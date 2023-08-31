@@ -3,7 +3,7 @@
 This is a disassembly of Gyakuten Saiban 3 (Japan) (Demo) (Kiosk, GameCube)
 
 It builds the following ROM:
-* pwaa2.gba `sha1: EE41EFF12E944CC73FB2A2C4706D0C2B8639668C`
+* pwaa3demo.gba `sha1: EE41EFF12E944CC73FB2A2C4706D0C2B8639668C`
 
 ### Setting up the repository
 
