@@ -1,0 +1,4 @@
+#ifndef GUARD_CONST_SCRIPT_H
+#define GUARD_CONST_SCRIPT_H
+
+#endif //GUARD_SCRIPT_H
