@@ -87,4 +87,14 @@ struct Struct3006390 { // unity class is different names are interpreted
     s16 unk22; // unity: cnt
 };
 
+struct Struct30070E0 {
+    u8 fill00[0x1E];
+    u16 unk1E;
+    u8 fill20[0xF];
+    u8 unk2F;
+    u16 unk30;
+    u8 fill32[0xC];
+    u16 unk3E;
+};
+
 #endif//GUARD_STRUCTS_H
