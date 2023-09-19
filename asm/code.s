@@ -7712,7 +7712,7 @@ _08004148:
 	ldr r0, [r2, #8]
 _08004150:
 	ldr r2, _0800418C @ =0x040000D4
-	ldr r0, _08004190 @ =gUnknown_0820DB9C
+	ldr r0, _08004190 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r2]
 	ldr r1, _08004194 @ =gUnknown_0203B000
 	str r1, [r2, #4]
@@ -7743,7 +7743,7 @@ _08004150:
 	b _080041F0
 	.align 2, 0
 _0800418C: .4byte 0x040000D4
-_08004190: .4byte gUnknown_0820DB9C
+_08004190: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08004194: .4byte gUnknown_0203B000
 _08004198: .4byte 0x80000280
 _0800419C: .4byte 0x06008B00
@@ -8049,7 +8049,7 @@ _080043FE:
 	movs r0, #1
 	strb r0, [r1]
 	ldr r1, _08004430 @ =0x040000D4
-	ldr r0, _08004438 @ =gUnknown_0820DB9C
+	ldr r0, _08004438 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r1]
 	ldr r0, _0800443C @ =gUnknown_0203B000
 	str r0, [r1, #4]
@@ -8063,7 +8063,7 @@ _08004428: .4byte gUnknown_080248F8
 _0800442C: .4byte gUnknown_03001080
 _08004430: .4byte 0x040000D4
 _08004434: .4byte 0x800002C0
-_08004438: .4byte gUnknown_0820DB9C
+_08004438: .4byte gGfxSpeedlinesFirstAndLastColumns
 _0800443C: .4byte gUnknown_0203B000
 _08004440: .4byte 0x80000280
 _08004444:
@@ -8856,7 +8856,7 @@ _08004A42:
 	cmp r0, #0
 	bne _08004A98
 	ldr r1, _08004A80 @ =0x040000D4
-	ldr r0, _08004A84 @ =gUnknown_0820DB9C
+	ldr r0, _08004A84 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r1]
 	ldr r2, _08004A88 @ =gUnknown_0203B000
 	str r2, [r1, #4]
@@ -8875,7 +8875,7 @@ _08004A74: .4byte gUnknown_030037ED
 _08004A78: .4byte 0x0000FFFF
 _08004A7C: .4byte gMain
 _08004A80: .4byte 0x040000D4
-_08004A84: .4byte gUnknown_0820DB9C
+_08004A84: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08004A88: .4byte gUnknown_0203B000
 _08004A8C: .4byte 0x80000280
 _08004A90: .4byte 0x06008B00
@@ -10818,7 +10818,7 @@ sub_800598C: @ 0x0800598C
 	ldr r1, _080059E8 @ =0xFFFF0000
 	adds r0, r0, r1
 	lsrs r0, r0, #0x10
-	ldr r1, _080059EC @ =gUnknown_08197424
+	ldr r1, _080059EC @ =gPalWitnessBench
 	cmp r0, #1
 	bhi _080059A8
 	adds r1, #0x20
@@ -10856,7 +10856,7 @@ _080059BA:
 	bx r0
 	.align 2, 0
 _080059E8: .4byte 0xFFFF0000
-_080059EC: .4byte gUnknown_08197424
+_080059EC: .4byte gPalWitnessBench
 _080059F0: .4byte 0x040000D4
 _080059F4: .4byte 0x80000010
 _080059F8: .4byte 0x05000340
@@ -11201,7 +11201,7 @@ sub_8005C88: @ 0x08005C88
 	ldr r1, _08005CE4 @ =0xFFFF0000
 	adds r0, r0, r1
 	lsrs r0, r0, #0x10
-	ldr r1, _08005CE8 @ =gUnknown_08197424
+	ldr r1, _08005CE8 @ =gPalWitnessBench
 	cmp r0, #1
 	bhi _08005CA4
 	adds r1, #0x20
@@ -11239,7 +11239,7 @@ _08005CB6:
 	bx r0
 	.align 2, 0
 _08005CE4: .4byte 0xFFFF0000
-_08005CE8: .4byte gUnknown_08197424
+_08005CE8: .4byte gPalWitnessBench
 _08005CEC: .4byte 0x040000D4
 _08005CF0: .4byte 0x80000010
 _08005CF4: .4byte 0x05000340
@@ -12731,14 +12731,14 @@ sub_8006830: @ 0x08006830
 	ldr r0, _080068D4 @ =gIORegisters
 	mov ip, r0
 	ldr r1, _080068D8 @ =0x040000D4
-	ldr r0, _080068DC @ =gUnknown_081972C4
+	ldr r0, _080068DC @ =gPalNewGameContinue
 	str r0, [r1]
 	ldr r0, _080068E0 @ =0x05000240
 	str r0, [r1, #4]
 	ldr r0, _080068E4 @ =0x80000060
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080068E8 @ =gUnknown_0818E360
+	ldr r0, _080068E8 @ =gGfxNewGameContinue
 	str r0, [r1]
 	ldr r0, _080068EC @ =0x06010400
 	str r0, [r1, #4]
@@ -12812,10 +12812,10 @@ _080068B6:
 	.align 2, 0
 _080068D4: .4byte gIORegisters
 _080068D8: .4byte 0x040000D4
-_080068DC: .4byte gUnknown_081972C4
+_080068DC: .4byte gPalNewGameContinue
 _080068E0: .4byte 0x05000240
 _080068E4: .4byte 0x80000060
-_080068E8: .4byte gUnknown_0818E360
+_080068E8: .4byte gGfxNewGameContinue
 _080068EC: .4byte 0x06010400
 _080068F0: .4byte 0x80000200
 _080068F4: .4byte gUnknown_03002D40
@@ -13341,14 +13341,14 @@ _08006D18:
 	b _08006E92
 _08006D1A:
 	ldr r1, _08006D70 @ =0x040000D4
-	ldr r0, _08006D74 @ =gUnknown_0818B880
+	ldr r0, _08006D74 @ =gGfxGameOverDoors
 	str r0, [r1]
 	ldr r0, _08006D78 @ =0x06001400
 	str r0, [r1, #4]
 	ldr r0, _08006D7C @ =0x80000170
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08006D80 @ =gUnknown_08197264
+	ldr r0, _08006D80 @ =gPalGameOverDoors
 	str r0, [r1]
 	ldr r0, _08006D84 @ =0x05000020
 	str r0, [r1, #4]
@@ -13385,10 +13385,10 @@ _08006D44:
 	b _08006E42
 	.align 2, 0
 _08006D70: .4byte 0x040000D4
-_08006D74: .4byte gUnknown_0818B880
+_08006D74: .4byte gGfxGameOverDoors
 _08006D78: .4byte 0x06001400
 _08006D7C: .4byte 0x80000170
-_08006D80: .4byte gUnknown_08197264
+_08006D80: .4byte gPalGameOverDoors
 _08006D84: .4byte 0x05000020
 _08006D88: .4byte 0x80000010
 _08006D8C: .4byte 0x000003FF
@@ -13576,14 +13576,14 @@ _08006EE4:
 	b _08007096
 _08006EE6:
 	ldr r1, _08006F48 @ =0x040000D4
-	ldr r0, _08006F4C @ =gUnknown_0818B880
+	ldr r0, _08006F4C @ =gGfxGameOverDoors
 	str r0, [r1]
 	ldr r0, _08006F50 @ =0x06001400
 	str r0, [r1, #4]
 	ldr r0, _08006F54 @ =0x80000170
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08006F58 @ =gUnknown_08197264
+	ldr r0, _08006F58 @ =gPalGameOverDoors
 	str r0, [r1]
 	ldr r0, _08006F5C @ =0x05000020
 	str r0, [r1, #4]
@@ -13626,10 +13626,10 @@ _08006F10:
 	b _08007096
 	.align 2, 0
 _08006F48: .4byte 0x040000D4
-_08006F4C: .4byte gUnknown_0818B880
+_08006F4C: .4byte gGfxGameOverDoors
 _08006F50: .4byte 0x06001400
 _08006F54: .4byte 0x80000170
-_08006F58: .4byte gUnknown_08197264
+_08006F58: .4byte gPalGameOverDoors
 _08006F5C: .4byte 0x05000020
 _08006F60: .4byte 0x80000010
 _08006F64: .4byte 0x000003FF
@@ -14143,14 +14143,14 @@ _08007332:
 	ldr r1, _0800741C @ =0x80000800
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007420 @ =gUnknown_081987E4
+	ldr r1, _08007420 @ =gGfxSaveYesNo
 	str r1, [r0]
 	ldr r1, _08007424 @ =0x06013C00
 	str r1, [r0, #4]
 	ldr r1, _08007428 @ =0x80000400
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800742C @ =gUnknown_081977A4
+	ldr r1, _0800742C @ =gPalChoiceSelected
 	str r1, [r0]
 	ldr r1, _08007430 @ =0x05000320
 	str r1, [r0, #4]
@@ -14235,10 +14235,10 @@ _08007410: .4byte 0x040000D4
 _08007414: .4byte 0x80000100
 _08007418: .4byte gGfxSaveGameTiles
 _0800741C: .4byte 0x80000800
-_08007420: .4byte gUnknown_081987E4
+_08007420: .4byte gGfxSaveYesNo
 _08007424: .4byte 0x06013C00
 _08007428: .4byte 0x80000400
-_0800742C: .4byte gUnknown_081977A4
+_0800742C: .4byte gPalChoiceSelected
 _08007430: .4byte 0x05000320
 _08007434: .4byte 0x80000020
 _08007438: .4byte gUnknown_0819F674
@@ -14818,27 +14818,27 @@ _08007894:
 	ldr r1, _08007A4C @ =0x80000014
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A50 @ =gUnknown_0818E360
+	ldr r1, _08007A50 @ =gGfxNewGameContinue
 	str r1, [r0]
 	ldr r1, _08007A54 @ =0x06013800
 	str r1, [r0, #4]
 	ldr r1, _08007A58 @ =0x80000200
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A5C @ =gUnknown_081972C4
+	ldr r1, _08007A5C @ =gPalNewGameContinue
 	str r1, [r0]
 	ldr r1, _08007A60 @ =0x05000300
 	str r1, [r0, #4]
 	ldr r1, _08007A64 @ =0x80000060
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A68 @ =gUnknown_081987E4
+	ldr r1, _08007A68 @ =gGfxSaveYesNo
 	str r1, [r0]
 	ldr r1, _08007A6C @ =0x06013C00
 	str r1, [r0, #4]
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A70 @ =gUnknown_081977A4
+	ldr r1, _08007A70 @ =gPalChoiceSelected
 	str r1, [r0]
 	ldr r1, _08007A74 @ =0x05000320
 	str r1, [r0, #4]
@@ -14955,15 +14955,15 @@ _08007A40: .4byte 0x80000140
 _08007A44: .4byte gUnknown_03003B90
 _08007A48: .4byte 0xFFFFF838
 _08007A4C: .4byte 0x80000014
-_08007A50: .4byte gUnknown_0818E360
+_08007A50: .4byte gGfxNewGameContinue
 _08007A54: .4byte 0x06013800
 _08007A58: .4byte 0x80000200
-_08007A5C: .4byte gUnknown_081972C4
+_08007A5C: .4byte gPalNewGameContinue
 _08007A60: .4byte 0x05000300
 _08007A64: .4byte 0x80000060
-_08007A68: .4byte gUnknown_081987E4
+_08007A68: .4byte gGfxSaveYesNo
 _08007A6C: .4byte 0x06013C00
-_08007A70: .4byte gUnknown_081977A4
+_08007A70: .4byte gPalChoiceSelected
 _08007A74: .4byte 0x05000320
 _08007A78: .4byte 0x80000020
 _08007A7C: .4byte gUnknown_030070E0
@@ -15026,7 +15026,7 @@ _08007AFC:
 	bl sub_8018778
 _08007B02:
 	ldr r1, _08007B84 @ =0x040000D4
-	ldr r0, _08007B88 @ =gUnknown_081987E4
+	ldr r0, _08007B88 @ =gGfxSaveYesNo
 	str r0, [r1]
 	ldr r0, _08007B8C @ =0x06013C00
 	str r0, [r1, #4]
@@ -15091,7 +15091,7 @@ _08007B02:
 	b _08007BC6
 	.align 2, 0
 _08007B84: .4byte 0x040000D4
-_08007B88: .4byte gUnknown_081987E4
+_08007B88: .4byte gGfxSaveYesNo
 _08007B8C: .4byte 0x06013C00
 _08007B90: .4byte 0x80000400
 _08007B94: .4byte gUnknown_0818E780
@@ -15695,7 +15695,7 @@ _0800804E:
 	ldr r0, _080081B8 @ =0x80000200
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _080081BC @ =gUnknown_08197024
+	ldr r0, _080081BC @ =gPalExamineCursors
 	str r0, [r4]
 	ldr r0, _080081C0 @ =0x05000300
 	str r0, [r4, #4]
@@ -15826,7 +15826,7 @@ _080081AC: .4byte gMain
 _080081B0: .4byte 0xFFFFE900
 _080081B4: .4byte gOamObjects
 _080081B8: .4byte 0x80000200
-_080081BC: .4byte gUnknown_08197024
+_080081BC: .4byte gPalExamineCursors
 _080081C0: .4byte 0x05000300
 _080081C4: .4byte 0x80000010
 _080081C8: .4byte 0xFFFFE1BC
@@ -16294,7 +16294,7 @@ _0800853E:
 	ldr r0, _080085C0 @ =0x80001400
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080085C4 @ =gUnknown_081977A4
+	ldr r0, _080085C4 @ =gPalChoiceSelected
 	str r0, [r1]
 	ldr r0, _080085C8 @ =0x05000320
 	str r0, [r1, #4]
@@ -16336,7 +16336,7 @@ _080085B4: .4byte 0x040000D4
 _080085B8: .4byte gUnknown_0202CFC0
 _080085BC: .4byte 0x06013400
 _080085C0: .4byte 0x80001400
-_080085C4: .4byte gUnknown_081977A4
+_080085C4: .4byte gPalChoiceSelected
 _080085C8: .4byte 0x05000320
 _080085CC: .4byte 0x80000020
 _080085D0: .4byte gGfxSaveGameTiles
@@ -18559,13 +18559,13 @@ _080098D6:
 	ldr r2, _080099BC @ =0x80000800
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080099C0 @ =gUnknown_081977E4
+	ldr r0, _080099C0 @ =gGfxFromSaveOrBeginningOptions
 	str r0, [r1]
 	ldr r0, _080099C4 @ =0x06013400
 	str r0, [r1, #4]
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080099C8 @ =gUnknown_081977A4
+	ldr r0, _080099C8 @ =gPalChoiceSelected
 	str r0, [r1]
 	ldr r0, _080099CC @ =0x05000320
 	str r0, [r1, #4]
@@ -18648,9 +18648,9 @@ _080099B0: .4byte gSaveDataBuffer
 _080099B4: .4byte 0x040000D4
 _080099B8: .4byte gGfxSaveGameTiles
 _080099BC: .4byte 0x80000800
-_080099C0: .4byte gUnknown_081977E4
+_080099C0: .4byte gGfxFromSaveOrBeginningOptions
 _080099C4: .4byte 0x06013400
-_080099C8: .4byte gUnknown_081977A4
+_080099C8: .4byte gPalChoiceSelected
 _080099CC: .4byte 0x05000320
 _080099D0: .4byte 0x80000020
 _080099D4: .4byte gMain
@@ -18963,7 +18963,7 @@ _08009BF4:
 	str r3, [r6, #8]
 	ldr r0, [r6, #8]
 	bl sub_8018504
-	ldr r0, _08009D48 @ =gUnknown_08197024
+	ldr r0, _08009D48 @ =gPalExamineCursors
 	str r0, [r6]
 	ldr r0, _08009D4C @ =0x05000300
 	str r0, [r6, #4]
@@ -19015,33 +19015,33 @@ _08009CB8:
 	mov r2, sl
 	str r2, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009D74 @ =gUnknown_08196F64
+	ldr r0, _08009D74 @ =gPalActionButtons1
 	str r0, [r6]
 	ldr r0, _08009D78 @ =0x050002A0
 	str r0, [r6, #4]
 	ldr r1, _08009D7C @ =0x80000020
 	str r1, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009D80 @ =gUnknown_08189D80
+	ldr r0, _08009D80 @ =gGfx4bppInvestigationScrollButton
 	str r0, [r6]
 	ldr r0, _08009D84 @ =0x06013000
 	str r0, [r6, #4]
 	str r7, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009D88 @ =gUnknown_08196FC4
+	ldr r0, _08009D88 @ =gPalInvestigationScrollPrompt
 	str r0, [r6]
 	ldr r0, _08009D8C @ =0x050002E0
 	str r0, [r6, #4]
 	mov r3, sb
 	str r3, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009D90 @ =gUnknown_0818B180
+	ldr r0, _08009D90 @ =gGfxExamineCursor
 	str r0, [r6]
 	ldr r0, _08009D94 @ =0x06013200
 	str r0, [r6, #4]
 	str r7, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009D98 @ =gUnknown_081977A4
+	ldr r0, _08009D98 @ =gPalChoiceSelected
 	str r0, [r6]
 	ldr r0, _08009D9C @ =0x05000320
 	str r0, [r6, #4]
@@ -19070,7 +19070,7 @@ _08009D38: .4byte 0x80000100
 _08009D3C: .4byte gUnknown_02000034
 _08009D40: .4byte gMain
 _08009D44: .4byte 0x8000016A
-_08009D48: .4byte gUnknown_08197024
+_08009D48: .4byte gPalExamineCursors
 _08009D4C: .4byte 0x05000300
 _08009D50: .4byte gUnknown_03002920
 _08009D54: .4byte 0x80000140
@@ -19081,16 +19081,16 @@ _08009D64: .4byte 0x000028A0
 _08009D68: .4byte 0x00FFFF00
 _08009D6C: .4byte gGfx4bppInvestigationActions
 _08009D70: .4byte 0x06012000
-_08009D74: .4byte gUnknown_08196F64
+_08009D74: .4byte gPalActionButtons1
 _08009D78: .4byte 0x050002A0
 _08009D7C: .4byte 0x80000020
-_08009D80: .4byte gUnknown_08189D80
+_08009D80: .4byte gGfx4bppInvestigationScrollButton
 _08009D84: .4byte 0x06013000
-_08009D88: .4byte gUnknown_08196FC4
+_08009D88: .4byte gPalInvestigationScrollPrompt
 _08009D8C: .4byte 0x050002E0
-_08009D90: .4byte gUnknown_0818B180
+_08009D90: .4byte gGfxExamineCursor
 _08009D94: .4byte 0x06013200
-_08009D98: .4byte gUnknown_081977A4
+_08009D98: .4byte gPalChoiceSelected
 _08009D9C: .4byte 0x05000320
 _08009DA0:
 	cmp r0, #8
@@ -19109,14 +19109,14 @@ _08009DAA:
 	ldrb r0, [r3, #8]
 	cmp r0, #5
 	bne _08009DF8
-	ldr r0, _08009DE4 @ =gUnknown_08189F80
+	ldr r0, _08009DE4 @ =gGfx4bppTestimonyTextTiles
 	str r0, [r6]
 	ldr r0, _08009DE8 @ =0x06013000
 	str r0, [r6, #4]
 	ldr r0, _08009DEC @ =0x80000400
 	str r0, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009DF0 @ =gUnknown_08196FE4
+	ldr r0, _08009DF0 @ =gPalTestimonyTextTiles
 	str r0, [r6]
 	ldr r0, _08009DF4 @ =0x050002A0
 	str r0, [r6, #4]
@@ -19125,22 +19125,22 @@ _08009DAA:
 	.align 2, 0
 _08009DDC: .4byte gUnknown_081CB694
 _08009DE0: .4byte 0x050002C0
-_08009DE4: .4byte gUnknown_08189F80
+_08009DE4: .4byte gGfx4bppTestimonyTextTiles
 _08009DE8: .4byte 0x06013000
 _08009DEC: .4byte 0x80000400
-_08009DF0: .4byte gUnknown_08196FE4
+_08009DF0: .4byte gPalTestimonyTextTiles
 _08009DF4: .4byte 0x050002A0
 _08009DF8:
 	cmp r0, #6
 	bne _08009E32
-	ldr r0, _08009F64 @ =gUnknown_0818A780
+	ldr r0, _08009F64 @ =gGfxPressPresentButtons
 	str r0, [r6]
 	ldr r0, _08009F68 @ =0x06013000
 	str r0, [r6, #4]
 	ldr r0, _08009F6C @ =0x80000200
 	str r0, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _08009F70 @ =gUnknown_08197004
+	ldr r0, _08009F70 @ =gPalPressPresentButtons
 	str r0, [r6]
 	ldr r0, _08009F74 @ =0x050002A0
 	str r0, [r6, #4]
@@ -19310,10 +19310,10 @@ _08009F04:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08009F64: .4byte gUnknown_0818A780
+_08009F64: .4byte gGfxPressPresentButtons
 _08009F68: .4byte 0x06013000
 _08009F6C: .4byte 0x80000200
-_08009F70: .4byte gUnknown_08197004
+_08009F70: .4byte gPalPressPresentButtons
 _08009F74: .4byte 0x050002A0
 _08009F78: .4byte gGfx4bppTestimonyArrows
 _08009F7C: .4byte 0x06013400
@@ -19451,7 +19451,7 @@ _0800A0CC:
 	cmp r0, #0
 	beq _0800A0E8
 	ldr r1, _0800A154 @ =0x040000D4
-	ldr r0, _0800A164 @ =gUnknown_0818B180
+	ldr r0, _0800A164 @ =gGfxExamineCursor
 	str r0, [r1]
 	ldr r0, _0800A15C @ =0x06011F80
 	str r0, [r1, #4]
@@ -19512,7 +19512,7 @@ _0800A154: .4byte 0x040000D4
 _0800A158: .4byte gUnknown_081A6794
 _0800A15C: .4byte 0x06011F80
 _0800A160: .4byte 0x80000040
-_0800A164: .4byte gUnknown_0818B180
+_0800A164: .4byte gGfxExamineCursor
 _0800A168: .4byte gUnknown_020009D4
 _0800A16C: .4byte gOamObjects
 _0800A170: .4byte 0x80000200
@@ -20045,7 +20045,7 @@ sub_800A51C: @ 0x0800A51C
 	ldr r0, _0800A698 @ =0x80000800
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800A69C @ =gUnknown_08197024
+	ldr r0, _0800A69C @ =gPalExamineCursors
 	str r0, [r4]
 	ldr r0, _0800A6A0 @ =0x05000300
 	str r0, [r4, #4]
@@ -20161,7 +20161,7 @@ _0800A68C: .4byte 0x00003D01
 _0800A690: .4byte 0x00003FC7
 _0800A694: .4byte gGfxSaveGameTiles
 _0800A698: .4byte 0x80000800
-_0800A69C: .4byte gUnknown_08197024
+_0800A69C: .4byte gPalExamineCursors
 _0800A6A0: .4byte 0x05000300
 _0800A6A4: .4byte 0x80000010
 _0800A6A8: .4byte gPalEvidenceProfileDesc
@@ -20496,14 +20496,14 @@ _0800A964: .4byte gUnknown_0814DB94
 	thumb_func_start sub_800A968
 sub_800A968: @ 0x0800A968
 	ldr r2, _0800A994 @ =0x040000D4
-	ldr r1, _0800A998 @ =gUnknown_08189F80
+	ldr r1, _0800A998 @ =gGfx4bppTestimonyTextTiles
 	str r1, [r2]
 	ldr r1, _0800A99C @ =0x06013000
 	str r1, [r2, #4]
 	ldr r1, _0800A9A0 @ =0x80000400
 	str r1, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r1, _0800A9A4 @ =gUnknown_08196FE4
+	ldr r1, _0800A9A4 @ =gPalTestimonyTextTiles
 	str r1, [r2]
 	ldr r1, _0800A9A8 @ =0x050002A0
 	str r1, [r2, #4]
@@ -20518,10 +20518,10 @@ sub_800A968: @ 0x0800A968
 	bx lr
 	.align 2, 0
 _0800A994: .4byte 0x040000D4
-_0800A998: .4byte gUnknown_08189F80
+_0800A998: .4byte gGfx4bppTestimonyTextTiles
 _0800A99C: .4byte 0x06013000
 _0800A9A0: .4byte 0x80000400
-_0800A9A4: .4byte gUnknown_08196FE4
+_0800A9A4: .4byte gPalTestimonyTextTiles
 _0800A9A8: .4byte 0x050002A0
 _0800A9AC: .4byte 0x80000010
 _0800A9B0: .4byte gUnknown_03003C60
@@ -20753,14 +20753,14 @@ _0800AB78: .4byte gUnknown_0814DBA4
 sub_800AB7C: @ 0x0800AB7C
 	push {lr}
 	ldr r1, _0800ABE4 @ =0x040000D4
-	ldr r2, _0800ABE8 @ =gUnknown_0818A780
+	ldr r2, _0800ABE8 @ =gGfxPressPresentButtons
 	str r2, [r1]
 	ldr r2, _0800ABEC @ =0x06013000
 	str r2, [r1, #4]
 	ldr r2, _0800ABF0 @ =0x80000200
 	str r2, [r1, #8]
 	ldr r2, [r1, #8]
-	ldr r2, _0800ABF4 @ =gUnknown_08197004
+	ldr r2, _0800ABF4 @ =gPalPressPresentButtons
 	str r2, [r1]
 	ldr r2, _0800ABF8 @ =0x050002A0
 	str r2, [r1, #4]
@@ -20803,10 +20803,10 @@ sub_800AB7C: @ 0x0800AB7C
 	bx r0
 	.align 2, 0
 _0800ABE4: .4byte 0x040000D4
-_0800ABE8: .4byte gUnknown_0818A780
+_0800ABE8: .4byte gGfxPressPresentButtons
 _0800ABEC: .4byte 0x06013000
 _0800ABF0: .4byte 0x80000200
-_0800ABF4: .4byte gUnknown_08197004
+_0800ABF4: .4byte gPalPressPresentButtons
 _0800ABF8: .4byte 0x050002A0
 _0800ABFC: .4byte 0x80000010
 _0800AC00: .4byte gGfx4bppTestimonyArrows
@@ -21232,7 +21232,7 @@ _0800AF56:
 	movs r3, #0
 	bl sub_8014364
 _0800AF62:
-	ldr r0, _0800AF7C @ =gUnknown_0820E74C
+	ldr r0, _0800AF7C @ =gPalCourtScroll
 	movs r1, #0x1e
 	movs r2, #0x1f
 	movs r3, #1
@@ -21244,7 +21244,7 @@ _0800AF62:
 	strb r0, [r5, #0xa]
 	b _0800B08C
 	.align 2, 0
-_0800AF7C: .4byte gUnknown_0820E74C
+_0800AF7C: .4byte gPalCourtScroll
 _0800AF80:
 	subs r0, #1
 	strb r0, [r1, #1]
@@ -21473,7 +21473,7 @@ _0800B152:
 	movs r3, #0
 	bl sub_8014364
 _0800B15E:
-	ldr r0, _0800B174 @ =gUnknown_0820E74C
+	ldr r0, _0800B174 @ =gPalCourtScroll
 	movs r1, #0x1e
 	movs r2, #0x1f
 	movs r3, #1
@@ -21482,7 +21482,7 @@ _0800B15E:
 	bl sub_80053FC
 	b _0800B186
 	.align 2, 0
-_0800B174: .4byte gUnknown_0820E74C
+_0800B174: .4byte gPalCourtScroll
 _0800B178:
 	ldr r0, _0800B190 @ =gUnknown_03004250
 	ldrh r0, [r0, #4]
@@ -21963,14 +21963,14 @@ _0800B590: .4byte gUnknown_08026430
 _0800B594: .4byte gOamObjects
 _0800B598:
 	ldr r1, _0800B5B8 @ =0x040000D4
-	ldr r0, _0800B5BC @ =gUnknown_0818E760
+	ldr r0, _0800B5BC @ =gGfxConfetti
 	str r0, [r1]
 	ldr r0, _0800B5C0 @ =0x06011F80
 	str r0, [r1, #4]
 	ldr r0, _0800B5C4 @ =0x80000010
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0800B5C8 @ =gUnknown_08197384
+	ldr r0, _0800B5C8 @ =gPalConfetti0
 	str r0, [r1]
 	ldr r0, _0800B5CC @ =0x050002A0
 	str r0, [r1, #4]
@@ -21980,10 +21980,10 @@ _0800B598:
 	b _0800B6CC
 	.align 2, 0
 _0800B5B8: .4byte 0x040000D4
-_0800B5BC: .4byte gUnknown_0818E760
+_0800B5BC: .4byte gGfxConfetti
 _0800B5C0: .4byte 0x06011F80
 _0800B5C4: .4byte 0x80000010
-_0800B5C8: .4byte gUnknown_08197384
+_0800B5C8: .4byte gPalConfetti0
 _0800B5CC: .4byte 0x050002A0
 _0800B5D0: .4byte 0x80000040
 _0800B5D4:
@@ -22253,7 +22253,7 @@ sub_800B7CC: @ 0x0800B7CC
 	push {r4, r5, lr}
 	sub sp, #0x20
 	ldr r2, _0800B830 @ =0x040000D4
-	ldr r0, _0800B834 @ =gUnknown_0818F180
+	ldr r0, _0800B834 @ =gGfxWitnessBench1
 	str r0, [r2]
 	ldr r0, _0800B838 @ =0x06012000
 	str r0, [r2, #4]
@@ -22268,7 +22268,7 @@ sub_800B7CC: @ 0x0800B7CC
 	ands r0, r1
 	cmp r0, #0
 	beq _0800B850
-	ldr r0, _0800B844 @ =gUnknown_08197424
+	ldr r0, _0800B844 @ =gPalWitnessBench
 	str r0, [r2]
 	mov r0, sp
 	str r0, [r2, #4]
@@ -22301,11 +22301,11 @@ _0800B800:
 	b _0800B882
 	.align 2, 0
 _0800B830: .4byte 0x040000D4
-_0800B834: .4byte gUnknown_0818F180
+_0800B834: .4byte gGfxWitnessBench1
 _0800B838: .4byte 0x06012000
 _0800B83C: .4byte 0x80000300
 _0800B840: .4byte gMain
-_0800B844: .4byte gUnknown_08197424
+_0800B844: .4byte gPalWitnessBench
 _0800B848: .4byte 0x80000010
 _0800B84C: .4byte 0x05000340
 _0800B850:
@@ -22328,7 +22328,7 @@ _0800B864:
 	.align 2, 0
 _0800B870: .4byte 0x0000FFFD
 _0800B874:
-	ldr r0, _0800B88C @ =gUnknown_08197424
+	ldr r0, _0800B88C @ =gPalWitnessBench
 	str r0, [r2]
 	ldr r0, _0800B890 @ =0x05000340
 	str r0, [r2, #4]
@@ -22341,7 +22341,7 @@ _0800B882:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B88C: .4byte gUnknown_08197424
+_0800B88C: .4byte gPalWitnessBench
 _0800B890: .4byte 0x05000340
 _0800B894: .4byte 0x80000010
 
@@ -22453,7 +22453,7 @@ sub_800B974: @ 0x0800B974
 	push {r4, r5, lr}
 	sub sp, #0x20
 	ldr r2, _0800B9D8 @ =0x040000D4
-	ldr r0, _0800B9DC @ =gUnknown_0818F780
+	ldr r0, _0800B9DC @ =gGfxCounselBench1
 	str r0, [r2]
 	ldr r0, _0800B9E0 @ =0x06012000
 	str r0, [r2, #4]
@@ -22468,7 +22468,7 @@ sub_800B974: @ 0x0800B974
 	ands r0, r1
 	cmp r0, #0
 	beq _0800B9F8
-	ldr r0, _0800B9EC @ =gUnknown_08197444
+	ldr r0, _0800B9EC @ =gPalCounselBench
 	str r0, [r2]
 	mov r0, sp
 	str r0, [r2, #4]
@@ -22501,11 +22501,11 @@ _0800B9A8:
 	b _0800BA2A
 	.align 2, 0
 _0800B9D8: .4byte 0x040000D4
-_0800B9DC: .4byte gUnknown_0818F780
+_0800B9DC: .4byte gGfxCounselBench1
 _0800B9E0: .4byte 0x06012000
 _0800B9E4: .4byte 0x80000680
 _0800B9E8: .4byte gMain
-_0800B9EC: .4byte gUnknown_08197444
+_0800B9EC: .4byte gPalCounselBench
 _0800B9F0: .4byte 0x80000010
 _0800B9F4: .4byte 0x05000340
 _0800B9F8:
@@ -22528,7 +22528,7 @@ _0800BA0C:
 	.align 2, 0
 _0800BA18: .4byte 0x0000FFFD
 _0800BA1C:
-	ldr r0, _0800BA34 @ =gUnknown_08197444
+	ldr r0, _0800BA34 @ =gPalCounselBench
 	str r0, [r2]
 	ldr r0, _0800BA38 @ =0x05000340
 	str r0, [r2, #4]
@@ -22541,7 +22541,7 @@ _0800BA2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800BA34: .4byte gUnknown_08197444
+_0800BA34: .4byte gPalCounselBench
 _0800BA38: .4byte 0x05000340
 _0800BA3C: .4byte 0x80000010
 
@@ -23297,40 +23297,40 @@ sub_800BFF0: @ 0x0800BFF0
 	str r0, [r4, #4]
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C228 @ =gUnknown_08196F64
+	ldr r0, _0800C228 @ =gPalActionButtons1
 	str r0, [r4]
 	ldr r0, _0800C22C @ =0x050002A0
 	str r0, [r4, #4]
 	ldr r3, _0800C230 @ =0x80000020
 	str r3, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C234 @ =gUnknown_08189D80
+	ldr r0, _0800C234 @ =gGfx4bppInvestigationScrollButton
 	str r0, [r4]
 	ldr r0, _0800C238 @ =0x06013000
 	str r0, [r4, #4]
 	ldr r2, _0800C23C @ =0x80000100
 	str r2, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C240 @ =gUnknown_08196FC4
+	ldr r0, _0800C240 @ =gPalInvestigationScrollPrompt
 	str r0, [r4]
 	ldr r0, _0800C244 @ =0x050002E0
 	str r0, [r4, #4]
 	ldr r1, _0800C248 @ =0x80000010
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C24C @ =gUnknown_0818B180
+	ldr r0, _0800C24C @ =gGfxExamineCursor
 	str r0, [r4]
 	ldr r0, _0800C250 @ =0x06013200
 	str r0, [r4, #4]
 	str r2, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C254 @ =gUnknown_08197024
+	ldr r0, _0800C254 @ =gPalExamineCursors
 	str r0, [r4]
 	ldr r0, _0800C258 @ =0x05000300
 	str r0, [r4, #4]
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800C25C @ =gUnknown_081977A4
+	ldr r0, _0800C25C @ =gPalChoiceSelected
 	str r0, [r4]
 	ldr r0, _0800C260 @ =0x05000320
 	str r0, [r4, #4]
@@ -23498,20 +23498,20 @@ _0800C218: .4byte gGfxSaveGameTiles
 _0800C21C: .4byte 0x80000800
 _0800C220: .4byte gGfx4bppInvestigationActions
 _0800C224: .4byte 0x06012000
-_0800C228: .4byte gUnknown_08196F64
+_0800C228: .4byte gPalActionButtons1
 _0800C22C: .4byte 0x050002A0
 _0800C230: .4byte 0x80000020
-_0800C234: .4byte gUnknown_08189D80
+_0800C234: .4byte gGfx4bppInvestigationScrollButton
 _0800C238: .4byte 0x06013000
 _0800C23C: .4byte 0x80000100
-_0800C240: .4byte gUnknown_08196FC4
+_0800C240: .4byte gPalInvestigationScrollPrompt
 _0800C244: .4byte 0x050002E0
 _0800C248: .4byte 0x80000010
-_0800C24C: .4byte gUnknown_0818B180
+_0800C24C: .4byte gGfxExamineCursor
 _0800C250: .4byte 0x06013200
-_0800C254: .4byte gUnknown_08197024
+_0800C254: .4byte gPalExamineCursors
 _0800C258: .4byte 0x05000300
-_0800C25C: .4byte gUnknown_081977A4
+_0800C25C: .4byte gPalChoiceSelected
 _0800C260: .4byte 0x05000320
 _0800C264: .4byte gUnknown_03002D40
 _0800C268: .4byte 0x000040E0
@@ -23750,7 +23750,7 @@ _0800C3F6:
 	strb r6, [r4, #0x1b]
 	strb r6, [r4, #0x1a]
 	ldr r1, _0800C474 @ =0x040000D4
-	ldr r0, _0800C478 @ =gUnknown_08197024
+	ldr r0, _0800C478 @ =gPalExamineCursors
 	str r0, [r1]
 	ldr r0, _0800C47C @ =0x05000300
 	str r0, [r1, #4]
@@ -23766,7 +23766,7 @@ _0800C466:
 	b _0800C50A
 	.align 2, 0
 _0800C474: .4byte 0x040000D4
-_0800C478: .4byte gUnknown_08197024
+_0800C478: .4byte gPalExamineCursors
 _0800C47C: .4byte 0x05000300
 _0800C480: .4byte 0x80000010
 _0800C484:
@@ -24562,7 +24562,7 @@ _0800CA64:
 	strb r0, [r5, #0x1a]
 	ldr r1, _0800CAA4 @ =0x040000D4
 	lsls r0, r0, #5
-	ldr r2, _0800CAA8 @ =gUnknown_08197024
+	ldr r2, _0800CAA8 @ =gPalExamineCursors
 	adds r0, r0, r2
 	str r0, [r1]
 	ldr r0, _0800CAAC @ =0x05000300
@@ -24574,7 +24574,7 @@ _0800CA64:
 	.align 2, 0
 _0800CAA0: .4byte 0x00008190
 _0800CAA4: .4byte 0x040000D4
-_0800CAA8: .4byte gUnknown_08197024
+_0800CAA8: .4byte gPalExamineCursors
 _0800CAAC: .4byte 0x05000300
 _0800CAB0: .4byte 0x80000010
 _0800CAB4:
@@ -25585,14 +25585,14 @@ _0800D268:
 	cmp r7, #3
 	bls _0800D1BC
 	ldr r1, _0800D2A4 @ =0x040000D4
-	ldr r0, _0800D2A8 @ =gUnknown_0818B680
+	ldr r0, _0800D2A8 @ =gGfxCheckmark
 	str r0, [r1]
 	ldr r0, _0800D2AC @ =0x06015400
 	str r0, [r1, #4]
 	ldr r0, _0800D2B0 @ =0x80000100
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0800D2B4 @ =gUnknown_08197244
+	ldr r0, _0800D2B4 @ =gPalCheckmark
 	str r0, [r1]
 	ldr r0, _0800D2B8 @ =0x05000360
 	str r0, [r1, #4]
@@ -25610,10 +25610,10 @@ _0800D268:
 	b _0800D2C4
 	.align 2, 0
 _0800D2A4: .4byte 0x040000D4
-_0800D2A8: .4byte gUnknown_0818B680
+_0800D2A8: .4byte gGfxCheckmark
 _0800D2AC: .4byte 0x06015400
 _0800D2B0: .4byte 0x80000100
-_0800D2B4: .4byte gUnknown_08197244
+_0800D2B4: .4byte gPalCheckmark
 _0800D2B8: .4byte 0x05000360
 _0800D2BC: .4byte 0x80000010
 _0800D2C0:
@@ -25694,14 +25694,14 @@ _0800D344: .4byte gUnknown_03002D50
 _0800D348: .4byte 0x000001FF
 _0800D34C:
 	ldr r1, _0800D3D8 @ =0x040000D4
-	ldr r0, _0800D3DC @ =gUnknown_0818B680
+	ldr r0, _0800D3DC @ =gGfxCheckmark
 	str r0, [r1]
 	ldr r0, _0800D3E0 @ =0x06015400
 	str r0, [r1, #4]
 	ldr r0, _0800D3E4 @ =0x80000100
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0800D3E8 @ =gUnknown_08197244
+	ldr r0, _0800D3E8 @ =gPalCheckmark
 	str r0, [r1]
 	ldr r0, _0800D3EC @ =0x05000360
 	str r0, [r1, #4]
@@ -25770,10 +25770,10 @@ _0800D3CE:
 	b _0800D57A
 	.align 2, 0
 _0800D3D8: .4byte 0x040000D4
-_0800D3DC: .4byte gUnknown_0818B680
+_0800D3DC: .4byte gGfxCheckmark
 _0800D3E0: .4byte 0x06015400
 _0800D3E4: .4byte 0x80000100
-_0800D3E8: .4byte gUnknown_08197244
+_0800D3E8: .4byte gPalCheckmark
 _0800D3EC: .4byte 0x05000360
 _0800D3F0: .4byte 0x80000010
 _0800D3F4: .4byte gUnknown_03002920
@@ -26007,14 +26007,14 @@ _0800D5A2:
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	beq _0800D610
-	ldr r0, _0800D5F4 @ =gUnknown_08190680
+	ldr r0, _0800D5F4 @ =gGfxInvestigationPsycheLock
 	str r0, [r6]
 	ldr r0, _0800D5F8 @ =0x06013000
 	str r0, [r6, #4]
 	ldr r0, _0800D5FC @ =0x80000100
 	str r0, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _0800D600 @ =gUnknown_08197664
+	ldr r0, _0800D600 @ =gPalInvestigationPsycheLock
 	str r0, [r6]
 	ldr r0, _0800D604 @ =0x050002E0
 	str r0, [r6, #4]
@@ -26032,10 +26032,10 @@ _0800D5A2:
 	.align 2, 0
 _0800D5EC: .4byte gUnknown_03002CB0
 _0800D5F0: .4byte 0x040000D4
-_0800D5F4: .4byte gUnknown_08190680
+_0800D5F4: .4byte gGfxInvestigationPsycheLock
 _0800D5F8: .4byte 0x06013000
 _0800D5FC: .4byte 0x80000100
-_0800D600: .4byte gUnknown_08197664
+_0800D600: .4byte gPalInvestigationPsycheLock
 _0800D604: .4byte 0x050002E0
 _0800D608: .4byte 0x80000010
 _0800D60C: .4byte 0x00008024
@@ -26195,14 +26195,14 @@ _0800D724:
 	b _0800DB04
 _0800D72E:
 	ldr r1, _0800D770 @ =0x040000D4
-	ldr r0, _0800D774 @ =gUnknown_08189D80
+	ldr r0, _0800D774 @ =gGfx4bppInvestigationScrollButton
 	str r0, [r1]
 	ldr r0, _0800D778 @ =0x06013000
 	str r0, [r1, #4]
 	ldr r0, _0800D77C @ =0x80000100
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0800D780 @ =gUnknown_08196FC4
+	ldr r0, _0800D780 @ =gPalInvestigationScrollPrompt
 	str r0, [r1]
 	ldr r0, _0800D784 @ =0x050002E0
 	str r0, [r1, #4]
@@ -26227,10 +26227,10 @@ _0800D72E:
 	.align 2, 0
 _0800D76C: .4byte gUnknown_03002CD0
 _0800D770: .4byte 0x040000D4
-_0800D774: .4byte gUnknown_08189D80
+_0800D774: .4byte gGfx4bppInvestigationScrollButton
 _0800D778: .4byte 0x06013000
 _0800D77C: .4byte 0x80000100
-_0800D780: .4byte gUnknown_08196FC4
+_0800D780: .4byte gPalInvestigationScrollPrompt
 _0800D784: .4byte 0x050002E0
 _0800D788: .4byte 0x80000010
 _0800D78C:
@@ -27624,40 +27624,40 @@ sub_800E280: @ 0x0800E280
 	ldr r1, _0800E318 @ =0x80000800
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E31C @ =gUnknown_08196F64
+	ldr r1, _0800E31C @ =gPalActionButtons1
 	str r1, [r0]
 	ldr r1, _0800E320 @ =0x050002A0
 	str r1, [r0, #4]
 	ldr r4, _0800E324 @ =0x80000020
 	str r4, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E328 @ =gUnknown_08189D80
+	ldr r1, _0800E328 @ =gGfx4bppInvestigationScrollButton
 	str r1, [r0]
 	ldr r1, _0800E32C @ =0x06013000
 	str r1, [r0, #4]
 	ldr r3, _0800E330 @ =0x80000100
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E334 @ =gUnknown_08196FC4
+	ldr r1, _0800E334 @ =gPalInvestigationScrollPrompt
 	str r1, [r0]
 	ldr r1, _0800E338 @ =0x050002E0
 	str r1, [r0, #4]
 	ldr r2, _0800E33C @ =0x80000010
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E340 @ =gUnknown_0818B180
+	ldr r1, _0800E340 @ =gGfxExamineCursor
 	str r1, [r0]
 	ldr r1, _0800E344 @ =0x06013200
 	str r1, [r0, #4]
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E348 @ =gUnknown_08197024
+	ldr r1, _0800E348 @ =gPalExamineCursors
 	str r1, [r0]
 	ldr r1, _0800E34C @ =0x05000300
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0800E350 @ =gUnknown_081977A4
+	ldr r1, _0800E350 @ =gPalChoiceSelected
 	str r1, [r0]
 	ldr r1, _0800E354 @ =0x05000320
 	str r1, [r0, #4]
@@ -27690,20 +27690,20 @@ _0800E30C: .4byte 0x040000D4
 _0800E310: .4byte gGfx4bppInvestigationActions
 _0800E314: .4byte 0x06012000
 _0800E318: .4byte 0x80000800
-_0800E31C: .4byte gUnknown_08196F64
+_0800E31C: .4byte gPalActionButtons1
 _0800E320: .4byte 0x050002A0
 _0800E324: .4byte 0x80000020
-_0800E328: .4byte gUnknown_08189D80
+_0800E328: .4byte gGfx4bppInvestigationScrollButton
 _0800E32C: .4byte 0x06013000
 _0800E330: .4byte 0x80000100
-_0800E334: .4byte gUnknown_08196FC4
+_0800E334: .4byte gPalInvestigationScrollPrompt
 _0800E338: .4byte 0x050002E0
 _0800E33C: .4byte 0x80000010
-_0800E340: .4byte gUnknown_0818B180
+_0800E340: .4byte gGfxExamineCursor
 _0800E344: .4byte 0x06013200
-_0800E348: .4byte gUnknown_08197024
+_0800E348: .4byte gPalExamineCursors
 _0800E34C: .4byte 0x05000300
-_0800E350: .4byte gUnknown_081977A4
+_0800E350: .4byte gPalChoiceSelected
 _0800E354: .4byte 0x05000320
 _0800E358: .4byte gUnknown_03002D40
 _0800E35C: .4byte 0x000040E0
@@ -28496,14 +28496,14 @@ _0800E958:
 	cmp r6, #3
 	bls _0800E930
 	ldr r1, _0800E9A0 @ =0x040000D4
-	ldr r0, _0800E9AC @ =gUnknown_0818B680
+	ldr r0, _0800E9AC @ =gGfxCheckmark
 	str r0, [r1]
 	ldr r0, _0800E9B0 @ =0x06015400
 	str r0, [r1, #4]
 	ldr r0, _0800E9B4 @ =0x80000100
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0800E9B8 @ =gUnknown_08197244
+	ldr r0, _0800E9B8 @ =gPalCheckmark
 	str r0, [r1]
 	ldr r0, _0800E9BC @ =0x05000360
 	str r0, [r1, #4]
@@ -28525,10 +28525,10 @@ _0800E99C: .4byte gUnknown_08026810
 _0800E9A0: .4byte 0x040000D4
 _0800E9A4: .4byte 0x06013400
 _0800E9A8: .4byte 0x80000400
-_0800E9AC: .4byte gUnknown_0818B680
+_0800E9AC: .4byte gGfxCheckmark
 _0800E9B0: .4byte 0x06015400
 _0800E9B4: .4byte 0x80000100
-_0800E9B8: .4byte gUnknown_08197244
+_0800E9B8: .4byte gPalCheckmark
 _0800E9BC: .4byte 0x05000360
 _0800E9C0: .4byte 0x80000010
 
@@ -30127,7 +30127,7 @@ sub_800F678: @ 0x0800F678
 	ands r0, r2
 	strb r0, [r4, #0xc]
 	ldr r1, _0800F6DC @ =0x040000D4
-	ldr r0, _0800F6E0 @ =gUnknown_0818AD80
+	ldr r0, _0800F6E0 @ =gGfx4bppProfileTextTiles
 	str r0, [r1]
 	ldr r0, _0800F6E4 @ =0x06013500
 	str r0, [r1, #4]
@@ -30141,7 +30141,7 @@ sub_800F678: @ 0x0800F678
 	b _0800F70A
 	.align 2, 0
 _0800F6DC: .4byte 0x040000D4
-_0800F6E0: .4byte gUnknown_0818AD80
+_0800F6E0: .4byte gGfx4bppProfileTextTiles
 _0800F6E4: .4byte 0x06013500
 _0800F6E8: .4byte 0x80000100
 _0800F6EC:
@@ -30149,7 +30149,7 @@ _0800F6EC:
 	orrs r0, r2
 	strb r0, [r4, #0xc]
 	ldr r1, _0800F720 @ =0x040000D4
-	ldr r0, _0800F724 @ =gUnknown_0818AF80
+	ldr r0, _0800F724 @ =gGfxEvidenceText
 	str r0, [r1]
 	ldr r0, _0800F728 @ =0x06013500
 	str r0, [r1, #4]
@@ -30173,7 +30173,7 @@ _0800F718:
 	bx r0
 	.align 2, 0
 _0800F720: .4byte 0x040000D4
-_0800F724: .4byte gUnknown_0818AF80
+_0800F724: .4byte gGfxEvidenceText
 _0800F728: .4byte 0x06013500
 _0800F72C: .4byte 0x80000100
 
@@ -31836,33 +31836,33 @@ sub_8010494: @ 0x08010494
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08010524 @ =gUnknown_08189B80
+	ldr r1, _08010524 @ =gGfx4bppControllerButtons
 	str r1, [r0]
 	ldr r1, _08010528 @ =0x06013800
 	str r1, [r0, #4]
 	adds r2, #0xc0
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0801052C @ =gUnknown_0818AB80
+	ldr r1, _0801052C @ =gGfx4bppPresentBackTextTiles
 	str r1, [r0]
 	ldr r1, _08010530 @ =0x06013A00
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08010534 @ =gUnknown_0818AD80
+	ldr r1, _08010534 @ =gGfx4bppProfileTextTiles
 	str r1, [r0]
 	ldr r1, _08010538 @ =0x06013500
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0801053C @ =gUnknown_08196F04
+	ldr r1, _0801053C @ =gPalCrossExamUI
 	str r1, [r0]
 	ldr r1, _08010540 @ =0x05000260
 	str r1, [r0, #4]
 	subs r2, #0xf0
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08010544 @ =gUnknown_08196FA4
+	ldr r1, _08010544 @ =gPalCourtRecordActionText
 	str r1, [r0]
 	ldr r1, _08010548 @ =0x05000280
 	str r1, [r0, #4]
@@ -31883,15 +31883,15 @@ _08010514: .4byte 0x06013400
 _08010518: .4byte 0x80000040
 _0801051C: .4byte gGfx4bppTestimonyArrows+0x180
 _08010520: .4byte 0x06013480
-_08010524: .4byte gUnknown_08189B80
+_08010524: .4byte gGfx4bppControllerButtons
 _08010528: .4byte 0x06013800
-_0801052C: .4byte gUnknown_0818AB80
+_0801052C: .4byte gGfx4bppPresentBackTextTiles
 _08010530: .4byte 0x06013A00
-_08010534: .4byte gUnknown_0818AD80
+_08010534: .4byte gGfx4bppProfileTextTiles
 _08010538: .4byte 0x06013500
-_0801053C: .4byte gUnknown_08196F04
+_0801053C: .4byte gPalCrossExamUI
 _08010540: .4byte 0x05000260
-_08010544: .4byte gUnknown_08196FA4
+_08010544: .4byte gPalCourtRecordActionText
 _08010548: .4byte 0x05000280
 _0801054C: .4byte gPalEvidenceProfileDesc
 _08010550: .4byte 0x05000240
@@ -35623,7 +35623,7 @@ _080121E6:
 	.align 2, 0
 _080121F0: .4byte gUnknown_0802813C
 _080121F4:
-	ldr r1, _08012248 @ =gUnknown_0826E5B0
+	ldr r1, _08012248 @ =gGfxSeqAnimation35
 	adds r0, r2, r1
 	str r0, [r4, #0x14]
 	ldr r0, _0801224C @ =gUnknown_08252494
@@ -35668,7 +35668,7 @@ _08012242:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012248: .4byte gUnknown_0826E5B0
+_08012248: .4byte gGfxSeqAnimation35
 _0801224C: .4byte gUnknown_08252494
 _08012250: .4byte 0x0000FFFF
 _08012254: .4byte gMain
@@ -40283,7 +40283,7 @@ _08014538:
 	beq _0801458C
 	b _080145A8
 _0801453E:
-	ldr r6, _08014554 @ =gUnknown_0820E74C
+	ldr r6, _08014554 @ =gPalCourtScroll
 	ldr r2, _08014558 @ =0x00000CAD
 	adds r0, r5, r2
 	ldrb r0, [r0]
@@ -40294,7 +40294,7 @@ _0801453E:
 	movs r0, #1
 	b _08014578
 	.align 2, 0
-_08014554: .4byte gUnknown_0820E74C
+_08014554: .4byte gPalCourtScroll
 _08014558: .4byte 0x00000CAD
 _0801455C:
 	movs r1, #0x80
@@ -40303,7 +40303,7 @@ _0801455C:
 	movs r2, #3
 	b _0801457C
 _08014566:
-	ldr r6, _08014584 @ =gUnknown_0820E74C
+	ldr r6, _08014584 @ =gPalCourtScroll
 	ldr r3, _08014588 @ =0x00000CAD
 	adds r0, r5, r3
 	movs r1, #0
@@ -40320,10 +40320,10 @@ _0801457C:
 	bl sub_8014364
 	b _080145A8
 	.align 2, 0
-_08014584: .4byte gUnknown_0820E74C
+_08014584: .4byte gPalCourtScroll
 _08014588: .4byte 0x00000CAD
 _0801458C:
-	ldr r6, _080145C8 @ =gUnknown_0820E74C
+	ldr r6, _080145C8 @ =gPalCourtScroll
 	ldr r1, _080145CC @ =0x00000CAD
 	adds r0, r5, r1
 	movs r1, #0
@@ -40352,7 +40352,7 @@ _080145A8:
 	movs r0, #0
 	b _080145E0
 	.align 2, 0
-_080145C8: .4byte gUnknown_0820E74C
+_080145C8: .4byte gPalCourtScroll
 _080145CC: .4byte 0x00000CAD
 _080145D0:
 	movs r3, #0x80
@@ -40782,7 +40782,7 @@ sub_80148E0: @ 0x080148E0
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
 	bl m4aSoundVSyncOff
-	ldr r0, _08014980 @ =gUnknown_08190C00
+	ldr r0, _08014980 @ =gGfxPsycheLockChainsTiles
 	ldr r1, _08014984 @ =0x06004000
 	bl LZ77UnCompVram
 	bl m4aSoundVSyncOn
@@ -40812,7 +40812,7 @@ _08014970: .4byte 0x040000D4
 _08014974: .4byte 0x0600E000
 _08014978: .4byte 0x81000400
 _0801497C: .4byte 0x0600F800
-_08014980: .4byte gUnknown_08190C00
+_08014980: .4byte gGfxPsycheLockChainsTiles
 _08014984: .4byte 0x06004000
 _08014988: .4byte gUnknown_0814DCB4
 _0801498C: .4byte 0x050001C0
@@ -42758,20 +42758,20 @@ _080158AC: .4byte 0x00000255
 	thumb_func_start sub_80158B0
 sub_80158B0: @ 0x080158B0
 	ldr r1, _080158DC @ =0x040000D4
-	ldr r0, _080158E0 @ =gUnknown_08190480
+	ldr r0, _080158E0 @ =gGfxInvestigationStopButton
 	str r0, [r1]
 	ldr r0, _080158E4 @ =0x06013000
 	str r0, [r1, #4]
 	ldr r2, _080158E8 @ =0x80000100
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080158EC @ =gUnknown_0818A980
+	ldr r0, _080158EC @ =gGfxPressPresentButtons+0x200
 	str r0, [r1]
 	ldr r0, _080158F0 @ =0x06013200
 	str r0, [r1, #4]
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080158F4 @ =gUnknown_08197004
+	ldr r0, _080158F4 @ =gPalPressPresentButtons
 	str r0, [r1]
 	ldr r0, _080158F8 @ =0x050002A0
 	str r0, [r1, #4]
@@ -42781,12 +42781,12 @@ sub_80158B0: @ 0x080158B0
 	bx lr
 	.align 2, 0
 _080158DC: .4byte 0x040000D4
-_080158E0: .4byte gUnknown_08190480
+_080158E0: .4byte gGfxInvestigationStopButton
 _080158E4: .4byte 0x06013000
 _080158E8: .4byte 0x80000100
-_080158EC: .4byte gUnknown_0818A980
+_080158EC: .4byte gGfxPressPresentButtons+0x200
 _080158F0: .4byte 0x06013200
-_080158F4: .4byte gUnknown_08197004
+_080158F4: .4byte gPalPressPresentButtons
 _080158F8: .4byte 0x050002A0
 _080158FC: .4byte 0x80000010
 
@@ -43723,7 +43723,7 @@ _08016038:
 	cmp r1, #7
 	bls _08016028
 	ldr r0, _080160B0 @ =0x040000D4
-	ldr r1, _080160B4 @ =gUnknown_08190A80
+	ldr r1, _080160B4 @ =gGfxHPBarProgress
 	str r1, [r0]
 	str r3, [r0, #4]
 	ldr r1, _080160B8 @ =0x800000C0
@@ -43732,14 +43732,14 @@ _08016038:
 	movs r1, #0xc0
 	lsls r1, r1, #1
 	adds r3, r3, r1
-	ldr r1, _080160BC @ =gUnknown_08190A00
+	ldr r1, _080160BC @ =gGfxHPBarFrame3
 	str r1, [r0]
 	str r3, [r0, #4]
 	ldr r2, _080160C0 @ =0x80000040
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
 	adds r3, #0x80
-	ldr r1, _080160C4 @ =gUnknown_08190900
+	ldr r1, _080160C4 @ =gGfxHPBarFrame2
 	str r1, [r0]
 	str r3, [r0, #4]
 	ldr r1, _080160C8 @ =0x80000080
@@ -43748,19 +43748,19 @@ _08016038:
 	movs r1, #0x80
 	lsls r1, r1, #1
 	adds r3, r3, r1
-	ldr r1, _080160CC @ =gUnknown_08190880
+	ldr r1, _080160CC @ =gGfxHPBarFrame1
 	str r1, [r0]
 	str r3, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _080160D0 @ =gUnknown_08197684
+	ldr r1, _080160D0 @ =gPalHPBarFrame
 	str r1, [r0]
 	ldr r1, _080160D4 @ =0x05000380
 	str r1, [r0, #4]
 	subs r2, #0x30
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _080160D8 @ =gUnknown_081976A4
+	ldr r1, _080160D8 @ =gPalHPBarProgress
 	str r1, [r0]
 	ldr r1, _080160DC @ =0x05000300
 	str r1, [r0, #4]
@@ -43774,16 +43774,16 @@ _080160A4: .4byte 0x06011880
 _080160A8: .4byte gUnknown_03003AF0
 _080160AC: .4byte 0x06011080
 _080160B0: .4byte 0x040000D4
-_080160B4: .4byte gUnknown_08190A80
+_080160B4: .4byte gGfxHPBarProgress
 _080160B8: .4byte 0x800000C0
-_080160BC: .4byte gUnknown_08190A00
+_080160BC: .4byte gGfxHPBarFrame3
 _080160C0: .4byte 0x80000040
-_080160C4: .4byte gUnknown_08190900
+_080160C4: .4byte gGfxHPBarFrame2
 _080160C8: .4byte 0x80000080
-_080160CC: .4byte gUnknown_08190880
-_080160D0: .4byte gUnknown_08197684
+_080160CC: .4byte gGfxHPBarFrame1
+_080160D0: .4byte gPalHPBarFrame
 _080160D4: .4byte 0x05000380
-_080160D8: .4byte gUnknown_081976A4
+_080160D8: .4byte gPalHPBarProgress
 _080160DC: .4byte 0x05000300
 
 	thumb_func_start sub_80160E0
@@ -46043,7 +46043,7 @@ _08017216:
 	ands r2, r0
 	strh r2, [r3, #0x3c]
 	ldr r1, _08017250 @ =0x040000D4
-	ldr r0, _08017254 @ =gUnknown_0818A780
+	ldr r0, _08017254 @ =gGfxPressPresentButtons
 	str r0, [r1]
 	ldr r0, _08017258 @ =0x06013000
 	str r0, [r1, #4]
@@ -46057,7 +46057,7 @@ _08017244: .4byte 0x06011E00
 _08017248: .4byte 0x06012D00
 _0801724C: .4byte 0x000003FF
 _08017250: .4byte 0x040000D4
-_08017254: .4byte gUnknown_0818A780
+_08017254: .4byte gGfxPressPresentButtons
 _08017258: .4byte 0x06013000
 _0801725C: .4byte 0x80000200
 _08017260:
@@ -46218,14 +46218,14 @@ _08017382:
 	ldr r0, _080173D8 @ =0x80000800
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080173DC @ =gUnknown_08189D80
+	ldr r0, _080173DC @ =gGfx4bppInvestigationScrollButton
 	str r0, [r1]
 	ldr r0, _080173E0 @ =0x06013000
 	str r0, [r1, #4]
 	ldr r2, _080173E4 @ =0x80000100
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _080173E8 @ =gUnknown_0818B180
+	ldr r0, _080173E8 @ =gGfxExamineCursor
 	str r0, [r1]
 	ldr r0, _080173EC @ =0x06013200
 	str r0, [r1, #4]
@@ -46240,10 +46240,10 @@ _080173CC: .4byte 0x040000D4
 _080173D0: .4byte gGfx4bppInvestigationActions
 _080173D4: .4byte 0x06012000
 _080173D8: .4byte 0x80000800
-_080173DC: .4byte gUnknown_08189D80
+_080173DC: .4byte gGfx4bppInvestigationScrollButton
 _080173E0: .4byte 0x06013000
 _080173E4: .4byte 0x80000100
-_080173E8: .4byte gUnknown_0818B180
+_080173E8: .4byte gGfxExamineCursor
 _080173EC: .4byte 0x06013200
 _080173F0:
 	movs r0, #0x83
@@ -50005,7 +50005,7 @@ _0801901C:
 	mov r0, sp
 	strh r1, [r0, #4]
 _08019020:
-	ldr r0, _0801903C @ =gUnknown_0820E74C
+	ldr r0, _0801903C @ =gPalCourtScroll
 	mov r1, sp
 	ldrh r1, [r1, #4]
 	mov r2, sp
@@ -50018,7 +50018,7 @@ _08019020:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801903C: .4byte gUnknown_0820E74C
+_0801903C: .4byte gPalCourtScroll
 
 	thumb_func_start sub_8019040
 sub_8019040: @ 0x08019040
@@ -50585,14 +50585,14 @@ sub_801943C: @ 0x0801943C
 	cmp r2, #0
 	beq _080194A8
 	ldr r1, _0801948C @ =0x040000D4
-	ldr r0, _08019490 @ =gUnknown_0818C360
+	ldr r0, _08019490 @ =gGfxGuilty1
 	str r0, [r1]
 	ldr r0, _08019494 @ =0x06013400
 	str r0, [r1, #4]
 	ldr r0, _08019498 @ =0x80000800
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0801949C @ =gUnknown_08197284
+	ldr r0, _0801949C @ =gPalGuilty
 	str r0, [r1]
 	ldr r0, _080194A0 @ =0x050002A0
 	str r0, [r1, #4]
@@ -50606,28 +50606,28 @@ _08019480: .4byte gUnknown_030070E0
 _08019484: .4byte gMain
 _08019488: .4byte gUnknown_03002D28
 _0801948C: .4byte 0x040000D4
-_08019490: .4byte gUnknown_0818C360
+_08019490: .4byte gGfxGuilty1
 _08019494: .4byte 0x06013400
 _08019498: .4byte 0x80000800
-_0801949C: .4byte gUnknown_08197284
+_0801949C: .4byte gPalGuilty
 _080194A0: .4byte 0x050002A0
 _080194A4: .4byte 0x80000010
 _080194A8:
 	ldr r1, _080194F0 @ =0x040000D4
-	ldr r0, _080194F4 @ =gUnknown_0818BB60
+	ldr r0, _080194F4 @ =gGfxNotGuilty1
 	str r0, [r1]
 	ldr r0, _080194F8 @ =0x06013400
 	str r0, [r1, #4]
 	ldr r2, _080194FC @ =0x80000400
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08019500 @ =gUnknown_0818CB60
+	ldr r0, _08019500 @ =gGfxGuiltyNotGuilty2
 	str r0, [r1]
 	ldr r0, _08019504 @ =0x06013C00
 	str r0, [r1, #4]
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08019508 @ =gUnknown_081972A4
+	ldr r0, _08019508 @ =gPalNotGuilty
 	str r0, [r1]
 	ldr r0, _0801950C @ =0x050002A0
 	str r0, [r1, #4]
@@ -50652,12 +50652,12 @@ _080194D4:
 	bx r1
 	.align 2, 0
 _080194F0: .4byte 0x040000D4
-_080194F4: .4byte gUnknown_0818BB60
+_080194F4: .4byte gGfxNotGuilty1
 _080194F8: .4byte 0x06013400
 _080194FC: .4byte 0x80000400
-_08019500: .4byte gUnknown_0818CB60
+_08019500: .4byte gGfxGuiltyNotGuilty2
 _08019504: .4byte 0x06013C00
-_08019508: .4byte gUnknown_081972A4
+_08019508: .4byte gPalNotGuilty
 _0801950C: .4byte 0x050002A0
 _08019510: .4byte 0x80000010
 _08019514: .4byte 0x01000009
@@ -53892,14 +53892,14 @@ _0801AE2C: .4byte gIORegisters
 _0801AE30: .4byte 0x0000FDFF
 _0801AE34:
 	ldr r0, _0801AEA4 @ =0x040000D4
-	ldr r1, _0801AEA8 @ =gUnknown_0818A780
+	ldr r1, _0801AEA8 @ =gGfxPressPresentButtons
 	str r1, [r0]
 	ldr r1, _0801AEAC @ =0x06013000
 	str r1, [r0, #4]
 	ldr r1, _0801AEB0 @ =0x80000200
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _0801AEB4 @ =gUnknown_08197004
+	ldr r1, _0801AEB4 @ =gPalPressPresentButtons
 	str r1, [r0]
 	ldr r1, _0801AEB8 @ =0x050002A0
 	str r1, [r0, #4]
@@ -53950,10 +53950,10 @@ _0801AE94:
 	bx r1
 	.align 2, 0
 _0801AEA4: .4byte 0x040000D4
-_0801AEA8: .4byte gUnknown_0818A780
+_0801AEA8: .4byte gGfxPressPresentButtons
 _0801AEAC: .4byte 0x06013000
 _0801AEB0: .4byte 0x80000200
-_0801AEB4: .4byte gUnknown_08197004
+_0801AEB4: .4byte gPalPressPresentButtons
 _0801AEB8: .4byte 0x050002A0
 _0801AEBC: .4byte 0x80000010
 _0801AEC0: .4byte gGfx4bppTestimonyArrows
@@ -54652,14 +54652,14 @@ sub_801B3FC: @ 0x0801B3FC
 	movs r0, #1
 	bl sub_8017154
 	ldr r1, _0801B45C @ =0x040000D4
-	ldr r0, _0801B460 @ =gUnknown_0818B180
+	ldr r0, _0801B460 @ =gGfxExamineCursor
 	str r0, [r1]
 	ldr r0, _0801B464 @ =0x06011F80
 	str r0, [r1, #4]
 	ldr r0, _0801B468 @ =0x80000040
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _0801B46C @ =gUnknown_08197024
+	ldr r0, _0801B46C @ =gPalExamineCursors
 	str r0, [r1]
 	ldr r0, _0801B470 @ =0x05000340
 	str r0, [r1, #4]
@@ -54695,10 +54695,10 @@ sub_801B3FC: @ 0x0801B3FC
 	.align 2, 0
 _0801B458: .4byte gUnknown_030070E0
 _0801B45C: .4byte 0x040000D4
-_0801B460: .4byte gUnknown_0818B180
+_0801B460: .4byte gGfxExamineCursor
 _0801B464: .4byte 0x06011F80
 _0801B468: .4byte 0x80000040
-_0801B46C: .4byte gUnknown_08197024
+_0801B46C: .4byte gPalExamineCursors
 _0801B470: .4byte 0x05000340
 _0801B474: .4byte 0x80000010
 _0801B478: .4byte gUnknown_03003C40
@@ -55241,7 +55241,7 @@ _0801B8AA:
 	bl sub_8011150
 _0801B8CC:
 	ldr r1, _0801B9C4 @ =0x040000D4
-	ldr r0, _0801B9C8 @ =gUnknown_0818B180
+	ldr r0, _0801B9C8 @ =gGfxExamineCursor
 	str r0, [r1]
 	ldr r2, _0801B9CC @ =0x06010000
 	str r2, [r1, #4]
@@ -55316,7 +55316,7 @@ _0801B93A:
 	orrs r0, r3
 	strh r0, [r6, #0x1c]
 	ldr r1, _0801B9C4 @ =0x040000D4
-	ldr r0, _0801B9E4 @ =gUnknown_08197024
+	ldr r0, _0801B9E4 @ =gPalExamineCursors
 	str r0, [r1]
 	ldr r0, _0801B9E8 @ =0x05000340
 	str r0, [r1, #4]
@@ -55369,14 +55369,14 @@ _0801B9A2:
 	.align 2, 0
 _0801B9C0: .4byte gJoypad
 _0801B9C4: .4byte 0x040000D4
-_0801B9C8: .4byte gUnknown_0818B180
+_0801B9C8: .4byte gGfxExamineCursor
 _0801B9CC: .4byte 0x06010000
 _0801B9D0: .4byte 0x80000040
 _0801B9D4: .4byte 0x00000FFF
 _0801B9D8: .4byte 0x0000F0FF
 _0801B9DC: .4byte 0x0000FF0F
 _0801B9E0: .4byte 0x0000FFF0
-_0801B9E4: .4byte gUnknown_08197024
+_0801B9E4: .4byte gPalExamineCursors
 _0801B9E8: .4byte 0x05000340
 _0801B9EC: .4byte 0x80000010
 _0801B9F0: .4byte gOamObjects
@@ -55399,7 +55399,7 @@ _0801BA00:
 	strb r0, [r5, #0x1a]
 	ldr r1, _0801BA70 @ =0x040000D4
 	lsls r0, r0, #5
-	ldr r2, _0801BA74 @ =gUnknown_08197024
+	ldr r2, _0801BA74 @ =gPalExamineCursors
 	adds r0, r0, r2
 	str r0, [r1]
 	ldr r0, _0801BA78 @ =0x05000340
@@ -55445,7 +55445,7 @@ _0801BA60:
 	bx r1
 	.align 2, 0
 _0801BA70: .4byte 0x040000D4
-_0801BA74: .4byte gUnknown_08197024
+_0801BA74: .4byte gPalExamineCursors
 _0801BA78: .4byte 0x05000340
 _0801BA7C: .4byte 0x80000010
 _0801BA80: .4byte gOamObjects
