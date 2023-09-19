@@ -19,6 +19,7 @@ SECTIONS {
     {
         src/crt0.o(.text);
         src/main.o(.text);
+        asm/main.o(.text);
         asm/code.o(.text);
         /* library functions */
         src/m4a_1.o(.text);

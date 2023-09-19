@@ -14,7 +14,7 @@
 #include "declarations.h"
 #include "constants/animation.h"
 
-void sub_8000E68(void);
+void UpdateSpecialEffects(void);
 
 void nullsub_1(void) {
 
@@ -163,7 +163,7 @@ void AgbMain(void)
                 DoGameProcess();
                 UpdateAnimations(gMain.previousBG);
                 UpdateHardwareBlend();
-                sub_8000E68();
+                UpdateSpecialEffects();
             } else {
                 sub_80139F4();
                 nullsub_7();
