@@ -5,33 +5,33 @@
 gUnknown_08180000:
     .incbin "baserom.gba", 0x00180000, 0x800
 
-    .global gUnknown_08180800
-gUnknown_08180800:
-    .incbin "baserom.gba", 0x00180800, 0x20
+    .global gPalEvidenceProfileDesc
+gPalEvidenceProfileDesc:
+    .incbin "graphics/evidence_profile_descriptions/evidence_profile_descriptions.gbapal"
 
-    .global gUnknown_08180820
-gUnknown_08180820:
-    .incbin "baserom.gba", 0x00180820, 0x1000
+    .global gGfxSaveGameTiles
+gGfxSaveGameTiles:
+    .incbin "graphics/ui/message_box/13791C.4bpp"
 
     .global gUnknown_08181820
 gUnknown_08181820:
     .incbin "baserom.gba", 0x00181820, 0x5000
 
-    .global gUnknown_08186820
-gUnknown_08186820:
-    .incbin "baserom.gba", 0x00186820, 0x60
+    .global gGfxDetentionCenterBottomTiles
+gGfxDetentionCenterBottomTiles:
+    .incbin "graphics/detention_center_bottom_tiles.4bpp"
 
-    .global gUnknown_08186880
-gUnknown_08186880:
-    .incbin "baserom.gba", 0x00186880, 0x180
+    .global gGfx4bppTestimonyArrows
+gGfx4bppTestimonyArrows:
+    .incbin "graphics/ui/left_right_arrows.4bpp"
 
-    .global gUnknown_08186A00
-gUnknown_08186A00:
-    .incbin "baserom.gba", 0x00186A00, 0x2180
+    .global gGfxUnusedTestimonyCharacters
+gGfxUnusedTestimonyCharacters:
+    .incbin "graphics/ui/trial/unused_testimony_characters.4bpp"
 
-    .global gUnknown_08188B80
-gUnknown_08188B80:
-    .incbin "baserom.gba", 0x00188B80, 0x1000
+    .global gGfx4bppInvestigationActions
+gGfx4bppInvestigationActions:
+    .incbin "graphics/ui/investigation/action_buttons.4bpp"
 
     .global gUnknown_08189B80
 gUnknown_08189B80:

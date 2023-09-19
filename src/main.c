@@ -11,6 +11,7 @@
 #include "investigation.h"
 #include "save.h"
 #include "court.h"
+#include "declarations.h"
 #include "constants/animation.h"
 
 void sub_8000E68(void);
