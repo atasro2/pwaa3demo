@@ -37,6 +37,7 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
+        src/main.o(.rodata);
         rodata/rodata.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);
@@ -47,6 +48,7 @@ SECTIONS {
     .data :
     ALIGN(4)
     {
+        src/main.o(.data);
         data/data.o(.data);
     } =0
     . = 0x8180000;

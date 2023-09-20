@@ -12,7 +12,7 @@ sub_800156C: @ 0x0800156C
 	ldrb r0, [r0]
 	movs r1, #0x1b
 	movs r2, #0
-	bl sub_08006470
+	bl sub_8006470
 	ldr r0, _080015A4 @ =gMain
 	ldr r0, [r0]
 	movs r1, #1
@@ -1062,7 +1062,7 @@ _08001DBA:
 	ldrb r0, [r5, #4]
 	movs r1, #0x14
 	movs r2, #5
-	bl sub_08006470
+	bl sub_8006470
 	b _08001E52
 	.align 2, 0
 _08001DD8: .4byte gUnknown_08022ED0
@@ -1125,7 +1125,7 @@ _08001E28:
 	ldrb r0, [r5, #6]
 	movs r1, #0x14
 	movs r2, #6
-	bl sub_08006470
+	bl sub_8006470
 _08001E52:
 	pop {r4, r5, r6, r7}
 	pop {r0}
@@ -1435,7 +1435,7 @@ _08002068:
 	ldrsh r0, [r3, r4]
 	movs r1, #9
 	movs r2, #6
-	bl sub_08006470
+	bl sub_8006470
 	mov r5, sl
 	movs r1, #0
 	ldrsh r0, [r5, r1]
@@ -1494,7 +1494,7 @@ _08002102:
 	adds r2, r5, #3
 	add r2, sb
 	adds r0, r3, #0
-	bl sub_08006470
+	bl sub_8006470
 	adds r6, #1
 	cmp r6, #3
 	ble _080020D4
@@ -10182,8 +10182,8 @@ _0800646C:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_08006470
-sub_08006470: @ 0x08006470
+	thumb_func_start sub_8006470
+sub_8006470: @ 0x08006470
 	bx lr
 	.align 2, 0
 
@@ -32706,7 +32706,7 @@ _08011B04:
 	ldrsh r0, [r5, r1]
 	movs r1, #0xa
 	movs r2, #6
-	bl sub_08006470
+	bl sub_8006470
 	ldr r0, _08011BB8 @ =gUnknown_0802704C
 	movs r1, #5
 	movs r2, #7
@@ -32729,7 +32729,7 @@ _08011B04:
 _08011B5C:
 	movs r1, #0xa
 	movs r2, #7
-	bl sub_08006470
+	bl sub_8006470
 	ldr r0, _08011BBC @ =gUnknown_08027058
 	movs r1, #5
 	movs r2, #8
@@ -43285,8 +43285,8 @@ _08016CBE:
 _08016CC4: .4byte gUnknown_03002DE0
 _08016CC8: .4byte gUnknown_03003C60
 
-	thumb_func_start sub_8016CCC
-sub_8016CCC: @ 0x08016CCC
+	thumb_func_start ProcessHPBar
+ProcessHPBar: @ 0x08016CCC
 	push {lr}
 	ldr r0, _08016CE4 @ =gMain
 	adds r0, #0xa4

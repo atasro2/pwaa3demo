@@ -1,59 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start DoGameProcess
-DoGameProcess: @ 0x08000594
-	push {r4, r5, lr}
-	ldr r5, _080005B0 @ =gCourtScroll
-	ldr r2, _080005B4 @ =gMain
-	adds r0, r2, #0
-	adds r0, #0xe8
-	ldr r1, [r0]
-	movs r0, #1
-	ands r1, r0
-	cmp r1, #0
-	beq _080005B8
-	bl sub_8000250
-	b _080005BC
-	.align 2, 0
-_080005B0: .4byte gCourtScroll
-_080005B4: .4byte gMain
-_080005B8:
-	strb r1, [r2, #0x13]
-	strb r1, [r2, #0x12]
-_080005BC:
-	bl sub_8016CCC
-	ldr r1, _080005FC @ =gUnknown_0814D308
-	ldr r4, _08000600 @ =gMain
-	ldrb r2, [r4, #8]
-	lsls r0, r2, #2
-	adds r0, r0, r1
-	ldr r1, [r0]
-	adds r0, r4, #0
-	bl _call_via_r1
-	ldr r0, [r4, #4]
-	movs r1, #0xe1
-	lsls r1, r1, #4
-	bl __udivsi3
-	movs r1, #0
-	movs r2, #2
-	bl sub_08006470
-	ldr r0, [r4, #4]
-	adds r0, #1
-	str r0, [r4, #4]
-	ldrh r0, [r5, #4]
-	cmp r0, #0
-	beq _080005F6
-	adds r0, r5, #0
-	bl sub_8000A8C
-_080005F6:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080005FC: .4byte gUnknown_0814D308
-_08000600: .4byte gMain
-
 	thumb_func_start ClearRamAndInitGame
 ClearRamAndInitGame: @ 0x08000604
 	push {r4, r5, r6, lr}
@@ -590,8 +537,8 @@ InitCourtScroll: @ 0x08000A68
 _08000A84: .4byte gCourtScroll
 _08000A88: .4byte gMain
 
-	thumb_func_start sub_8000A8C
-sub_8000A8C: @ 0x08000A8C
+	thumb_func_start UpdateCourtScroll
+UpdateCourtScroll: @ 0x08000A8C
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	ldr r4, _08000AB0 @ =gUnknown_030070E0

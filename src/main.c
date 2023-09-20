@@ -16,6 +16,27 @@
 
 void UpdateSpecialEffects(void);
 
+void UpdateCourtScroll(struct CourtScroll *);
+
+void (*gGameProcesses[])(struct Main *) = {
+    sub_8006918,
+    sub_8006AA4,
+    sub_8006CE8,
+    sub_800A434,
+    sub_800BFA4,
+    sub_800A950,
+    sub_800AB64,
+    sub_800EA6C,
+    sub_800EACC,
+    sub_800B208,
+    sub_80076F8,
+    sub_8008708,
+    sub_8008D7C,
+    sub_800985C,
+    sub_800730C,
+    sub_80018F8
+};
+
 void nullsub_1(void) {
 
 }
@@ -37,7 +58,7 @@ void CheckClearSaveComboAndSwitchProcess(void)
     }
 }
 
-void sub_8000250(void){
+void UpdateScreenShake(void){
     struct Main * main = &gMain;
     struct Struct30070E0 * struct30070E0 = &gUnknown_030070E0;
     u32 amplitude;
@@ -226,5 +247,33 @@ void AgbMain(void)
             sub_80015CC();
         if(gMain.unk2D0 & 1)
             sub_80015E8();
+    }
+}
+
+void DoGameProcess(void)
+{
+    struct CourtScroll *courtScroll = &gCourtScroll;
+    struct Main *main = &gMain;
+
+    u8 amplitude;
+    u8 rand;
+
+    if (main->gameStateFlags & 1)
+    {
+        UpdateScreenShake();
+    }
+    else
+    {
+        main->shakeAmountY = 0;
+        main->shakeAmountX = 0;
+    }
+    ProcessHPBar();
+    gGameProcesses[gMain.process[GAME_PROCESS]](&gMain);
+    sub_8006470(gMain.unk4 / 3600, 0, 2);
+    gMain.unk4++;
+
+    if (courtScroll->state != 0)
+    {
+        UpdateCourtScroll(courtScroll);
     }
 }
