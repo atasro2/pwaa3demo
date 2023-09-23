@@ -26,6 +26,7 @@ struct CourtRecord
     /* +0x14 */ u8 * displayItemList; // unity AA4: now_file
     /* +0x18 */ u8 evidenceList[0x20]; // unity AA4: item_file
     /* +0x38 */ u8 profileList[0x20]; // unity AA4: name_file
+    /* +0x58 */ u8 fill58[2];
 };
 
 extern struct CourtRecord gCourtRecord;

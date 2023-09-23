@@ -139,11 +139,3 @@ gUnknown_0814DDA8:
     .global gUnknown_0814DF88
 gUnknown_0814DF88:
     .incbin "baserom.gba", 0x0014DF88, 0x1E0
-
-    .global gUnknown_0814E168
-gUnknown_0814E168:
-    .incbin "baserom.gba", 0x0014E168, 0x1D0
-
-    .global gUnknown_0814E338
-gUnknown_0814E338:
-    .incbin "baserom.gba", 0x0014E338, 0x4

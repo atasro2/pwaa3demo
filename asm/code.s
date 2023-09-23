@@ -1614,7 +1614,7 @@ _080021E8:
 	ands r0, r1
 	cmp r0, #0
 	beq _08002210
-	bl sub_80006D4
+	bl ResetGameState
 	ldrb r0, [r4]
 	adds r1, r5, #0
 	adds r1, #0xc1
@@ -1737,8 +1737,8 @@ _080022CC: .4byte 0x000003FF
 _080022D0: .4byte gMain
 _080022D4: .4byte gUnknown_08023EF8
 
-	thumb_func_start sub_80022D8
-sub_80022D8: @ 0x080022D8
+	thumb_func_start InitBGs
+InitBGs: @ 0x080022D8
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	mov r1, sp
@@ -3900,7 +3900,7 @@ UpdateBackground: @ 0x08003368
 	push {r5, r6, r7}
 	sub sp, #0x40
 	ldr r7, _080033AC @ =gMain
-	ldr r0, _080033B0 @ =gUnknown_030070E0
+	ldr r0, _080033B0 @ =gScriptContext
 	mov sb, r0
 	ldr r1, _080033B4 @ =gCourtScroll
 	ldrh r0, [r1, #4]
@@ -3930,7 +3930,7 @@ _08003394:
 	mov pc, r0
 	.align 2, 0
 _080033AC: .4byte gMain
-_080033B0: .4byte gUnknown_030070E0
+_080033B0: .4byte gScriptContext
 _080033B4: .4byte gCourtScroll
 _080033B8: .4byte gIORegisters
 _080033BC: .4byte _080033C0
@@ -5762,7 +5762,7 @@ _08004214: .4byte 0x81000400
 	thumb_func_start sub_8004218
 sub_8004218: @ 0x08004218
 	push {r4, lr}
-	ldr r4, _08004234 @ =gUnknown_030070E0
+	ldr r4, _08004234 @ =gScriptContext
 	cmp r0, #1
 	beq _080042C2
 	cmp r0, #2
@@ -5774,7 +5774,7 @@ sub_8004218: @ 0x08004218
 	bl sub_800BB14
 	b _080042E0
 	.align 2, 0
-_08004234: .4byte gUnknown_030070E0
+_08004234: .4byte gScriptContext
 _08004238:
 	cmp r0, #3
 	beq _080042B2
@@ -6543,7 +6543,7 @@ sub_800482C: @ 0x0800482C
 	sub sp, #4
 	adds r1, r0, #0
 	ldr r2, _08004860 @ =gMain
-	ldr r5, _08004864 @ =gUnknown_030070E0
+	ldr r5, _08004864 @ =gScriptContext
 	movs r0, #4
 	ldrh r3, [r5, #0x1e]
 	ands r0, r3
@@ -6566,7 +6566,7 @@ sub_800482C: @ 0x0800482C
 	b _080048BE
 	.align 2, 0
 _08004860: .4byte gMain
-_08004864: .4byte gUnknown_030070E0
+_08004864: .4byte gScriptContext
 _08004868: .4byte 0x040000D4
 _0800486C: .4byte gUnknown_03000000
 _08004870:
@@ -6736,7 +6736,7 @@ sub_80049A0: @ 0x080049A0
 	mov sl, r0
 	ldr r0, _080049E0 @ =gMain
 	str r0, [sp, #0xc]
-	ldr r7, _080049E4 @ =gUnknown_030070E0
+	ldr r7, _080049E4 @ =gScriptContext
 	ldr r1, _080049E8 @ =gIORegisters
 	str r1, [sp, #0x10]
 	movs r0, #2
@@ -6761,7 +6761,7 @@ _080049C4:
 	b _08004A12
 	.align 2, 0
 _080049E0: .4byte gMain
-_080049E4: .4byte gUnknown_030070E0
+_080049E4: .4byte gScriptContext
 _080049E8: .4byte gIORegisters
 _080049EC:
 	movs r0, #1
@@ -7762,7 +7762,7 @@ _080051C8: .4byte gUnknown_08023B98
 	thumb_func_start sub_80051CC
 sub_80051CC: @ 0x080051CC
 	push {r4, r5, r6, r7, lr}
-	ldr r1, _080051E0 @ =gUnknown_030070E0
+	ldr r1, _080051E0 @ =gScriptContext
 	adds r5, r1, #0
 	cmp r0, #1
 	beq _08005228
@@ -7772,7 +7772,7 @@ sub_80051CC: @ 0x080051CC
 	beq _08005240
 	b _08005294
 	.align 2, 0
-_080051E0: .4byte gUnknown_030070E0
+_080051E0: .4byte gScriptContext
 _080051E4:
 	ldr r3, _0800521C @ =gUnknown_03002080
 	movs r2, #0
@@ -7877,7 +7877,7 @@ _080052AC: .4byte 0x000001DF
 	thumb_func_start UpdateTextbox
 UpdateTextbox: @ 0x080052B0
 	push {r4, r5, lr}
-	ldr r0, _080052CC @ =gUnknown_030070E0
+	ldr r0, _080052CC @ =gScriptContext
 	mov ip, r0
 	adds r0, #0x23
 	ldrb r0, [r0]
@@ -7891,7 +7891,7 @@ _080052C0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080052CC: .4byte gUnknown_030070E0
+_080052CC: .4byte gScriptContext
 _080052D0: .4byte _080052D4
 _080052D4: @ jump table
 	.4byte _080053B4 @ case 0
@@ -8053,11 +8053,11 @@ sub_80053FC: @ 0x080053FC
 	bl sub_8006130
 	cmp r4, #1
 	bne _08005464
-	ldr r0, _0800544C @ =gUnknown_030070E0
+	ldr r0, _0800544C @ =gScriptContext
 	adds r0, #0x23
 	movs r1, #3
 	strb r1, [r0]
-	ldr r0, _08005450 @ =gUnknown_03003C40
+	ldr r0, _08005450 @ =gInvestigation
 	strb r1, [r0, #0x10]
 	ldr r0, _08005454 @ =gIORegisters
 	adds r0, #0x4a
@@ -8078,8 +8078,8 @@ sub_80053FC: @ 0x080053FC
 	b _0800548E
 	.align 2, 0
 _08005448: .4byte gMain
-_0800544C: .4byte gUnknown_030070E0
-_08005450: .4byte gUnknown_03003C40
+_0800544C: .4byte gScriptContext
+_08005450: .4byte gInvestigation
 _08005454: .4byte gIORegisters
 _08005458: .4byte gUnknown_03002080
 _0800545C: .4byte 0x000004DC
@@ -8087,22 +8087,22 @@ _08005460: .4byte 0x000004DE
 _08005464:
 	cmp r4, #2
 	bne _08005480
-	ldr r0, _08005478 @ =gUnknown_030070E0
+	ldr r0, _08005478 @ =gScriptContext
 	adds r0, #0x23
 	movs r1, #3
 	strb r1, [r0]
-	ldr r0, _0800547C @ =gUnknown_03003C40
+	ldr r0, _0800547C @ =gInvestigation
 	strb r1, [r0, #0x10]
 	b _0800548E
 	.align 2, 0
-_08005478: .4byte gUnknown_030070E0
-_0800547C: .4byte gUnknown_03003C40
+_08005478: .4byte gScriptContext
+_0800547C: .4byte gInvestigation
 _08005480:
-	ldr r0, _08005494 @ =gUnknown_030070E0
+	ldr r0, _08005494 @ =gScriptContext
 	adds r0, #0x23
 	movs r1, #4
 	strb r1, [r0]
-	ldr r1, _08005498 @ =gUnknown_03003C40
+	ldr r1, _08005498 @ =gInvestigation
 	movs r0, #1
 	strb r0, [r1, #0x10]
 _0800548E:
@@ -8110,8 +8110,8 @@ _0800548E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08005494: .4byte gUnknown_030070E0
-_08005498: .4byte gUnknown_03003C40
+_08005494: .4byte gScriptContext
+_08005498: .4byte gInvestigation
 
 	thumb_func_start sub_800549C
 sub_800549C: @ 0x0800549C
@@ -9216,7 +9216,7 @@ sub_8005CFC: @ 0x08005CFC
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0
-	ldr r2, _08005D10 @ =gUnknown_030028C0
+	ldr r2, _08005D10 @ =gCourtRecord
 	cmp r3, #4
 	bls _08005D14
 	movs r0, #1
@@ -9224,7 +9224,7 @@ sub_8005CFC: @ 0x08005CFC
 	subs r3, #4
 	b _08005D18
 	.align 2, 0
-_08005D10: .4byte gUnknown_030028C0
+_08005D10: .4byte gCourtRecord
 _08005D14:
 	movs r0, #0
 	strb r0, [r2, #0xa]
@@ -10508,7 +10508,7 @@ sub_80066B0: @ 0x080066B0
 	adds r2, r4, #0
 	movs r3, #0
 	bl sub_8012684
-	ldr r0, _080066E0 @ =gUnknown_03003C40
+	ldr r0, _080066E0 @ =gInvestigation
 	movs r1, #1
 	strb r1, [r0, #6]
 	movs r1, #0xf
@@ -10518,7 +10518,7 @@ sub_80066B0: @ 0x080066B0
 	bx r0
 	.align 2, 0
 _080066DC: .4byte gMain
-_080066E0: .4byte gUnknown_03003C40
+_080066E0: .4byte gInvestigation
 
 	thumb_func_start sub_80066E4
 sub_80066E4: @ 0x080066E4
@@ -10594,7 +10594,7 @@ _08006748:
 	bl sub_8018778
 	movs r0, #1
 	bl sub_80053FC
-	ldr r4, _080067A0 @ =gUnknown_03003C40
+	ldr r4, _080067A0 @ =gInvestigation
 	adds r0, r4, #0
 	movs r1, #0xf
 	bl sub_800BF90
@@ -10609,7 +10609,7 @@ _08006748:
 _08006794: .4byte gUnknown_03002D40
 _08006798: .4byte gUnknown_030037B8
 _0800679C: .4byte 0x000040C0
-_080067A0: .4byte gUnknown_03003C40
+_080067A0: .4byte gInvestigation
 
 	thumb_func_start nullsub_15
 nullsub_15: @ 0x080067A4
@@ -10624,7 +10624,7 @@ sub_80067A8: @ 0x080067A8
 	cmp r0, #0
 	bne _080067F4
 	ldr r3, _080067E8 @ =gUnknown_03002D40
-	ldr r2, _080067EC @ =gUnknown_03003C40
+	ldr r2, _080067EC @ =gInvestigation
 	ldrb r1, [r2, #0x18]
 	lsls r0, r1, #0xc
 	movs r5, #0x84
@@ -10652,7 +10652,7 @@ sub_80067A8: @ 0x080067A8
 	b _0800681C
 	.align 2, 0
 _080067E8: .4byte gUnknown_03002D40
-_080067EC: .4byte gUnknown_03003C40
+_080067EC: .4byte gInvestigation
 _080067F0: .4byte 0x00005030
 _080067F4:
 	ldr r3, _08006824 @ =gUnknown_03002D40
@@ -10667,7 +10667,7 @@ _080067F4:
 	ands r0, r4
 	cmp r0, #0
 	beq _0800681E
-	ldr r0, _0800682C @ =gUnknown_03003C40
+	ldr r0, _0800682C @ =gInvestigation
 	ldrb r5, [r0, #0x18]
 	lsls r1, r5, #0xc
 	adds r1, #0x30
@@ -10684,7 +10684,7 @@ _0800681E:
 	.align 2, 0
 _08006824: .4byte gUnknown_03002D40
 _08006828: .4byte 0x00005420
-_0800682C: .4byte gUnknown_03003C40
+_0800682C: .4byte gInvestigation
 
 	thumb_func_start sub_8006830
 sub_8006830: @ 0x08006830
@@ -10744,7 +10744,7 @@ _08006894:
 	movs r0, #0xca
 	lsls r0, r0, #5
 	strh r0, [r1]
-	ldr r1, _08006914 @ =gUnknown_03003C40
+	ldr r1, _08006914 @ =gInvestigation
 	strb r7, [r1, #0x19]
 	movs r0, #2
 	strb r0, [r1, #0x18]
@@ -10788,7 +10788,7 @@ _08006904: .4byte 0x00008078
 _08006908: .4byte 0x00004084
 _0800690C: .4byte 0x00002030
 _08006910: .4byte 0x00002038
-_08006914: .4byte gUnknown_03003C40
+_08006914: .4byte gInvestigation
 
 	thumb_func_start sub_8006918
 sub_8006918: @ 0x08006918
@@ -10999,7 +10999,7 @@ _08006AB8:
 	beq _08006B94
 	b _08006CD6
 _08006AC2:
-	bl sub_80006D4
+	bl ResetGameState
 	bl sub_8007120
 	ldr r0, _08006AD0 @ =0x00000101
 	str r0, [r4, #8]
@@ -11032,7 +11032,7 @@ _08006AFC:
 	beq _08006B28
 	movs r0, #0x3a
 	bl sub_8011150
-	ldr r0, _08006B20 @ =gUnknown_030070E0
+	ldr r0, _08006B20 @ =gScriptContext
 	movs r1, #0
 	strh r1, [r0, #0x16]
 	ldr r0, _08006B24 @ =0x00000301
@@ -11040,7 +11040,7 @@ _08006AFC:
 	b _08006B4E
 	.align 2, 0
 _08006B1C: .4byte gJoypad
-_08006B20: .4byte gUnknown_030070E0
+_08006B20: .4byte gScriptContext
 _08006B24: .4byte 0x00000301
 _08006B28:
 	movs r0, #0xf0
@@ -11052,7 +11052,7 @@ _08006B28:
 	ands r0, r3
 	cmp r0, #0
 	beq _08006B4E
-	ldr r0, _08006B68 @ =gUnknown_03003C40
+	ldr r0, _08006B68 @ =gInvestigation
 	strb r2, [r0, #0x19]
 	strb r1, [r0, #0x18]
 	movs r0, #1
@@ -11062,7 +11062,7 @@ _08006B28:
 	movs r0, #0x2a
 	bl sub_8011150
 _08006B4E:
-	ldr r0, _08006B68 @ =gUnknown_03003C40
+	ldr r0, _08006B68 @ =gInvestigation
 	ldrb r2, [r0, #0x18]
 	adds r1, r0, #0
 	cmp r2, #2
@@ -11076,7 +11076,7 @@ _08006B4E:
 	bls _08006B82
 	b _08006B7A
 	.align 2, 0
-_08006B68: .4byte gUnknown_03003C40
+_08006B68: .4byte gInvestigation
 _08006B6C:
 	ldrb r0, [r1, #0x19]
 	adds r0, #1
@@ -11164,7 +11164,7 @@ _08006C08:
 	movs r0, #0xf0
 	ldrb r4, [r4, #0x1b]
 	ands r0, r4
-	ldr r5, _08006C4C @ =gUnknown_030070E0
+	ldr r5, _08006C4C @ =gScriptContext
 	cmp r0, #0
 	beq _08006CD0
 	ldrh r1, [r2]
@@ -11192,14 +11192,14 @@ _08006C3C: .4byte gUnknown_03002D40
 _08006C40: .4byte 0x00004070
 _08006C44: .4byte 0x00002020
 _08006C48: .4byte 0x00002028
-_08006C4C: .4byte gUnknown_030070E0
+_08006C4C: .4byte gScriptContext
 _08006C50:
 	ldr r2, _08006CB0 @ =gUnknown_03002D40
 	ldrh r1, [r2]
 	movs r3, #0xff
 	adds r0, r3, #0
 	ands r0, r1
-	ldr r5, _08006CB4 @ =gUnknown_030070E0
+	ldr r5, _08006CB4 @ =gScriptContext
 	cmp r0, #0xe0
 	bhi _08006C66
 	ldrh r6, [r5, #0x16]
@@ -11246,7 +11246,7 @@ _08006C78:
 	b _08006CD0
 	.align 2, 0
 _08006CB0: .4byte gUnknown_03002D40
-_08006CB4: .4byte gUnknown_030070E0
+_08006CB4: .4byte gScriptContext
 _08006CB8: .4byte 0x00002030
 _08006CBC: .4byte 0x00002038
 _08006CC0:
@@ -11512,7 +11512,7 @@ sub_8006EAC: @ 0x08006EAC
 	push {r5, r6, r7}
 	adds r6, r0, #0
 	ldr r3, _08006ED0 @ =gIORegisters
-	ldr r2, _08006ED4 @ =gUnknown_030070E0
+	ldr r2, _08006ED4 @ =gScriptContext
 	adds r4, r2, #0
 	adds r4, #0x46
 	ldrh r0, [r4]
@@ -11525,7 +11525,7 @@ sub_8006EAC: @ 0x08006EAC
 	b _08007096
 	.align 2, 0
 _08006ED0: .4byte gIORegisters
-_08006ED4: .4byte gUnknown_030070E0
+_08006ED4: .4byte gScriptContext
 _08006ED8:
 	cmp r0, #2
 	bne _08006EDE
@@ -11575,14 +11575,14 @@ _08006F10:
 	strh r0, [r4]
 	movs r0, #0xb
 	strb r0, [r6, #0x1a]
-	ldr r2, _08006F6C @ =gUnknown_030070E0
+	ldr r2, _08006F6C @ =gScriptContext
 	adds r2, #0x46
 	movs r0, #1
 	strh r0, [r2]
-	ldr r0, _08006F6C @ =gUnknown_030070E0
+	ldr r0, _08006F6C @ =gScriptContext
 	adds r0, #0x48
 	strh r1, [r0]
-	ldr r0, _08006F6C @ =gUnknown_030070E0
+	ldr r0, _08006F6C @ =gScriptContext
 	adds r0, #0x4a
 	strh r1, [r0]
 	b _08007096
@@ -11596,7 +11596,7 @@ _08006F5C: .4byte 0x05000020
 _08006F60: .4byte 0x80000010
 _08006F64: .4byte 0x000003FF
 _08006F68: .4byte gUnknown_03002FA0
-_08006F6C: .4byte gUnknown_030070E0
+_08006F6C: .4byte gScriptContext
 _08006F70:
 	movs r5, #0
 	ldr r0, _08007038 @ =gUnknown_03002FA0
@@ -11688,14 +11688,14 @@ _08007012:
 	adds r5, r6, #0
 	cmp r5, #9
 	bls _08006FD0
-	ldr r4, _08007044 @ =gUnknown_030070E0
+	ldr r4, _08007044 @ =gScriptContext
 	adds r4, #0x48
 	ldrh r0, [r4]
 	cmp r0, #0xe
 	bls _08007060
 	movs r0, #0x56
 	bl sub_8011150
-	ldr r0, _08007044 @ =gUnknown_030070E0
+	ldr r0, _08007044 @ =gScriptContext
 	adds r0, #0x46
 	ldrh r1, [r0]
 	adds r1, #1
@@ -11707,7 +11707,7 @@ _08007012:
 _08007038: .4byte gUnknown_03002FA0
 _0800703C: .4byte gUnknown_08026718
 _08007040: .4byte gUnknown_03007128
-_08007044: .4byte gUnknown_030070E0
+_08007044: .4byte gScriptContext
 _08007048:
 	adds r1, r2, #0
 	adds r1, #0x48
@@ -12222,7 +12222,7 @@ _08007464:
 	beq _08007470
 	b _080075F6
 _08007470:
-	ldr r4, _080074DC @ =gUnknown_030028C0
+	ldr r4, _080074DC @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	ldrb r4, [r4, #1]
@@ -12234,7 +12234,7 @@ _08007470:
 _08007484:
 	strb r5, [r6, #0x18]
 	strb r5, [r6, #0x19]
-	ldr r1, _080074E0 @ =gUnknown_030070E0
+	ldr r1, _080074E0 @ =gScriptContext
 	ldr r0, _080074E4 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #4
@@ -12276,8 +12276,8 @@ _080074D2:
 	strb r0, [r6, #9]
 	b _080075F6
 	.align 2, 0
-_080074DC: .4byte gUnknown_030028C0
-_080074E0: .4byte gUnknown_030070E0
+_080074DC: .4byte gCourtRecord
+_080074E0: .4byte gScriptContext
 _080074E4: .4byte 0x0000FFFF
 _080074E8: .4byte gUnknown_03002CE0
 _080074EC: .4byte 0x00004460
@@ -12286,7 +12286,7 @@ _080074F4: .4byte 0x0000A1E0
 _080074F8: .4byte 0x0000C080
 _080074FC: .4byte gIORegisters
 _08007500:
-	ldr r1, _08007528 @ =gUnknown_030070E0
+	ldr r1, _08007528 @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -12306,7 +12306,7 @@ _08007500:
 	strb r0, [r6, #0x17]
 	b _08007552
 	.align 2, 0
-_08007528: .4byte gUnknown_030070E0
+_08007528: .4byte gScriptContext
 _0800752C: .4byte gJoypad
 _08007530:
 	movs r0, #1
@@ -12583,7 +12583,7 @@ sub_8007718: @ 0x08007718
 	ldr r1, _0800783C @ =0x80000012
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007840 @ =gUnknown_030070E0
+	ldr r1, _08007840 @ =gScriptContext
 	str r1, [r0]
 	ldr r3, _08007844 @ =0xFFFFEA88
 	adds r1, r2, r3
@@ -12686,7 +12686,7 @@ _08007830: .4byte 0x80000180
 _08007834: .4byte gUnknown_030070B0
 _08007838: .4byte 0xFFFFEB24
 _0800783C: .4byte 0x80000012
-_08007840: .4byte gUnknown_030070E0
+_08007840: .4byte gScriptContext
 _08007844: .4byte 0xFFFFEA88
 _08007848: .4byte 0x8000004E
 _0800784C: .4byte gIORegisters
@@ -12724,7 +12724,7 @@ _08007894:
 	ldr r3, _08007A08 @ =0x80000400
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A0C @ =gUnknown_030028C0
+	ldr r1, _08007A0C @ =gCourtRecord
 	str r1, [r0]
 	ldr r5, _08007A10 @ =0xFFFFF348
 	adds r1, r2, r5
@@ -12732,7 +12732,7 @@ _08007894:
 	ldr r1, _08007A14 @ =0x8000002E
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A18 @ =gUnknown_03003C40
+	ldr r1, _08007A18 @ =gInvestigation
 	str r1, [r0]
 	adds r5, #0x74
 	adds r1, r2, r5
@@ -12740,7 +12740,7 @@ _08007894:
 	ldr r1, _08007A1C @ =0x8000000E
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A20 @ =gUnknown_03003C60
+	ldr r1, _08007A20 @ =gTestimony
 	str r1, [r0]
 	subs r5, #8
 	adds r1, r2, r5
@@ -12807,7 +12807,7 @@ _08007894:
 	ldr r1, _08007A78 @ =0x80000020
 	str r1, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r0, _08007A7C @ =gUnknown_030070E0
+	ldr r0, _08007A7C @ =gScriptContext
 	adds r0, #0x22
 	strb r4, [r0]
 	mov r1, sb
@@ -12900,12 +12900,12 @@ _080079FC: .4byte 0x040000D4
 _08007A00: .4byte gUnknown_03002FA0
 _08007A04: .4byte gUnknown_020010D4
 _08007A08: .4byte 0x80000400
-_08007A0C: .4byte gUnknown_030028C0
+_08007A0C: .4byte gCourtRecord
 _08007A10: .4byte 0xFFFFF348
 _08007A14: .4byte 0x8000002E
-_08007A18: .4byte gUnknown_03003C40
+_08007A18: .4byte gInvestigation
 _08007A1C: .4byte 0x8000000E
-_08007A20: .4byte gUnknown_03003C60
+_08007A20: .4byte gTestimony
 _08007A24: .4byte 0x80000004
 _08007A28: .4byte gCourtScroll
 _08007A2C: .4byte 0x80000008
@@ -12928,7 +12928,7 @@ _08007A6C: .4byte 0x06013C00
 _08007A70: .4byte gPalChoiceSelected
 _08007A74: .4byte 0x05000320
 _08007A78: .4byte 0x80000020
-_08007A7C: .4byte gUnknown_030070E0
+_08007A7C: .4byte gScriptContext
 _08007A80: .4byte gOamObjects
 _08007A84: .4byte 0x000003FF
 _08007A88: .4byte gUnknown_03000000
@@ -12940,8 +12940,8 @@ _08007A94: .4byte gMain
 sub_8007A98: @ 0x08007A98
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
-	ldr r6, _08007AE8 @ =gUnknown_030070E0
-	ldr r4, _08007AEC @ =gUnknown_030028C0
+	ldr r6, _08007AE8 @ =gScriptContext
+	ldr r4, _08007AEC @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	ldrb r4, [r4, #1]
@@ -12978,8 +12978,8 @@ _08007AB2:
 	bl sub_8018778
 	b _08007B02
 	.align 2, 0
-_08007AE8: .4byte gUnknown_030070E0
-_08007AEC: .4byte gUnknown_030028C0
+_08007AE8: .4byte gScriptContext
+_08007AEC: .4byte gCourtRecord
 _08007AF0: .4byte gIORegisters
 _08007AF4: .4byte 0x0000FDFF
 _08007AF8: .4byte 0x0000FFFF
@@ -13086,7 +13086,7 @@ sub_8007BD4: @ 0x08007BD4
 	mov r7, r8
 	push {r7}
 	adds r5, r0, #0
-	ldr r6, _08007C14 @ =gUnknown_030070E0
+	ldr r6, _08007C14 @ =gScriptContext
 	movs r0, #0x46
 	adds r0, r0, r6
 	mov r8, r0
@@ -13116,7 +13116,7 @@ _08007BF8:
 	bl sub_8011150
 	b _08007CFE
 	.align 2, 0
-_08007C14: .4byte gUnknown_030070E0
+_08007C14: .4byte gScriptContext
 _08007C18: .4byte gJoypad
 _08007C1C:
 	movs r7, #1
@@ -13152,7 +13152,7 @@ _08007C58:
 	bl sub_80070AC
 	cmp r0, #0
 	beq _08007C80
-	ldr r0, _08007C78 @ =gUnknown_030070E0
+	ldr r0, _08007C78 @ =gScriptContext
 	ldr r1, _08007C7C @ =0x0000FFFF
 	strh r1, [r0, #0xc]
 	movs r0, #3
@@ -13162,13 +13162,13 @@ _08007C58:
 	b _08007E68
 	.align 2, 0
 _08007C74: .4byte gSaveDataBuffer
-_08007C78: .4byte gUnknown_030070E0
+_08007C78: .4byte gScriptContext
 _08007C7C: .4byte 0x0000FFFF
 _08007C80:
 	ldrb r4, [r5, #0xb]
 	cmp r4, #0
 	bne _08007CA8
-	ldr r1, _08007CC8 @ =gUnknown_030070E0
+	ldr r1, _08007CC8 @ =gScriptContext
 	ldr r0, _08007CCC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #6
@@ -13201,7 +13201,7 @@ _08007CA8:
 	strb r2, [r5, #0xa]
 	b _08007E68
 	.align 2, 0
-_08007CC8: .4byte gUnknown_030070E0
+_08007CC8: .4byte gScriptContext
 _08007CCC: .4byte 0x0000FFFF
 _08007CD0:
 	ldrb r4, [r5, #0xb]
@@ -13565,7 +13565,7 @@ _08007F70:
 	ldr r3, _0800815C @ =0xFFFFE288
 	adds r0, r7, r3
 	str r0, [r4]
-	ldr r0, _08008160 @ =gUnknown_030070E0
+	ldr r0, _08008160 @ =gScriptContext
 	mov r8, r0
 	str r0, [r4, #4]
 	ldr r0, _08008164 @ =0x8000004E
@@ -13733,7 +13733,7 @@ _080080E4:
 	mov r2, sl
 	strb r2, [r0]
 _08008108:
-	ldr r1, _08008160 @ =gUnknown_030070E0
+	ldr r1, _08008160 @ =gScriptContext
 	ldr r0, _080081D0 @ =0x0000FFF7
 	ldrh r3, [r1, #0x1c]
 	ands r0, r3
@@ -13765,7 +13765,7 @@ _08008150: .4byte 0xFFFFE324
 _08008154: .4byte gUnknown_030070B0
 _08008158: .4byte 0x80000012
 _0800815C: .4byte 0xFFFFE288
-_08008160: .4byte gUnknown_030070E0
+_08008160: .4byte gScriptContext
 _08008164: .4byte 0x8000004E
 _08008168: .4byte 0xFFFFE234
 _0800816C: .4byte gIORegisters
@@ -13950,7 +13950,7 @@ _08008312:
 	ldr r0, _0800832C @ =gIORegisters
 	adds r0, #0x4a
 	strh r1, [r0]
-	ldr r1, _08008330 @ =gUnknown_030070E0
+	ldr r1, _08008330 @ =gScriptContext
 	movs r0, #0x80
 	strh r0, [r1, #0xc]
 	ldr r0, _08008334 @ =gUnknown_080266D0
@@ -13963,14 +13963,14 @@ _08008328:
 	bx lr
 	.align 2, 0
 _0800832C: .4byte gIORegisters
-_08008330: .4byte gUnknown_030070E0
+_08008330: .4byte gScriptContext
 _08008334: .4byte gUnknown_080266D0
 
 	thumb_func_start sub_8008338
 sub_8008338: @ 0x08008338
 	push {r4, r5, lr}
 	adds r4, r0, #0
-	ldr r3, _0800836C @ =gUnknown_030070E0
+	ldr r3, _0800836C @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r3, #0x1c]
 	ands r0, r1
@@ -13994,7 +13994,7 @@ sub_8008338: @ 0x08008338
 	bl sub_8018778
 	b _0800837E
 	.align 2, 0
-_0800836C: .4byte gUnknown_030070E0
+_0800836C: .4byte gScriptContext
 _08008370: .4byte gJoypad
 _08008374: .4byte 0x0000FFFF
 _08008378:
@@ -14106,7 +14106,7 @@ _0800842C:
 sub_8008434: @ 0x08008434
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
-	ldr r3, _0800847C @ =gUnknown_030070E0
+	ldr r3, _0800847C @ =gScriptContext
 	ldrb r0, [r4, #0x17]
 	lsls r1, r0, #3
 	ldr r0, _08008480 @ =gUnknown_03002CE0
@@ -14140,7 +14140,7 @@ sub_8008434: @ 0x08008434
 	movs r0, #0x3c
 	b _0800848E
 	.align 2, 0
-_0800847C: .4byte gUnknown_030070E0
+_0800847C: .4byte gScriptContext
 _08008480: .4byte gUnknown_03002CE0
 _08008484: .4byte 0x0000FFFF
 _08008488: .4byte 0x0000FDFF
@@ -14247,7 +14247,7 @@ _0800853E:
 	adds r0, #1
 	cmp r0, #0x7f
 	bls _0800853E
-	bl sub_8011CAC
+	bl ResetAnimationSystem
 	ldr r1, _080085B4 @ =0x040000D4
 	ldr r0, _080085B8 @ =gUnknown_0202CFC0
 	str r0, [r1]
@@ -15132,7 +15132,7 @@ _08008C74:
 	movs r0, #1
 	strb r0, [r7, #0x18]
 	strb r0, [r7, #0x19]
-	ldr r1, _08008CB4 @ =gUnknown_030070E0
+	ldr r1, _08008CB4 @ =gScriptContext
 	ldr r0, _08008CB8 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #5
@@ -15152,7 +15152,7 @@ _08008CAA:
 	strb r0, [r7, #9]
 	b _08008D58
 	.align 2, 0
-_08008CB4: .4byte gUnknown_030070E0
+_08008CB4: .4byte gScriptContext
 _08008CB8: .4byte 0x0000FFFF
 _08008CBC: .4byte gUnknown_03002D70
 _08008CC0: .4byte 0x0000FEFF
@@ -15192,7 +15192,7 @@ _08008D08: .4byte gUnknown_08026430
 _08008D0C: .4byte gOamObjects
 _08008D10: .4byte gUnknown_080264B0
 _08008D14:
-	ldr r1, _08008D68 @ =gUnknown_030070E0
+	ldr r1, _08008D68 @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -15234,7 +15234,7 @@ _08008D58:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08008D68: .4byte gUnknown_030070E0
+_08008D68: .4byte gScriptContext
 _08008D6C: .4byte gJoypad
 _08008D70: .4byte gSaveDataBuffer
 _08008D74: .4byte gMain
@@ -15534,7 +15534,7 @@ _08009088:
 	strb r0, [r6, #0x18]
 	strb r0, [r6, #0x19]
 	strb r0, [r6, #0x17]
-	ldr r1, _080090F8 @ =gUnknown_030070E0
+	ldr r1, _080090F8 @ =gScriptContext
 	ldr r0, _080090FC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #2
@@ -15568,10 +15568,10 @@ _080090EC:
 	strh r0, [r1, #0x10]
 	b _08009850
 	.align 2, 0
-_080090F8: .4byte gUnknown_030070E0
+_080090F8: .4byte gScriptContext
 _080090FC: .4byte 0x0000FFFF
 _08009100:
-	ldr r1, _08009298 @ =gUnknown_030070E0
+	ldr r1, _08009298 @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -15746,7 +15746,7 @@ _08009246:
 	strb r0, [r6, #9]
 	b _08009850
 	.align 2, 0
-_08009298: .4byte gUnknown_030070E0
+_08009298: .4byte gScriptContext
 _0800929C: .4byte gJoypad
 _080092A0: .4byte gIORegisters
 _080092A4: .4byte 0x0000FDFF
@@ -16375,7 +16375,7 @@ _080097B4:
 	movs r0, #1
 	strb r0, [r6, #0x18]
 	strb r0, [r6, #0x19]
-	ldr r1, _08009804 @ =gUnknown_030070E0
+	ldr r1, _08009804 @ =gScriptContext
 	ldr r0, _08009808 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #2
@@ -16390,7 +16390,7 @@ _080097B4:
 	strb r0, [r6, #9]
 	b _08009810
 	.align 2, 0
-_08009804: .4byte gUnknown_030070E0
+_08009804: .4byte gScriptContext
 _08009808: .4byte 0x0000FFFF
 _0800980C:
 	adds r0, r1, #1
@@ -16622,7 +16622,7 @@ _080099E0: .4byte gUnknown_03000000
 _080099E4: .4byte gIORegisters
 _080099E8: .4byte 0x00003E01
 _080099EC:
-	ldr r4, _08009A48 @ =gUnknown_030028C0
+	ldr r4, _08009A48 @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	movs r5, #1
@@ -16635,7 +16635,7 @@ _08009A00:
 	mov r0, r8
 	strb r4, [r0, #0x18]
 	strb r4, [r0, #0x19]
-	ldr r1, _08009A4C @ =gUnknown_030070E0
+	ldr r1, _08009A4C @ =gScriptContext
 	ldr r0, _08009A50 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	mov r0, r8
@@ -16666,12 +16666,12 @@ _08009A00:
 	strb r0, [r1, #9]
 	bl _0800A368
 	.align 2, 0
-_08009A48: .4byte gUnknown_030028C0
-_08009A4C: .4byte gUnknown_030070E0
+_08009A48: .4byte gCourtRecord
+_08009A4C: .4byte gScriptContext
 _08009A50: .4byte 0x0000FFFF
 _08009A54: .4byte gIORegisters
 _08009A58:
-	ldr r1, _08009A90 @ =gUnknown_030070E0
+	ldr r1, _08009A90 @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -16699,7 +16699,7 @@ _08009A58:
 	strb r0, [r1, #0x17]
 	b _08009B0E
 	.align 2, 0
-_08009A90: .4byte gUnknown_030070E0
+_08009A90: .4byte gScriptContext
 _08009A94: .4byte gJoypad
 _08009A98:
 	ldrh r1, [r1, #2]
@@ -16880,10 +16880,10 @@ _08009BE8:
 	b _0800A368
 _08009BF4:
 	bl HideAllSprites
-	bl sub_80022D8
-	bl sub_8011CAC
-	bl sub_80110E0
-	bl sub_8018504
+	bl InitBGs
+	bl ResetAnimationSystem
+	bl ResetSoundControl
+	bl LoadCurrentScriptIntoRam
 	ldr r6, _08009D20 @ =0x040000D4
 	ldr r0, _08009D24 @ =gGfxSaveGameTiles
 	str r0, [r6]
@@ -16924,7 +16924,7 @@ _08009BF4:
 	mov r3, sb
 	str r3, [r6, #8]
 	ldr r0, [r6, #8]
-	bl sub_8018504
+	bl LoadCurrentScriptIntoRam
 	ldr r0, _08009D48 @ =gPalExamineCursors
 	str r0, [r6]
 	ldr r0, _08009D4C @ =0x05000300
@@ -17127,7 +17127,7 @@ _08009E32:
 	ldr r5, _08009F8C @ =0x040000D4
 	ldr r6, _08009F90 @ =gUnknown_0200035C
 	str r6, [r5]
-	ldr r7, _08009F94 @ =gUnknown_030070E0
+	ldr r7, _08009F94 @ =gScriptContext
 	str r7, [r5, #4]
 	ldr r4, _08009F98 @ =0x8000004E
 	str r4, [r5, #8]
@@ -17168,7 +17168,7 @@ _08009E32:
 	adds r0, r6, #0
 	adds r0, #0xc0
 	str r0, [r5]
-	ldr r0, _08009FB8 @ =gUnknown_030028C0
+	ldr r0, _08009FB8 @ =gCourtRecord
 	str r0, [r5, #4]
 	ldr r0, _08009FBC @ =0x8000002E
 	str r0, [r5, #8]
@@ -17177,7 +17177,7 @@ _08009E32:
 	lsls r2, r2, #1
 	adds r0, r6, r2
 	str r0, [r5]
-	ldr r0, _08009FC0 @ =gUnknown_03003C40
+	ldr r0, _08009FC0 @ =gInvestigation
 	str r0, [r5, #4]
 	ldr r0, _08009FC4 @ =0x8000000E
 	str r0, [r5, #8]
@@ -17186,7 +17186,7 @@ _08009E32:
 	lsls r3, r3, #1
 	adds r0, r6, r3
 	str r0, [r5]
-	ldr r0, _08009FC8 @ =gUnknown_03003C60
+	ldr r0, _08009FC8 @ =gTestimony
 	str r0, [r5, #4]
 	ldr r0, _08009FCC @ =0x80000004
 	str r0, [r5, #8]
@@ -17284,7 +17284,7 @@ _08009F84: .4byte gGfx4bppTestimonyArrows+0x180
 _08009F88: .4byte 0x06013480
 _08009F8C: .4byte 0x040000D4
 _08009F90: .4byte gUnknown_0200035C
-_08009F94: .4byte gUnknown_030070E0
+_08009F94: .4byte gScriptContext
 _08009F98: .4byte 0x8000004E
 _08009F9C: .4byte 0x00000A78
 _08009FA0: .4byte gUnknown_03003E50
@@ -17293,11 +17293,11 @@ _08009FA8: .4byte gUnknown_030070B0
 _08009FAC: .4byte 0x80000012
 _08009FB0: .4byte gIORegisters
 _08009FB4: .4byte 0x8000002A
-_08009FB8: .4byte gUnknown_030028C0
+_08009FB8: .4byte gCourtRecord
 _08009FBC: .4byte 0x8000002E
-_08009FC0: .4byte gUnknown_03003C40
+_08009FC0: .4byte gInvestigation
 _08009FC4: .4byte 0x8000000E
-_08009FC8: .4byte gUnknown_03003C60
+_08009FC8: .4byte gTestimony
 _08009FCC: .4byte 0x80000004
 _08009FD0: .4byte gCourtScroll
 _08009FD4: .4byte 0x80000008
@@ -17351,7 +17351,7 @@ _0800A042:
 	mov r2, r8
 	ldrh r0, [r2, #0x34]
 	bl sub_8004FAC
-	ldr r0, _0800A14C @ =gUnknown_030070E0
+	ldr r0, _0800A14C @ =gScriptContext
 	adds r2, r0, #0
 	adds r2, #0x40
 	ldrh r1, [r2]
@@ -17391,7 +17391,7 @@ _0800A092:
 	adds r0, #0x3c
 	strb r6, [r0]
 _0800A0B0:
-	ldr r2, _0800A14C @ =gUnknown_030070E0
+	ldr r2, _0800A14C @ =gScriptContext
 	movs r0, #4
 	ldrh r3, [r2, #0x1c]
 	ands r0, r3
@@ -17468,7 +17468,7 @@ _0800A11C:
 	b _0800A1B0
 	.align 2, 0
 _0800A148: .4byte gMain
-_0800A14C: .4byte gUnknown_030070E0
+_0800A14C: .4byte gScriptContext
 _0800A150: .4byte gSaveDataBuffer
 _0800A154: .4byte 0x040000D4
 _0800A158: .4byte gUnknown_081A6794
@@ -17530,7 +17530,7 @@ sub_0800A1D0: @ 0x0800A1D0
 	b _0800A368
 _0800A1DC:
 	mov r0, r8
-	bl sub_8018C50
+	bl ClearSectionReadFlags
 	ldr r2, _0800A210 @ =gMain
 	ldr r0, _0800A214 @ =gSaveDataBuffer
 	adds r0, #0xea
@@ -17787,7 +17787,7 @@ sub_800A3A0: @ 0x0800A3A0
 	ldr r1, _0800A424 @ =0x8000016A
 	str r1, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r0, _0800A428 @ =gUnknown_030070E0
+	ldr r0, _0800A428 @ =gScriptContext
 	adds r1, r0, #0
 	adds r1, #0x23
 	ldrb r1, [r1]
@@ -17828,7 +17828,7 @@ _0800A418: .4byte gUnknown_020009D4
 _0800A41C: .4byte 0x80000200
 _0800A420: .4byte 0xFFFFF660
 _0800A424: .4byte 0x8000016A
-_0800A428: .4byte gUnknown_030070E0
+_0800A428: .4byte gScriptContext
 _0800A42C: .4byte 0xFFFFF679
 _0800A430: .4byte gUnknown_030037B8
 
@@ -17849,7 +17849,7 @@ _0800A448: .4byte gUnknown_0814DB88
 	thumb_func_start sub_800A44C
 sub_800A44C: @ 0x0800A44C
 	push {lr}
-	ldr r1, _0800A48C @ =gUnknown_030070E0
+	ldr r1, _0800A48C @ =gScriptContext
 	movs r0, #0x80
 	lsls r0, r0, #6
 	ldrh r1, [r1, #0x1e]
@@ -17880,7 +17880,7 @@ _0800A480:
 	movs r0, #1
 	b _0800A49A
 	.align 2, 0
-_0800A48C: .4byte gUnknown_030070E0
+_0800A48C: .4byte gScriptContext
 _0800A490: .4byte gJoypad
 _0800A494: .4byte gMain
 _0800A498:
@@ -17907,14 +17907,14 @@ sub_800A4A0: @ 0x0800A4A0
 	ands r0, r1
 	cmp r0, #0
 	bne _0800A4D8
-	ldr r1, _0800A4E4 @ =gUnknown_030070E0
+	ldr r1, _0800A4E4 @ =gScriptContext
 	movs r0, #8
 	ldrh r2, [r1, #0x1c]
 	ands r0, r2
 	adds r2, r1, #0
 	cmp r0, #0
 	beq _0800A4F0
-	ldr r0, _0800A4E8 @ =gUnknown_03003C60
+	ldr r0, _0800A4E8 @ =gTestimony
 	ldr r0, [r0]
 	ldr r1, _0800A4EC @ =0x00FF00FF
 	ands r0, r1
@@ -17926,8 +17926,8 @@ _0800A4D8:
 	.align 2, 0
 _0800A4DC: .4byte gJoypad
 _0800A4E0: .4byte gMain
-_0800A4E4: .4byte gUnknown_030070E0
-_0800A4E8: .4byte gUnknown_03003C60
+_0800A4E4: .4byte gScriptContext
+_0800A4E8: .4byte gTestimony
 _0800A4EC: .4byte 0x00FF00FF
 _0800A4F0:
 	movs r0, #4
@@ -17965,7 +17965,7 @@ sub_800A51C: @ 0x0800A51C
 	strh r5, [r0]
 	ldr r4, _0800A678 @ =0x040000D4
 	str r0, [r4]
-	ldr r0, _0800A67C @ =gUnknown_03003C60
+	ldr r0, _0800A67C @ =gTestimony
 	str r0, [r4, #4]
 	ldr r0, _0800A680 @ =0x81000004
 	str r0, [r4, #8]
@@ -17973,15 +17973,15 @@ sub_800A51C: @ 0x0800A51C
 	mov r0, sp
 	strh r5, [r0]
 	str r0, [r4]
-	ldr r0, _0800A684 @ =gUnknown_03003C40
+	ldr r0, _0800A684 @ =gInvestigation
 	str r0, [r4, #4]
 	ldr r0, _0800A688 @ =0x8100000E
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
 	bl HideAllSprites
-	bl sub_80022D8
-	bl sub_8011CAC
-	bl sub_8018504
+	bl InitBGs
+	bl ResetAnimationSystem
+	bl LoadCurrentScriptIntoRam
 	movs r0, #0x4a
 	adds r0, r0, r6
 	mov r8, r0
@@ -18034,10 +18034,10 @@ sub_800A51C: @ 0x0800A51C
 	ands r0, r2
 	mov r3, r8
 	strh r0, [r3]
-	ldr r1, _0800A6B8 @ =gUnknown_030028C0
+	ldr r1, _0800A6B8 @ =gCourtRecord
 	adds r0, r7, #0
 	bl sub_800E9C4
-	bl sub_8016E2C
+	bl ResetHPBar
 	str r5, [sp, #4]
 	add r1, sp, #4
 	str r1, [r4]
@@ -18086,7 +18086,7 @@ sub_800A51C: @ 0x0800A51C
 	strb r0, [r7, #0x18]
 	strb r0, [r7, #0x19]
 	bl sub_800A38C
-	ldr r1, _0800A6C8 @ =gUnknown_030070E0
+	ldr r1, _0800A6C8 @ =gScriptContext
 	strh r5, [r1, #0x10]
 	ldr r0, _0800A6CC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
@@ -18115,9 +18115,9 @@ sub_800A51C: @ 0x0800A51C
 	.align 2, 0
 _0800A674: .4byte gIORegisters
 _0800A678: .4byte 0x040000D4
-_0800A67C: .4byte gUnknown_03003C60
+_0800A67C: .4byte gTestimony
 _0800A680: .4byte 0x81000004
-_0800A684: .4byte gUnknown_03003C40
+_0800A684: .4byte gInvestigation
 _0800A688: .4byte 0x8100000E
 _0800A68C: .4byte 0x00003D01
 _0800A690: .4byte 0x00003FC7
@@ -18130,11 +18130,11 @@ _0800A6A8: .4byte gPalEvidenceProfileDesc
 _0800A6AC: .4byte 0x05000240
 _0800A6B0: .4byte 0x0000FFAF
 _0800A6B4: .4byte 0x0000FDFF
-_0800A6B8: .4byte gUnknown_030028C0
+_0800A6B8: .4byte gCourtRecord
 _0800A6BC: .4byte 0x85000008
 _0800A6C0: .4byte 0x85000006
 _0800A6C4: .4byte 0x85000004
-_0800A6C8: .4byte gUnknown_030070E0
+_0800A6C8: .4byte gScriptContext
 _0800A6CC: .4byte 0x0000FFFF
 _0800A6D0: .4byte gUnknown_030037B8
 
@@ -18142,7 +18142,7 @@ _0800A6D0: .4byte gUnknown_030037B8
 sub_800A6D4: @ 0x0800A6D4
 	push {r4, lr}
 	adds r4, r0, #0
-	bl sub_8018C50
+	bl ClearSectionReadFlags
 	adds r0, r4, #0
 	bl sub_8007238
 	ldr r1, _0800A718 @ =0x040000D4
@@ -18161,7 +18161,7 @@ sub_800A6D4: @ 0x0800A6D4
 	ldrb r0, [r0]
 	cmp r0, #2
 	bne _0800A730
-	bl sub_8016E5C
+	bl ResetHPBarHealthToMax
 	adds r0, r4, #0
 	adds r0, #0xc2
 	ldrb r0, [r0]
@@ -18229,7 +18229,7 @@ sub_800A780: @ 0x0800A780
 	ldrh r0, [r0]
 	cmp r0, #0
 	bne _0800A7A2
-	ldr r1, _0800A7A8 @ =gUnknown_030070E0
+	ldr r1, _0800A7A8 @ =gScriptContext
 	movs r0, #1
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -18243,7 +18243,7 @@ _0800A7A2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A7A8: .4byte gUnknown_030070E0
+_0800A7A8: .4byte gScriptContext
 
 	thumb_func_start sub_800A7AC
 sub_800A7AC: @ 0x0800A7AC
@@ -18316,12 +18316,12 @@ _0800A834:
 	bl sub_8012824
 	movs r0, #0x53
 	bl sub_8011150
-	ldr r0, _0800A850 @ =gUnknown_03003C60
+	ldr r0, _0800A850 @ =gTestimony
 	movs r1, #0
 	strb r1, [r0, #4]
 	b _0800A8DC
 	.align 2, 0
-_0800A850: .4byte gUnknown_03003C60
+_0800A850: .4byte gTestimony
 _0800A854:
 	movs r0, #0x54
 	bl sub_8011D68
@@ -18395,7 +18395,7 @@ _0800A8E4:
 	movs r0, #0x55
 	bl sub_8011D68
 	adds r5, r0, #0
-	ldr r2, _0800A94C @ =gUnknown_03003C60
+	ldr r2, _0800A94C @ =gTestimony
 	ldrh r3, [r4, #0x10]
 	ldrb r7, [r2, #4]
 	adds r0, r3, r7
@@ -18439,7 +18439,7 @@ _0800A944:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A94C: .4byte gUnknown_03003C60
+_0800A94C: .4byte gTestimony
 
 	thumb_func_start sub_800A950
 sub_800A950: @ 0x0800A950
@@ -18472,7 +18472,7 @@ sub_800A968: @ 0x0800A968
 	ldr r1, _0800A9AC @ =0x80000010
 	str r1, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r2, _0800A9B0 @ =gUnknown_03003C60
+	ldr r2, _0800A9B0 @ =gTestimony
 	movs r1, #0
 	strb r1, [r2, #1]
 	movs r1, #3
@@ -18486,7 +18486,7 @@ _0800A9A0: .4byte 0x80000400
 _0800A9A4: .4byte gPalTestimonyTextTiles
 _0800A9A8: .4byte 0x050002A0
 _0800A9AC: .4byte 0x80000010
-_0800A9B0: .4byte gUnknown_03003C60
+_0800A9B0: .4byte gTestimony
 
 	thumb_func_start sub_800A9B4
 sub_800A9B4: @ 0x0800A9B4
@@ -18495,7 +18495,7 @@ sub_800A9B4: @ 0x0800A9B4
 	ldrh r0, [r0]
 	cmp r0, #0
 	bne _0800AA1A
-	ldr r1, _0800AA08 @ =gUnknown_030070E0
+	ldr r1, _0800AA08 @ =gScriptContext
 	movs r0, #1
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -18506,7 +18506,7 @@ sub_800A9B4: @ 0x0800A9B4
 	beq _0800A9D6
 	bl sub_800A4A0
 _0800A9D6:
-	ldr r1, _0800AA0C @ =gUnknown_03003C60
+	ldr r1, _0800AA0C @ =gTestimony
 	ldrb r0, [r1, #1]
 	adds r0, #1
 	strb r0, [r1, #1]
@@ -18532,8 +18532,8 @@ _0800A9EA:
 	strh r0, [r2, #4]
 	b _0800AA1A
 	.align 2, 0
-_0800AA08: .4byte gUnknown_030070E0
-_0800AA0C: .4byte gUnknown_03003C60
+_0800AA08: .4byte gScriptContext
+_0800AA0C: .4byte gTestimony
 _0800AA10: .4byte gUnknown_03002D68
 _0800AA14:
 	movs r0, #0x80
@@ -18744,23 +18744,23 @@ sub_800AB7C: @ 0x0800AB7C
 	str r2, [r1, #4]
 	str r3, [r1, #8]
 	ldr r1, [r1, #8]
-	ldr r1, _0800AC0C @ =gUnknown_030070E0
+	ldr r1, _0800AC0C @ =gScriptContext
 	ldrh r1, [r1, #0xc]
 	movs r3, #0
 	strh r1, [r0, #0x1c]
-	ldr r1, _0800AC10 @ =gUnknown_030028C0
+	ldr r1, _0800AC10 @ =gCourtRecord
 	strb r3, [r1, #9]
 	ldrb r2, [r1, #8]
 	adds r2, #1
 	strb r2, [r1, #8]
-	ldr r1, _0800AC14 @ =gUnknown_03003C60
+	ldr r1, _0800AC14 @ =gTestimony
 	movs r2, #0xe0
 	strb r2, [r1, #2]
 	strb r2, [r1, #3]
 	strb r3, [r1]
 	movs r1, #3
 	strb r1, [r0, #9]
-	bl sub_8016E2C
+	bl ResetHPBar
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -18774,22 +18774,22 @@ _0800ABFC: .4byte 0x80000010
 _0800AC00: .4byte gGfx4bppTestimonyArrows
 _0800AC04: .4byte 0x80000040
 _0800AC08: .4byte gGfx4bppTestimonyArrows+0x180
-_0800AC0C: .4byte gUnknown_030070E0
-_0800AC10: .4byte gUnknown_030028C0
-_0800AC14: .4byte gUnknown_03003C60
+_0800AC0C: .4byte gScriptContext
+_0800AC10: .4byte gCourtRecord
+_0800AC14: .4byte gTestimony
 
 	thumb_func_start sub_800AC18
 sub_800AC18: @ 0x0800AC18
 	push {r4, lr}
 	ldr r4, _0800AC48 @ =gMain
-	ldr r1, _0800AC4C @ =gUnknown_03003C60
+	ldr r1, _0800AC4C @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #1
 	bl sub_800B6EC
-	ldr r0, _0800AC50 @ =gUnknown_030028C0
+	ldr r0, _0800AC50 @ =gCourtRecord
 	bl sub_8010420
 	ldr r2, _0800AC54 @ =gOamObjects
-	ldr r1, _0800AC58 @ =gUnknown_030070E0
+	ldr r1, _0800AC58 @ =gScriptContext
 	movs r0, #8
 	ldrh r3, [r1, #0x1c]
 	ands r0, r3
@@ -18804,10 +18804,10 @@ sub_800AC18: @ 0x0800AC18
 	b _0800AC60
 	.align 2, 0
 _0800AC48: .4byte gMain
-_0800AC4C: .4byte gUnknown_03003C60
-_0800AC50: .4byte gUnknown_030028C0
+_0800AC4C: .4byte gTestimony
+_0800AC50: .4byte gCourtRecord
 _0800AC54: .4byte gOamObjects
-_0800AC58: .4byte gUnknown_030070E0
+_0800AC58: .4byte gScriptContext
 _0800AC5C:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -18819,7 +18819,7 @@ _0800AC60:
 	ldr r0, _0800AC80 @ =0x000021A0
 	strh r0, [r2, #4]
 	adds r2, #8
-	ldr r1, _0800AC84 @ =gUnknown_030070E0
+	ldr r1, _0800AC84 @ =gScriptContext
 	ldr r0, _0800AC88 @ =gMain
 	ldrh r1, [r1, #0xe]
 	ldrh r0, [r0, #0x1e]
@@ -18829,7 +18829,7 @@ _0800AC60:
 	b _0800AC90
 	.align 2, 0
 _0800AC80: .4byte 0x000021A0
-_0800AC84: .4byte gUnknown_030070E0
+_0800AC84: .4byte gScriptContext
 _0800AC88: .4byte gMain
 _0800AC8C:
 	movs r0, #0x80
@@ -18880,21 +18880,21 @@ sub_800ACD4: @ 0x0800ACD4
 	beq _0800ACE2
 	b _0800AEE6
 _0800ACE2:
-	ldr r4, _0800ACFC @ =gUnknown_030070E0
+	ldr r4, _0800ACFC @ =gScriptContext
 	ldrh r1, [r4, #0x1c]
 	movs r0, #0xc0
 	lsls r0, r0, #1
 	ands r0, r1
 	cmp r0, #0
 	beq _0800AD04
-	ldr r1, _0800AD00 @ =gUnknown_03003C60
+	ldr r1, _0800AD00 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #1
 	bl sub_800B6EC
 	b _0800AEE6
 	.align 2, 0
-_0800ACFC: .4byte gUnknown_030070E0
-_0800AD00: .4byte gUnknown_03003C60
+_0800ACFC: .4byte gScriptContext
+_0800AD00: .4byte gTestimony
 _0800AD04:
 	movs r6, #8
 	adds r0, r6, #0
@@ -18919,7 +18919,7 @@ _0800AD22:
 	bne _0800AD2E
 	b _0800AED4
 _0800AD2E:
-	ldr r7, _0800AD60 @ =gUnknown_03003C60
+	ldr r7, _0800AD60 @ =gTestimony
 	ldr r0, [r7]
 	ldr r1, _0800AD64 @ =0x00FF00FF
 	ands r0, r1
@@ -18943,7 +18943,7 @@ _0800AD3C:
 	str r0, [r4, #8]
 	b _0800AEE6
 	.align 2, 0
-_0800AD60: .4byte gUnknown_03003C60
+_0800AD60: .4byte gTestimony
 _0800AD64: .4byte 0x00FF00FF
 _0800AD68: .4byte gMain
 _0800AD6C: .4byte 0x01000007
@@ -18997,7 +18997,7 @@ _0800ADCA:
 	adds r1, #1
 	cmp r1, #0xff
 	bls _0800ADCA
-	ldr r0, _0800ADF0 @ =gUnknown_030070E0
+	ldr r0, _0800ADF0 @ =gScriptContext
 	adds r0, #0x23
 	movs r1, #1
 	strb r1, [r0]
@@ -19010,7 +19010,7 @@ _0800ADCA:
 	.align 2, 0
 _0800ADE8: .4byte gMain
 _0800ADEC: .4byte gUnknown_03002080
-_0800ADF0: .4byte gUnknown_030070E0
+_0800ADF0: .4byte gScriptContext
 _0800ADF4: .4byte gOamObjects
 _0800ADF8:
 	movs r0, #0x22
@@ -19018,7 +19018,7 @@ _0800ADF8:
 	ands r0, r2
 	cmp r0, #0
 	beq _0800AE24
-	ldr r2, _0800AE20 @ =gUnknown_030070E0
+	ldr r2, _0800AE20 @ =gScriptContext
 	movs r0, #2
 	ldrh r3, [r2, #0x12]
 	ands r0, r3
@@ -19032,7 +19032,7 @@ _0800ADF8:
 	bl sub_800ACB4
 	b _0800AEE2
 	.align 2, 0
-_0800AE20: .4byte gUnknown_030070E0
+_0800AE20: .4byte gScriptContext
 _0800AE24:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -19040,7 +19040,7 @@ _0800AE24:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800AEE2
-	ldr r0, _0800AE4C @ =gUnknown_030070E0
+	ldr r0, _0800AE4C @ =gScriptContext
 	ldrh r0, [r0, #0x10]
 	cmp r0, #0
 	beq _0800AEE2
@@ -19054,7 +19054,7 @@ _0800AE24:
 	strb r0, [r5, #0xa]
 	b _0800AEE6
 	.align 2, 0
-_0800AE4C: .4byte gUnknown_030070E0
+_0800AE4C: .4byte gScriptContext
 _0800AE50: .4byte gMain
 _0800AE54:
 	movs r0, #1
@@ -19090,7 +19090,7 @@ _0800AE8E:
 	movs r2, #8
 	movs r3, #0x1f
 	bl StartHardwareBlend
-	ldr r1, _0800AEC8 @ =gUnknown_03003C60
+	ldr r1, _0800AEC8 @ =gTestimony
 	movs r0, #0x40
 	strb r0, [r1, #1]
 	movs r0, #0xe0
@@ -19113,7 +19113,7 @@ _0800AE8E:
 	strb r4, [r5, #0xa]
 	b _0800AEE6
 	.align 2, 0
-_0800AEC8: .4byte gUnknown_03003C60
+_0800AEC8: .4byte gTestimony
 _0800AECC: .4byte gIORegisters
 _0800AED0: .4byte 0x0000FDFF
 _0800AED4:
@@ -19154,7 +19154,7 @@ _0800AF08:
 	beq _0800AFD8
 	b _0800B08C
 _0800AF0E:
-	ldr r1, _0800AF38 @ =gUnknown_03003C60
+	ldr r1, _0800AF38 @ =gTestimony
 	ldrb r0, [r1, #1]
 	cmp r0, #0
 	bne _0800AF80
@@ -19175,7 +19175,7 @@ _0800AF28:
 	bl sub_8014364
 	b _0800AF62
 	.align 2, 0
-_0800AF38: .4byte gUnknown_03003C60
+_0800AF38: .4byte gTestimony
 _0800AF3C: .4byte gMain
 _0800AF40: .4byte 0x00001770
 _0800AF44:
@@ -19218,7 +19218,7 @@ _0800AF86:
 	beq _0800AF90
 	b _0800B08C
 _0800AF90:
-	ldr r7, _0800AFC8 @ =gUnknown_030070E0
+	ldr r7, _0800AFC8 @ =gScriptContext
 	ldrh r0, [r7, #0x10]
 	cmp r0, #0
 	beq _0800AFAA
@@ -19236,7 +19236,7 @@ _0800AFAA:
 	bl sub_8018778
 	movs r2, #0
 	strh r6, [r7, #0x10]
-	ldr r0, _0800AFD4 @ =gUnknown_03003C60
+	ldr r0, _0800AFD4 @ =gTestimony
 	movs r1, #0xe0
 	strb r1, [r0, #2]
 	strb r1, [r0, #3]
@@ -19246,10 +19246,10 @@ _0800AFAA:
 	b _0800B08C
 	.align 2, 0
 _0800AFC4: .4byte gCourtScroll
-_0800AFC8: .4byte gUnknown_030070E0
+_0800AFC8: .4byte gScriptContext
 _0800AFCC: .4byte gMain
 _0800AFD0: .4byte gIORegisters
-_0800AFD4: .4byte gUnknown_03003C60
+_0800AFD4: .4byte gTestimony
 _0800AFD8:
 	ldr r0, _0800B024 @ =gUnknown_03000844
 	movs r1, #1
@@ -19267,7 +19267,7 @@ _0800AFD8:
 	lsls r1, r1, #2
 	adds r0, r5, r1
 	strb r2, [r0]
-	ldr r0, _0800B028 @ =gUnknown_030070E0
+	ldr r0, _0800B028 @ =gScriptContext
 	adds r0, #0x40
 	movs r1, #0x80
 	strh r1, [r0]
@@ -19289,7 +19289,7 @@ _0800B01A:
 	b _0800B046
 	.align 2, 0
 _0800B024: .4byte gUnknown_03000844
-_0800B028: .4byte gUnknown_030070E0
+_0800B028: .4byte gScriptContext
 _0800B02C: .4byte gMain
 _0800B030:
 	cmp r0, #0x14
@@ -19308,7 +19308,7 @@ _0800B046:
 	movs r2, #8
 	movs r3, #0x1f
 	bl StartHardwareBlend
-	ldr r1, _0800B080 @ =gUnknown_03003C60
+	ldr r1, _0800B080 @ =gTestimony
 	movs r0, #0x40
 	strb r0, [r1, #1]
 	movs r0, #0xe0
@@ -19331,11 +19331,11 @@ _0800B046:
 	strb r4, [r5, #0xa]
 	b _0800B0A0
 	.align 2, 0
-_0800B080: .4byte gUnknown_03003C60
+_0800B080: .4byte gTestimony
 _0800B084: .4byte gIORegisters
 _0800B088: .4byte 0x0000FDFF
 _0800B08C:
-	ldr r1, _0800B0A8 @ =gUnknown_03003C60
+	ldr r1, _0800B0A8 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #0
 	bl sub_800B6EC
@@ -19349,7 +19349,7 @@ _0800B0A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B0A8: .4byte gUnknown_03003C60
+_0800B0A8: .4byte gTestimony
 _0800B0AC: .4byte gOamObjects
 
 	thumb_func_start sub_800B0B0
@@ -19376,7 +19376,7 @@ _0800B0CC: @ jump table
 	.4byte _0800B1FE @ case 4
 	.4byte _0800B1FE @ case 5
 _0800B0E4:
-	ldr r4, _0800B100 @ =gUnknown_03003C60
+	ldr r4, _0800B100 @ =gTestimony
 	ldrb r0, [r4, #1]
 	cmp r0, #0
 	bne _0800B104
@@ -19389,13 +19389,13 @@ _0800B0E4:
 	strb r0, [r4, #1]
 	b _0800B186
 	.align 2, 0
-_0800B100: .4byte gUnknown_03003C60
+_0800B100: .4byte gTestimony
 _0800B104:
 	subs r0, #1
 	strb r0, [r4, #1]
 	b _0800B1F4
 _0800B10A:
-	ldr r1, _0800B134 @ =gUnknown_03003C60
+	ldr r1, _0800B134 @ =gTestimony
 	ldrb r0, [r1, #1]
 	cmp r0, #0
 	bne _0800B1F0
@@ -19416,7 +19416,7 @@ _0800B124:
 	bl sub_8014364
 	b _0800B15E
 	.align 2, 0
-_0800B134: .4byte gUnknown_03003C60
+_0800B134: .4byte gTestimony
 _0800B138: .4byte gMain
 _0800B13C: .4byte 0x00001770
 _0800B140:
@@ -19450,7 +19450,7 @@ _0800B178:
 	ldrh r0, [r0, #4]
 	cmp r0, #0
 	bne _0800B1F4
-	ldr r0, _0800B194 @ =gUnknown_03003C60
+	ldr r0, _0800B194 @ =gTestimony
 	movs r1, #0x14
 	strb r1, [r0, #1]
 _0800B186:
@@ -19460,9 +19460,9 @@ _0800B186:
 	b _0800B1F4
 	.align 2, 0
 _0800B190: .4byte gCourtScroll
-_0800B194: .4byte gUnknown_03003C60
+_0800B194: .4byte gTestimony
 _0800B198:
-	ldr r1, _0800B1CC @ =gUnknown_03003C60
+	ldr r1, _0800B1CC @ =gTestimony
 	ldrb r0, [r1, #1]
 	adds r2, r0, #0
 	cmp r2, #0
@@ -19471,7 +19471,7 @@ _0800B198:
 	strb r0, [r1, #2]
 	strb r0, [r1, #3]
 	strb r2, [r1]
-	ldr r3, _0800B1D0 @ =gUnknown_030070E0
+	ldr r3, _0800B1D0 @ =gScriptContext
 	adds r0, r3, #0
 	adds r0, #0x2a
 	ldrb r0, [r0]
@@ -19488,8 +19488,8 @@ _0800B198:
 	strb r1, [r0]
 	b _0800B1E2
 	.align 2, 0
-_0800B1CC: .4byte gUnknown_03003C60
-_0800B1D0: .4byte gUnknown_030070E0
+_0800B1CC: .4byte gTestimony
+_0800B1D0: .4byte gScriptContext
 _0800B1D4: .4byte gMain
 _0800B1D8: .4byte gIORegisters
 _0800B1DC:
@@ -19506,7 +19506,7 @@ _0800B1F0:
 	subs r0, #1
 	strb r0, [r1, #1]
 _0800B1F4:
-	ldr r1, _0800B204 @ =gUnknown_03003C60
+	ldr r1, _0800B204 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #0
 	bl sub_800B6EC
@@ -19515,7 +19515,7 @@ _0800B1FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B204: .4byte gUnknown_03003C60
+_0800B204: .4byte gTestimony
 
 	thumb_func_start sub_800B208
 sub_800B208: @ 0x0800B208
@@ -20095,7 +20095,7 @@ _0800B6E8: .4byte gUnknown_030037B8
 sub_800B6EC: @ 0x0800B6EC
 	push {r4, lr}
 	adds r3, r1, #0
-	ldr r0, _0800B704 @ =gUnknown_030070E0
+	ldr r0, _0800B704 @ =gScriptContext
 	ldrh r1, [r0, #0x10]
 	adds r4, r0, #0
 	cmp r1, #0
@@ -20106,7 +20106,7 @@ _0800B6FE:
 	ldr r2, _0800B708 @ =gUnknown_03002D48
 	b _0800B74E
 	.align 2, 0
-_0800B704: .4byte gUnknown_030070E0
+_0800B704: .4byte gScriptContext
 _0800B708: .4byte gUnknown_03002D48
 _0800B70C:
 	ldrb r0, [r3]
@@ -21184,7 +21184,7 @@ _0800BFC2:
 	ldrb r2, [r5, #9]
 	lsls r0, r2, #2
 	adds r0, r0, r1
-	ldr r4, _0800BFEC @ =gUnknown_03003C40
+	ldr r4, _0800BFEC @ =gInvestigation
 	ldr r2, [r0]
 	adds r0, r5, #0
 	adds r1, r4, #0
@@ -21197,7 +21197,7 @@ _0800BFC2:
 	.align 2, 0
 _0800BFE4: .4byte gUnknown_0814DB08
 _0800BFE8: .4byte gUnknown_0814DBBC
-_0800BFEC: .4byte gUnknown_03003C40
+_0800BFEC: .4byte gInvestigation
 
 	thumb_func_start sub_800BFF0
 sub_800BFF0: @ 0x0800BFF0
@@ -21214,7 +21214,7 @@ sub_800BFF0: @ 0x0800BFF0
 	strh r5, [r0]
 	ldr r4, _0800C1FC @ =0x040000D4
 	str r0, [r4]
-	ldr r0, _0800C200 @ =gUnknown_03003C60
+	ldr r0, _0800C200 @ =gTestimony
 	str r0, [r4, #4]
 	ldr r0, _0800C204 @ =0x81000004
 	str r0, [r4, #8]
@@ -21222,15 +21222,15 @@ sub_800BFF0: @ 0x0800BFF0
 	mov r0, sp
 	strh r5, [r0]
 	str r0, [r4]
-	ldr r0, _0800C208 @ =gUnknown_03003C40
+	ldr r0, _0800C208 @ =gInvestigation
 	str r0, [r4, #4]
 	ldr r0, _0800C20C @ =0x8100000E
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
 	bl HideAllSprites
-	bl sub_80022D8
-	bl sub_8011CAC
-	bl sub_8018504
+	bl InitBGs
+	bl ResetAnimationSystem
+	bl LoadCurrentScriptIntoRam
 	adds r1, r7, #0
 	adds r1, #0x4a
 	movs r0, #0xfa
@@ -21369,7 +21369,7 @@ _0800C0D2:
 	ldrh r2, [r1]
 	ands r0, r2
 	strh r0, [r1]
-	ldr r1, _0800C278 @ =gUnknown_030028C0
+	ldr r1, _0800C278 @ =gCourtRecord
 	adds r0, r6, #0
 	bl sub_800E9C4
 	str r4, [sp, #4]
@@ -21390,7 +21390,7 @@ _0800C0D2:
 	movs r0, #1
 	strb r0, [r6, #0x18]
 	strb r0, [r6, #0x19]
-	ldr r1, _0800C280 @ =gUnknown_030070E0
+	ldr r1, _0800C280 @ =gScriptContext
 	ldr r0, _0800C284 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #0x80
@@ -21450,9 +21450,9 @@ _0800C1AC:
 	.align 2, 0
 _0800C1F8: .4byte gIORegisters
 _0800C1FC: .4byte 0x040000D4
-_0800C200: .4byte gUnknown_03003C60
+_0800C200: .4byte gTestimony
 _0800C204: .4byte 0x81000004
-_0800C208: .4byte gUnknown_03003C40
+_0800C208: .4byte gInvestigation
 _0800C20C: .4byte 0x8100000E
 _0800C210: .4byte 0x00003D01
 _0800C214: .4byte 0x00003FC7
@@ -21480,9 +21480,9 @@ _0800C268: .4byte 0x000040E0
 _0800C26C: .4byte gUnknown_0814DA50
 _0800C270: .4byte 0x0000FFAF
 _0800C274: .4byte 0x0000FDFF
-_0800C278: .4byte gUnknown_030028C0
+_0800C278: .4byte gCourtRecord
 _0800C27C: .4byte 0x85000008
-_0800C280: .4byte gUnknown_030070E0
+_0800C280: .4byte gScriptContext
 _0800C284: .4byte 0x0000FFFF
 _0800C288: .4byte gMain
 _0800C28C: .4byte gUnknown_0814DAAC
@@ -21507,7 +21507,7 @@ sub_800C290: @ 0x0800C290
 	ldrh r2, [r1, #2]
 	ands r0, r2
 	adds r3, r1, #0
-	ldr r2, _0800C320 @ =gUnknown_030070E0
+	ldr r2, _0800C320 @ =gScriptContext
 	cmp r0, #0
 	beq _0800C2DC
 	adds r0, r5, #0
@@ -21561,7 +21561,7 @@ _0800C310:
 	b _0800C50A
 	.align 2, 0
 _0800C31C: .4byte gJoypad
-_0800C320: .4byte gUnknown_030070E0
+_0800C320: .4byte gScriptContext
 _0800C324: .4byte gMain
 _0800C328:
 	adds r0, r5, #0
@@ -21812,7 +21812,7 @@ _0800C50A:
 sub_800C510: @ 0x0800C510
 	push {r4, lr}
 	adds r4, r0, #0
-	bl sub_8018C50
+	bl ClearSectionReadFlags
 	adds r0, r4, #0
 	bl sub_8007238
 	ldr r1, _0800C54C @ =0x040000D4
@@ -21940,7 +21940,7 @@ sub_800C604: @ 0x0800C604
 	adds r4, r0, #0
 	movs r1, #0
 	bl sub_800E6A4
-	ldr r0, _0800C624 @ =gUnknown_030070E0
+	ldr r0, _0800C624 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -21953,7 +21953,7 @@ _0800C61E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C624: .4byte gUnknown_030070E0
+_0800C624: .4byte gScriptContext
 
 	thumb_func_start sub_800C628
 sub_800C628: @ 0x0800C628
@@ -21962,7 +21962,7 @@ sub_800C628: @ 0x0800C628
 	push {r7}
 	adds r6, r0, #0
 	adds r5, r1, #0
-	ldr r0, _0800C680 @ =gUnknown_030070E0
+	ldr r0, _0800C680 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r7, [r0]
 	cmp r7, #1
@@ -21995,13 +21995,13 @@ _0800C650:
 	ldrb r0, [r6, #0xa]
 	cmp r0, #0
 	bne _0800C688
-	bl sub_80110E0
+	bl ResetSoundControl
 	ldrb r0, [r4]
 	bl sub_8003D5C
 	strb r7, [r6, #0xa]
 	b _0800C74C
 	.align 2, 0
-_0800C680: .4byte gUnknown_030070E0
+_0800C680: .4byte gScriptContext
 _0800C684: .4byte 0x0000FFFF
 _0800C688:
 	ldrb r0, [r4]
@@ -22067,7 +22067,7 @@ _0800C6CE:
 	bl sub_8011CF8
 	ldr r0, _0800C760 @ =gUnknown_03000844
 	bl sub_8012F7C
-	ldr r0, _0800C764 @ =gUnknown_03003C40
+	ldr r0, _0800C764 @ =gInvestigation
 	strb r4, [r0, #6]
 	movs r1, #0xf
 	bl sub_800BF90
@@ -22104,7 +22104,7 @@ _0800C74C:
 _0800C758: .4byte gUnknown_03002CD0
 _0800C75C: .4byte 0x000040E0
 _0800C760: .4byte gUnknown_03000844
-_0800C764: .4byte gUnknown_03003C40
+_0800C764: .4byte gInvestigation
 _0800C768: .4byte gUnknown_0814DAAC
 
 	thumb_func_start sub_800C76C
@@ -22148,7 +22148,7 @@ _0800C79C:
 	ands r0, r1
 	cmp r0, #0
 	bne _0800C7CC
-	ldr r1, _0800C82C @ =gUnknown_030070E0
+	ldr r1, _0800C82C @ =gScriptContext
 	movs r0, #5
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -22172,7 +22172,7 @@ _0800C7CC:
 	ands r0, r1
 	cmp r0, #0
 	bne _0800C7F2
-	ldr r1, _0800C82C @ =gUnknown_030070E0
+	ldr r1, _0800C82C @ =gScriptContext
 	movs r0, #5
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -22184,7 +22184,7 @@ _0800C7F2:
 	beq _0800C7FA
 	b _0800CAFA
 _0800C7FA:
-	ldr r0, _0800C82C @ =gUnknown_030070E0
+	ldr r0, _0800C82C @ =gScriptContext
 	adds r0, #0x23
 	ldrb r6, [r0]
 	cmp r6, #1
@@ -22208,7 +22208,7 @@ _0800C80E:
 _0800C820: .4byte gUnknown_03002D70
 _0800C824: .4byte gUnknown_03000800
 _0800C828: .4byte gJoypad
-_0800C82C: .4byte gUnknown_030070E0
+_0800C82C: .4byte gScriptContext
 _0800C830: .4byte gMain
 _0800C834:
 	cmp r1, #2
@@ -22755,7 +22755,7 @@ _0800CC4E:
 _0800CC60:
 	movs r0, #1
 	bl sub_80053FC
-	ldr r1, _0800CC78 @ =gUnknown_03003C40
+	ldr r1, _0800CC78 @ =gInvestigation
 	movs r0, #4
 	strb r0, [r1, #0x10]
 	movs r0, #0x1e
@@ -22763,7 +22763,7 @@ _0800CC60:
 	b _0800D09E
 	.align 2, 0
 _0800CC74: .4byte gUnknown_03003C54
-_0800CC78: .4byte gUnknown_03003C40
+_0800CC78: .4byte gInvestigation
 _0800CC7C:
 	ldr r5, _0800CCEC @ =gUnknown_03002D48
 	mov r7, r8
@@ -22849,7 +22849,7 @@ _0800CD06:
 	bls _0800CD06
 	cmp r4, #0
 	bne _0800CD54
-	ldr r1, _0800CD4C @ =gUnknown_030070E0
+	ldr r1, _0800CD4C @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -22859,7 +22859,7 @@ _0800CD06:
 _0800CD24:
 	movs r0, #0
 	bl sub_80053FC
-	ldr r1, _0800CD50 @ =gUnknown_03003C40
+	ldr r1, _0800CD50 @ =gInvestigation
 	movs r0, #4
 	strb r0, [r1, #0x10]
 	movs r0, #0xe0
@@ -22875,8 +22875,8 @@ _0800CD24:
 	b _0800D0F8
 	.align 2, 0
 _0800CD48: .4byte gUnknown_03003C54
-_0800CD4C: .4byte gUnknown_030070E0
-_0800CD50: .4byte gUnknown_03003C40
+_0800CD4C: .4byte gScriptContext
+_0800CD50: .4byte gInvestigation
 _0800CD54:
 	ldr r0, _0800CD84 @ =gJoypad
 	ldrh r1, [r0, #2]
@@ -24208,7 +24208,7 @@ _0800D798:
 	ldrh r6, [r1, #2]
 	ands r0, r6
 	adds r2, r1, #0
-	ldr r6, _0800D7D4 @ =gUnknown_030070E0
+	ldr r6, _0800D7D4 @ =gScriptContext
 	cmp r0, #0
 	beq _0800D7DC
 	mov r0, sl
@@ -24232,7 +24232,7 @@ _0800D798:
 	b _0800DB5C
 	.align 2, 0
 _0800D7D0: .4byte gJoypad
-_0800D7D4: .4byte gUnknown_030070E0
+_0800D7D4: .4byte gScriptContext
 _0800D7D8: .4byte gMain
 _0800D7DC:
 	movs r0, #0x80
@@ -24448,7 +24448,7 @@ _0800D960:
 	subs r0, r4, #1
 	strb r0, [r3, #4]
 _0800D982:
-	ldr r4, _0800D9A4 @ =gUnknown_03003C40
+	ldr r4, _0800D9A4 @ =gInvestigation
 	adds r0, r4, #0
 	movs r1, #4
 	bl sub_800BF90
@@ -24464,7 +24464,7 @@ _0800D982:
 	strb r1, [r2, #0xb]
 	b _0800DB04
 	.align 2, 0
-_0800D9A4: .4byte gUnknown_03003C40
+_0800D9A4: .4byte gInvestigation
 _0800D9A8:
 	mov r3, sl
 	ldrb r3, [r3, #0xb]
@@ -24761,7 +24761,7 @@ _0800DBD4:
 	ldrb r0, [r4, #0x11]
 	cmp r0, #0xe0
 	bne _0800DC80
-	ldr r0, _0800DC2C @ =gUnknown_030070E0
+	ldr r0, _0800DC2C @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -24802,7 +24802,7 @@ _0800DBF8:
 	strb r0, [r4, #0xd]
 	b _0800DC7A
 	.align 2, 0
-_0800DC2C: .4byte gUnknown_030070E0
+_0800DC2C: .4byte gScriptContext
 _0800DC30: .4byte gUnknown_03002D40
 _0800DC34: .4byte 0x000040E0
 _0800DC38:
@@ -24887,7 +24887,7 @@ _0800DC9C:
 	.align 2, 0
 _0800DCC4: .4byte gUnknown_0814DBE8
 _0800DCC8:
-	bl sub_8016E2C
+	bl ResetHPBar
 	ldrb r0, [r7, #9]
 	movs r4, #0
 	strb r0, [r7, #8]
@@ -24961,7 +24961,7 @@ _0800DD30:
 	ands r0, r1
 	cmp r0, #0
 	bne _0800DD84
-	ldr r1, _0800DDD0 @ =gUnknown_030070E0
+	ldr r1, _0800DDD0 @ =gScriptContext
 	movs r0, #0xd
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -25008,7 +25008,7 @@ _0800DD84:
 _0800DDC4: .4byte gMain
 _0800DDC8: .4byte 0x00000256
 _0800DDCC: .4byte gJoypad
-_0800DDD0: .4byte gUnknown_030070E0
+_0800DDD0: .4byte gScriptContext
 _0800DDD4: .4byte gUnknown_03000007
 _0800DDD8:
 	ldr r4, _0800DE58 @ =gMain
@@ -25036,7 +25036,7 @@ _0800DDD8:
 	ands r0, r1
 	cmp r0, #0
 	bne _0800DE2C
-	ldr r1, _0800DE64 @ =gUnknown_030070E0
+	ldr r1, _0800DE64 @ =gScriptContext
 	movs r0, #5
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -25078,7 +25078,7 @@ _0800DE52:
 _0800DE58: .4byte gMain
 _0800DE5C: .4byte 0x00000256
 _0800DE60: .4byte gJoypad
-_0800DE64: .4byte gUnknown_030070E0
+_0800DE64: .4byte gScriptContext
 _0800DE68: .4byte 0x04000007
 _0800DE6C:
 	ldrb r2, [r6, #0xb]
@@ -25126,7 +25126,7 @@ _0800DEAC:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800DEF0
-	ldr r1, _0800DEEC @ =gUnknown_030070E0
+	ldr r1, _0800DEEC @ =gScriptContext
 	movs r0, #0x80
 	lsls r0, r0, #1
 	ldrh r1, [r1, #0x1e]
@@ -25144,7 +25144,7 @@ _0800DEAC:
 	.align 2, 0
 _0800DEE4: .4byte gMain
 _0800DEE8: .4byte 0x0000027D
-_0800DEEC: .4byte gUnknown_030070E0
+_0800DEEC: .4byte gScriptContext
 _0800DEF0:
 	ldr r0, _0800DF10 @ =gMain
 	movs r1, #1
@@ -25319,7 +25319,7 @@ _0800E050: @ jump table
 _0800E068:
 	ldrh r0, [r7, #0xc]
 	bl sub_8018778
-	ldr r0, _0800E088 @ =gUnknown_030070E0
+	ldr r0, _0800E088 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #1
@@ -25332,9 +25332,9 @@ _0800E07E:
 	bl sub_80053FC
 	b _0800E216
 	.align 2, 0
-_0800E088: .4byte gUnknown_030070E0
+_0800E088: .4byte gScriptContext
 _0800E08C:
-	ldr r1, _0800E0B4 @ =gUnknown_030070E0
+	ldr r1, _0800E0B4 @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -25353,7 +25353,7 @@ _0800E09A:
 	movs r1, #4
 	b _0800E1D0
 	.align 2, 0
-_0800E0B4: .4byte gUnknown_030070E0
+_0800E0B4: .4byte gScriptContext
 _0800E0B8:
 	adds r0, r6, #0
 	adds r0, #0x8a
@@ -25370,7 +25370,7 @@ _0800E0C4:
 _0800E0D0:
 	bl sub_800E280
 	bl sub_800E4A4
-	ldr r1, _0800E100 @ =gUnknown_03003C40
+	ldr r1, _0800E100 @ =gInvestigation
 	movs r0, #0xfe
 	ldrb r4, [r1, #0xb]
 	ands r0, r4
@@ -25390,7 +25390,7 @@ _0800E0FC:
 	movs r0, #1
 	b _0800E1CE
 	.align 2, 0
-_0800E100: .4byte gUnknown_03003C40
+_0800E100: .4byte gInvestigation
 _0800E104: .4byte 0x0000FFFF
 _0800E108:
 	ldrb r1, [r6, #0xb]
@@ -25463,7 +25463,7 @@ _0800E17C: @ jump table
 _0800E194:
 	ldrh r0, [r7, #0x12]
 	bl sub_8018778
-	ldr r0, _0800E1B0 @ =gUnknown_030070E0
+	ldr r0, _0800E1B0 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #1
@@ -25475,9 +25475,9 @@ _0800E1A8:
 	bl sub_80053FC
 	b _0800E216
 	.align 2, 0
-_0800E1B0: .4byte gUnknown_030070E0
+_0800E1B0: .4byte gScriptContext
 _0800E1B4:
-	ldr r1, _0800E1DC @ =gUnknown_030070E0
+	ldr r1, _0800E1DC @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -25497,7 +25497,7 @@ _0800E1D0:
 	bl StartHardwareBlend
 	b _0800E26A
 	.align 2, 0
-_0800E1DC: .4byte gUnknown_030070E0
+_0800E1DC: .4byte gScriptContext
 _0800E1E0:
 	adds r0, r6, #0
 	adds r0, #0x8a
@@ -25542,7 +25542,7 @@ _0800E21E:
 	bl sub_8017154
 	bl sub_800E280
 	bl sub_800E4A4
-	ldr r1, _0800E278 @ =gUnknown_03003C40
+	ldr r1, _0800E278 @ =gInvestigation
 	movs r0, #0xfe
 	ldrb r2, [r1, #0xb]
 	ands r0, r2
@@ -25572,7 +25572,7 @@ _0800E26A:
 	bx r0
 	.align 2, 0
 _0800E274: .4byte gMain
-_0800E278: .4byte gUnknown_03003C40
+_0800E278: .4byte gInvestigation
 _0800E27C: .4byte 0x0000FFFF
 
 	thumb_func_start sub_800E280
@@ -25685,7 +25685,7 @@ sub_800E364: @ 0x0800E364
 	bl sub_800E280
 	cmp r4, #0
 	bne _0800E394
-	ldr r0, _0800E390 @ =gUnknown_03003C40
+	ldr r0, _0800E390 @ =gInvestigation
 	movs r1, #0xfe
 	ldrb r2, [r0, #0xb]
 	ands r1, r2
@@ -25695,11 +25695,11 @@ sub_800E364: @ 0x0800E364
 	strb r1, [r0, #0xd]
 	b _0800E496
 	.align 2, 0
-_0800E390: .4byte gUnknown_03003C40
+_0800E390: .4byte gInvestigation
 _0800E394:
 	cmp r4, #1
 	bne _0800E46C
-	ldr r1, _0800E44C @ =gUnknown_03003C40
+	ldr r1, _0800E44C @ =gInvestigation
 	movs r0, #0xfe
 	ldrb r2, [r1, #0xb]
 	ands r0, r2
@@ -25788,7 +25788,7 @@ _0800E3B6:
 	bl sub_8011278
 	b _0800E496
 	.align 2, 0
-_0800E44C: .4byte gUnknown_03003C40
+_0800E44C: .4byte gInvestigation
 _0800E450: .4byte gUnknown_03002D40
 _0800E454: .4byte 0x000040E0
 _0800E458: .4byte 0x00006540
@@ -25799,7 +25799,7 @@ _0800E468: .4byte 0x0000FFFF
 _0800E46C:
 	cmp r4, #2
 	bne _0800E488
-	ldr r0, _0800E484 @ =gUnknown_03003C40
+	ldr r0, _0800E484 @ =gInvestigation
 	movs r1, #0xfe
 	ldrb r2, [r0, #0xb]
 	ands r1, r2
@@ -25809,13 +25809,13 @@ _0800E46C:
 	strb r2, [r0, #0xd]
 	b _0800E496
 	.align 2, 0
-_0800E484: .4byte gUnknown_03003C40
+_0800E484: .4byte gInvestigation
 _0800E488:
 	cmp r5, #3
 	beq _0800E496
 	cmp r5, #4
 	bne _0800E496
-	ldr r1, _0800E4A0 @ =gUnknown_03003C40
+	ldr r1, _0800E4A0 @ =gInvestigation
 	movs r0, #2
 	strb r0, [r1, #0x10]
 _0800E496:
@@ -25825,7 +25825,7 @@ _0800E496:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800E4A0: .4byte gUnknown_03003C40
+_0800E4A0: .4byte gInvestigation
 
 	thumb_func_start sub_800E4A4
 sub_800E4A4: @ 0x0800E4A4
@@ -26108,7 +26108,7 @@ sub_800E6A4: @ 0x0800E6A4
 	strh r0, [r4]
 	cmp r1, #0
 	beq _0800E720
-	ldr r0, _0800E6EC @ =gUnknown_030070E0
+	ldr r0, _0800E6EC @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #1
@@ -26133,7 +26133,7 @@ sub_800E6A4: @ 0x0800E6A4
 	b _0800E71E
 	.align 2, 0
 _0800E6E8: .4byte gUnknown_03002D60
-_0800E6EC: .4byte gUnknown_030070E0
+_0800E6EC: .4byte gScriptContext
 _0800E6F0: .4byte gMain
 _0800E6F4: .4byte 0x00004020
 _0800E6F8: .4byte 0x000080D0
@@ -26591,7 +26591,7 @@ _0800EA68: .4byte gUnknown_0814D93C
 sub_800EA6C: @ 0x0800EA6C
 	push {lr}
 	adds r3, r0, #0
-	ldr r0, _0800EA84 @ =gUnknown_030070E0
+	ldr r0, _0800EA84 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
 	cmp r0, #0
@@ -26602,7 +26602,7 @@ sub_800EA6C: @ 0x0800EA6C
 	movs r2, #9
 	b _0800EA98
 	.align 2, 0
-_0800EA84: .4byte gUnknown_030070E0
+_0800EA84: .4byte gScriptContext
 _0800EA88: .4byte gUnknown_03002080
 _0800EA8C: .4byte 0x000004DC
 _0800EA90:
@@ -26619,7 +26619,7 @@ _0800EA98:
 	ldrb r2, [r3, #9]
 	lsls r0, r2, #2
 	adds r0, r0, r1
-	ldr r1, _0800EAC8 @ =gUnknown_030028C0
+	ldr r1, _0800EAC8 @ =gCourtRecord
 	ldr r2, [r0]
 	adds r0, r3, #0
 	bl _call_via_r2
@@ -26630,7 +26630,7 @@ _0800EAB8: .4byte gUnknown_03002080
 _0800EABC: .4byte 0x000004DC
 _0800EAC0: .4byte 0x000004DE
 _0800EAC4: .4byte gUnknown_0814DC18
-_0800EAC8: .4byte gUnknown_030028C0
+_0800EAC8: .4byte gCourtRecord
 
 	thumb_func_start sub_800EACC
 sub_800EACC: @ 0x0800EACC
@@ -26639,14 +26639,14 @@ sub_800EACC: @ 0x0800EACC
 	ldrb r3, [r0, #9]
 	lsls r2, r3, #2
 	adds r2, r2, r1
-	ldr r1, _0800EAE8 @ =gUnknown_030028C0
+	ldr r1, _0800EAE8 @ =gCourtRecord
 	ldr r2, [r2]
 	bl _call_via_r2
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0800EAE4: .4byte gUnknown_0814DC38
-_0800EAE8: .4byte gUnknown_030028C0
+_0800EAE8: .4byte gCourtRecord
 
 	thumb_func_start sub_800EAEC
 sub_800EAEC: @ 0x0800EAEC
@@ -26774,7 +26774,7 @@ _0800EBE4: .4byte gIORegisters
 	thumb_func_start sub_800EBE8
 sub_800EBE8: @ 0x0800EBE8
 	push {r4, r5, lr}
-	ldr r4, _0800EC14 @ =gUnknown_030070E0
+	ldr r4, _0800EC14 @ =gScriptContext
 	ldrh r5, [r4, #0xc]
 	ldr r0, _0800EC18 @ =gMain
 	adds r0, #0xc1
@@ -26796,7 +26796,7 @@ _0800EC10:
 	movs r0, #0x20
 	b _0800EC2E
 	.align 2, 0
-_0800EC14: .4byte gUnknown_030070E0
+_0800EC14: .4byte gScriptContext
 _0800EC18: .4byte gMain
 _0800EC1C:
 	movs r0, #0x21
@@ -26815,13 +26815,13 @@ _0800EC2E:
 	movs r0, #1
 	strb r0, [r1]
 _0800EC3A:
-	ldr r0, _0800EC44 @ =gUnknown_030070E0
+	ldr r0, _0800EC44 @ =gScriptContext
 	strh r5, [r0, #0xe]
 	pop {r4, r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EC44: .4byte gUnknown_030070E0
+_0800EC44: .4byte gScriptContext
 
 	thumb_func_start sub_800EC48
 sub_800EC48: @ 0x0800EC48
@@ -26834,7 +26834,7 @@ sub_800EC48: @ 0x0800EC48
 	cmp r0, #0
 	beq _0800ED04
 	ldr r2, _0800ECDC @ =gUnknown_08026998
-	ldr r1, _0800ECE0 @ =gUnknown_030028C0
+	ldr r1, _0800ECE0 @ =gCourtRecord
 	ldr r0, [r1, #0x18]
 	ldrb r1, [r1, #0xd]
 	adds r0, r1, r0
@@ -26896,7 +26896,7 @@ _0800ECC8:
 	.align 2, 0
 _0800ECD8: .4byte gJoypad
 _0800ECDC: .4byte gUnknown_08026998
-_0800ECE0: .4byte gUnknown_030028C0
+_0800ECE0: .4byte gCourtRecord
 _0800ECE4: .4byte gMain
 _0800ECE8: .4byte gUnknown_03000844
 _0800ECEC: .4byte gUnknown_0826FE38
@@ -26917,7 +26917,7 @@ sub_800ED0C: @ 0x0800ED0C
 	push {r4, r5, lr}
 	movs r0, #0x36
 	bl sub_8011150
-	ldr r0, _0800EDA0 @ =gUnknown_030028C0
+	ldr r0, _0800EDA0 @ =gCourtRecord
 	movs r1, #1
 	strb r1, [r0, #0xf]
 	movs r1, #2
@@ -26956,7 +26956,7 @@ sub_800ED0C: @ 0x0800ED0C
 	ldrb r2, [r4, #0xc]
 	cmp r2, #4
 	beq _0800ED6E
-	ldr r1, _0800EDD0 @ =gUnknown_03003C60
+	ldr r1, _0800EDD0 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #0
 	bl sub_800B6EC
@@ -26986,7 +26986,7 @@ _0800ED6E:
 	strh r0, [r2, #4]
 	b _0800EDF0
 	.align 2, 0
-_0800EDA0: .4byte gUnknown_030028C0
+_0800EDA0: .4byte gCourtRecord
 _0800EDA4: .4byte 0x040000D4
 _0800EDA8: .4byte 0x06013C00
 _0800EDAC: .4byte 0x06001400
@@ -26998,7 +26998,7 @@ _0800EDC0: .4byte gUnknown_03002CB0
 _0800EDC4: .4byte 0x07000110
 _0800EDC8: .4byte 0x8000002C
 _0800EDCC: .4byte gMain
-_0800EDD0: .4byte gUnknown_03003C60
+_0800EDD0: .4byte gTestimony
 _0800EDD4: .4byte 0x000080BA
 _0800EDD8: .4byte 0x00005590
 _0800EDDC: .4byte 0x000080DA
@@ -27011,7 +27011,7 @@ _0800EDE4:
 	adds r2, #0xb0
 	strh r0, [r2]
 _0800EDF0:
-	ldr r4, _0800EE04 @ =gUnknown_030028C0
+	ldr r4, _0800EE04 @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
@@ -27020,7 +27020,7 @@ _0800EDF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EE04: .4byte gUnknown_030028C0
+_0800EE04: .4byte gCourtRecord
 
 	thumb_func_start sub_800EE08
 sub_800EE08: @ 0x0800EE08
@@ -27034,7 +27034,7 @@ sub_800EE08: @ 0x0800EE08
 	ldrb r1, [r7, #0xb]
 	cmp r1, #2
 	bne _0800EE40
-	ldr r6, _0800EE4C @ =gUnknown_030028C0
+	ldr r6, _0800EE4C @ =gCourtRecord
 	ldr r0, [r6, #0x18]
 	ldrb r2, [r6, #0xd]
 	adds r0, r2, r0
@@ -27058,9 +27058,9 @@ _0800EE40:
 	.align 2, 0
 _0800EE44: .4byte gUnknown_03000844
 _0800EE48: .4byte gMain
-_0800EE4C: .4byte gUnknown_030028C0
+_0800EE4C: .4byte gCourtRecord
 _0800EE50:
-	ldr r1, _0800EEAC @ =gUnknown_03003C40
+	ldr r1, _0800EEAC @ =gInvestigation
 	movs r0, #1
 	movs r2, #0
 	mov r8, r2
@@ -27102,7 +27102,7 @@ _0800EE50:
 	movs r0, #1
 	b _0800EEBE
 	.align 2, 0
-_0800EEAC: .4byte gUnknown_03003C40
+_0800EEAC: .4byte gInvestigation
 _0800EEB0: .4byte gUnknown_03002D58
 _0800EEB4: .4byte 0xFFFFFE48
 _0800EEB8:
@@ -27139,14 +27139,14 @@ _0800EEE8:
 _0800EEEE:
 	strb r0, [r1]
 _0800EEF0:
-	ldr r0, _0800EEFC @ =gUnknown_030070E0
+	ldr r0, _0800EEFC @ =gScriptContext
 	movs r1, #0x40
 	ldrh r2, [r0, #0x1e]
 	orrs r1, r2
 	strh r1, [r0, #0x1e]
 	b _0800EF1A
 	.align 2, 0
-_0800EEFC: .4byte gUnknown_030070E0
+_0800EEFC: .4byte gScriptContext
 _0800EF00:
 	movs r0, #0x1e
 	bl sub_80113B8
@@ -27190,7 +27190,7 @@ _0800EF4C:
 	movs r0, #1
 	movs r1, #0xc
 	bl sub_8005CFC
-	ldr r1, _0800EF74 @ =gUnknown_030028C0
+	ldr r1, _0800EF74 @ =gCourtRecord
 	ldrb r0, [r1, #0xd]
 	adds r0, #1
 	strb r0, [r1, #0xd]
@@ -27208,7 +27208,7 @@ _0800EF70:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800EF74: .4byte gUnknown_030028C0
+_0800EF74: .4byte gCourtRecord
 
 	thumb_func_start sub_800EF78
 sub_800EF78: @ 0x0800EF78
@@ -27227,7 +27227,7 @@ _0800EF90:
 	movs r0, #2
 	movs r1, #0xc
 	bl sub_8005CFC
-	ldr r1, _0800EFB8 @ =gUnknown_030028C0
+	ldr r1, _0800EFB8 @ =gCourtRecord
 	ldrb r0, [r1, #0xd]
 	subs r0, #1
 	strb r0, [r1, #0xd]
@@ -27244,7 +27244,7 @@ _0800EFB2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800EFB8: .4byte gUnknown_030028C0
+_0800EFB8: .4byte gCourtRecord
 
 	thumb_func_start sub_800EFBC
 sub_800EFBC: @ 0x0800EFBC
@@ -27273,7 +27273,7 @@ _0800EFE0:
 	ldrb r0, [r5, #0xb]
 	cmp r0, #2
 	bne _0800F00E
-	ldr r3, _0800F0A4 @ =gUnknown_030028C0
+	ldr r3, _0800F0A4 @ =gCourtRecord
 	ldr r0, [r3, #0x18]
 	ldrb r1, [r3, #0xd]
 	adds r0, r1, r0
@@ -27287,7 +27287,7 @@ _0800EFE0:
 	movs r0, #1
 	bl sub_80053FC
 _0800F00E:
-	ldr r6, _0800F0A4 @ =gUnknown_030028C0
+	ldr r6, _0800F0A4 @ =gCourtRecord
 	adds r0, r6, #0
 	bl sub_8010704
 	movs r0, #0
@@ -27309,7 +27309,7 @@ _0800F00E:
 	ldrb r3, [r5, #0xb]
 	cmp r3, #3
 	bne _0800F100
-	ldr r1, _0800F0B4 @ =gUnknown_03003C40
+	ldr r1, _0800F0B4 @ =gInvestigation
 	movs r0, #4
 	strb r0, [r1, #0x10]
 	movs r1, #0x12
@@ -27355,11 +27355,11 @@ _0800F00E:
 	b _0800F0C2
 	.align 2, 0
 _0800F0A0: .4byte gMain
-_0800F0A4: .4byte gUnknown_030028C0
+_0800F0A4: .4byte gCourtRecord
 _0800F0A8: .4byte gIORegisters
 _0800F0AC: .4byte 0x0000FBFF
 _0800F0B0: .4byte gOamObjects
-_0800F0B4: .4byte gUnknown_03003C40
+_0800F0B4: .4byte gInvestigation
 _0800F0B8: .4byte 0x00000707
 _0800F0BC:
 	movs r0, #8
@@ -27378,7 +27378,7 @@ _0800F0C2:
 	lsls r3, r3, #1
 	adds r1, r2, r3
 	adds r0, r0, r1
-	ldr r2, _0800F0FC @ =gUnknown_030028C0
+	ldr r2, _0800F0FC @ =gCourtRecord
 	ldr r1, [r2, #0x18]
 	ldrb r2, [r2, #0xd]
 	adds r1, r2, r1
@@ -27392,9 +27392,9 @@ _0800F0C2:
 	b _0800F112
 	.align 2, 0
 _0800F0F8: .4byte gMain
-_0800F0FC: .4byte gUnknown_030028C0
+_0800F0FC: .4byte gCourtRecord
 _0800F100:
-	ldr r1, _0800F11C @ =gUnknown_03003C40
+	ldr r1, _0800F11C @ =gInvestigation
 	movs r0, #3
 	strb r0, [r1, #0x10]
 	movs r0, #8
@@ -27410,7 +27410,7 @@ _0800F114:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800F11C: .4byte gUnknown_03003C40
+_0800F11C: .4byte gInvestigation
 
 	thumb_func_start sub_800F120
 sub_800F120: @ 0x0800F120
@@ -27454,7 +27454,7 @@ _0800F138:
 	lsls r1, r1, #2
 	adds r0, r4, r1
 	strb r2, [r0]
-	ldr r0, _0800F1C8 @ =gUnknown_030070E0
+	ldr r0, _0800F1C8 @ =gScriptContext
 	adds r0, #0x40
 	movs r1, #0x80
 	strh r1, [r0]
@@ -27467,9 +27467,9 @@ _0800F17A:
 	lsls r0, r0, #2
 	strh r0, [r1]
 	strh r0, [r1, #8]
-	ldr r0, _0800F1C8 @ =gUnknown_030070E0
+	ldr r0, _0800F1C8 @ =gScriptContext
 	ldrh r0, [r0, #0xc]
-	ldr r2, _0800F1D0 @ =gUnknown_030028C0
+	ldr r2, _0800F1D0 @ =gCourtRecord
 	ldr r1, [r2, #0x18]
 	ldrb r2, [r2, #0xd]
 	adds r1, r2, r1
@@ -27492,9 +27492,9 @@ _0800F17A:
 	.align 2, 0
 _0800F1C0: .4byte gMain
 _0800F1C4: .4byte gUnknown_03000844
-_0800F1C8: .4byte gUnknown_030070E0
+_0800F1C8: .4byte gScriptContext
 _0800F1CC: .4byte gOamObjects
-_0800F1D0: .4byte gUnknown_030028C0
+_0800F1D0: .4byte gCourtRecord
 _0800F1D4:
 	movs r0, #8
 	bl sub_8016E74
@@ -27584,7 +27584,7 @@ _0800F282:
 	movs r2, #8
 	movs r3, #0x1f
 	bl StartHardwareBlend
-	ldr r1, _0800F2FC @ =gUnknown_03003C60
+	ldr r1, _0800F2FC @ =gTestimony
 	movs r0, #0xa
 	strb r0, [r1, #1]
 	ldr r1, _0800F300 @ =gIORegisters
@@ -27606,9 +27606,9 @@ _0800F282:
 	ldr r0, [r1]
 	orrs r0, r2
 	str r0, [r1]
-	ldr r6, _0800F30C @ =gUnknown_030070E0
+	ldr r6, _0800F30C @ =gScriptContext
 	ldrh r0, [r6, #0xc]
-	ldr r2, _0800F310 @ =gUnknown_030028C0
+	ldr r2, _0800F310 @ =gCourtRecord
 	ldr r1, [r2, #0x18]
 	ldrb r2, [r2, #0xd]
 	adds r1, r2, r1
@@ -27635,12 +27635,12 @@ _0800F2EA:
 	str r0, [r4, #0xc]
 	b _0800F34C
 	.align 2, 0
-_0800F2FC: .4byte gUnknown_03003C60
+_0800F2FC: .4byte gTestimony
 _0800F300: .4byte gIORegisters
 _0800F304: .4byte 0x0000FDFF
 _0800F308: .4byte gMain
-_0800F30C: .4byte gUnknown_030070E0
-_0800F310: .4byte gUnknown_030028C0
+_0800F30C: .4byte gScriptContext
+_0800F310: .4byte gCourtRecord
 _0800F314: .4byte 0x00000103
 _0800F318:
 	bl sub_8016ED8
@@ -27659,7 +27659,7 @@ _0800F326:
 _0800F336:
 	bl sub_800EBE8
 _0800F33A:
-	ldr r1, _0800F3B8 @ =gUnknown_030070E0
+	ldr r1, _0800F3B8 @ =gScriptContext
 	ldr r0, _0800F3BC @ =0x0000FFEF
 	ldrh r2, [r1, #0x1c]
 	ands r0, r2
@@ -27676,7 +27676,7 @@ _0800F352:
 	movs r0, #0
 	movs r1, #0
 	bl sub_8006130
-	ldr r4, _0800F3CC @ =gUnknown_030028C0
+	ldr r4, _0800F3CC @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
@@ -27713,7 +27713,7 @@ _0800F39E:
 	ldr r2, _0800F3DC @ =0xFFFFFCFF
 	ands r0, r2
 	str r0, [r1]
-	ldr r1, _0800F3B8 @ =gUnknown_030070E0
+	ldr r1, _0800F3B8 @ =gScriptContext
 	movs r0, #0
 	strh r0, [r1, #0x10]
 	movs r0, #1
@@ -27722,12 +27722,12 @@ _0800F3B2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800F3B8: .4byte gUnknown_030070E0
+_0800F3B8: .4byte gScriptContext
 _0800F3BC: .4byte 0x0000FFEF
 _0800F3C0: .4byte gUnknown_030037BC
 _0800F3C4: .4byte gUnknown_030037B8
 _0800F3C8: .4byte 0x00000506
-_0800F3CC: .4byte gUnknown_030028C0
+_0800F3CC: .4byte gCourtRecord
 _0800F3D0: .4byte gMain
 _0800F3D4: .4byte gIORegisters
 _0800F3D8: .4byte 0x0000FBFF
@@ -27738,7 +27738,7 @@ sub_800F3E0: @ 0x0800F3E0
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r6, r1, #0
-	ldr r2, _0800F41C @ =gUnknown_030070E0
+	ldr r2, _0800F41C @ =gScriptContext
 	ldrh r1, [r2, #0x1e]
 	movs r0, #0x40
 	ands r0, r1
@@ -27754,7 +27754,7 @@ sub_800F3E0: @ 0x0800F3E0
 	strh r0, [r2, #0x1e]
 	movs r0, #0x1e
 	bl sub_80113B8
-	ldr r1, _0800F424 @ =gUnknown_030028C0
+	ldr r1, _0800F424 @ =gCourtRecord
 	movs r0, #8
 	ldrb r2, [r1, #0xc]
 	orrs r0, r2
@@ -27764,9 +27764,9 @@ sub_800F3E0: @ 0x0800F3E0
 	str r0, [r1]
 	b _0800F530
 	.align 2, 0
-_0800F41C: .4byte gUnknown_030070E0
+_0800F41C: .4byte gScriptContext
 _0800F420: .4byte 0x0000FFBF
-_0800F424: .4byte gUnknown_030028C0
+_0800F424: .4byte gCourtRecord
 _0800F428: .4byte gUnknown_030037B8
 _0800F42C: .4byte 0x00000707
 _0800F430:
@@ -27820,14 +27820,14 @@ _0800F480:
 	cmp r0, #0
 	beq _0800F4C4
 _0800F49C:
-	ldr r4, _0800F4AC @ =gUnknown_030028C0
+	ldr r4, _0800F4AC @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
 	bl sub_8010554
 	b _0800F530
 	.align 2, 0
-_0800F4AC: .4byte gUnknown_030028C0
+_0800F4AC: .4byte gCourtRecord
 _0800F4B0:
 	subs r0, #2
 	lsls r0, r0, #0x18
@@ -27856,7 +27856,7 @@ _0800F4C4:
 	lsrs r0, r0, #0x18
 	cmp r0, #1
 	bls _0800F4FE
-	ldr r1, _0800F53C @ =gUnknown_030070E0
+	ldr r1, _0800F53C @ =gScriptContext
 	movs r0, #8
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -27887,7 +27887,7 @@ _0800F51E:
 	movs r0, #2
 	strb r0, [r4, #9]
 _0800F522:
-	ldr r4, _0800F54C @ =gUnknown_030028C0
+	ldr r4, _0800F54C @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
@@ -27898,11 +27898,11 @@ _0800F530:
 	bx r0
 	.align 2, 0
 _0800F538: .4byte gJoypad
-_0800F53C: .4byte gUnknown_030070E0
+_0800F53C: .4byte gScriptContext
 _0800F540: .4byte gMain
 _0800F544: .4byte 0x00030904
 _0800F548: .4byte 0x00060A04
-_0800F54C: .4byte gUnknown_030028C0
+_0800F54C: .4byte gCourtRecord
 
 	thumb_func_start sub_800F550
 sub_800F550: @ 0x0800F550
@@ -27961,7 +27961,7 @@ _0800F596:
 	ldrb r0, [r5, #0xb]
 	cmp r0, #0
 	bne _0800F5DA
-	ldr r1, _0800F5FC @ =gUnknown_030070E0
+	ldr r1, _0800F5FC @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -27993,7 +27993,7 @@ _0800F5EE:
 	.align 2, 0
 _0800F5F4: .4byte gUnknown_03002D58
 _0800F5F8: .4byte 0x000001FF
-_0800F5FC: .4byte gUnknown_030070E0
+_0800F5FC: .4byte gScriptContext
 _0800F600: .4byte gUnknown_03002080
 _0800F604: .4byte 0x000004DC
 _0800F608: .4byte 0x000004DE
@@ -28367,7 +28367,7 @@ _0800F8F0:
 	movs r1, #0
 	ldr r2, _0800F94C @ =gIORegisters
 	mov sb, r2
-	ldr r6, _0800F950 @ =gUnknown_030070E0
+	ldr r6, _0800F950 @ =gScriptContext
 	mov ip, r6
 	ldr r0, _0800F954 @ =gSaveDataBuffer
 	mov r8, r0
@@ -28394,7 +28394,7 @@ _0800F940: .4byte gUnknown_03003AF0
 _0800F944: .4byte 0x80000050
 _0800F948: .4byte gUnknown_03002D40
 _0800F94C: .4byte gIORegisters
-_0800F950: .4byte gUnknown_030070E0
+_0800F950: .4byte gScriptContext
 _0800F954: .4byte gSaveDataBuffer
 _0800F958: .4byte 0x0000FCFF
 _0800F95C:
@@ -28406,7 +28406,7 @@ _0800F95C:
 	strh r0, [r3]
 	ldr r0, _0800F97C @ =gIORegisters
 	mov sb, r0
-	ldr r1, _0800F980 @ =gUnknown_030070E0
+	ldr r1, _0800F980 @ =gScriptContext
 	mov ip, r1
 	ldr r2, _0800F984 @ =gSaveDataBuffer
 	mov r8, r2
@@ -28414,12 +28414,12 @@ _0800F95C:
 	.align 2, 0
 _0800F978: .4byte gUnknown_03002D68
 _0800F97C: .4byte gIORegisters
-_0800F980: .4byte gUnknown_030070E0
+_0800F980: .4byte gScriptContext
 _0800F984: .4byte gSaveDataBuffer
 _0800F988:
 	ldr r3, _0800FA84 @ =gIORegisters
 	mov sb, r3
-	ldr r6, _0800FA88 @ =gUnknown_030070E0
+	ldr r6, _0800FA88 @ =gScriptContext
 	mov ip, r6
 	ldr r1, _0800FA8C @ =gSaveDataBuffer
 	mov r8, r1
@@ -28524,7 +28524,7 @@ _0800FA42:
 	cmp r0, #0x21
 	bne _0800FA7E
 _0800FA5A:
-	ldr r1, _0800FA88 @ =gUnknown_030070E0
+	ldr r1, _0800FA88 @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -28549,7 +28549,7 @@ _0800FA7E:
 	b _0800FEBA
 	.align 2, 0
 _0800FA84: .4byte gIORegisters
-_0800FA88: .4byte gUnknown_030070E0
+_0800FA88: .4byte gScriptContext
 _0800FA8C: .4byte gSaveDataBuffer
 _0800FA90: .4byte gUnknown_03002D58
 _0800FA94: .4byte 0x0000FCFF
@@ -28834,7 +28834,7 @@ _0800FC64:
 	ldrb r3, [r5, #0xc]
 	cmp r3, #5
 	bne _0800FCD6
-	ldr r0, _0800FD54 @ =gUnknown_03003C60
+	ldr r0, _0800FD54 @ =gTestimony
 	strb r6, [r0, #1]
 _0800FCD6:
 	movs r0, #3
@@ -28872,7 +28872,7 @@ _0800FCEA:
 	ands r0, r1
 	str r0, [r2]
 _0800FD1A:
-	ldr r4, _0800FD74 @ =gUnknown_030028C0
+	ldr r4, _0800FD74 @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
@@ -28890,7 +28890,7 @@ _0800FD44: .4byte 0x80000200
 _0800FD48: .4byte 0x00000934
 _0800FD4C: .4byte gUnknown_03003AF0
 _0800FD50: .4byte 0x80000050
-_0800FD54: .4byte gUnknown_03003C60
+_0800FD54: .4byte gTestimony
 _0800FD58: .4byte gUnknown_03000844
 _0800FD5C: .4byte gUnknown_0826FE38
 _0800FD60: .4byte gUnknown_08252498
@@ -28898,7 +28898,7 @@ _0800FD64: .4byte 0x050003A0
 _0800FD68: .4byte 0x80000010
 _0800FD6C: .4byte 0xFEFFFFFF
 _0800FD70: .4byte 0xFDFFFFFF
-_0800FD74: .4byte gUnknown_030028C0
+_0800FD74: .4byte gCourtRecord
 _0800FD78:
 	ldrh r0, [r5, #0x34]
 	bl sub_8004FAC
@@ -29002,14 +29002,14 @@ _0800FE40:
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
 _0800FE54:
-	ldr r4, _0800FE64 @ =gUnknown_030028C0
+	ldr r4, _0800FE64 @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
 	bl sub_8010554
 	b _0800FEBC
 	.align 2, 0
-_0800FE64: .4byte gUnknown_030028C0
+_0800FE64: .4byte gCourtRecord
 _0800FE68:
 	adds r0, r5, #0
 	adds r0, #0x8a
@@ -29151,7 +29151,7 @@ _0800FF66:
 	movs r0, #0x37
 	bl sub_8011150
 _0800FF6C:
-	ldr r1, _0800FFE4 @ =gUnknown_03003C60
+	ldr r1, _0800FFE4 @ =gTestimony
 	movs r0, #6
 	strb r0, [r1, #1]
 	ldr r0, [r4, #0x18]
@@ -29211,7 +29211,7 @@ _0800FF6C:
 	strb r2, [r5, #0xb]
 	b _080101CE
 	.align 2, 0
-_0800FFE4: .4byte gUnknown_03003C60
+_0800FFE4: .4byte gTestimony
 _0800FFE8: .4byte gUnknown_0200AFC0
 _0800FFEC: .4byte gUnknown_08026E20
 _0800FFF0: .4byte gUnknown_08026998
@@ -29368,7 +29368,7 @@ _0801012C:
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r7]
-	ldr r1, _0801016C @ =gUnknown_03003C40
+	ldr r1, _0801016C @ =gInvestigation
 	strb r3, [r1, #0x12]
 	strb r6, [r1, #0x13]
 	ldr r2, _08010170 @ =gIORegisters
@@ -29382,7 +29382,7 @@ _0801012C:
 	ldr r1, _08010174 @ =0x0000FDFF
 	ands r0, r1
 	strh r0, [r2]
-	ldr r6, _08010178 @ =gUnknown_030070E0
+	ldr r6, _08010178 @ =gScriptContext
 	ldrh r0, [r6, #0xc]
 	ldr r1, [r4, #0x18]
 	ldrb r4, [r4, #0xd]
@@ -29394,10 +29394,10 @@ _0801012C:
 	bl sub_8018778
 	b _0801019E
 	.align 2, 0
-_0801016C: .4byte gUnknown_03003C40
+_0801016C: .4byte gInvestigation
 _08010170: .4byte gIORegisters
 _08010174: .4byte 0x0000FDFF
-_08010178: .4byte gUnknown_030070E0
+_08010178: .4byte gScriptContext
 _0801017C:
 	mov r0, r8
 	ldrh r2, [r6, #0x1c]
@@ -29411,7 +29411,7 @@ _0801017C:
 _08010190:
 	bl sub_800EBE8
 _08010194:
-	ldr r1, _080101A8 @ =gUnknown_030070E0
+	ldr r1, _080101A8 @ =gScriptContext
 	ldr r0, _080101AC @ =0x0000FFEF
 	ldrh r3, [r1, #0x1c]
 	ands r0, r3
@@ -29422,7 +29422,7 @@ _0801019E:
 	str r0, [r1]
 	b _08010272
 	.align 2, 0
-_080101A8: .4byte gUnknown_030070E0
+_080101A8: .4byte gScriptContext
 _080101AC: .4byte 0x0000FFEF
 _080101B0: .4byte gUnknown_030037B8
 _080101B4:
@@ -29510,7 +29510,7 @@ _080101EC:
 	lsls r0, r0, #5
 	strh r0, [r7, #4]
 _08010264:
-	ldr r4, _08010288 @ =gUnknown_030028C0
+	ldr r4, _08010288 @ =gCourtRecord
 	adds r0, r4, #0
 	bl sub_80060AC
 	adds r0, r4, #0
@@ -29525,7 +29525,7 @@ _08010272:
 _0801027C: .4byte gUnknown_08026430
 _08010280: .4byte gOamObjects
 _08010284: .4byte 0x0000C058
-_08010288: .4byte gUnknown_030028C0
+_08010288: .4byte gCourtRecord
 
 	thumb_func_start sub_801028C
 sub_801028C: @ 0x0801028C
@@ -29604,7 +29604,7 @@ sub_8010310: @ 0x08010310
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
 	bne _0801039A
-	ldr r4, _080103A0 @ =gUnknown_030070E0
+	ldr r4, _080103A0 @ =gScriptContext
 	movs r6, #1
 	adds r0, r6, #0
 	ldrh r1, [r4, #0x1c]
@@ -29663,7 +29663,7 @@ _0801039A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080103A0: .4byte gUnknown_030070E0
+_080103A0: .4byte gScriptContext
 _080103A4: .4byte gJoypad
 _080103A8: .4byte gUnknown_03002080
 _080103AC: .4byte 0x000004DC
@@ -29692,27 +29692,27 @@ sub_80103B4: @ 0x080103B4
 	ldrb r1, [r1, #9]
 	cmp r1, #6
 	bne _080103F4
-	ldr r0, _080103F0 @ =gUnknown_03003C40
+	ldr r0, _080103F0 @ =gInvestigation
 	movs r1, #1
 	bl sub_800BF90
 	b _08010414
 	.align 2, 0
 _080103EC: .4byte gUnknown_030037B8
-_080103F0: .4byte gUnknown_03003C40
+_080103F0: .4byte gInvestigation
 _080103F4:
 	ldrb r5, [r5, #9]
 	cmp r5, #8
 	bne _08010408
-	ldr r0, _08010404 @ =gUnknown_03003C40
+	ldr r0, _08010404 @ =gInvestigation
 	movs r1, #4
 	bl sub_800BF90
 	b _08010414
 	.align 2, 0
-_08010404: .4byte gUnknown_03003C40
+_08010404: .4byte gInvestigation
 _08010408:
 	cmp r1, #9
 	bne _08010414
-	ldr r0, _0801041C @ =gUnknown_03003C40
+	ldr r0, _0801041C @ =gInvestigation
 	movs r1, #8
 	bl sub_800BF90
 _08010414:
@@ -29720,7 +29720,7 @@ _08010414:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801041C: .4byte gUnknown_03003C40
+_0801041C: .4byte gInvestigation
 
 	thumb_func_start sub_8010420
 sub_8010420: @ 0x08010420
@@ -30510,7 +30510,7 @@ _08010A60:
 	cmp r0, #0
 	beq _08010AD8
 _08010A72:
-	ldr r0, _08010A9C @ =gUnknown_030070E0
+	ldr r0, _08010A9C @ =gScriptContext
 	adds r0, #0x44
 	ldrh r0, [r0]
 	cmp r0, #0
@@ -30527,7 +30527,7 @@ _08010A8C: .4byte gUnknown_0814D998
 _08010A90: .4byte gMain
 _08010A94: .4byte 0x0000FFFF
 _08010A98: .4byte gUnknown_0300710A
-_08010A9C: .4byte gUnknown_030070E0
+_08010A9C: .4byte gScriptContext
 _08010AA0:
 	ldrh r0, [r4]
 	adds r1, r5, #0
@@ -30566,7 +30566,7 @@ _08010AD8:
 	cmp r0, sb
 	bne _08010A60
 _08010AE0:
-	ldr r0, _08010AF8 @ =gUnknown_030070E0
+	ldr r0, _08010AF8 @ =gScriptContext
 	adds r0, #0x2a
 	movs r1, #0
 	strb r1, [r0]
@@ -30579,7 +30579,7 @@ _08010AEA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08010AF8: .4byte gUnknown_030070E0
+_08010AF8: .4byte gScriptContext
 
 	thumb_func_start sub_8010AFC
 sub_8010AFC: @ 0x08010AFC
@@ -31366,8 +31366,8 @@ _080110DA:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80110E0
-sub_80110E0: @ 0x080110E0
+	thumb_func_start ResetSoundControl
+ResetSoundControl: @ 0x080110E0
 	ldr r0, _0801110C @ =gMain
 	adds r2, r0, #0
 	adds r2, #0x24
@@ -32153,7 +32153,7 @@ sub_80116B0: @ 0x080116B0
 	strh r3, [r2, #0xc]
 	strh r3, [r2, #0xe]
 	bl sub_80112C8
-	bl sub_80110E0
+	bl ResetSoundControl
 	ldrb r0, [r4, #1]
 	adds r0, #1
 	strb r0, [r4, #1]
@@ -32879,8 +32879,8 @@ sub_8011C98: @ 0x08011C98
 	.align 2, 0
 _08011CA8: .4byte gUnknown_03000800
 
-	thumb_func_start sub_8011CAC
-sub_8011CAC: @ 0x08011CAC
+	thumb_func_start ResetAnimationSystem
+ResetAnimationSystem: @ 0x08011CAC
 	push {r4, lr}
 	sub sp, #4
 	ldr r2, _08011CE8 @ =gUnknown_03000800
@@ -34578,7 +34578,7 @@ sub_8012948: @ 0x08012948
 	sub sp, #0x1c
 	adds r4, r0, #0
 	ldr r6, _08012A80 @ =gUnknown_03000844
-	bl sub_8011CAC
+	bl ResetAnimationSystem
 	ldr r0, [r4, #0x14]
 	movs r1, #0x80
 	lsls r1, r1, #0x15
@@ -35103,7 +35103,7 @@ sub_8012D38: @ 0x08012D38
 	ldr r0, _08012D64 @ =gIORegisters
 	mov r8, r0
 	ldr r7, _08012D68 @ =gMain
-	ldr r5, _08012D6C @ =gUnknown_030070E0
+	ldr r5, _08012D6C @ =gScriptContext
 	movs r0, #0xff
 	lsls r0, r0, #8
 	ands r0, r4
@@ -35118,7 +35118,7 @@ sub_8012D38: @ 0x08012D38
 	.align 2, 0
 _08012D64: .4byte gIORegisters
 _08012D68: .4byte gMain
-_08012D6C: .4byte gUnknown_030070E0
+_08012D6C: .4byte gScriptContext
 _08012D70:
 	ldr r3, _08012DC0 @ =gUnknown_03000844
 _08012D72:
@@ -35814,7 +35814,7 @@ _08013296:
 	cmp r1, r0
 	beq _080132C0
 	movs r0, #0x40
-	ldr r1, _080133FC @ =gUnknown_030070E0
+	ldr r1, _080133FC @ =gScriptContext
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
 	cmp r0, #0
@@ -35950,7 +35950,7 @@ _0801339C:
 	ldrb r0, [r7, #0x19]
 	cmp r0, #0
 	beq _0801349C
-	ldr r0, _080133FC @ =gUnknown_030070E0
+	ldr r0, _080133FC @ =gScriptContext
 	ldrh r0, [r0, #0x1c]
 	ands r2, r0
 	cmp r2, #0
@@ -35988,7 +35988,7 @@ _080133E0:
 	b _08013428
 	.align 2, 0
 _080133F8: .4byte 0x0000FFFF
-_080133FC: .4byte gUnknown_030070E0
+_080133FC: .4byte gScriptContext
 _08013400: .4byte gOamObjects
 _08013404: .4byte 0xFFFFFE78
 _08013408: .4byte 0x000003FF
@@ -36034,7 +36034,7 @@ _08013444:
 	ldrh r0, [r2, #2]
 	strh r0, [r5, #4]
 	mov r0, sl
-	ldr r7, _08013484 @ =gUnknown_030070E0
+	ldr r7, _08013484 @ =gScriptContext
 	ldrh r7, [r7, #0x1c]
 	ands r0, r7
 	cmp r0, #0
@@ -36048,7 +36048,7 @@ _08013444:
 _08013478: .4byte gUnknown_03003E50
 _0801347C: .4byte 0x0000FBFF
 _08013480: .4byte 0x00004009
-_08013484: .4byte gUnknown_030070E0
+_08013484: .4byte gScriptContext
 _08013488:
 	adds r0, r4, #0
 	ands r0, r1
@@ -36497,7 +36497,7 @@ UpdateAnimations: @ 0x080137D0
 	ldr r2, _08013838 @ =gUnknown_03000800
 	ldr r0, _0801383C @ =gCourtScroll
 	mov r8, r0
-	ldr r1, _08013840 @ =gUnknown_030070E0
+	ldr r1, _08013840 @ =gScriptContext
 	mov sl, r1
 	ldr r3, _08013844 @ =gIORegisters
 	str r3, [sp]
@@ -36543,7 +36543,7 @@ _0801380A:
 _08013834: .4byte gMain
 _08013838: .4byte gUnknown_03000800
 _0801383C: .4byte gCourtScroll
-_08013840: .4byte gUnknown_030070E0
+_08013840: .4byte gScriptContext
 _08013844: .4byte gIORegisters
 _08013848:
 	adds r0, r5, #0
@@ -36984,7 +36984,7 @@ sub_8013B84: @ 0x08013B84
 	ldr r2, _08013BFC @ =gUnknown_03000800
 	ldr r0, _08013C00 @ =gCourtScroll
 	mov r8, r0
-	ldr r1, _08013C04 @ =gUnknown_030070E0
+	ldr r1, _08013C04 @ =gScriptContext
 	mov sl, r1
 	ldr r3, _08013C08 @ =gIORegisters
 	str r3, [sp]
@@ -37038,7 +37038,7 @@ _08013BCE:
 _08013BF8: .4byte gMain
 _08013BFC: .4byte gUnknown_03000800
 _08013C00: .4byte gCourtScroll
-_08013C04: .4byte gUnknown_030070E0
+_08013C04: .4byte gScriptContext
 _08013C08: .4byte gIORegisters
 _08013C0C:
 	adds r0, r5, #0
@@ -37272,7 +37272,7 @@ sub_8013DC8: @ 0x08013DC8
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r5, _08013E5C @ =gUnknown_030070E0
+	ldr r5, _08013E5C @ =gScriptContext
 	ldr r2, _08013E60 @ =gUnknown_0802817C
 	movs r3, #0xc
 	ldrsh r1, [r4, r3]
@@ -37343,7 +37343,7 @@ _08013E44:
 	bl sub_800BA40
 	b _08013E78
 	.align 2, 0
-_08013E5C: .4byte gUnknown_030070E0
+_08013E5C: .4byte gScriptContext
 _08013E60: .4byte gUnknown_0802817C
 _08013E64: .4byte gUnknown_03000800
 _08013E68: .4byte 0xFFFFFE20
@@ -37364,7 +37364,7 @@ sub_8013E80: @ 0x08013E80
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r5, _08013F14 @ =gUnknown_030070E0
+	ldr r5, _08013F14 @ =gScriptContext
 	ldr r3, _08013F18 @ =gUnknown_0802817C
 	movs r1, #0xc
 	ldrsh r2, [r4, r1]
@@ -37436,7 +37436,7 @@ _08013F00:
 	bl sub_800BA40
 	b _08013F2E
 	.align 2, 0
-_08013F14: .4byte gUnknown_030070E0
+_08013F14: .4byte gScriptContext
 _08013F18: .4byte gUnknown_0802817C
 _08013F1C: .4byte gUnknown_03000800
 _08013F20:
@@ -37459,7 +37459,7 @@ sub_8013F38: @ 0x08013F38
 	sub sp, #4
 	adds r5, r0, #0
 	adds r4, r1, #0
-	ldr r6, _08013FE8 @ =gUnknown_030070E0
+	ldr r6, _08013FE8 @ =gScriptContext
 	ldr r0, _08013FEC @ =gUnknown_0802819B
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
@@ -37545,7 +37545,7 @@ _08013FDA:
 	bl sub_800B898
 	b _0801401E
 	.align 2, 0
-_08013FE8: .4byte gUnknown_030070E0
+_08013FE8: .4byte gScriptContext
 _08013FEC: .4byte gUnknown_0802819B
 _08013FF0: .4byte gUnknown_03000800
 _08013FF4:
@@ -37585,7 +37585,7 @@ sub_801402C: @ 0x0801402C
 	sub sp, #4
 	adds r5, r0, #0
 	adds r4, r1, #0
-	ldr r6, _080140E4 @ =gUnknown_030070E0
+	ldr r6, _080140E4 @ =gScriptContext
 	ldr r0, _080140E8 @ =gUnknown_080281BA
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
@@ -37675,7 +37675,7 @@ _080140D4:
 	bl sub_800B898
 	b _08014124
 	.align 2, 0
-_080140E4: .4byte gUnknown_030070E0
+_080140E4: .4byte gScriptContext
 _080140E8: .4byte gUnknown_080281BA
 _080140EC: .4byte gUnknown_03000800
 _080140F0: .4byte gUnknown_0802819B
@@ -37719,7 +37719,7 @@ sub_8014130: @ 0x08014130
 	sub sp, #4
 	adds r5, r0, #0
 	adds r4, r1, #0
-	ldr r6, _080141E0 @ =gUnknown_030070E0
+	ldr r6, _080141E0 @ =gScriptContext
 	ldr r0, _080141E4 @ =gUnknown_0802819B
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
@@ -37805,7 +37805,7 @@ _080141D2:
 	bl sub_800B898
 	b _08014214
 	.align 2, 0
-_080141E0: .4byte gUnknown_030070E0
+_080141E0: .4byte gScriptContext
 _080141E4: .4byte gUnknown_0802819B
 _080141E8: .4byte gUnknown_03000800
 _080141EC:
@@ -37844,7 +37844,7 @@ sub_8014220: @ 0x08014220
 	sub sp, #4
 	adds r5, r0, #0
 	adds r4, r1, #0
-	ldr r6, _080142D8 @ =gUnknown_030070E0
+	ldr r6, _080142D8 @ =gScriptContext
 	ldr r0, _080142DC @ =gUnknown_080281BA
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
@@ -37934,7 +37934,7 @@ _080142C8:
 	bl sub_800B898
 	b _08014316
 	.align 2, 0
-_080142D8: .4byte gUnknown_030070E0
+_080142D8: .4byte gScriptContext
 _080142DC: .4byte gUnknown_080281BA
 _080142E0: .4byte gUnknown_03000800
 _080142E4: .4byte gUnknown_0802819B
@@ -40609,7 +40609,7 @@ _080157E2:
 	blt _080157E2
 _080157F2:
 	bl sub_800E280
-	ldr r1, _0801580C @ =gUnknown_03003C40
+	ldr r1, _0801580C @ =gInvestigation
 	movs r0, #0xfe
 	ldrb r2, [r1, #0xb]
 	ands r0, r2
@@ -40619,7 +40619,7 @@ _080157F2:
 	bx r0
 	.align 2, 0
 _08015808: .4byte gUnknown_03006D70
-_0801580C: .4byte gUnknown_03003C40
+_0801580C: .4byte gInvestigation
 
 	thumb_func_start sub_8015810
 sub_8015810: @ 0x08015810
@@ -41177,7 +41177,7 @@ _08015C44: .4byte gUnknown_03006D70
 	thumb_func_start sub_8015C48
 sub_8015C48: @ 0x08015C48
 	push {r4, r5, lr}
-	ldr r3, _08015C70 @ =gUnknown_030070E0
+	ldr r3, _08015C70 @ =gScriptContext
 	adds r0, r3, #0
 	adds r0, #0x46
 	ldrh r2, [r0]
@@ -41197,7 +41197,7 @@ sub_8015C48: @ 0x08015C48
 	strh r0, [r1]
 	b _08015DD8
 	.align 2, 0
-_08015C70: .4byte gUnknown_030070E0
+_08015C70: .4byte gScriptContext
 _08015C74: .4byte gMain
 _08015C78: .4byte gIORegisters
 _08015C7C: .4byte 0x0000FEFF
@@ -41235,7 +41235,7 @@ _08015CB8:
 	ands r0, r1
 	cmp r0, #0
 	beq _08015CF0
-	ldr r0, _08015D10 @ =gUnknown_030070E0
+	ldr r0, _08015D10 @ =gScriptContext
 	adds r4, r0, #0
 	adds r4, #0x48
 	ldrh r0, [r4]
@@ -41269,7 +41269,7 @@ _08015CF0:
 	b _08015D1A
 	.align 2, 0
 _08015D0C: .4byte gJoypad
-_08015D10: .4byte gUnknown_030070E0
+_08015D10: .4byte gScriptContext
 _08015D14: .4byte gMain
 _08015D18:
 	movs r0, #0x67
@@ -41342,7 +41342,7 @@ _08015D98:
 	ands r0, r1
 	cmp r0, #0
 	beq _08015DBC
-	ldr r4, _08015DEC @ =gUnknown_030070E0
+	ldr r4, _08015DEC @ =gScriptContext
 	adds r4, #0x48
 	ldrh r0, [r4]
 	bl sub_8011D68
@@ -41356,7 +41356,7 @@ _08015DBC:
 	ands r0, r5
 	cmp r0, #0
 	beq _08015DD8
-	ldr r0, _08015DEC @ =gUnknown_030070E0
+	ldr r0, _08015DEC @ =gScriptContext
 	adds r0, #0x48
 	ldrh r0, [r0]
 	bl sub_8011D68
@@ -41370,7 +41370,7 @@ _08015DD8:
 _08015DE0: .4byte gIORegisters
 _08015DE4: .4byte 0x0000FEFF
 _08015DE8: .4byte gJoypad
-_08015DEC: .4byte gUnknown_030070E0
+_08015DEC: .4byte gScriptContext
 
 	thumb_func_start sub_8015DF0
 sub_8015DF0: @ 0x08015DF0
@@ -41658,7 +41658,7 @@ sub_8016008: @ 0x08016008
 
 	thumb_func_start sub_8016014
 sub_8016014: @ 0x08016014
-	ldr r1, _0801609C @ =gUnknown_030070E0
+	ldr r1, _0801609C @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -41730,7 +41730,7 @@ _08016038:
 	ldr r0, [r0, #8]
 	bx lr
 	.align 2, 0
-_0801609C: .4byte gUnknown_030070E0
+_0801609C: .4byte gScriptContext
 _080160A0: .4byte 0x06015000
 _080160A4: .4byte 0x06011880
 _080160A8: .4byte gUnknown_03003AF0
@@ -41758,7 +41758,7 @@ sub_80160E0: @ 0x080160E0
 	sub sp, #4
 	adds r7, r0, #0
 	adds r5, r1, #0
-	ldr r1, _08016104 @ =gUnknown_030070E0
+	ldr r1, _08016104 @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -41769,7 +41769,7 @@ sub_80160E0: @ 0x080160E0
 	str r0, [sp]
 	b _08016116
 	.align 2, 0
-_08016104: .4byte gUnknown_030070E0
+_08016104: .4byte gScriptContext
 _08016108: .4byte 0x06011880
 _0801610C: .4byte gUnknown_03002DB8
 _08016110:
@@ -42308,7 +42308,7 @@ sub_8016540: @ 0x08016540
 	str r0, [sp, #0x10]
 	movs r1, #0
 	str r1, [sp, #0x14]
-	ldr r1, _08016568 @ =gUnknown_030070E0
+	ldr r1, _08016568 @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -42319,7 +42319,7 @@ sub_8016540: @ 0x08016540
 	mov sb, r2
 	b _08016576
 	.align 2, 0
-_08016568: .4byte gUnknown_030070E0
+_08016568: .4byte gScriptContext
 _0801656C: .4byte 0x06011880
 _08016570:
 	ldr r7, _08016630 @ =0x06015000
@@ -42822,7 +42822,7 @@ _0801694C:
 	lsls r3, r3, #2
 	adds r0, r2, r3
 	strh r1, [r0]
-	ldr r1, _080169B0 @ =gUnknown_03003C60
+	ldr r1, _080169B0 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #1
 	bl sub_800B6EC
@@ -42859,7 +42859,7 @@ _080169A6:
 	bx r0
 	.align 2, 0
 _080169AC: .4byte gOamObjects
-_080169B0: .4byte gUnknown_03003C60
+_080169B0: .4byte gTestimony
 _080169B4: .4byte gMain
 _080169B8: .4byte 0x0000011B
 
@@ -42959,14 +42959,14 @@ _08016A68:
 _08016A6A:
 	bl __divsi3
 	str r0, [r4]
-	ldr r1, _08016A7C @ =gUnknown_03003C60
+	ldr r1, _08016A7C @ =gTestimony
 	movs r2, #0
 	movs r0, #0x28
 	strb r0, [r1, #4]
 	strb r2, [r5, #0x18]
 	b _08016B16
 	.align 2, 0
-_08016A7C: .4byte gUnknown_03003C60
+_08016A7C: .4byte gTestimony
 _08016A80:
 	adds r2, r4, #0
 	adds r2, #0xb8
@@ -43001,7 +43001,7 @@ _08016AAC:
 _08016ABA:
 	strh r1, [r3]
 _08016ABC:
-	ldr r3, _08016AF0 @ =gUnknown_03003C60
+	ldr r3, _08016AF0 @ =gTestimony
 	ldrb r0, [r3, #4]
 	cmp r0, #0
 	beq _08016AC8
@@ -43029,7 +43029,7 @@ _08016AC8:
 	strh r0, [r2]
 	b _08016B62
 	.align 2, 0
-_08016AF0: .4byte gUnknown_03003C60
+_08016AF0: .4byte gTestimony
 _08016AF4:
 	subs r0, r4, #1
 	strh r0, [r2]
@@ -43272,7 +43272,7 @@ _08016CA2:
 	lsls r0, r0, #2
 	strh r0, [r1]
 	strh r0, [r1, #8]
-	ldr r1, _08016CC8 @ =gUnknown_03003C60
+	ldr r1, _08016CC8 @ =gTestimony
 	adds r0, r3, #0
 	movs r2, #1
 	bl sub_800B6EC
@@ -43283,7 +43283,7 @@ _08016CBE:
 	bx r0
 	.align 2, 0
 _08016CC4: .4byte gUnknown_03002DE0
-_08016CC8: .4byte gUnknown_03003C60
+_08016CC8: .4byte gTestimony
 
 	thumb_func_start ProcessHPBar
 ProcessHPBar: @ 0x08016CCC
@@ -43365,7 +43365,7 @@ _08016D5C:
 	thumb_func_start sub_8016D6C
 sub_8016D6C: @ 0x08016D6C
 	push {r4, lr}
-	ldr r1, _08016D9C @ =gUnknown_030070E0
+	ldr r1, _08016D9C @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -43391,7 +43391,7 @@ _08016D8C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016D9C: .4byte gUnknown_030070E0
+_08016D9C: .4byte gScriptContext
 _08016DA0: .4byte gOamObjects
 
 	thumb_func_start sub_8016DA4
@@ -43464,8 +43464,8 @@ _08016E1C:
 _08016E24: .4byte gMain
 _08016E28: .4byte 0x00000507
 
-	thumb_func_start sub_8016E2C
-sub_8016E2C: @ 0x08016E2C
+	thumb_func_start ResetHPBar
+ResetHPBar: @ 0x08016E2C
 	push {lr}
 	ldr r3, _08016E58 @ =gMain
 	adds r1, r3, #0
@@ -43490,8 +43490,8 @@ sub_8016E2C: @ 0x08016E2C
 	.align 2, 0
 _08016E58: .4byte gMain
 
-	thumb_func_start sub_8016E5C
-sub_8016E5C: @ 0x08016E5C
+	thumb_func_start ResetHPBarHealthToMax
+ResetHPBarHealthToMax: @ 0x08016E5C
 	ldr r2, _08016E70 @ =gMain
 	adds r1, r2, #0
 	adds r1, #0xb6
@@ -43577,7 +43577,7 @@ sub_8016ED8: @ 0x08016ED8
 	ldrb r0, [r2, #8]
 	cmp r0, #7
 	bne _08016EF8
-	ldr r1, _08016F10 @ =gUnknown_030070E0
+	ldr r1, _08016F10 @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r1, #0x1c]
 	ands r0, r1
@@ -43596,7 +43596,7 @@ _08016F04:
 	.align 2, 0
 _08016F08: .4byte gMain
 _08016F0C: .4byte 0x0014011C
-_08016F10: .4byte gUnknown_030070E0
+_08016F10: .4byte gScriptContext
 _08016F14:
 	movs r0, #1
 _08016F16:
@@ -43652,8 +43652,8 @@ _08016F70: .4byte 0x00004020
 	thumb_func_start sub_8016F74
 sub_8016F74: @ 0x08016F74
 	push {lr}
-	ldr r0, _08016F90 @ =gUnknown_030070E0
-	ldr r2, _08016F94 @ =gUnknown_0814E338
+	ldr r0, _08016F90 @ =gScriptContext
+	ldr r2, _08016F94 @ =gScriptCmdFuncs+0x1D0
 	adds r1, r0, #0
 	adds r1, #0x2c
 	ldrb r1, [r1]
@@ -43664,8 +43664,8 @@ sub_8016F74: @ 0x08016F74
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016F90: .4byte gUnknown_030070E0
-_08016F94: .4byte gUnknown_0814E338
+_08016F90: .4byte gScriptContext
+_08016F94: .4byte gScriptCmdFuncs+0x1D0
 
 	thumb_func_start sub_8016F98
 sub_8016F98: @ 0x08016F98
@@ -43722,7 +43722,7 @@ sub_8016FEC: @ 0x08016FEC
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10
 	movs r5, #0xff
-	ldr r6, _08017050 @ =gUnknown_030070E0
+	ldr r6, _08017050 @ =gScriptContext
 	ldr r1, _08017054 @ =gUnknown_08028624
 	mov r0, sp
 	movs r2, #0x40
@@ -43771,7 +43771,7 @@ _08017048:
 	bl sub_8016FEC
 	b _08017148
 	.align 2, 0
-_08017050: .4byte gUnknown_030070E0
+_08017050: .4byte gScriptContext
 _08017054: .4byte gUnknown_08028624
 _08017058: .4byte gUnknown_03000844
 _0801705C: .4byte 0xF7DB61F0
@@ -43808,7 +43808,7 @@ _08017086:
 	adds r2, r0, #0
 	strh r4, [r2, #0x10]
 _080170A2:
-	ldr r1, _08017108 @ =gUnknown_030070E0
+	ldr r1, _08017108 @ =gScriptContext
 	movs r0, #0x80
 	lsls r0, r0, #8
 	ldrh r1, [r1, #0x1e]
@@ -43858,7 +43858,7 @@ _080170EA:
 	.align 2, 0
 _08017100: .4byte gMain
 _08017104: .4byte gUnknown_03000844
-_08017108: .4byte gUnknown_030070E0
+_08017108: .4byte gScriptContext
 _0801710C: .4byte 0x01000400
 _08017110:
 	adds r1, r6, #0
@@ -45123,7 +45123,7 @@ _08017AB0: .4byte 0x0000FFFF
 	thumb_func_start sub_8017AB4
 sub_8017AB4: @ 0x08017AB4
 	push {lr}
-	ldr r1, _08017ACC @ =gUnknown_030070E0
+	ldr r1, _08017ACC @ =gScriptContext
 	adds r1, #0x44
 	strh r0, [r1]
 	subs r0, #1
@@ -45135,7 +45135,7 @@ sub_8017AB4: @ 0x08017AB4
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08017ACC: .4byte gUnknown_030070E0
+_08017ACC: .4byte gScriptContext
 _08017AD0: .4byte _08017AD4
 _08017AD4: @ jump table
 	.4byte _08017B44 @ case 0
@@ -45219,7 +45219,7 @@ _08017BA4: .4byte gMain
 	thumb_func_start sub_8017BA8
 sub_8017BA8: @ 0x08017BA8
 	movs r1, #0
-	ldr r0, _08017BBC @ =gUnknown_030070E0
+	ldr r0, _08017BBC @ =gScriptContext
 	movs r2, #0
 	adds r0, #0x18
 _08017BB0:
@@ -45230,13 +45230,13 @@ _08017BB0:
 	bls _08017BB0
 	bx lr
 	.align 2, 0
-_08017BBC: .4byte gUnknown_030070E0
+_08017BBC: .4byte gScriptContext
 
 	thumb_func_start sub_8017BC0
 sub_8017BC0: @ 0x08017BC0
 	push {r4, r5, lr}
 	movs r4, #0x10
-	ldr r0, _08017C2C @ =gUnknown_030070E0
+	ldr r0, _08017C2C @ =gScriptContext
 	ldr r2, [r0]
 	adds r1, r0, #0
 	adds r1, #0x29
@@ -45290,7 +45290,7 @@ _08017C20:
 	blo _08017C20
 	b _08017C3A
 	.align 2, 0
-_08017C2C: .4byte gUnknown_030070E0
+_08017C2C: .4byte gScriptContext
 _08017C30: .4byte gUnknown_0802845E
 _08017C34:
 	subs r4, #1
@@ -45332,7 +45332,7 @@ _08017C68:
 	thumb_func_start sub_8017C70
 sub_8017C70: @ 0x08017C70
 	ldr r1, _08017CA0 @ =gUnknown_0802845E
-	ldr r3, _08017CA4 @ =gUnknown_030070E0
+	ldr r3, _08017CA4 @ =gScriptContext
 	ldrh r2, [r3, #0xa]
 	lsls r0, r2, #1
 	adds r0, r0, r1
@@ -45360,7 +45360,7 @@ _08017C9C:
 	bx lr
 	.align 2, 0
 _08017CA0: .4byte gUnknown_0802845E
-_08017CA4: .4byte gUnknown_030070E0
+_08017CA4: .4byte gScriptContext
 
 	thumb_func_start sub_8017CA8
 sub_8017CA8: @ 0x08017CA8
@@ -45393,7 +45393,7 @@ sub_8017CD0: @ 0x08017CD0
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #4
-	ldr r1, _08017D74 @ =gUnknown_030070E0
+	ldr r1, _08017D74 @ =gScriptContext
 	movs r0, #4
 	ldrh r2, [r1, #0x1c]
 	ands r0, r2
@@ -45475,7 +45475,7 @@ _08017D4C:
 	strb r0, [r2, #5]
 	b _08017E00
 	.align 2, 0
-_08017D74: .4byte gUnknown_030070E0
+_08017D74: .4byte gScriptContext
 _08017D78: .4byte gMain
 _08017D7C: .4byte gUnknown_03002D68
 _08017D80: .4byte gUnknown_03003AF0
@@ -45675,7 +45675,7 @@ _08017EE2:
 sub_8017EF4: @ 0x08017EF4
 	push {r4, lr}
 	adds r4, r0, #0
-	ldr r3, _08017F30 @ =gUnknown_030070E0
+	ldr r3, _08017F30 @ =gScriptContext
 	ldrh r0, [r3, #0xa]
 	cmp r0, r4
 	beq _08017F2A
@@ -45706,7 +45706,7 @@ _08017F2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08017F30: .4byte gUnknown_030070E0
+_08017F30: .4byte gScriptContext
 _08017F34: .4byte 0x00007FFF
 _08017F38: .4byte gUnknown_08028288
 _08017F3C: .4byte gUnknown_08028370
@@ -45730,7 +45730,7 @@ sub_8017F40: @ 0x08017F40
 	ldm r0!, {r3, r4}
 	stm r1!, {r3, r4}
 	str r7, [sp, #0x98]
-	ldr r1, _08017F94 @ =gUnknown_030070E0
+	ldr r1, _08017F94 @ =gScriptContext
 	movs r0, #4
 	ldrh r5, [r1, #0x1c]
 	ands r0, r5
@@ -45754,7 +45754,7 @@ sub_8017F40: @ 0x08017F40
 	b _08017FBC
 	.align 2, 0
 _08017F90: .4byte gUnknown_08028664
-_08017F94: .4byte gUnknown_030070E0
+_08017F94: .4byte gScriptContext
 _08017F98: .4byte gUnknown_03003E50
 _08017F9C:
 	adds r5, #1
@@ -46183,14 +46183,14 @@ sub_80182B8: @ 0x080182B8
 	mov r6, r8
 	push {r6, r7}
 	movs r7, #0
-	ldr r5, _08018378 @ =gUnknown_030070E0
+	ldr r5, _08018378 @ =gScriptContext
 	ldr r4, _0801837C @ =gMain
 	ldrb r0, [r4, #8]
 	cmp r0, #1
 	bne _080182CE
 	b _080184F8
 _080182CE:
-	ldr r1, _08018380 @ =gUnknown_0814E338
+	ldr r1, _08018380 @ =gScriptCmdFuncs+0x1D0
 	adds r0, r5, #0
 	adds r0, #0x2c
 	ldrb r0, [r0]
@@ -46267,7 +46267,7 @@ _08018346:
 	bhi _08018388
 	ldrh r0, [r5, #8]
 	bl sub_8017EF4
-	ldr r1, _08018384 @ =gUnknown_0814E168
+	ldr r1, _08018384 @ =gScriptCmdFuncs
 	ldrh r2, [r5, #0xa]
 	lsls r0, r2, #2
 	adds r0, r0, r1
@@ -46278,10 +46278,10 @@ _08018346:
 	beq _08018312
 	b _080183FA
 	.align 2, 0
-_08018378: .4byte gUnknown_030070E0
+_08018378: .4byte gScriptContext
 _0801837C: .4byte gMain
-_08018380: .4byte gUnknown_0814E338
-_08018384: .4byte gUnknown_0814E168
+_08018380: .4byte gScriptCmdFuncs+0x1D0
+_08018384: .4byte gScriptCmdFuncs
 _08018388:
 	mov r4, sb
 	ldrb r4, [r4]
@@ -46488,10 +46488,10 @@ _080184F8:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_8018504
-sub_8018504: @ 0x08018504
+	thumb_func_start LoadCurrentScriptIntoRam
+LoadCurrentScriptIntoRam: @ 0x08018504
 	push {r4, r5, r6, lr}
-	ldr r0, _080185D8 @ =gUnknown_030070E0
+	ldr r0, _080185D8 @ =gScriptContext
 	mov ip, r0
 	adds r0, #0x28
 	movs r1, #0
@@ -46599,7 +46599,7 @@ _080185BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080185D8: .4byte gUnknown_030070E0
+_080185D8: .4byte gScriptContext
 _080185DC: .4byte gUnknown_030070B0
 _080185E0: .4byte gUnknown_08028588
 _080185E4: .4byte gMain
@@ -46647,7 +46647,7 @@ sub_8018638: @ 0x08018638
 	mov r5, r8
 	push {r5, r6, r7}
 	adds r5, r0, #0
-	ldr r4, _080186E4 @ =gUnknown_030070E0
+	ldr r4, _080186E4 @ =gScriptContext
 	ldrh r0, [r4, #0xc]
 	adds r0, #1
 	ldr r6, _080186E8 @ =gMain
@@ -46728,7 +46728,7 @@ _080186CC:
 	orrs r0, r1
 	b _08018706
 	.align 2, 0
-_080186E4: .4byte gUnknown_030070E0
+_080186E4: .4byte gScriptContext
 _080186E8: .4byte gMain
 _080186EC: .4byte gUnknown_03003AF0
 _080186F0: .4byte 0x00003FFF
@@ -46772,7 +46772,7 @@ _08018738: .4byte gMain
 sub_801873C: @ 0x0801873C
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
-	ldr r5, _08018770 @ =gUnknown_030070E0
+	ldr r5, _08018770 @ =gScriptContext
 	lsls r0, r6, #2
 	ldr r1, _08018774 @ =gUnknown_02011FC4
 	adds r0, r0, r1
@@ -46796,14 +46796,14 @@ sub_801873C: @ 0x0801873C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08018770: .4byte gUnknown_030070E0
+_08018770: .4byte gScriptContext
 _08018774: .4byte gUnknown_02011FC4
 
 	thumb_func_start sub_8018778
 sub_8018778: @ 0x08018778
 	push {r4, r5, lr}
 	adds r5, r0, #0
-	ldr r4, _080187C4 @ =gUnknown_030070E0
+	ldr r4, _080187C4 @ =gScriptContext
 	ldr r2, _080187C8 @ =gMain
 	movs r1, #0xb4
 	lsls r1, r1, #2
@@ -46839,7 +46839,7 @@ _080187AC:
 	bl sub_8017154
 	b _080187D2
 	.align 2, 0
-_080187C4: .4byte gUnknown_030070E0
+_080187C4: .4byte gScriptContext
 _080187C8: .4byte gMain
 _080187CC:
 	movs r0, #4
@@ -46893,7 +46893,7 @@ sub_801880C: @ 0x0801880C
 _08018828:
 	ldr r4, _08018854 @ =gUnknown_03002BB0
 	mov sb, r3
-	ldr r5, _08018858 @ =gUnknown_030070E0
+	ldr r5, _08018858 @ =gScriptContext
 	ldr r6, _0801885C @ =gUnknown_03003E50
 _08018830:
 	movs r1, #0x80
@@ -46915,7 +46915,7 @@ _08018840:
 	.align 2, 0
 _08018850: .4byte gMain
 _08018854: .4byte gUnknown_03002BB0
-_08018858: .4byte gUnknown_030070E0
+_08018858: .4byte gScriptContext
 _0801885C: .4byte gUnknown_03003E50
 _08018860:
 	ldrh r0, [r6, #6]
@@ -47214,7 +47214,7 @@ RunScriptContext: @ 0x08018A80
 	bne _08018A98
 	bl sub_80182B8
 _08018A98:
-	ldr r1, _08018AB8 @ =gUnknown_030070E0
+	ldr r1, _08018AB8 @ =gScriptContext
 	movs r0, #0x80
 	lsls r0, r0, #4
 	ldrh r1, [r1, #0x1e]
@@ -47228,7 +47228,7 @@ _08018AAA:
 	bx r0
 	.align 2, 0
 _08018AB4: .4byte gMain
-_08018AB8: .4byte gUnknown_030070E0
+_08018AB8: .4byte gScriptContext
 
 	thumb_func_start sub_8018ABC
 sub_8018ABC: @ 0x08018ABC
@@ -47451,8 +47451,8 @@ _08018C4C:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8018C50
-sub_8018C50: @ 0x08018C50
+	thumb_func_start ClearSectionReadFlags
+ClearSectionReadFlags: @ 0x08018C50
 	push {r4, r5, lr}
 	movs r2, #0
 	movs r1, #0x86
@@ -47559,7 +47559,7 @@ _08018CFC:
 sub_8018D04: @ 0x08018D04
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _08018D3C @ =gUnknown_030070E0
+	ldr r4, _08018D3C @ =gScriptContext
 	movs r3, #0
 _08018D0C:
 	lsls r0, r3, #1
@@ -47586,13 +47586,13 @@ _08018D0C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08018D3C: .4byte gUnknown_030070E0
+_08018D3C: .4byte gScriptContext
 
 	thumb_func_start sub_8018D40
 sub_8018D40: @ 0x08018D40
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _08018D78 @ =gUnknown_030070E0
+	ldr r4, _08018D78 @ =gScriptContext
 	movs r3, #0
 _08018D48:
 	lsls r0, r3, #1
@@ -47619,7 +47619,7 @@ _08018D48:
 	bl sub_8011150
 	b _08018D84
 	.align 2, 0
-_08018D78: .4byte gUnknown_030070E0
+_08018D78: .4byte gScriptContext
 _08018D7C:
 	mov r0, sp
 	ldrh r0, [r0]
@@ -47636,7 +47636,7 @@ _08018D84:
 sub_8018D90: @ 0x08018D90
 	push {r4, lr}
 	sub sp, #8
-	ldr r4, _08018DD4 @ =gUnknown_030070E0
+	ldr r4, _08018DD4 @ =gScriptContext
 	movs r3, #0
 _08018D98:
 	lsls r0, r3, #1
@@ -47668,7 +47668,7 @@ _08018D98:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08018DD4: .4byte gUnknown_030070E0
+_08018DD4: .4byte gScriptContext
 
 	thumb_func_start sub_8018DD8
 sub_8018DD8: @ 0x08018DD8
@@ -47699,7 +47699,7 @@ _08018DFA:
 	strh r1, [r3]
 	ldr r0, _08018E30 @ =0x00000203
 	str r0, [r2, #8]
-	ldr r0, _08018E34 @ =gUnknown_03003C40
+	ldr r0, _08018E34 @ =gInvestigation
 	strb r4, [r0, #0xc]
 	strb r4, [r0, #0xd]
 	adds r1, r2, #0
@@ -47716,12 +47716,12 @@ _08018DFA:
 	.align 2, 0
 _08018E2C: .4byte gMain
 _08018E30: .4byte 0x00000203
-_08018E34: .4byte gUnknown_03003C40
+_08018E34: .4byte gInvestigation
 
 	thumb_func_start sub_8018E38
 sub_8018E38: @ 0x08018E38
 	push {r4, r5, r6, lr}
-	ldr r1, _08018E84 @ =gUnknown_030070E0
+	ldr r1, _08018E84 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r4, [r0]
 	adds r0, #2
@@ -47746,7 +47746,7 @@ sub_8018E38: @ 0x08018E38
 	blt _08018EBE
 	cmp r5, #0
 	beq _08018E90
-	ldr r0, _08018E8C @ =gUnknown_030028C0
+	ldr r0, _08018E8C @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x3c
 	adds r1, r2, r1
@@ -47756,11 +47756,11 @@ sub_8018E38: @ 0x08018E38
 	strb r1, [r0, #0x11]
 	b _08018EA0
 	.align 2, 0
-_08018E84: .4byte gUnknown_030070E0
+_08018E84: .4byte gScriptContext
 _08018E88: .4byte 0x00003FFF
-_08018E8C: .4byte gUnknown_030028C0
+_08018E8C: .4byte gCourtRecord
 _08018E90:
-	ldr r0, _08018EC8 @ =gUnknown_030028C0
+	ldr r0, _08018EC8 @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x1c
 	adds r1, r2, r1
@@ -47790,13 +47790,13 @@ _08018EBE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08018EC8: .4byte gUnknown_030028C0
+_08018EC8: .4byte gCourtRecord
 _08018ECC: .4byte gMain
 
 	thumb_func_start sub_8018ED0
 sub_8018ED0: @ 0x08018ED0
 	push {r4, lr}
-	ldr r1, _08018F04 @ =gUnknown_030070E0
+	ldr r1, _08018F04 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r2, [r0]
 	adds r0, #2
@@ -47815,16 +47815,16 @@ sub_8018ED0: @ 0x08018ED0
 	blt _08018F20
 	cmp r4, #0
 	beq _08018F10
-	ldr r0, _08018F0C @ =gUnknown_030028C0
+	ldr r0, _08018F0C @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x3c
 	b _08018F16
 	.align 2, 0
-_08018F04: .4byte gUnknown_030070E0
+_08018F04: .4byte gScriptContext
 _08018F08: .4byte 0x00003FFF
-_08018F0C: .4byte gUnknown_030028C0
+_08018F0C: .4byte gCourtRecord
 _08018F10:
-	ldr r0, _08018F28 @ =gUnknown_030028C0
+	ldr r0, _08018F28 @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x1c
 _08018F16:
@@ -47838,13 +47838,13 @@ _08018F20:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08018F28: .4byte gUnknown_030028C0
+_08018F28: .4byte gCourtRecord
 
 	thumb_func_start sub_8018F2C
 sub_8018F2C: @ 0x08018F2C
 	push {r4, r5, r6, lr}
 	sub sp, #4
-	ldr r4, _08018F88 @ =gUnknown_030070E0
+	ldr r4, _08018F88 @ =gScriptContext
 	movs r3, #0
 _08018F34:
 	lsls r0, r3, #1
@@ -47884,15 +47884,15 @@ _08018F34:
 	ands r2, r0
 	cmp r5, #0
 	beq _08018F94
-	ldr r0, _08018F90 @ =gUnknown_030028C0
+	ldr r0, _08018F90 @ =gCourtRecord
 	adds r0, #0x3c
 	b _08018F98
 	.align 2, 0
-_08018F88: .4byte gUnknown_030070E0
+_08018F88: .4byte gScriptContext
 _08018F8C: .4byte 0x00003FFF
-_08018F90: .4byte gUnknown_030028C0
+_08018F90: .4byte gCourtRecord
 _08018F94:
-	ldr r0, _08018FC4 @ =gUnknown_030028C0
+	ldr r0, _08018FC4 @ =gCourtRecord
 	adds r0, #0x1c
 _08018F98:
 	adds r0, r1, r0
@@ -47919,14 +47919,14 @@ _08018FBA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08018FC4: .4byte gUnknown_030028C0
+_08018FC4: .4byte gCourtRecord
 _08018FC8: .4byte gMain
 
 	thumb_func_start sub_8018FCC
 sub_8018FCC: @ 0x08018FCC
 	push {r4, lr}
 	sub sp, #8
-	ldr r4, _08019018 @ =gUnknown_030070E0
+	ldr r4, _08019018 @ =gScriptContext
 	movs r3, #0
 _08018FD4:
 	lsls r0, r3, #1
@@ -47962,7 +47962,7 @@ _08018FD4:
 	strh r0, [r1, #4]
 	b _08019020
 	.align 2, 0
-_08019018: .4byte gUnknown_030070E0
+_08019018: .4byte gScriptContext
 _0801901C:
 	mov r0, sp
 	strh r1, [r0, #4]
@@ -47985,7 +47985,7 @@ _0801903C: .4byte gPalCourtScroll
 	thumb_func_start sub_8019040
 sub_8019040: @ 0x08019040
 	push {r4, r5, lr}
-	ldr r4, _0801907C @ =gUnknown_030070E0
+	ldr r4, _0801907C @ =gScriptContext
 	ldr r3, _08019080 @ =gMain
 	ldrh r5, [r4, #0x12]
 	ldrb r0, [r4, #0x12]
@@ -48015,7 +48015,7 @@ sub_8019040: @ 0x08019040
 	movs r0, #1
 	b _080190A6
 	.align 2, 0
-_0801907C: .4byte gUnknown_030070E0
+_0801907C: .4byte gScriptContext
 _08019080: .4byte gMain
 _08019084:
 	adds r0, r3, #0
@@ -48044,7 +48044,7 @@ _080190A6:
 	thumb_func_start sub_80190AC
 sub_80190AC: @ 0x080190AC
 	push {r4, r5, lr}
-	ldr r5, _080190D0 @ =gUnknown_030070E0
+	ldr r5, _080190D0 @ =gScriptContext
 	ldr r4, _080190D4 @ =gMain
 	ldrh r0, [r4, #0x34]
 	bl sub_80051AC
@@ -48061,7 +48061,7 @@ sub_80190AC: @ 0x080190AC
 	strb r0, [r1]
 	b _080190DE
 	.align 2, 0
-_080190D0: .4byte gUnknown_030070E0
+_080190D0: .4byte gScriptContext
 _080190D4: .4byte gMain
 _080190D8:
 	adds r0, r4, #0
@@ -48117,7 +48117,7 @@ _0801911A:
 sub_8019128: @ 0x08019128
 	push {r4, r5, lr}
 	sub sp, #8
-	ldr r4, _08019188 @ =gUnknown_030070E0
+	ldr r4, _08019188 @ =gScriptContext
 	ldr r5, _0801918C @ =gMain
 	movs r3, #0
 _08019132:
@@ -48155,22 +48155,22 @@ _08019132:
 	movs r1, #0
 	movs r3, #0
 	bl sub_8012684
-	ldr r0, _08019190 @ =gUnknown_03003C40
+	ldr r0, _08019190 @ =gInvestigation
 	movs r1, #1
 	strb r1, [r0, #6]
 	movs r1, #0xf
 	bl sub_800BF90
 	b _080191AC
 	.align 2, 0
-_08019188: .4byte gUnknown_030070E0
+_08019188: .4byte gScriptContext
 _0801918C: .4byte gMain
-_08019190: .4byte gUnknown_03003C40
+_08019190: .4byte gInvestigation
 _08019194:
 	movs r0, #0
 	bl sub_8016FEC
 	ldr r0, _080191B8 @ =gUnknown_03000844
 	bl sub_8012F7C
-	ldr r0, _080191BC @ =gUnknown_03003C40
+	ldr r0, _080191BC @ =gInvestigation
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
@@ -48183,7 +48183,7 @@ _080191AC:
 	bx r1
 	.align 2, 0
 _080191B8: .4byte gUnknown_03000844
-_080191BC: .4byte gUnknown_03003C40
+_080191BC: .4byte gInvestigation
 
 	thumb_func_start sub_80191C0
 sub_80191C0: @ 0x080191C0
@@ -48241,7 +48241,7 @@ _08019228: .4byte gUnknown_03000844
 sub_801922C: @ 0x0801922C
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _08019260 @ =gUnknown_030070E0
+	ldr r4, _08019260 @ =gScriptContext
 	movs r3, #0
 _08019234:
 	lsls r0, r3, #1
@@ -48266,7 +48266,7 @@ _08019234:
 	bl sub_80113B8
 	b _08019268
 	.align 2, 0
-_08019260: .4byte gUnknown_030070E0
+_08019260: .4byte gScriptContext
 _08019264:
 	bl sub_8011324
 _08019268:
@@ -48281,7 +48281,7 @@ _08019268:
 sub_8019274: @ 0x08019274
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _080192A4 @ =gUnknown_030070E0
+	ldr r4, _080192A4 @ =gScriptContext
 	movs r3, #0
 _0801927C:
 	lsls r0, r3, #1
@@ -48304,7 +48304,7 @@ _0801927C:
 	bl sub_8011354
 	b _080192AC
 	.align 2, 0
-_080192A4: .4byte gUnknown_030070E0
+_080192A4: .4byte gScriptContext
 _080192A8:
 	bl sub_80112C8
 _080192AC:
@@ -48332,7 +48332,7 @@ _080192C8: .4byte gMain
 sub_80192CC: @ 0x080192CC
 	push {r4, r5, lr}
 	sub sp, #4
-	ldr r4, _08019314 @ =gUnknown_030070E0
+	ldr r4, _08019314 @ =gScriptContext
 	ldr r5, _08019318 @ =gMain
 	movs r3, #0
 _080192D6:
@@ -48367,12 +48367,12 @@ _080192D6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08019314: .4byte gUnknown_030070E0
+_08019314: .4byte gScriptContext
 _08019318: .4byte gMain
 
 	thumb_func_start sub_801931C
 sub_801931C: @ 0x0801931C
-	ldr r0, _08019338 @ =gUnknown_030070E0
+	ldr r0, _08019338 @ =gScriptContext
 	ldr r1, [r0]
 	ldrh r2, [r1]
 	adds r1, #2
@@ -48387,7 +48387,7 @@ sub_801931C: @ 0x0801931C
 	str r0, [r2]
 	b _08019348
 	.align 2, 0
-_08019338: .4byte gUnknown_030070E0
+_08019338: .4byte gScriptContext
 _0801933C: .4byte gUnknown_030037BC
 _08019340:
 	ldr r1, _0801934C @ =gMain
@@ -48404,7 +48404,7 @@ _0801934C: .4byte gMain
 sub_8019350: @ 0x08019350
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _08019384 @ =gUnknown_030070E0
+	ldr r4, _08019384 @ =gScriptContext
 	movs r3, #0
 _08019358:
 	lsls r0, r3, #1
@@ -48429,7 +48429,7 @@ _08019358:
 	bl sub_8012824
 	b _08019394
 	.align 2, 0
-_08019384: .4byte gUnknown_030070E0
+_08019384: .4byte gScriptContext
 _08019388:
 	mov r0, sp
 	ldrh r0, [r0]
@@ -48447,7 +48447,7 @@ _08019394:
 sub_80193A0: @ 0x080193A0
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _080193D8 @ =gUnknown_030070E0
+	ldr r4, _080193D8 @ =gScriptContext
 	movs r3, #0
 _080193A8:
 	lsls r0, r3, #1
@@ -48474,12 +48474,12 @@ _080193A8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080193D8: .4byte gUnknown_030070E0
+_080193D8: .4byte gScriptContext
 
 	thumb_func_start sub_80193DC
 sub_80193DC: @ 0x080193DC
 	push {lr}
-	ldr r0, _080193F8 @ =gUnknown_030070E0
+	ldr r0, _080193F8 @ =gScriptContext
 	ldr r1, [r0]
 	ldrh r2, [r1]
 	adds r1, #2
@@ -48491,7 +48491,7 @@ sub_80193DC: @ 0x080193DC
 	bl sub_801208C
 	b _08019408
 	.align 2, 0
-_080193F8: .4byte gUnknown_030070E0
+_080193F8: .4byte gScriptContext
 _080193FC: .4byte gUnknown_03000844
 _08019400:
 	ldr r0, _08019410 @ =gUnknown_03000844
@@ -48507,7 +48507,7 @@ _08019410: .4byte gUnknown_03000844
 	thumb_func_start sub_8019414
 sub_8019414: @ 0x08019414
 	push {lr}
-	ldr r0, _0801942C @ =gUnknown_030070E0
+	ldr r0, _0801942C @ =gScriptContext
 	ldr r1, [r0]
 	ldrh r2, [r1]
 	adds r1, #2
@@ -48518,7 +48518,7 @@ sub_8019414: @ 0x08019414
 	bl sub_8016E74
 	b _08019436
 	.align 2, 0
-_0801942C: .4byte gUnknown_030070E0
+_0801942C: .4byte gScriptContext
 _08019430:
 	movs r0, #2
 	bl sub_8016E74
@@ -48530,7 +48530,7 @@ _08019436:
 	thumb_func_start sub_801943C
 sub_801943C: @ 0x0801943C
 	push {r4, lr}
-	ldr r1, _08019480 @ =gUnknown_030070E0
+	ldr r1, _08019480 @ =gScriptContext
 	ldr r3, _08019484 @ =gMain
 	ldr r4, _08019488 @ =gUnknown_03002D28
 	ldr r0, [r1]
@@ -48564,7 +48564,7 @@ sub_801943C: @ 0x0801943C
 	movs r0, #9
 	b _080194D4
 	.align 2, 0
-_08019480: .4byte gUnknown_030070E0
+_08019480: .4byte gScriptContext
 _08019484: .4byte gMain
 _08019488: .4byte gUnknown_03002D28
 _0801948C: .4byte 0x040000D4
@@ -48635,7 +48635,7 @@ sub_8019524: @ 0x08019524
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #4
-	ldr r1, _08019554 @ =gUnknown_030070E0
+	ldr r1, _08019554 @ =gScriptContext
 	ldr r2, _08019558 @ =gMain
 	ldr r0, [r1]
 	ldrh r3, [r0]
@@ -48653,7 +48653,7 @@ sub_8019524: @ 0x08019524
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08019554: .4byte gUnknown_030070E0
+_08019554: .4byte gScriptContext
 _08019558: .4byte gMain
 _0801955C: .4byte _08019560
 _08019560: @ jump table
@@ -48869,7 +48869,7 @@ _08019700: .4byte 0x0000F7FF
 sub_8019704: @ 0x08019704
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _0801973C @ =gUnknown_030070E0
+	ldr r4, _0801973C @ =gScriptContext
 	movs r3, #0
 _0801970C:
 	lsls r0, r3, #1
@@ -48896,7 +48896,7 @@ _0801970C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801973C: .4byte gUnknown_030070E0
+_0801973C: .4byte gScriptContext
 
 	thumb_func_start sub_8019740
 sub_8019740: @ 0x08019740
@@ -48927,7 +48927,7 @@ _08019764: .4byte gMain
 sub_8019768: @ 0x08019768
 	push {r4, r5, lr}
 	sub sp, #4
-	ldr r4, _080197A0 @ =gUnknown_030070E0
+	ldr r4, _080197A0 @ =gScriptContext
 	ldr r5, _080197A4 @ =gMain
 	movs r3, #0
 _08019772:
@@ -48954,7 +48954,7 @@ _08019772:
 	beq _080197B2
 	b _080197E8
 	.align 2, 0
-_080197A0: .4byte gUnknown_030070E0
+_080197A0: .4byte gScriptContext
 _080197A4: .4byte gMain
 _080197A8:
 	cmp r0, #2
@@ -48990,7 +48990,7 @@ _080197D4:
 	adds r0, r5, #0
 	adds r0, #0xa4
 	strb r2, [r0]
-	bl sub_8016E5C
+	bl ResetHPBarHealthToMax
 _080197E8:
 	movs r0, #0
 	add sp, #4
@@ -49003,7 +49003,7 @@ _080197E8:
 sub_80197F4: @ 0x080197F4
 	push {r4, r5, r6, lr}
 	sub sp, #4
-	ldr r3, _08019848 @ =gUnknown_030070E0
+	ldr r3, _08019848 @ =gScriptContext
 	ldr r2, _0801984C @ =gMain
 	mov r1, sp
 	ldr r5, [r3]
@@ -49043,7 +49043,7 @@ sub_80197F4: @ 0x080197F4
 	movs r0, #1
 	b _08019874
 	.align 2, 0
-_08019848: .4byte gUnknown_030070E0
+_08019848: .4byte gScriptContext
 _0801984C: .4byte gMain
 _08019850:
 	adds r0, r2, #0
@@ -49074,7 +49074,7 @@ _08019874:
 	thumb_func_start sub_801987C
 sub_801987C: @ 0x0801987C
 	push {r4, r5, lr}
-	ldr r5, _080198A0 @ =gUnknown_030070E0
+	ldr r5, _080198A0 @ =gScriptContext
 	ldr r4, _080198A4 @ =gMain
 	ldrh r0, [r4, #0x34]
 	bl sub_80051AC
@@ -49091,7 +49091,7 @@ sub_801987C: @ 0x0801987C
 	strb r0, [r1]
 	b _080198AE
 	.align 2, 0
-_080198A0: .4byte gUnknown_030070E0
+_080198A0: .4byte gScriptContext
 _080198A4: .4byte gMain
 _080198A8:
 	adds r0, r4, #0
@@ -49157,7 +49157,7 @@ _080198EE:
 sub_801990C: @ 0x0801990C
 	push {r4, lr}
 	sub sp, #8
-	ldr r4, _08019944 @ =gUnknown_030070E0
+	ldr r4, _08019944 @ =gScriptContext
 	ldr r1, _08019948 @ =gMain
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
@@ -49183,7 +49183,7 @@ sub_801990C: @ 0x0801990C
 	movs r0, #1
 	b _08019976
 	.align 2, 0
-_08019944: .4byte gUnknown_030070E0
+_08019944: .4byte gScriptContext
 _08019948: .4byte gMain
 _0801994C:
 	adds r0, r1, #0
@@ -49219,7 +49219,7 @@ _08019976:
 sub_8019980: @ 0x08019980
 	push {r4, lr}
 	sub sp, #8
-	ldr r4, _080199B4 @ =gUnknown_030070E0
+	ldr r4, _080199B4 @ =gScriptContext
 	mov r2, sp
 	ldr r1, [r4]
 	ldrh r0, [r1]
@@ -49243,13 +49243,13 @@ sub_8019980: @ 0x08019980
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080199B4: .4byte gUnknown_030070E0
+_080199B4: .4byte gScriptContext
 
 	thumb_func_start sub_80199B8
 sub_80199B8: @ 0x080199B8
 	push {r4, r5, lr}
 	sub sp, #4
-	ldr r4, _08019A04 @ =gUnknown_030070E0
+	ldr r4, _08019A04 @ =gScriptContext
 	movs r3, #0
 	ldr r5, _08019A08 @ =gMain
 _080199C2:
@@ -49287,7 +49287,7 @@ _080199C2:
 	beq _08019A16
 	b _08019A80
 	.align 2, 0
-_08019A04: .4byte gUnknown_030070E0
+_08019A04: .4byte gScriptContext
 _08019A08: .4byte gMain
 _08019A0C: .4byte 0x000002C6
 _08019A10:
@@ -50080,7 +50080,7 @@ _0801A050: .4byte gUnknown_03003AF0
 	thumb_func_start sub_801A054
 sub_801A054: @ 0x0801A054
 	push {r4, lr}
-	ldr r3, _0801A0A4 @ =gUnknown_030070E0
+	ldr r3, _0801A0A4 @ =gScriptContext
 	ldrh r1, [r3, #0x12]
 	movs r4, #0xff
 	adds r0, r4, #0
@@ -50122,7 +50122,7 @@ _0801A09E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801A0A4: .4byte gUnknown_030070E0
+_0801A0A4: .4byte gScriptContext
 _0801A0A8: .4byte gMain
 _0801A0AC: .4byte gUnknown_03002080
 _0801A0B0: .4byte gUnknown_08028736
@@ -50132,7 +50132,7 @@ _0801A0B8: .4byte 0x000004DE
 	thumb_func_start sub_801A0BC
 sub_801A0BC: @ 0x0801A0BC
 	push {r4, r5, lr}
-	ldr r0, _0801A0F0 @ =gUnknown_030070E0
+	ldr r0, _0801A0F0 @ =gScriptContext
 	adds r0, #0x25
 	movs r1, #0
 	strb r1, [r0]
@@ -50158,14 +50158,14 @@ _0801A0CC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A0F0: .4byte gUnknown_030070E0
+_0801A0F0: .4byte gScriptContext
 _0801A0F4: .4byte gUnknown_03003E50
 _0801A0F8: .4byte 0x00003FFF
 
 	thumb_func_start sub_801A0FC
 sub_801A0FC: @ 0x0801A0FC
 	push {r4, lr}
-	ldr r1, _0801A144 @ =gUnknown_030070E0
+	ldr r1, _0801A144 @ =gScriptContext
 	adds r0, r1, #0
 	adds r0, #0x28
 	movs r4, #0
@@ -50201,7 +50201,7 @@ _0801A13A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A144: .4byte gUnknown_030070E0
+_0801A144: .4byte gScriptContext
 
 	thumb_func_start sub_801A148
 sub_801A148: @ 0x0801A148
@@ -50224,7 +50224,7 @@ sub_801A148: @ 0x0801A148
 	blt _0801A19C
 	cmp r4, #0
 	beq _0801A18C
-	ldr r0, _0801A188 @ =gUnknown_030028C0
+	ldr r0, _0801A188 @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x3c
 	adds r1, r2, r1
@@ -50235,9 +50235,9 @@ sub_801A148: @ 0x0801A148
 	b _0801A19C
 	.align 2, 0
 _0801A184: .4byte 0x00003FFF
-_0801A188: .4byte gUnknown_030028C0
+_0801A188: .4byte gCourtRecord
 _0801A18C:
-	ldr r0, _0801A1A4 @ =gUnknown_030028C0
+	ldr r0, _0801A1A4 @ =gCourtRecord
 	adds r1, r0, #0
 	adds r1, #0x1c
 	adds r1, r2, r1
@@ -50250,14 +50250,14 @@ _0801A19C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801A1A4: .4byte gUnknown_030028C0
+_0801A1A4: .4byte gCourtRecord
 
 	thumb_func_start sub_801A1A8
 sub_801A1A8: @ 0x0801A1A8
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
-	ldr r5, _0801A1F8 @ =gUnknown_030070E0
+	ldr r5, _0801A1F8 @ =gScriptContext
 	movs r0, #1
 	ldrh r1, [r5, #0x1c]
 	orrs r0, r1
@@ -50298,7 +50298,7 @@ _0801A1DE:
 	strh r0, [r5, #0x12]
 	b _0801A48C
 	.align 2, 0
-_0801A1F8: .4byte gUnknown_030070E0
+_0801A1F8: .4byte gScriptContext
 _0801A1FC: .4byte gMain
 _0801A200: .4byte gUnknown_03000844
 _0801A204:
@@ -50615,7 +50615,7 @@ _0801A49C: .4byte 0x00003FFF
 
 	thumb_func_start sub_801A4A0
 sub_801A4A0: @ 0x0801A4A0
-	ldr r0, _0801A4B4 @ =gUnknown_030070E0
+	ldr r0, _0801A4B4 @ =gScriptContext
 	ldr r1, [r0]
 	ldrh r2, [r1]
 	adds r3, r0, #0
@@ -50626,11 +50626,11 @@ sub_801A4A0: @ 0x0801A4A0
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801A4B4: .4byte gUnknown_030070E0
+_0801A4B4: .4byte gScriptContext
 
 	thumb_func_start sub_801A4B8
 sub_801A4B8: @ 0x0801A4B8
-	ldr r0, _0801A4D0 @ =gUnknown_030070E0
+	ldr r0, _0801A4D0 @ =gScriptContext
 	ldr r1, _0801A4D4 @ =gJoypad
 	ldr r0, [r0]
 	ldrh r1, [r1, #2]
@@ -50642,7 +50642,7 @@ sub_801A4B8: @ 0x0801A4B8
 	movs r0, #1
 	b _0801A4DA
 	.align 2, 0
-_0801A4D0: .4byte gUnknown_030070E0
+_0801A4D0: .4byte gScriptContext
 _0801A4D4: .4byte gJoypad
 _0801A4D8:
 	movs r0, #0
@@ -50656,7 +50656,7 @@ sub_801A4DC: @ 0x0801A4DC
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
-	ldr r4, _0801A530 @ =gUnknown_030070E0
+	ldr r4, _0801A530 @ =gScriptContext
 	movs r0, #4
 	ldrh r1, [r4, #0x1c]
 	orrs r0, r1
@@ -50695,7 +50695,7 @@ _0801A528:
 	bl sub_8016E74
 	b _0801A796
 	.align 2, 0
-_0801A530: .4byte gUnknown_030070E0
+_0801A530: .4byte gScriptContext
 _0801A534: .4byte gMain
 _0801A538:
 	ldr r1, _0801A56C @ =gJoypad
@@ -51015,7 +51015,7 @@ _0801A7B0: .4byte 0x000004FC
 
 	thumb_func_start sub_801A7B4
 sub_801A7B4: @ 0x0801A7B4
-	ldr r1, _0801A7D8 @ =gUnknown_030070E0
+	ldr r1, _0801A7D8 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r0, [r0]
 	adds r2, r1, #0
@@ -51034,11 +51034,11 @@ _0801A7CC:
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801A7D8: .4byte gUnknown_030070E0
+_0801A7D8: .4byte gScriptContext
 
 	thumb_func_start sub_801A7DC
 sub_801A7DC: @ 0x0801A7DC
-	ldr r2, _0801A7F0 @ =gUnknown_030070E0
+	ldr r2, _0801A7F0 @ =gScriptContext
 	ldrh r1, [r2, #0x12]
 	ldrb r0, [r2, #0x12]
 	cmp r0, #0
@@ -51048,7 +51048,7 @@ sub_801A7DC: @ 0x0801A7DC
 	orrs r0, r1
 	b _0801A7F6
 	.align 2, 0
-_0801A7F0: .4byte gUnknown_030070E0
+_0801A7F0: .4byte gScriptContext
 _0801A7F4:
 	subs r0, r1, #1
 _0801A7F6:
@@ -51092,19 +51092,19 @@ _0801A836:
 	thumb_func_start sub_801A838
 sub_801A838: @ 0x0801A838
 	push {lr}
-	ldr r0, _0801A848 @ =gUnknown_030070E0
+	ldr r0, _0801A848 @ =gScriptContext
 	ldrh r0, [r0, #0xe]
 	bl sub_8018778
 	movs r0, #0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A848: .4byte gUnknown_030070E0
+_0801A848: .4byte gScriptContext
 
 	thumb_func_start sub_801A84C
 sub_801A84C: @ 0x0801A84C
 	push {r4, r5, lr}
-	ldr r4, _0801A8B0 @ =gUnknown_030070E0
+	ldr r4, _0801A8B0 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -51152,12 +51152,12 @@ _0801A89C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A8B0: .4byte gUnknown_030070E0
+_0801A8B0: .4byte gScriptContext
 _0801A8B4: .4byte gMain
 
 	thumb_func_start sub_801A8B8
 sub_801A8B8: @ 0x0801A8B8
-	ldr r2, _0801A8DC @ =gUnknown_030070E0
+	ldr r2, _0801A8DC @ =gScriptContext
 	ldr r0, [r2]
 	ldrh r1, [r0]
 	strh r1, [r2, #0x10]
@@ -51176,12 +51176,12 @@ _0801A8D0:
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801A8DC: .4byte gUnknown_030070E0
+_0801A8DC: .4byte gScriptContext
 
 	thumb_func_start sub_801A8E0
 sub_801A8E0: @ 0x0801A8E0
 	push {lr}
-	ldr r1, _0801A904 @ =gUnknown_030070E0
+	ldr r1, _0801A904 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r2, [r0]
 	adds r0, #2
@@ -51198,14 +51198,14 @@ sub_801A8E0: @ 0x0801A8E0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A904: .4byte gUnknown_030070E0
+_0801A904: .4byte gScriptContext
 
 	thumb_func_start sub_801A908
 sub_801A908: @ 0x0801A908
 	push {lr}
 	movs r0, #0x31
 	bl sub_8011150
-	ldr r1, _0801A944 @ =gUnknown_030070E0
+	ldr r1, _0801A944 @ =gScriptContext
 	movs r0, #0x10
 	ldrh r2, [r1, #0x1c]
 	orrs r0, r2
@@ -51230,7 +51230,7 @@ sub_801A908: @ 0x0801A908
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801A944: .4byte gUnknown_030070E0
+_0801A944: .4byte gScriptContext
 _0801A948: .4byte gMain
 _0801A94C: .4byte 0x01000007
 _0801A950: .4byte gUnknown_03000844
@@ -51238,7 +51238,7 @@ _0801A950: .4byte gUnknown_03000844
 	thumb_func_start sub_801A954
 sub_801A954: @ 0x0801A954
 	push {r4, lr}
-	ldr r4, _0801A9A8 @ =gUnknown_030070E0
+	ldr r4, _0801A9A8 @ =gScriptContext
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
 	bne _0801A992
@@ -51279,7 +51279,7 @@ _0801A992:
 	movs r0, #0
 	b _0801A9B6
 	.align 2, 0
-_0801A9A8: .4byte gUnknown_030070E0
+_0801A9A8: .4byte gScriptContext
 _0801A9AC: .4byte gMain
 _0801A9B0:
 	adds r0, r1, #1
@@ -51293,7 +51293,7 @@ _0801A9B6:
 	thumb_func_start sub_801A9BC
 sub_801A9BC: @ 0x0801A9BC
 	push {r4, lr}
-	ldr r4, _0801A9F8 @ =gUnknown_030070E0
+	ldr r4, _0801A9F8 @ =gScriptContext
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
 	bne _0801A9E8
@@ -51323,7 +51323,7 @@ _0801A9E8:
 	movs r0, #0
 	b _0801AA0E
 	.align 2, 0
-_0801A9F8: .4byte gUnknown_030070E0
+_0801A9F8: .4byte gScriptContext
 _0801A9FC: .4byte gMain
 _0801AA00: .4byte 0x00007530
 _0801AA04: .4byte 0x75307530
@@ -51339,7 +51339,7 @@ _0801AA0E:
 	thumb_func_start sub_801AA14
 sub_801AA14: @ 0x0801AA14
 	push {r4, lr}
-	ldr r4, _0801AA58 @ =gUnknown_030070E0
+	ldr r4, _0801AA58 @ =gScriptContext
 	ldrh r1, [r4, #0x12]
 	movs r0, #2
 	ands r0, r1
@@ -51374,7 +51374,7 @@ _0801AA4E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801AA58: .4byte gUnknown_030070E0
+_0801AA58: .4byte gScriptContext
 _0801AA5C: .4byte gUnknown_03000844
 _0801AA60: .4byte gMain
 _0801AA64: .4byte 0x0000DFFF
@@ -51382,7 +51382,7 @@ _0801AA64: .4byte 0x0000DFFF
 	thumb_func_start sub_801AA68
 sub_801AA68: @ 0x0801AA68
 	push {r4, r5, r6, r7, lr}
-	ldr r7, _0801AA80 @ =gUnknown_030070E0
+	ldr r7, _0801AA80 @ =gScriptContext
 	ldr r0, [r7]
 	ldrh r0, [r0]
 	cmp r0, #6
@@ -51395,7 +51395,7 @@ _0801AA76:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801AA80: .4byte gUnknown_030070E0
+_0801AA80: .4byte gScriptContext
 _0801AA84: .4byte _0801AA88
 _0801AA88: @ jump table
 	.4byte _0801AAA4 @ case 0
@@ -51428,7 +51428,7 @@ _0801AAA4:
 	adds r0, #0x23
 	strb r2, [r0]
 	bl sub_80053C8
-	ldr r1, _0801AB04 @ =gUnknown_030070E0
+	ldr r1, _0801AB04 @ =gScriptContext
 	adds r1, #0x24
 	movs r0, #0x7f
 	ldrb r1, [r1]
@@ -51450,7 +51450,7 @@ _0801AAA4:
 	.align 2, 0
 _0801AAFC: .4byte gMain
 _0801AB00: .4byte gIORegisters
-_0801AB04: .4byte gUnknown_030070E0
+_0801AB04: .4byte gScriptContext
 _0801AB08: .4byte 0x000002C5
 _0801AB0C: .4byte 0x040000D4
 _0801AB10: .4byte gPalEvidenceProfileDesc
@@ -51489,7 +51489,7 @@ _0801AB4C:
 	bne _0801AB66
 	ldr r0, _0801AB74 @ =gUnknown_03000844
 	bl sub_8012F7C
-	ldr r0, _0801AB78 @ =gUnknown_03003C40
+	ldr r0, _0801AB78 @ =gInvestigation
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
@@ -51501,7 +51501,7 @@ _0801AB66:
 	.align 2, 0
 _0801AB70: .4byte gMain
 _0801AB74: .4byte gUnknown_03000844
-_0801AB78: .4byte gUnknown_03003C40
+_0801AB78: .4byte gInvestigation
 _0801AB7C:
 	ldr r4, _0801ABA8 @ =gMain
 	ldrb r2, [r4, #8]
@@ -51509,7 +51509,7 @@ _0801AB7C:
 	bne _0801AB96
 	ldr r0, _0801ABAC @ =gUnknown_03000844
 	bl sub_8012F7C
-	ldr r0, _0801ABB0 @ =gUnknown_03003C40
+	ldr r0, _0801ABB0 @ =gInvestigation
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
@@ -51526,19 +51526,19 @@ _0801AB96:
 	.align 2, 0
 _0801ABA8: .4byte gMain
 _0801ABAC: .4byte gUnknown_03000844
-_0801ABB0: .4byte gUnknown_03003C40
+_0801ABB0: .4byte gInvestigation
 _0801ABB4:
 	movs r0, #0
 	strb r0, [r4, #0x18]
 	strb r0, [r4, #0x19]
-	ldr r0, _0801AC00 @ =gUnknown_03003C40
+	ldr r0, _0801AC00 @ =gInvestigation
 	strb r1, [r0, #0x10]
 _0801ABBE:
 	ldr r5, _0801AC04 @ =gMain
 	ldrb r6, [r5, #8]
 	cmp r6, #4
 	bne _0801ABF8
-	ldr r4, _0801AC00 @ =gUnknown_03003C40
+	ldr r4, _0801AC00 @ =gInvestigation
 	movs r0, #0
 	strb r0, [r4, #0x12]
 	ldrb r3, [r5, #9]
@@ -51568,10 +51568,10 @@ _0801ABF8:
 	movs r0, #3
 	b _0801AC9A
 	.align 2, 0
-_0801AC00: .4byte gUnknown_03003C40
+_0801AC00: .4byte gInvestigation
 _0801AC04: .4byte gMain
 _0801AC08:
-	ldr r5, _0801AC3C @ =gUnknown_03003C40
+	ldr r5, _0801AC3C @ =gInvestigation
 	movs r6, #0
 	strb r6, [r5, #0x12]
 	ldr r4, _0801AC40 @ =gMain
@@ -51596,7 +51596,7 @@ _0801AC1E:
 	adds r1, #0x23
 	b _0801AC9A
 	.align 2, 0
-_0801AC3C: .4byte gUnknown_03003C40
+_0801AC3C: .4byte gInvestigation
 _0801AC40: .4byte gMain
 _0801AC44:
 	cmp r0, #9
@@ -51650,7 +51650,7 @@ _0801AC9C:
 	ldr r0, [r7]
 	adds r0, #2
 	str r0, [r7]
-	ldr r1, _0801ACBC @ =gUnknown_03003C40
+	ldr r1, _0801ACBC @ =gInvestigation
 	movs r0, #0
 	strb r0, [r1, #7]
 	pop {r4, r5, r6, r7}
@@ -51660,11 +51660,11 @@ _0801AC9C:
 _0801ACB0: .4byte gIORegisters
 _0801ACB4: .4byte 0x0000FFAF
 _0801ACB8: .4byte 0x0000FDFF
-_0801ACBC: .4byte gUnknown_03003C40
+_0801ACBC: .4byte gInvestigation
 
 	thumb_func_start sub_801ACC0
 sub_801ACC0: @ 0x0801ACC0
-	ldr r0, _0801ACD0 @ =gUnknown_030070E0
+	ldr r0, _0801ACD0 @ =gScriptContext
 	ldr r1, [r0]
 	ldrh r2, [r1]
 	strh r2, [r0, #0xe]
@@ -51673,12 +51673,12 @@ sub_801ACC0: @ 0x0801ACC0
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801ACD0: .4byte gUnknown_030070E0
+_0801ACD0: .4byte gScriptContext
 
 	thumb_func_start sub_801ACD4
 sub_801ACD4: @ 0x0801ACD4
 	push {r4, lr}
-	ldr r4, _0801AD14 @ =gUnknown_030070E0
+	ldr r4, _0801AD14 @ =gScriptContext
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
 	beq _0801AD24
@@ -51707,7 +51707,7 @@ sub_801ACD4: @ 0x0801ACD4
 	movs r0, #0
 	b _0801AD3A
 	.align 2, 0
-_0801AD14: .4byte gUnknown_030070E0
+_0801AD14: .4byte gScriptContext
 _0801AD18: .4byte gMain
 _0801AD1C: .4byte 0x01000007
 _0801AD20: .4byte gUnknown_03000844
@@ -51731,18 +51731,18 @@ _0801AD40: .4byte 0x0000DFFF
 
 	thumb_func_start sub_801AD44
 sub_801AD44: @ 0x0801AD44
-	ldr r1, _0801AD50 @ =gUnknown_030070E0
+	ldr r1, _0801AD50 @ =gScriptContext
 	ldr r0, [r1]
 	adds r0, #2
 	str r0, [r1]
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801AD50: .4byte gUnknown_030070E0
+_0801AD50: .4byte gScriptContext
 
 	thumb_func_start sub_801AD54
 sub_801AD54: @ 0x0801AD54
-	ldr r3, _0801AD6C @ =gUnknown_030070E0
+	ldr r3, _0801AD6C @ =gScriptContext
 	ldr r0, [r3]
 	ldrh r0, [r0]
 	cmp r0, #0
@@ -51754,7 +51754,7 @@ sub_801AD54: @ 0x0801AD54
 	orrs r1, r2
 	b _0801AD80
 	.align 2, 0
-_0801AD6C: .4byte gUnknown_030070E0
+_0801AD6C: .4byte gScriptContext
 _0801AD70: .4byte gMain
 _0801AD74:
 	ldr r0, _0801AD8C @ =gMain
@@ -51776,7 +51776,7 @@ _0801AD8C: .4byte gMain
 	thumb_func_start sub_801AD90
 sub_801AD90: @ 0x0801AD90
 	push {r4, lr}
-	ldr r4, _0801ADA8 @ =gUnknown_030070E0
+	ldr r4, _0801ADA8 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	cmp r0, #2
@@ -51787,7 +51787,7 @@ sub_801AD90: @ 0x0801AD90
 	beq _0801ADC4
 	b _0801ADB4
 	.align 2, 0
-_0801ADA8: .4byte gUnknown_030070E0
+_0801ADA8: .4byte gScriptContext
 _0801ADAC:
 	cmp r0, #3
 	beq _0801AE0C
@@ -51811,7 +51811,7 @@ _0801ADC4:
 	.align 2, 0
 _0801ADD4: .4byte gUnknown_030037BC
 _0801ADD8:
-	ldr r0, _0801AE04 @ =gUnknown_03003C60
+	ldr r0, _0801AE04 @ =gTestimony
 	movs r2, #0
 	movs r1, #0xe0
 	strb r1, [r0, #2]
@@ -51832,10 +51832,10 @@ _0801ADD8:
 	bl sub_8018778
 	b _0801AE94
 	.align 2, 0
-_0801AE04: .4byte gUnknown_03003C60
+_0801AE04: .4byte gTestimony
 _0801AE08: .4byte gIORegisters
 _0801AE0C:
-	ldr r1, _0801AE28 @ =gUnknown_03003C60
+	ldr r1, _0801AE28 @ =gTestimony
 	movs r0, #0xe0
 	strb r0, [r1, #2]
 	strb r0, [r1, #3]
@@ -51849,7 +51849,7 @@ _0801AE0C:
 	strh r0, [r1]
 	b _0801AE94
 	.align 2, 0
-_0801AE28: .4byte gUnknown_03003C60
+_0801AE28: .4byte gTestimony
 _0801AE2C: .4byte gIORegisters
 _0801AE30: .4byte 0x0000FDFF
 _0801AE34:
@@ -51883,7 +51883,7 @@ _0801AE34:
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r0, _0801AECC @ =gUnknown_03003C60
+	ldr r0, _0801AECC @ =gTestimony
 	movs r2, #0
 	movs r1, #0xe0
 	strb r1, [r0, #2]
@@ -51921,14 +51921,14 @@ _0801AEBC: .4byte 0x80000010
 _0801AEC0: .4byte gGfx4bppTestimonyArrows
 _0801AEC4: .4byte 0x80000040
 _0801AEC8: .4byte gGfx4bppTestimonyArrows+0x180
-_0801AECC: .4byte gUnknown_03003C60
+_0801AECC: .4byte gTestimony
 _0801AED0: .4byte gIORegisters
 _0801AED4: .4byte gUnknown_030037B8
 
 	thumb_func_start sub_801AED8
 sub_801AED8: @ 0x0801AED8
 	push {r4, lr}
-	ldr r4, _0801AEF0 @ =gUnknown_030070E0
+	ldr r4, _0801AEF0 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r1, [r0]
 	movs r0, #0
@@ -51939,7 +51939,7 @@ sub_801AED8: @ 0x0801AED8
 	ldrh r1, [r0, #2]
 	b _0801AEF8
 	.align 2, 0
-_0801AEF0: .4byte gUnknown_030070E0
+_0801AEF0: .4byte gScriptContext
 _0801AEF4:
 	ldr r0, [r4]
 	ldrh r1, [r0, #4]
@@ -51961,7 +51961,7 @@ sub_801AF08: @ 0x0801AF08
 	thumb_func_start sub_801AF0C
 sub_801AF0C: @ 0x0801AF0C
 	push {lr}
-	ldr r2, _0801AF3C @ =gUnknown_030070E0
+	ldr r2, _0801AF3C @ =gScriptContext
 	adds r3, r2, #0
 	adds r3, #0x22
 	ldrb r1, [r3]
@@ -51984,12 +51984,12 @@ _0801AF2C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801AF3C: .4byte gUnknown_030070E0
+_0801AF3C: .4byte gScriptContext
 
 	thumb_func_start sub_801AF40
 sub_801AF40: @ 0x0801AF40
 	push {r4, r5, r6, lr}
-	ldr r3, _0801AF8C @ =gUnknown_030070E0
+	ldr r3, _0801AF8C @ =gScriptContext
 	ldr r0, _0801AF90 @ =0x0000DFFF
 	ldrh r1, [r3, #0x1c]
 	ands r0, r1
@@ -52027,7 +52027,7 @@ _0801AF6E:
 	strh r2, [r0]
 	b _0801AFB2
 	.align 2, 0
-_0801AF8C: .4byte gUnknown_030070E0
+_0801AF8C: .4byte gScriptContext
 _0801AF90: .4byte 0x0000DFFF
 _0801AF94: .4byte 0x0000BFFF
 _0801AF98: .4byte gUnknown_03002080
@@ -52086,7 +52086,7 @@ _0801B008: .4byte gUnknown_03003E50
 
 	thumb_func_start sub_801B00C
 sub_801B00C: @ 0x0801B00C
-	ldr r1, _0801B024 @ =gUnknown_030070E0
+	ldr r1, _0801B024 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r0, [r0]
 	cmp r0, #2
@@ -52100,11 +52100,11 @@ _0801B01A:
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801B024: .4byte gUnknown_030070E0
+_0801B024: .4byte gScriptContext
 
 	thumb_func_start sub_801B028
 sub_801B028: @ 0x0801B028
-	ldr r1, _0801B048 @ =gUnknown_030070E0
+	ldr r1, _0801B048 @ =gScriptContext
 	ldr r0, [r1]
 	ldrh r2, [r0]
 	ldrh r3, [r0, #2]
@@ -52121,13 +52121,13 @@ sub_801B028: @ 0x0801B028
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801B048: .4byte gUnknown_030070E0
+_0801B048: .4byte gScriptContext
 _0801B04C: .4byte gMain
 
 	thumb_func_start sub_801B050
 sub_801B050: @ 0x0801B050
 	push {r4, r5, lr}
-	ldr r3, _0801B088 @ =gUnknown_030070E0
+	ldr r3, _0801B088 @ =gScriptContext
 	ldr r0, [r3]
 	ldrh r1, [r0]
 	adds r0, #2
@@ -52155,13 +52155,13 @@ _0801B064:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B088: .4byte gUnknown_030070E0
+_0801B088: .4byte gScriptContext
 _0801B08C: .4byte gUnknown_030038DC
 
 	thumb_func_start sub_801B090
 sub_801B090: @ 0x0801B090
 	push {r4, r5, lr}
-	ldr r4, _0801B0CC @ =gUnknown_030070E0
+	ldr r4, _0801B0CC @ =gScriptContext
 	ldr r5, _0801B0D0 @ =gMain
 	ldr r2, [r4]
 	ldrh r1, [r2]
@@ -52190,14 +52190,14 @@ _0801B0B8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B0CC: .4byte gUnknown_030070E0
+_0801B0CC: .4byte gScriptContext
 _0801B0D0: .4byte gMain
 _0801B0D4: .4byte 0x00000504
 
 	thumb_func_start sub_801B0D8
 sub_801B0D8: @ 0x0801B0D8
 	push {r4, lr}
-	ldr r4, _0801B0FC @ =gUnknown_030070E0
+	ldr r4, _0801B0FC @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r1, [r0]
 	lsrs r2, r1, #8
@@ -52214,7 +52214,7 @@ sub_801B0D8: @ 0x0801B0D8
 	adds r0, #4
 	b _0801B134
 	.align 2, 0
-_0801B0FC: .4byte gUnknown_030070E0
+_0801B0FC: .4byte gScriptContext
 _0801B100:
 	movs r0, #0
 	adds r1, r2, #0
@@ -52254,7 +52254,7 @@ _0801B136:
 	thumb_func_start sub_801B140
 sub_801B140: @ 0x0801B140
 	push {lr}
-	ldr r0, _0801B154 @ =gUnknown_030070E0
+	ldr r0, _0801B154 @ =gScriptContext
 	ldr r0, [r0]
 	ldrh r0, [r0]
 	bl sub_801873C
@@ -52262,12 +52262,12 @@ sub_801B140: @ 0x0801B140
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B154: .4byte gUnknown_030070E0
+_0801B154: .4byte gScriptContext
 
 	thumb_func_start sub_801B158
 sub_801B158: @ 0x0801B158
 	push {r4, lr}
-	ldr r2, _0801B180 @ =gUnknown_030070E0
+	ldr r2, _0801B180 @ =gScriptContext
 	ldr r1, [r2]
 	ldrh r3, [r1]
 	adds r0, r1, #2
@@ -52287,13 +52287,13 @@ sub_801B158: @ 0x0801B158
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B180: .4byte gUnknown_030070E0
+_0801B180: .4byte gScriptContext
 _0801B184: .4byte gUnknown_03002920
 
 	thumb_func_start sub_801B188
 sub_801B188: @ 0x0801B188
 	push {r4, r5, r6, r7, lr}
-	ldr r7, _0801B21C @ =gUnknown_030070E0
+	ldr r7, _0801B21C @ =gScriptContext
 	ldr r0, [r7]
 	ldrh r0, [r0]
 	lsrs r6, r0, #8
@@ -52364,7 +52364,7 @@ sub_801B188: @ 0x0801B188
 	strh r0, [r5, #0xc]
 	b _0801B262
 	.align 2, 0
-_0801B21C: .4byte gUnknown_030070E0
+_0801B21C: .4byte gScriptContext
 _0801B220: .4byte gUnknown_03003AF0
 _0801B224: .4byte 0x040000D4
 _0801B228: .4byte gUnknown_08028698
@@ -52423,7 +52423,7 @@ _0801B294: .4byte gUnknown_03003AF0
 	thumb_func_start sub_801B298
 sub_801B298: @ 0x0801B298
 	push {r4, lr}
-	ldr r4, _0801B2F0 @ =gUnknown_030070E0
+	ldr r4, _0801B2F0 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -52467,13 +52467,13 @@ _0801B2E2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B2F0: .4byte gUnknown_030070E0
+_0801B2F0: .4byte gScriptContext
 _0801B2F4: .4byte gUnknown_03003AF0
 
 	thumb_func_start sub_801B2F8
 sub_801B2F8: @ 0x0801B2F8
 	push {r4, lr}
-	ldr r4, _0801B344 @ =gUnknown_030070E0
+	ldr r4, _0801B344 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -52509,7 +52509,7 @@ sub_801B2F8: @ 0x0801B2F8
 	strb r3, [r1, #7]
 	b _0801B352
 	.align 2, 0
-_0801B344: .4byte gUnknown_030070E0
+_0801B344: .4byte gScriptContext
 _0801B348: .4byte gUnknown_03003AF0
 _0801B34C:
 	ldr r0, [r4]
@@ -52525,7 +52525,7 @@ _0801B352:
 	thumb_func_start sub_801B35C
 sub_801B35C: @ 0x0801B35C
 	push {r4, lr}
-	ldr r4, _0801B3AC @ =gUnknown_030070E0
+	ldr r4, _0801B3AC @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -52566,14 +52566,14 @@ _0801B39E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B3AC: .4byte gUnknown_030070E0
+_0801B3AC: .4byte gScriptContext
 _0801B3B0: .4byte gUnknown_03003AF0
 _0801B3B4: .4byte gOamObjects
 
 	thumb_func_start sub_801B3B8
 sub_801B3B8: @ 0x0801B3B8
 	push {r4, lr}
-	ldr r4, _0801B3E4 @ =gUnknown_030070E0
+	ldr r4, _0801B3E4 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -52594,7 +52594,7 @@ sub_801B3B8: @ 0x0801B3B8
 	movs r0, #1
 	b _0801B3F4
 	.align 2, 0
-_0801B3E4: .4byte gUnknown_030070E0
+_0801B3E4: .4byte gScriptContext
 _0801B3E8: .4byte gUnknown_03003AF0
 _0801B3EC:
 	ldr r0, [r4]
@@ -52610,7 +52610,7 @@ _0801B3F4:
 	thumb_func_start sub_801B3FC
 sub_801B3FC: @ 0x0801B3FC
 	push {r4, lr}
-	ldr r4, _0801B458 @ =gUnknown_030070E0
+	ldr r4, _0801B458 @ =gScriptContext
 	movs r0, #1
 	bl sub_8017154
 	ldr r1, _0801B45C @ =0x040000D4
@@ -52628,7 +52628,7 @@ sub_801B3FC: @ 0x0801B3FC
 	ldr r0, _0801B474 @ =0x80000010
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r2, _0801B478 @ =gUnknown_03003C40
+	ldr r2, _0801B478 @ =gInvestigation
 	movs r1, #0
 	movs r0, #0xf0
 	strh r0, [r2]
@@ -52655,7 +52655,7 @@ sub_801B3FC: @ 0x0801B3FC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B458: .4byte gUnknown_030070E0
+_0801B458: .4byte gScriptContext
 _0801B45C: .4byte 0x040000D4
 _0801B460: .4byte gGfxExamineCursor
 _0801B464: .4byte 0x06011F80
@@ -52663,7 +52663,7 @@ _0801B468: .4byte 0x80000040
 _0801B46C: .4byte gPalExamineCursors
 _0801B470: .4byte 0x05000340
 _0801B474: .4byte 0x80000010
-_0801B478: .4byte gUnknown_03003C40
+_0801B478: .4byte gInvestigation
 
 	thumb_func_start sub_801B47C
 sub_801B47C: @ 0x0801B47C
@@ -52740,8 +52740,8 @@ sub_801B50C: @ 0x0801B50C
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #8
-	ldr r5, _0801B710 @ =gUnknown_03003C40
-	ldr r6, _0801B714 @ =gUnknown_030070E0
+	ldr r5, _0801B710 @ =gInvestigation
+	ldr r6, _0801B714 @ =gScriptContext
 	movs r0, #0x2c
 	ldrb r2, [r5, #0xa]
 	adds r1, r2, #0
@@ -52991,8 +52991,8 @@ _0801B654:
 	bl sub_8018778
 	b _0801B778
 	.align 2, 0
-_0801B710: .4byte gUnknown_03003C40
-_0801B714: .4byte gUnknown_030070E0
+_0801B710: .4byte gInvestigation
+_0801B714: .4byte gScriptContext
 _0801B718: .4byte gUnknown_0802873C
 _0801B71C: .4byte gOamObjects
 _0801B720: .4byte 0x000002C2
@@ -53323,7 +53323,7 @@ _0801B9A2:
 	lsrs r3, r0, #0x10
 	cmp r3, #0xff
 	bls _0801B9A2
-	ldr r0, _0801B9FC @ =gUnknown_030070E0
+	ldr r0, _0801B9FC @ =gScriptContext
 	adds r0, #0x23
 	movs r1, #1
 	strb r1, [r0]
@@ -53344,7 +53344,7 @@ _0801B9EC: .4byte 0x80000010
 _0801B9F0: .4byte gOamObjects
 _0801B9F4: .4byte 0x0000A4FC
 _0801B9F8: .4byte gUnknown_03002080
-_0801B9FC: .4byte gUnknown_030070E0
+_0801B9FC: .4byte gScriptContext
 _0801BA00:
 	ldrb r0, [r5, #0x1b]
 	adds r0, #1
@@ -53415,7 +53415,7 @@ _0801BA84: .4byte 0x0000A4FC
 
 	thumb_func_start sub_801BA88
 sub_801BA88: @ 0x0801BA88
-	ldr r1, _0801BAA4 @ =gUnknown_030070E0
+	ldr r1, _0801BAA4 @ =gScriptContext
 	ldr r0, _0801BAA8 @ =0x0000FBFF
 	ldrh r2, [r1, #0x1c]
 	ands r0, r2
@@ -53429,7 +53429,7 @@ sub_801BA88: @ 0x0801BA88
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801BAA4: .4byte gUnknown_030070E0
+_0801BAA4: .4byte gScriptContext
 _0801BAA8: .4byte 0x0000FBFF
 _0801BAAC: .4byte gOamObjects
 
@@ -53438,7 +53438,7 @@ sub_801BAB0: @ 0x0801BAB0
 	push {r4, r5, r6, r7, lr}
 	ldr r1, _0801BB08 @ =gUnknown_03002D40
 	movs r4, #0
-	ldr r5, _0801BB0C @ =gUnknown_03003C40
+	ldr r5, _0801BB0C @ =gInvestigation
 	ldr r7, _0801BB10 @ =0x000040E0
 	movs r3, #0
 	movs r0, #0xc0
@@ -53481,7 +53481,7 @@ _0801BAC6:
 	bx r1
 	.align 2, 0
 _0801BB08: .4byte gUnknown_03002D40
-_0801BB0C: .4byte gUnknown_03003C40
+_0801BB0C: .4byte gInvestigation
 _0801BB10: .4byte 0x000040E0
 _0801BB14: .4byte gIORegisters
 _0801BB18: .4byte 0x0000FFAC
@@ -53489,7 +53489,7 @@ _0801BB1C: .4byte gUnknown_030037B8
 
 	thumb_func_start sub_801BB20
 sub_801BB20: @ 0x0801BB20
-	ldr r3, _0801BB3C @ =gUnknown_030070E0
+	ldr r3, _0801BB3C @ =gScriptContext
 	ldr r0, [r3]
 	ldrh r0, [r0]
 	cmp r0, #0
@@ -53504,7 +53504,7 @@ sub_801BB20: @ 0x0801BB20
 	ands r1, r2
 	b _0801BB52
 	.align 2, 0
-_0801BB3C: .4byte gUnknown_030070E0
+_0801BB3C: .4byte gScriptContext
 _0801BB40: .4byte gMain
 _0801BB44:
 	ldr r0, _0801BB60 @ =gMain
@@ -53527,7 +53527,7 @@ _0801BB60: .4byte gMain
 	thumb_func_start sub_801BB64
 sub_801BB64: @ 0x0801BB64
 	push {r4, r5, lr}
-	ldr r3, _0801BB90 @ =gUnknown_030070E0
+	ldr r3, _0801BB90 @ =gScriptContext
 	ldr r4, [r3]
 	ldr r0, _0801BB94 @ =0x0000FFFF
 	ldrh r1, [r4]
@@ -53549,7 +53549,7 @@ sub_801BB64: @ 0x0801BB64
 	strb r2, [r0]
 	b _0801BBB8
 	.align 2, 0
-_0801BB90: .4byte gUnknown_030070E0
+_0801BB90: .4byte gScriptContext
 _0801BB94: .4byte 0x0000FFFF
 _0801BB98: .4byte gIORegisters
 _0801BB9C:
@@ -53580,7 +53580,7 @@ _0801BBC8: .4byte 0x0000FDFF
 
 	thumb_func_start sub_801BBCC
 sub_801BBCC: @ 0x0801BBCC
-	ldr r2, _0801BBE0 @ =gUnknown_030070E0
+	ldr r2, _0801BBE0 @ =gScriptContext
 	ldr r1, [r2]
 	ldrh r0, [r1]
 	cmp r0, #0
@@ -53591,7 +53591,7 @@ sub_801BBCC: @ 0x0801BBCC
 	bne _0801BBFC
 	b _0801BBF0
 	.align 2, 0
-_0801BBE0: .4byte gUnknown_030070E0
+_0801BBE0: .4byte gScriptContext
 _0801BBE4: .4byte gMain
 _0801BBE8:
 	ldr r0, _0801BBF8 @ =gMain
@@ -53613,7 +53613,7 @@ _0801BBFE:
 	thumb_func_start sub_801BC00
 sub_801BC00: @ 0x0801BC00
 	push {r4, r5, lr}
-	ldr r4, _0801BC50 @ =gUnknown_030070E0
+	ldr r4, _0801BC50 @ =gScriptContext
 	ldr r0, [r4]
 	ldrh r0, [r0]
 	lsrs r0, r0, #8
@@ -53652,14 +53652,14 @@ _0801BC32:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BC50: .4byte gUnknown_030070E0
+_0801BC50: .4byte gScriptContext
 _0801BC54: .4byte gUnknown_03003AF0
 _0801BC58: .4byte 0x0000CFFF
 
 	thumb_func_start sub_801BC5C
 sub_801BC5C: @ 0x0801BC5C
 	push {r4, lr}
-	ldr r4, _0801BC8C @ =gUnknown_030070E0
+	ldr r4, _0801BC8C @ =gScriptContext
 	ldr r3, _0801BC90 @ =gMain
 	ldrh r0, [r3, #0x34]
 	strh r0, [r3, #0x38]
@@ -53682,7 +53682,7 @@ sub_801BC5C: @ 0x0801BC5C
 	orrs r0, r2
 	b _0801BCA0
 	.align 2, 0
-_0801BC8C: .4byte gUnknown_030070E0
+_0801BC8C: .4byte gScriptContext
 _0801BC90: .4byte gMain
 _0801BC94:
 	adds r1, r3, #0
@@ -53704,7 +53704,7 @@ _0801BCA0:
 	thumb_func_start sub_801BCB0
 sub_801BCB0: @ 0x0801BCB0
 	push {r4, lr}
-	ldr r4, _0801BCD4 @ =gUnknown_030070E0
+	ldr r4, _0801BCD4 @ =gScriptContext
 	ldrh r1, [r4, #0x12]
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
@@ -53721,7 +53721,7 @@ sub_801BCB0: @ 0x0801BCB0
 	adds r0, r1, #0
 	b _0801BCE2
 	.align 2, 0
-_0801BCD4: .4byte gUnknown_030070E0
+_0801BCD4: .4byte gScriptContext
 _0801BCD8: .4byte gUnknown_03000844
 _0801BCDC: .4byte gMain
 _0801BCE0:
@@ -53754,7 +53754,7 @@ _0801BD0A:
 	thumb_func_start sub_801BD10
 sub_801BD10: @ 0x0801BD10
 	push {r4, r5, lr}
-	ldr r4, _0801BDA0 @ =gUnknown_030070E0
+	ldr r4, _0801BDA0 @ =gScriptContext
 	ldr r3, _0801BDA4 @ =gMain
 	ldr r2, [r4]
 	ldrh r1, [r2]
@@ -53831,7 +53831,7 @@ _0801BD90:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BDA0: .4byte gUnknown_030070E0
+_0801BDA0: .4byte gScriptContext
 _0801BDA4: .4byte gMain
 _0801BDA8: .4byte 0x0000FFFF
 
@@ -53839,7 +53839,7 @@ _0801BDA8: .4byte 0x0000FFFF
 sub_801BDAC: @ 0x0801BDAC
 	push {r4, lr}
 	sub sp, #4
-	ldr r4, _0801BDE0 @ =gUnknown_030070E0
+	ldr r4, _0801BDE0 @ =gScriptContext
 	ldr r3, [r4]
 	ldrh r1, [r3]
 	lsls r0, r1, #2
@@ -53864,7 +53864,7 @@ sub_801BDAC: @ 0x0801BDAC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BDE0: .4byte gUnknown_030070E0
+_0801BDE0: .4byte gScriptContext
 _0801BDE4: .4byte gUnknown_03003960
 _0801BDE8: .4byte 0x040000D4
 _0801BDEC: .4byte 0x81000014
@@ -53872,7 +53872,7 @@ _0801BDEC: .4byte 0x81000014
 	thumb_func_start sub_801BDF0
 sub_801BDF0: @ 0x0801BDF0
 	push {r4, lr}
-	ldr r4, _0801BE10 @ =gUnknown_030070E0
+	ldr r4, _0801BE10 @ =gScriptContext
 	ldr r1, [r4]
 	ldrh r0, [r1]
 	adds r2, r1, #2
@@ -53887,12 +53887,12 @@ sub_801BDF0: @ 0x0801BDF0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BE10: .4byte gUnknown_030070E0
+_0801BE10: .4byte gScriptContext
 
 	thumb_func_start sub_801BE14
 sub_801BE14: @ 0x0801BE14
 	push {r4, lr}
-	ldr r4, _0801BE34 @ =gUnknown_030070E0
+	ldr r4, _0801BE34 @ =gScriptContext
 	ldr r1, [r4]
 	ldrh r0, [r1]
 	adds r2, r1, #2
@@ -53907,12 +53907,12 @@ sub_801BE14: @ 0x0801BE14
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BE34: .4byte gUnknown_030070E0
+_0801BE34: .4byte gScriptContext
 
 	thumb_func_start sub_801BE38
 sub_801BE38: @ 0x0801BE38
 	push {r4, lr}
-	ldr r4, _0801BE68 @ =gUnknown_030070E0
+	ldr r4, _0801BE68 @ =gScriptContext
 	ldr r0, _0801BE6C @ =gMain
 	ldr r1, _0801BE70 @ =0x00000256
 	adds r0, r0, r1
@@ -53934,7 +53934,7 @@ sub_801BE38: @ 0x0801BE38
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BE68: .4byte gUnknown_030070E0
+_0801BE68: .4byte gScriptContext
 _0801BE6C: .4byte gMain
 _0801BE70: .4byte 0x00000256
 
@@ -53958,7 +53958,7 @@ _0801BE90: .4byte 0x00000256
 	thumb_func_start sub_801BE94
 sub_801BE94: @ 0x0801BE94
 	push {r4, r5, lr}
-	ldr r4, _0801BEC4 @ =gUnknown_030070E0
+	ldr r4, _0801BEC4 @ =gScriptContext
 	ldr r0, _0801BEC8 @ =gMain
 	ldr r3, [r4]
 	ldrh r2, [r3]
@@ -53981,7 +53981,7 @@ sub_801BE94: @ 0x0801BE94
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BEC4: .4byte gUnknown_030070E0
+_0801BEC4: .4byte gScriptContext
 _0801BEC8: .4byte gMain
 _0801BECC: .4byte 0x00090A04
 _0801BED0: .4byte 0x00000257
@@ -54005,7 +54005,7 @@ _0801BEF0: .4byte 0x00000257
 	thumb_func_start sub_801BEF4
 sub_801BEF4: @ 0x0801BEF4
 	push {r4, lr}
-	ldr r4, _0801BF30 @ =gUnknown_030070E0
+	ldr r4, _0801BF30 @ =gScriptContext
 	ldr r0, _0801BF34 @ =gMain
 	movs r1, #0xa4
 	lsls r1, r1, #2
@@ -54034,7 +54034,7 @@ sub_801BEF4: @ 0x0801BEF4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BF30: .4byte gUnknown_030070E0
+_0801BF30: .4byte gScriptContext
 _0801BF34: .4byte gMain
 _0801BF38: .4byte gUnknown_03003B90
 
@@ -54045,7 +54045,7 @@ sub_801BF3C: @ 0x0801BF3C
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
-	ldr r0, _0801C010 @ =gUnknown_030070E0
+	ldr r0, _0801C010 @ =gScriptContext
 	mov sb, r0
 	movs r1, #0
 	ldr r0, _0801C014 @ =gMain
@@ -54153,7 +54153,7 @@ _0801BFEA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C010: .4byte gUnknown_030070E0
+_0801C010: .4byte gScriptContext
 _0801C014: .4byte gMain
 _0801C018: .4byte gUnknown_03003B90
 _0801C01C: .4byte gUnknown_03003A30
@@ -54161,7 +54161,7 @@ _0801C01C: .4byte gUnknown_03003A30
 	thumb_func_start sub_801C020
 sub_801C020: @ 0x0801C020
 	push {lr}
-	ldr r2, _0801C038 @ =gUnknown_030070E0
+	ldr r2, _0801C038 @ =gScriptContext
 	ldr r0, [r2]
 	ldrh r0, [r0]
 	cmp r0, #5
@@ -54172,7 +54172,7 @@ sub_801C020: @ 0x0801C020
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801C038: .4byte gUnknown_030070E0
+_0801C038: .4byte gScriptContext
 _0801C03C: .4byte _0801C040
 _0801C040: @ jump table
 	.4byte _0801C058 @ case 0
@@ -54250,7 +54250,7 @@ _0801C0C0:
 	thumb_func_start sub_801C0C8
 sub_801C0C8: @ 0x0801C0C8
 	push {r4, lr}
-	ldr r3, _0801C0F4 @ =gUnknown_030070E0
+	ldr r3, _0801C0F4 @ =gScriptContext
 	movs r0, #0x25
 	adds r0, r0, r3
 	mov ip, r0
@@ -54271,11 +54271,11 @@ sub_801C0C8: @ 0x0801C0C8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C0F4: .4byte gUnknown_030070E0
+_0801C0F4: .4byte gScriptContext
 
 	thumb_func_start sub_801C0F8
 sub_801C0F8: @ 0x0801C0F8
-	ldr r3, _0801C134 @ =gUnknown_030070E0
+	ldr r3, _0801C134 @ =gScriptContext
 	ldr r2, [r3]
 	ldrh r0, [r2]
 	lsls r1, r0, #2
@@ -54305,13 +54305,13 @@ sub_801C0F8: @ 0x0801C0F8
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801C134: .4byte gUnknown_030070E0
+_0801C134: .4byte gScriptContext
 _0801C138: .4byte gUnknown_03003960
 
 	thumb_func_start sub_801C13C
 sub_801C13C: @ 0x0801C13C
 	push {r4, lr}
-	ldr r3, _0801C18C @ =gUnknown_030070E0
+	ldr r3, _0801C18C @ =gScriptContext
 	ldr r2, [r3]
 	ldrh r1, [r2]
 	lsls r0, r1, #2
@@ -54350,7 +54350,7 @@ sub_801C13C: @ 0x0801C13C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C18C: .4byte gUnknown_030070E0
+_0801C18C: .4byte gScriptContext
 _0801C190: .4byte gUnknown_03003960
 
 	thumb_func_start sub_801C194
@@ -54396,7 +54396,7 @@ _0801C1E4: .4byte 0x00000257
 	thumb_func_start sub_801C1E8
 sub_801C1E8: @ 0x0801C1E8
 	push {r4, lr}
-	ldr r2, _0801C204 @ =gUnknown_030070E0
+	ldr r2, _0801C204 @ =gScriptContext
 	ldr r1, [r2]
 	ldr r0, _0801C208 @ =gUnknown_03003960
 	ldr r4, _0801C20C @ =0xFFFFFE58
@@ -54410,14 +54410,14 @@ sub_801C1E8: @ 0x0801C1E8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C204: .4byte gUnknown_030070E0
+_0801C204: .4byte gScriptContext
 _0801C208: .4byte gUnknown_03003960
 _0801C20C: .4byte 0xFFFFFE58
 _0801C210: .4byte 0x00040A04
 
 	thumb_func_start sub_801C214
 sub_801C214: @ 0x0801C214
-	ldr r3, _0801C254 @ =gUnknown_030070E0
+	ldr r3, _0801C254 @ =gScriptContext
 	ldr r0, _0801C258 @ =gMain
 	mov ip, r0
 	ldr r2, [r3]
@@ -54450,13 +54450,13 @@ sub_801C214: @ 0x0801C214
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801C254: .4byte gUnknown_030070E0
+_0801C254: .4byte gScriptContext
 _0801C258: .4byte gMain
 
 	thumb_func_start sub_801C25C
 sub_801C25C: @ 0x0801C25C
 	push {lr}
-	bl sub_8018504
+	bl LoadCurrentScriptIntoRam
 	movs r0, #0
 	pop {r1}
 	bx r1
@@ -54482,7 +54482,7 @@ _0801C284: .4byte gUnknown_03000800
 sub_801C288: @ 0x0801C288
 	push {r4, r5, r6, lr}
 	sub sp, #8
-	ldr r4, _0801C2D4 @ =gUnknown_030070E0
+	ldr r4, _0801C2D4 @ =gScriptContext
 	mov r1, sp
 	ldr r5, [r4]
 	ldrh r2, [r5]
@@ -54519,7 +54519,7 @@ sub_801C288: @ 0x0801C288
 	adds r0, r6, #2
 	b _0801C31C
 	.align 2, 0
-_0801C2D4: .4byte gUnknown_030070E0
+_0801C2D4: .4byte gScriptContext
 _0801C2D8:
 	mov r0, sp
 	ldrh r1, [r0]
@@ -54567,7 +54567,7 @@ _0801C320:
 	thumb_func_start sub_801C328
 sub_801C328: @ 0x0801C328
 	push {lr}
-	ldr r0, _0801C33C @ =gUnknown_030070E0
+	ldr r0, _0801C33C @ =gScriptContext
 	ldr r0, [r0]
 	ldrh r0, [r0]
 	bl sub_8017AB4
@@ -54575,11 +54575,11 @@ sub_801C328: @ 0x0801C328
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C33C: .4byte gUnknown_030070E0
+_0801C33C: .4byte gScriptContext
 
 	thumb_func_start sub_801C340
 sub_801C340: @ 0x0801C340
-	ldr r3, _0801C368 @ =gUnknown_030070E0
+	ldr r3, _0801C368 @ =gScriptContext
 	ldr r0, [r3]
 	ldrh r1, [r0]
 	adds r2, r3, #0
@@ -54599,12 +54599,12 @@ sub_801C340: @ 0x0801C340
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801C368: .4byte gUnknown_030070E0
+_0801C368: .4byte gScriptContext
 
 	thumb_func_start sub_801C36C
 sub_801C36C: @ 0x0801C36C
 	push {r4, r5, lr}
-	ldr r5, _0801C394 @ =gUnknown_030070E0
+	ldr r5, _0801C394 @ =gScriptContext
 	ldr r3, [r5]
 	ldrh r0, [r3]
 	cmp r0, #0
@@ -54623,7 +54623,7 @@ sub_801C36C: @ 0x0801C36C
 	beq _0801C3BC
 	b _0801C44A
 	.align 2, 0
-_0801C394: .4byte gUnknown_030070E0
+_0801C394: .4byte gScriptContext
 _0801C398: .4byte gUnknown_03002920
 _0801C39C: .4byte 0x0000024E
 _0801C3A0:
@@ -54732,7 +54732,7 @@ _0801C468: .4byte 0x00000256
 
 	thumb_func_start sub_801C46C
 sub_801C46C: @ 0x0801C46C
-	ldr r3, _0801C480 @ =gUnknown_030070E0
+	ldr r3, _0801C480 @ =gScriptContext
 	ldr r2, _0801C484 @ =gMain
 	ldr r0, [r3]
 	ldrh r1, [r0]
@@ -54742,13 +54742,13 @@ sub_801C46C: @ 0x0801C46C
 	movs r0, #0
 	bx lr
 	.align 2, 0
-_0801C480: .4byte gUnknown_030070E0
+_0801C480: .4byte gScriptContext
 _0801C484: .4byte gMain
 
 	thumb_func_start sub_801C488
 sub_801C488: @ 0x0801C488
 	push {lr}
-	ldr r2, _0801C4A0 @ =gUnknown_030070E0
+	ldr r2, _0801C4A0 @ =gScriptContext
 	ldr r0, [r2]
 	ldrh r1, [r0]
 	cmp r1, #1
@@ -54759,7 +54759,7 @@ sub_801C488: @ 0x0801C488
 	beq _0801C4AA
 	b _0801C4D8
 	.align 2, 0
-_0801C4A0: .4byte gUnknown_030070E0
+_0801C4A0: .4byte gScriptContext
 _0801C4A4:
 	cmp r1, #2
 	beq _0801C4B6
@@ -54803,7 +54803,7 @@ sub_801C4E4: @ 0x0801C4E4
 	mov r7, sb
 	mov r6, r8
 	push {r6, r7}
-	ldr r6, _0801C530 @ =gUnknown_030070E0
+	ldr r6, _0801C530 @ =gScriptContext
 	ldrh r4, [r6, #0x12]
 	ldrb r0, [r6, #0x12]
 	cmp r0, #0
@@ -54838,7 +54838,7 @@ _0801C510:
 	beq _0801C546
 	b _0801C564
 	.align 2, 0
-_0801C530: .4byte gUnknown_030070E0
+_0801C530: .4byte gScriptContext
 _0801C534: .4byte gUnknown_0802872E
 _0801C538: .4byte gUnknown_030070B0
 _0801C53C:
@@ -55002,7 +55002,7 @@ sub_801C66C: @ 0x0801C66C
 	mov r7, sb
 	mov r6, r8
 	push {r6, r7}
-	ldr r6, _0801C698 @ =gUnknown_030070E0
+	ldr r6, _0801C698 @ =gScriptContext
 	ldrh r1, [r6, #0x12]
 	movs r0, #0xf0
 	ands r0, r1
@@ -55021,7 +55021,7 @@ _0801C682:
 	movs r0, #1
 	b _0801C8A0
 	.align 2, 0
-_0801C698: .4byte gUnknown_030070E0
+_0801C698: .4byte gScriptContext
 _0801C69C: .4byte gMain
 _0801C6A0:
 	adds r1, #1
@@ -55301,7 +55301,7 @@ sub_801C8BC: @ 0x0801C8BC
 	mov r8, r0
 	ldr r1, _0801C8F4 @ =gMain
 	mov sl, r1
-	ldr r6, _0801C8F8 @ =gUnknown_030070E0
+	ldr r6, _0801C8F8 @ =gScriptContext
 	mov r0, sb
 	adds r0, #0x2d
 	ldrb r0, [r0]
@@ -55318,7 +55318,7 @@ _0801C8E4:
 	.align 2, 0
 _0801C8F0: .4byte gIORegisters
 _0801C8F4: .4byte gMain
-_0801C8F8: .4byte gUnknown_030070E0
+_0801C8F8: .4byte gScriptContext
 _0801C8FC: .4byte _0801C900
 _0801C900: @ jump table
 	.4byte _0801D2F0 @ case 0
@@ -56723,7 +56723,7 @@ sub_801D548: @ 0x0801D548
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldr r7, _0801D564 @ =gIORegisters
-	ldr r6, _0801D568 @ =gUnknown_030070E0
+	ldr r6, _0801D568 @ =gScriptContext
 	adds r0, #0x2f
 	ldrb r0, [r0]
 	cmp r0, #0xd
@@ -56737,7 +56737,7 @@ _0801D55A:
 	mov pc, r0
 	.align 2, 0
 _0801D564: .4byte gIORegisters
-_0801D568: .4byte gUnknown_030070E0
+_0801D568: .4byte gScriptContext
 _0801D56C: .4byte _0801D570
 _0801D570: @ jump table
 	.4byte _0801D5A8 @ case 0
@@ -56985,7 +56985,7 @@ nullsub_8: @ 0x0801D754
 	thumb_func_start sub_801D758
 sub_801D758: @ 0x0801D758
 	push {r4, lr}
-	ldr r4, _0801D780 @ =gUnknown_030070E0
+	ldr r4, _0801D780 @ =gScriptContext
 	movs r1, #0
 	strh r1, [r4, #0x30]
 	strh r1, [r4, #0x32]
@@ -57003,7 +57003,7 @@ sub_801D758: @ 0x0801D758
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801D780: .4byte gUnknown_030070E0
+_0801D780: .4byte gScriptContext
 
 	thumb_func_start sub_801D784
 sub_801D784: @ 0x0801D784
@@ -57042,7 +57042,7 @@ sub_801D7B8: @ 0x0801D7B8
 	lsls r1, r1, #0x10
 	lsrs r1, r1, #0x10
 	ldr r5, _0801D7F0 @ =gIORegisters
-	ldr r2, _0801D7F4 @ =gUnknown_030070E0
+	ldr r2, _0801D7F4 @ =gScriptContext
 	ldrh r0, [r2, #0x32]
 	adds r0, #1
 	strh r0, [r2, #0x32]
@@ -57065,7 +57065,7 @@ _0801D7E0:
 	b _0801D812
 	.align 2, 0
 _0801D7F0: .4byte gIORegisters
-_0801D7F4: .4byte gUnknown_030070E0
+_0801D7F4: .4byte gScriptContext
 _0801D7F8: .4byte 0x0000071F
 _0801D7FC:
 	ldrh r2, [r2, #0x32]
@@ -57092,7 +57092,7 @@ sub_801D818: @ 0x0801D818
 	lsls r1, r1, #0x10
 	lsrs r5, r1, #0x10
 	ldr r4, _0801D870 @ =gIORegisters
-	ldr r3, _0801D874 @ =gUnknown_030070E0
+	ldr r3, _0801D874 @ =gScriptContext
 	ldrh r0, [r3, #0x32]
 	adds r0, #1
 	movs r7, #0
@@ -57128,7 +57128,7 @@ sub_801D818: @ 0x0801D818
 	b _0801D8AC
 	.align 2, 0
 _0801D870: .4byte gIORegisters
-_0801D874: .4byte gUnknown_030070E0
+_0801D874: .4byte gScriptContext
 _0801D878: .4byte 0x0000FDFD
 _0801D87C: .4byte 0x0000071F
 _0801D880:
@@ -57166,7 +57166,7 @@ _0801D8B4: .4byte 0x0000FFFD
 sub_801D8B8: @ 0x0801D8B8
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
-	ldr r4, _0801D8EC @ =gUnknown_030070E0
+	ldr r4, _0801D8EC @ =gScriptContext
 	ldr r5, _0801D8F0 @ =gUnknown_03000844
 	cmp r5, #0
 	bne _0801D8C8
@@ -57190,7 +57190,7 @@ _0801D8C8:
 	adds r0, r1, r2
 	b _0801D90C
 	.align 2, 0
-_0801D8EC: .4byte gUnknown_030070E0
+_0801D8EC: .4byte gScriptContext
 _0801D8F0: .4byte gUnknown_03000844
 _0801D8F4:
 	movs r1, #0x10
@@ -57217,7 +57217,7 @@ _0801D90E:
 sub_801D914: @ 0x0801D914
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
-	ldr r4, _0801D954 @ =gUnknown_030070E0
+	ldr r4, _0801D954 @ =gScriptContext
 	ldr r5, _0801D958 @ =gUnknown_03000844
 	cmp r5, #0
 	bne _0801D924
@@ -57247,7 +57247,7 @@ _0801D924:
 	adds r0, r1, r2
 	b _0801D97C
 	.align 2, 0
-_0801D954: .4byte gUnknown_030070E0
+_0801D954: .4byte gScriptContext
 _0801D958: .4byte gUnknown_03000844
 _0801D95C:
 	movs r0, #0x12
@@ -57507,7 +57507,7 @@ sub_801DB60: @ 0x0801DB60
 	push {r6, r7}
 	ldr r0, _0801DB88 @ =gIORegisters
 	mov sb, r0
-	ldr r4, _0801DB8C @ =gUnknown_030070E0
+	ldr r4, _0801DB8C @ =gScriptContext
 	adds r0, r4, #0
 	adds r0, #0x4a
 	ldrh r0, [r0]
@@ -57523,7 +57523,7 @@ _0801DB7C:
 	mov pc, r0
 	.align 2, 0
 _0801DB88: .4byte gIORegisters
-_0801DB8C: .4byte gUnknown_030070E0
+_0801DB8C: .4byte gScriptContext
 _0801DB90: .4byte _0801DB94
 _0801DB94: @ jump table
 	.4byte _0801DCEC @ case 0
@@ -57962,7 +57962,7 @@ sub_801DF10: @ 0x0801DF10
 	str r0, [sp, #0x10]
 	ldr r0, _0801DF44 @ =gIORegisters
 	str r0, [sp, #0x14]
-	ldr r6, _0801DF48 @ =gUnknown_030070E0
+	ldr r6, _0801DF48 @ =gScriptContext
 	ldr r1, _0801DF4C @ =gMain
 	mov r8, r1
 	ldr r0, [sp, #0x10]
@@ -57981,7 +57981,7 @@ _0801DF3A:
 	mov pc, r0
 	.align 2, 0
 _0801DF44: .4byte gIORegisters
-_0801DF48: .4byte gUnknown_030070E0
+_0801DF48: .4byte gScriptContext
 _0801DF4C: .4byte gMain
 _0801DF50: .4byte _0801DF54
 _0801DF54: @ jump table
@@ -61238,7 +61238,7 @@ _0801F9D2:
 	thumb_func_start sub_801F9E4
 sub_801F9E4: @ 0x0801F9E4
 	push {r4, r5, r6, r7, lr}
-	ldr r2, _0801FA18 @ =gUnknown_030070E0
+	ldr r2, _0801FA18 @ =gScriptContext
 	lsls r1, r0, #1
 	adds r1, r1, r0
 	lsls r1, r1, #3
@@ -61265,7 +61265,7 @@ _0801FA0E:
 	subs r0, r1, r0
 	b _0801FA26
 	.align 2, 0
-_0801FA18: .4byte gUnknown_030070E0
+_0801FA18: .4byte gScriptContext
 _0801FA1C: .4byte gUnknown_08028764
 _0801FA20: .4byte 0x0000FFFF
 _0801FA24:
@@ -61326,7 +61326,7 @@ sub_801FA7C: @ 0x0801FA7C
 	mov r6, sb
 	mov r5, r8
 	push {r5, r6, r7}
-	ldr r1, _0801FAC0 @ =gUnknown_030070E0
+	ldr r1, _0801FAC0 @ =gScriptContext
 	mov sl, r1
 	lsls r1, r0, #1
 	adds r1, r1, r0
@@ -61355,7 +61355,7 @@ sub_801FA7C: @ 0x0801FA7C
 	ands r0, r1
 	b _0801FAD2
 	.align 2, 0
-_0801FAC0: .4byte gUnknown_030070E0
+_0801FAC0: .4byte gScriptContext
 _0801FAC4: .4byte gUnknown_03000844
 _0801FAC8: .4byte gUnknown_08028764
 _0801FACC:
@@ -61599,7 +61599,7 @@ _0801FC98: .4byte gUnknown_08028741
 	thumb_func_start sub_801FC9C
 sub_801FC9C: @ 0x0801FC9C
 	adds r3, r0, #0
-	ldr r0, _0801FCB4 @ =gUnknown_030070E0
+	ldr r0, _0801FCB4 @ =gScriptContext
 	movs r1, #0
 	adds r2, r0, #0
 	adds r2, #0x54
@@ -61611,7 +61611,7 @@ _0801FCA6:
 	asrs r0, r0, #0x10
 	b _0801FCC4
 	.align 2, 0
-_0801FCB4: .4byte gUnknown_030070E0
+_0801FCB4: .4byte gScriptContext
 _0801FCB8:
 	adds r2, #0x18
 	adds r1, #1
@@ -61625,7 +61625,7 @@ _0801FCC4:
 
 	thumb_func_start sub_801FCC8
 sub_801FCC8: @ 0x0801FCC8
-	ldr r0, _0801FCDC @ =gUnknown_030070E0
+	ldr r0, _0801FCDC @ =gScriptContext
 	movs r1, #0
 	adds r0, #0x54
 _0801FCCE:
@@ -61636,7 +61636,7 @@ _0801FCCE:
 	asrs r0, r0, #0x10
 	b _0801FCEC
 	.align 2, 0
-_0801FCDC: .4byte gUnknown_030070E0
+_0801FCDC: .4byte gScriptContext
 _0801FCE0:
 	adds r0, #0x18
 	adds r1, #1
@@ -61653,7 +61653,7 @@ sub_801FCF0: @ 0x0801FCF0
 	push {r4, lr}
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10
-	ldr r0, _0801FD0C @ =gUnknown_030070E0
+	ldr r0, _0801FD0C @ =gScriptContext
 	movs r1, #0
 	movs r3, #0
 	adds r2, r0, #0
@@ -61666,7 +61666,7 @@ _0801FD00:
 	bhi _0801FD20
 	b _0801FD16
 	.align 2, 0
-_0801FD0C: .4byte gUnknown_030070E0
+_0801FD0C: .4byte gScriptContext
 _0801FD10:
 	ldrb r0, [r2]
 	cmp r0, #2
@@ -61695,7 +61695,7 @@ sub_801FD34: @ 0x0801FD34
 	mov r7, r8
 	push {r7}
 	mov r8, r0
-	ldr r7, _0801FD5C @ =gUnknown_030070E0
+	ldr r7, _0801FD5C @ =gScriptContext
 	lsls r0, r0, #1
 	add r0, r8
 	lsls r0, r0, #3
@@ -61713,7 +61713,7 @@ _0801FD52:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0801FD5C: .4byte gUnknown_030070E0
+_0801FD5C: .4byte gScriptContext
 _0801FD60: .4byte _0801FD64
 _0801FD64: @ jump table
 	.4byte _0801FD7C @ case 0
@@ -62026,7 +62026,7 @@ sub_801FFBC: @ 0x0801FFBC
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #0x18
-	ldr r0, _0802001C @ =gUnknown_030070E0
+	ldr r0, _0802001C @ =gScriptContext
 	mov sl, r0
 	adds r0, #0x4e
 	ldrh r0, [r0]
@@ -62073,7 +62073,7 @@ _08020012:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0802001C: .4byte gUnknown_030070E0
+_0802001C: .4byte gScriptContext
 _08020020: .4byte gUnknown_03000844
 _08020024: .4byte _08020028
 _08020028: @ jump table

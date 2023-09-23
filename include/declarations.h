@@ -1,8 +1,6 @@
 #ifndef GUARD_DECLARATIONS_H //TODO: get rid of this file when it's possible to move everything to its own header
 #define GUARD_DECLARATIONS_H
 
-extern struct Struct30070E0 gUnknown_030070E0;
-
 void DoGameProcess(void);
 void UpdateHardwareBlend(void);
 void sub_80139F4(void);
@@ -34,12 +32,16 @@ void sub_800730C(struct Main *);
 void sub_80018F8(struct Main *);
 
 void ProcessHPBar(void);
+void VBlankIntr();
+void HBlankIntr();
+void IntrDummy();
+
 
 // stubbed out stuff
 void sub_8006470(u32, u32, u32);
 
 void RunScriptContext(void);
-void sub_801DF10(struct Struct30070E0 *);
+void sub_801DF10(struct ScriptContext *);
 void nullsub_6(u32, u32, u32, u32);
 
 #endif//GUARD_DECLARATIONS_H

@@ -30,6 +30,7 @@ struct SaveData
     /* +0x183C */ u16 bg1Map[0x400];
     /* +0x203C */ u16 bg2Map[0x400];
     /* +0x283C */ struct AnimationBackupStruct backupAnimations[0x20];
+    /* +0x2BD4 */ u8 fill2BD4[0x24];
 };
 
 extern EWRAM_DATA struct SaveData gSaveDataBuffer;

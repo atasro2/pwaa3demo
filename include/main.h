@@ -29,14 +29,28 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    /* +0x017 */ u8 fill17[0x1D];
+    /* +0x017 */ u8 fill17[0x19];
+    /* +0x030 */ u16 rngSeed; // unity: Random_seed
+    /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
     /* +0x036 */ u16 unk36;
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
     /* +0x03D */ u8 unk3D;
-    /* +0x03E */ u8 fill3E[0xAA];
+    /* +0x03E */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
+    /* +0x03F */ u8 fill3F[0x49];
+    /* +0x088 */ u16 blendTarget; // unity: Fade_object
+    /* +0x08A */ u16 blendMode; // unity: Fade_status
+    /* +0x08C */ u16 blendCounter; // unity: Fade_timer
+    /* +0x08E */ u8 blendDelay; // unity: fade_time
+    /* +0x08F */ u8 blendDeltaY; // unity: fade_speed
+    /* +0x090 */ u8 fill90[0xE];
+    /* +0x09E */ u8 itemPlateAction;
+    /* +0x0A0 */ u8 fillA0[0x22];
+    /* +0x0C1 */ u8 scenarioIdx;
+    /* +0x0C2 */ u8 caseEnabledFlags;
+    /* +0x0C3 */ u8 fillC3[0x25];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;

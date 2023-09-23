@@ -19,7 +19,7 @@
 . = 0x00002380; gUnknown_03002380 = .;
 . = 0x00002400; gUnknown_03002400 = .;
 . = 0x00002880; gIntrTable = .;
-. = 0x000028C0; gUnknown_030028C0 = .;
+. = 0x000028C0; gCourtRecord = .;
 . = 0x000028DC; gUnknown_030028DC = .;
 . = 0x000028FC; gUnknown_030028FC = .;
 . = 0x00002920; gUnknown_03002920 = .;
@@ -65,9 +65,9 @@
 . = 0x00003AF0; gUnknown_03003AF0 = .;
 . = 0x00003B90; gUnknown_03003B90 = .;
 . = 0x00003BC0; gUnknown_03003BC0 = .;
-. = 0x00003C40; gUnknown_03003C40 = .;
+. = 0x00003C40; gInvestigation = .;
 . = 0x00003C54; gUnknown_03003C54 = .;
-. = 0x00003C60; gUnknown_03003C60 = .;
+. = 0x00003C60; gTestimony = .;
 . = 0x00003C70; gUnknown_03003C70 = .;
 . = 0x00003E50; gUnknown_03003E50 = .;
 . = 0x00004150; gUnknown_03004150 = .;
@@ -86,7 +86,7 @@
 . = 0x00006D70; gUnknown_03006D70 = .;
 . = 0x00006D80; gUnknown_03006D80 = .;
 . = 0x000070B0; gUnknown_030070B0 = .;
-. = 0x000070E0; gUnknown_030070E0 = .;
+. = 0x000070E0; gScriptContext = .;
 . = 0x0000710A; gUnknown_0300710A = .;
 . = 0x00007128; gUnknown_03007128 = .;
 . = 0x0000712A; gUnknown_0300712A = .;

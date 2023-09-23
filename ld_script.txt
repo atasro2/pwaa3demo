@@ -50,6 +50,7 @@ SECTIONS {
     {
         src/main.o(.data);
         data/data.o(.data);
+        data/script_main.o(.data);
     } =0
     . = 0x8180000;
     gfx_data :

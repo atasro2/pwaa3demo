@@ -8,6 +8,8 @@
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
 
+// script system has been revamped, keeping this for reference only!
+#if 0
 struct ScriptContext
 {
     /* +0x00 */ u16 flags; // message status, flags
@@ -53,6 +55,7 @@ struct ScriptContext
     /* +0x3B */ u8 textboxYPos; // unity AA4: frame_y
     /* +0x3C */ u8 * mapMarkerVramPtr; // unity AA4: Expl_now_vram_addr?
 };
+#endif
 
 struct TextBoxCharacter
 {
