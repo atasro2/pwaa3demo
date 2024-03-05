@@ -161,7 +161,7 @@ _0801A1DE:
 	ldrb r0, [r5, #0x12]
 	cmp r0, #0
 	bne _0801A204
-	ldr r0, _0801A200 @ =gUnknown_03000844
+	ldr r0, _0801A200 @ =gAnimation+0x44
 	adds r1, #0xc6
 	ldrh r1, [r1]
 	bl sub_8012180
@@ -172,7 +172,7 @@ _0801A1DE:
 	.align 2, 0
 _0801A1F8: .4byte gScriptContext
 _0801A1FC: .4byte gMain
-_0801A200: .4byte gUnknown_03000844
+_0801A200: .4byte gAnimation+0x44
 _0801A204:
 	adds r0, r2, #1
 	strh r0, [r5, #0x12]
@@ -350,14 +350,14 @@ _0801A37C: .4byte 0x000004DE
 _0801A380:
 	cmp r0, #2
 	bne _0801A39C
-	ldr r0, _0801A394 @ =gUnknown_03000844
+	ldr r0, _0801A394 @ =gAnimation+0x44
 	ldr r1, _0801A398 @ =gMain
 	adds r1, #0xc4
 	ldrh r1, [r1]
 	bl sub_8012180
 	b _0801A438
 	.align 2, 0
-_0801A394: .4byte gUnknown_03000844
+_0801A394: .4byte gAnimation+0x44
 _0801A398: .4byte gMain
 _0801A39C:
 	cmp r0, #7
@@ -671,7 +671,7 @@ _0801A5D6:
 	movs r0, #0
 	bl sub_8017154
 _0801A5FE:
-	ldr r0, _0801A704 @ =gUnknown_03000800
+	ldr r0, _0801A704 @ =gAnimation
 	adds r0, #0x52
 	ldrb r0, [r0]
 	cmp r0, #0xb
@@ -801,7 +801,7 @@ _0801A6F4: .4byte 0x0000FFFB
 _0801A6F8: .4byte 0x0000FFFE
 _0801A6FC: .4byte 0x0000DFFF
 _0801A700: .4byte gMain
-_0801A704: .4byte gUnknown_03000800
+_0801A704: .4byte gAnimation
 _0801A708: .4byte gOamObjects
 _0801A70C: .4byte gUnknown_03003E50
 _0801A710: .4byte 0x00003FFF
@@ -1094,7 +1094,7 @@ sub_801A908: @ 0x0801A908
 	str r0, [r1, #0xc]
 	ldr r0, _0801A94C @ =0x01000007
 	str r0, [r1, #8]
-	ldr r0, _0801A950 @ =gUnknown_03000844
+	ldr r0, _0801A950 @ =gAnimation+0x44
 	adds r1, #0xc6
 	ldrh r1, [r1]
 	bl sub_8012180
@@ -1105,7 +1105,7 @@ sub_801A908: @ 0x0801A908
 _0801A944: .4byte gScriptContext
 _0801A948: .4byte gMain
 _0801A94C: .4byte 0x01000007
-_0801A950: .4byte gUnknown_03000844
+_0801A950: .4byte gAnimation+0x44
 
 	thumb_func_start sub_801A954
 sub_801A954: @ 0x0801A954
@@ -1228,7 +1228,7 @@ _0801AA26:
 	ldrh r0, [r4, #8]
 	cmp r0, #0x15
 	bne _0801AA42
-	ldr r0, _0801AA5C @ =gUnknown_03000844
+	ldr r0, _0801AA5C @ =gAnimation+0x44
 	ldr r1, _0801AA60 @ =gMain
 	adds r1, #0xc6
 	ldrh r1, [r1]
@@ -1247,7 +1247,7 @@ _0801AA4E:
 	bx r1
 	.align 2, 0
 _0801AA58: .4byte gScriptContext
-_0801AA5C: .4byte gUnknown_03000844
+_0801AA5C: .4byte gAnimation+0x44
 _0801AA60: .4byte gMain
 _0801AA64: .4byte 0x0000DFFF
 
@@ -1359,7 +1359,7 @@ _0801AB4C:
 	ldrb r0, [r0, #8]
 	cmp r0, #3
 	bne _0801AB66
-	ldr r0, _0801AB74 @ =gUnknown_03000844
+	ldr r0, _0801AB74 @ =gAnimation+0x44
 	bl sub_8012F7C
 	ldr r0, _0801AB78 @ =gInvestigation
 	movs r1, #0
@@ -1372,14 +1372,14 @@ _0801AB66:
 	b _0801AC9C
 	.align 2, 0
 _0801AB70: .4byte gMain
-_0801AB74: .4byte gUnknown_03000844
+_0801AB74: .4byte gAnimation+0x44
 _0801AB78: .4byte gInvestigation
 _0801AB7C:
 	ldr r4, _0801ABA8 @ =gMain
 	ldrb r2, [r4, #8]
 	cmp r2, #3
 	bne _0801AB96
-	ldr r0, _0801ABAC @ =gUnknown_03000844
+	ldr r0, _0801ABAC @ =gAnimation+0x44
 	bl sub_8012F7C
 	ldr r0, _0801ABB0 @ =gInvestigation
 	movs r1, #0
@@ -1397,7 +1397,7 @@ _0801AB96:
 	b _0801ABBE
 	.align 2, 0
 _0801ABA8: .4byte gMain
-_0801ABAC: .4byte gUnknown_03000844
+_0801ABAC: .4byte gAnimation+0x44
 _0801ABB0: .4byte gInvestigation
 _0801ABB4:
 	movs r0, #0
@@ -1572,7 +1572,7 @@ sub_801ACD4: @ 0x0801ACD4
 	str r0, [r1, #0xc]
 	ldr r0, _0801AD1C @ =0x01000007
 	str r0, [r1, #8]
-	ldr r0, _0801AD20 @ =gUnknown_03000844
+	ldr r0, _0801AD20 @ =gAnimation+0x44
 	adds r1, #0xc6
 	ldrh r1, [r1]
 	bl sub_8012180
@@ -1582,7 +1582,7 @@ sub_801ACD4: @ 0x0801ACD4
 _0801AD14: .4byte gScriptContext
 _0801AD18: .4byte gMain
 _0801AD1C: .4byte 0x01000007
-_0801AD20: .4byte gUnknown_03000844
+_0801AD20: .4byte gAnimation+0x44
 _0801AD24:
 	movs r0, #6
 	bl sub_8016E74
@@ -3581,7 +3581,7 @@ sub_801BCB0: @ 0x0801BCB0
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
 	bne _0801BCE0
-	ldr r0, _0801BCD8 @ =gUnknown_03000844
+	ldr r0, _0801BCD8 @ =gAnimation+0x44
 	ldr r1, _0801BCDC @ =gMain
 	adds r1, #0xc6
 	ldrh r1, [r1]
@@ -3594,7 +3594,7 @@ sub_801BCB0: @ 0x0801BCB0
 	b _0801BCE2
 	.align 2, 0
 _0801BCD4: .4byte gScriptContext
-_0801BCD8: .4byte gUnknown_03000844
+_0801BCD8: .4byte gAnimation+0x44
 _0801BCDC: .4byte gMain
 _0801BCE0:
 	subs r0, r1, #1
@@ -3603,7 +3603,7 @@ _0801BCE2:
 	ldrb r0, [r4, #0x12]
 	cmp r0, #0
 	bne _0801BD08
-	ldr r0, _0801BD00 @ =gUnknown_03000844
+	ldr r0, _0801BD00 @ =gAnimation+0x44
 	ldr r1, _0801BD04 @ =gMain
 	adds r1, #0xc6
 	ldrh r1, [r1]
@@ -3614,7 +3614,7 @@ _0801BCE2:
 	movs r0, #0
 	b _0801BD0A
 	.align 2, 0
-_0801BD00: .4byte gUnknown_03000844
+_0801BD00: .4byte gAnimation+0x44
 _0801BD04: .4byte gMain
 _0801BD08:
 	movs r0, #1
@@ -4336,7 +4336,7 @@ sub_801C25C: @ 0x0801C25C
 	thumb_func_start sub_801C268
 sub_801C268: @ 0x0801C268
 	push {lr}
-	ldr r0, _0801C284 @ =gUnknown_03000800
+	ldr r0, _0801C284 @ =gAnimation
 	ldr r1, [r0, #0x44]
 	movs r2, #0x80
 	lsls r2, r2, #3
@@ -4348,7 +4348,7 @@ sub_801C268: @ 0x0801C268
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801C284: .4byte gUnknown_03000800
+_0801C284: .4byte gAnimation
 
 	thumb_func_start sub_801C288
 sub_801C288: @ 0x0801C288
@@ -4942,7 +4942,7 @@ _0801C6E4:
 	ands r0, r3
 	strh r0, [r1]
 _0801C6FA:
-	ldr r0, _0801C738 @ =gUnknown_03000844
+	ldr r0, _0801C738 @ =gAnimation+0x44
 	adds r1, r2, #0
 	adds r1, #0xc6
 	ldrh r1, [r1]
@@ -4969,7 +4969,7 @@ _0801C726:
 _0801C72C: .4byte gUnknown_030070B0
 _0801C730: .4byte gUnknown_03003E50
 _0801C734: .4byte 0x00003FFF
-_0801C738: .4byte gUnknown_03000844
+_0801C738: .4byte gAnimation+0x44
 _0801C73C: .4byte 0x00000FFF
 _0801C740: .4byte gUnknown_0802871C
 _0801C744:
