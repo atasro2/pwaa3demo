@@ -12,6 +12,7 @@
 #include "save.h"
 #include "court.h"
 #include "declarations.h"
+#include "graphics.h"
 #include "constants/animation.h"
 #include "constants/oam_allocations.h"
 
@@ -505,3 +506,126 @@ void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target)
     gMain.blendDeltaY = deltaY;
     gMain.blendCounter = 0;
 }
+
+void UpdateHardwareBlend(void)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    
+    if(!(scriptCtx->unk1E & 0x4000)) {
+        gIORegisters.lcd_dispcnt &= ~DISPCNT_WIN0_ON;
+        gIORegisters.lcd_win0h = 0;
+        gIORegisters.lcd_win0v = 0;
+        gIORegisters.lcd_winin = 0;
+        gIORegisters.lcd_winout = 0;
+    }
+
+    switch(main->blendMode)
+    {
+        case 0:
+            break;
+        case 1:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_DARKEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy -= main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0 || main->blendDeltaY == 0)
+            {
+                struct AnimationListEntry *anim;
+                ioRegs->lcd_bldy = 0;
+                ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND;
+                ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 0x7);
+                main->blendMode = 0;
+                anim = &gAnimation[1];
+                if((anim->animationInfo.personId == 0xB || anim->animationInfo.personId == 0x21) && anim->flags & (0x10000000)) {
+                    u16 i;
+                    u8 * src;
+                    u32 * dst;
+                    anim = sub_8016FB4();
+                    anim->flags |= 0x80;
+                    anim->flags |= 0x22000000;
+                    dst = gUnknown_0826F888;
+                    src = gUnknown_08252498 + dst[1];
+                    dst = (u32*)(OBJ_PLTT+0x1A0);
+                    DmaCopy16(3, src, dst, 0x20);
+                    REG_BLDALPHA = ioRegs->lcd_bldalpha;
+                    REG_BLDCNT = ioRegs->lcd_bldcnt;
+                    for(i = anim->animtionOamStartIdx; i < anim->animtionOamEndIdx; i++)
+                    {
+                        ((struct OamAttrs *)OAM)[i].attr0 |= 0x400;
+                        gOamObjects[i].attr0 |= 0x400;
+                    }
+                }
+            }
+            break;
+        case 2:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_DARKEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy += main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0x10 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0x10;
+                main->blendMode = 0;
+                main->blendCounter |= 0xFFFF;
+            }
+            break;
+        case 3:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy -= main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0;
+                ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND;
+                ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 0x7);
+                main->blendMode = 0;
+            }
+            break;
+        case 4:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BD;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy += main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0x10 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0x10;
+                main->blendMode = 0;
+                main->blendCounter |= 0xFFFF;
+            }
+            break;
+    }
+    if(gMain.itemPlateAction == 1
+    && gMain.blendMode == 0) {
+        if(gMain.blendCounter != 0xFFFF)
+        {
+            gIORegisters.lcd_dispcnt |= DISPCNT_WIN0_ON;
+            gIORegisters.lcd_win0h = 239;
+            gIORegisters.lcd_win0v = 100;
+            gIORegisters.lcd_winin = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ;
+            gIORegisters.lcd_winout = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR;
+        }
+        else {
+            gIORegisters.lcd_dispcnt &= ~DISPCNT_WIN0_ON;
+            gIORegisters.lcd_win0h = 0;
+            gIORegisters.lcd_win0v = 0;
+            gIORegisters.lcd_winin = 0;
+            gIORegisters.lcd_winout = 0;
+        }
+    }
+}
+

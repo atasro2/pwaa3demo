@@ -43,5 +43,6 @@ void sub_8006470(u32, u32, u32);
 void RunScriptContext(void);
 void sub_801DF10(struct ScriptContext *);
 void nullsub_6(u32, u32, u32, u32);
+struct AnimationListEntry * sub_8016FB4(void);
 
 #endif//GUARD_DECLARATIONS_H
