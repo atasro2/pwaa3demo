@@ -7383,7 +7383,7 @@ _08004EB6:
 	ldrh r0, [r1, #0x34]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_80057F4
+	bl LoadAndAdjustBGPaletteByMode
 	b _08004F14
 	.align 2, 0
 _08004EDC: .4byte 0x040000D4
@@ -7402,7 +7402,7 @@ _08004F08:
 	ldrh r0, [r2, #0x34]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_80057F4
+	bl LoadAndAdjustBGPaletteByMode
 _08004F14:
 	ldr r1, [sp, #0xc]
 	ldrh r0, [r1, #0x34]
@@ -7418,7 +7418,7 @@ _08004F14:
 	ldrh r0, [r1, #0x34]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_800598C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 	b _08004F48
 	.align 2, 0
 _08004F38: .4byte 0x0000FFFE
@@ -7427,7 +7427,7 @@ _08004F3C:
 	ldrh r0, [r2, #0x34]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800598C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 _08004F48:
 	movs r0, #8
 	ldr r4, _08004FA8 @ =gUnknown_030037ED
@@ -8565,8 +8565,8 @@ _0800579E:
 	.align 2, 0
 _080057F0: .4byte 0x00000259
 
-	thumb_func_start sub_80057F4
-sub_80057F4: @ 0x080057F4
+	thumb_func_start LoadAndAdjustBGPaletteByMode
+LoadAndAdjustBGPaletteByMode: @ 0x080057F4
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -8686,8 +8686,8 @@ _080058DC: .4byte 0x80000100
 _080058E0: .4byte 0x05000040
 _080058E4: .4byte 0x800000E0
 
-	thumb_func_start sub_80058E8
-sub_80058E8: @ 0x080058E8
+	thumb_func_start LoadAndAdjustCurrentAnimation01PaletteByMode
+LoadAndAdjustCurrentAnimation01PaletteByMode: @ 0x080058E8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -8768,8 +8768,8 @@ _08005976:
 _08005984: .4byte 0x040000D4
 _08005988: .4byte 0x050003C0
 
-	thumb_func_start sub_800598C
-sub_800598C: @ 0x0800598C
+	thumb_func_start LoadAndAdjustCounselWitnessBenchPaletteByMode
+LoadAndAdjustCounselWitnessBenchPaletteByMode: @ 0x0800598C
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x20
 	lsls r0, r0, #0x10
@@ -8823,8 +8823,8 @@ _080059F0: .4byte 0x040000D4
 _080059F4: .4byte 0x80000010
 _080059F8: .4byte 0x05000340
 
-	thumb_func_start nullsub_2
-nullsub_2: @ 0x080059FC
+	thumb_func_start LoadAndAdjustAnimation10PaletteByMode
+LoadAndAdjustAnimation10PaletteByMode: @ 0x080059FC
 	bx lr
 	.align 2, 0
 
@@ -20285,7 +20285,7 @@ _0800B864:
 	movs r0, #3
 	movs r1, #0xff
 	movs r2, #1
-	bl sub_800598C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 	b _0800B882
 	.align 2, 0
 _0800B870: .4byte 0x0000FFFD
@@ -20485,7 +20485,7 @@ _0800BA0C:
 	movs r0, #2
 	movs r1, #0xff
 	movs r2, #1
-	bl sub_800598C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 	b _0800BA2A
 	.align 2, 0
 _0800BA18: .4byte 0x0000FFFD

@@ -95,7 +95,9 @@ struct ScriptContext {
     u16 unk30;
     u8 fill32[0xC];
     u16 unk3E;
-    u8 fill40[0x5C];
+    u8 fill40[0x6];
+    u16 unk46;
+    u8 fill48[0x54];
 };
 
 #endif//GUARD_STRUCTS_H
