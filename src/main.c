@@ -905,3 +905,39 @@ void UpdateSpecialEffects(void)
             break;
     }
 }
+
+void InitSpecialEffectsWithMosaic(u32 type, u32 delay, u32 intensity)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
+    ioRegs->lcd_bg3cnt |= BGCNT_MOSAIC;
+    ioRegs->lcd_bg2cnt |= BGCNT_MOSAIC;
+    main->effectCounter = 0;
+}
+
+void InitSpecialEffects(u32 type, u32 delay, u32 intensity)
+{
+    struct Main * main = &gMain;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
+    main->effectCounter = 0;
+}
+
+
+void VBlankIntr()
+{
+    m4aSoundVSync();
+    gMain.vblankWaitCounter++;
+}
+
+void HBlankIntr()
+{
+}
+
+void IntrDummy()
+{
+}
