@@ -75,7 +75,7 @@ _0801A13A:
 	.align 2, 0
 _0801A144: .4byte gScriptContext
 
-	thumb_func_start sub_801A148
+	thumb_func_start sub_801A148 @ this looks like its Command17 ???
 sub_801A148: @ 0x0801A148
 	push {r4, r5, lr}
 	ldr r5, _0801A184 @ =0x00003FFF
