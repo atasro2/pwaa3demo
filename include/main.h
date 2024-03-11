@@ -45,7 +45,12 @@ struct Main
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
     /* +0x08E */ u8 blendDelay; // unity: fade_time
     /* +0x08F */ u8 blendDeltaY; // unity: fade_speed
-    /* +0x090 */ u8 fill90[0xE];
+    /* +0x090 */ u16 effectType;
+    /* +0x092 */ u8 fill92[0x2];
+    /* +0x094 */ u16 effectCounter;
+    /* +0x096 */ u8 effectDelay;
+    /* +0x097 */ u8 effectIntensity;
+    /* +0x098 */ u8 fill98[0x6];
     /* +0x09E */ u8 itemPlateAction;
     /* +0x0A0 */ u8 fillA0[0x22];
     /* +0x0C1 */ u8 scenarioIdx;

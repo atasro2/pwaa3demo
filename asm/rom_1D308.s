@@ -2218,7 +2218,7 @@ _0801E51C:
 	bne _0801E54A
 	movs r0, #0x1f
 	movs r1, #0
-	bl sub_80058E8
+	bl LoadAndAdjustCurrentAnimation01PaletteByMode
 _0801E54A:
 	ldrh r4, [r6, #0x3a]
 	lsrs r1, r4, #1

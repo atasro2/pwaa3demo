@@ -512,7 +512,7 @@ void UpdateHardwareBlend(void)
     struct Main * main = &gMain;
     struct IORegisters * ioRegs = &gIORegisters;
     struct ScriptContext * scriptCtx = &gScriptContext;
-    
+
     if(!(scriptCtx->unk1E & 0x4000)) {
         gIORegisters.lcd_dispcnt &= ~DISPCNT_WIN0_ON;
         gIORegisters.lcd_win0h = 0;
@@ -629,3 +629,315 @@ void UpdateHardwareBlend(void)
     }
 }
 
+void UpdateSpecialEffects(void)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+
+    switch(main->effectType)
+    {
+        case 0:
+        case 0xFFFD:
+        case 0xFFFE:
+        case 0xFFFF:
+            break;
+        case 1:
+            if((ioRegs->lcd_mosaic & 0xFF) < main->effectIntensity) {
+                ioRegs->lcd_mosaic = 0;
+                main->effectCounter = 0;
+                ioRegs->lcd_bg3cnt &= ~BGCNT_MOSAIC;
+                ioRegs->lcd_bg2cnt &= ~BGCNT_MOSAIC;
+                main->effectType = 0;
+            } else {
+                ioRegs->lcd_mosaic -= (main->effectIntensity << 8) + main->effectIntensity;
+            }
+            break;
+        case 2:
+            if((ioRegs->lcd_mosaic & 0xFF) + main->effectIntensity >= 0x100) {
+                ioRegs->lcd_mosaic |= 0xFFFF; //??
+                main->effectType |= 0xFFFF; // ?????
+                main->effectCounter = 0;
+            } else {
+                ioRegs->lcd_mosaic += (main->effectIntensity << 8) + main->effectIntensity;
+            }
+            break;
+        case 3:
+        case 7:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 3 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
+                if(main->currentBG == 1 
+                || main->currentBG == 2 
+                || main->currentBG == 3
+                || main->currentBG == 0x81)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 0);
+            }
+            
+            if(main->effectIntensity == 0x20)
+                main->effectType = 0xFFFD;
+            break;
+        case 4:
+        case 8:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 4 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
+                if(main->currentBG == 1 
+                || main->currentBG == 2 
+                || main->currentBG == 3)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 0);
+            }
+            
+            if(main->effectIntensity == 0)
+                main->effectType = 0;
+            break;
+        case 5:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 1);
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 1);
+                if(main->currentBG == 1
+                || main->currentBG == 2 
+                || main->currentBG == 3)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 1);
+            }
+            
+            if(main->effectIntensity == 0)
+                main->effectType = 0;
+            break;
+        case 6:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 1);
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 1);
+                if(main->currentBG == 1 
+                || main->currentBG == 2 
+                || main->currentBG == 3)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 1);
+            }
+            
+            if(main->effectIntensity == 0x20)
+                main->effectType = 0xFFFE;
+            break;
+        case 9:
+        case 11:
+            if(main->effectDelay != 0)
+            {
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
+                {
+                    main->effectCounter = 0;
+                    main->effectIntensity++;
+                    if(main->effectType == 11)
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
+                    else
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                }
+            }
+            if(main->effectIntensity == 0x20)
+            {
+                if(main->effectType == 11)
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
+                else
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                main->effectType = 0;
+            }
+            break;
+        case 10:
+        case 12:
+            if(main->effectDelay != 0)
+            {
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
+                {
+                    main->effectCounter = 0;
+                    main->effectIntensity--;
+                    if(main->effectType == 12)
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
+                    else
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                }
+            }
+            if(main->effectIntensity == 0)
+            {
+                if(main->effectType == 12)
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
+                else
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                main->effectType = 0;
+            }
+            break;
+        case 13:
+        case 15:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                sub_8005A00(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 15 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    sub_8005BE8(main->effectIntensity, 0);
+                if(main->currentBG == 1
+                || main->currentBG == 2 
+                || main->currentBG == 3)
+                    sub_8005C88(main->currentBG, main->effectIntensity, 0);
+            }
+            
+            if(main->effectIntensity == 0x20)
+                main->effectType = 0xFFFC;
+            break;
+        case 14:
+        case 16:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                sub_8005A00(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 16 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    sub_8005BE8(main->effectIntensity, 0);
+                if(main->currentBG == 1
+                || main->currentBG == 2 
+                || main->currentBG == 3)
+                    sub_8005C88(main->currentBG, main->effectIntensity, 0);
+            }
+            
+            if(main->effectIntensity == 0)
+                main->effectType = 0;
+            break;
+        case 17:
+            if(main->effectDelay != 0)
+            {
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
+                {
+                    main->effectCounter = 0;
+                    main->effectIntensity++;
+                    nullsub_3(main->effectIntensity, 0);
+                }
+            }
+            if(main->effectIntensity == 0x20)
+            {
+                nullsub_3(main->effectIntensity, 0);
+                main->effectType = 0;
+            }
+            break;
+        case 18:
+            if(main->effectDelay != 0)
+            {
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
+                {
+                    main->effectCounter = 0;
+                    main->effectIntensity--;
+                    nullsub_3(main->effectIntensity, 0);
+                }
+            }
+            if(main->effectIntensity == 0)
+            {
+                nullsub_3(main->effectIntensity, 0);
+                main->effectType = 0;
+            }
+            break;
+        case 19:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                ioRegs->lcd_mosaic = ((gScriptContext.unk46 + (main->effectIntensity & Random())) << 8)
+                                   | ((gScriptContext.unk46 + (main->effectIntensity & Random())) << 12);
+            }
+            break;
+        case 20:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                ioRegs->lcd_bldy -= main->effectIntensity;
+                ioRegs->lcd_bldy &= 0xF;
+                if(ioRegs->lcd_bldy == 0) {
+                    main->effectType = 0;
+                }
+            }
+            break;
+        case 21:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
+            }
+            if(main->effectIntensity == 0x20) {
+                main->effectType = 0xFFFD;
+            }
+            break;
+        case 22:
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
+            {
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
+            }
+            if(main->effectIntensity == 0) {
+                main->effectType = 0;
+            }
+            break;
+    }
+}
+
+void InitSpecialEffectsWithMosaic(u32 type, u32 delay, u32 intensity)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
+    ioRegs->lcd_bg3cnt |= BGCNT_MOSAIC;
+    ioRegs->lcd_bg2cnt |= BGCNT_MOSAIC;
+    main->effectCounter = 0;
+}
+
+void InitSpecialEffects(u32 type, u32 delay, u32 intensity)
+{
+    struct Main * main = &gMain;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
+    main->effectCounter = 0;
+}
+
+
+void VBlankIntr()
+{
+    m4aSoundVSync();
+    gMain.vblankWaitCounter++;
+}
+
+void HBlankIntr()
+{
+}
+
+void IntrDummy()
+{
+}

@@ -19,7 +19,7 @@ SECTIONS {
     {
         src/crt0.o(.text);
         src/main.o(.text);
-        asm/main.o(.text);
+        asm/debug.o(.text);
         asm/code.o(.text);
         asm/script_commands.o(.text);
         asm/rom_1D308.o(.text);

@@ -36,6 +36,16 @@ void VBlankIntr();
 void HBlankIntr();
 void IntrDummy();
 
+extern void LoadAndAdjustBGPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
+extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
+
+extern void sub_8005A00(u16,u16,u16);
+extern void sub_8005BE8(u16,u16);
+extern void sub_8005C88(u16,u16,u16);
+extern void nullsub_3(u16,u16);
+
 
 // stubbed out stuff
 void sub_8006470(u32, u32, u32);
