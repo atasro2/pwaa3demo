@@ -129,8 +129,9 @@ void ScrollMode3AnimationUpdate(struct AnimationListEntry *, struct CourtScroll 
 void ScrollMode4AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
 void ScrollMode5AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
 
-void ResetAnimationSystem();
-void ClearAllAnimationSprites();
+void ResetAnimationSystem(void);
+void ClearAllAnimationSprites(void);
+void ActivateAllAllocatedAnimations(void);
 struct AnimationListEntry * FindAnimationFromAnimId(u32 animId);
 void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin, u32 yOrigin);
 void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation);

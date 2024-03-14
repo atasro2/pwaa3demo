@@ -36,7 +36,7 @@ void (*gGameProcesses[])(struct Main *) = {
     sub_8008D7C,
     sub_800985C,
     sub_800730C,
-    sub_80018F8
+    DebugProcess
 };
 extern void (*gIntrTable[0x10]);
 

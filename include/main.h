@@ -29,7 +29,10 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    /* +0x017 */ u8 fill17[0x19];
+    /* +0x017 */ u8 unk17;
+    /* +0x018 */ u8 unk18;
+    /* +0x019 */ u8 unk19;
+    /* +0x01A */ u8 fill1A[0x16];
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
@@ -59,7 +62,9 @@ struct Main
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;
-    /* +0x259 */ u8 fill259[0x6E];
+    /* +0x259 */ u8 fill259[0x7];
+    /* +0x260 */ u32 unk260;
+    /* +0x264 */ u8 fill264[0x63];
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
     /* +0x2D0 */ u32 unk2D0;

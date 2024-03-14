@@ -1,6 +1,10 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 SECTIONS {
+    /* TODO: matching hack for later functions REMOVE!!!! */
+    gUnknown_08022DDC = 0x08022DDC; 
+    
+    
     . = 0x2000000;
     ewram (NOLOAD) :
     ALIGN(4)
@@ -19,6 +23,7 @@ SECTIONS {
     {
         src/crt0.o(.text);
         src/main.o(.text);
+        src/debug.o(.text);
         asm/debug.o(.text);
         asm/code.o(.text);
         asm/script_commands.o(.text);
@@ -40,6 +45,8 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
+        src/debug.o(.rodata);
+        rodata/debug.o(.rodata);
         rodata/rodata.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);

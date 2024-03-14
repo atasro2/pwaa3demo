@@ -1,4 +1,5 @@
 	.section .data
+    .align 2, 0
 
     .global gUnknown_0814D348
 gUnknown_0814D348:
