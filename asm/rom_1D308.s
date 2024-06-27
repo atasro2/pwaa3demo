@@ -1468,7 +1468,7 @@ _0801DEB8:
 	beq _0801DEF2
 	b _0801DF04
 _0801DEC2:
-	bl sub_800B974
+	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
@@ -1482,7 +1482,7 @@ _0801DED2:
 	bl sub_800B898
 	b _0801DF04
 _0801DEE2:
-	bl sub_800B974
+	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
@@ -3942,14 +3942,14 @@ _0801F342:
 	bl sub_800B898
 	b _0801F370
 _0801F352:
-	bl sub_800B974
+	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
 	bl sub_800BA40
 	b _0801F370
 _0801F362:
-	bl sub_800B974
+	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1

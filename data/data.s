@@ -84,8 +84,8 @@ gUnknown_0814DB94:
 gUnknown_0814DBA4:
     .incbin "baserom.gba", 0x0014DBA4, 0x18
 
-    .global gUnknown_0814DBBC
-gUnknown_0814DBBC:
+    .global gInvestigationProcessStates
+gInvestigationProcessStates:
     .incbin "baserom.gba", 0x0014DBBC, 0x2C
 
     .global gUnknown_0814DBE8

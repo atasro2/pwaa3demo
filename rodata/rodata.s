@@ -180,8 +180,8 @@ gUnknown_080266E8:
 gUnknown_08026718:
     .incbin "baserom.gba", 0x00026718, 0x98
 
-    .global gUnknown_080267B0
-gUnknown_080267B0:
+    .global gSaveVersion
+gSaveVersion:
     .incbin "baserom.gba", 0x000267B0, 0x34
 
     .global gUnknown_080267E4

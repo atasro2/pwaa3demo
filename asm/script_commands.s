@@ -3770,7 +3770,7 @@ sub_801BE14: @ 0x0801BE14
 	adds r2, r1, #2
 	str r2, [r4]
 	ldrh r1, [r1, #2]
-	bl sub_800BF38
+	bl SetRoomSeq
 	ldr r0, [r4]
 	adds r0, #2
 	str r0, [r4]

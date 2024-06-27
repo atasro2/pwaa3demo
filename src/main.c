@@ -21,21 +21,21 @@ void UpdateSpecialEffects(void);
 static void UpdateCourtScroll(struct CourtScroll *);
 
 void (*gGameProcesses[])(struct Main *) = {
-    sub_8006918,
-    sub_8006AA4,
-    sub_8006CE8,
-    sub_800A434,
-    sub_800BFA4,
-    sub_800A950,
-    sub_800AB64,
-    sub_800EA6C,
-    sub_800EACC,
-    sub_800B208,
-    sub_80076F8,
-    sub_8008708,
-    sub_8008D7C,
-    sub_800985C,
-    sub_800730C,
+    CapcomLogoProcess,
+    TitleScreenProcess,
+    GameOverScreenProcess,
+    CourtProcess,
+    InvestigationProcess,
+    TestimonyProcess,
+    QuestioningProcess,
+    CourtRecordProcess,
+    EvidenceAddedProcess,
+    VerdictProcess,
+    SaveGameProcess,
+    EpisodeClearedProcess,
+    SelectEpisodeProcess,
+    ContinueSaveProcess,
+    ClearSaveProcess,
     sub_80018F8
 };
 extern void (*gIntrTable[0x10]);
