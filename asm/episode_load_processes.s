@@ -376,7 +376,7 @@ _080087C0:
 	lsls r0, r0, #4
 	ldr r2, _080087EC @ =gUnknown_020000F6
 	strb r0, [r2]
-	bl sub_80070AC
+	bl SaveGameData
 	b _08008854
 	.align 2, 0
 _080087E4: .4byte 0x00002C54

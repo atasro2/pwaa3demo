@@ -1,210 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_80070AC
-sub_80070AC: @ 0x080070AC
-	push {lr}
-	ldr r2, _080070E4 @ =gSaveDataBuffer
-	adds r1, r2, #0
-	adds r1, #0x4f
-	movs r0, #0xf0
-	ldrb r3, [r1]
-	orrs r0, r3
-	strb r0, [r1]
-	ldr r1, _080070E8 @ =0x040000D4
-	ldr r0, _080070EC @ =gSaveVersion
-	str r0, [r1]
-	str r2, [r1, #4]
-	ldr r0, _080070F0 @ =0x80000019
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	bl sub_80071BC
-	movs r1, #0
-	ldr r0, _080070F4 @ =gJoypad
-	ldrh r2, [r0]
-	movs r0, #0x80
-	lsls r0, r0, #2
-	ands r0, r2
-	cmp r0, #0
-	beq _080070F8
-	movs r1, #1
-	b _08007104
-	.align 2, 0
-_080070E4: .4byte gSaveDataBuffer
-_080070E8: .4byte 0x040000D4
-_080070EC: .4byte gSaveVersion
-_080070F0: .4byte 0x80000019
-_080070F4: .4byte gJoypad
-_080070F8:
-	movs r0, #0x80
-	lsls r0, r0, #1
-	ands r0, r2
-	cmp r0, #0
-	beq _08007104
-	movs r1, #2
-_08007104:
-	ldr r2, _08007118 @ =0x00002C54
-	ldr r0, _0800711C @ =gSaveDataBuffer
-	muls r1, r2, r1
-	movs r3, #0xe0
-	lsls r3, r3, #0x14
-	adds r1, r1, r3
-	bl WriteSramEx
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08007118: .4byte 0x00002C54
-_0800711C: .4byte gSaveDataBuffer
-
-	thumb_func_start LoadSaveData
-LoadSaveData: @ 0x08007120
-	push {r4, lr}
-	movs r3, #0
-	ldr r0, _08007138 @ =gJoypad
-	ldrh r1, [r0]
-	movs r0, #0x80
-	lsls r0, r0, #2
-	ands r0, r1
-	cmp r0, #0
-	beq _0800713C
-	movs r3, #1
-	b _08007148
-	.align 2, 0
-_08007138: .4byte gJoypad
-_0800713C:
-	movs r0, #0x80
-	lsls r0, r0, #1
-	ands r0, r1
-	cmp r0, #0
-	beq _08007148
-	movs r3, #2
-_08007148:
-	ldr r2, _08007190 @ =0x00002C54
-	adds r0, r3, #0
-	muls r0, r2, r0
-	movs r1, #0xe0
-	lsls r1, r1, #0x14
-	adds r0, r0, r1
-	ldr r4, _08007194 @ =gSaveDataBuffer
-	adds r1, r4, #0
-	bl ReadSram
-	movs r1, #0
-	ldr r2, _08007198 @ =gSaveVersion
-_08007160:
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	ldrb r3, [r4]
-	cmp r0, r3
-	bne _080071A0
-	adds r4, #1
-	adds r1, #1
-	cmp r1, #0x2f
-	bls _08007160
-	ldr r4, _0800719C @ =gMain
-	ldr r0, _08007194 @ =gSaveDataBuffer
-	adds r0, #0xf6
-	ldrb r0, [r0]
-	adds r1, r4, #0
-	adds r1, #0xc2
-	strb r0, [r1]
-	bl sub_80071F8
-	cmp r0, #0
-	beq _080071B0
-	movs r0, #0xf0
-	strb r0, [r4, #0x1b]
-	movs r0, #0
-	b _080071B4
-	.align 2, 0
-_08007190: .4byte 0x00002C54
-_08007194: .4byte gSaveDataBuffer
-_08007198: .4byte gSaveVersion
-_0800719C: .4byte gMain
-_080071A0:
-	ldr r1, _080071AC @ =gMain
-	movs r0, #0
-	strb r0, [r1, #0x1b]
-	movs r0, #2
-	b _080071B4
-	.align 2, 0
-_080071AC: .4byte gMain
-_080071B0:
-	strb r0, [r4, #0x1b]
-	movs r0, #1
-_080071B4:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-
-	thumb_func_start sub_80071BC
-sub_80071BC: @ 0x080071BC
-	push {r4, lr}
-	ldr r1, _080071EC @ =gSaveDataBuffer
-	movs r0, #0
-	str r0, [r1, #0x30]
-	movs r2, #0
-	adds r0, r1, #0
-	adds r0, #0x34
-	ldr r4, _080071F0 @ =0x00002C54
-	adds r3, r1, r4
-	adds r4, r1, #0
-	cmp r0, r3
-	bhs _080071E0
-	adds r1, r3, #0
-_080071D6:
-	ldrb r3, [r0]
-	adds r2, r3, r2
-	adds r0, #4
-	cmp r0, r1
-	blo _080071D6
-_080071E0:
-	ldr r0, _080071F4 @ =0x00000927
-	adds r2, r2, r0
-	str r2, [r4, #0x30]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080071EC: .4byte gSaveDataBuffer
-_080071F0: .4byte 0x00002C54
-_080071F4: .4byte 0x00000927
-
-	thumb_func_start sub_80071F8
-sub_80071F8: @ 0x080071F8
-	push {r4, lr}
-	movs r1, #0
-	ldr r0, _08007224 @ =gUnknown_02000034
-	ldr r3, _08007228 @ =0x00002C20
-	adds r2, r0, r3
-	adds r3, r0, #0
-	subs r3, #0x34
-	cmp r0, r2
-	bhs _08007214
-_0800720A:
-	ldrb r4, [r0]
-	adds r1, r4, r1
-	adds r0, #4
-	cmp r0, r2
-	blo _0800720A
-_08007214:
-	ldr r0, _0800722C @ =0x00000927
-	adds r1, r1, r0
-	ldr r0, [r3, #0x30]
-	cmp r1, r0
-	beq _08007230
-	movs r0, #0
-	b _08007232
-	.align 2, 0
-_08007224: .4byte gUnknown_02000034
-_08007228: .4byte 0x00002C20
-_0800722C: .4byte 0x00000927
-_08007230:
-	movs r0, #1
-_08007232:
-	pop {r4}
-	pop {r1}
-	bx r1
-
 	thumb_func_start sub_8007238
 sub_8007238: @ 0x08007238
 	push {r4, r5, r6, lr}
@@ -289,7 +85,7 @@ _080072CE:
 	ldr r0, _08007308 @ =gMain
 	adds r0, #0xc2
 	strb r1, [r0]
-	bl sub_80070AC
+	bl SaveGameData
 _080072FC:
 	pop {r4, r5, r6}
 	pop {r0}
@@ -1387,7 +1183,7 @@ _08007C4C:
 	orrs r1, r2
 	strb r1, [r0]
 _08007C58:
-	bl sub_80070AC
+	bl SaveGameData
 	cmp r0, #0
 	beq _08007C80
 	ldr r0, _08007C78 @ =gScriptContext

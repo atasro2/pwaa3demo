@@ -29,7 +29,9 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    /* +0x017 */ u8 fill17[0x19];
+    /* +0x017 */ u8 fill17[4];
+    /* +0x01B */ u8 saveContinueFlags;
+    /* +0x01C */ u8 fill1C[0x14];
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
