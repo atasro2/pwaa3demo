@@ -1156,7 +1156,7 @@ sub_8012504: @ 0x08012504
 	mov r8, sp
 	add r7, sp, #4
 	mov r1, sl
-	bl sub_800647C
+	bl CheckPointInArea
 	cmp r0, #0
 	bne _080125D8
 	mov r2, sp

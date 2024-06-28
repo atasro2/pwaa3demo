@@ -22,7 +22,10 @@ SECTIONS {
         asm/debug.o(.text);
         src/bg.o(.text);
         asm/bg.o(.text);
+        src/utils.o(.text);
         asm/utils.o(.text);
+        src/utils_2.o(.text);
+        asm/utils_2.o(.text);
         asm/case_data.o(.text);
         asm/rom_67A8.o(.text);
         asm/title_processes.o(.text);
