@@ -132,8 +132,8 @@ gUnknown_08023EEC:
 gUnknown_08023EF2:
     .incbin "baserom.gba", 0x00023EF2, 0x6
 
-    .global gUnknown_08023EF8
-gUnknown_08023EF8:
+    .global gTextboxTiles
+gTextboxTiles:
     .incbin "baserom.gba", 0x00023EF8, 0x400
 
     .global gUnknown_080242F8

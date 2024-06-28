@@ -256,8 +256,8 @@ _08006500:
 	pop {r1}
 	bx r1
 
-	thumb_func_start sub_800650C
-sub_800650C: @ 0x0800650C
+	thumb_func_start fix_mul
+fix_mul: @ 0x0800650C
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	lsls r1, r1, #0x10
@@ -272,8 +272,8 @@ _0800651E:
 	asrs r0, r0, #0x10
 	bx lr
 
-	thumb_func_start sub_8006524
-sub_8006524: @ 0x08006524
+	thumb_func_start fix_div
+fix_div: @ 0x08006524
 	push {lr}
 	lsls r0, r0, #0x10
 	asrs r0, r0, #8
@@ -286,8 +286,8 @@ sub_8006524: @ 0x08006524
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_800653C
-sub_800653C: @ 0x0800653C
+	thumb_func_start fix_inverse
+fix_inverse: @ 0x0800653C
 	push {lr}
 	adds r1, r0, #0
 	movs r0, #0x80
@@ -343,11 +343,11 @@ _080065A0: .4byte 0xFFFF0000
 _080065A4: .4byte 0xFFFFFF00
 _080065A8: .4byte 0xFFFF00FF
 
-	thumb_func_start sub_80065AC
-sub_80065AC: @ 0x080065AC
+	thumb_func_start ChangeFlag
+ChangeFlag: @ 0x080065AC
 	push {r4, lr}
 	adds r4, r1, #0
-	ldr r1, _080065D0 @ =gUnknown_0814D930
+	ldr r1, _080065D0 @ =gFlagPtrs
 	lsls r0, r0, #2
 	adds r0, r0, r1
 	ldr r3, [r0]
@@ -364,7 +364,7 @@ sub_80065AC: @ 0x080065AC
 	orrs r0, r1
 	b _080065E0
 	.align 2, 0
-_080065D0: .4byte gUnknown_0814D930
+_080065D0: .4byte gFlagPtrs
 _080065D4:
 	movs r0, #0x1f
 	ands r0, r4
@@ -378,9 +378,9 @@ _080065E0:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80065E8
-sub_80065E8: @ 0x080065E8
-	ldr r2, _0800660C @ =gUnknown_0814D930
+	thumb_func_start GetFlag
+GetFlag: @ 0x080065E8
+	ldr r2, _0800660C @ =gFlagPtrs
 	lsls r0, r0, #2
 	adds r0, r0, r2
 	ldr r2, [r0]
@@ -399,7 +399,7 @@ sub_80065E8: @ 0x080065E8
 _08006608:
 	bx lr
 	.align 2, 0
-_0800660C: .4byte gUnknown_0814D930
+_0800660C: .4byte gFlagPtrs
 
 	thumb_func_start sub_8006610
 sub_8006610: @ 0x08006610
@@ -418,23 +418,23 @@ sub_8006610: @ 0x08006610
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x18]
 	movs r3, #0
 	ldrsh r0, [r6, r3]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1a]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1c]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1e]
 	ldrh r1, [r5, #0x1a]
 	lsls r0, r1, #2

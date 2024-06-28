@@ -449,7 +449,7 @@ _08011FC4:
 	strh r0, [r1]
 	lsls r0, r5, #0x10
 	asrs r0, r0, #0x10
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r5, _0801205C @ =gUnknown_08026430
 	adds r0, r5, #0
@@ -461,7 +461,7 @@ _08011FC4:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08012060 @ =gOamObjects
 	lsls r1, r7, #3
 	adds r1, r1, r6
@@ -470,7 +470,7 @@ _08011FC4:
 	movs r1, #0
 	ldrsh r0, [r5, r1]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	lsls r1, r7, #3
 	adds r1, r1, r6
 	strh r0, [r1, #6]
@@ -480,14 +480,14 @@ _08011FC4:
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	lsls r1, r7, #3
 	adds r1, r1, r6
 	strh r0, [r1, #6]
 	adds r7, #1
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	lsls r1, r7, #3
 	adds r1, r1, r6
 	strh r0, [r1, #6]
@@ -2641,7 +2641,7 @@ sub_8013050: @ 0x08013050
 	ldr r0, _080131B0 @ =gMain
 	str r0, [sp]
 	movs r7, #0x80
-	ldr r5, _080131B4 @ =gUnknown_03002FA0
+	ldr r5, _080131B4 @ =gBG0MapBuffer
 	ldr r0, _080131B8 @ =gAnimation
 	ldr r1, [r0, #8]
 	mov ip, r1
@@ -2819,7 +2819,7 @@ _08013180:
 	b _080131E0
 	.align 2, 0
 _080131B0: .4byte gMain
-_080131B4: .4byte gUnknown_03002FA0
+_080131B4: .4byte gBG0MapBuffer
 _080131B8: .4byte gAnimation
 _080131BC: .4byte 0x000003FF
 _080131C0: .4byte gUnknown_0200AFC0

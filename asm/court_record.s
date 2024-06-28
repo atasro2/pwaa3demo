@@ -103,17 +103,17 @@ CourtRecordProcess: @ 0x0800EA6C
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800EA90
-	ldr r0, _0800EA88 @ =gUnknown_03002080
+	ldr r0, _0800EA88 @ =gBG1MapBuffer
 	ldr r2, _0800EA8C @ =0x000004DC
 	adds r1, r0, r2
 	movs r2, #9
 	b _0800EA98
 	.align 2, 0
 _0800EA84: .4byte gScriptContext
-_0800EA88: .4byte gUnknown_03002080
+_0800EA88: .4byte gBG1MapBuffer
 _0800EA8C: .4byte 0x000004DC
 _0800EA90:
-	ldr r0, _0800EAB8 @ =gUnknown_03002080
+	ldr r0, _0800EAB8 @ =gBG1MapBuffer
 	ldr r2, _0800EABC @ =0x000004DC
 	adds r1, r0, r2
 	movs r2, #0
@@ -133,7 +133,7 @@ _0800EA98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EAB8: .4byte gUnknown_03002080
+_0800EAB8: .4byte gBG1MapBuffer
 _0800EABC: .4byte 0x000004DC
 _0800EAC0: .4byte 0x000004DE
 _0800EAC4: .4byte gUnknown_0814DC18
@@ -167,7 +167,7 @@ sub_800EAEC: @ 0x0800EAEC
 	adds r0, r5, #0
 	bl sub_8011194
 	strh r5, [r4]
-	ldr r1, _0800EBCC @ =gUnknown_03000000
+	ldr r1, _0800EBCC @ =gBG2MapBuffer
 	movs r0, #0
 	ldr r3, _0800EBD0 @ =0x000003FF
 	movs r2, #0
@@ -270,7 +270,7 @@ _0800EBB6:
 	.align 2, 0
 _0800EBC4: .4byte gMain
 _0800EBC8: .4byte 0x000002C2
-_0800EBCC: .4byte gUnknown_03000000
+_0800EBCC: .4byte gBG2MapBuffer
 _0800EBD0: .4byte 0x000003FF
 _0800EBD4: .4byte gUnknown_03002D40
 _0800EBD8: .4byte gUnknown_03002D68
@@ -1474,7 +1474,7 @@ _0800F596:
 	ands r0, r1
 	cmp r0, #0
 	bne _0800F5DA
-	ldr r1, _0800F600 @ =gUnknown_03002080
+	ldr r1, _0800F600 @ =gBG1MapBuffer
 	ldr r0, _0800F604 @ =0x000004DC
 	adds r2, r1, r0
 	movs r0, #0x20
@@ -1501,7 +1501,7 @@ _0800F5EE:
 _0800F5F4: .4byte gUnknown_03002D58
 _0800F5F8: .4byte 0x000001FF
 _0800F5FC: .4byte gScriptContext
-_0800F600: .4byte gUnknown_03002080
+_0800F600: .4byte gBG1MapBuffer
 _0800F604: .4byte 0x000004DC
 _0800F608: .4byte 0x000004DE
 _0800F60C: .4byte gUnknown_030037B8
@@ -2963,7 +2963,7 @@ _080101CE:
 _080101EC:
 	movs r2, #0
 	ldrsh r0, [r6, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r3, _0801027C @ =gUnknown_08026430
 	mov r8, r3
@@ -2978,7 +2978,7 @@ _080101EC:
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _08010280 @ =gOamObjects
 	strh r0, [r5, #6]
 	ldrb r2, [r6]
@@ -2987,7 +2987,7 @@ _080101EC:
 	movs r3, #0
 	ldrsh r0, [r0, r3]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0xe]
 	ldrb r1, [r6]
 	lsls r0, r1, #1
@@ -2997,7 +2997,7 @@ _080101EC:
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x16]
 	ldrb r0, [r6]
 	adds r0, #0x40
@@ -3006,7 +3006,7 @@ _080101EC:
 	movs r2, #0
 	ldrsh r0, [r0, r2]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1e]
 	movs r0, #0x88
 	lsls r0, r0, #1
@@ -3040,7 +3040,7 @@ sub_801028C: @ 0x0801028C
 	mov r7, r8
 	push {r7}
 	adds r6, r0, #0
-	ldr r1, _08010304 @ =gUnknown_03000000
+	ldr r1, _08010304 @ =gBG2MapBuffer
 	movs r0, #0
 	ldr r3, _08010308 @ =0x000003FF
 	ldr r2, _0801030C @ =gIORegisters
@@ -3094,7 +3094,7 @@ _080102A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010304: .4byte gUnknown_03000000
+_08010304: .4byte gBG2MapBuffer
 _08010308: .4byte 0x000003FF
 _0801030C: .4byte gIORegisters
 
@@ -3157,7 +3157,7 @@ _0801036C:
 	ldrh r2, [r4, #0x1c]
 	orrs r0, r2
 	strh r0, [r4, #0x1c]
-	ldr r0, _080103A8 @ =gUnknown_03002080
+	ldr r0, _080103A8 @ =gBG1MapBuffer
 	ldr r2, _080103AC @ =0x000004DC
 	adds r1, r0, r2
 	movs r2, #9
@@ -3172,7 +3172,7 @@ _0801039A:
 	.align 2, 0
 _080103A0: .4byte gScriptContext
 _080103A4: .4byte gJoypad
-_080103A8: .4byte gUnknown_03002080
+_080103A8: .4byte gBG1MapBuffer
 _080103AC: .4byte 0x000004DC
 _080103B0: .4byte 0x000004DE
 
@@ -4013,7 +4013,7 @@ _08010A60:
 	beq _08010A72
 	adds r1, r0, #0
 	movs r0, #0
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _08010AD8
 _08010A72:
@@ -4278,7 +4278,7 @@ _08010C5A:
 	beq _08010C6C
 	b _08010DD2
 _08010C6C:
-	ldr r3, _08010C98 @ =gUnknown_03002080
+	ldr r3, _08010C98 @ =gBG1MapBuffer
 	adds r0, r3, #0
 	adds r0, #0x42
 	movs r2, #0
@@ -4301,7 +4301,7 @@ _08010C6C:
 	strb r2, [r6]
 	b _08010DD2
 	.align 2, 0
-_08010C98: .4byte gUnknown_03002080
+_08010C98: .4byte gBG1MapBuffer
 _08010C9C:
 	adds r0, r4, #0
 	bl sub_8010DD8
@@ -4382,7 +4382,7 @@ _08010D30:
 	ldr r0, _08010D5C @ =0x80000004
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r1, _08010D60 @ =gUnknown_03002080
+	ldr r1, _08010D60 @ =gBG1MapBuffer
 	movs r2, #0
 	movs r0, #0xb0
 	lsls r0, r0, #1
@@ -4400,7 +4400,7 @@ _08010D50: .4byte 0x040000D4
 _08010D54: .4byte gUnknown_03002DE0
 _08010D58: .4byte 0x07000240
 _08010D5C: .4byte 0x80000004
-_08010D60: .4byte gUnknown_03002080
+_08010D60: .4byte gBG1MapBuffer
 _08010D64:
 	ldrb r2, [r4, #8]
 	cmp r2, #6

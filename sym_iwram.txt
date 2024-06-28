@@ -1,15 +1,15 @@
-. = 0x00000000; gUnknown_03000000 = .;
+. = 0x00000000; gBG2MapBuffer = .;
 . = 0x00000007; gUnknown_03000007 = .;
 . = 0x0000000B; gUnknown_0300000B = .;
 . = 0x00000800; gAnimation = .;
-. = 0x00001080; gUnknown_03001080 = .;
+. = 0x00001080; gBG3MapBuffer = .;
 . = 0x00001082; gUnknown_03001082 = .;
 . = 0x000010BE; gUnknown_030010BE = .;
 . = 0x000010C0; gUnknown_030010C0 = .;
 . = 0x000015C0; gUnknown_030015C0 = .;
 . = 0x00001880; gUnknown_03001880 = .;
 . = 0x00001882; gUnknown_03001882 = .;
-. = 0x00002080; gUnknown_03002080 = .;
+. = 0x00002080; gBG1MapBuffer = .;
 . = 0x000020C0; gUnknown_030020C0 = .;
 . = 0x000020C2; gUnknown_030020C2 = .;
 . = 0x000020F8; gUnknown_030020F8 = .;
@@ -40,7 +40,7 @@
 . = 0x00002DA8; gUnknown_03002DA8 = .;
 . = 0x00002DB8; gUnknown_03002DB8 = .;
 . = 0x00002DE0; gUnknown_03002DE0 = .;
-. = 0x00002FA0; gUnknown_03002FA0 = .;
+. = 0x00002FA0; gBG0MapBuffer = .;
 . = 0x000033A4; gUnknown_030033A4 = .;
 . = 0x000037A0; gJoypad = .;
 . = 0x000037B0; gMain = .;

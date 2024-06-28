@@ -157,7 +157,7 @@ sub_801480C: @ 0x0801480C
 	ldr r0, _08014890 @ =0x040000D4
 	mov r1, sp
 	str r1, [r0]
-	ldr r1, _08014894 @ =gUnknown_03002FA0
+	ldr r1, _08014894 @ =gBG0MapBuffer
 	str r1, [r0, #4]
 	ldr r3, _08014898 @ =0x81000400
 	str r3, [r0, #8]
@@ -165,7 +165,7 @@ sub_801480C: @ 0x0801480C
 	mov r1, sp
 	strh r2, [r1]
 	str r1, [r0]
-	ldr r1, _0801489C @ =gUnknown_03001080
+	ldr r1, _0801489C @ =gBG3MapBuffer
 	str r1, [r0, #4]
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
@@ -216,9 +216,9 @@ sub_801480C: @ 0x0801480C
 	bx r0
 	.align 2, 0
 _08014890: .4byte 0x040000D4
-_08014894: .4byte gUnknown_03002FA0
+_08014894: .4byte gBG0MapBuffer
 _08014898: .4byte 0x81000400
-_0801489C: .4byte gUnknown_03001080
+_0801489C: .4byte gBG3MapBuffer
 _080148A0: .4byte 0x06004000
 _080148A4: .4byte 0x81002000
 _080148A8: .4byte 0x05000040
@@ -369,18 +369,18 @@ CopyPsycheLockChainBlocksToBGMapBuffer: @ 0x08014998
 	bne _08014A00
 	ldr r6, _080149F8 @ =0x0000FFF8
 	str r6, [sp, #4]
-	ldr r7, _080149FC @ =gUnknown_03002FA0
+	ldr r7, _080149FC @ =gBG0MapBuffer
 	str r7, [sp]
 	movs r0, #1
 	str r0, [sp, #0x10]
 	b _08014A0C
 	.align 2, 0
 _080149F8: .4byte 0x0000FFF8
-_080149FC: .4byte gUnknown_03002FA0
+_080149FC: .4byte gBG0MapBuffer
 _08014A00:
 	movs r2, #8
 	str r2, [sp, #8]
-	ldr r3, _08014A70 @ =gUnknown_03001080
+	ldr r3, _08014A70 @ =gBG3MapBuffer
 	str r3, [sp]
 	movs r6, #0xf
 	str r6, [sp, #0xc]
@@ -438,7 +438,7 @@ _08014A62:
 	str r0, [sp, #0x18]
 	b _08014A84
 	.align 2, 0
-_08014A70: .4byte gUnknown_03001080
+_08014A70: .4byte gBG3MapBuffer
 _08014A74: .4byte 0x000003FF
 _08014A78:
 	mov r7, ip
@@ -1896,7 +1896,7 @@ _080155CC:
 	ldr r1, _080155FC @ =0x040000D4
 	mov r2, sp
 	str r2, [r1]
-	ldr r0, _08015600 @ =gUnknown_03002FA0
+	ldr r0, _08015600 @ =gBG0MapBuffer
 	str r0, [r1, #4]
 	ldr r0, _08015604 @ =0x81000400
 	str r0, [r1, #8]
@@ -1913,7 +1913,7 @@ _080155CC:
 	.align 2, 0
 _080155F8: .4byte gUnknown_03006D70
 _080155FC: .4byte 0x040000D4
-_08015600: .4byte gUnknown_03002FA0
+_08015600: .4byte gBG0MapBuffer
 _08015604: .4byte 0x81000400
 
 	thumb_func_start sub_8015608

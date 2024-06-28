@@ -55,7 +55,7 @@ _08006940:
 	adds r7, r4, #0
 	adds r7, #0x4e
 	movs r1, #0
-	ldr r0, _08006A3C @ =gUnknown_03001080
+	ldr r0, _08006A3C @ =gBG3MapBuffer
 _0800697E:
 	strh r1, [r0]
 	adds r0, #2
@@ -64,7 +64,7 @@ _0800697E:
 	bls _0800697E
 	movs r2, #0
 	ldr r5, _08006A40 @ =gIORegisters
-	ldr r4, _08006A3C @ =gUnknown_03001080
+	ldr r4, _08006A3C @ =gBG3MapBuffer
 _0800698E:
 	ldr r1, _08006A44 @ =0x00000107
 	adds r0, r2, r1
@@ -144,7 +144,7 @@ _08006A2C: .4byte gUnknown_0820E33C
 _08006A30: .4byte 0x040000D4
 _08006A34: .4byte 0x80000010
 _08006A38: .4byte 0x000003FF
-_08006A3C: .4byte gUnknown_03001080
+_08006A3C: .4byte gBG3MapBuffer
 _08006A40: .4byte gIORegisters
 _08006A44: .4byte 0x00000107
 _08006A48: .4byte 0x00000147

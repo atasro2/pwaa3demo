@@ -4636,7 +4636,7 @@ sub_80191C0: @ 0x080191C0
 	adds r2, r4, #0
 	orrs r1, r2
 	strh r1, [r3]
-	ldr r1, _08019224 @ =gUnknown_03000000
+	ldr r1, _08019224 @ =gBG2MapBuffer
 	adds r3, r0, #0
 	ldr r4, _08019228 @ =gAnimation+0x44
 	movs r2, #0
@@ -4670,7 +4670,7 @@ _080191E6:
 _08019218: .4byte gMain
 _0801921C: .4byte gIORegisters
 _08019220: .4byte 0x0000FBFF
-_08019224: .4byte gUnknown_03000000
+_08019224: .4byte gBG2MapBuffer
 _08019228: .4byte gAnimation+0x44
 
 	thumb_func_start sub_801922C
@@ -5201,7 +5201,7 @@ _08019634:
 	ldr r7, _080196E4 @ =gIORegisters
 	mov ip, r7
 	ldr r2, _080196E8 @ =0x0000E080
-	ldr r1, _080196EC @ =gUnknown_03000000
+	ldr r1, _080196EC @ =gBG2MapBuffer
 	movs r0, #0x80
 	lsls r0, r0, #3
 _08019640:
@@ -5211,7 +5211,7 @@ _08019640:
 	cmp r0, #0
 	bne _08019640
 	movs r0, #0
-	ldr r6, _080196EC @ =gUnknown_03000000
+	ldr r6, _080196EC @ =gBG2MapBuffer
 _0801964E:
 	movs r2, #0
 	adds r4, r0, #1
@@ -5294,7 +5294,7 @@ _080196C2:
 _080196E0: .4byte gAnimation+0x44
 _080196E4: .4byte gIORegisters
 _080196E8: .4byte 0x0000E080
-_080196EC: .4byte gUnknown_03000000
+_080196EC: .4byte gBG2MapBuffer
 _080196F0: .4byte 0x040000D4
 _080196F4: .4byte gUnknown_0203B500
 _080196F8: .4byte 0x80002580
@@ -6033,12 +6033,12 @@ _08019C40:
 	movs r3, #0
 	ldrsh r2, [r1, r3]
 	mov sb, r2
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, sb
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08019CF0 @ =gOamObjects
 	strh r0, [r6, #6]
 	movs r0, #0
@@ -6046,12 +6046,12 @@ _08019C40:
 	mov r1, r8
 	movs r2, #0
 	ldrsh r0, [r1, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r5, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0xe]
 	ldrh r4, [r4]
 	rsbs r4, r4, #0
@@ -6060,22 +6060,22 @@ _08019C40:
 	mov r3, r8
 	movs r1, #0
 	ldrsh r0, [r3, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x16]
 	mov r2, r8
 	movs r3, #0
 	ldrsh r0, [r2, r3]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, sb
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x1e]
 	movs r1, #0x96
 	lsls r1, r1, #2
@@ -6104,24 +6104,24 @@ _08019CF4:
 	mov r8, r1
 	movs r3, #0
 	ldrsh r0, [r7, r3]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, r8
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08019DB4 @ =gOamObjects
 	strh r0, [r6, #6]
 	movs r0, #0
 	ldrsh r5, [r4, r0]
 	movs r1, #0
 	ldrsh r0, [r7, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r5, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0xe]
 	ldrh r4, [r4]
 	rsbs r4, r4, #0
@@ -6129,21 +6129,21 @@ _08019CF4:
 	asrs r4, r4, #0x10
 	movs r2, #0
 	ldrsh r0, [r7, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x16]
 	movs r3, #0
 	ldrsh r0, [r7, r3]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, r8
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x1e]
 	movs r0, #0x6a
 	bl sub_8011D68
@@ -6184,24 +6184,24 @@ _08019DC0:
 	mov r8, r1
 	movs r3, #0
 	ldrsh r0, [r7, r3]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, r8
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08019E38 @ =gOamObjects
 	strh r0, [r6, #6]
 	movs r0, #0
 	ldrsh r5, [r4, r0]
 	movs r1, #0
 	ldrsh r0, [r7, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r5, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0xe]
 	ldrh r4, [r4]
 	rsbs r4, r4, #0
@@ -6209,21 +6209,21 @@ _08019DC0:
 	asrs r4, r4, #0x10
 	movs r2, #0
 	ldrsh r0, [r7, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x16]
 	movs r3, #0
 	ldrsh r0, [r7, r3]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	mov r0, r8
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x1e]
 	b _08019E8A
 	.align 2, 0
@@ -6538,7 +6538,7 @@ _0801A06E:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0801A09E
-	ldr r2, _0801A0AC @ =gUnknown_03002080
+	ldr r2, _0801A0AC @ =gBG1MapBuffer
 	ldr r1, _0801A0B0 @ =gUnknown_08028736
 	adds r0, r4, #0
 	ldrh r3, [r3, #0x12]
@@ -6560,7 +6560,7 @@ _0801A09E:
 	.align 2, 0
 _0801A0A4: .4byte gScriptContext
 _0801A0A8: .4byte gMain
-_0801A0AC: .4byte gUnknown_03002080
+_0801A0AC: .4byte gBG1MapBuffer
 _0801A0B0: .4byte gUnknown_08028736
 _0801A0B4: .4byte 0x000004DC
 _0801A0B8: .4byte 0x000004DE

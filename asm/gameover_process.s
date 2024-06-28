@@ -52,7 +52,7 @@ _08006D1A:
 	adds r4, r3, #0
 	adds r4, #0x4a
 	movs r1, #0
-	ldr r0, _08006D90 @ =gUnknown_03000000
+	ldr r0, _08006D90 @ =gBG2MapBuffer
 _08006D44:
 	strh r1, [r0]
 	adds r0, #2
@@ -84,10 +84,10 @@ _08006D80: .4byte gPalGameOverDoors
 _08006D84: .4byte 0x05000020
 _08006D88: .4byte 0x80000010
 _08006D8C: .4byte 0x000003FF
-_08006D90: .4byte gUnknown_03000000
+_08006D90: .4byte gBG2MapBuffer
 _08006D94:
 	movs r5, #0
-	ldr r0, _08006E48 @ =gUnknown_03000000
+	ldr r0, _08006E48 @ =gBG2MapBuffer
 	mov sb, r0
 	mov r8, r5
 	ldr r0, _08006E4C @ =gUnknown_08026718
@@ -183,7 +183,7 @@ _08006E42:
 	strb r1, [r6, #0xa]
 	b _08006E92
 	.align 2, 0
-_08006E48: .4byte gUnknown_03000000
+_08006E48: .4byte gBG2MapBuffer
 _08006E4C: .4byte gUnknown_08026718
 _08006E50:
 	ldrb r0, [r6, #0xa]
@@ -287,7 +287,7 @@ _08006EE6:
 	adds r4, r3, #0
 	adds r4, #0x4a
 	movs r1, #0
-	ldr r0, _08006F68 @ =gUnknown_03002FA0
+	ldr r0, _08006F68 @ =gBG0MapBuffer
 _08006F10:
 	strh r1, [r0]
 	adds r0, #2
@@ -325,11 +325,11 @@ _08006F58: .4byte gPalGameOverDoors
 _08006F5C: .4byte 0x05000020
 _08006F60: .4byte 0x80000010
 _08006F64: .4byte 0x000003FF
-_08006F68: .4byte gUnknown_03002FA0
+_08006F68: .4byte gBG0MapBuffer
 _08006F6C: .4byte gScriptContext
 _08006F70:
 	movs r5, #0
-	ldr r0, _08007038 @ =gUnknown_03002FA0
+	ldr r0, _08007038 @ =gBG0MapBuffer
 	mov sb, r0
 	adds r2, #0x48
 	mov r8, r2
@@ -434,7 +434,7 @@ _08007012:
 	strh r2, [r4]
 	b _08007096
 	.align 2, 0
-_08007038: .4byte gUnknown_03002FA0
+_08007038: .4byte gBG0MapBuffer
 _0800703C: .4byte gUnknown_08026718
 _08007040: .4byte gUnknown_03007128
 _08007044: .4byte gScriptContext
@@ -474,7 +474,7 @@ _0800706C:
 	movs r5, #0
 	ldr r2, _080070A4 @ =0x000003FF
 	movs r1, #0
-	ldr r0, _080070A8 @ =gUnknown_03002FA0
+	ldr r0, _080070A8 @ =gBG0MapBuffer
 _0800708C:
 	strh r1, [r0]
 	adds r0, #2
@@ -491,4 +491,4 @@ _08007096:
 	bx r0
 	.align 2, 0
 _080070A4: .4byte 0x000003FF
-_080070A8: .4byte gUnknown_03002FA0
+_080070A8: .4byte gBG0MapBuffer

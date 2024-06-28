@@ -400,7 +400,7 @@ _08007332:
 	movs r1, #0
 	ldr r3, _08007458 @ =0x000003FF
 	movs r2, #0
-	ldr r0, _0800745C @ =gUnknown_03000000
+	ldr r0, _0800745C @ =gBG2MapBuffer
 _080073D2:
 	strh r2, [r0]
 	adds r0, #2
@@ -450,7 +450,7 @@ _0800744C: .4byte 0x00003D01
 _08007450: .4byte 0x00003FC7
 _08007454: .4byte gMain
 _08007458: .4byte 0x000003FF
-_0800745C: .4byte gUnknown_03000000
+_0800745C: .4byte gBG2MapBuffer
 _08007460: .4byte 0x00003E01
 _08007464:
 	adds r0, r6, #0
@@ -790,14 +790,14 @@ sub_8007718: @ 0x08007718
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r0, _08007814 @ =0x040000D4
-	ldr r1, _08007818 @ =gUnknown_03002080
+	ldr r1, _08007818 @ =gBG1MapBuffer
 	str r1, [r0]
 	ldr r2, _0800781C @ =gUnknown_020018D4
 	str r2, [r0, #4]
 	ldr r3, _08007820 @ =0x80000400
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007824 @ =gUnknown_03000000
+	ldr r1, _08007824 @ =gBG2MapBuffer
 	str r1, [r0]
 	movs r4, #0x80
 	lsls r4, r4, #4
@@ -914,10 +914,10 @@ _080077F8:
 	bx r0
 	.align 2, 0
 _08007814: .4byte 0x040000D4
-_08007818: .4byte gUnknown_03002080
+_08007818: .4byte gBG1MapBuffer
 _0800781C: .4byte gUnknown_020018D4
 _08007820: .4byte 0x80000400
-_08007824: .4byte gUnknown_03000000
+_08007824: .4byte gBG2MapBuffer
 _08007828: .4byte gUnknown_03003E50
 _0800782C: .4byte 0xFFFFF500
 _08007830: .4byte 0x80000180
@@ -955,7 +955,7 @@ sub_8007880: @ 0x08007880
 	b _080079F0
 _08007894:
 	ldr r0, _080079FC @ =0x040000D4
-	ldr r1, _08007A00 @ =gUnknown_03002FA0
+	ldr r1, _08007A00 @ =gBG0MapBuffer
 	str r1, [r0]
 	ldr r2, _08007A04 @ =gUnknown_020010D4
 	str r2, [r0, #4]
@@ -1069,7 +1069,7 @@ _08007968:
 	movs r0, #0
 	ldr r3, _08007A84 @ =0x000003FF
 	movs r2, #0
-	ldr r1, _08007A88 @ =gUnknown_03000000
+	ldr r1, _08007A88 @ =gBG2MapBuffer
 _0800797A:
 	strh r2, [r1]
 	adds r1, #2
@@ -1135,7 +1135,7 @@ _080079F0:
 	bx r0
 	.align 2, 0
 _080079FC: .4byte 0x040000D4
-_08007A00: .4byte gUnknown_03002FA0
+_08007A00: .4byte gBG0MapBuffer
 _08007A04: .4byte gUnknown_020010D4
 _08007A08: .4byte 0x80000400
 _08007A0C: .4byte gCourtRecord
@@ -1169,7 +1169,7 @@ _08007A78: .4byte 0x80000020
 _08007A7C: .4byte gScriptContext
 _08007A80: .4byte gOamObjects
 _08007A84: .4byte 0x000003FF
-_08007A88: .4byte gUnknown_03000000
+_08007A88: .4byte gBG2MapBuffer
 _08007A8C: .4byte gIORegisters
 _08007A90: .4byte 0x00003E01
 _08007A94: .4byte gMain
@@ -1764,7 +1764,7 @@ _08007EA6:
 	ldr r0, [r0]
 	str r0, [r5, #0x54]
 	movs r4, #0
-	ldr r3, _08008134 @ =gUnknown_03000000
+	ldr r3, _08008134 @ =gBG2MapBuffer
 	ldr r6, _08008138 @ =gUnknown_03003E50
 	movs r0, #0xe8
 	adds r0, r0, r5
@@ -1992,7 +1992,7 @@ _08008108:
 	b _080081E8
 	.align 2, 0
 _08008130: .4byte gSaveDataBuffer
-_08008134: .4byte gUnknown_03000000
+_08008134: .4byte gBG2MapBuffer
 _08008138: .4byte gUnknown_03003E50
 _0800813C: .4byte 0x040000D4
 _08008140: .4byte gUnknown_020020D4

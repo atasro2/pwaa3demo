@@ -66,7 +66,7 @@ sub_80015E8: @ 0x080015E8
 	ldr r0, _08001604 @ =gMain
 	movs r1, #0
 	strb r1, [r0, #0x19]
-	ldr r0, _08001608 @ =gUnknown_03002080
+	ldr r0, _08001608 @ =gBG1MapBuffer
 	movs r2, #0
 	movs r3, #0xc0
 	lsls r3, r3, #2
@@ -80,7 +80,7 @@ _080015F8:
 	bx lr
 	.align 2, 0
 _08001604: .4byte gMain
-_08001608: .4byte gUnknown_03002080
+_08001608: .4byte gBG1MapBuffer
 
 	thumb_func_start nullsub_10
 nullsub_10: @ 0x0800160C
@@ -208,7 +208,7 @@ _080016D8:
 	mov r0, r8
 	str r4, [r0, #8]
 	ldr r1, _0800172C @ =0x040000D4
-	ldr r0, _08001740 @ =gUnknown_03001080
+	ldr r0, _08001740 @ =gBG3MapBuffer
 	str r0, [r1]
 	adds r0, r5, #0
 	adds r0, #0x64
@@ -240,7 +240,7 @@ _08001730: .4byte gOamObjects
 _08001734: .4byte 0x00000864
 _08001738: .4byte 0x80000200
 _0800173C: .4byte gAnimation
-_08001740: .4byte gUnknown_03001080
+_08001740: .4byte gBG3MapBuffer
 _08001744: .4byte 0x80000400
 
 	thumb_func_start sub_8001748
@@ -367,7 +367,7 @@ sub_8001848: @ 0x08001848
 	ldr r4, _080018D8 @ =0x040000D4
 	adds r0, #0x64
 	str r0, [r4]
-	ldr r0, _080018DC @ =gUnknown_03001080
+	ldr r0, _080018DC @ =gBG3MapBuffer
 	str r0, [r4, #4]
 	ldr r0, _080018E0 @ =0x80000400
 	str r0, [r4, #8]
@@ -429,7 +429,7 @@ sub_8001848: @ 0x08001848
 _080018D0: .4byte gMain
 _080018D4: .4byte gIORegisters
 _080018D8: .4byte 0x040000D4
-_080018DC: .4byte gUnknown_03001080
+_080018DC: .4byte gBG3MapBuffer
 _080018E0: .4byte 0x80000400
 _080018E4: .4byte gAnimation
 _080018E8: .4byte 0x00000864
@@ -806,7 +806,7 @@ sub_8001BBC: @ 0x08001BBC
 	bl sub_80019C0
 _08001BD0:
 	movs r5, #0
-	ldr r0, _08001C20 @ =gUnknown_03001080
+	ldr r0, _08001C20 @ =gBG3MapBuffer
 	mov ip, r0
 _08001BD6:
 	movs r3, #0
@@ -846,7 +846,7 @@ _08001BE0:
 	bx r0
 	.align 2, 0
 _08001C1C: .4byte 0x00000C64
-_08001C20: .4byte gUnknown_03001080
+_08001C20: .4byte gBG3MapBuffer
 
 	thumb_func_start sub_8001C24
 sub_8001C24: @ 0x08001C24
@@ -1390,7 +1390,7 @@ _08002036:
 	mov r3, sl
 	movs r4, #0
 	ldrsh r1, [r3, r4]
-	bl sub_80065E8
+	bl GetFlag
 	adds r3, r0, #0
 	ldr r1, _0800213C @ =gJoypad
 	movs r0, #1
@@ -1408,7 +1408,7 @@ _08002036:
 	bne _08002064
 	movs r2, #1
 _08002064:
-	bl sub_80065AC
+	bl ChangeFlag
 _08002068:
 	movs r0, #5
 	movs r1, #0x19
@@ -1472,7 +1472,7 @@ _080020D4:
 	adds r4, r4, r6
 	ldr r3, [sp, #4]
 	adds r1, r4, r3
-	bl sub_80065E8
+	bl GetFlag
 	adds r3, r0, #0
 	mov r1, sl
 	movs r2, #0
@@ -1711,11 +1711,11 @@ _0800229C: .4byte gUnknown_08023B98
 	thumb_func_start sub_80022A0
 sub_80022A0: @ 0x080022A0
 	push {r4, r5, lr}
-	ldr r2, _080022C8 @ =gUnknown_03002080
+	ldr r2, _080022C8 @ =gBG1MapBuffer
 	movs r1, #0
 	ldr r4, _080022CC @ =0x000003FF
 	ldr r5, _080022D0 @ =gMain
-	ldr r3, _080022D4 @ =gUnknown_08023EF8
+	ldr r3, _080022D4 @ =gTextboxTiles
 _080022AC:
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -1732,7 +1732,7 @@ _080022AC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080022C8: .4byte gUnknown_03002080
+_080022C8: .4byte gBG1MapBuffer
 _080022CC: .4byte 0x000003FF
 _080022D0: .4byte gMain
-_080022D4: .4byte gUnknown_08023EF8
+_080022D4: .4byte gTextboxTiles

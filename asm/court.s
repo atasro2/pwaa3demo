@@ -1234,7 +1234,7 @@ _0800ADA6:
 	ldr r0, _0800ADE8 @ =gMain
 	strb r1, [r0, #0x19]
 	movs r1, #0
-	ldr r0, _0800ADEC @ =gUnknown_03002080
+	ldr r0, _0800ADEC @ =gBG1MapBuffer
 	movs r2, #0
 	movs r3, #0xc0
 	lsls r3, r3, #2
@@ -1257,7 +1257,7 @@ _0800ADCA:
 	b _0800AEE6
 	.align 2, 0
 _0800ADE8: .4byte gMain
-_0800ADEC: .4byte gUnknown_03002080
+_0800ADEC: .4byte gBG1MapBuffer
 _0800ADF0: .4byte gScriptContext
 _0800ADF4: .4byte gOamObjects
 _0800ADF8:
@@ -1810,7 +1810,7 @@ _0800B258:
 	lsls r0, r0, #1
 	cmp r1, r0
 	bgt _0800B2D8
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B2D0 @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -1822,24 +1822,24 @@ _0800B258:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B2D4 @ =gOamObjects
 	strh r0, [r5, #6]
 	movs r1, #0
 	ldrsh r0, [r6, r1]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0xe]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x16]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1e]
 	movs r0, #3
 	movs r1, #1
@@ -1858,7 +1858,7 @@ _0800B2D8:
 	adds r0, #0xa0
 	movs r2, #0
 	ldrsh r0, [r0, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B32C @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -1870,24 +1870,24 @@ _0800B2D8:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B330 @ =gOamObjects
 	strh r0, [r5, #6]
 	movs r1, #0
 	ldrsh r0, [r6, r1]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0xe]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x16]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1e]
 	b _0800B6DA
 	.align 2, 0
@@ -1921,7 +1921,7 @@ _0800B344:
 	adds r0, #0xa0
 	movs r2, #0
 	ldrsh r0, [r0, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B3C4 @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -1933,24 +1933,24 @@ _0800B344:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B3C8 @ =gOamObjects
 	strh r0, [r5, #0x26]
 	movs r1, #0
 	ldrsh r0, [r6, r1]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x2e]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x36]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x3e]
 	b _0800B6CC
 	.align 2, 0
@@ -1976,7 +1976,7 @@ _0800B3CC:
 	cmp r0, sb
 	bgt _0800B458
 	mov r0, sb
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B450 @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -1988,24 +1988,24 @@ _0800B3CC:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B454 @ =gOamObjects
 	strh r0, [r5, #0x26]
 	movs r2, #0
 	ldrsh r0, [r6, r2]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x2e]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x36]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x3e]
 	movs r0, #3
 	movs r1, #1
@@ -2027,7 +2027,7 @@ _0800B458:
 	adds r0, #0xa0
 	movs r2, #0
 	ldrsh r0, [r0, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B4AC @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -2039,24 +2039,24 @@ _0800B458:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B4B0 @ =gOamObjects
 	strh r0, [r5, #0x26]
 	movs r1, #0
 	ldrsh r0, [r6, r1]
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x2e]
 	ldrh r6, [r6]
 	rsbs r0, r6, #0
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x36]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x3e]
 	b _0800B6DA
 	.align 2, 0
@@ -2110,7 +2110,7 @@ _0800B4FC:
 	strh r1, [r0]
 	movs r1, #0
 	ldrsh r0, [r0, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	ldr r6, _0800B590 @ =gUnknown_08026430
 	adds r0, r6, #0
@@ -2122,7 +2122,7 @@ _0800B4FC:
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r5, _0800B594 @ =gOamObjects
 	strh r0, [r5, #6]
 	movs r0, #0
@@ -2130,7 +2130,7 @@ _0800B4FC:
 	mov sb, r2
 	mov r0, sb
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0xe]
 	ldrh r6, [r6]
 	rsbs r6, r6, #0
@@ -2138,27 +2138,27 @@ _0800B4FC:
 	asrs r6, r6, #0x10
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x16]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x1e]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x26]
 	mov r0, sb
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x2e]
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x36]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r5, #0x3e]
 	mov r1, sl
 	ldrh r0, [r1]
@@ -2587,27 +2587,27 @@ _0800B8C8:
 	ands r5, r0
 	subs r0, #0xff
 	mov r8, r0
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r1, _0800B95C @ =0xFFFFFE80
 	adds r7, r6, r1
 	strh r0, [r7, #6]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0xe]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x16]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x1e]
 	movs r3, #0x80
 	lsls r3, r3, #7
@@ -2791,27 +2791,27 @@ _0800BA7C:
 	movs r5, #0x80
 	lsls r5, r5, #1
 	adds r0, r5, #0
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r3, _0800BB04 @ =0xFFFFFE80
 	adds r7, r6, r3
 	strh r0, [r7, #6]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0xe]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x16]
 	adds r0, r5, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x1e]
 	movs r2, #0
 	movs r3, #0x80
@@ -2891,27 +2891,27 @@ _0800BB4C:
 	movs r0, #0x80
 	lsls r0, r0, #1
 	mov r8, r0
-	bl sub_800653C
+	bl fix_inverse
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r1, _0800BBCC @ =0xFFFFFE80
 	adds r7, r6, r1
 	strh r0, [r7, #6]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0xe]
 	movs r0, #0
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x16]
 	mov r0, r8
 	adds r1, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r7, #0x1e]
 	ldr r0, _0800BBD0 @ =0xFFFF8000
 	add r0, sb

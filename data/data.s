@@ -40,8 +40,8 @@ gUnknown_0814D8D4:
 gUnknown_0814D8E8:
     .incbin "baserom.gba", 0x0014D8E8, 0x48
 
-    .global gUnknown_0814D930
-gUnknown_0814D930:
+    .global gFlagPtrs
+gFlagPtrs:
     .incbin "baserom.gba", 0x0014D930, 0xC
 
     .global gUnknown_0814D93C

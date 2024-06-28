@@ -33,7 +33,7 @@ sub_80066E4: @ 0x080066E4
 	adds r4, r0, #0
 	movs r0, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	adds r0, r4, #0
 	bl sub_8018778
 	movs r0, #1
@@ -50,7 +50,7 @@ sub_8006708: @ 0x08006708
 	adds r4, r0, #0
 	movs r0, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	adds r0, r4, #0
 	bl sub_8018778
 	movs r0, #2
@@ -96,7 +96,7 @@ _08006748:
 	movs r0, #0
 	adds r1, r7, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	mov r0, r8
 	bl sub_8018778
 	movs r0, #1

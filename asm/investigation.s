@@ -2792,7 +2792,7 @@ _0800D4DC:
 	adds r0, r1, r4
 	ldrb r1, [r0]
 	movs r0, #2
-	bl sub_80065E8
+	bl GetFlag
 	str r4, [sp, #4]
 	ldr r3, [sp, #0x14]
 	cmp r0, #0
@@ -2803,7 +2803,7 @@ _0800D4DC:
 	ldrb r1, [r0]
 	movs r0, #2
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	ldr r3, [sp, #0x14]
 _0800D53A:
 	ldr r0, [sp]
@@ -2865,7 +2865,7 @@ _0800D5A2:
 	adds r0, r2, r7
 	ldrb r1, [r0]
 	movs r0, #2
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0800D628
 	mov r3, r8
@@ -5134,12 +5134,12 @@ _0800E754:
 	bne _0800E7E2
 	movs r0, #0
 	movs r1, #0x13
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	bne _0800E7E2
 	movs r0, #0
 	movs r1, #0xa
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0800E7E2
 	movs r0, #0x94

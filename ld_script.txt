@@ -20,6 +20,7 @@ SECTIONS {
         src/crt0.o(.text);
         src/main.o(.text);
         asm/debug.o(.text);
+        src/bg.o(.text);
         asm/bg.o(.text);
         asm/utils.o(.text);
         asm/case_data.o(.text);

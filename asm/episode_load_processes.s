@@ -62,7 +62,7 @@ _0800853E:
 	bls _0800853E
 	bl ResetAnimationSystem
 	ldr r1, _080085B4 @ =0x040000D4
-	ldr r0, _080085B8 @ =gUnknown_0202CFC0
+	ldr r0, _080085B8 @ =eBGDecompBuffer
 	str r0, [r1]
 	ldr r0, _080085BC @ =0x06013400
 	str r0, [r1, #4]
@@ -108,7 +108,7 @@ _080085A8: .4byte gMain
 _080085AC: .4byte gIORegisters
 _080085B0: .4byte gOamObjects
 _080085B4: .4byte 0x040000D4
-_080085B8: .4byte gUnknown_0202CFC0
+_080085B8: .4byte eBGDecompBuffer
 _080085BC: .4byte 0x06013400
 _080085C0: .4byte 0x80001400
 _080085C4: .4byte gPalChoiceSelected
@@ -803,24 +803,24 @@ _08008B34:
 	ldrsh r4, [r0, r1]
 	str r4, [sp, #0x10]
 	mov r0, sl
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	ldr r0, [sp, #0x10]
-	bl sub_800650C
+	bl fix_mul
 	ldr r2, _08008BD0 @ =gOamObjects
 	mov r8, r2
 	strh r0, [r2, #6]
 	movs r3, #0
 	ldrsh r4, [r6, r3]
 	mov r0, sl
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r4, #0
-	bl sub_800650C
+	bl fix_mul
 	mov r4, r8
 	strh r0, [r4, #0xe]
 	ldrh r6, [r6]
@@ -831,22 +831,22 @@ _08008B34:
 	mov r1, sb
 	movs r2, #0
 	ldrsh r0, [r1, r2]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r5, #0
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r4, #0x16]
 	mov r3, sb
 	movs r4, #0
 	ldrsh r0, [r3, r4]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	ldr r0, [sp, #0x10]
-	bl sub_800650C
+	bl fix_mul
 	mov r1, r8
 	strh r0, [r1, #0x1e]
 	ldrb r0, [r7, #9]
@@ -876,12 +876,12 @@ _08008BD4:
 	asrs r6, r0, #0x10
 	movs r1, #0
 	ldrsh r0, [r3, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r6, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08008C28 @ =gOamObjects
 	strh r0, [r6, #0x16]
 	ldr r2, _08008C2C @ =gUnknown_080264B0
@@ -890,7 +890,7 @@ _08008BD4:
 	mov r4, r8
 	movs r1, #0
 	ldrsh r0, [r4, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
@@ -978,12 +978,12 @@ _08008CC4:
 	asrs r6, r0, #0x10
 	movs r1, #0
 	ldrsh r0, [r5, r1]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r6, #0
-	bl sub_800650C
+	bl fix_mul
 	ldr r6, _08008D0C @ =gOamObjects
 	strh r0, [r6, #0x16]
 	ldr r2, _08008D10 @ =gUnknown_080264B0
@@ -991,13 +991,13 @@ _08008CC4:
 	ldrsh r7, [r2, r3]
 	movs r4, #0
 	ldrsh r0, [r5, r4]
-	bl sub_800653C
+	bl fix_inverse
 	adds r1, r0, #0
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	adds r0, r7, #0
 _08008CFE:
-	bl sub_800650C
+	bl fix_mul
 	strh r0, [r6, #0x1e]
 	b _08008D58
 	.align 2, 0
@@ -2383,7 +2383,7 @@ _08009952:
 	movs r7, #0
 	ldr r2, _080099DC @ =0x000003FF
 	movs r1, #0
-	ldr r0, _080099E0 @ =gUnknown_03000000
+	ldr r0, _080099E0 @ =gBG2MapBuffer
 _08009964:
 	strh r1, [r0]
 	adds r0, #2
@@ -2431,7 +2431,7 @@ _080099D0: .4byte 0x80000020
 _080099D4: .4byte gMain
 _080099D8: .4byte gOamObjects
 _080099DC: .4byte 0x000003FF
-_080099E0: .4byte gUnknown_03000000
+_080099E0: .4byte gBG2MapBuffer
 _080099E4: .4byte gIORegisters
 _080099E8: .4byte 0x00003E01
 _080099EC:
@@ -3062,7 +3062,7 @@ _08009F04:
 	ldr r1, _08009FEC @ =0x00001578
 	adds r0, r6, r1
 	str r0, [r5]
-	ldr r0, _08009FF0 @ =gUnknown_03002080
+	ldr r0, _08009FF0 @ =gBG1MapBuffer
 	str r0, [r5, #4]
 	ldr r1, _08009FF4 @ =0x80000400
 	str r1, [r5, #8]
@@ -3070,7 +3070,7 @@ _08009F04:
 	ldr r2, _08009FF8 @ =0x00000D78
 	adds r0, r6, r2
 	str r0, [r5]
-	ldr r0, _08009FFC @ =gUnknown_03002FA0
+	ldr r0, _08009FFC @ =gBG0MapBuffer
 	str r0, [r5, #4]
 	str r1, [r5, #8]
 	ldr r0, [r5, #8]
@@ -3120,10 +3120,10 @@ _08009FE0: .4byte gMain
 _08009FE4: .4byte gUnknown_03003AF0
 _08009FE8: .4byte 0x80000050
 _08009FEC: .4byte 0x00001578
-_08009FF0: .4byte gUnknown_03002080
+_08009FF0: .4byte gBG1MapBuffer
 _08009FF4: .4byte 0x80000400
 _08009FF8: .4byte 0x00000D78
-_08009FFC: .4byte gUnknown_03002FA0
+_08009FFC: .4byte gBG0MapBuffer
 _0800A000: .4byte gAnimation+0x44
 _0800A004: .4byte _0800A008
 _0800A008: @ jump table

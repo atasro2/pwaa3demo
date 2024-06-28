@@ -39,7 +39,18 @@ struct Main
     /* +0x03C */ s8 currentBgStripe;
     /* +0x03D */ u8 unk3D;
     /* +0x03E */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
-    /* +0x03F */ u8 fill3F[0x49];
+    /* +0x03F */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
+    /* +0x040 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
+    /* +0x042 */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
+    /* +0x044 */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
+    /* +0x046 */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
+    /* +0x048 */ u16 unused48; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x04A */ s16 Bg256_dir; // unity AA4: Bg256_dir
+    /* +0x04C */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
+    /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
+    /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
+    /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
+    /* +0x050 */ u8 fill50[0x38];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
