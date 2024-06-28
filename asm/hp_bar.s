@@ -280,7 +280,7 @@ _08016240:
 	mov sb, r0
 	movs r5, #0x80
 	lsls r5, r5, #1
-	ldr r4, _080162DC @ =gUnknown_08026430
+	ldr r4, _080162DC @ =gSineTable
 	movs r2, #0x80
 	adds r2, r2, r4
 	mov sl, r2
@@ -345,7 +345,7 @@ _080162B0:
 	b _08016312
 	.align 2, 0
 _080162D8: .4byte gOamObjects
-_080162DC: .4byte gUnknown_08026430
+_080162DC: .4byte gSineTable
 _080162E0: .4byte 0x000001FF
 _080162E4:
 	lsrs r0, r2, #0x10
@@ -396,7 +396,7 @@ _0801631A:
 	asrs r0, r0, #0x10
 	bl fix_inverse
 	adds r5, r0, #0
-	ldr r1, _08016414 @ =gUnknown_08026430
+	ldr r1, _08016414 @ =gSineTable
 	mov r8, r1
 	ldr r2, _08016418 @ =gUnknown_080264B0
 	movs r1, #0
@@ -497,7 +497,7 @@ _080163FC:
 	bx r1
 	.align 2, 0
 _08016410: .4byte 0x000003FF
-_08016414: .4byte gUnknown_08026430
+_08016414: .4byte gSineTable
 _08016418: .4byte gUnknown_080264B0
 _0801641C: .4byte gOamObjects
 
@@ -1074,7 +1074,7 @@ _080168AA:
 	lsls r0, r0, #1
 	adds r0, r0, r1
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #5
 	bl sub_8016E74
 _080168C0:

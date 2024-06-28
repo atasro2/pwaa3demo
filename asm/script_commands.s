@@ -341,7 +341,7 @@ _0801A362:
 	bne _0801A380
 	ldr r0, [r5]
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801A438
 	.align 2, 0
 _0801A374: .4byte gBG1MapBuffer
@@ -823,7 +823,7 @@ _0801A72C:
 	bne _0801A720
 	ldr r0, [r4]
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 _0801A73E:
 	bl sub_8016ED8
 	cmp r0, #0
@@ -966,7 +966,7 @@ sub_801A838: @ 0x0801A838
 	push {lr}
 	ldr r0, _0801A848 @ =gScriptContext
 	ldrh r0, [r0, #0xe]
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #0
 	pop {r1}
 	bx r1
@@ -1365,10 +1365,10 @@ _0801AB4C:
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801AB66:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	b _0801AC9C
 	.align 2, 0
 _0801AB70: .4byte gMain
@@ -1385,7 +1385,7 @@ _0801AB7C:
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801AB96:
 	adds r0, r7, #0
 	adds r0, #0x23
@@ -1393,7 +1393,7 @@ _0801AB96:
 	cmp r1, #1
 	beq _0801ABB4
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	b _0801ABBE
 	.align 2, 0
 _0801ABA8: .4byte gMain
@@ -1418,14 +1418,14 @@ _0801ABBE:
 	bne _0801ABDA
 	adds r0, r4, #0
 	movs r1, #1
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801ABDA:
 	ldrb r0, [r5, #9]
 	cmp r0, #8
 	bne _0801ABEA
 	adds r0, r4, #0
 	movs r1, #4
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	strb r6, [r4, #0x10]
 _0801ABEA:
 	ldrb r5, [r5, #9]
@@ -1433,7 +1433,7 @@ _0801ABEA:
 	bne _0801ABF8
 	adds r0, r4, #0
 	movs r1, #8
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801ABF8:
 	adds r1, r7, #0
 	adds r1, #0x26
@@ -1452,14 +1452,14 @@ _0801AC08:
 	bne _0801AC1E
 	adds r0, r5, #0
 	movs r1, #1
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801AC1E:
 	ldrb r0, [r4, #9]
 	cmp r0, #8
 	bne _0801AC44
 	adds r0, r5, #0
 	movs r1, #4
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #4
 	strb r0, [r5, #0x10]
 	strb r6, [r4, #0x18]
@@ -1475,7 +1475,7 @@ _0801AC44:
 	bne _0801AC50
 	adds r0, r5, #0
 	movs r1, #8
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0801AC50:
 	strb r6, [r4, #0x18]
 	strb r6, [r4, #0x19]
@@ -1701,7 +1701,7 @@ _0801ADD8:
 	cmp r0, #0x7f
 	bhi _0801AE94
 	ldrh r0, [r4, #0xe]
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801AE94
 	.align 2, 0
 _0801AE04: .4byte gTestimony
@@ -1851,7 +1851,7 @@ sub_801AF0C: @ 0x0801AF0C
 _0801AF2C:
 	ldr r0, [r2]
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #0
 	pop {r1}
 	bx r1
@@ -2860,7 +2860,7 @@ _0801B654:
 	beq _0801B758
 	mov r1, r8
 	ldrh r0, [r1, #0x20]
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801B778
 	.align 2, 0
 _0801B710: .4byte gInvestigation
@@ -2890,12 +2890,12 @@ _0801B758:
 	beq _0801B770
 	mov r2, r8
 	ldrh r0, [r2, #0x22]
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801B778
 _0801B770:
 	mov r3, r8
 	ldrh r0, [r3, #0x24]
-	bl sub_8018778
+	bl ChangeScriptSection
 _0801B778:
 	ldr r0, _0801B78C @ =0x0000FEF7
 	ldrh r1, [r6, #0x1c]
@@ -3332,7 +3332,7 @@ _0801BAC6:
 	movs r4, #0
 	adds r0, r5, #0
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #0xe0
 	strb r0, [r5, #0x11]
 	strb r4, [r5, #0x12]
@@ -5144,7 +5144,7 @@ _0801C874:
 	adds r0, r0, r5
 _0801C898:
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 _0801C89E:
 	movs r0, #0
 _0801C8A0:

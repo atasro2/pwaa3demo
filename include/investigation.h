@@ -25,27 +25,11 @@ struct ExaminationData
 
 struct InvestigationStruct // unity: tantei_work_
 {
-    /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
-    /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
-    /* +0x04 */ u8 selectedOption; // unity AA4: sel_place
-    /* +0x05 */ u8 previousSelectedOption;
+    /* +0x00 */ u8 fill00[6];
     /* +0x06 */ bool8 personActive;
-    /* +0x07 */ bool8 inspectionPaused; // unity AA4: ckeck_no_flag
-    /* +0x08 */ u8 inactiveActions; // unity AA4: menu_mv_be_flag
-    /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
-    /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
-    /* +0x0B */ u8 unkB;
-    /* +0x0C */ u8 selectedAction; // unity: menu // selected investigation button, why menu?
-    /* +0x0D */ u8 lastAction; // unity AA4: menu_old
-    /* +0x0E */ u8 actionState; // unity AA4: menu_rno
-    /* +0x0F */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
-    /* +0x10 */ u8 selectedActionYOffset; // unity AA4: menu_add
-    /* +0x11 */ u8 lastActionYOffset; // unity AA4: menu_add_old
-    /* +0x12 */ bool8 activeOptions[4]; // unity AA4: sel_place_be
-    /* +0x16 */ u8 pointerFrame; // unity AA4: yubi_no // 指 finger
-    /* +0x17 */ u8 pointerFrameCounter; // unity AA4: yubi_timer
-    /* +0x18 */ u8 pointerColor; // unity AA4: yubi_col_no
-    /* +0x19 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
+    /* +0x07 */ u8 fill07[0x0B];
+    /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
+    /* +0x13 */ u8 fill13[9];
 };
 
 extern struct TalkData gTalkData[32];

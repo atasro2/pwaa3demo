@@ -19,7 +19,7 @@ sub_800A3A0: @ 0x0800A3A0
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18
 	ldr r4, _0800A40C @ =gMain
-	bl sub_80112C8
+	bl PauseBGM
 	ldr r0, _0800A410 @ =0x040000D4
 	ldr r1, _0800A414 @ =gOamObjects
 	str r1, [r0]
@@ -339,7 +339,7 @@ sub_800A51C: @ 0x0800A51C
 	ldr r0, _0800A6CC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #0x80
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #0x30
 	movs r1, #0xf
 	bl SetTimedKeysAndDelay
@@ -1110,7 +1110,7 @@ sub_800ACB4: @ 0x0800ACB4
 	movs r0, #0x2b
 	bl sub_8011150
 	adds r0, r4, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	bl RunScriptContext
 	bl sub_8016DA4
 	pop {r4}
@@ -1448,7 +1448,7 @@ _0800AF62:
 	movs r3, #1
 	bl InitCourtScroll
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	ldrb r0, [r5, #0xa]
 	adds r0, #1
 	strb r0, [r5, #0xa]
@@ -1481,7 +1481,7 @@ _0800AF90:
 	strb r1, [r0]
 _0800AFAA:
 	ldrh r0, [r7, #0x10]
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r2, #0
 	strh r6, [r7, #0x10]
 	ldr r0, _0800AFD4 @ =gTestimony
@@ -1689,7 +1689,7 @@ _0800B15E:
 	movs r3, #1
 	bl InitCourtScroll
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	b _0800B186
 	.align 2, 0
 _0800B174: .4byte gPalCourtScroll
@@ -1742,7 +1742,7 @@ _0800B1D4: .4byte gMain
 _0800B1D8: .4byte gIORegisters
 _0800B1DC:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 _0800B1E2:
 	ldr r1, _0800B1EC @ =gUnknown_030037B8
 	ldr r0, [r5, #0xc]
@@ -1812,7 +1812,7 @@ _0800B258:
 	bgt _0800B2D8
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B2D0 @ =gUnknown_08026430
+	ldr r6, _0800B2D0 @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -1851,7 +1851,7 @@ _0800B258:
 	b _0800B4F0
 	.align 2, 0
 _0800B2CC: .4byte gMain
-_0800B2D0: .4byte gUnknown_08026430
+_0800B2D0: .4byte gSineTable
 _0800B2D4: .4byte gOamObjects
 _0800B2D8:
 	adds r0, r7, #0
@@ -1860,7 +1860,7 @@ _0800B2D8:
 	ldrsh r0, [r0, r2]
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B32C @ =gUnknown_08026430
+	ldr r6, _0800B32C @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -1891,7 +1891,7 @@ _0800B2D8:
 	strh r0, [r5, #0x1e]
 	b _0800B6DA
 	.align 2, 0
-_0800B32C: .4byte gUnknown_08026430
+_0800B32C: .4byte gSineTable
 _0800B330: .4byte gOamObjects
 _0800B334:
 	ldrb r0, [r7, #0xa]
@@ -1923,7 +1923,7 @@ _0800B344:
 	ldrsh r0, [r0, r2]
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B3C4 @ =gUnknown_08026430
+	ldr r6, _0800B3C4 @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -1958,7 +1958,7 @@ _0800B3B4: .4byte gMain
 _0800B3B8: .4byte 0x000003EF
 _0800B3BC: .4byte 0x0000C280
 _0800B3C0: .4byte 0x000051E0
-_0800B3C4: .4byte gUnknown_08026430
+_0800B3C4: .4byte gSineTable
 _0800B3C8: .4byte gOamObjects
 _0800B3CC:
 	ldr r0, _0800B44C @ =gMain
@@ -1978,7 +1978,7 @@ _0800B3CC:
 	mov r0, sb
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B450 @ =gUnknown_08026430
+	ldr r6, _0800B450 @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r1, #0
@@ -2020,7 +2020,7 @@ _0800B3CC:
 	b _0800B4F0
 	.align 2, 0
 _0800B44C: .4byte gMain
-_0800B450: .4byte gUnknown_08026430
+_0800B450: .4byte gSineTable
 _0800B454: .4byte gOamObjects
 _0800B458:
 	adds r0, r7, #0
@@ -2029,7 +2029,7 @@ _0800B458:
 	ldrsh r0, [r0, r2]
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B4AC @ =gUnknown_08026430
+	ldr r6, _0800B4AC @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -2060,7 +2060,7 @@ _0800B458:
 	strh r0, [r5, #0x3e]
 	b _0800B6DA
 	.align 2, 0
-_0800B4AC: .4byte gUnknown_08026430
+_0800B4AC: .4byte gSineTable
 _0800B4B0: .4byte gOamObjects
 _0800B4B4:
 	ldrb r0, [r7, #0xa]
@@ -2112,7 +2112,7 @@ _0800B4FC:
 	ldrsh r0, [r0, r1]
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r6, _0800B590 @ =gUnknown_08026430
+	ldr r6, _0800B590 @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r1, #0
@@ -2169,7 +2169,7 @@ _0800B4FC:
 	strh r0, [r1, #8]
 	b _0800B6DA
 	.align 2, 0
-_0800B590: .4byte gUnknown_08026430
+_0800B590: .4byte gSineTable
 _0800B594: .4byte gOamObjects
 _0800B598:
 	ldr r1, _0800B5B8 @ =0x040000D4

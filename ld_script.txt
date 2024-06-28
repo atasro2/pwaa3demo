@@ -25,8 +25,7 @@ SECTIONS {
         src/utils.o(.text);
         asm/utils.o(.text);
         src/utils_2.o(.text);
-        asm/utils_2.o(.text);
-        asm/case_data.o(.text);
+        src/case_data.o(.text);
         asm/rom_67A8.o(.text);
         asm/title_processes.o(.text);
         asm/gameover_process.o(.text);

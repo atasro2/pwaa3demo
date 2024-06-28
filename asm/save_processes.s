@@ -476,7 +476,7 @@ _08007484:
 	ldr r0, _080074E4 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #4
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r2, _080074E8 @ =gUnknown_03002CE0
 	ldr r1, _080074EC @ =0x00004460
 	strh r1, [r2]
@@ -1213,7 +1213,7 @@ _08007AB2:
 	cmp r0, #0
 	beq _08007AFC
 	movs r0, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _08007B02
 	.align 2, 0
 _08007AE8: .4byte gScriptContext
@@ -1223,7 +1223,7 @@ _08007AF4: .4byte 0x0000FDFF
 _08007AF8: .4byte 0x0000FFFF
 _08007AFC:
 	movs r0, #1
-	bl sub_8018778
+	bl ChangeScriptSection
 _08007B02:
 	ldr r1, _08007B84 @ =0x040000D4
 	ldr r0, _08007B88 @ =gGfxSaveYesNo
@@ -1394,7 +1394,7 @@ _08007C58:
 	ldr r1, _08007C7C @ =0x0000FFFF
 	strh r1, [r0, #0xc]
 	movs r0, #3
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #6
 	strb r0, [r5, #9]
 	b _08007E68
@@ -1410,7 +1410,7 @@ _08007C80:
 	ldr r0, _08007CCC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #6
-	bl sub_8018778
+	bl ChangeScriptSection
 	adds r0, r5, #0
 	adds r0, #0x8c
 	movs r1, #0
@@ -2229,7 +2229,7 @@ sub_8008338: @ 0x08008338
 	cmp r0, #0
 	beq _08008378
 	movs r0, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0800837E
 	.align 2, 0
 _0800836C: .4byte gScriptContext
@@ -2237,7 +2237,7 @@ _08008370: .4byte gJoypad
 _08008374: .4byte 0x0000FFFF
 _08008378:
 	movs r0, #1
-	bl sub_8018778
+	bl ChangeScriptSection
 _0800837E:
 	adds r1, r4, #0
 	adds r1, #0x8c

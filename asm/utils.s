@@ -145,18 +145,3 @@ _08006468:
 _0800646C:
 	bx lr
 	.align 2, 0
-
-	thumb_func_start sub_8006470
-sub_8006470: @ 0x08006470
-	bx lr
-	.align 2, 0
-
-	thumb_func_start nullsub_20
-nullsub_20: @ 0x08006474
-	bx lr
-	.align 2, 0
-
-	thumb_func_start nullsub_6
-nullsub_6: @ 0x08006478
-	bx lr
-	.align 2, 0

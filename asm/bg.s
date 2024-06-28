@@ -4791,8 +4791,8 @@ _080053F0: .4byte 0x000003BF
 _080053F4: .4byte gBG1MapBuffer
 _080053F8: .4byte gTextboxTiles
 
-	thumb_func_start sub_80053FC
-sub_80053FC: @ 0x080053FC
+	thumb_func_start SlideTextbox
+SlideTextbox: @ 0x080053FC
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r1, _08005448 @ =gMain

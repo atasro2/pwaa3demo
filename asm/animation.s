@@ -315,7 +315,7 @@ _08011EC8:
 	ands r0, r4
 	orrs r0, r3
 	strh r0, [r2]
-	ldr r2, _08011F38 @ =gUnknown_08026430
+	ldr r2, _08011F38 @ =gSineTable
 	movs r0, #0
 	ldrsh r1, [r1, r0]
 	adds r0, r1, #0
@@ -351,7 +351,7 @@ _08011F2C:
 	bx r0
 	.align 2, 0
 _08011F34: .4byte gUnknown_08028114
-_08011F38: .4byte gUnknown_08026430
+_08011F38: .4byte gSineTable
 _08011F3C: .4byte gOamObjects
 
 	thumb_func_start sub_8011F40
@@ -451,7 +451,7 @@ _08011FC4:
 	asrs r0, r0, #0x10
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r5, _0801205C @ =gUnknown_08026430
+	ldr r5, _0801205C @ =gSineTable
 	adds r0, r5, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -499,7 +499,7 @@ _0801204C:
 	bx r0
 	.align 2, 0
 _08012058: .4byte gUnknown_08028114
-_0801205C: .4byte gUnknown_08026430
+_0801205C: .4byte gSineTable
 _08012060: .4byte gOamObjects
 
 	thumb_func_start sub_8012064
@@ -1347,8 +1347,8 @@ _0801267A:
 	.align 2, 0
 _08012680: .4byte gMain
 
-	thumb_func_start sub_8012684
-sub_8012684: @ 0x08012684
+	thumb_func_start PlayPersonAnimation
+PlayPersonAnimation: @ 0x08012684
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r0, #0
@@ -5271,7 +5271,7 @@ sub_8014400: @ 0x08014400
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8012684
+	bl PlayPersonAnimation
 	pop {r3}
 	mov r8, r3
 	pop {r4, r5, r6}
@@ -5490,7 +5490,7 @@ _0801460C:
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8012684
+	bl PlayPersonAnimation
 	b _08014632
 _08014620:
 	movs r0, #1
@@ -5499,7 +5499,7 @@ _08014620:
 	movs r1, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8012684
+	bl PlayPersonAnimation
 _08014632:
 	ldr r0, _08014674 @ =gUnknown_08028208
 	movs r1, #0xa

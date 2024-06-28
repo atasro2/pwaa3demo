@@ -141,7 +141,7 @@ _0800BD3C:
 	ldrh r1, [r1]
 	adds r2, #0xc6
 	ldrh r2, [r2]
-	bl sub_80066B0
+	bl InvestigationSetPersonAnimation
 _0800BD5A:
 	movs r0, #0x10
 	ldrsh r1, [r5, r0]
@@ -165,7 +165,7 @@ _0800BD76:
 	ldrh r1, [r1]
 	adds r2, #0xc6
 	ldrh r2, [r2]
-	bl sub_80066B0
+	bl InvestigationSetPersonAnimation
 	b _0800BDA4
 	.align 2, 0
 _0800BD88: .4byte 0x0000800B
@@ -178,7 +178,7 @@ _0800BD94:
 	ldrh r1, [r1]
 	adds r2, #0xc6
 	ldrh r2, [r2]
-	bl sub_80066B0
+	bl InvestigationSetPersonAnimation
 _0800BDA4:
 	movs r0, #1
 	bl sub_800BC08

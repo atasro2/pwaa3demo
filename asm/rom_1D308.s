@@ -2180,7 +2180,7 @@ _0801E4E8:
 	ldrh r2, [r4]
 	movs r1, #0
 	movs r3, #0
-	bl sub_8012684
+	bl PlayPersonAnimation
 	ldrh r1, [r4]
 	mov r0, r8
 	adds r0, #0xc4

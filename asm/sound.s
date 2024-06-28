@@ -258,8 +258,8 @@ _080112C0:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_80112C8
-sub_80112C8: @ 0x080112C8
+	thumb_func_start PauseBGM
+PauseBGM: @ 0x080112C8
 	push {r4, r5, lr}
 	ldr r0, _0801130C @ =gMain
 	adds r4, r0, #0
@@ -787,7 +787,7 @@ sub_80116B0: @ 0x080116B0
 	strh r0, [r2, #0xa]
 	strh r3, [r2, #0xc]
 	strh r3, [r2, #0xe]
-	bl sub_80112C8
+	bl PauseBGM
 	bl ResetSoundControl
 	ldrb r0, [r4, #1]
 	adds r0, #1
@@ -1064,7 +1064,7 @@ _080118D0:
 	bl ChangeTrackPanning
 	b _08011934
 _080118F4:
-	bl sub_80112C8
+	bl PauseBGM
 	b _08011934
 _080118FA:
 	movs r0, #0x80

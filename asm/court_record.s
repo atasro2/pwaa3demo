@@ -307,16 +307,16 @@ _0800EC14: .4byte gScriptContext
 _0800EC18: .4byte gMain
 _0800EC1C:
 	movs r0, #0x21
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0800EC3A
 _0800EC24:
 	movs r0, #0x22
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0800EC3A
 _0800EC2C:
 	movs r0, #0x23
 _0800EC2E:
-	bl sub_8018778
+	bl ChangeScriptSection
 	adds r1, r4, #0
 	adds r1, #0x2a
 	movs r0, #1
@@ -351,7 +351,7 @@ sub_800EC48: @ 0x0800EC48
 	ldrh r0, [r0, #6]
 	cmp r0, #0
 	beq _0800ED04
-	bl sub_80112C8
+	bl PauseBGM
 	movs r0, #0x2b
 	bl sub_8011150
 	ldr r0, _0800ECE4 @ =gMain
@@ -790,9 +790,9 @@ _0800EFE0:
 	ands r2, r3
 	adds r0, r5, #0
 	bl sub_8010AFC
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 _0800F00E:
 	ldr r6, _0800F0A4 @ =gCourtRecord
 	adds r0, r6, #0
@@ -1137,7 +1137,7 @@ _0800F282:
 _0800F2EA:
 	bl sub_8011324
 	adds r0, r5, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r0, _0800F314 @ =0x00000103
 	str r0, [r4, #0xc]
 	b _0800F34C
@@ -2845,7 +2845,7 @@ _08010080:
 	adds r0, r5, r0
 	adds r0, r0, r3
 	ldrh r0, [r0]
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801011C
 	.align 2, 0
 _080100FC: .4byte gMain
@@ -2861,10 +2861,10 @@ _08010104:
 	lsls r0, r0, #1
 	adds r1, r1, r0
 	ldrh r0, [r1]
-	bl sub_8018778
+	bl ChangeScriptSection
 _0801011C:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	ldr r0, _08010128 @ =0x00030A04
 	str r0, [r5, #8]
 	b _08010272
@@ -2898,7 +2898,7 @@ _0801012C:
 	bl sub_8010A34
 	cmp r0, #0
 	beq _0801017C
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0801019E
 	.align 2, 0
 _0801016C: .4byte gInvestigation
@@ -2913,7 +2913,7 @@ _0801017C:
 	beq _08010190
 	ldrh r0, [r6, #0xc]
 	adds r0, #1
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _08010194
 _08010190:
 	bl sub_800EBE8
@@ -2965,7 +2965,7 @@ _080101EC:
 	ldrsh r0, [r6, r2]
 	bl fix_inverse
 	adds r4, r0, #0
-	ldr r3, _0801027C @ =gUnknown_08026430
+	ldr r3, _0801027C @ =gSineTable
 	mov r8, r3
 	adds r6, r5, #0
 	adds r6, #0x9b
@@ -3029,7 +3029,7 @@ _08010272:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801027C: .4byte gUnknown_08026430
+_0801027C: .4byte gSineTable
 _08010280: .4byte gOamObjects
 _08010284: .4byte 0x0000C058
 _08010288: .4byte gCourtRecord
@@ -3201,7 +3201,7 @@ sub_80103B4: @ 0x080103B4
 	bne _080103F4
 	ldr r0, _080103F0 @ =gInvestigation
 	movs r1, #1
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	b _08010414
 	.align 2, 0
 _080103EC: .4byte gUnknown_030037B8
@@ -3212,7 +3212,7 @@ _080103F4:
 	bne _08010408
 	ldr r0, _08010404 @ =gInvestigation
 	movs r1, #4
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	b _08010414
 	.align 2, 0
 _08010404: .4byte gInvestigation
@@ -3221,7 +3221,7 @@ _08010408:
 	bne _08010414
 	ldr r0, _0801041C @ =gInvestigation
 	movs r1, #8
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _08010414:
 	pop {r4, r5}
 	pop {r0}

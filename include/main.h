@@ -66,7 +66,10 @@ struct Main
     /* +0x0A0 */ u8 fillA0[0x22];
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
-    /* +0x0C3 */ u8 fillC3[0x25];
+    /* +0x0C3 */ u8 fillC3[1];
+    /* +0x0C4 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
+    /* +0x0C6 */ u16 idleAnimationOffset; // unity: Def_wait_foa
+    /* +0x0C8 */ u8 fillC8[0x20];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;

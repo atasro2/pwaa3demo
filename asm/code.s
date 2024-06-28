@@ -1644,7 +1644,7 @@ _08017B8C:
 	ldrb r0, [r0]
 	bl sub_8007610
 	movs r0, #0x80
-	bl sub_8018778
+	bl ChangeScriptSection
 _08017B9C:
 	pop {r0}
 	bx r0
@@ -3235,8 +3235,8 @@ sub_801873C: @ 0x0801873C
 _08018770: .4byte gScriptContext
 _08018774: .4byte gUnknown_02011FC4
 
-	thumb_func_start sub_8018778
-sub_8018778: @ 0x08018778
+	thumb_func_start ChangeScriptSection
+ChangeScriptSection: @ 0x08018778
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r4, _080187C4 @ =gScriptContext
@@ -4590,12 +4590,12 @@ _08019132:
 	ldrh r2, [r1, #2]
 	movs r1, #0
 	movs r3, #0
-	bl sub_8012684
+	bl PlayPersonAnimation
 	ldr r0, _08019190 @ =gInvestigation
 	movs r1, #1
 	strb r1, [r0, #6]
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	b _080191AC
 	.align 2, 0
 _08019188: .4byte gScriptContext
@@ -4610,7 +4610,7 @@ _08019194:
 	movs r1, #0
 	strb r1, [r0, #6]
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _080191AC:
 	movs r0, #0
 	add sp, #8
@@ -4742,7 +4742,7 @@ _0801927C:
 	.align 2, 0
 _080192A4: .4byte gScriptContext
 _080192A8:
-	bl sub_80112C8
+	bl PauseBGM
 _080192AC:
 	movs r0, #0
 	add sp, #4
@@ -6027,7 +6027,7 @@ _08019C40:
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
-	ldr r4, _08019CEC @ =gUnknown_08026430
+	ldr r4, _08019CEC @ =gSineTable
 	adds r1, r4, #0
 	adds r1, #0x80
 	movs r3, #0
@@ -6083,7 +6083,7 @@ _08019C40:
 	movs r0, #2
 	b _08019E88
 	.align 2, 0
-_08019CEC: .4byte gUnknown_08026430
+_08019CEC: .4byte gSineTable
 _08019CF0: .4byte gOamObjects
 _08019CF4:
 	mov r7, sl
@@ -6096,7 +6096,7 @@ _08019CF4:
 	lsls r1, r1, #0x11
 	cmp r0, r1
 	bgt _08019DC0
-	ldr r4, _08019DB0 @ =gUnknown_08026430
+	ldr r4, _08019DB0 @ =gSineTable
 	adds r0, r4, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -6171,12 +6171,12 @@ _08019CF4:
 	movs r0, #3
 	b _08019E88
 	.align 2, 0
-_08019DB0: .4byte gUnknown_08026430
+_08019DB0: .4byte gSineTable
 _08019DB4: .4byte gOamObjects
 _08019DB8: .4byte 0xFFDFFFFF
 _08019DBC: .4byte 0x00000259
 _08019DC0:
-	ldr r4, _08019E34 @ =gUnknown_08026430
+	ldr r4, _08019E34 @ =gSineTable
 	adds r0, r4, #0
 	adds r0, #0x80
 	movs r2, #0
@@ -6227,7 +6227,7 @@ _08019DC0:
 	strh r0, [r6, #0x1e]
 	b _08019E8A
 	.align 2, 0
-_08019E34: .4byte gUnknown_08026430
+_08019E34: .4byte gSineTable
 _08019E38: .4byte gOamObjects
 _08019E3C:
 	ldr r2, _08019E5C @ =0x00000259

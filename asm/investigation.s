@@ -54,8 +54,8 @@ _0800BF88:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_800BF90
-sub_800BF90: @ 0x0800BF90
+	thumb_func_start SetInactiveActionButtons
+SetInactiveActionButtons: @ 0x0800BF90
 	adds r2, r0, #0
 	strb r1, [r2, #8]
 	ldrb r0, [r2, #6]
@@ -229,7 +229,7 @@ _0800C0D2:
 	bls _0800C0D2
 	mov r0, r8
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r4, #0
 	movs r0, #0xe0
 	mov r1, r8
@@ -299,7 +299,7 @@ _0800C0D2:
 	ldr r0, _0800C284 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #0x80
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r0, _0800C288 @ =gMain
 	adds r4, r0, #0
 	adds r4, #0xc1
@@ -307,7 +307,7 @@ _0800C0D2:
 	cmp r0, #0xc
 	beq _0800C19A
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 _0800C19A:
 	ldrb r4, [r4]
 	cmp r4, #7
@@ -587,7 +587,7 @@ _0800C3F6:
 	strh r0, [r4, #2]
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	adds r0, r7, #0
 	ldrb r1, [r4, #0xc]
 	lsls r0, r1
@@ -695,7 +695,7 @@ _0800C4E2:
 	strb r1, [r4, #0x10]
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 _0800C4F6:
 	ldrb r0, [r4, #0x12]
 	cmp r0, #7
@@ -959,7 +959,7 @@ _0800C6CE:
 	movs r4, #0
 	adds r0, r5, #0
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #0xe0
 	strb r0, [r5, #0x11]
 	strb r4, [r5, #0x12]
@@ -975,7 +975,7 @@ _0800C6CE:
 	ldr r0, _0800C764 @ =gInvestigation
 	strb r4, [r0, #6]
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	ldr r1, _0800C768 @ =gUnknown_0814DAAC
 	mov r2, r8
 	ldrb r2, [r2]
@@ -1208,9 +1208,9 @@ _0800C8C0:
 	adds r0, r5, #0
 	bl sub_800E72C
 	adds r2, r0, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	strb r6, [r5, #7]
 	strb r4, [r5, #0x18]
 	strb r4, [r5, #0x19]
@@ -1245,7 +1245,7 @@ _0800C920:
 	strb r6, [r7, #0xa]
 	adds r0, r5, #0
 	movs r1, #0xe
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	strb r6, [r5, #0x10]
 	movs r0, #0xe0
 	strb r0, [r5, #0x11]
@@ -1659,12 +1659,12 @@ _0800CC4E:
 	b _0800D09E
 _0800CC60:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	ldr r1, _0800CC78 @ =gInvestigation
 	movs r0, #4
 	strb r0, [r1, #0x10]
 	movs r0, #0x1e
-	bl sub_8018778
+	bl ChangeScriptSection
 	b _0800D09E
 	.align 2, 0
 _0800CC74: .4byte gUnknown_03003C54
@@ -1763,7 +1763,7 @@ _0800CD06:
 	b _0800D0F8
 _0800CD24:
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	ldr r1, _0800CD50 @ =gInvestigation
 	movs r0, #4
 	strb r0, [r1, #0x10]
@@ -2021,7 +2021,7 @@ _0800CEFA:
 	ldr r0, [sp]
 	movs r1, #0xd
 	str r2, [sp, #8]
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #2
 	ldr r7, [sp]
 	strb r0, [r7, #0x10]
@@ -2781,9 +2781,9 @@ _0800D4DC:
 	adds r0, r0, r1
 	ldrh r2, [r0]
 	adds r0, r2, #0
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	ldr r3, [sp, #0x14]
 	adds r4, r3, #0
 	adds r4, #8
@@ -2809,7 +2809,7 @@ _0800D53A:
 	ldr r0, [sp]
 	movs r1, #4
 	str r3, [sp, #0x14]
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #0xf0
 	ldr r4, [sp]
 	strb r0, [r4, #0x11]
@@ -2990,7 +2990,7 @@ _0800D68A:
 	ldr r0, [sp]
 	movs r1, #0xb
 	str r2, [sp, #0x10]
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #2
 	ldr r1, [sp]
 	strb r0, [r1, #0x10]
@@ -3356,7 +3356,7 @@ _0800D982:
 	ldr r4, _0800D9A4 @ =gInvestigation
 	adds r0, r4, #0
 	movs r1, #4
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #1
 	strb r0, [r4, #0x10]
@@ -3695,7 +3695,7 @@ _0800DBF8:
 	bls _0800DBF8
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r0, #0xe0
 	strb r0, [r4, #0x11]
 	movs r0, #0x40
@@ -3713,7 +3713,7 @@ _0800DC34: .4byte 0x000040E0
 _0800DC38:
 	adds r0, r4, #0
 	movs r1, #7
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r4, #0x10]
@@ -3832,7 +3832,7 @@ _0800DD18: .4byte gMain
 _0800DD1C: .4byte 0x00000256
 _0800DD20:
 	ldrh r0, [r7, #0xa]
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r1, _0800DDC4 @ =gMain
 	movs r0, #1
 	strb r0, [r1, #0x18]
@@ -4060,7 +4060,7 @@ _0800DEF0:
 	cmp r0, #0
 	bne _0800DF06
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 _0800DF06:
 	movs r0, #3
 	strb r0, [r6, #0xa]
@@ -4072,9 +4072,9 @@ _0800DF10: .4byte gMain
 _0800DF14: .4byte 0x0000027D
 _0800DF18:
 	ldrh r0, [r7, #0x10]
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 _0800DF24:
 	movs r0, #3
 	strb r0, [r6, #0xa]
@@ -4223,7 +4223,7 @@ _0800E050: @ jump table
 	.4byte _0800E0D0 @ case 5
 _0800E068:
 	ldrh r0, [r7, #0xc]
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r0, _0800E088 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
@@ -4234,7 +4234,7 @@ _0800E068:
 	b _0800E216
 _0800E07E:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	b _0800E216
 	.align 2, 0
 _0800E088: .4byte gScriptContext
@@ -4322,7 +4322,7 @@ _0800E120:
 	mov r4, r8
 	strb r0, [r4, #0xb]
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	movs r1, #0x94
 	lsls r1, r1, #2
 	adds r0, r6, r1
@@ -4338,7 +4338,7 @@ _0800E150:
 	ldr r4, _0800E160 @ =gMain
 	movs r0, #1
 	strb r0, [r4, #0x18]
-	bl sub_80053FC
+	bl SlideTextbox
 	ldr r0, [r4, #0xc]
 	str r0, [r4, #8]
 _0800E15E:
@@ -4367,7 +4367,7 @@ _0800E17C: @ jump table
 	.4byte _0800E21E @ case 5
 _0800E194:
 	ldrh r0, [r7, #0x12]
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r0, _0800E1B0 @ =gScriptContext
 	adds r0, #0x23
 	ldrb r0, [r0]
@@ -4377,7 +4377,7 @@ _0800E194:
 	bne _0800E216
 _0800E1A8:
 	movs r0, #1
-	bl sub_80053FC
+	bl SlideTextbox
 	b _0800E216
 	.align 2, 0
 _0800E1B0: .4byte gScriptContext
@@ -4453,7 +4453,7 @@ _0800E21E:
 	ands r0, r2
 	strb r0, [r1, #0xb]
 	movs r0, #0
-	bl sub_80053FC
+	bl SlideTextbox
 	movs r0, #0x82
 	lsls r0, r0, #1
 	str r0, [r6, #8]
@@ -4633,7 +4633,7 @@ _0800E3B6:
 	ldr r4, _0800E450 @ =gUnknown_03002D40
 	adds r0, r5, #0
 	movs r1, #4
-	bl sub_800BF90
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #0xd0
 	strb r0, [r5, #0x11]

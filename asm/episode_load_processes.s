@@ -796,7 +796,7 @@ _08008B34:
 	mov sl, r2
 	mov r3, sl
 	strh r3, [r1]
-	ldr r6, _08008BCC @ =gUnknown_08026430
+	ldr r6, _08008BCC @ =gSineTable
 	adds r0, r6, #0
 	adds r0, #0x80
 	movs r1, #0
@@ -856,7 +856,7 @@ _08008B34:
 	strb r2, [r7, #0xa]
 	b _08008D58
 	.align 2, 0
-_08008BCC: .4byte gUnknown_08026430
+_08008BCC: .4byte gSineTable
 _08008BD0: .4byte gOamObjects
 _08008BD4:
 	movs r3, #0xa0
@@ -868,7 +868,7 @@ _08008BD4:
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	beq _08008C30
-	ldr r7, _08008C24 @ =gUnknown_08026430
+	ldr r7, _08008C24 @ =gSineTable
 	ldrh r4, [r7]
 	rsbs r4, r4, #0
 	str r4, [sp, #0x1c]
@@ -897,7 +897,7 @@ _08008BD4:
 	adds r0, r5, #0
 	b _08008CFE
 	.align 2, 0
-_08008C24: .4byte gUnknown_08026430
+_08008C24: .4byte gSineTable
 _08008C28: .4byte gOamObjects
 _08008C2C: .4byte gUnknown_080264B0
 _08008C30:
@@ -949,7 +949,7 @@ _08008C74:
 	ldr r0, _08008CB8 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #5
-	bl sub_8018778
+	bl ChangeScriptSection
 	ldr r6, _08008CBC @ =gUnknown_03002D70
 	ldr r1, _08008CC0 @ =0x0000FEFF
 	adds r0, r1, #0
@@ -970,7 +970,7 @@ _08008CB8: .4byte 0x0000FFFF
 _08008CBC: .4byte gUnknown_03002D70
 _08008CC0: .4byte 0x0000FEFF
 _08008CC4:
-	ldr r7, _08008D08 @ =gUnknown_08026430
+	ldr r7, _08008D08 @ =gSineTable
 	ldrh r4, [r7]
 	rsbs r4, r4, #0
 	str r4, [sp, #0x24]
@@ -1001,7 +1001,7 @@ _08008CFE:
 	strh r0, [r6, #0x1e]
 	b _08008D58
 	.align 2, 0
-_08008D08: .4byte gUnknown_08026430
+_08008D08: .4byte gSineTable
 _08008D0C: .4byte gOamObjects
 _08008D10: .4byte gUnknown_080264B0
 _08008D14:
@@ -1017,7 +1017,7 @@ _08008D14:
 	ands r0, r1
 	cmp r0, #0
 	beq _08008D58
-	bl sub_80112C8
+	bl PauseBGM
 	movs r0, #0x2b
 	bl sub_8011150
 	ldr r0, _08008D70 @ =gSaveDataBuffer
@@ -1351,7 +1351,7 @@ _08009088:
 	ldr r0, _080090FC @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #2
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #0x30
 	movs r1, #0x14
 	bl SetTimedKeysAndDelay
@@ -2192,7 +2192,7 @@ _080097B4:
 	ldr r0, _08009808 @ =0x0000FFFF
 	strh r0, [r1, #0xc]
 	movs r0, #2
-	bl sub_8018778
+	bl ChangeScriptSection
 	movs r0, #0x30
 	movs r1, #0x14
 	bl SetTimedKeysAndDelay
@@ -2455,7 +2455,7 @@ _08009A00:
 	adds r0, #0xc1
 	ldrb r0, [r0]
 	adds r0, #7
-	bl sub_8018778
+	bl ChangeScriptSection
 	mov r0, r8
 	adds r0, #0x8c
 	strh r5, [r0]
