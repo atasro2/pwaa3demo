@@ -2890,7 +2890,7 @@ _080184BA:
 	cmp r0, #0
 	bne _080184C8
 	movs r0, #0x44
-	bl sub_8011150
+	bl PlaySE
 	b _08018312
 _080184C8:
 	ldr r6, _080184F4 @ =gUnknown_08028546
@@ -2902,7 +2902,7 @@ _080184C8:
 	cmp r0, #1
 	bne _080184DE
 	movs r0, #0x2e
-	bl sub_8011150
+	bl PlaySE
 _080184DE:
 	ldrb r4, [r4]
 	adds r0, r4, r6
@@ -2912,7 +2912,7 @@ _080184DE:
 	b _08018312
 _080184EA:
 	movs r0, #0x2d
-	bl sub_8011150
+	bl PlaySE
 	b _08018312
 	.align 2, 0
 _080184F4: .4byte gUnknown_08028546
@@ -4052,7 +4052,7 @@ _08018D48:
 	beq _08018D7C
 	mov r0, sp
 	ldrh r0, [r0]
-	bl sub_8011150
+	bl PlaySE
 	b _08018D84
 	.align 2, 0
 _08018D78: .4byte gScriptContext
@@ -5841,7 +5841,7 @@ _08019AE8:
 	movs r0, #0x55
 	bl sub_8012824
 	movs r0, #0x53
-	bl sub_8011150
+	bl PlaySE
 	movs r2, #0x96
 	lsls r2, r2, #2
 	adds r1, r4, r2
@@ -5950,7 +5950,7 @@ _08019BB0:
 	orrs r1, r2
 	strh r1, [r0]
 	movs r0, #0x57
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #0x96
 	lsls r0, r0, #2
 	adds r1, r4, r0

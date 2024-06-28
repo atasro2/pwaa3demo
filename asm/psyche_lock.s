@@ -665,7 +665,7 @@ _08014C10:
 	b _08014D24
 _08014C16:
 	movs r0, #0x7a
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _08014CA4 @ =gMain
 	movs r0, #0x80
 	strh r0, [r1, #0x36]
@@ -856,7 +856,7 @@ _08014D5A:
 	movs r1, #0
 	ldrsh r0, [r4, r1]
 	adds r0, #0x7f
-	bl sub_8011150
+	bl PlaySE
 	ldrh r0, [r4, #6]
 	adds r0, #1
 	strh r0, [r4, #6]
@@ -1045,7 +1045,7 @@ _08014EE2:
 	cmp r4, #8
 	bne _08014F06
 	movs r0, #0x73
-	bl sub_8011150
+	bl PlaySE
 _08014F06:
 	cmp r4, #7
 	bgt _08014F30
@@ -1212,7 +1212,7 @@ _0801503E:
 	subs r0, #1
 	strh r0, [r5, #2]
 	movs r0, #0x74
-	bl sub_8011150
+	bl PlaySE
 	movs r1, #2
 	ldrsh r0, [r5, r1]
 	lsls r0, r0, #2
@@ -1476,7 +1476,7 @@ _08015230:
 	movs r1, #0
 	ldrsh r0, [r4, r1]
 	adds r0, #0x7f
-	bl sub_8011150
+	bl PlaySE
 	b _0801530E
 _0801526C:
 	ldr r4, _080152C4 @ =gUnknown_03006D80
@@ -1625,7 +1625,7 @@ _08015364:
 	strh r0, [r5, #0x10]
 _080153A0:
 	movs r0, #0xa6
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _080153F8 @ =gUnknown_03006D70
 	ldrh r0, [r1, #6]
 	adds r0, #1
@@ -1746,7 +1746,7 @@ _08015480:
 	movs r2, #0x3c
 	bl sub_8012864
 	movs r0, #0xa7
-	bl sub_8011150
+	bl PlaySE
 	b _080154F4
 _080154B0:
 	movs r0, #0x68

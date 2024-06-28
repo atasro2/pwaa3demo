@@ -211,7 +211,7 @@ _08006AB8:
 	b _08006CD6
 _08006AC2:
 	bl ResetGameState
-	bl sub_8007120
+	bl LoadSaveData
 	ldr r0, _08006AD0 @ =0x00000101
 	str r0, [r4, #8]
 	b _08006CD6
@@ -242,7 +242,7 @@ _08006AFC:
 	cmp r2, #0
 	beq _08006B28
 	movs r0, #0x3a
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _08006B20 @ =gScriptContext
 	movs r1, #0
 	strh r1, [r0, #0x16]
@@ -271,7 +271,7 @@ _08006B28:
 	eors r0, r6
 	strb r0, [r4, #0x17]
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 _08006B4E:
 	ldr r0, _08006B68 @ =gInvestigation
 	ldrb r2, [r0, #0x18]

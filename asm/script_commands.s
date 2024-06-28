@@ -299,7 +299,7 @@ _0801A2F4:
 	ands r0, r1
 	strh r0, [r5, #0x1c]
 	movs r0, #0x2f
-	bl sub_8011150
+	bl PlaySE
 	adds r0, r5, #0
 	adds r0, #0x23
 	ldrb r0, [r0]
@@ -578,7 +578,7 @@ _0801A538:
 	cmp r0, #0
 	beq _0801A58A
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	ldrh r1, [r4, #0x12]
 	subs r1, #1
 	strh r1, [r4, #0x12]
@@ -619,7 +619,7 @@ _0801A58A:
 	cmp r0, #0
 	beq _0801A5CA
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	ldrh r1, [r4, #0x12]
 	adds r1, #1
 	strh r1, [r4, #0x12]
@@ -654,7 +654,7 @@ _0801A5CA:
 	b _0801A754
 _0801A5D6:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	bl sub_8016D6C
 	ldr r0, _0801A6F4 @ =0x0000FFFB
 	ldrh r1, [r4, #0x1c]
@@ -1076,7 +1076,7 @@ _0801A904: .4byte gScriptContext
 sub_801A908: @ 0x0801A908
 	push {lr}
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _0801A944 @ =gScriptContext
 	movs r0, #0x10
 	ldrh r2, [r1, #0x1c]
@@ -1138,7 +1138,7 @@ sub_801A954: @ 0x0801A954
 	cmp r0, #0
 	bne _0801A992
 	movs r0, #0x33
-	bl sub_8011150
+	bl PlaySE
 _0801A992:
 	ldrh r1, [r4, #0x12]
 	movs r0, #0xf0
@@ -1185,7 +1185,7 @@ sub_801A9BC: @ 0x0801A9BC
 	beq _0801A9E8
 _0801A9E2:
 	movs r0, #0x33
-	bl sub_8011150
+	bl PlaySE
 _0801A9E8:
 	ldrh r1, [r4, #0x12]
 	movs r0, #0xf0
@@ -1555,7 +1555,7 @@ sub_801ACD4: @ 0x0801ACD4
 	cmp r0, #0
 	beq _0801AD24
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #0x10
 	ldrh r1, [r4, #0x1c]
 	orrs r0, r1
@@ -2943,7 +2943,7 @@ _0801B7C2:
 	b _0801BA2E
 _0801B7D0:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0801B7E4 @ =0x0000FDFF
 	ldrh r1, [r6, #0x1c]
 	ands r0, r1
@@ -3072,7 +3072,7 @@ _0801B8AA:
 	bl StartHardwareBlend
 	bl sub_8011324
 	movs r0, #0x48
-	bl sub_8011150
+	bl PlaySE
 _0801B8CC:
 	ldr r1, _0801B9C4 @ =0x040000D4
 	ldr r0, _0801B9C8 @ =gGfxExamineCursor
@@ -3158,7 +3158,7 @@ _0801B93A:
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _0801B9F0 @ =gOamObjects
 	ldrh r2, [r5, #2]
 	movs r3, #0xb0
@@ -4829,7 +4829,7 @@ _0801C614:
 	mov r3, sb
 	strb r3, [r7]
 	movs r0, #0x2e
-	bl sub_8011150
+	bl PlaySE
 	b _0801C658
 	.align 2, 0
 _0801C628: .4byte 0x00000FFF
@@ -5111,7 +5111,7 @@ _0801C844:
 	strb r1, [r0]
 	movs r0, #0x48
 _0801C85C:
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #1
 	b _0801C8A0
 	.align 2, 0

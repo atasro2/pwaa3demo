@@ -91,7 +91,7 @@ _0800853E:
 	movs r0, #0
 	strh r0, [r1]
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #1
 	movs r1, #0
 	movs r2, #1
@@ -1019,7 +1019,7 @@ _08008D14:
 	beq _08008D58
 	bl PauseBGM
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _08008D70 @ =gSaveDataBuffer
 	adds r1, r7, #0
 	adds r1, #0xc1
@@ -1446,7 +1446,7 @@ _0800912A:
 	movs r2, #0x48
 	bl sub_8012864
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #0xb
 	strb r0, [r6, #9]
 _0800919E:
@@ -1513,7 +1513,7 @@ _080091CA:
 	movs r2, #0x48
 	bl sub_8012864
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #0xa
 	strb r0, [r6, #9]
 _0800923E:
@@ -1535,7 +1535,7 @@ _08009246:
 	bl sub_8011D68
 	bl sub_8012F7C
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	adds r1, r6, #0
 	adds r1, #0xa2
 	movs r2, #0
@@ -1571,7 +1571,7 @@ _080092A8:
 	b _08009850
 _080092B2:
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #2
 	movs r1, #0
 	movs r2, #1
@@ -2302,7 +2302,7 @@ _080098AE:
 _080098B6:
 	bl _0800A368
 _080098BA:
-	bl sub_8007120
+	bl LoadSaveData
 	mov r0, r8
 	bl sub_80084D8
 	bl _0800A368
@@ -2394,7 +2394,7 @@ _08009964:
 	movs r1, #8
 	bl sub_8005CFC
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _080099E4 @ =gIORegisters
 	adds r3, r1, #0
 	adds r3, #0x4a
@@ -2503,7 +2503,7 @@ _08009A58:
 	cmp r0, #0
 	beq _08009A98
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #1
 	mov r6, r8
 	ldrb r6, [r6, #0x17]
@@ -2523,7 +2523,7 @@ _08009A98:
 	cmp r0, #0
 	beq _08009AEC
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	movs r2, #0
 	mov r3, r8
 	strb r2, [r3, #0x18]
@@ -2562,7 +2562,7 @@ _08009AEC:
 	cmp r0, #0
 	beq _08009B0E
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #2
 	movs r1, #0
 	movs r2, #1
@@ -3324,7 +3324,7 @@ _0800A1B0:
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _0800A1C0
-	bl sub_8011150
+	bl PlaySE
 _0800A1C0:
 	movs r0, #1
 	movs r1, #1

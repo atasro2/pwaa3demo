@@ -64,8 +64,8 @@ _0801114A:
 	pop {r1}
 	bx r1
 
-	thumb_func_start sub_8011150
-sub_8011150: @ 0x08011150
+	thumb_func_start PlaySE
+PlaySE: @ 0x08011150
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r5, _0801118C @ =gMain
@@ -934,7 +934,7 @@ _080117E0:
 	movs r1, #4
 	ldrsh r0, [r5, r1]
 	adds r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 _080117F2:
 	ldr r0, _0801180C @ =gUnknown_08026FB0
 	movs r1, #0xb

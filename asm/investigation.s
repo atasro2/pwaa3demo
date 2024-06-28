@@ -514,7 +514,7 @@ _0800C364:
 	b _0800C4F6
 _0800C382:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800C3AC @ =gUnknown_030037B8
 	ldr r0, [r0]
 	str r0, [r5, #0xc]
@@ -566,7 +566,7 @@ _0800C3DE:
 _0800C3E4:
 	strb r0, [r4, #0xc]
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #0
 	strb r0, [r4, #0x12]
 	movs r0, #8
@@ -579,7 +579,7 @@ _0800C3F6:
 	cmp r0, #0
 	beq _0800C484
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	movs r6, #0
 	movs r0, #0x78
 	strh r0, [r4]
@@ -662,7 +662,7 @@ _0800C484:
 	bne _0800C4F6
 _0800C4B4:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	adds r1, r5, #0
 	adds r1, #0x3e
 	movs r0, #1
@@ -1178,7 +1178,7 @@ _0800C888:
 	bne _0800C8C0
 _0800C8A2:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800C8BC @ =gUnknown_030037B8
 	ldr r0, [r0]
 	str r0, [r7, #0xc]
@@ -1199,7 +1199,7 @@ _0800C8C0:
 	cmp r4, #0
 	beq _0800C920
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	movs r4, #0
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -1241,7 +1241,7 @@ _0800C920:
 	cmp r0, #0
 	beq _0800C944
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	strb r6, [r7, #0xa]
 	adds r0, r5, #0
 	movs r1, #0xe
@@ -1826,7 +1826,7 @@ _0800CD8C:
 	b _0800D09E
 _0800CDA6:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #6
 	mov r2, r8
 	strb r0, [r2, #0xa]
@@ -1919,7 +1919,7 @@ _0800CE44:
 	b _0800D09E
 _0800CE4E:
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	b _0800D09E
 _0800CE56:
 	movs r4, #1
@@ -1927,7 +1927,7 @@ _0800CE56:
 	cmp r4, #0
 	beq _0800CEA8
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	mov r2, r8
 	adds r2, #0xc0
 	ldr r6, [sp]
@@ -1967,7 +1967,7 @@ _0800CEA8:
 	b _0800D09E
 _0800CEB2:
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	mov r2, r8
 	ldrb r0, [r2, #0xa]
 	adds r0, #1
@@ -2664,7 +2664,7 @@ _0800D404:
 _0800D41E:
 	movs r0, #0x31
 	str r3, [sp, #0x14]
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #8
 	mov r1, sl
 	strb r0, [r1, #0xa]
@@ -2723,7 +2723,7 @@ _0800D486:
 	beq _0800D57C
 	movs r0, #0x2a
 	str r3, [sp, #0x14]
-	bl sub_8011150
+	bl PlaySE
 	b _0800D57A
 _0800D498:
 	ldr r6, [sp]
@@ -2760,7 +2760,7 @@ _0800D4CA:
 	beq _0800D57C
 	movs r0, #0x2a
 	str r3, [sp, #0x14]
-	bl sub_8011150
+	bl PlaySE
 	b _0800D57A
 _0800D4DC:
 	mov r0, sb
@@ -2771,7 +2771,7 @@ _0800D4DC:
 	beq _0800D55C
 	movs r0, #0x2b
 	str r3, [sp, #0x14]
-	bl sub_8011150
+	bl PlaySE
 	ldr r6, [sp]
 	ldrb r6, [r6, #4]
 	lsls r1, r6, #1
@@ -2829,7 +2829,7 @@ _0800D55C:
 	beq _0800D57C
 	movs r0, #0x2c
 	str r3, [sp, #0x14]
-	bl sub_8011150
+	bl PlaySE
 	mov r1, sl
 	ldrb r0, [r1, #0xa]
 	adds r0, #1
@@ -3159,7 +3159,7 @@ _0800D7DC:
 	cmp r0, #0
 	beq _0800D818
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800D814 @ =gUnknown_030037B8
 	ldr r0, [r0]
 	mov r3, sl
@@ -3874,7 +3874,7 @@ _0800DD30:
 	beq _0800DD84
 	bl sub_8015B4C
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, [r4, #8]
 	str r0, [r6, #0xc]
 	ldr r0, _0800DDD4 @ =gUnknown_03000007
@@ -3904,7 +3904,7 @@ _0800DD84:
 	cmp r1, r0
 	bne _0800DDD8
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #8
 	strb r0, [r6, #0xa]
 	strb r4, [r6, #0xb]
@@ -3949,7 +3949,7 @@ _0800DDD8:
 	beq _0800DE2C
 	bl sub_8016D6C
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, [r4, #8]
 	str r0, [r6, #0xc]
 	ldr r0, _0800DE68 @ =0x04000007

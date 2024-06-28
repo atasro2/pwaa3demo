@@ -2297,11 +2297,11 @@ _0801E5DA:
 	cmp r0, #0
 	beq _0801E5EC
 	movs r0, #0x6f
-	bl sub_8011150
+	bl PlaySE
 	b _0801E5F2
 _0801E5EC:
 	movs r0, #0x3a
-	bl sub_8011150
+	bl PlaySE
 _0801E5F2:
 	movs r4, #0
 	movs r2, #0
@@ -2488,11 +2488,11 @@ _0801E782:
 	cmp r0, #0
 	beq _0801E794
 	movs r0, #0x6f
-	bl sub_8011150
+	bl PlaySE
 	b _0801E79A
 _0801E794:
 	movs r0, #0x3a
-	bl sub_8011150
+	bl PlaySE
 _0801E79A:
 	movs r0, #0xa
 	mov r7, r8
@@ -2570,11 +2570,11 @@ _0801E81E:
 	cmp r0, #0
 	beq _0801E840
 	movs r0, #0x6f
-	bl sub_8011150
+	bl PlaySE
 	b _0801E846
 _0801E840:
 	movs r0, #0x3a
-	bl sub_8011150
+	bl PlaySE
 _0801E846:
 	movs r0, #0xa
 	mov r3, r8
@@ -2634,11 +2634,11 @@ _0801E89E:
 	cmp r0, #0
 	beq _0801E8C0
 	movs r0, #0x6f
-	bl sub_8011150
+	bl PlaySE
 	b _0801E8C6
 _0801E8C0:
 	movs r0, #0x3a
-	bl sub_8011150
+	bl PlaySE
 _0801E8C6:
 	movs r4, #0
 	movs r1, #0

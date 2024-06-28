@@ -56,8 +56,8 @@ _08007104:
 _08007118: .4byte 0x00002C54
 _0800711C: .4byte gSaveDataBuffer
 
-	thumb_func_start sub_8007120
-sub_8007120: @ 0x08007120
+	thumb_func_start LoadSaveData
+LoadSaveData: @ 0x08007120
 	push {r4, lr}
 	movs r3, #0
 	ldr r0, _08007138 @ =gJoypad
@@ -282,7 +282,7 @@ _080072CE:
 	ands r0, r1
 	cmp r0, r4
 	bhi _080072FC
-	bl sub_8007120
+	bl LoadSaveData
 	lsls r1, r5, #4
 	orrs r1, r4
 	strb r1, [r6]
@@ -537,7 +537,7 @@ _08007500:
 	cmp r4, #0
 	beq _08007530
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #1
 	ldrb r1, [r6, #0x17]
 	eors r0, r1
@@ -552,7 +552,7 @@ _08007530:
 	cmp r0, #0
 	beq _08007552
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #2
 	movs r1, #1
 	movs r2, #1
@@ -1351,7 +1351,7 @@ _08007BF8:
 	eors r0, r2
 	strb r0, [r5, #0x17]
 	movs r0, #0x2a
-	bl sub_8011150
+	bl PlaySE
 	b _08007CFE
 	.align 2, 0
 _08007C14: .4byte gScriptContext
@@ -1363,7 +1363,7 @@ _08007C1C:
 	cmp r0, #0
 	beq _08007CD0
 	movs r0, #0x40
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r5, #0x17]
 	cmp r0, #0
 	bne _08007CA8
@@ -1449,7 +1449,7 @@ _08007CD0:
 	cmp r2, #0
 	beq _08007CFE
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #1
 	strb r0, [r5, #0x17]
 	movs r1, #0
@@ -2090,7 +2090,7 @@ _08008244:
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _08008254
-	bl sub_8011150
+	bl PlaySE
 _08008254:
 	ldr r2, _080082BC @ =gAnimation+0x44
 	ldrb r0, [r2, #0xe]

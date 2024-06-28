@@ -1239,13 +1239,13 @@ _080169E4:
 	cmp r0, #0
 	bge _080169F8
 	movs r0, #0x9c
-	bl sub_8011150
+	bl PlaySE
 	b _08016A02
 _080169F8:
 	cmp r0, #0
 	ble _08016A02
 	movs r0, #0x4c
-	bl sub_8011150
+	bl PlaySE
 _08016A02:
 	ldr r1, _08016A64 @ =gMain
 	adds r3, r1, #0

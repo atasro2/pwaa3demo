@@ -174,7 +174,7 @@ _08006E2A:
 	cmp r0, #0xe
 	bls _08006E6A
 	movs r0, #0x56
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r6, #9]
 	adds r0, #1
 	movs r1, #0
@@ -424,7 +424,7 @@ _08007012:
 	cmp r0, #0xe
 	bls _08007060
 	movs r0, #0x56
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _08007044 @ =gScriptContext
 	adds r0, #0x46
 	ldrh r1, [r0]

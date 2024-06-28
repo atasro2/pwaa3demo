@@ -353,7 +353,7 @@ sub_800EC48: @ 0x0800EC48
 	beq _0800ED04
 	bl PauseBGM
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800ECE4 @ =gMain
 	movs r2, #0
 	movs r1, #5
@@ -423,7 +423,7 @@ _0800ED06:
 sub_800ED0C: @ 0x0800ED0C
 	push {r4, r5, lr}
 	movs r0, #0x36
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800EDA0 @ =gCourtRecord
 	movs r1, #1
 	strb r1, [r0, #0xf]
@@ -775,7 +775,7 @@ _0800EFD4:
 	b _0800F112
 _0800EFE0:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldr r5, _0800F0A0 @ =gMain
 	ldrb r0, [r5, #0xb]
 	cmp r0, #2
@@ -1043,7 +1043,7 @@ _0800F204:
 	bne _0800F234
 _0800F226:
 	ldr r0, _0800F230 @ =0x00000173
-	bl sub_8011150
+	bl PlaySE
 	b _0800F282
 	.align 2, 0
 _0800F230: .4byte 0x00000173
@@ -1052,11 +1052,11 @@ _0800F234:
 	bne _0800F242
 	movs r0, #0xb8
 	lsls r0, r0, #1
-	bl sub_8011150
+	bl PlaySE
 	b _0800F282
 _0800F242:
 	movs r0, #0x37
-	bl sub_8011150
+	bl PlaySE
 	b _0800F282
 _0800F24A:
 	movs r0, #2
@@ -1072,7 +1072,7 @@ _0800F24A:
 	bne _0800F270
 _0800F262:
 	ldr r0, _0800F26C @ =0x00000171
-	bl sub_8011150
+	bl PlaySE
 	b _0800F282
 	.align 2, 0
 _0800F26C: .4byte 0x00000171
@@ -1080,11 +1080,11 @@ _0800F270:
 	cmp r0, #0x14
 	bne _0800F27C
 	movs r0, #0x51
-	bl sub_8011150
+	bl PlaySE
 	b _0800F282
 _0800F27C:
 	movs r0, #0x51
-	bl sub_8011150
+	bl PlaySE
 _0800F282:
 	movs r0, #3
 	movs r1, #1
@@ -1302,7 +1302,7 @@ _0800F454:
 	cmp r0, #0
 	beq _0800F480
 	movs r0, #0x34
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
 	bl sub_8005CFC
@@ -1353,7 +1353,7 @@ _0800F4C4:
 	cmp r0, #0
 	beq _0800F522
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
 	bl sub_8005CFC
@@ -1492,7 +1492,7 @@ _0800F5DA:
 	ldrh r0, [r1]
 	cmp r0, #0
 	beq _0800F5EE
-	bl sub_8011150
+	bl PlaySE
 _0800F5EE:
 	pop {r4, r5}
 	pop {r0}
@@ -2091,7 +2091,7 @@ _0800FAD0:
 	cmp r6, #0
 	beq _0800FAFC
 	movs r0, #0x2c
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #2
 	movs r1, #1
 	movs r2, #1
@@ -2121,7 +2121,7 @@ _0800FAFC:
 	b _0800FEBC
 _0800FB1A:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r4, #0x13]
 	adds r0, #1
 	strb r0, [r4, #0x13]
@@ -2160,7 +2160,7 @@ _0800FB4E:
 	b _0800FEBC
 _0800FB64:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r4, #0x13]
 	subs r0, #1
 	strb r0, [r4, #0x13]
@@ -2642,7 +2642,7 @@ _0800FF30:
 	bne _0800FF58
 _0800FF48:
 	ldr r0, _0800FF54 @ =0x00000173
-	bl sub_8011150
+	bl PlaySE
 	b _0800FF6C
 	.align 2, 0
 _0800FF50: .4byte gMain
@@ -2652,11 +2652,11 @@ _0800FF58:
 	bne _0800FF66
 	movs r0, #0xb8
 	lsls r0, r0, #1
-	bl sub_8011150
+	bl PlaySE
 	b _0800FF6C
 _0800FF66:
 	movs r0, #0x37
-	bl sub_8011150
+	bl PlaySE
 _0800FF6C:
 	ldr r1, _0800FFE4 @ =gTestimony
 	movs r0, #6
@@ -3072,7 +3072,7 @@ _080102A0:
 	movs r1, #4
 	bl sub_80115D4
 	movs r0, #0xf
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r6, #9]
 	adds r0, #1
 	strb r0, [r6, #9]
@@ -3145,7 +3145,7 @@ _0801034C:
 	beq _0801039A
 _0801036C:
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	movs r0, #3
 	movs r1, #0xe
 	bl sub_8005CFC

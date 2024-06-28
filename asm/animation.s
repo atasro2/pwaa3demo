@@ -1995,7 +1995,7 @@ _08012B3C:
 	cmp r0, #0
 	beq _08012B88
 	ldrb r0, [r1, #4]
-	bl sub_8011150
+	bl PlaySE
 _08012B88:
 	ldr r1, [r4, #0x38]
 	movs r0, #4
@@ -2063,7 +2063,7 @@ _08012BE0:
 	cmp r0, #0
 	beq _08012C0A
 	ldrb r0, [r1, #4]
-	bl sub_8011150
+	bl PlaySE
 _08012C0A:
 	ldr r1, [r4, #0x38]
 	movs r0, #4

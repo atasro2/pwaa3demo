@@ -50,7 +50,7 @@ sub_800A3A0: @ 0x0800A3A0
 	strb r2, [r0]
 _0800A3E4:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	adds r2, r4, #0
 	adds r2, #0xe8
 	ldr r0, [r2]
@@ -186,7 +186,7 @@ _0800A4F0:
 	bl sub_8016D6C
 _0800A4FE:
 	movs r0, #0x31
-	bl sub_8011150
+	bl PlaySE
 	ldr r1, _0800A518 @ =gUnknown_030037BC
 	subs r2, r1, #4
 	ldr r0, [r2]
@@ -563,7 +563,7 @@ _0800A834:
 	movs r0, #0x55
 	bl sub_8012824
 	movs r0, #0x53
-	bl sub_8011150
+	bl PlaySE
 	ldr r0, _0800A850 @ =gTestimony
 	movs r1, #0
 	strb r1, [r0, #4]
@@ -838,7 +838,7 @@ _0800AA74:
 	movs r0, #0x57
 	bl sub_8012824
 	movs r0, #0x53
-	bl sub_8011150
+	bl PlaySE
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800AB5C
@@ -1108,7 +1108,7 @@ sub_800ACB4: @ 0x0800ACB4
 	push {r4, lr}
 	adds r4, r0, #0
 	movs r0, #0x2b
-	bl sub_8011150
+	bl PlaySE
 	adds r0, r4, #0
 	bl ChangeScriptSection
 	bl RunScriptContext
@@ -1319,19 +1319,19 @@ _0800AE54:
 _0800AE6C:
 	movs r0, #0xb9
 	lsls r0, r0, #1
-	bl sub_8011150
+	bl PlaySE
 	b _0800AE8E
 _0800AE76:
 	cmp r0, #0x14
 	bne _0800AE88
 	ldr r0, _0800AE84 @ =0x0000016F
-	bl sub_8011150
+	bl PlaySE
 	b _0800AE8E
 	.align 2, 0
 _0800AE84: .4byte 0x0000016F
 _0800AE88:
 	movs r0, #0x47
-	bl sub_8011150
+	bl PlaySE
 _0800AE8E:
 	movs r0, #3
 	movs r1, #1
@@ -1533,7 +1533,7 @@ _0800AFD8:
 _0800B01A:
 	movs r0, #0xb9
 	lsls r0, r0, #1
-	bl sub_8011150
+	bl PlaySE
 	b _0800B046
 	.align 2, 0
 _0800B024: .4byte gAnimation+0x44
@@ -1543,13 +1543,13 @@ _0800B030:
 	cmp r0, #0x14
 	bne _0800B040
 	ldr r0, _0800B03C @ =0x0000016F
-	bl sub_8011150
+	bl PlaySE
 	b _0800B046
 	.align 2, 0
 _0800B03C: .4byte 0x0000016F
 _0800B040:
 	movs r0, #0x47
-	bl sub_8011150
+	bl PlaySE
 _0800B046:
 	movs r0, #3
 	movs r1, #1
@@ -1847,7 +1847,7 @@ _0800B258:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	movs r0, #0x56
-	bl sub_8011150
+	bl PlaySE
 	b _0800B4F0
 	.align 2, 0
 _0800B2CC: .4byte gMain
@@ -2013,7 +2013,7 @@ _0800B3CC:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	movs r0, #0x56
-	bl sub_8011150
+	bl PlaySE
 	mov r1, sb
 	mov r0, sl
 	strh r1, [r0]
@@ -2234,7 +2234,7 @@ _0800B5DA:
 	cmp r6, #0x1e
 	bls _0800B5DA
 	movs r0, #0x66
-	bl sub_8011150
+	bl PlaySE
 	b _0800B6CC
 	.align 2, 0
 _0800B628: .4byte gUnknown_03002D70
