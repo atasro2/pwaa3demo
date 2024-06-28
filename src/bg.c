@@ -106,7 +106,7 @@ void bg256_right_scroll(struct Main * main, u32 sp0)
     {
         u8 * buf;
         buf = eBGDecompBuffer;
-        if(sp10 & 0x80000000) // ! this statement will never be true
+        if(sp10 & 0x80000000)
             buf += main->Bg256_next_line * 0x20;
         else 
             buf += main->Bg256_next_line * 0x40;
@@ -217,7 +217,7 @@ void bg256_left_scroll(struct Main * main, u32 sp0)
     do
     {
         buf = eBGDecompBuffer;
-        if(sp10 & 0x80000000) // ! this statement will never be true
+        if(sp10 & 0x80000000)
             buf += main->Bg256_next_line * 0x20;
         else 
             buf += main->Bg256_next_line * 0x40;
