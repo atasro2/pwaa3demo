@@ -1,1402 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start bg256_right_scroll_end
-bg256_right_scroll_end: @ 0x080023CC
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #0x28
-	mov ip, r0
-	mov sl, r1
-	mov r2, ip
-	adds r2, #0x4e
-	movs r0, #0x1e
-	strb r0, [r2]
-	mov r1, ip
-	adds r1, #0x4f
-	ldrb r0, [r1]
-	adds r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x1e
-	ble _080023FA
-	movs r0, #0
-	strb r0, [r1]
-_080023FA:
-	movs r1, #0x80
-	lsls r1, r1, #0x18
-	movs r0, #8
-	mov r8, r0
-	mov r3, sl
-	cmp r3, #0
-	bge _0800240C
-	movs r4, #4
-	mov r8, r4
-_0800240C:
-	ldr r7, _08002440 @ =0x7FFFFFFF
-	mov r0, sl
-	ands r0, r7
-	str r0, [sp, #4]
-	mov r3, r8
-	muls r3, r0, r3
-	mov sl, r3
-	mov r4, r8
-	lsls r4, r4, #3
-	str r4, [sp]
-	mov r7, r8
-	lsls r0, r7, #5
-	subs r0, r0, r7
-	lsls r0, r0, #3
-	mov r8, r0
-	ldr r0, [sp, #4]
-	ands r1, r0
-	cmp r1, #0
-	beq _08002448
-	movs r0, #0
-	ldrsb r0, [r2, r0]
-	lsls r0, r0, #5
-	ldr r1, _08002444 @ =eBGDecompBuffer
-	adds r3, r0, r1
-	b _08002452
-	.align 2, 0
-_08002440: .4byte 0x7FFFFFFF
-_08002444: .4byte eBGDecompBuffer
-_08002448:
-	movs r0, #0
-	ldrsb r0, [r2, r0]
-	lsls r0, r0, #6
-	ldr r2, _080024F8 @ =eBGDecompBuffer
-	adds r3, r0, r2
-_08002452:
-	movs r5, #1
-	mov r4, ip
-	adds r4, #0x4e
-	str r4, [sp, #0x14]
-	movs r7, #0x4f
-	add r7, ip
-	mov sb, r7
-	ldr r0, [sp]
-	lsrs r0, r0, #1
-	str r0, [sp, #0x24]
-	mov r1, ip
-	adds r1, #0x3f
-	str r1, [sp, #0x1c]
-	mov r2, ip
-	adds r2, #0x3e
-	str r2, [sp, #0x18]
-	subs r4, #4
-	str r4, [sp, #0x10]
-	mov r7, ip
-	adds r7, #0x44
-	str r7, [sp, #0xc]
-	mov r0, ip
-	adds r0, #0x40
-	str r0, [sp, #0x20]
-	ldr r2, _080024FC @ =0x040000D4
-	movs r0, #0x80
-	lsls r0, r0, #0x18
-	ldr r1, [sp, #0x24]
-	orrs r1, r0
-	str r1, [sp, #0x24]
-	movs r4, #0
-	ldr r6, _08002500 @ =gBG3MapBuffer
-	adds r6, #0x7e
-	mov r7, sb
-	str r7, [sp, #8]
-_08002498:
-	lsls r0, r5, #6
-	ldr r1, _08002500 @ =gBG3MapBuffer
-	adds r0, r0, r1
-	str r0, [r2]
-	str r6, [r2, #4]
-	ldr r7, _08002504 @ =0x80000001
-	str r7, [r2, #8]
-	ldr r0, [r2, #8]
-	ldr r1, [sp, #8]
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	ldr r7, [sp]
-	adds r1, r0, #0
-	muls r1, r7, r1
-	ldr r7, _08002508 @ =0x06004000
-	adds r0, r4, r7
-	adds r0, r1, r0
-	str r3, [r2]
-	str r0, [r2, #4]
-	ldr r0, [sp, #0x24]
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	add r3, sl
-	add r4, r8
-	adds r6, #0x40
-	adds r5, #1
-	cmp r5, #0x14
-	bls _08002498
-	mov r1, sb
-	ldrb r0, [r1]
-	adds r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x1e
-	ble _080024E4
-	movs r0, #0
-	strb r0, [r1]
-_080024E4:
-	movs r0, #0xb4
-	lsls r0, r0, #1
-	ldr r2, [sp, #4]
-	cmp r2, r0
-	bne _0800250C
-	movs r0, #0x2e
-	ldr r3, [sp, #0x1c]
-	strb r0, [r3]
-	b _08002512
-	.align 2, 0
-_080024F8: .4byte eBGDecompBuffer
-_080024FC: .4byte 0x040000D4
-_08002500: .4byte gBG3MapBuffer
-_08002504: .4byte 0x80000001
-_08002508: .4byte 0x06004000
-_0800250C:
-	movs r0, #1
-	ldr r4, [sp, #0x1c]
-	strb r0, [r4]
-_08002512:
-	ldr r7, [sp, #0x14]
-	ldrb r0, [r7]
-	adds r0, #1
-	movs r3, #0
-	strb r0, [r7]
-	ldr r0, [sp, #0x18]
-	strb r3, [r0]
-	movs r0, #0x11
-	rsbs r0, r0, #0
-	ldr r1, [sp, #0x10]
-	ldrh r1, [r1]
-	ands r0, r1
-	movs r1, #0x20
-	orrs r0, r1
-	ldr r2, [sp, #0x10]
-	strh r0, [r2]
-	ldr r4, [sp, #0xc]
-	ldrh r2, [r4]
-	movs r7, #0
-	ldrsh r0, [r4, r7]
-	cmp r0, #0
-	bge _08002548
-	mov r1, ip
-	adds r1, #0x4c
-	ldrb r4, [r1]
-	subs r0, r4, r2
-	strb r0, [r1]
-_08002548:
-	ldr r7, [sp, #0xc]
-	strh r3, [r7]
-	ldr r0, [sp, #0x20]
-	strh r3, [r0]
-	add sp, #0x28
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-
-	thumb_func_start sub_8002560
-sub_8002560: @ 0x08002560
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #0x24
-	str r0, [sp]
-	str r1, [sp, #4]
-	adds r1, r0, #0
-	adds r1, #0x40
-	movs r2, #0
-	ldrsh r0, [r1, r2]
-	cmp r0, #0
-	bge _0800257E
-	adds r0, #7
-_0800257E:
-	asrs r0, r0, #3
-	rsbs r0, r0, #0
-	str r0, [sp, #8]
-	movs r3, #8
-	str r3, [sp, #0xc]
-	ldr r6, [sp, #4]
-	cmp r6, #0
-	bge _08002592
-	movs r0, #4
-	str r0, [sp, #0xc]
-_08002592:
-	ldr r2, [sp, #4]
-	str r2, [sp, #0x14]
-	ldr r6, [sp, #0xc]
-	adds r3, r2, #0
-	muls r3, r6, r3
-	str r3, [sp, #4]
-	lsls r0, r6, #3
-	str r0, [sp, #0x10]
-	lsls r0, r6, #5
-	subs r0, r0, r6
-	lsls r0, r0, #3
-	str r0, [sp, #0xc]
-	str r1, [sp, #0x1c]
-	ldr r1, [sp]
-	adds r1, #0x4e
-	mov sb, r1
-	ldr r2, [sp]
-	adds r2, #0x4f
-	mov ip, r2
-	ldr r3, [sp]
-	adds r3, #0x3f
-	str r3, [sp, #0x18]
-	b _080025CA
-_080025C0:
-	ldr r6, [sp, #8]
-	subs r6, #1
-	str r6, [sp, #8]
-	cmp r6, #0
-	beq _080026A6
-_080025CA:
-	ldr r0, [sp, #0x14]
-	cmp r0, #0
-	bge _080025E4
-	mov r1, sb
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	lsls r0, r0, #5
-	ldr r2, _080025E0 @ =eBGDecompBuffer
-	adds r5, r0, r2
-	b _080025F0
-	.align 2, 0
-_080025E0: .4byte eBGDecompBuffer
-_080025E4:
-	mov r3, sb
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	lsls r0, r0, #6
-	ldr r6, _080026D0 @ =eBGDecompBuffer
-	adds r5, r0, r6
-_080025F0:
-	movs r7, #1
-	ldr r0, [sp, #0x10]
-	lsrs r0, r0, #1
-	str r0, [sp, #0x20]
-	ldr r1, _080026D4 @ =gBG3MapBuffer
-	mov r8, r1
-	ldr r3, _080026D8 @ =0x040000D4
-	ldr r2, _080026DC @ =0x8000001E
-	mov sl, r2
-	movs r4, #0
-	movs r0, #0x80
-	lsls r0, r0, #0x18
-	ldr r6, [sp, #0x20]
-	orrs r6, r0
-	str r6, [sp, #0x20]
-_0800260E:
-	lsls r1, r7, #6
-	mov r0, r8
-	adds r2, r1, r0
-	ldr r6, _080026E0 @ =gUnknown_03001880
-	adds r0, r1, r6
-	str r2, [r3]
-	str r0, [r3, #4]
-	mov r0, sl
-	str r0, [r3, #8]
-	ldr r0, [r3, #8]
-	mov r0, r8
-	adds r0, #0x3c
-	adds r0, r1, r0
-	str r0, [r3]
-	str r2, [r3, #4]
-	ldr r0, _080026E4 @ =0x80000001
-	str r0, [r3, #8]
-	ldr r0, [r3, #8]
-	adds r2, r1, r6
-	ldr r6, _080026E8 @ =gUnknown_03001082
-	adds r0, r1, r6
-	str r2, [r3]
-	str r0, [r3, #4]
-	mov r0, sl
-	str r0, [r3, #8]
-	ldr r0, [r3, #8]
-	mov r1, ip
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	ldr r2, [sp, #0x10]
-	adds r1, r0, #0
-	muls r1, r2, r1
-	ldr r6, _080026EC @ =0x06004000
-	adds r0, r4, r6
-	adds r2, r1, r0
-	str r5, [r3]
-	str r2, [r3, #4]
-	ldr r0, [sp, #0x20]
-	str r0, [r3, #8]
-	ldr r0, [r3, #8]
-	ldr r1, [sp, #4]
-	adds r5, r5, r1
-	ldr r2, [sp, #0xc]
-	adds r4, r4, r2
-	adds r7, #1
-	cmp r7, #0x14
-	bls _0800260E
-	mov r3, ip
-	ldrb r0, [r3]
-	subs r0, #1
-	strb r0, [r3]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _0800267E
-	movs r0, #0x1e
-	strb r0, [r3]
-_0800267E:
-	mov r1, sb
-	ldrb r0, [r1]
-	subs r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _08002690
-	movs r0, #0x3b
-	strb r0, [r1]
-_08002690:
-	mov r6, sb
-	movs r0, #0
-	ldrsb r0, [r6, r0]
-	ldr r1, [sp, #0x18]
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080025C0
-	ldr r0, [sp]
-	ldr r1, [sp, #0x14]
-	bl bg256_right_scroll_end
-_080026A6:
-	ldr r2, [sp, #0x1c]
-	movs r3, #0
-	ldrsh r1, [r2, r3]
-	adds r0, r1, #0
-	cmp r1, #0
-	bge _080026B4
-	adds r0, r1, #7
-_080026B4:
-	asrs r0, r0, #3
-	lsls r0, r0, #3
-	subs r0, r1, r0
-	ldr r6, [sp, #0x1c]
-	strh r0, [r6]
-	add sp, #0x24
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080026D0: .4byte eBGDecompBuffer
-_080026D4: .4byte gBG3MapBuffer
-_080026D8: .4byte 0x040000D4
-_080026DC: .4byte 0x8000001E
-_080026E0: .4byte gUnknown_03001880
-_080026E4: .4byte 0x80000001
-_080026E8: .4byte gUnknown_03001082
-_080026EC: .4byte 0x06004000
-
-	thumb_func_start sub_80026F0
-sub_80026F0: @ 0x080026F0
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #0x2c
-	mov r8, r0
-	adds r6, r1, #0
-	movs r0, #8
-	mov sb, r0
-	cmp r6, #0
-	bge _0800270C
-	movs r1, #4
-	mov sb, r1
-_0800270C:
-	ldr r0, _08002738 @ =0x7FFFFFFF
-	ands r6, r0
-	lsrs r2, r6, #1
-	str r2, [sp, #8]
-	mov r4, sb
-	muls r4, r6, r4
-	adds r6, r4, #0
-	mov r7, sb
-	lsls r7, r7, #3
-	str r7, [sp, #4]
-	mov r1, sb
-	lsls r0, r1, #5
-	subs r0, r0, r1
-	lsls r0, r0, #3
-	mov sb, r0
-	cmp r2, #0xb4
-	bne _0800273C
-	mov r1, r8
-	adds r1, #0x4e
-	movs r0, #0xe
-	b _08002742
-	.align 2, 0
-_08002738: .4byte 0x7FFFFFFF
-_0800273C:
-	mov r1, r8
-	adds r1, #0x4e
-	movs r0, #0x1d
-_08002742:
-	strb r0, [r1]
-	str r1, [sp, #0x24]
-	mov r1, r8
-	adds r1, #0x4f
-	ldrb r0, [r1]
-	subs r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	mov sl, r1
-	cmp r0, #0
-	bge _0800275C
-	movs r0, #0x1e
-	strb r0, [r1]
-_0800275C:
-	ldr r1, [sp, #0x24]
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	lsls r0, r0, #6
-	ldr r2, _08002878 @ =eBGDecompBuffer
-	adds r4, r0, r2
-	movs r3, #1
-	ldr r7, [sp, #4]
-	lsrs r7, r7, #1
-	mov ip, r7
-	mov r0, r8
-	adds r0, #0x3f
-	str r0, [sp, #0x14]
-	mov r1, r8
-	adds r1, #0x3e
-	str r1, [sp, #0x10]
-	mov r2, r8
-	adds r2, #0x4a
-	str r2, [sp, #0x20]
-	mov r7, r8
-	adds r7, #0x44
-	str r7, [sp, #0x1c]
-	adds r0, #1
-	str r0, [sp, #0x18]
-	ldr r2, _0800287C @ =0x040000D4
-	movs r0, #0x80
-	lsls r0, r0, #0x18
-	mov r1, ip
-	orrs r1, r0
-	mov ip, r1
-	movs r5, #0
-	ldr r7, _08002880 @ =gUnknown_030010BE
-	adds r7, #2
-	str r7, [sp, #0x28]
-	mov r0, sl
-	str r0, [sp, #0xc]
-_080027A4:
-	lsls r0, r3, #6
-	ldr r1, _08002880 @ =gUnknown_030010BE
-	adds r0, r0, r1
-	str r0, [r2]
-	ldr r7, [sp, #0x28]
-	str r7, [r2, #4]
-	ldr r0, _08002884 @ =0x80000001
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	ldr r1, [sp, #0xc]
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	ldr r7, [sp, #4]
-	adds r1, r0, #0
-	muls r1, r7, r1
-	ldr r7, _08002888 @ =0x06004000
-	adds r0, r5, r7
-	adds r0, r1, r0
-	str r4, [r2]
-	str r0, [r2, #4]
-	mov r0, ip
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	adds r4, r4, r6
-	add r5, sb
-	ldr r1, [sp, #0x28]
-	adds r1, #0x40
-	str r1, [sp, #0x28]
-	adds r3, #1
-	cmp r3, #0x14
-	bls _080027A4
-	mov r1, sp
-	movs r0, #0
-	strh r0, [r1]
-	ldr r1, _0800287C @ =0x040000D4
-	mov r2, sp
-	str r2, [r1]
-	ldr r0, _0800288C @ =0x0600DD80
-	str r0, [r1, #4]
-	ldr r0, _08002890 @ =0x81000020
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	movs r3, #0
-	ldr r0, _08002894 @ =gBG3MapBuffer
-	ldr r1, _08002898 @ =0x00002276
-	adds r0, #0x3e
-_08002800:
-	strh r1, [r0]
-	adds r0, #0x40
-	adds r3, #1
-	cmp r3, #0x1f
-	bls _08002800
-	mov r4, sl
-	ldrb r0, [r4]
-	subs r0, #1
-	movs r3, #0
-	strb r0, [r4]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _0800281E
-	movs r0, #0x1e
-	strb r0, [r4]
-_0800281E:
-	ldr r7, [sp, #0x24]
-	ldrb r0, [r7]
-	subs r0, #1
-	strb r0, [r7]
-	movs r0, #0x3a
-	ldr r1, [sp, #0x14]
-	strb r0, [r1]
-	ldr r2, [sp, #0x10]
-	strb r3, [r2]
-	subs r0, #0x5b
-	ldr r4, [sp, #0x20]
-	ldrh r4, [r4]
-	ands r0, r4
-	movs r1, #0x10
-	orrs r0, r1
-	ldr r7, [sp, #0x20]
-	strh r0, [r7]
-	ldr r2, [sp, #0x1c]
-	movs r1, #0
-	ldrsh r0, [r2, r1]
-	ldr r4, [sp, #8]
-	cmp r0, r4
-	bls _0800285A
-	mov r1, r8
-	adds r1, #0x4c
-	ldrb r2, [r2]
-	subs r0, r2, r4
-	ldrb r7, [r1]
-	subs r0, r7, r0
-	strb r0, [r1]
-_0800285A:
-	mov r0, sp
-	ldrh r1, [r0, #8]
-	ldr r0, [sp, #0x1c]
-	strh r1, [r0]
-	ldr r2, [sp, #0x18]
-	strh r3, [r2]
-	add sp, #0x2c
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002878: .4byte eBGDecompBuffer
-_0800287C: .4byte 0x040000D4
-_08002880: .4byte gUnknown_030010BE
-_08002884: .4byte 0x80000001
-_08002888: .4byte 0x06004000
-_0800288C: .4byte 0x0600DD80
-_08002890: .4byte 0x81000020
-_08002894: .4byte gBG3MapBuffer
-_08002898: .4byte 0x00002276
-
-	thumb_func_start sub_800289C
-sub_800289C: @ 0x0800289C
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #0x20
-	str r0, [sp]
-	str r1, [sp, #4]
-	adds r1, r0, #0
-	adds r1, #0x40
-	movs r2, #0
-	ldrsh r0, [r1, r2]
-	cmp r0, #0
-	bge _080028BA
-	adds r0, #7
-_080028BA:
-	asrs r0, r0, #3
-	str r0, [sp, #8]
-	movs r3, #8
-	str r3, [sp, #0xc]
-	ldr r0, [sp, #4]
-	cmp r0, #0
-	bge _080028CC
-	movs r2, #4
-	str r2, [sp, #0xc]
-_080028CC:
-	ldr r3, [sp, #4]
-	str r3, [sp, #0x14]
-	ldr r2, [sp, #0xc]
-	adds r0, r3, #0
-	muls r0, r2, r0
-	str r0, [sp, #4]
-	lsls r3, r2, #3
-	str r3, [sp, #0x10]
-	lsls r0, r2, #5
-	subs r0, r0, r2
-	lsls r0, r0, #3
-	str r0, [sp, #0xc]
-	str r1, [sp, #0x1c]
-	ldr r0, [sp]
-	adds r0, #0x4e
-	mov sb, r0
-	ldr r1, [sp]
-	adds r1, #0x4f
-	mov r8, r1
-	ldr r2, [sp]
-	adds r2, #0x3f
-	str r2, [sp, #0x18]
-	b _08002904
-_080028FA:
-	ldr r3, [sp, #8]
-	subs r3, #1
-	str r3, [sp, #8]
-	cmp r3, #0
-	beq _080029D6
-_08002904:
-	ldr r0, [sp, #0x14]
-	cmp r0, #0
-	bge _0800291C
-	mov r1, sb
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	lsls r0, r0, #5
-	ldr r2, _08002918 @ =eBGDecompBuffer
-	adds r6, r0, r2
-	b _08002928
-	.align 2, 0
-_08002918: .4byte eBGDecompBuffer
-_0800291C:
-	mov r3, sb
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	lsls r0, r0, #6
-	ldr r1, _08002A00 @ =eBGDecompBuffer
-	adds r6, r0, r1
-_08002928:
-	movs r2, #1
-	mov ip, r2
-	ldr r3, [sp, #0x10]
-	lsrs r7, r3, #1
-	ldr r4, _08002A04 @ =0x040000D4
-	ldr r0, _08002A08 @ =0x8000001F
-	mov sl, r0
-	movs r5, #0
-	subs r0, #0x1f
-	orrs r7, r0
-_0800293C:
-	mov r2, ip
-	lsls r1, r2, #6
-	ldr r3, _08002A0C @ =gUnknown_03001082
-	adds r2, r1, r3
-	ldr r0, _08002A10 @ =gUnknown_03001880
-	adds r3, r1, r0
-	str r2, [r4]
-	str r3, [r4, #4]
-	mov r2, sl
-	str r2, [r4, #8]
-	ldr r0, [r4, #8]
-	ldr r0, _08002A14 @ =gBG3MapBuffer
-	adds r2, r1, r0
-	str r3, [r4]
-	str r2, [r4, #4]
-	mov r3, sl
-	str r3, [r4, #8]
-	ldr r0, [r4, #8]
-	ldr r0, _08002A18 @ =gUnknown_030010BE
-	adds r3, r1, r0
-	str r2, [r4]
-	str r3, [r4, #4]
-	ldr r0, _08002A1C @ =0x80000001
-	str r0, [r4, #8]
-	ldr r0, [r4, #8]
-	mov r1, r8
-	movs r0, #0
-	ldrsb r0, [r1, r0]
-	ldr r2, [sp, #0x10]
-	adds r1, r0, #0
-	muls r1, r2, r1
-	ldr r3, _08002A20 @ =0x06004000
-	adds r0, r5, r3
-	adds r2, r1, r0
-	str r6, [r4]
-	str r2, [r4, #4]
-	str r7, [r4, #8]
-	ldr r0, [r4, #8]
-	ldr r0, [sp, #4]
-	adds r6, r6, r0
-	ldr r1, [sp, #0xc]
-	adds r5, r5, r1
-	movs r2, #1
-	add ip, r2
-	mov r3, ip
-	cmp r3, #0x14
-	bls _0800293C
-	mov r1, r8
-	ldrb r0, [r1]
-	adds r0, #1
-	movs r2, #0
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x1e
-	ble _080029AE
-	strb r2, [r1]
-_080029AE:
-	mov r1, sb
-	ldrb r0, [r1]
-	adds r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x3b
-	ble _080029C0
-	strb r2, [r1]
-_080029C0:
-	mov r2, sb
-	movs r0, #0
-	ldrsb r0, [r2, r0]
-	ldr r3, [sp, #0x18]
-	ldrb r3, [r3]
-	cmp r0, r3
-	bne _080028FA
-	ldr r0, [sp]
-	ldr r1, [sp, #0x14]
-	bl sub_80026F0
-_080029D6:
-	ldr r0, [sp, #0x1c]
-	movs r2, #0
-	ldrsh r1, [r0, r2]
-	adds r0, r1, #0
-	cmp r1, #0
-	bge _080029E4
-	adds r0, r1, #7
-_080029E4:
-	asrs r0, r0, #3
-	lsls r0, r0, #3
-	subs r0, r1, r0
-	ldr r3, [sp, #0x1c]
-	strh r0, [r3]
-	add sp, #0x20
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002A00: .4byte eBGDecompBuffer
-_08002A04: .4byte 0x040000D4
-_08002A08: .4byte 0x8000001F
-_08002A0C: .4byte gUnknown_03001082
-_08002A10: .4byte gUnknown_03001880
-_08002A14: .4byte gBG3MapBuffer
-_08002A18: .4byte gUnknown_030010BE
-_08002A1C: .4byte 0x80000001
-_08002A20: .4byte 0x06004000
-
-	thumb_func_start sub_8002A24
-sub_8002A24: @ 0x08002A24
-	push {r4, r5, r6, r7, lr}
-	mov r7, sb
-	mov r6, r8
-	push {r6, r7}
-	mov ip, r0
-	mov r6, ip
-	adds r6, #0x4e
-	movs r0, #0
-	mov r8, r0
-	movs r0, #0x15
-	strb r0, [r6]
-	movs r2, #0x80
-	lsls r2, r2, #0x18
-	mov sb, r2
-	movs r4, #8
-	cmp r1, #0
-	bge _08002A48
-	movs r4, #4
-_08002A48:
-	ldr r5, _08002AC4 @ =0x7FFFFFFF
-	ands r5, r1
-	lsls r0, r4, #4
-	subs r0, r0, r4
-	lsls r4, r0, #4
-	mov r2, ip
-	adds r2, #0x4f
-	ldrb r0, [r2]
-	adds r0, #1
-	strb r0, [r2]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x14
-	ble _08002A68
-	mov r3, r8
-	strb r3, [r2]
-_08002A68:
-	ldr r3, _08002AC8 @ =gBG3MapBuffer
-	movs r7, #0xa8
-	lsls r7, r7, #3
-	adds r0, r3, r7
-	ldr r1, _08002ACC @ =0x040000D4
-	str r3, [r1]
-	str r0, [r1, #4]
-	ldr r0, _08002AD0 @ =0x80000020
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	movs r0, #0
-	ldrsb r0, [r2, r0]
-	muls r0, r4, r0
-	ldr r7, _08002AD4 @ =0x06004000
-	adds r3, r0, r7
-	movs r0, #0
-	ldrsb r0, [r6, r0]
-	muls r0, r4, r0
-	ldr r6, _08002AD8 @ =eBGDecompBuffer
-	adds r0, r0, r6
-	subs r0, r0, r4
-	str r0, [r1]
-	str r3, [r1, #4]
-	lsrs r0, r4, #1
-	mov r7, sb
-	orrs r0, r7
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldrb r0, [r2]
-	adds r0, #1
-	strb r0, [r2]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x14
-	ble _08002AB2
-	mov r0, r8
-	strb r0, [r2]
-_08002AB2:
-	movs r0, #0xa0
-	lsls r0, r0, #1
-	cmp r5, r0
-	bne _08002ADC
-	mov r1, ip
-	adds r1, #0x3f
-	movs r0, #1
-	b _08002AE2
-	.align 2, 0
-_08002AC4: .4byte 0x7FFFFFFF
-_08002AC8: .4byte gBG3MapBuffer
-_08002ACC: .4byte 0x040000D4
-_08002AD0: .4byte 0x80000020
-_08002AD4: .4byte 0x06004000
-_08002AD8: .4byte eBGDecompBuffer
-_08002ADC:
-	mov r1, ip
-	adds r1, #0x3f
-	movs r0, #0x20
-_08002AE2:
-	strb r0, [r1]
-	mov r0, ip
-	adds r0, #0x3e
-	movs r4, #0
-	strb r4, [r0]
-	mov r2, ip
-	adds r2, #0x4a
-	movs r0, #0x41
-	rsbs r0, r0, #0
-	ldrh r1, [r2]
-	ands r0, r1
-	movs r1, #0x80
-	orrs r0, r1
-	strh r0, [r2]
-	mov r1, ip
-	adds r1, #0x46
-	ldrh r3, [r1]
-	movs r2, #0
-	ldrsh r0, [r1, r2]
-	cmp r0, #0
-	bge _08002B16
-	mov r2, ip
-	adds r2, #0x4d
-	ldrb r5, [r2]
-	subs r0, r5, r3
-	strb r0, [r2]
-_08002B16:
-	strh r4, [r1]
-	mov r0, ip
-	adds r0, #0x42
-	strh r4, [r0]
-	pop {r3, r4}
-	mov r8, r3
-	mov sb, r4
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-	thumb_func_start sub_8002B2C
-sub_8002B2C: @ 0x08002B2C
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #8
-	adds r4, r0, #0
-	str r1, [sp]
-	adds r1, r4, #0
-	adds r1, #0x42
-	movs r2, #0
-	ldrsh r0, [r1, r2]
-	cmp r0, #0
-	bge _08002B4A
-	adds r0, #7
-_08002B4A:
-	asrs r0, r0, #3
-	rsbs r0, r0, #0
-	mov r8, r0
-	movs r6, #8
-	ldr r3, [sp]
-	cmp r3, #0
-	bge _08002B5A
-	movs r6, #4
-_08002B5A:
-	lsls r0, r6, #4
-	subs r0, r0, r6
-	lsls r6, r0, #4
-	mov sl, r1
-	ldr r5, _08002B78 @ =gBG3MapBuffer
-	adds r7, r4, #0
-	adds r7, #0x4e
-	str r7, [sp, #4]
-	movs r0, #0x4f
-	adds r0, r0, r4
-	mov ip, r0
-	movs r1, #0x3f
-	adds r1, r1, r4
-	mov sb, r1
-	b _08002B88
-	.align 2, 0
-_08002B78: .4byte gBG3MapBuffer
-_08002B7C:
-	movs r2, #1
-	rsbs r2, r2, #0
-	add r8, r2
-	mov r3, r8
-	cmp r3, #0
-	beq _08002C14
-_08002B88:
-	ldr r2, _08002C3C @ =0x040000D4
-	str r5, [r2]
-	ldr r7, _08002C40 @ =gUnknown_03001880
-	str r7, [r2, #4]
-	ldr r1, _08002C44 @ =0x800002A0
-	str r1, [r2, #8]
-	ldr r0, [r2, #8]
-	adds r0, r5, #0
-	adds r0, #0x40
-	str r7, [r2]
-	str r0, [r2, #4]
-	str r1, [r2, #8]
-	ldr r0, [r2, #8]
-	movs r1, #0xa8
-	lsls r1, r1, #3
-	adds r0, r5, r1
-	str r0, [r2]
-	str r5, [r2, #4]
-	ldr r0, _08002C48 @ =0x80000020
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	ldr r3, [sp, #4]
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	adds r1, r0, #0
-	muls r1, r6, r1
-	ldr r7, _08002C4C @ =eBGDecompBuffer
-	adds r1, r1, r7
-	mov r7, ip
-	movs r0, #0
-	ldrsb r0, [r7, r0]
-	muls r0, r6, r0
-	ldr r7, _08002C50 @ =0x06004000
-	adds r0, r0, r7
-	str r1, [r2]
-	str r0, [r2, #4]
-	lsrs r0, r6, #1
-	movs r1, #0x80
-	lsls r1, r1, #0x18
-	orrs r0, r1
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	mov r1, ip
-	ldrb r0, [r1]
-	subs r0, #1
-	strb r0, [r1]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _08002BEE
-	movs r0, #0x14
-	strb r0, [r1]
-_08002BEE:
-	ldrb r0, [r3]
-	subs r0, #1
-	strb r0, [r3]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _08002BFE
-	movs r0, #0x27
-	strb r0, [r3]
-_08002BFE:
-	ldr r2, [sp, #4]
-	movs r0, #0
-	ldrsb r0, [r2, r0]
-	mov r3, sb
-	ldrb r3, [r3]
-	cmp r0, r3
-	bne _08002B7C
-	adds r0, r4, #0
-	ldr r1, [sp]
-	bl sub_8002A24
-_08002C14:
-	mov r7, sl
-	movs r0, #0
-	ldrsh r1, [r7, r0]
-	adds r0, r1, #0
-	cmp r1, #0
-	bge _08002C22
-	adds r0, r1, #7
-_08002C22:
-	asrs r0, r0, #3
-	lsls r0, r0, #3
-	subs r0, r1, r0
-	mov r1, sl
-	strh r0, [r1]
-	add sp, #8
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002C3C: .4byte 0x040000D4
-_08002C40: .4byte gUnknown_03001880
-_08002C44: .4byte 0x800002A0
-_08002C48: .4byte 0x80000020
-_08002C4C: .4byte eBGDecompBuffer
-_08002C50: .4byte 0x06004000
-
-	thumb_func_start sub_8002C54
-sub_8002C54: @ 0x08002C54
-	push {r4, r5, r6, r7, lr}
-	mov ip, r0
-	adds r4, r1, #0
-	movs r5, #8
-	cmp r4, #0
-	bge _08002C62
-	movs r5, #4
-_08002C62:
-	ldr r0, _08002C7C @ =0x7FFFFFFF
-	ands r4, r0
-	lsls r0, r5, #4
-	subs r0, r0, r5
-	lsls r5, r0, #4
-	movs r0, #0xa0
-	lsls r0, r0, #1
-	cmp r4, r0
-	bne _08002C80
-	mov r1, ip
-	adds r1, #0x4e
-	movs r0, #0x12
-	b _08002C86
-	.align 2, 0
-_08002C7C: .4byte 0x7FFFFFFF
-_08002C80:
-	mov r1, ip
-	adds r1, #0x4e
-	movs r0, #8
-_08002C86:
-	strb r0, [r1]
-	adds r6, r1, #0
-	mov r3, ip
-	adds r3, #0x4f
-	ldrb r0, [r3]
-	subs r0, #1
-	movs r7, #0
-	strb r0, [r3]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _08002CA0
-	movs r0, #0x14
-	strb r0, [r3]
-_08002CA0:
-	ldr r1, _08002D34 @ =gUnknown_030015C0
-	ldr r2, _08002D38 @ =0xFFFFFAC0
-	adds r0, r1, r2
-	ldr r2, _08002D3C @ =0x040000D4
-	str r1, [r2]
-	str r0, [r2, #4]
-	ldr r0, _08002D40 @ =0x80000020
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	movs r0, #0
-	ldrsb r0, [r6, r0]
-	muls r0, r5, r0
-	ldr r6, _08002D44 @ =eBGDecompBuffer
-	adds r0, r0, r6
-	adds r0, r0, r5
-	movs r1, #0
-	ldrsb r1, [r3, r1]
-	muls r1, r5, r1
-	ldr r6, _08002D48 @ =0x06004000
-	adds r1, r1, r6
-	str r0, [r2]
-	str r1, [r2, #4]
-	lsrs r0, r5, #1
-	movs r1, #0x80
-	lsls r1, r1, #0x18
-	orrs r0, r1
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	ldrb r0, [r3]
-	subs r0, #1
-	strb r0, [r3]
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	bge _08002CE8
-	movs r0, #0x14
-	strb r0, [r3]
-_08002CE8:
-	mov r1, ip
-	adds r1, #0x3f
-	movs r0, #0x26
-	strb r0, [r1]
-	mov r0, ip
-	adds r0, #0x3e
-	strb r7, [r0]
-	mov r2, ip
-	adds r2, #0x4a
-	movs r0, #0x81
-	rsbs r0, r0, #0
-	ldrh r1, [r2]
-	ands r0, r1
-	movs r1, #0x40
-	orrs r0, r1
-	strh r0, [r2]
-	lsrs r4, r4, #1
-	mov r1, ip
-	adds r1, #0x46
-	movs r2, #0
-	ldrsh r0, [r1, r2]
-	cmp r0, r4
-	bls _08002D24
-	mov r2, ip
-	adds r2, #0x4d
-	ldrb r3, [r1]
-	subs r0, r3, r4
-	ldrb r6, [r2]
-	subs r0, r6, r0
-	strb r0, [r2]
-_08002D24:
-	strh r4, [r1]
-	mov r0, ip
-	adds r0, #0x42
-	strh r7, [r0]
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002D34: .4byte gUnknown_030015C0
-_08002D38: .4byte 0xFFFFFAC0
-_08002D3C: .4byte 0x040000D4
-_08002D40: .4byte 0x80000020
-_08002D44: .4byte eBGDecompBuffer
-_08002D48: .4byte 0x06004000
-
-	thumb_func_start sub_8002D4C
-sub_8002D4C: @ 0x08002D4C
-	push {r4, r5, r6, r7, lr}
-	mov r7, sl
-	mov r6, sb
-	mov r5, r8
-	push {r5, r6, r7}
-	sub sp, #8
-	adds r4, r0, #0
-	adds r2, r4, #0
-	adds r2, #0x42
-	ldrh r3, [r2]
-	lsls r0, r3, #0x10
-	asrs r0, r0, #0x13
-	mov r8, r0
-	movs r6, #8
-	cmp r1, #0
-	bge _08002D6E
-	movs r6, #4
-_08002D6E:
-	str r1, [sp]
-	lsls r0, r6, #4
-	subs r0, r0, r6
-	lsls r6, r0, #4
-	mov sl, r2
-	ldr r5, _08002D90 @ =gUnknown_030010C0
-	adds r7, r4, #0
-	adds r7, #0x4e
-	str r7, [sp, #4]
-	movs r0, #0x4f
-	adds r0, r0, r4
-	mov ip, r0
-	movs r1, #0x3f
-	adds r1, r1, r4
-	mov sb, r1
-	b _08002DA0
-	.align 2, 0
-_08002D90: .4byte gUnknown_030010C0
-_08002D94:
-	movs r2, #1
-	rsbs r2, r2, #0
-	add r8, r2
-	mov r3, r8
-	cmp r3, #0
-	beq _08002E38
-_08002DA0:
-	movs r7, #0xa8
-	lsls r7, r7, #3
-	adds r0, r5, r7
-	ldr r2, _08002E60 @ =0x040000D4
-	str r5, [r2]
-	str r0, [r2, #4]
-	ldr r0, _08002E64 @ =0x80000020
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	adds r0, r5, #0
-	subs r0, #0x40
-	str r0, [r2]
-	ldr r0, _08002E68 @ =gUnknown_03001880
-	str r0, [r2, #4]
-	ldr r0, _08002E6C @ =0x800002E0
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	ldr r0, _08002E68 @ =gUnknown_03001880
-	adds r0, #0x40
-	str r0, [r2]
-	ldr r1, _08002E70 @ =gBG3MapBuffer
-	str r1, [r2, #4]
-	ldr r0, _08002E74 @ =0x800002C0
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	ldr r3, [sp, #4]
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	adds r1, r0, #0
-	muls r1, r6, r1
-	ldr r7, _08002E78 @ =eBGDecompBuffer
-	adds r1, r1, r7
-	mov r7, ip
-	movs r0, #0
-	ldrsb r0, [r7, r0]
-	muls r0, r6, r0
-	ldr r7, _08002E7C @ =0x06004000
-	adds r0, r0, r7
-	str r1, [r2]
-	str r0, [r2, #4]
-	lsrs r0, r6, #1
-	movs r1, #0x80
-	lsls r1, r1, #0x18
-	orrs r0, r1
-	str r0, [r2, #8]
-	ldr r0, [r2, #8]
-	mov r1, ip
-	ldrb r0, [r1]
-	adds r0, #1
-	movs r1, #0
-	mov r2, ip
-	strb r0, [r2]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x14
-	ble _08002E12
-	strb r1, [r2]
-_08002E12:
-	ldrb r0, [r3]
-	adds r0, #1
-	strb r0, [r3]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0x27
-	ble _08002E22
-	strb r1, [r3]
-_08002E22:
-	ldr r3, [sp, #4]
-	movs r0, #0
-	ldrsb r0, [r3, r0]
-	mov r7, sb
-	ldrb r7, [r7]
-	cmp r0, r7
-	bne _08002D94
-	adds r0, r4, #0
-	ldr r1, [sp]
-	bl sub_8002C54
-_08002E38:
-	mov r0, sl
-	movs r2, #0
-	ldrsh r1, [r0, r2]
-	adds r0, r1, #0
-	cmp r1, #0
-	bge _08002E46
-	adds r0, r1, #7
-_08002E46:
-	asrs r0, r0, #3
-	lsls r0, r0, #3
-	subs r0, r1, r0
-	mov r3, sl
-	strh r0, [r3]
-	add sp, #8
-	pop {r3, r4, r5}
-	mov r8, r3
-	mov sb, r4
-	mov sl, r5
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08002E60: .4byte 0x040000D4
-_08002E64: .4byte 0x80000020
-_08002E68: .4byte gUnknown_03001880
-_08002E6C: .4byte 0x800002E0
-_08002E70: .4byte gBG3MapBuffer
-_08002E74: .4byte 0x800002C0
-_08002E78: .4byte eBGDecompBuffer
-_08002E7C: .4byte 0x06004000
-
 	thumb_func_start sub_8002E80
 sub_8002E80: @ 0x08002E80
 	push {r4, r5, r6, r7, lr}
@@ -1480,7 +84,7 @@ _08002F14:
 	lsls r1, r7, #6
 	ldr r0, _080030C0 @ =gUnknown_03001082
 	adds r2, r1, r0
-	ldr r0, _080030C4 @ =gUnknown_03001880
+	ldr r0, _080030C4 @ =gTilemapBuffer
 	adds r3, r1, r0
 	str r2, [r4]
 	str r3, [r4, #4]
@@ -1700,7 +304,7 @@ _080030A8:
 _080030B8: .4byte 0x040000D4
 _080030BC: .4byte eBGDecompBuffer
 _080030C0: .4byte gUnknown_03001082
-_080030C4: .4byte gUnknown_03001880
+_080030C4: .4byte gTilemapBuffer
 _080030C8: .4byte 0x8000001F
 _080030CC: .4byte gBG3MapBuffer
 _080030D0: .4byte gUnknown_030010BE
@@ -1797,7 +401,7 @@ _08003186:
 	lsls r1, r6, #6
 	mov r7, r8
 	adds r2, r1, r7
-	ldr r7, _08003314 @ =gUnknown_03001880
+	ldr r7, _08003314 @ =gTilemapBuffer
 	adds r0, r1, r7
 	str r2, [r3]
 	str r0, [r3, #4]
@@ -1999,7 +603,7 @@ _080032F6:
 _08003308: .4byte gBG3MapBuffer
 _0800330C: .4byte 0x040000D4
 _08003310: .4byte eBGDecompBuffer
-_08003314: .4byte gUnknown_03001880
+_08003314: .4byte gTilemapBuffer
 _08003318: .4byte 0x8000001E
 _0800331C: .4byte 0x80000001
 _08003320: .4byte gUnknown_03001082
@@ -2687,7 +1291,7 @@ _08003850:
 	bgt _0800386E
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_8002560
+	bl bg256_right_scroll
 	b _08003892
 _0800386E:
 	mov r1, r8
@@ -2775,7 +1379,7 @@ _080038FC:
 	ble _08003914
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_800289C
+	bl bg256_left_scroll
 _08003914:
 	adds r1, r7, #0
 	adds r1, #0x50
@@ -2810,7 +1414,7 @@ _0800392E:
 _0800394E:
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_80026F0
+	bl bg256_left_scroll_end
 _08003956:
 	movs r0, #0
 	ldrsb r0, [r5, r0]
@@ -2885,7 +1489,7 @@ _080039CC:
 	bgt _080039F0
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_8002B2C
+	bl bg256_down_scroll
 	b _08003A14
 	.align 2, 0
 _080039EC: .4byte gMain
@@ -2907,7 +1511,7 @@ _080039F0:
 _08003A0C:
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_8002A24
+	bl bg256_down_scroll_end
 _08003A14:
 	adds r1, r7, #0
 	adds r1, #0x50
@@ -2983,7 +1587,7 @@ _08003A8C:
 	ble _08003AA6
 	adds r0, r7, #0
 	adds r1, r4, #0
-	bl sub_8002D4C
+	bl bg256_up_scroll
 	b _08003ACE
 _08003AA6:
 	movs r0, #0
@@ -3005,7 +1609,7 @@ _08003AA6:
 _08003AC6:
 	lsls r1, r4, #1
 	adds r0, r7, #0
-	bl sub_8002C54
+	bl bg256_up_scroll_end
 _08003ACE:
 	adds r1, r7, #0
 	adds r1, #0x50
@@ -5842,7 +4446,7 @@ _08005156:
 	orrs r2, r0
 	adds r0, r6, #0
 	adds r1, r2, #0
-	bl sub_8002B2C
+	bl bg256_down_scroll
 	b _0800519C
 _08005162:
 	cmp r0, #0
@@ -5874,7 +4478,7 @@ _08005192:
 	orrs r2, r0
 	adds r0, r6, #0
 	adds r1, r2, #0
-	bl sub_8002D4C
+	bl bg256_up_scroll
 _0800519C:
 	add sp, #0x20
 	pop {r3, r4, r5}
@@ -7488,7 +6092,7 @@ _08005DC2:
 _08005DE0:
 	movs r3, #2
 	ldr r1, _08005E40 @ =0x040000D4
-	ldr r0, _08005E44 @ =gUnknown_03001880
+	ldr r0, _08005E44 @ =gTilemapBuffer
 	mov r8, r0
 	ldr r7, _08005E48 @ =gUnknown_03001882
 	mov r2, ip
@@ -7534,7 +6138,7 @@ _08005E34: .4byte 0x000001FF
 _08005E38: .4byte gBG2MapBuffer
 _08005E3C: .4byte 0x0000017F
 _08005E40: .4byte 0x040000D4
-_08005E44: .4byte gUnknown_03001880
+_08005E44: .4byte gTilemapBuffer
 _08005E48: .4byte gUnknown_03001882
 _08005E4C: .4byte 0x80000020
 _08005E50: .4byte 0x8000001F
@@ -7593,7 +6197,7 @@ _08005E98:
 _08005EB4:
 	movs r3, #2
 	ldr r1, _08005F18 @ =0x040000D4
-	ldr r6, _08005F1C @ =gUnknown_03001880
+	ldr r6, _08005F1C @ =gTilemapBuffer
 	mov r4, ip
 	adds r4, #0x82
 	mov r2, ip
@@ -7641,7 +6245,7 @@ _08005F0C: .4byte gUnknown_080242F8
 _08005F10: .4byte 0x0000017F
 _08005F14: .4byte gBG2MapBuffer
 _08005F18: .4byte 0x040000D4
-_08005F1C: .4byte gUnknown_03001880
+_08005F1C: .4byte gTilemapBuffer
 _08005F20: .4byte 0x80000020
 _08005F24: .4byte 0x8000001F
 _08005F28: .4byte gUnknown_080245F8
@@ -7705,7 +6309,7 @@ sub_8005F68: @ 0x08005F68
 	ble _08005FFE
 	movs r0, #0
 	mov sb, r0
-	ldr r1, _08006090 @ =gUnknown_03001880
+	ldr r1, _08006090 @ =gTilemapBuffer
 	mov sl, r1
 	ldr r2, _08006094 @ =gBG2MapBuffer
 	mov r8, r2
@@ -7770,7 +6374,7 @@ _08005FFE:
 	cmp r0, r2
 	bgt _0800607C
 	mov sl, r2
-	ldr r2, _08006090 @ =gUnknown_03001880
+	ldr r2, _08006090 @ =gTilemapBuffer
 	mov sb, r2
 	ldr r0, _08006094 @ =gBG2MapBuffer
 	mov r8, r0
@@ -7839,7 +6443,7 @@ _0800607C:
 	bx r0
 	.align 2, 0
 _0800608C: .4byte 0x000001FF
-_08006090: .4byte gUnknown_03001880
+_08006090: .4byte gTilemapBuffer
 _08006094: .4byte gBG2MapBuffer
 _08006098: .4byte 0x040000D4
 _0800609C: .4byte gUnknown_03001882

@@ -7,7 +7,7 @@
 . = 0x000010BE; gUnknown_030010BE = .;
 . = 0x000010C0; gUnknown_030010C0 = .;
 . = 0x000015C0; gUnknown_030015C0 = .;
-. = 0x00001880; gUnknown_03001880 = .;
+. = 0x00001880; gTilemapBuffer = .;
 . = 0x00001882; gUnknown_03001882 = .;
 . = 0x00002080; gBG1MapBuffer = .;
 . = 0x000020C0; gUnknown_030020C0 = .;
