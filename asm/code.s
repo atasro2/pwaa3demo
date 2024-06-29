@@ -2987,7 +2987,7 @@ _0801856E:
 	cmp r2, #0xf
 	bls _0801856E
 	ldr r1, _080185E8 @ =0x040000D4
-	ldr r0, _080185EC @ =gUnknown_0819F674
+	ldr r0, _080185EC @ =gTextPal
 	str r0, [r1]
 	ldr r0, _080185F0 @ =0x05000200
 	str r0, [r1, #4]
@@ -3040,7 +3040,7 @@ _080185DC: .4byte gUnknown_030070B0
 _080185E0: .4byte gUnknown_08028588
 _080185E4: .4byte gMain
 _080185E8: .4byte 0x040000D4
-_080185EC: .4byte gUnknown_0819F674
+_080185EC: .4byte gTextPal
 _080185F0: .4byte 0x05000200
 _080185F4: .4byte 0x80000010
 _080185F8: .4byte 0x00003FFF

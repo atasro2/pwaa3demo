@@ -1169,7 +1169,7 @@ _08003750:
 _08003778: .4byte gBG3MapBuffer
 _0800377C: .4byte gIORegisters
 _08003780:
-	ldr r2, _080037B4 @ =gUnknown_08023B98
+	ldr r2, _080037B4 @ =gBackgroundTable
 	ldrh r6, [r7, #0x34]
 	lsls r0, r6, #3
 	adds r1, r2, #4
@@ -1196,7 +1196,7 @@ _0800379C:
 	strb r1, [r2]
 	b _08003B0A
 	.align 2, 0
-_080037B4: .4byte gUnknown_08023B98
+_080037B4: .4byte gBackgroundTable
 _080037B8:
 	movs r1, #0x30
 	adds r0, r4, #0
@@ -1676,7 +1676,7 @@ DecompressCurrentBGStripe: @ 0x08003B20
 _08003B40: .4byte 0xFFFF7FFF
 _08003B44: .4byte gMain
 _08003B48:
-	ldr r0, _08003BB0 @ =gUnknown_08023B98
+	ldr r0, _08003BB0 @ =gBackgroundTable
 	lsls r1, r1, #3
 	adds r0, r1, r0
 	ldr r4, [r0]
@@ -1713,7 +1713,7 @@ _08003B78:
 	adds r0, r0, r1
 	ldr r0, [r0]
 	adds r4, r4, r0
-	ldr r0, _08003BB0 @ =gUnknown_08023B98
+	ldr r0, _08003BB0 @ =gBackgroundTable
 	adds r0, #4
 	adds r0, r5, r0
 	ldr r3, [r0]
@@ -1729,7 +1729,7 @@ _08003B78:
 	lsls r6, r6, #5
 	b _08003BC8
 	.align 2, 0
-_08003BB0: .4byte gUnknown_08023B98
+_08003BB0: .4byte gBackgroundTable
 _08003BB4: .4byte gMain
 _08003BB8:
 	movs r0, #4
@@ -1933,8 +1933,8 @@ _08003D50:
 	.align 2, 0
 _08003D58: .4byte gMain
 
-	thumb_func_start sub_8003D5C
-sub_8003D5C: @ 0x08003D5C
+	thumb_func_start DecompressBackgroundIntoBuffer
+DecompressBackgroundIntoBuffer: @ 0x08003D5C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1949,7 +1949,7 @@ sub_8003D5C: @ 0x08003D5C
 	bne _08003D78
 	b _08003F72
 _08003D78:
-	ldr r0, _08003DBC @ =gUnknown_08023B98
+	ldr r0, _08003DBC @ =gBackgroundTable
 	lsls r2, r5, #3
 	adds r1, r2, r0
 	ldr r5, [r1]
@@ -1982,7 +1982,7 @@ _08003D8C:
 	.align 2, 0
 _08003DB4: .4byte gMain
 _08003DB8: .4byte 0xFFFF7FFF
-_08003DBC: .4byte gUnknown_08023B98
+_08003DBC: .4byte gBackgroundTable
 _08003DC0:
 	movs r0, #4
 	ands r0, r2
@@ -2114,7 +2114,7 @@ _08003EBE:
 	ldr r0, [r4, #0x54]
 	adds r0, r0, r7
 	str r0, [r4, #0x54]
-	ldr r0, _08003EFC @ =gUnknown_08023B98
+	ldr r0, _08003EFC @ =gBackgroundTable
 	add r0, r8
 	ldr r5, [r0]
 	lsls r0, r6, #2
@@ -2138,7 +2138,7 @@ _08003EDC:
 	.align 2, 0
 _08003EF4: .4byte eBGDecompBuffer
 _08003EF8: .4byte gMain
-_08003EFC: .4byte gUnknown_08023B98
+_08003EFC: .4byte gBackgroundTable
 _08003F00: .4byte _08003F04
 _08003F04: @ jump table
 	.4byte _08003F60 @ case 0
@@ -3322,7 +3322,7 @@ _08004864: .4byte gScriptContext
 _08004868: .4byte 0x040000D4
 _0800486C: .4byte gBG2MapBuffer
 _08004870:
-	ldr r2, _0800488C @ =gUnknown_08023B98
+	ldr r2, _0800488C @ =gBackgroundTable
 	lsls r1, r1, #3
 	adds r0, r2, #4
 	adds r0, r1, r0
@@ -3337,7 +3337,7 @@ _08004870:
 	ldr r0, _08004894 @ =gBG2MapBuffer
 	b _080048F2
 	.align 2, 0
-_0800488C: .4byte gUnknown_08023B98
+_0800488C: .4byte gBackgroundTable
 _08004890: .4byte 0x040000D4
 _08004894: .4byte gBG2MapBuffer
 _08004898:
@@ -3372,7 +3372,7 @@ _080048CC: .4byte 0x040000D4
 _080048D0: .4byte gBG0MapBuffer
 _080048D4: .4byte 0x81000010
 _080048D8:
-	ldr r2, _08004900 @ =gUnknown_08023B98
+	ldr r2, _08004900 @ =gBackgroundTable
 	lsls r1, r1, #3
 	adds r0, r2, #4
 	adds r0, r1, r0
@@ -3393,7 +3393,7 @@ _080048F2:
 	strh r4, [r5, #0x38]
 	b _08004922
 	.align 2, 0
-_08004900: .4byte gUnknown_08023B98
+_08004900: .4byte gBackgroundTable
 _08004904: .4byte 0x040000D4
 _08004908: .4byte gBG0MapBuffer
 _0800490C: .4byte 0x80000010
@@ -3429,7 +3429,7 @@ sub_8004940: @ 0x08004940
 	movs r2, #0xf0
 	ands r2, r1
 	adds r3, r0, #0
-	ldr r0, _08004964 @ =gUnknown_08023B98
+	ldr r0, _08004964 @ =gBackgroundTable
 	lsls r1, r3, #3
 	adds r0, #4
 	adds r1, r1, r0
@@ -3443,7 +3443,7 @@ sub_8004940: @ 0x08004940
 	ands r2, r0
 	b _0800498A
 	.align 2, 0
-_08004964: .4byte gUnknown_08023B98
+_08004964: .4byte gBackgroundTable
 _08004968:
 	movs r0, #0x80
 	ands r0, r1
@@ -3472,13 +3472,13 @@ _0800498A:
 	orrs r3, r0
 _08004994:
 	adds r0, r3, #0
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	pop {r4}
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80049A0
-sub_80049A0: @ 0x080049A0
+	thumb_func_start CopyBGDataToVram
+CopyBGDataToVram: @ 0x080049A0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -3696,7 +3696,7 @@ _08004B70:
 	ands r0, r6
 	cmp r0, #0
 	beq _08004BD6
-	ldr r1, _08004B9C @ =gUnknown_08023B98
+	ldr r1, _08004B9C @ =gBackgroundTable
 	mov r0, sl
 	lsls r2, r0, #3
 	adds r0, r1, #4
@@ -3714,7 +3714,7 @@ _08004B70:
 	orrs r6, r0
 	b _08004BE4
 	.align 2, 0
-_08004B9C: .4byte gUnknown_08023B98
+_08004B9C: .4byte gBackgroundTable
 _08004BA0:
 	movs r0, #0x80
 	ands r0, r6
@@ -3747,7 +3747,7 @@ _08004BD0:
 	orrs r6, r3
 	b _08004BE4
 _08004BD6:
-	ldr r0, _08004C3C @ =gUnknown_08023B98
+	ldr r0, _08004C3C @ =gBackgroundTable
 	mov r1, sl
 	lsls r2, r1, #3
 	adds r1, r0, #4
@@ -3802,7 +3802,7 @@ _08004C2C:
 	ldr r0, [r1, #8]
 	b _08004D8E
 	.align 2, 0
-_08004C3C: .4byte gUnknown_08023B98
+_08004C3C: .4byte gBackgroundTable
 _08004C40: .4byte 0x0000FF7F
 _08004C44: .4byte gUnknown_030037ED
 _08004C48: .4byte 0x040000D4
@@ -4281,7 +4281,7 @@ sub_8004FAC: @ 0x08004FAC
 	strb r0, [r4]
 	movs r0, #0xff
 	ands r0, r1
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	strb r5, [r4]
 _08005012:
 	lsls r0, r7, #0x10
@@ -4289,7 +4289,7 @@ _08005012:
 	movs r1, #0
 	bl nullsub_8
 	adds r0, r7, #0
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	mov r3, sp
 	ldrh r3, [r3]
 	strh r3, [r6, #0x38]
@@ -4319,7 +4319,7 @@ _08005012:
 	adds r4, r6, #0
 	adds r4, #0x42
 	strh r7, [r4]
-	ldr r1, _080050C8 @ =gUnknown_08023B98
+	ldr r1, _080050C8 @ =gBackgroundTable
 	ldrh r2, [r6, #0x34]
 	lsls r0, r2, #3
 	adds r1, #4
@@ -4368,7 +4368,7 @@ _080050B8: .4byte gUnknown_030037F6
 _080050BC: .4byte gUnknown_030037FC
 _080050C0: .4byte gUnknown_030037FD
 _080050C4: .4byte gUnknown_030037FA
-_080050C8: .4byte gUnknown_08023B98
+_080050C8: .4byte gBackgroundTable
 _080050CC:
 	movs r0, #0xb4
 	lsls r0, r0, #1
@@ -4491,25 +4491,25 @@ _0800519C:
 
 	thumb_func_start sub_80051AC
 sub_80051AC: @ 0x080051AC
-	ldr r1, _080051B8 @ =gUnknown_08023B98
+	ldr r1, _080051B8 @ =gBackgroundTable
 	lsls r0, r0, #3
 	adds r1, #4
 	adds r0, r0, r1
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_080051B8: .4byte gUnknown_08023B98
+_080051B8: .4byte gBackgroundTable
 
-	thumb_func_start sub_80051BC
-sub_80051BC: @ 0x080051BC
-	ldr r1, _080051C8 @ =gUnknown_08023B98
+	thumb_func_start GetBGPalettePtr
+GetBGPalettePtr: @ 0x080051BC
+	ldr r1, _080051C8 @ =gBackgroundTable
 	lsls r0, r0, #3
 	adds r0, r0, r1
 	ldr r0, [r0]
 	adds r0, #0x28
 	bx lr
 	.align 2, 0
-_080051C8: .4byte gUnknown_08023B98
+_080051C8: .4byte gBackgroundTable
 
 	thumb_func_start sub_80051CC
 sub_80051CC: @ 0x080051CC
@@ -5359,7 +5359,7 @@ _0800583C:
 	bl sub_80051AC
 	adds r4, r0, #0
 	adds r0, r5, #0
-	bl sub_80051BC
+	bl GetBGPalettePtr
 	adds r1, r0, #0
 	cmp r4, #0
 	bge _08005890
@@ -5622,7 +5622,7 @@ _08005A48:
 	bl sub_80051AC
 	adds r4, r0, #0
 	adds r0, r5, #0
-	bl sub_80051BC
+	bl GetBGPalettePtr
 	adds r1, r0, #0
 	cmp r4, #0
 	bge _08005A9C
@@ -5743,7 +5743,7 @@ _08005B3C:
 	bl sub_80051AC
 	adds r4, r0, #0
 	adds r0, r5, #0
-	bl sub_80051BC
+	bl GetBGPalettePtr
 	adds r1, r0, #0
 	cmp r4, #0
 	bge _08005B90
@@ -5963,8 +5963,8 @@ nullsub_3: @ 0x08005CF8
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8005CFC
-sub_8005CFC: @ 0x08005CFC
+	thumb_func_start SlideInBG2Window
+SlideInBG2Window: @ 0x08005CFC
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0
@@ -6451,8 +6451,8 @@ _080060A0: .4byte 0x80000020
 _080060A4: .4byte 0x8000001F
 _080060A8: .4byte 0x0000017F
 
-	thumb_func_start sub_80060AC
-sub_80060AC: @ 0x080060AC
+	thumb_func_start UpdateBG2Window
+UpdateBG2Window: @ 0x080060AC
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, _080060DC @ =gMain

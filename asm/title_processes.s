@@ -219,9 +219,9 @@ _08006AC2:
 _08006AD0: .4byte 0x00000101
 _08006AD4:
 	movs r0, #0x14
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0x14
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	adds r0, r4, #0
 	bl sub_8006830
 	movs r0, #1

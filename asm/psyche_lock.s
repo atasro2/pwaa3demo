@@ -2826,9 +2826,9 @@ _08015D1A:
 	strh r0, [r4, #0x34]
 _08015D26:
 	ldrh r0, [r4, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r4, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	ldr r1, _08015D5C @ =gIORegisters
 	adds r1, #0x4a
 	ldr r0, _08015D60 @ =0x0000FEFF
@@ -2868,9 +2868,9 @@ _08015D6E:
 	strh r0, [r1, #0x34]
 _08015D7C:
 	ldrh r0, [r4, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r4, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	ldr r1, _08015DE0 @ =gIORegisters
 	adds r1, #0x4a
 	ldr r0, _08015DE4 @ =0x0000FEFF

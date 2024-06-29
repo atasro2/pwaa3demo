@@ -4710,13 +4710,13 @@ _0801F93C:
 	movs r0, #0x5f
 	mov r4, r8
 	strh r0, [r4, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	b _0801F99A
 _0801F952:
 	movs r0, #0x5e
 	mov r5, r8
 	strh r0, [r5, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	b _0801F99A
 _0801F95E:
 	adds r0, r6, #0

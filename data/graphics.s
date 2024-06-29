@@ -273,8 +273,8 @@ gGfxSaveYesNo:
 gUnknown_08198FE4:
     .incbin "baserom.gba", 0x00198FE4, 0x6690
 
-    .global gUnknown_0819F674
-gUnknown_0819F674:
+    .global gTextPal
+gTextPal:
     .incbin "baserom.gba", 0x0019F674, 0x20
 
     .global gUnknown_0819F694

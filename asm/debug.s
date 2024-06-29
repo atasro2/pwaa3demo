@@ -1687,26 +1687,26 @@ _08002274: .4byte gUnknown_0814D888
 	thumb_func_start sub_8002278
 sub_8002278: @ 0x08002278
 	lsls r0, r0, #0x10
-	ldr r1, _08002288 @ =gUnknown_08023B98
+	ldr r1, _08002288 @ =gBackgroundTable
 	lsrs r0, r0, #0xd
 	adds r0, r0, r1
 	ldr r0, [r0]
 	adds r0, #0x28
 	bx lr
 	.align 2, 0
-_08002288: .4byte gUnknown_08023B98
+_08002288: .4byte gBackgroundTable
 
 	thumb_func_start sub_800228C
 sub_800228C: @ 0x0800228C
 	lsls r0, r0, #0x10
-	ldr r1, _0800229C @ =gUnknown_08023B98
+	ldr r1, _0800229C @ =gBackgroundTable
 	lsrs r0, r0, #0xd
 	adds r1, #4
 	adds r0, r0, r1
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_0800229C: .4byte gUnknown_08023B98
+_0800229C: .4byte gBackgroundTable
 
 	thumb_func_start sub_80022A0
 sub_80022A0: @ 0x080022A0

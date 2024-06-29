@@ -5266,7 +5266,7 @@ sub_8014400: @ 0x08014400
 	mov r2, r8
 	strh r0, [r2]
 	movs r0, #2
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #0x11
 	movs r1, #0
 	movs r2, #0
@@ -5485,7 +5485,7 @@ _08014606:
 	b _08014632
 _0801460C:
 	movs r0, #2
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #0x11
 	movs r1, #0
 	movs r2, #0
@@ -5494,7 +5494,7 @@ _0801460C:
 	b _08014632
 _08014620:
 	movs r0, #1
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #3
 	movs r1, #0
 	movs r2, #0

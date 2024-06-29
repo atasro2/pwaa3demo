@@ -222,7 +222,7 @@ void AgbMain(void)
                         case 5:
                             sub_800482C(gMain.currentBG);
                             gMain.currentBG = gMain.previousBG;
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             break;
                         case 6:
                         case 7:    
@@ -235,7 +235,7 @@ void AgbMain(void)
                         struct ScriptContext * ScriptContext = &gScriptContext;
                         if(gMain.currentBG == 0xE
                         && !(gMain.unk3D & 4)) {
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             ScriptContext->unk2F = 0x1F;
                             ScriptContext->unk30 = 2;
                             sub_801DF10(ScriptContext);
@@ -243,11 +243,11 @@ void AgbMain(void)
                             ScriptContext->unk2F = 0x12;
                             ScriptContext->unk30 = 0;
                             sub_801DF10(ScriptContext);
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             ScriptContext->unk3E = 0;
                         } else {
                             nullsub_8(gMain.currentBG, 0);
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                         }
                     }
                 } else {

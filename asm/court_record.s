@@ -258,7 +258,7 @@ _0800EB6A:
 	bne _0800EBB6
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 _0800EBB6:
 	movs r0, #1
 	strb r0, [r6, #0xf]
@@ -520,7 +520,7 @@ _0800EDE4:
 _0800EDF0:
 	ldr r4, _0800EE04 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	pop {r4, r5}
@@ -590,7 +590,7 @@ _0800EE50:
 	strh r4, [r5, #8]
 	movs r0, #4
 	movs r1, #0x12
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	movs r0, #0xff
 	lsls r0, r0, #8
 	mov r1, sb
@@ -663,7 +663,7 @@ _0800EF00:
 	strb r0, [r6, #0xc]
 	movs r0, #4
 	movs r1, #0x12
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r0, _0800EF30 @ =0x00000707
 	str r0, [r7, #8]
 _0800EF1A:
@@ -696,7 +696,7 @@ _0800EF48: .4byte gJoypad
 _0800EF4C:
 	movs r0, #1
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r1, _0800EF74 @ =gCourtRecord
 	ldrb r0, [r1, #0xd]
 	adds r0, #1
@@ -733,7 +733,7 @@ _0800EF8C: .4byte gJoypad
 _0800EF90:
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r1, _0800EFB8 @ =gCourtRecord
 	ldrb r0, [r1, #0xd]
 	subs r0, #1
@@ -820,7 +820,7 @@ _0800F00E:
 	movs r0, #4
 	strb r0, [r1, #0x10]
 	movs r1, #0x12
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r0, _0800F0B8 @ =0x00000707
 	str r0, [r5, #8]
 	movs r0, #0x10
@@ -968,7 +968,7 @@ _0800F138:
 _0800F17A:
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r1, _0800F1CC @ =gOamObjects
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -1017,7 +1017,7 @@ _0800F1DA:
 	beq _0800F204
 	movs r0, #4
 	movs r1, #0x12
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r0, _0800F200 @ =0x00000707
 	str r0, [r4, #8]
 	b _0800F352
@@ -1185,7 +1185,7 @@ _0800F352:
 	bl sub_8006130
 	ldr r4, _0800F3CC @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	movs r0, #0
@@ -1305,7 +1305,7 @@ _0800F454:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	movs r0, #4
 	strb r0, [r6, #0xf]
 	strb r0, [r4, #9]
@@ -1329,7 +1329,7 @@ _0800F480:
 _0800F49C:
 	ldr r4, _0800F4AC @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	b _0800F530
@@ -1356,7 +1356,7 @@ _0800F4C4:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldrb r0, [r4, #0xb]
 	subs r0, #2
 	lsls r0, r0, #0x18
@@ -1396,7 +1396,7 @@ _0800F51E:
 _0800F522:
 	ldr r4, _0800F54C @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 _0800F530:
@@ -1452,7 +1452,7 @@ _0800F582:
 	strh r0, [r3]
 _0800F596:
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	movs r0, #1
@@ -1537,7 +1537,7 @@ _0800F640:
 	strh r2, [r3, #2]
 _0800F646:
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	movs r0, #1
@@ -1566,7 +1566,7 @@ sub_800F678: @ 0x0800F678
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	movs r0, #1
@@ -1579,7 +1579,7 @@ sub_800F678: @ 0x0800F678
 	strb r0, [r4, #0xc]
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	movs r1, #1
 	strb r1, [r4, #0xf]
 	movs r0, #3
@@ -1839,7 +1839,7 @@ _0800F8C2:
 	strh r0, [r5, #0x34]
 _0800F8C4:
 	ldrh r0, [r5, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldr r1, _0800F930 @ =0x040000D4
 	ldr r0, _0800F934 @ =gOamObjects
 	str r0, [r1]
@@ -2067,7 +2067,7 @@ _0800FAA4: .4byte gOamObjects
 _0800FAA8: .4byte gAnimation
 _0800FAAC:
 	ldrh r0, [r5, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #1
 	movs r1, #1
 	movs r2, #2
@@ -2295,7 +2295,7 @@ _0800FC64:
 	cmp r1, #0xb
 	bls _0800FC64
 	ldrh r0, [r5, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x34]
 	bl sub_8004FAC
 	ldr r3, _0800FD30 @ =gSaveDataBuffer
@@ -2381,7 +2381,7 @@ _0800FCEA:
 _0800FD1A:
 	ldr r4, _0800FD74 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	ldrb r0, [r5, #0xa]
@@ -2511,7 +2511,7 @@ _0800FE40:
 _0800FE54:
 	ldr r4, _0800FE64 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 	b _0800FEBC
@@ -2550,9 +2550,9 @@ _0800FE9E:
 	strh r0, [r5, #0x34]
 _0800FEA0:
 	ldrh r0, [r5, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x34]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #1
 	movs r1, #1
 	movs r2, #2
@@ -3019,7 +3019,7 @@ _080101EC:
 _08010264:
 	ldr r4, _08010288 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010554
 _08010272:
@@ -3104,7 +3104,7 @@ sub_8010310: @ 0x08010310
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010690
 	movs r0, #1
@@ -3148,7 +3148,7 @@ _0801036C:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xe
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	movs r0, #2
 	strb r0, [r5, #9]
 	movs r1, #0x80
@@ -3182,7 +3182,7 @@ sub_80103B4: @ 0x080103B4
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8010690
 	movs r0, #1
@@ -3290,7 +3290,7 @@ LoadEvidenceWindowGraphics: @ 0x08010494
 	push {lr}
 	movs r0, #1
 	movs r1, #0xc
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	ldr r0, _0801050C @ =0x040000D4
 	ldr r1, _08010510 @ =gGfx4bppTestimonyArrows
 	str r1, [r0]

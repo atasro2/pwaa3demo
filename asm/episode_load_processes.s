@@ -39,9 +39,9 @@ sub_80084FC: @ 0x080084FC
 	orrs r0, r1
 	strb r0, [r5]
 	movs r0, #6
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #6
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	strb r4, [r5]
 	ldr r0, _080085AC @ =gIORegisters
 	adds r0, #0x4a
@@ -2360,9 +2360,9 @@ _080098D6:
 	orrs r0, r1
 	strb r0, [r5]
 	movs r0, #6
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #6
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	strb r4, [r5]
 	mov r1, r8
 	adds r1, #0x27
@@ -2392,7 +2392,7 @@ _08009964:
 	bls _08009964
 	movs r0, #5
 	movs r1, #8
-	bl sub_8005CFC
+	bl SlideInBG2Window
 	movs r0, #0x31
 	bl PlaySE
 	ldr r1, _080099E4 @ =gIORegisters
@@ -2437,7 +2437,7 @@ _080099E8: .4byte 0x00003E01
 _080099EC:
 	ldr r4, _08009A48 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_80060AC
+	bl UpdateBG2Window
 	movs r5, #1
 	ldrsb r5, [r4, r5]
 	cmp r5, #0
@@ -2716,7 +2716,7 @@ _08009BF4:
 	str r2, [r6, #8]
 	ldr r0, [r6, #8]
 	movs r0, #0
-	bl sub_80051BC
+	bl GetBGPalettePtr
 	adds r7, r0, #0
 	str r7, [r6]
 	movs r1, #0xa0
@@ -3160,7 +3160,7 @@ _0800A042:
 	ldrsh r7, [r6, r0]
 	mov r1, r8
 	ldrh r0, [r1, #0x34]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	mov r2, r8
 	ldrh r0, [r2, #0x34]
 	bl sub_8004FAC
@@ -3182,7 +3182,7 @@ _0800A042:
 	strh r0, [r4, #0x38]
 	strh r1, [r4, #0x34]
 	ldrh r0, [r2]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	ldrb r0, [r5]
 	cmp r0, #5
 	bne _0800A092

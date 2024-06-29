@@ -260,11 +260,11 @@ _0800C0D2:
 	adds r0, r0, r1
 	ldrb r5, [r0]
 	adds r0, r5, #0
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	adds r0, r5, #0
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #0x81
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	ldr r0, _0800C270 @ =0x0000FFAF
 	strh r0, [r7, #0xe]
 	adds r1, r7, #0
@@ -902,7 +902,7 @@ _0800C650:
 	bne _0800C688
 	bl ResetSoundControl
 	ldrb r0, [r4]
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	strb r7, [r6, #0xa]
 	b _0800C74C
 	.align 2, 0
@@ -913,7 +913,7 @@ _0800C688:
 	movs r1, #0
 	bl nullsub_8
 	ldrb r0, [r4]
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	ldr r1, _0800C758 @ =gUnknown_03002CD0
 	movs r2, #0
 	movs r0, #0xc1

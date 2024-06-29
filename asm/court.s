@@ -269,11 +269,11 @@ sub_800A51C: @ 0x0800A51C
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
 	movs r0, #1
-	bl sub_8003D5C
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #1
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	movs r0, #0x81
-	bl sub_80049A0
+	bl CopyBGDataToVram
 	ldr r0, _0800A6B0 @ =0x0000FFAF
 	strh r0, [r6, #0xe]
 	ldr r0, _0800A6B4 @ =0x0000FDFF

@@ -29,7 +29,10 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    /* +0x017 */ u8 fill17[4];
+    /* +0x017 */ u8 selectedButton; // unity: Cursol
+    /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
+    /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
+    /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
     /* +0x01C */ u8 fill1C[0x14];
     /* +0x030 */ u16 rngSeed; // unity: Random_seed

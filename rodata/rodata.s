@@ -116,8 +116,8 @@ gUnknown_08022ED8:
 gUnknown_08023B80:
     .incbin "baserom.gba", 0x00023B80, 0x18
 
-    .global gUnknown_08023B98
-gUnknown_08023B98:
+    .global gBackgroundTable
+gBackgroundTable:
     .incbin "baserom.gba", 0x00023B98, 0x348
 
     .global gUnknown_08023EE0
