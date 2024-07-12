@@ -2,9 +2,8 @@ gNumMusicPlayers = 4;
 gMaxLines = 0;
 SECTIONS {
     /* TODO: matching hack for later functions REMOVE!!!! */
-    gUnknown_08022DDC = 0x08022DDC; 
-    
-    
+    /* add any rodata stuff that is used multiple times for easy C conversion here*/  
+
     . = 0x2000000;
     ewram (NOLOAD) :
     ALIGN(4)
