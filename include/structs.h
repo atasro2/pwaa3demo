@@ -87,7 +87,7 @@ struct Struct3006390 { // unity class is different names are interpreted
     s16 unk22; // unity: cnt
 };
 
-struct Struct30070E0 {
+struct ScriptContext {
     u8 fill00[0x1E];
     u16 unk1E;
     u8 fill20[0xF];
@@ -95,6 +95,9 @@ struct Struct30070E0 {
     u16 unk30;
     u8 fill32[0xC];
     u16 unk3E;
+    u8 fill40[0x6];
+    u16 unk46;
+    u8 fill48[0x54];
 };
 
 #endif//GUARD_STRUCTS_H
