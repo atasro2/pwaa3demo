@@ -58,7 +58,8 @@ struct Main
     /* +0x0A0 */ u8 fillA0[0x22];
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
-    /* +0x0C3 */ u8 fillC3[0x25];
+    /* +0x0C3 */ u8 fillC3[0x5];
+    /* +0x0C8 */ u32 scriptFlags[8];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;

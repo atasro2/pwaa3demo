@@ -994,7 +994,7 @@ sub_801A84C: @ 0x0801A84C
 	bhi _0801A87E
 	movs r0, #0
 	movs r1, #0x8d
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	bne _0801A87E
 	movs r0, #2
@@ -1065,7 +1065,7 @@ sub_801A8E0: @ 0x0801A8E0
 	movs r1, #0xff
 	ands r1, r2
 	lsrs r2, r2, #0xf
-	bl sub_80065AC
+	bl ChangeFlag
 	movs r0, #0
 	pop {r1}
 	bx r1
@@ -1804,7 +1804,7 @@ sub_801AED8: @ 0x0801AED8
 	ldr r0, [r4]
 	ldrh r1, [r0]
 	movs r0, #0
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0801AEF4
 	ldr r0, [r4]
@@ -2079,7 +2079,7 @@ sub_801B0D8: @ 0x0801B0D8
 	beq _0801B100
 	movs r0, #0
 	adds r1, r2, #0
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	bne _0801B112
 	ldr r0, [r4]
@@ -2090,7 +2090,7 @@ _0801B0FC: .4byte gScriptContext
 _0801B100:
 	movs r0, #0
 	adds r1, r2, #0
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0801B112
 	ldr r0, [r4]

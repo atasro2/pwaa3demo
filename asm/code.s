@@ -1,6 +1,59 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
+	thumb_func_start sub_8002278
+sub_8002278: @ 0x08002278
+	lsls r0, r0, #0x10
+	ldr r1, _08002288 @ =gUnknown_08023B98
+	lsrs r0, r0, #0xd
+	adds r0, r0, r1
+	ldr r0, [r0]
+	adds r0, #0x28
+	bx lr
+	.align 2, 0
+_08002288: .4byte gUnknown_08023B98
+
+	thumb_func_start sub_800228C
+sub_800228C: @ 0x0800228C
+	lsls r0, r0, #0x10
+	ldr r1, _0800229C @ =gUnknown_08023B98
+	lsrs r0, r0, #0xd
+	adds r1, #4
+	adds r0, r0, r1
+	ldr r0, [r0]
+	bx lr
+	.align 2, 0
+_0800229C: .4byte gUnknown_08023B98
+
+	thumb_func_start sub_80022A0
+sub_80022A0: @ 0x080022A0
+	push {r4, r5, lr}
+	ldr r2, _080022C8 @ =gBG1MapBuffer
+	movs r1, #0
+	ldr r4, _080022CC @ =0x000003FF
+	ldr r5, _080022D0 @ =gMain
+	ldr r3, _080022D4 @ =gUnknown_08023EF8
+_080022AC:
+	adds r0, r1, r3
+	ldrb r0, [r0]
+	strh r0, [r2]
+	adds r1, #1
+	adds r2, #2
+	cmp r1, r4
+	bls _080022AC
+	movs r0, #2
+	ldrb r1, [r5, #0x1a]
+	orrs r0, r1
+	strb r0, [r5, #0x1a]
+	pop {r4, r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080022C8: .4byte gBG1MapBuffer
+_080022CC: .4byte 0x000003FF
+_080022D0: .4byte gMain
+_080022D4: .4byte gUnknown_08023EF8
+
 	thumb_func_start InitBGs
 InitBGs: @ 0x080022D8
 	push {r4, r5, r6, lr}
@@ -8626,8 +8679,8 @@ _080065A0: .4byte 0xFFFF0000
 _080065A4: .4byte 0xFFFFFF00
 _080065A8: .4byte 0xFFFF00FF
 
-	thumb_func_start sub_80065AC
-sub_80065AC: @ 0x080065AC
+	thumb_func_start ChangeFlag
+ChangeFlag: @ 0x080065AC
 	push {r4, lr}
 	adds r4, r1, #0
 	ldr r1, _080065D0 @ =gUnknown_0814D930
@@ -8661,8 +8714,8 @@ _080065E0:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80065E8
-sub_80065E8: @ 0x080065E8
+	thumb_func_start GetFlag
+GetFlag: @ 0x080065E8
 	ldr r2, _0800660C @ =gUnknown_0814D930
 	lsls r0, r0, #2
 	adds r0, r0, r2
@@ -8790,7 +8843,7 @@ sub_80066E4: @ 0x080066E4
 	adds r4, r0, #0
 	movs r0, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	adds r0, r4, #0
 	bl sub_8018778
 	movs r0, #1
@@ -8807,7 +8860,7 @@ sub_8006708: @ 0x08006708
 	adds r4, r0, #0
 	movs r0, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	adds r0, r4, #0
 	bl sub_8018778
 	movs r0, #2
@@ -8853,7 +8906,7 @@ _08006748:
 	movs r0, #0
 	adds r1, r7, #0
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	mov r0, r8
 	bl sub_8018778
 	movs r0, #1
@@ -22151,7 +22204,7 @@ _0800D4DC:
 	adds r0, r1, r4
 	ldrb r1, [r0]
 	movs r0, #2
-	bl sub_80065E8
+	bl GetFlag
 	str r4, [sp, #4]
 	ldr r3, [sp, #0x14]
 	cmp r0, #0
@@ -22162,7 +22215,7 @@ _0800D4DC:
 	ldrb r1, [r0]
 	movs r0, #2
 	movs r2, #1
-	bl sub_80065AC
+	bl ChangeFlag
 	ldr r3, [sp, #0x14]
 _0800D53A:
 	ldr r0, [sp]
@@ -22224,7 +22277,7 @@ _0800D5A2:
 	adds r0, r2, r7
 	ldrb r1, [r0]
 	movs r0, #2
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0800D628
 	mov r3, r8
@@ -24493,12 +24546,12 @@ _0800E754:
 	bne _0800E7E2
 	movs r0, #0
 	movs r1, #0x13
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	bne _0800E7E2
 	movs r0, #0
 	movs r1, #0xa
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _0800E7E2
 	movs r0, #0x94
@@ -28770,7 +28823,7 @@ _08010A60:
 	beq _08010A72
 	adds r1, r0, #0
 	movs r0, #0
-	bl sub_80065E8
+	bl GetFlag
 	cmp r0, #0
 	beq _08010AD8
 _08010A72:

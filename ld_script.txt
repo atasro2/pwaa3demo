@@ -2,7 +2,7 @@ gNumMusicPlayers = 4;
 gMaxLines = 0;
 SECTIONS {
     /* TODO: matching hack for later functions REMOVE!!!! */
-    /* add any rodata stuff that is used multiple times for easy C conversion here*/  
+    /* add any .rodata stuff that is used multiple times for easy C conversion here*/  
 
     . = 0x2000000;
     ewram (NOLOAD) :
@@ -23,7 +23,6 @@ SECTIONS {
         src/crt0.o(.text);
         src/main.o(.text);
         src/debug.o(.text);
-        asm/debug.o(.text);
         asm/code.o(.text);
         asm/script_commands.o(.text);
         asm/rom_1D308.o(.text);
@@ -45,7 +44,6 @@ SECTIONS {
     {
         src/main.o(.rodata);
         src/debug.o(.rodata);
-        rodata/debug.o(.rodata);
         rodata/rodata.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);
@@ -57,6 +55,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.data);
+        src/debug.o(.data);
         data/data.o(.data);
         data/script_main.o(.data);
     } =0

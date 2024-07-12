@@ -1,5 +1,6 @@
 	.section .rodata
-
+    .align 2, 0
+    
     .global gUnknown_08023B98
 gUnknown_08023B98:
     .incbin "baserom.gba", 0x00023B98, 0x348
