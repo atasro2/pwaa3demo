@@ -29,10 +29,12 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    /* +0x017 */ u8 unk17;
-    /* +0x018 */ u8 unk18;
-    /* +0x019 */ u8 unk19;
-    /* +0x01A */ u8 fill1A[0x16];
+    /* +0x017 */ u8 selectedButton; // unity: Cursol
+    /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
+    /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
+    /* +0x01A */ u8 tilemapUpdateBits;
+    /* +0x01B */ u8 saveContinueFlags;
+    /* +0x01C */ u8 fill1C[0x14];
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
@@ -42,7 +44,18 @@ struct Main
     /* +0x03C */ s8 currentBgStripe;
     /* +0x03D */ u8 unk3D;
     /* +0x03E */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
-    /* +0x03F */ u8 fill3F[0x49];
+    /* +0x03F */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
+    /* +0x040 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
+    /* +0x042 */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
+    /* +0x044 */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
+    /* +0x046 */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
+    /* +0x048 */ u16 unused48; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x04A */ s16 Bg256_dir; // unity AA4: Bg256_dir
+    /* +0x04C */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
+    /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
+    /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
+    /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
+    /* +0x050 */ u8 fill50[0x38];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
@@ -58,7 +71,9 @@ struct Main
     /* +0x0A0 */ u8 fillA0[0x22];
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
-    /* +0x0C3 */ u8 fillC3[0x5];
+    /* +0x0C3 */ u8 fillC3[1];
+    /* +0x0C4 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
+    /* +0x0C6 */ u16 idleAnimationOffset; // unity: Def_wait_foa
     /* +0x0C8 */ u32 scriptFlags[8];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];

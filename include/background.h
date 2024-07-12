@@ -58,6 +58,8 @@ struct CourtScroll
 
 extern struct CourtScroll gCourtScroll;
 
+u8 * GetBGPalettePtr(u32 bgId);
+
 void InitBGs(void);
 void InitBG3(void);
 void UpdateBackground(void);

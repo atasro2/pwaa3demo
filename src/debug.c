@@ -76,7 +76,7 @@ void sub_80015E8(void) {
     struct Main * main = &gMain;
     u32 i;
 
-    main->unk19 = FALSE;
+    main->showTextboxCharacters = FALSE;
     for(i = 0; i < 0x100; i++) {
         gBG1MapBuffer[0x180 + i] = 0;
     }
@@ -113,10 +113,10 @@ void DebugProcessInit(struct DebugContext * debug) {
     debug->unk14 = ioRegs->lcd_bg3hofs;
     debug->unk16 = ioRegs->lcd_bg3vofs;
     DmaCopy16(3, gOamObjects, debug->oam, OAM_SIZE);
-    debug->unk60 = main->unk19;
-    debug->unk61 = main->unk18;
-    main->unk19 = FALSE;
-    main->unk18 = FALSE;
+    debug->unk60 = main->showTextboxCharacters;
+    debug->unk61 = main->advanceScriptContext;
+    main->showTextboxCharacters = FALSE;
+    main->advanceScriptContext = FALSE;
     for(i = 0; i < 128; i++)
         gOamObjects[i].attr1 = 0x12C;
     debug->anim = gAnimation[0];
@@ -185,8 +185,8 @@ void DebugProcessExit(struct DebugContext * debug) {
     ActivateAllAllocatedAnimations();
     DmaCopy16(3, debug->oam, gOamObjects, OAM_SIZE);
     sub_8001610(0, 29, 0, 19);
-    main->unk19 = debug->unk60;
-    main->unk18 = debug->unk61;
+    main->showTextboxCharacters = debug->unk60;
+    main->advanceScriptContext = debug->unk61;
     *(u32*)main->process = *(u32*)gDebugCtx.process;
 }
 

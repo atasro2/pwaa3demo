@@ -1,8 +1,8 @@
 	.section .rodata
     .align 2, 0
-    
-    .global gUnknown_08023B98
-gUnknown_08023B98:
+
+    .global gBackgroundTable
+gBackgroundTable:
     .incbin "baserom.gba", 0x00023B98, 0x348
 
     .global gUnknown_08023EE0
@@ -17,8 +17,8 @@ gUnknown_08023EEC:
 gUnknown_08023EF2:
     .incbin "baserom.gba", 0x00023EF2, 0x6
 
-    .global gUnknown_08023EF8
-gUnknown_08023EF8:
+    .global gTextboxTiles
+gTextboxTiles:
     .incbin "baserom.gba", 0x00023EF8, 0x400
 
     .global gUnknown_080242F8
@@ -45,8 +45,8 @@ gUnknown_08025430:
 gUnknown_08025C30:
     .incbin "baserom.gba", 0x00025C30, 0x800
 
-    .global gUnknown_08026430
-gUnknown_08026430:
+    .global gSineTable
+gSineTable:
     .incbin "baserom.gba", 0x00026430, 0x80
 
     .global gUnknown_080264B0
@@ -65,8 +65,8 @@ gUnknown_080266E8:
 gUnknown_08026718:
     .incbin "baserom.gba", 0x00026718, 0x98
 
-    .global gUnknown_080267B0
-gUnknown_080267B0:
+    .global gSaveVersion
+gSaveVersion:
     .incbin "baserom.gba", 0x000267B0, 0x34
 
     .global gUnknown_080267E4

@@ -8,6 +8,22 @@
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
 
+struct ScriptContext {
+    /* +0x00 */ u8 fill00[0xB];
+    /* +0x0C */ u16 currentSection;
+    u8 fill0E[0xE];
+    /* +0x1C */ u16 flags; // message status, flags
+    u16 unk1E;
+    u8 fill20[0xF];
+    u8 unk2F;
+    u16 unk30;
+    u8 fill32[0xC];
+    u16 unk3E;
+    u8 fill40[0x6];
+    u16 unk46;
+    u8 fill48[0x54];
+};
+
 // script system has been revamped, keeping this for reference only!
 #if 0
 struct ScriptContext
@@ -123,10 +139,10 @@ void RunScriptContext(void);
 void InitScriptSection(struct ScriptContext *scriptCtx);
 void RedrawTextboxCharacters(void);
 
-void sub_8007CCC(struct Main *, s32);
-bool32 sub_8007CFC(struct Main *, s32);
-void sub_8007D30(struct Main *);
-void sub_8007D5C(struct Main *);
+void MarkSectionAsRead(struct Main *, s32);
+bool32 HasSectionBeenRead(struct Main *, s32);
+void ClearSectionReadFlags(struct Main *);
+void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);

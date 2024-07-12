@@ -21,21 +21,21 @@ void UpdateSpecialEffects(void);
 static void UpdateCourtScroll(struct CourtScroll *);
 
 void (*gGameProcesses[])(struct Main *) = {
-    sub_8006918,
-    sub_8006AA4,
-    sub_8006CE8,
-    sub_800A434,
-    sub_800BFA4,
-    sub_800A950,
-    sub_800AB64,
-    sub_800EA6C,
-    sub_800EACC,
-    sub_800B208,
-    sub_80076F8,
-    sub_8008708,
-    sub_8008D7C,
-    sub_800985C,
-    sub_800730C,
+    CapcomLogoProcess,
+    TitleScreenProcess,
+    GameOverScreenProcess,
+    CourtProcess,
+    InvestigationProcess,
+    TestimonyProcess,
+    QuestioningProcess,
+    CourtRecordProcess,
+    EvidenceAddedProcess,
+    VerdictProcess,
+    SaveGameProcess,
+    EpisodeClearedProcess,
+    SelectEpisodeProcess,
+    ContinueSaveProcess,
+    ClearSaveProcess,
     DebugProcess
 };
 extern void (*gIntrTable[0x10]);
@@ -222,7 +222,7 @@ void AgbMain(void)
                         case 5:
                             sub_800482C(gMain.currentBG);
                             gMain.currentBG = gMain.previousBG;
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             break;
                         case 6:
                         case 7:    
@@ -235,7 +235,7 @@ void AgbMain(void)
                         struct ScriptContext * ScriptContext = &gScriptContext;
                         if(gMain.currentBG == 0xE
                         && !(gMain.unk3D & 4)) {
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             ScriptContext->unk2F = 0x1F;
                             ScriptContext->unk30 = 2;
                             sub_801DF10(ScriptContext);
@@ -243,11 +243,11 @@ void AgbMain(void)
                             ScriptContext->unk2F = 0x12;
                             ScriptContext->unk30 = 0;
                             sub_801DF10(ScriptContext);
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                             ScriptContext->unk3E = 0;
                         } else {
                             nullsub_8(gMain.currentBG, 0);
-                            sub_80049A0(gMain.currentBG);
+                            CopyBGDataToVram(gMain.currentBG);
                         }
                     }
                 } else {
