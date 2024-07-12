@@ -11,7 +11,7 @@ void sub_8006470(u32 arg0, u32 arg1, u32 arg2) {
 
 }
 
-void nullsub_20(void) {
+void nullsub_20(char *arg0, u32 arg1, u32 arg2) {
 
 }
 

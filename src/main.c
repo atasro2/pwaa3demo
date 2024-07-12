@@ -36,7 +36,7 @@ void (*gGameProcesses[])(struct Main *) = {
     SelectEpisodeProcess,
     ContinueSaveProcess,
     ClearSaveProcess,
-    sub_80018F8
+    DebugProcess
 };
 extern void (*gIntrTable[0x10]);
 

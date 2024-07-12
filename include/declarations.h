@@ -31,7 +31,7 @@ void EpisodeClearedProcess(struct Main *);
 void SelectEpisodeProcess(struct Main *);
 void ContinueSaveProcess(struct Main *);
 void ClearSaveProcess(struct Main *);
-void sub_80018F8(struct Main *);
+void DebugProcess(struct Main *);
 
 void ProcessHPBar(void);
 void VBlankIntr();
@@ -51,8 +51,9 @@ extern void nullsub_3(u16,u16);
 void ResetHPBar(void);
 void ResetHPBarHealthToMax(void);
 
-// stubbed out stuff
-void sub_8006470(u32, u32, u32);
+//Debug related code
+void nullsub_20(char *,u32,u32);
+void sub_8006470(u32,u32,u32);
 
 void RunScriptContext(void);
 void sub_801DF10(struct ScriptContext *);

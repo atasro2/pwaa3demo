@@ -2489,8 +2489,8 @@ _08012F3C:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_8012F44
-sub_8012F44: @ 0x08012F44
+	thumb_func_start ActivateAllAllocatedAnimations
+ActivateAllAllocatedAnimations: @ 0x08012F44
 	push {r4, r5, lr}
 	ldr r2, _08012F78 @ =gAnimation
 	movs r1, #0x88

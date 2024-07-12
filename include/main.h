@@ -74,11 +74,13 @@ struct Main
     /* +0x0C3 */ u8 fillC3[1];
     /* +0x0C4 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
     /* +0x0C6 */ u16 idleAnimationOffset; // unity: Def_wait_foa
-    /* +0x0C8 */ u8 fillC8[0x20];
+    /* +0x0C8 */ u32 scriptFlags[8];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;
-    /* +0x259 */ u8 fill259[0x6E];
+    /* +0x259 */ u8 fill259[0x7];
+    /* +0x260 */ u32 unk260;
+    /* +0x264 */ u8 fill264[0x63];
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
     /* +0x2D0 */ u32 unk2D0;
