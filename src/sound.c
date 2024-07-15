@@ -333,3 +333,168 @@ void sub_80116B0(struct DebugContext * debug) {
     nullsub_20("SOUND TEST", 10, 3);
     nullsub_20("START TO EXIT", 9, 17);
 }
+
+#define SCROLL_FAST_WITH_B(lval, changeSign) \
+    if (gJoypad.heldKeys & B_BUTTON) {       \
+        (lval) += 10 * (changeSign);         \
+    } else {                                 \
+        (lval) += 1 * (changeSign);          \
+    }
+
+void sub_8011714(struct DebugContext *ctx) {
+	struct SoundDebug *sound = &ctx->menu.sound;
+
+	if (gJoypad.pressedKeys & DPAD_UP) {
+		--sound->unk6;
+	} else if (gJoypad.pressedKeys & DPAD_DOWN) {
+		++sound->unk6;
+	}
+
+	if (sound->unk6 < 0) {
+		sound->unk6 = 3;
+	} else if (sound->unk6 > 3) {
+		sound->unk6 = 0;
+	}
+
+	switch (sound->unk6) {
+		case 0:
+			if (gJoypad.pressedKeys & DPAD_LEFT) {
+				SCROLL_FAST_WITH_B(sound->unk4, -1)
+				if (sound->unk4 < 0) {
+					sound->unk4 = 321;
+				}
+			} else if (gJoypad.pressedKeys & DPAD_RIGHT) {
+				SCROLL_FAST_WITH_B(sound->unk4, 1)
+				if (sound->unk4 > 321) {
+					sound->unk4 = 0;
+				}
+			} else if (gJoypad.pressedKeys & A_BUTTON) {
+				PlaySE(sound->unk4 + 42);
+			}
+			nullsub_20("<-  SELECT", 11, 12);
+			nullsub_20("->  SELECT", 11, 13);
+			nullsub_20("A   PLAY  ", 11, 14);
+			nullsub_20("B   +10   ", 11, 15);
+			break;
+		case 1:
+			if (gJoypad.pressedKeys & DPAD_LEFT) {
+				SCROLL_FAST_WITH_B(sound->unk2, -1)
+				if (sound->unk2 < 0) {
+					sound->unk2 = 249;
+				}
+				if (sound->unk2 >= 42 && sound->unk2 < 201) {
+					sound->unk2 = 249;
+				}
+			} else if (gJoypad.pressedKeys & DPAD_RIGHT) {
+				SCROLL_FAST_WITH_B(sound->unk2, 1)
+				if (sound->unk2 > 249) {
+					sound->unk2 = 0;
+				}
+				if (sound->unk2 >= 42 && sound->unk2 < 201) {
+					sound->unk2 = 201;
+				}
+			} else if (gJoypad.pressedKeys & A_BUTTON) {
+				if (sound->unk0 != sound->unk2) {
+					FadeOutBGM(120);
+					++ctx->unk1;
+				} else if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE) {
+					if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK) {
+						UnpauseBGM();
+					} else {
+						PlayBGM(sound->unk2);
+						m4aMPlayImmInit(&gMPlayInfo_BGM);
+						ChangeTrackVolume(1, sound->unk8);
+						ChangeTrackPanning(1, sound->unkC);
+					}
+				} else {
+					PauseBGM();
+				}
+			} else if (gJoypad.pressedKeys & L_BUTTON) {
+				FadeOutBGM(20);
+			} else if (gJoypad.pressedKeys & R_BUTTON) {
+				if (gJoypad.heldKeys & B_BUTTON) {
+					FadeInBGM(120, 255);
+				} else {
+					FadeInBGM(120, sound->unk2);
+				}
+			}
+			nullsub_20("<-  SELECT", 11, 12);
+			nullsub_20("->  SELECT", 11, 13);
+			nullsub_20("B   +10   ", 11, 15);
+			if (!(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE) && sound->unk0 == sound->unk2) {
+				nullsub_20("A   PAUSE ", 11, 14);
+			} else {
+				nullsub_20("A   PLAY  ", 11, 14);
+			}
+			break;
+		case 2:
+			if ((gJoypad.heldKeys & DPAD_LEFT) || (gJoypad.pressedKeys & L_BUTTON)) {
+				SCROLL_FAST_WITH_B(sound->unk8, -1)
+				if (sound->unk8 < 4) {
+					sound->unk8 = 4;
+				}
+				ChangeTrackVolume(1, sound->unk8);
+			} else if ((gJoypad.heldKeys & DPAD_RIGHT) || (gJoypad.pressedKeys & R_BUTTON)) {
+				SCROLL_FAST_WITH_B(sound->unk8, 1)
+				if (sound->unk8 > 510) {
+					sound->unk8 = 510;
+				}
+				ChangeTrackVolume(1, sound->unk8);
+			}
+
+			if (gJoypad.pressedKeys & A_BUTTON) {
+				sound->unk8 = 256;
+				ChangeTrackVolume(1, sound->unk8);
+			}
+
+			nullsub_20("<-  DOWN  ", 11, 12);
+			nullsub_20("->  UP    ", 11, 13);
+			nullsub_20("A DEFAULT ", 11, 14);
+			nullsub_20("B   +10   ", 11, 15);
+			break;
+		case 3:
+			if (gJoypad.heldKeys & DPAD_LEFT) {
+				SCROLL_FAST_WITH_B(sound->unkC, -1)
+				if (sound->unkC < -128) {
+					sound->unkC = -128;
+				}
+				ChangeTrackPanning(1, sound->unkC);
+			} else if (gJoypad.heldKeys & DPAD_RIGHT) {
+				SCROLL_FAST_WITH_B(sound->unkC, 1)
+				if (sound->unkC > 127) {
+					sound->unkC = 127;
+				}
+				ChangeTrackPanning(1, sound->unkC);
+			} else if (gJoypad.pressedKeys & A_BUTTON) {
+                sound->unkC = 0;
+                ChangeTrackPanning(1, sound->unkC);
+            }
+			nullsub_20("<-  LEFT  ", 11, 12);
+			nullsub_20("->  RIGHT ", 11, 13);
+			nullsub_20("A  CENTER ", 11, 14);
+			nullsub_20("B   +10   ", 11, 15);
+			break;
+	}
+
+	nullsub_20(" SE        ", 5, 5);
+	nullsub_6(sound->unk4, 10, 5, 2);
+
+	nullsub_20(" BGM       ", 5, 6);
+	sub_8006470(sound->unk2, 10, 6);
+
+	nullsub_20(" VOL       ", 5, 7);
+    sub_8006470(sound->unk8 / 50 ?: sound->unk8 != 4 || sound->unk8 < 0, 10, 7);
+    
+    nullsub_20(" PAN L             R", 5, 8);
+	nullsub_20("*", sound->unkC / 20 + 17, 8);
+	if (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE) {
+		if(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK) {
+            nullsub_20("PAUSE ", 15, 6);
+        } else {
+            nullsub_20("STOP  ", 15, 6);    
+        }
+	} else {
+		nullsub_20("PLAY ", 15, 6);
+	}
+	nullsub_20(">", 5, 5 + sound->unk6);
+}
