@@ -3070,7 +3070,7 @@ _0801B8AA:
 	movs r2, #8
 	movs r3, #0x1f
 	bl StartHardwareBlend
-	bl sub_8011324
+	bl StopBGM
 	movs r0, #0x48
 	bl PlaySE
 _0801B8CC:

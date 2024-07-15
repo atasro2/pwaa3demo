@@ -3262,7 +3262,7 @@ _0800A11C:
 	mov r6, r8
 	ldrh r1, [r6, #0x28]
 	movs r0, #0x14
-	bl sub_80113E8
+	bl FadeInBGM
 	ldr r0, _0800A148 @ =gMain
 	ldr r1, _0800A178 @ =0x000002C6
 	adds r0, r0, r1

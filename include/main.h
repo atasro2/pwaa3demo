@@ -34,7 +34,16 @@ struct Main
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
-    /* +0x01C */ u8 fill1C[0x14];
+    /* +0x01C */ u8 fill1C[0x4];
+    /* +0x020 */ s16 bgmFadeVolume;
+    /* +0x022 */ u8 fill22[0x2];
+    /* +0x024 */ u8 soundStatus;
+    /* +0x025 */ u8 fill25[0x3];
+    /* +0x028 */ u16 currentPlayingBgm;
+    /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
+    /* +0x02B */ u8 animationFlags; // unity: Obj_flag
+    /* +0x02C */ s16 bgmFadeAmount;
+    /* +0x02E */ s16 bgmVolume;
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
@@ -78,9 +87,13 @@ struct Main
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u8 fillEC[0x16C];
     /* +0x258 */ u8 unk258;
-    /* +0x259 */ u8 fill259[0x7];
+    /* +0x259 */ u8 fill259[0x3];
+    /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 fill264[0x63];
+    /* +0x264 */ u8 fill264[0x5C];
+    /* +0x2C0 */ u16 currentlyPlayingSfx;
+    /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
+    /* +0x2C4 */ u8 fill2C4[0x3];
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
     /* +0x2D0 */ u32 unk2D0;

@@ -902,7 +902,7 @@ _08014DE0:
 	ldrsh r0, [r4, r1]
 	adds r0, #0x7f
 	movs r1, #0x3c
-	bl sub_80111CC
+	bl FadeOutSE
 	movs r0, #0
 	strh r0, [r4, #0xa]
 	ldrh r0, [r4, #6]
@@ -1500,7 +1500,7 @@ _0801526C:
 	ldrsh r0, [r4, r1]
 	adds r0, #0x7f
 	movs r1, #0x3c
-	bl sub_80111CC
+	bl FadeOutSE
 	ldrh r0, [r4, #6]
 	adds r0, #1
 	movs r1, #0

@@ -165,7 +165,7 @@ sub_800EAEC: @ 0x0800EAEC
 	adds r4, r4, r0
 	ldrh r5, [r4]
 	adds r0, r5, #0
-	bl sub_8011194
+	bl StopSE
 	strh r5, [r4]
 	ldr r1, _0800EBCC @ =gBG2MapBuffer
 	movs r0, #0
@@ -656,7 +656,7 @@ _0800EEF0:
 _0800EEFC: .4byte gScriptContext
 _0800EF00:
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	movs r0, #8
 	ldrb r1, [r6, #0xc]
 	orrs r0, r1
@@ -895,7 +895,7 @@ _0800F0C2:
 	rsbs r1, r1, #0
 	cmp r0, r1
 	beq _0800F112
-	bl sub_8011324
+	bl StopBGM
 	b _0800F112
 	.align 2, 0
 _0800F0F8: .4byte gMain
@@ -1135,7 +1135,7 @@ _0800F282:
 	movs r0, #0
 	strh r0, [r1]
 _0800F2EA:
-	bl sub_8011324
+	bl StopBGM
 	adds r0, r5, #0
 	bl ChangeScriptSection
 	ldr r0, _0800F314 @ =0x00000103
@@ -1260,7 +1260,7 @@ sub_800F3E0: @ 0x0800F3E0
 	ands r0, r1
 	strh r0, [r2, #0x1e]
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	ldr r1, _0800F424 @ =gCourtRecord
 	movs r0, #8
 	ldrb r2, [r1, #0xc]
@@ -2504,7 +2504,7 @@ _0800FE40:
 	ldrh r4, [r0]
 	cmp r4, #0
 	bne _0800FE54
-	bl sub_8011354
+	bl UnpauseBGM
 	movs r0, #1
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -3070,7 +3070,7 @@ _080102A0:
 	lsls r0, r1, #0x10
 	asrs r0, r0, #0x11
 	movs r1, #4
-	bl sub_80115D4
+	bl SetBGMVolume
 	movs r0, #0xf
 	bl PlaySE
 	ldrb r0, [r6, #9]
@@ -3124,7 +3124,7 @@ sub_8010310: @ 0x08010310
 	movs r0, #0x80
 	lsls r0, r0, #1
 	movs r1, #0x1e
-	bl sub_80115D4
+	bl SetBGMVolume
 	movs r0, #1
 	strb r0, [r5, #0xa]
 _0801034C:

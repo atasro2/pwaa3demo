@@ -4015,7 +4015,7 @@ _08018D0C:
 	ldrh r0, [r0, #2]
 	mov r1, sp
 	ldrh r1, [r1]
-	bl sub_80113E8
+	bl FadeInBGM
 	movs r0, #0
 	add sp, #4
 	pop {r4}
@@ -4059,7 +4059,7 @@ _08018D78: .4byte gScriptContext
 _08018D7C:
 	mov r0, sp
 	ldrh r0, [r0]
-	bl sub_8011194
+	bl StopSE
 _08018D84:
 	movs r0, #0
 	add sp, #4
@@ -4144,7 +4144,7 @@ _08018DFA:
 	adds r0, #1
 	strb r0, [r1]
 	movs r0, #0xe6
-	bl sub_8011278
+	bl PlayBGM
 	movs r0, #0
 	pop {r4}
 	pop {r1}
@@ -4699,12 +4699,12 @@ _08019234:
 	beq _08019264
 	mov r0, sp
 	ldrh r0, [r0, #2]
-	bl sub_80113B8
+	bl FadeOutBGM
 	b _08019268
 	.align 2, 0
 _08019260: .4byte gScriptContext
 _08019264:
-	bl sub_8011324
+	bl StopBGM
 _08019268:
 	movs r0, #0
 	add sp, #4
@@ -4737,7 +4737,7 @@ _0801927C:
 	ldrh r0, [r0, #2]
 	cmp r0, #0
 	beq _080192A8
-	bl sub_8011354
+	bl UnpauseBGM
 	b _080192AC
 	.align 2, 0
 _080192A4: .4byte gScriptContext
@@ -5325,7 +5325,7 @@ _0801970C:
 	ldrh r0, [r0]
 	mov r1, sp
 	ldrh r1, [r1, #2]
-	bl sub_80115D4
+	bl SetBGMVolume
 	movs r0, #0
 	add sp, #4
 	pop {r4}

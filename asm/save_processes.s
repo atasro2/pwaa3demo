@@ -211,7 +211,7 @@ _08007796:
 	adds r4, r4, r1
 	ldrh r5, [r4]
 	adds r0, r5, #0
-	bl sub_8011194
+	bl StopSE
 	strh r5, [r4]
 	ldr r2, _08007868 @ =gAnimation+0x44
 	ldrb r0, [r2, #0xe]
@@ -1470,7 +1470,7 @@ _08008260:
 _08008292:
 	movs r0, #0x1e
 	movs r1, #0xff
-	bl sub_80113E8
+	bl FadeInBGM
 	movs r0, #1
 	movs r1, #0
 	movs r2, #1

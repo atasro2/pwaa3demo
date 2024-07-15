@@ -40,6 +40,7 @@ SECTIONS {
         asm/rom_BC08.o(.text);
         asm/investigation.o(.text);
         asm/court_record.o(.text);
+        src/sound.o(.text);
         asm/sound.o(.text);
         asm/animation.o(.text);
         asm/psyche_lock.o(.text);
@@ -66,8 +67,11 @@ SECTIONS {
         src/main.o(.rodata);
         src/debug.o(.rodata);
         rodata/rodata.o(.rodata);
-        src/m4a_tables.o(.rodata);
+        src/sound.o(.rodata);
         rodata/sound.o(.rodata);
+        rodata/rodata_2.o(.rodata);
+        src/m4a_tables.o(.rodata);
+        rodata/song_data.o(.rodata);
         src/agb_sram.o(.rodata);
     } =0
     /* capcom :^)) */
@@ -78,6 +82,8 @@ SECTIONS {
         src/main.o(.data);
         src/debug.o(.data);
         data/data.o(.data);
+        src/sound.o(.data);
+        data/data_2.o(.data);
         data/script_main.o(.data);
     } =0
     . = 0x8180000;

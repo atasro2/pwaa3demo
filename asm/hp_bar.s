@@ -1385,9 +1385,9 @@ _08016AFA:
 	cmp r4, #0
 	bne _08016B62
 	movs r0, #0x4c
-	bl sub_8011194
+	bl StopSE
 	movs r0, #0x9c
-	bl sub_8011194
+	bl StopSE
 	adds r0, r5, #0
 	adds r0, #0xb0
 	strh r4, [r0]

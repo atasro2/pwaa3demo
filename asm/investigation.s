@@ -1945,7 +1945,7 @@ _0800CE56:
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, #0x14
-	bl sub_80113B8
+	bl FadeOutBGM
 	movs r0, #0xd
 	bl sub_800BC08
 	movs r0, #2
@@ -4108,7 +4108,7 @@ _0800DF60:
 	movs r1, #0
 	strb r1, [r0, #0x18]
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	movs r0, #5
 	movs r1, #0
 	bl sub_8014B40
@@ -4251,7 +4251,7 @@ _0800E09A:
 	adds r0, #1
 	strb r0, [r6, #0xb]
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	movs r0, #0x1e
 	bl sub_800BC08
 	movs r0, #2
@@ -4290,7 +4290,7 @@ _0800E0D0:
 	cmp r1, r0
 	beq _0800E0FC
 	ldrh r0, [r7, #0x14]
-	bl sub_8011278
+	bl PlayBGM
 _0800E0FC:
 	movs r0, #1
 	b _0800E1CE
@@ -4410,7 +4410,7 @@ _0800E1E0:
 	cmp r0, #0
 	bne _0800E26A
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	b _0800E216
 _0800E1F2:
 	movs r0, #4
@@ -4462,7 +4462,7 @@ _0800E21E:
 	cmp r4, r0
 	beq _0800E25E
 	ldrh r0, [r7, #0x14]
-	bl sub_8011278
+	bl PlayBGM
 _0800E25E:
 	movs r0, #1
 	movs r1, #1
@@ -4690,7 +4690,7 @@ _0800E3B6:
 	cmp r2, r0
 	beq _0800E496
 	ldrh r0, [r1]
-	bl sub_8011278
+	bl PlayBGM
 	b _0800E496
 	.align 2, 0
 _0800E44C: .4byte gInvestigation
