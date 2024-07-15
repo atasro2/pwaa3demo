@@ -498,3 +498,23 @@ void sub_8011714(struct DebugContext *ctx) {
 	}
 	nullsub_20(">", 5, 5 + sound->unk6);
 }
+
+void sub_8011C08(struct DebugContext *ctx) {
+	struct SoundDebug *sound = &ctx->menu.sound;
+
+    if(!(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_PAUSE) && gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK)
+        return;
+    PlayBGM(sound->unk2);
+    m4aMPlayImmInit(&gMPlayInfo_BGM);
+    ChangeTrackVolume(1, sound->unk8);
+    ChangeTrackPanning(1, sound->unkC);
+    sound->unk0 = sound->unk2;
+    ctx->unk1--;
+}
+extern void (*gUnknown_0814DC64[])(struct DebugContext *ctx);
+
+void sub_8011C60(struct DebugContext *ctx) {
+    if (gJoypad.pressedKeys & START_BUTTON)
+        gMain.process[GAME_PROCESS_STATE] = 3;
+    gUnknown_0814DC64[ctx->unk1](ctx);
+}

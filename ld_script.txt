@@ -41,7 +41,6 @@ SECTIONS {
         asm/investigation.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
-        asm/sound.o(.text);
         asm/animation.o(.text);
         asm/psyche_lock.o(.text);
         asm/hp_bar.o(.text);
@@ -68,7 +67,6 @@ SECTIONS {
         src/debug.o(.rodata);
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
-        rodata/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/song_data.o(.rodata);
