@@ -203,7 +203,7 @@ sub_800BFF0: @ 0x0800BFF0
 	str r0, [r4, #4]
 	str r3, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r1, _0800C264 @ =gUnknown_03002D40
+	ldr r1, _0800C264 @ =gOamObjects+0x1A0
 	movs r5, #0
 	add r0, sp, #4
 	mov sb, r0
@@ -380,7 +380,7 @@ _0800C254: .4byte gPalExamineCursors
 _0800C258: .4byte 0x05000300
 _0800C25C: .4byte gPalChoiceSelected
 _0800C260: .4byte 0x05000320
-_0800C264: .4byte gUnknown_03002D40
+_0800C264: .4byte gOamObjects+0x1A0
 _0800C268: .4byte 0x000040E0
 _0800C26C: .4byte gUnknown_0814DA50
 _0800C270: .4byte 0x0000FFAF
@@ -914,7 +914,7 @@ _0800C688:
 	bl nullsub_8
 	ldrb r0, [r4]
 	bl CopyBGDataToVram
-	ldr r1, _0800C758 @ =gUnknown_03002CD0
+	ldr r1, _0800C758 @ =gOamObjects+0x130
 	movs r2, #0
 	movs r0, #0xc1
 	adds r0, r0, r6
@@ -1006,7 +1006,7 @@ _0800C74C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C758: .4byte gUnknown_03002CD0
+_0800C758: .4byte gOamObjects+0x130
 _0800C75C: .4byte 0x000040E0
 _0800C760: .4byte gAnimation+0x44
 _0800C764: .4byte gInvestigation
@@ -1019,7 +1019,7 @@ sub_800C76C: @ 0x0800C76C
 	push {r7}
 	adds r7, r0, #0
 	adds r5, r1, #0
-	ldr r0, _0800C820 @ =gUnknown_03002D70
+	ldr r0, _0800C820 @ =gOamObjects+0x1D0
 	mov r8, r0
 	movs r0, #0x14
 	bl sub_800BC08
@@ -1110,7 +1110,7 @@ _0800C80E:
 	beq _0800C83C
 	b _0800CAFA
 	.align 2, 0
-_0800C820: .4byte gUnknown_03002D70
+_0800C820: .4byte gOamObjects+0x1D0
 _0800C824: .4byte gAnimation
 _0800C828: .4byte gJoypad
 _0800C82C: .4byte gScriptContext
@@ -1539,7 +1539,7 @@ _0800CB66:
 	adds r0, #1
 	b _0800D09C
 _0800CB6E:
-	ldr r4, _0800CBFC @ =gUnknown_03002CD0
+	ldr r4, _0800CBFC @ =gOamObjects+0x130
 	mov r1, r8
 	adds r1, #0xc0
 	ldrb r7, [r1]
@@ -1612,7 +1612,7 @@ _0800CBDE:
 	bls _0800CBDE
 	b _0800CC30
 	.align 2, 0
-_0800CBFC: .4byte gUnknown_03002CD0
+_0800CBFC: .4byte gOamObjects+0x130
 _0800CC00: .4byte 0x0000012D
 _0800CC04: .4byte 0x06013400
 _0800CC08: .4byte gUnknown_0200AFC0
@@ -1670,7 +1670,7 @@ _0800CC60:
 _0800CC74: .4byte gUnknown_03003C54
 _0800CC78: .4byte gInvestigation
 _0800CC7C:
-	ldr r5, _0800CCEC @ =gUnknown_03002D48
+	ldr r5, _0800CCEC @ =gOamObjects+0x1A8
 	mov r7, r8
 	ldrb r7, [r7, #0xb]
 	cmp r7, #0xc
@@ -1732,7 +1732,7 @@ _0800CCE4:
 	strh r2, [r4, #2]
 	b _0800D09E
 	.align 2, 0
-_0800CCEC: .4byte gUnknown_03002D48
+_0800CCEC: .4byte gOamObjects+0x1A8
 _0800CCF0: .4byte 0x000001FF
 _0800CCF4:
 	mov r0, r8
@@ -1835,7 +1835,7 @@ _0800CDA6:
 	str r0, [r2, #0xc]
 	movs r0, #7
 	str r0, [r2, #8]
-	ldr r4, _0800CDD4 @ =gUnknown_03002CD0
+	ldr r4, _0800CDD4 @ =gOamObjects+0x130
 	movs r6, #0
 	movs r0, #0x96
 	lsls r0, r0, #1
@@ -1848,7 +1848,7 @@ _0800CDC4:
 	b _0800D09E
 	.align 2, 0
 _0800CDD0: .4byte gUnknown_030037B8
-_0800CDD4: .4byte gUnknown_03002CD0
+_0800CDD4: .4byte gOamObjects+0x130
 _0800CDD8:
 	ldr r6, [sp]
 	strb r3, [r6, #4]
@@ -1975,7 +1975,7 @@ _0800CEB2:
 	strb r4, [r2, #0xb]
 	b _0800D09E
 _0800CEC4:
-	ldr r5, _0800CF44 @ =gUnknown_03002D48
+	ldr r5, _0800CF44 @ =gOamObjects+0x1A8
 	mov r3, r8
 	ldrb r3, [r3, #0xb]
 	cmp r3, #0xc
@@ -2042,14 +2042,14 @@ _0800CF3A:
 	strh r2, [r4, #2]
 	b _0800D09E
 	.align 2, 0
-_0800CF44: .4byte gUnknown_03002D48
+_0800CF44: .4byte gOamObjects+0x1A8
 _0800CF48: .4byte 0x000001FF
 _0800CF4C:
 	mov r6, r8
 	ldrb r6, [r6, #0xb]
 	cmp r6, #0xc
 	bhi _0800CF7E
-	ldr r4, _0800CFBC @ =gUnknown_03002CD0
+	ldr r4, _0800CFBC @ =gOamObjects+0x130
 	movs r6, #0
 	movs r2, #4
 _0800CF5A:
@@ -2108,9 +2108,9 @@ _0800CF9E:
 	strb r1, [r3, #0x13]
 	b _0800D09E
 	.align 2, 0
-_0800CFBC: .4byte gUnknown_03002CD0
+_0800CFBC: .4byte gOamObjects+0x130
 _0800CFC0:
-	ldr r4, _0800D050 @ =gUnknown_03002CD0
+	ldr r4, _0800D050 @ =gOamObjects+0x130
 	mov r1, r8
 	adds r1, #0xc0
 	ldrb r6, [r1]
@@ -2183,7 +2183,7 @@ _0800D030:
 	bls _0800D030
 	b _0800D088
 	.align 2, 0
-_0800D050: .4byte gUnknown_03002CD0
+_0800D050: .4byte gOamObjects+0x130
 _0800D054: .4byte 0x0000012D
 _0800D058: .4byte 0x06013400
 _0800D05C: .4byte gUnknown_0200AFC0
@@ -2217,7 +2217,7 @@ _0800D088:
 _0800D09C:
 	strb r0, [r6, #0xa]
 _0800D09E:
-	ldr r4, _0800D0CC @ =gUnknown_03002CD0
+	ldr r4, _0800D0CC @ =gOamObjects+0x130
 	movs r6, #0
 _0800D0A2:
 	ldr r7, [sp]
@@ -2242,7 +2242,7 @@ _0800D0B6:
 	bls _0800D0B6
 	b _0800D0F2
 	.align 2, 0
-_0800D0CC: .4byte gUnknown_03002CD0
+_0800D0CC: .4byte gOamObjects+0x130
 _0800D0D0: .4byte 0x00000FFF
 _0800D0D4:
 	movs r3, #0
@@ -2333,7 +2333,7 @@ _0800D17E:
 	ldr r3, _0800D230 @ =gUnknown_03002920
 	ldrb r1, [r3]
 	adds r0, r1, #0
-	ldr r5, _0800D234 @ =gUnknown_03002CD0
+	ldr r5, _0800D234 @ =gOamObjects+0x130
 	ldr r6, [sp]
 	adds r6, #0x14
 	str r6, [sp, #8]
@@ -2425,7 +2425,7 @@ _0800D212:
 	b _0800D268
 	.align 2, 0
 _0800D230: .4byte gUnknown_03002920
-_0800D234: .4byte gUnknown_03002CD0
+_0800D234: .4byte gOamObjects+0x130
 _0800D238: .4byte gAnimation+0x52
 _0800D23C: .4byte 0x06013400
 _0800D240: .4byte gUnknown_0200AFC0
@@ -2495,7 +2495,7 @@ _0800D2C4:
 	strb r1, [r6, #0xb]
 	bl _0800DB04
 _0800D2D4:
-	ldr r3, _0800D344 @ =gUnknown_03002D50
+	ldr r3, _0800D344 @ =gOamObjects+0x1B0
 	mov r0, sl
 	ldrb r0, [r0, #0xb]
 	cmp r0, #0xc
@@ -2557,7 +2557,7 @@ _0800D33C:
 	strh r2, [r5, #2]
 	b _0800DB04
 	.align 2, 0
-_0800D344: .4byte gUnknown_03002D50
+_0800D344: .4byte gOamObjects+0x1B0
 _0800D348: .4byte 0x000001FF
 _0800D34C:
 	ldr r1, _0800D3D8 @ =0x040000D4
@@ -2673,7 +2673,7 @@ _0800D41E:
 	str r0, [r1, #0xc]
 	movs r0, #7
 	str r0, [r1, #8]
-	ldr r5, _0800D454 @ =gUnknown_03002CD0
+	ldr r5, _0800D454 @ =gOamObjects+0x130
 	movs r7, #0
 	movs r0, #0x96
 	lsls r0, r0, #1
@@ -2689,7 +2689,7 @@ _0800D440:
 	b _0800D57C
 	.align 2, 0
 _0800D450: .4byte gUnknown_030037B8
-_0800D454: .4byte gUnknown_03002CD0
+_0800D454: .4byte gOamObjects+0x130
 _0800D458:
 	ldr r6, [sp]
 	strb r4, [r6, #4]
@@ -2840,7 +2840,7 @@ _0800D55C:
 _0800D57A:
 	ldr r3, [sp, #0x14]
 _0800D57C:
-	ldr r5, _0800D5EC @ =gUnknown_03002CB0
+	ldr r5, _0800D5EC @ =gOamObjects+0x110
 	mov r4, sb
 	cmp r4, #0
 	beq _0800D642
@@ -2897,7 +2897,7 @@ _0800D5A2:
 	strh r0, [r5, #4]
 	b _0800D62E
 	.align 2, 0
-_0800D5EC: .4byte gUnknown_03002CB0
+_0800D5EC: .4byte gOamObjects+0x110
 _0800D5F0: .4byte 0x040000D4
 _0800D5F4: .4byte gGfxInvestigationPsycheLock
 _0800D5F8: .4byte 0x06013000
@@ -2944,7 +2944,7 @@ _0800D648:
 	bls _0800D648
 	b _0800DB04
 _0800D654:
-	ldr r3, _0800D6D4 @ =gUnknown_03002D50
+	ldr r3, _0800D6D4 @ =gOamObjects+0x1B0
 	mov r4, sl
 	ldrb r4, [r4, #0xb]
 	cmp r4, #0xc
@@ -3011,14 +3011,14 @@ _0800D6CA:
 	strh r2, [r5, #2]
 	b _0800DB04
 	.align 2, 0
-_0800D6D4: .4byte gUnknown_03002D50
+_0800D6D4: .4byte gOamObjects+0x1B0
 _0800D6D8: .4byte 0x000001FF
 _0800D6DC:
 	mov r6, sl
 	ldrb r6, [r6, #0xb]
 	cmp r6, #0xc
 	bhi _0800D70E
-	ldr r5, _0800D76C @ =gUnknown_03002CD0
+	ldr r5, _0800D76C @ =gOamObjects+0x130
 	movs r7, #0
 	movs r2, #4
 _0800D6EA:
@@ -3092,7 +3092,7 @@ _0800D72E:
 	strb r2, [r4, #0x13]
 	b _0800DB04
 	.align 2, 0
-_0800D76C: .4byte gUnknown_03002CD0
+_0800D76C: .4byte gOamObjects+0x130
 _0800D770: .4byte 0x040000D4
 _0800D774: .4byte gGfx4bppInvestigationScrollButton
 _0800D778: .4byte 0x06013000
@@ -3174,7 +3174,7 @@ _0800D818:
 	ldrb r4, [r4, #0xb]
 	cmp r4, #0xc
 	bhi _0800D84C
-	ldr r5, _0800D924 @ =gUnknown_03002CD0
+	ldr r5, _0800D924 @ =gOamObjects+0x130
 	movs r7, #0
 	movs r3, #4
 _0800D826:
@@ -3213,7 +3213,7 @@ _0800D858:
 	bne _0800D864
 	b _0800DB5C
 _0800D864:
-	ldr r5, _0800D928 @ =gUnknown_03002D50
+	ldr r5, _0800D928 @ =gOamObjects+0x1B0
 	movs r0, #0xfe
 	lsls r0, r0, #8
 	ldrh r2, [r5, #2]
@@ -3313,8 +3313,8 @@ _0800D904:
 	bls _0800D904
 	b _0800D960
 	.align 2, 0
-_0800D924: .4byte gUnknown_03002CD0
-_0800D928: .4byte gUnknown_03002D50
+_0800D924: .4byte gOamObjects+0x130
+_0800D928: .4byte gOamObjects+0x1B0
 _0800D92C: .4byte gUnknown_03002920
 _0800D930: .4byte gAnimation+0x52
 _0800D934: .4byte 0x06013400
@@ -3375,7 +3375,7 @@ _0800D9A8:
 	ldrb r3, [r3, #0xb]
 	cmp r3, #0xc
 	bhi _0800D9D8
-	ldr r5, _0800D9F8 @ =gUnknown_03002CD0
+	ldr r5, _0800D9F8 @ =gOamObjects+0x130
 	movs r7, #0
 	movs r2, #4
 _0800D9B6:
@@ -3416,12 +3416,12 @@ _0800D9EC:
 	strb r1, [r4, #0xb]
 	b _0800DB04
 	.align 2, 0
-_0800D9F8: .4byte gUnknown_03002CD0
+_0800D9F8: .4byte gOamObjects+0x130
 _0800D9FC:
 	ldr r3, _0800DAB0 @ =gUnknown_03002920
 	ldrb r1, [r3]
 	adds r0, r1, #0
-	ldr r5, _0800DAB4 @ =gUnknown_03002CD0
+	ldr r5, _0800DAB4 @ =gOamObjects+0x130
 	ldr r6, [sp]
 	adds r6, #0x14
 	str r6, [sp, #8]
@@ -3514,7 +3514,7 @@ _0800DA92:
 	b _0800DAEC
 	.align 2, 0
 _0800DAB0: .4byte gUnknown_03002920
-_0800DAB4: .4byte gUnknown_03002CD0
+_0800DAB4: .4byte gOamObjects+0x130
 _0800DAB8: .4byte gAnimation+0x52
 _0800DABC: .4byte 0x06013400
 _0800DAC0: .4byte gUnknown_0200AFC0
@@ -3551,7 +3551,7 @@ _0800DAEC:
 sub_0800DB02: @ 0x0800DB02
 	strb r0, [r4, #0xa]
 _0800DB04:
-	ldr r5, _0800DB30 @ =gUnknown_03002CD0
+	ldr r5, _0800DB30 @ =gOamObjects+0x130
 	movs r7, #0
 _0800DB08:
 	ldr r6, [sp]
@@ -3576,7 +3576,7 @@ _0800DB1C:
 	bls _0800DB1C
 	b _0800DB56
 	.align 2, 0
-_0800DB30: .4byte gUnknown_03002CD0
+_0800DB30: .4byte gOamObjects+0x130
 _0800DB34: .4byte 0x00000FFF
 _0800DB38:
 	movs r4, #0
@@ -3671,7 +3671,7 @@ _0800DBD4:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800DC80
-	ldr r1, _0800DC30 @ =gUnknown_03002D40
+	ldr r1, _0800DC30 @ =gOamObjects+0x1A0
 	movs r5, #0
 	ldr r0, _0800DC34 @ =0x000040E0
 	mov ip, r0
@@ -3708,7 +3708,7 @@ _0800DBF8:
 	b _0800DC7A
 	.align 2, 0
 _0800DC2C: .4byte gScriptContext
-_0800DC30: .4byte gUnknown_03002D40
+_0800DC30: .4byte gOamObjects+0x1A0
 _0800DC34: .4byte 0x000040E0
 _0800DC38:
 	adds r0, r4, #0
@@ -4530,7 +4530,7 @@ sub_800E280: @ 0x0800E280
 	str r1, [r0, #4]
 	str r4, [r0, #8]
 	ldr r0, [r0, #8]
-	ldr r1, _0800E358 @ =gUnknown_03002D40
+	ldr r1, _0800E358 @ =gOamObjects+0x1A0
 	movs r4, #0
 	ldr r6, _0800E35C @ =0x000040E0
 	movs r3, #0
@@ -4572,7 +4572,7 @@ _0800E348: .4byte gPalExamineCursors
 _0800E34C: .4byte 0x05000300
 _0800E350: .4byte gPalChoiceSelected
 _0800E354: .4byte 0x05000320
-_0800E358: .4byte gUnknown_03002D40
+_0800E358: .4byte gOamObjects+0x1A0
 _0800E35C: .4byte 0x000040E0
 _0800E360: .4byte 0xFFFFC000
 
@@ -4609,7 +4609,7 @@ _0800E394:
 	ldrb r2, [r1, #0xb]
 	ands r0, r2
 	strb r0, [r1, #0xb]
-	ldr r3, _0800E450 @ =gUnknown_03002D40
+	ldr r3, _0800E450 @ =gOamObjects+0x1A0
 	movs r4, #0
 	adds r5, r1, #0
 	ldr r7, _0800E454 @ =0x000040E0
@@ -4630,7 +4630,7 @@ _0800E3B6:
 	adds r4, #1
 	cmp r4, #3
 	bls _0800E3B6
-	ldr r4, _0800E450 @ =gUnknown_03002D40
+	ldr r4, _0800E450 @ =gOamObjects+0x1A0
 	adds r0, r5, #0
 	movs r1, #4
 	bl SetInactiveActionButtons
@@ -4694,7 +4694,7 @@ _0800E3B6:
 	b _0800E496
 	.align 2, 0
 _0800E44C: .4byte gInvestigation
-_0800E450: .4byte gUnknown_03002D40
+_0800E450: .4byte gOamObjects+0x1A0
 _0800E454: .4byte 0x000040E0
 _0800E458: .4byte 0x00006540
 _0800E45C: .4byte gMain
@@ -4735,7 +4735,7 @@ _0800E4A0: .4byte gInvestigation
 	thumb_func_start sub_800E4A4
 sub_800E4A4: @ 0x0800E4A4
 	push {r4, lr}
-	ldr r0, _0800E4F0 @ =gUnknown_03002D40
+	ldr r0, _0800E4F0 @ =gOamObjects+0x1A0
 	ldr r3, _0800E4F4 @ =0x000040E0
 	strh r3, [r0]
 	movs r2, #0xfe
@@ -4772,7 +4772,7 @@ sub_800E4A4: @ 0x0800E4A4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800E4F0: .4byte gUnknown_03002D40
+_0800E4F0: .4byte gOamObjects+0x1A0
 _0800E4F4: .4byte 0x000040E0
 
 	thumb_func_start sub_800E4F8
@@ -4782,7 +4782,7 @@ sub_800E4F8: @ 0x0800E4F8
 	mov r6, r8
 	push {r6, r7}
 	adds r3, r0, #0
-	ldr r4, _0800E524 @ =gUnknown_03002D40
+	ldr r4, _0800E524 @ =gOamObjects+0x1A0
 	movs r0, #1
 	ldrb r1, [r3, #0xb]
 	ands r0, r1
@@ -4801,7 +4801,7 @@ _0800E518:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800E524: .4byte gUnknown_03002D40
+_0800E524: .4byte gOamObjects+0x1A0
 _0800E528: .4byte _0800E52C
 _0800E52C: @ jump table
 	.4byte _0800E544 @ case 0
@@ -5006,7 +5006,7 @@ _0800E696:
 sub_800E6A4: @ 0x0800E6A4
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
-	ldr r4, _0800E6E8 @ =gUnknown_03002D60
+	ldr r4, _0800E6E8 @ =gOamObjects+0x1C0
 	movs r6, #0
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -5037,7 +5037,7 @@ sub_800E6A4: @ 0x0800E6A4
 	ldr r0, _0800E6FC @ =0x00007188
 	b _0800E71E
 	.align 2, 0
-_0800E6E8: .4byte gUnknown_03002D60
+_0800E6E8: .4byte gOamObjects+0x1C0
 _0800E6EC: .4byte gScriptContext
 _0800E6F0: .4byte gMain
 _0800E6F4: .4byte 0x00004020

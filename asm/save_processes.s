@@ -591,7 +591,7 @@ _08007B02:
 	ldr r0, _08007BA8 @ =0x80000010
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08007BAC @ =gUnknown_03002CE0
+	ldr r0, _08007BAC @ =gOamObjects+0x140
 	movs r3, #0
 	ldr r2, _08007BB0 @ =0x00004460
 	strh r2, [r0]
@@ -644,7 +644,7 @@ _08007B9C: .4byte 0x80000500
 _08007BA0: .4byte gUnknown_08197404
 _08007BA4: .4byte 0x050003A0
 _08007BA8: .4byte 0x80000010
-_08007BAC: .4byte gUnknown_03002CE0
+_08007BAC: .4byte gOamObjects+0x140
 _08007BB0: .4byte 0x00004460
 _08007BB4: .4byte 0x0000C030
 _08007BB8: .4byte 0x0000A1E0
@@ -819,7 +819,7 @@ _08007CFE:
 	ldrh r4, [r6]
 	cmp r4, #0
 	bne _08007DC4
-	ldr r3, _08007D94 @ =gUnknown_03002CF0
+	ldr r3, _08007D94 @ =gOamObjects+0x150
 	movs r1, #0x89
 	lsls r1, r1, #7
 	strh r1, [r3]
@@ -884,7 +884,7 @@ _08007CFE:
 	strh r1, [r0]
 	b _08007DCC
 	.align 2, 0
-_08007D94: .4byte gUnknown_03002CF0
+_08007D94: .4byte gOamObjects+0x150
 _08007D98: .4byte 0x0000C028
 _08007D9C: .4byte 0x00080220
 _08007DA0: .4byte 0x0008D220
@@ -910,7 +910,7 @@ _08007DCC:
 	movs r1, #0x80
 	lsls r1, r1, #7
 _08007DDA:
-	ldr r3, _08007DFC @ =gUnknown_03002CE0
+	ldr r3, _08007DFC @ =gOamObjects+0x140
 	ldrb r0, [r5, #0x17]
 	cmp r0, #0
 	bne _08007E0C
@@ -928,7 +928,7 @@ _08007DDA:
 	lsls r0, r0, #8
 	b _08007E24
 	.align 2, 0
-_08007DFC: .4byte gUnknown_03002CE0
+_08007DFC: .4byte gOamObjects+0x140
 _08007E00: .4byte 0x0000C030
 _08007E04: .4byte 0x000091E0
 _08007E08: .4byte 0x0000C080
@@ -1619,7 +1619,7 @@ _080083BA:
 	b _080083D8
 _080083C0:
 	movs r1, #0
-	ldr r3, _080083E0 @ =gUnknown_03002CE0
+	ldr r3, _080083E0 @ =gOamObjects+0x140
 	movs r2, #0x80
 	lsls r2, r2, #2
 _080083C8:
@@ -1636,7 +1636,7 @@ _080083D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080083E0: .4byte gUnknown_03002CE0
+_080083E0: .4byte gOamObjects+0x140
 
 	thumb_func_start sub_80083E4
 sub_80083E4: @ 0x080083E4
@@ -1653,7 +1653,7 @@ sub_80083E4: @ 0x080083E4
 	cmp r0, #0
 	beq _0800842C
 	movs r1, #0
-	ldr r4, _08008420 @ =gUnknown_03002CE0
+	ldr r4, _08008420 @ =gOamObjects+0x140
 	movs r3, #0x80
 	lsls r3, r3, #2
 _08008404:
@@ -1671,7 +1671,7 @@ _08008404:
 	movs r0, #5
 	b _08008426
 	.align 2, 0
-_08008420: .4byte gUnknown_03002CE0
+_08008420: .4byte gOamObjects+0x140
 _08008424:
 	movs r0, #4
 _08008426:
@@ -1691,7 +1691,7 @@ sub_8008434: @ 0x08008434
 	ldr r3, _0800847C @ =gScriptContext
 	ldrb r0, [r4, #0x17]
 	lsls r1, r0, #3
-	ldr r0, _08008480 @ =gUnknown_03002CE0
+	ldr r0, _08008480 @ =gOamObjects+0x140
 	adds r2, r1, r0
 	adds r1, r3, #0
 	adds r1, #0x46
@@ -1723,7 +1723,7 @@ sub_8008434: @ 0x08008434
 	b _0800848E
 	.align 2, 0
 _0800847C: .4byte gScriptContext
-_08008480: .4byte gUnknown_03002CE0
+_08008480: .4byte gOamObjects+0x140
 _08008484: .4byte 0x0000FFFF
 _08008488: .4byte 0x0000FDFF
 _0800848C:

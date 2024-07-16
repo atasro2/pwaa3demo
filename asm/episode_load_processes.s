@@ -717,7 +717,7 @@ _08008A88:
 	movs r0, #9
 	bl sub_8011D68
 	str r0, [sp]
-	ldr r6, _08008B0C @ =gUnknown_03002D70
+	ldr r6, _08008B0C @ =gOamObjects+0x1D0
 	ldrh r0, [r0, #0x12]
 	adds r0, #0xe0
 	strh r0, [r6]
@@ -772,7 +772,7 @@ _08008A88:
 	strb r0, [r7, #0xa]
 	b _08008D58
 	.align 2, 0
-_08008B0C: .4byte gUnknown_03002D70
+_08008B0C: .4byte gOamObjects+0x1D0
 _08008B10: .4byte 0xFFFFBFC0
 _08008B14: .4byte gUnknown_080267E4
 _08008B18: .4byte 0x00000259
@@ -901,7 +901,7 @@ _08008C24: .4byte gSineTable
 _08008C28: .4byte gOamObjects
 _08008C2C: .4byte gUnknown_080264B0
 _08008C30:
-	ldr r6, _08008C64 @ =gUnknown_03002D70
+	ldr r6, _08008C64 @ =gOamObjects+0x1D0
 	ldr r5, _08008C68 @ =gUnknown_080267E4
 	ldr r2, _08008C6C @ =0x0000025A
 	adds r3, r7, r2
@@ -928,7 +928,7 @@ _08008C30:
 	strh r0, [r6, #0xc]
 	b _08008CAA
 	.align 2, 0
-_08008C64: .4byte gUnknown_03002D70
+_08008C64: .4byte gOamObjects+0x1D0
 _08008C68: .4byte gUnknown_080267E4
 _08008C6C: .4byte 0x0000025A
 _08008C70: .4byte 0xF9FF0000
@@ -950,7 +950,7 @@ _08008C74:
 	strh r0, [r1, #0xc]
 	movs r0, #5
 	bl ChangeScriptSection
-	ldr r6, _08008CBC @ =gUnknown_03002D70
+	ldr r6, _08008CBC @ =gOamObjects+0x1D0
 	ldr r1, _08008CC0 @ =0x0000FEFF
 	adds r0, r1, #0
 	ldrh r2, [r6]
@@ -967,7 +967,7 @@ _08008CAA:
 	.align 2, 0
 _08008CB4: .4byte gScriptContext
 _08008CB8: .4byte 0x0000FFFF
-_08008CBC: .4byte gUnknown_03002D70
+_08008CBC: .4byte gOamObjects+0x1D0
 _08008CC0: .4byte 0x0000FEFF
 _08008CC4:
 	ldr r7, _08008D08 @ =gSineTable
@@ -2579,7 +2579,7 @@ _08009B0E:
 	ands r0, r6
 	cmp r0, #0
 	beq _08009B80
-	ldr r2, _08009B54 @ =gUnknown_03002CD0
+	ldr r2, _08009B54 @ =gOamObjects+0x130
 	movs r7, #0
 	ldr r0, _08009B58 @ =0x0000A1A0
 	mov sl, r0
@@ -2611,7 +2611,7 @@ _08009B40:
 	strh r3, [r2, #4]
 	b _08009B6A
 	.align 2, 0
-_08009B54: .4byte gUnknown_03002CD0
+_08009B54: .4byte gOamObjects+0x130
 _08009B58: .4byte 0x0000A1A0
 _08009B5C: .4byte 0x0000C038
 _08009B60: .4byte 0x00004462
@@ -2631,7 +2631,7 @@ _08009B6A:
 	bls _08009B26
 	b _08009B9C
 _08009B80:
-	ldr r2, _08009BD8 @ =gUnknown_03002CD0
+	ldr r2, _08009BD8 @ =gOamObjects+0x130
 	movs r5, #0
 	ldr r3, _08009BDC @ =0x00004462
 	ldr r1, _08009BE0 @ =0x0000C038
@@ -2680,7 +2680,7 @@ _08009BCC:
 	subs r0, #1
 	b _0800A356
 	.align 2, 0
-_08009BD8: .4byte gUnknown_03002CD0
+_08009BD8: .4byte gOamObjects+0x130
 _08009BDC: .4byte 0x00004462
 _08009BE0: .4byte 0x0000C038
 _08009BE4: .4byte 0x000091E0
@@ -3410,7 +3410,7 @@ _0800A256:
 	movs r0, #0
 	mov r6, r8
 	strb r0, [r6, #0xa]
-	ldr r2, _0800A284 @ =gUnknown_03002CD0
+	ldr r2, _0800A284 @ =gOamObjects+0x130
 	lsls r0, r1, #0x18
 	cmp r0, #0
 	bne _0800A266
@@ -3433,7 +3433,7 @@ _0800A27A:
 	bl StartHardwareBlend
 	b _0800A368
 	.align 2, 0
-_0800A284: .4byte gUnknown_03002CD0
+_0800A284: .4byte gOamObjects+0x130
 _0800A288:
 	movs r0, #1
 	mov r1, r8
@@ -3441,7 +3441,7 @@ _0800A288:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800A308
-	ldr r2, _0800A2D0 @ =gUnknown_03002CD0
+	ldr r2, _0800A2D0 @ =gOamObjects+0x130
 	movs r7, #0
 _0800A298:
 	movs r5, #0
@@ -3473,7 +3473,7 @@ _0800A2BC:
 	strh r3, [r2, #4]
 	b _0800A2F2
 	.align 2, 0
-_0800A2D0: .4byte gUnknown_03002CD0
+_0800A2D0: .4byte gOamObjects+0x130
 _0800A2D4: .4byte 0x00004062
 _0800A2D8: .4byte 0x00004462
 _0800A2DC: .4byte 0x000091A0
@@ -3498,7 +3498,7 @@ _0800A2F2:
 	bls _0800A298
 	b _0800A324
 _0800A308:
-	ldr r2, _0800A378 @ =gUnknown_03002CD0
+	ldr r2, _0800A378 @ =gOamObjects+0x130
 	movs r5, #0
 	ldr r3, _0800A37C @ =0x00004062
 	ldr r1, _0800A380 @ =0x0000C038
@@ -3560,7 +3560,7 @@ _0800A368:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A378: .4byte gUnknown_03002CD0
+_0800A378: .4byte gOamObjects+0x130
 _0800A37C: .4byte 0x00004062
 _0800A380: .4byte 0x0000C038
 _0800A384: .4byte 0x000091E0

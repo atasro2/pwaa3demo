@@ -745,7 +745,7 @@ _0801A66A:
 	cmp r2, #0x1f
 	bls _0801A66A
 	movs r2, #0x20
-	ldr r3, _0801A714 @ =gUnknown_03002D70
+	ldr r3, _0801A714 @ =gOamObjects+0x1D0
 	ldr r6, _0801A70C @ =gUnknown_03003E50
 	movs r5, #0x80
 	lsls r5, r5, #2
@@ -805,7 +805,7 @@ _0801A704: .4byte gAnimation
 _0801A708: .4byte gOamObjects
 _0801A70C: .4byte gUnknown_03003E50
 _0801A710: .4byte 0x00003FFF
-_0801A714: .4byte gUnknown_03002D70
+_0801A714: .4byte gOamObjects+0x1D0
 _0801A718: .4byte gIORegisters
 _0801A71C: .4byte 0x0000FDFF
 _0801A720:
@@ -3308,7 +3308,7 @@ _0801BAAC: .4byte gOamObjects
 	thumb_func_start sub_801BAB0
 sub_801BAB0: @ 0x0801BAB0
 	push {r4, r5, r6, r7, lr}
-	ldr r1, _0801BB08 @ =gUnknown_03002D40
+	ldr r1, _0801BB08 @ =gOamObjects+0x1A0
 	movs r4, #0
 	ldr r5, _0801BB0C @ =gInvestigation
 	ldr r7, _0801BB10 @ =0x000040E0
@@ -3352,7 +3352,7 @@ _0801BAC6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801BB08: .4byte gUnknown_03002D40
+_0801BB08: .4byte gOamObjects+0x1A0
 _0801BB0C: .4byte gInvestigation
 _0801BB10: .4byte 0x000040E0
 _0801BB14: .4byte gIORegisters

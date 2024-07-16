@@ -110,16 +110,16 @@ sub_80160E0: @ 0x080160E0
 	cmp r0, #0
 	bne _08016110
 	ldr r6, _08016108 @ =0x06011880
-	ldr r0, _0801610C @ =gUnknown_03002DB8
+	ldr r0, _0801610C @ =gOamObjects+0x218
 	str r0, [sp]
 	b _08016116
 	.align 2, 0
 _08016104: .4byte gScriptContext
 _08016108: .4byte 0x06011880
-_0801610C: .4byte gUnknown_03002DB8
+_0801610C: .4byte gOamObjects+0x218
 _08016110:
 	ldr r6, _08016200 @ =0x06015000
-	ldr r1, _08016204 @ =gUnknown_03002CF8
+	ldr r1, _08016204 @ =gOamObjects+0x158
 	str r1, [sp]
 _08016116:
 	movs r3, #0
@@ -243,7 +243,7 @@ _08016136:
 	bx r0
 	.align 2, 0
 _08016200: .4byte 0x06015000
-_08016204: .4byte gUnknown_03002CF8
+_08016204: .4byte gOamObjects+0x158
 _08016208: .4byte gUnknown_03003AF0
 _0801620C: .4byte 0x06011080
 _08016210: .4byte 0xF9FF0000
@@ -1612,7 +1612,7 @@ _08016C92:
 _08016CA2:
 	movs r0, #0x14
 	strh r0, [r1]
-	ldr r1, _08016CC4 @ =gUnknown_03002DE0
+	ldr r1, _08016CC4 @ =gOamObjects+0x240
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
@@ -1627,7 +1627,7 @@ _08016CBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016CC4: .4byte gUnknown_03002DE0
+_08016CC4: .4byte gOamObjects+0x240
 _08016CC8: .4byte gTestimony
 
 	thumb_func_start ProcessHPBar

@@ -40,7 +40,7 @@ _08016F16:
 
 	thumb_func_start sub_8016F18
 sub_8016F18: @ 0x08016F18
-	ldr r2, _08016F40 @ =gUnknown_03002D60
+	ldr r2, _08016F40 @ =gOamObjects+0x1C0
 	movs r3, #0
 	movs r1, #0x80
 	lsls r1, r1, #2
@@ -60,7 +60,7 @@ sub_8016F18: @ 0x08016F18
 	ldr r0, _08016F50 @ =0x00007188
 	b _08016F6A
 	.align 2, 0
-_08016F40: .4byte gUnknown_03002D60
+_08016F40: .4byte gOamObjects+0x1C0
 _08016F44: .4byte gMain
 _08016F48: .4byte 0x00004020
 _08016F4C: .4byte 0x000080D0
@@ -798,7 +798,7 @@ sub_80174F8: @ 0x080174F8
 	ldr r0, _0801757C @ =0x00000FFF
 	ands r0, r1
 	lsls r3, r0, #7
-	ldr r0, _08017580 @ =gUnknown_0819F694
+	ldr r0, _08017580 @ =gCharSet
 	adds r3, r3, r0
 	cmp r4, #0
 	beq _0801758C
@@ -847,7 +847,7 @@ _08017562:
 	b _08017594
 	.align 2, 0
 _0801757C: .4byte 0x00000FFF
-_08017580: .4byte gUnknown_0819F694
+_08017580: .4byte gCharSet
 _08017584: .4byte 0x040000D4
 _08017588: .4byte 0x80000040
 _0801758C:
@@ -914,7 +914,7 @@ sub_80175D8: @ 0x080175D8
 	ldr r0, _08017654 @ =0x00000FFF
 	ands r0, r1
 	lsls r3, r0, #7
-	ldr r0, _08017658 @ =gUnknown_0819F694
+	ldr r0, _08017658 @ =gCharSet
 	adds r3, r3, r0
 	cmp r2, #0
 	bne _0801760E
@@ -958,7 +958,7 @@ _08017640:
 	b _0801766A
 	.align 2, 0
 _08017654: .4byte 0x00000FFF
-_08017658: .4byte gUnknown_0819F694
+_08017658: .4byte gCharSet
 _0801765C: .4byte 0x040000D4
 _08017660: .4byte 0x80000040
 _08017664:
@@ -1846,7 +1846,7 @@ _08017CEA:
 	bls _08017CFA
 	b _08017EE2
 _08017CFA:
-	ldr r6, _08017D7C @ =gUnknown_03002D68
+	ldr r6, _08017D7C @ =gOamObjects+0x1C8
 	movs r5, #0
 	mov sl, r5
 	ldr r5, _08017D80 @ =gUnknown_03003AF0
@@ -1913,7 +1913,7 @@ _08017D4C:
 	.align 2, 0
 _08017D74: .4byte gScriptContext
 _08017D78: .4byte gMain
-_08017D7C: .4byte gUnknown_03002D68
+_08017D7C: .4byte gOamObjects+0x1C8
 _08017D80: .4byte gUnknown_03003AF0
 _08017D84: .4byte 0x000001FF
 _08017D88:
@@ -2235,7 +2235,7 @@ _08017FE4:
 _08017FEA:
 	ldr r5, [sp, #0x94]
 	lsls r6, r5, #7
-	ldr r0, _08018090 @ =gUnknown_0819F694
+	ldr r0, _08018090 @ =gCharSet
 	adds r6, r6, r0
 	mov r1, r8
 	adds r1, #0x22
@@ -2323,7 +2323,7 @@ _0801807E:
 	adds r2, r6, #0
 	b _080180AC
 	.align 2, 0
-_08018090: .4byte gUnknown_0819F694
+_08018090: .4byte gCharSet
 _08018094: .4byte 0x040000D4
 _08018098: .4byte 0x80000040
 _0801809C:
@@ -3327,7 +3327,7 @@ sub_801880C: @ 0x0801880C
 	bne _08018828
 	b _08018A54
 _08018828:
-	ldr r4, _08018854 @ =gUnknown_03002BB0
+	ldr r4, _08018854 @ =gOamObjects+0x10
 	mov sb, r3
 	ldr r5, _08018858 @ =gScriptContext
 	ldr r6, _0801885C @ =gUnknown_03003E50
@@ -3350,7 +3350,7 @@ _08018840:
 	b _08018864
 	.align 2, 0
 _08018850: .4byte gMain
-_08018854: .4byte gUnknown_03002BB0
+_08018854: .4byte gOamObjects+0x10
 _08018858: .4byte gScriptContext
 _0801885C: .4byte gUnknown_03003E50
 _08018860:
@@ -3541,7 +3541,7 @@ _080189B8:
 	bhi _080189CA
 	b _08018830
 _080189CA:
-	ldr r1, _08018A28 @ =gUnknown_03002BB0
+	ldr r1, _08018A28 @ =gOamObjects+0x10
 	movs r0, #4
 	ldrh r2, [r5, #0x1c]
 	ands r0, r2
@@ -3589,7 +3589,7 @@ _080189F6:
 	orrs r0, r1
 	b _08018A42
 	.align 2, 0
-_08018A28: .4byte gUnknown_03002BB0
+_08018A28: .4byte gOamObjects+0x10
 _08018A2C: .4byte gUnknown_03003E50
 _08018A30: .4byte 0x0000FBFF
 _08018A34: .4byte 0x00004009
@@ -3611,7 +3611,7 @@ _08018A42:
 	bls _080189F6
 	b _08018A6C
 _08018A54:
-	ldr r4, _08018A7C @ =gUnknown_03002BB0
+	ldr r4, _08018A7C @ =gOamObjects+0x10
 	movs r2, #0
 	mov sb, r2
 	movs r0, #0x80
@@ -3634,7 +3634,7 @@ _08018A6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08018A7C: .4byte gUnknown_03002BB0
+_08018A7C: .4byte gOamObjects+0x10
 
 	thumb_func_start RunScriptContext
 RunScriptContext: @ 0x08018A80
@@ -3702,7 +3702,7 @@ _08018AF2:
 	adds r4, r0, #0
 	ands r4, r1
 	lsls r4, r4, #7
-	ldr r0, _08018B5C @ =gUnknown_0819F694
+	ldr r0, _08018B5C @ =gCharSet
 	adds r4, r4, r0
 	ldrb r1, [r2, #0xa]
 	cmp r1, #0
@@ -3746,7 +3746,7 @@ _08018B4C: .4byte gUnknown_03003BC0
 _08018B50: .4byte 0x80000040
 _08018B54: .4byte gUnknown_03003E50
 _08018B58: .4byte 0x00003FFF
-_08018B5C: .4byte gUnknown_0819F694
+_08018B5C: .4byte gCharSet
 _08018B60:
 	cmp r2, #2
 	bne _08018B6E
@@ -4968,7 +4968,7 @@ sub_801943C: @ 0x0801943C
 	push {r4, lr}
 	ldr r1, _08019480 @ =gScriptContext
 	ldr r3, _08019484 @ =gMain
-	ldr r4, _08019488 @ =gUnknown_03002D28
+	ldr r4, _08019488 @ =gOamObjects+0x188
 	ldr r0, [r1]
 	ldrh r2, [r0]
 	adds r0, #2
@@ -5002,7 +5002,7 @@ sub_801943C: @ 0x0801943C
 	.align 2, 0
 _08019480: .4byte gScriptContext
 _08019484: .4byte gMain
-_08019488: .4byte gUnknown_03002D28
+_08019488: .4byte gOamObjects+0x188
 _0801948C: .4byte 0x040000D4
 _08019490: .4byte gGfxGuilty1
 _08019494: .4byte 0x06013400
@@ -6306,7 +6306,7 @@ _08019EAE:
 	lsrs r4, r7, #4
 	ands r4, r2
 	lsls r0, r0, #7
-	ldr r2, _08019F48 @ =gUnknown_0819F694
+	ldr r2, _08019F48 @ =gCharSet
 	adds r0, r0, r2
 	ldr r2, [sp, #0x80]
 	cmp r2, #0
@@ -6371,7 +6371,7 @@ _08019F1C:
 _08019F3C: .4byte 0x040000D4
 _08019F40: .4byte gUnknown_03003E50
 _08019F44: .4byte 0x00000FFF
-_08019F48: .4byte gUnknown_0819F694
+_08019F48: .4byte gCharSet
 _08019F4C: .4byte 0x80000040
 _08019F50: .4byte 0x06010000
 _08019F54:

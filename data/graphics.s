@@ -277,8 +277,8 @@ gUnknown_08198FE4:
 gTextPal:
     .incbin "baserom.gba", 0x0019F674, 0x20
 
-    .global gUnknown_0819F694
-gUnknown_0819F694:
+    .global gCharSet
+gCharSet:
     .incbin "baserom.gba", 0x0019F694, 0x7100
 
     .global gUnknown_081A6794

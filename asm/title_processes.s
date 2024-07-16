@@ -339,7 +339,7 @@ _08006BB0:
 	lsrs r0, r0, #0x18
 	cmp r0, #4
 	bls _08006BF4
-	ldr r2, _08006BE8 @ =gUnknown_03002D40
+	ldr r2, _08006BE8 @ =gOamObjects+0x1A0
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r2]
@@ -357,11 +357,11 @@ _08006BB0:
 	strb r0, [r4, #0xa]
 	b _08006C08
 	.align 2, 0
-_08006BE8: .4byte gUnknown_03002D40
+_08006BE8: .4byte gOamObjects+0x1A0
 _08006BEC: .4byte 0x00002020
 _08006BF0: .4byte 0x00002028
 _08006BF4:
-	ldr r2, _08006C3C @ =gUnknown_03002D40
+	ldr r2, _08006C3C @ =gOamObjects+0x1A0
 	ldr r0, _08006C40 @ =0x00004070
 	strh r0, [r2]
 	ldr r1, _08006C44 @ =0x00002020
@@ -399,13 +399,13 @@ _08006C26:
 	strh r0, [r2]
 	b _08006CD0
 	.align 2, 0
-_08006C3C: .4byte gUnknown_03002D40
+_08006C3C: .4byte gOamObjects+0x1A0
 _08006C40: .4byte 0x00004070
 _08006C44: .4byte 0x00002020
 _08006C48: .4byte 0x00002028
 _08006C4C: .4byte gScriptContext
 _08006C50:
-	ldr r2, _08006CB0 @ =gUnknown_03002D40
+	ldr r2, _08006CB0 @ =gOamObjects+0x1A0
 	ldrh r1, [r2]
 	movs r3, #0xff
 	adds r0, r3, #0
@@ -456,7 +456,7 @@ _08006C78:
 	strb r0, [r4, #0xa]
 	b _08006CD0
 	.align 2, 0
-_08006CB0: .4byte gUnknown_03002D40
+_08006CB0: .4byte gOamObjects+0x1A0
 _08006CB4: .4byte gScriptContext
 _08006CB8: .4byte 0x00002030
 _08006CBC: .4byte 0x00002038
