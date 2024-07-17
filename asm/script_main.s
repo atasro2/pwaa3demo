@@ -1,43 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_8016ED8
-sub_8016ED8: @ 0x08016ED8
-	ldr r2, _08016F08 @ =gMain
-	adds r0, r2, #0
-	adds r0, #0xac
-	ldr r1, [r0]
-	ldr r0, _08016F0C @ =0x0014011C
-	cmp r1, r0
-	beq _08016F04
-	ldrb r0, [r2, #8]
-	cmp r0, #7
-	bne _08016EF8
-	ldr r1, _08016F10 @ =gScriptContext
-	movs r0, #4
-	ldrh r1, [r1, #0x1c]
-	ands r0, r1
-	cmp r0, #0
-	bne _08016F04
-_08016EF8:
-	adds r0, r2, #0
-	adds r0, #0xb4
-	movs r1, #0
-	ldrsh r0, [r0, r1]
-	cmp r0, #0
-	bne _08016F14
-_08016F04:
-	movs r0, #0
-	b _08016F16
-	.align 2, 0
-_08016F08: .4byte gMain
-_08016F0C: .4byte 0x0014011C
-_08016F10: .4byte gScriptContext
-_08016F14:
-	movs r0, #1
-_08016F16:
-	bx lr
-
 	thumb_func_start sub_8016F18
 sub_8016F18: @ 0x08016F18
 	ldr r2, _08016F40 @ =gOamObjects+0x1C0
@@ -89,7 +52,7 @@ _08016F70: .4byte 0x00004020
 sub_8016F74: @ 0x08016F74
 	push {lr}
 	ldr r0, _08016F90 @ =gScriptContext
-	ldr r2, _08016F94 @ =gScriptCmdFuncs+0x1D0
+	ldr r2, _08016F94 @ =gUnknown_0814E338
 	adds r1, r0, #0
 	adds r1, #0x2c
 	ldrb r1, [r1]
@@ -101,7 +64,7 @@ sub_8016F74: @ 0x08016F74
 	bx r0
 	.align 2, 0
 _08016F90: .4byte gScriptContext
-_08016F94: .4byte gScriptCmdFuncs+0x1D0
+_08016F94: .4byte gUnknown_0814E338
 
 	thumb_func_start sub_8016F98
 sub_8016F98: @ 0x08016F98
@@ -134,7 +97,7 @@ sub_8016FB4: @ 0x08016FB4
 	mov r4, sp
 _08016FCA:
 	ldr r0, [r4]
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	cmp r0, #0
 	bne _08016FDE
 	adds r4, #4
@@ -216,7 +179,7 @@ _08017060:
 	adds r2, r0, #0
 	cmp r4, #0
 	bne _08017070
-	bl sub_8012F7C
+	bl DestroyAnimation
 	b _08017148
 _08017070:
 	cmp r4, #1
@@ -233,7 +196,7 @@ _08017080:
 _08017086:
 	adds r0, r5, #0
 	adds r0, #0x74
-	bl sub_8012824
+	bl PlayAnimation
 	ldr r0, _08017100 @ =gMain
 	ldrb r0, [r0, #8]
 	cmp r0, #4
@@ -392,7 +355,7 @@ _08017194: @ jump table
 	.4byte _080174B0 @ case 13
 _080171CC:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080171EA
@@ -407,7 +370,7 @@ _080171CC:
 	strh r0, [r3, #0x3c]
 _080171EA:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017208
@@ -422,7 +385,7 @@ _080171EA:
 	strh r0, [r3, #0x3c]
 _08017208:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	bne _08017216
@@ -460,7 +423,7 @@ _08017258: .4byte 0x06013000
 _0801725C: .4byte 0x80000200
 _08017260:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017284
@@ -478,7 +441,7 @@ _08017260:
 	strh r2, [r3, #0x3c]
 _08017284:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080172A8
@@ -496,7 +459,7 @@ _08017284:
 	strh r2, [r3, #0x3c]
 _080172A8:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	bne _080172B6
@@ -511,7 +474,7 @@ _080172C4: .4byte 0x06013000
 _080172C8: .4byte 0x06012E00
 _080172CC:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080172EA
@@ -526,7 +489,7 @@ _080172CC:
 	strh r0, [r3, #0x3c]
 _080172EA:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017308
@@ -541,7 +504,7 @@ _080172EA:
 	strh r0, [r3, #0x3c]
 _08017308:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	bne _08017316
@@ -563,7 +526,7 @@ _08017330: .4byte 0x06011A00
 _08017334: .4byte 0x06011C00
 _08017338:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017356
@@ -578,7 +541,7 @@ _08017338:
 	strh r0, [r3, #0x3c]
 _08017356:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017374
@@ -593,7 +556,7 @@ _08017356:
 	strh r0, [r3, #0x3c]
 _08017374:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	bne _08017382
@@ -645,7 +608,7 @@ _080173E8: .4byte gGfxExamineCursor
 _080173EC: .4byte 0x06013200
 _080173F0:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017414
@@ -663,7 +626,7 @@ _080173F0:
 	strh r2, [r3, #0x3c]
 _08017414:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017438
@@ -681,7 +644,7 @@ _08017414:
 	strh r2, [r3, #0x3c]
 _08017438:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080174F2
@@ -706,7 +669,7 @@ _08017468: .4byte 0x06012880
 _0801746C: .4byte 0x06012900
 _08017470:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017484
@@ -716,7 +679,7 @@ _08017470:
 	str r0, [r3]
 _08017484:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _08017498
@@ -726,7 +689,7 @@ _08017484:
 	str r0, [r3]
 _08017498:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080174F2
@@ -738,7 +701,7 @@ _08017498:
 _080174AC: .4byte 0xDFFFFFFF
 _080174B0:
 	movs r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080174C6
@@ -749,7 +712,7 @@ _080174B0:
 	str r0, [r3]
 _080174C6:
 	movs r0, #0x84
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080174DC
@@ -760,7 +723,7 @@ _080174C6:
 	str r0, [r3]
 _080174DC:
 	movs r0, #0x85
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	cmp r3, #0
 	beq _080174F2
@@ -2626,7 +2589,7 @@ sub_80182B8: @ 0x080182B8
 	bne _080182CE
 	b _080184F8
 _080182CE:
-	ldr r1, _08018380 @ =gScriptCmdFuncs+0x1D0
+	ldr r1, _08018380 @ =gUnknown_0814E338
 	adds r0, r5, #0
 	adds r0, #0x2c
 	ldrb r0, [r0]
@@ -2716,7 +2679,7 @@ _08018346:
 	.align 2, 0
 _08018378: .4byte gScriptContext
 _0801837C: .4byte gMain
-_08018380: .4byte gScriptCmdFuncs+0x1D0
+_08018380: .4byte gUnknown_0814E338
 _08018384: .4byte gScriptCmdFuncs
 _08018388:
 	mov r4, sb
@@ -4605,7 +4568,7 @@ _08019194:
 	movs r0, #0
 	bl sub_8016FEC
 	ldr r0, _080191B8 @ =gAnimation+0x44
-	bl sub_8012F7C
+	bl DestroyAnimation
 	ldr r0, _080191BC @ =gInvestigation
 	movs r1, #0
 	strb r1, [r0, #6]
@@ -4654,7 +4617,7 @@ _080191E6:
 	movs r0, #8
 	strh r0, [r3, #0x10]
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r1, r5, #0
 	adds r1, #0x3d
 	movs r0, #7
@@ -4862,15 +4825,15 @@ _08019358:
 	beq _08019388
 	mov r0, sp
 	ldrh r0, [r0]
-	bl sub_8012824
+	bl PlayAnimation
 	b _08019394
 	.align 2, 0
 _08019384: .4byte gScriptContext
 _08019388:
 	mov r0, sp
 	ldrh r0, [r0]
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 _08019394:
 	movs r0, #0
 	add sp, #4
@@ -5839,7 +5802,7 @@ _08019AD0: @ jump table
 	.4byte _08019BB0 @ case 5
 _08019AE8:
 	movs r0, #0x55
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	movs r2, #0x96
@@ -5849,7 +5812,7 @@ _08019AE8:
 	b _08019BDC
 _08019AFE:
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	ldrh r0, [r3, #0x10]
 	subs r0, #0xa
@@ -5903,7 +5866,7 @@ _08019B44:
 _08019B68: .4byte 0x00000259
 _08019B6C:
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	ldrh r2, [r3, #0x10]
 	subs r2, #0xa
@@ -5920,7 +5883,7 @@ _08019B6C:
 	cmp r2, r0
 	bgt _08019BDE
 	adds r0, r3, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r2, #0x96
 	lsls r2, r2, #2
 	adds r1, r4, r2
@@ -5998,7 +5961,7 @@ _08019C1C: @ jump table
 	.4byte _08019E60 @ case 4
 _08019C30:
 	movs r0, #0x6a
-	bl sub_8012824
+	bl PlayAnimation
 	movs r1, #0x96
 	lsls r1, r1, #2
 	add r1, sl
@@ -6006,7 +5969,7 @@ _08019C30:
 	b _08019E88
 _08019C40:
 	movs r0, #0x6a
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r2, r0, #0
 	ldr r0, [r2]
 	movs r1, #0x80
@@ -6146,7 +6109,7 @@ _08019CF4:
 	bl fix_mul
 	strh r0, [r6, #0x1e]
 	movs r0, #0x6a
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r2, r0, #0
 	ldr r0, [r2]
 	ldr r1, _08019DB8 @ =0xFFDFFFFF
@@ -6250,7 +6213,7 @@ _08019E3C:
 _08019E5C: .4byte 0x00000259
 _08019E60:
 	movs r0, #0x6a
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r2, r0, #0
 	ldrh r0, [r2, #0x12]
 	subs r0, #0xa
@@ -6262,7 +6225,7 @@ _08019E60:
 	cmp r0, r1
 	bgt _08019E8A
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r1, #0x96
 	lsls r1, r1, #2
 	add r1, sl

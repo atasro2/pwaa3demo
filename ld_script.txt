@@ -44,7 +44,7 @@ SECTIONS {
         asm/animation.o(.text);
         asm/psyche_lock.o(.text);
         asm/hp_bar.o(.text);
-        asm/code.o(.text);
+        asm/script_main.o(.text);
         asm/script_commands.o(.text);
         asm/rom_1D308.o(.text);
         /* library functions */

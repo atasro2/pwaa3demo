@@ -591,7 +591,7 @@ _080164C2:
 	adds r5, r6, #0
 	adds r5, #0x6b
 	adds r0, r5, #0
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _08016512
@@ -1693,7 +1693,7 @@ sub_8016D48: @ 0x08016D48
 _08016D4E:
 	adds r0, r4, #0
 	adds r0, #0x6b
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	cmp r0, #0
 	beq _08016D5C
 	adds r5, #1
@@ -1908,4 +1908,41 @@ _08016ED0: .4byte gMain
 _08016ED4:
 	movs r0, #1
 _08016ED6:
+	bx lr
+
+	thumb_func_start sub_8016ED8
+sub_8016ED8: @ 0x08016ED8
+	ldr r2, _08016F08 @ =gMain
+	adds r0, r2, #0
+	adds r0, #0xac
+	ldr r1, [r0]
+	ldr r0, _08016F0C @ =0x0014011C
+	cmp r1, r0
+	beq _08016F04
+	ldrb r0, [r2, #8]
+	cmp r0, #7
+	bne _08016EF8
+	ldr r1, _08016F10 @ =gScriptContext
+	movs r0, #4
+	ldrh r1, [r1, #0x1c]
+	ands r0, r1
+	cmp r0, #0
+	bne _08016F04
+_08016EF8:
+	adds r0, r2, #0
+	adds r0, #0xb4
+	movs r1, #0
+	ldrsh r0, [r0, r1]
+	cmp r0, #0
+	bne _08016F14
+_08016F04:
+	movs r0, #0
+	b _08016F16
+	.align 2, 0
+_08016F08: .4byte gMain
+_08016F0C: .4byte 0x0014011C
+_08016F10: .4byte gScriptContext
+_08016F14:
+	movs r0, #1
+_08016F16:
 	bx lr

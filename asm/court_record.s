@@ -1031,7 +1031,7 @@ _0800F204:
 	cmp r1, #0
 	beq _0800F24A
 	movs r0, #4
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1060,7 +1060,7 @@ _0800F242:
 	b _0800F282
 _0800F24A:
 	movs r0, #2
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -2630,7 +2630,7 @@ _0800FF18:
 	b _080101CE
 _0800FF30:
 	movs r0, #4
-	bl sub_8012824
+	bl PlayAnimation
 	ldr r0, _0800FF50 @ =gMain
 	adds r0, #0xc1
 	ldrb r0, [r0]

@@ -559,9 +559,9 @@ _0800A820: @ jump table
 	.4byte _0800A8E4 @ case 4
 _0800A834:
 	movs r0, #0x54
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x55
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldr r0, _0800A850 @ =gTestimony
@@ -572,10 +572,10 @@ _0800A834:
 _0800A850: .4byte gTestimony
 _0800A854:
 	movs r0, #0x54
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -601,11 +601,11 @@ _0800A854:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x52
-	bl sub_8012824
+	bl PlayAnimation
 	b _0800A8DC
 _0800A8A8:
 	adds r0, r6, #0
@@ -616,13 +616,13 @@ _0800A8A8:
 	b _0800A8DC
 _0800A8B4:
 	movs r0, #0x52
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	ldr r0, [r4]
 	cmp r0, #0
 	blt _0800A944
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x54
 	movs r1, #0x78
 	movs r2, #0x3c
@@ -638,10 +638,10 @@ _0800A8DC:
 	b _0800A944
 _0800A8E4:
 	movs r0, #0x54
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldr r2, _0800A94C @ =gTestimony
 	ldrh r3, [r4, #0x10]
@@ -677,9 +677,9 @@ _0800A928:
 	cmp r1, r0
 	ble _0800A944
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 _0800A944:
@@ -809,10 +809,10 @@ sub_800AA34: @ 0x0800AA34
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	movs r0, #0x56
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x57
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrb r0, [r6, #0xa]
 	cmp r0, #4
@@ -834,9 +834,9 @@ _0800AA60: @ jump table
 	.4byte _0800AB12 @ case 4
 _0800AA74:
 	movs r0, #0x56
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x57
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldrb r0, [r6, #0xa]
@@ -867,11 +867,11 @@ _0800AA8C:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x53
-	bl sub_8012824
+	bl PlayAnimation
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800AB5C
@@ -886,13 +886,13 @@ _0800AAD4:
 	b _0800AB5C
 _0800AAE4:
 	movs r0, #0x53
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	ldr r0, [r4]
 	cmp r0, #0
 	blt _0800AB5E
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x56
 	movs r1, #0x78
 	movs r2, #0x3c
@@ -906,10 +906,10 @@ _0800AAE4:
 	b _0800AB5C
 _0800AB12:
 	movs r0, #0x56
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x57
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x12]
 	subs r0, #7
@@ -932,9 +932,9 @@ _0800AB12:
 	cmp r1, r0
 	bge _0800AB5E
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 	movs r0, #0
@@ -1306,7 +1306,7 @@ _0800AE4C: .4byte gScriptContext
 _0800AE50: .4byte gMain
 _0800AE54:
 	movs r0, #1
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1520,7 +1520,7 @@ _0800AFD8:
 	movs r1, #0x80
 	strh r1, [r0]
 	movs r0, #1
-	bl sub_8012824
+	bl PlayAnimation
 	ldr r0, _0800B02C @ =gMain
 	adds r0, #0xc1
 	ldrb r0, [r0]

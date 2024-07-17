@@ -118,5 +118,7 @@ gScriptCmdFuncs:
     .4byte sub_8017C70
     .4byte sub_8019A8C
     .4byte sub_801C488
-    @ this is referenced explicitly in two functions    
+
+    .global gUnknown_0814E338
+gUnknown_0814E338: @ Demo_proc_tbl in gs1 iOS
     .4byte sub_801C8BC
