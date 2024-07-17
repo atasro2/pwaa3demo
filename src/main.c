@@ -237,14 +237,14 @@ void AgbMain(void)
                         && !(gMain.unk3D & 4)) {
                             CopyBGDataToVram(gMain.currentBG);
                             ScriptContext->unk2F = 0x1F;
-                            ScriptContext->unk30 = 2;
+                            ScriptContext->unk30[0] = 2;
                             sub_801DF10(ScriptContext);
-                        } else if(ScriptContext->unk3E == 0xFFFE) {
+                        } else if(ScriptContext->unk30[7] == 0xFFFE) {
                             ScriptContext->unk2F = 0x12;
-                            ScriptContext->unk30 = 0;
+                            ScriptContext->unk30[0] = 0;
                             sub_801DF10(ScriptContext);
                             CopyBGDataToVram(gMain.currentBG);
-                            ScriptContext->unk3E = 0;
+                            ScriptContext->unk30[7] = 0;
                         } else {
                             nullsub_8(gMain.currentBG, 0);
                             CopyBGDataToVram(gMain.currentBG);

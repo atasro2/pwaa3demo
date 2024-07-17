@@ -14,11 +14,12 @@ struct ScriptContext {
     u8 fill0E[0xE];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
-    u8 fill20[0xF];
+    u8 fill20[0xC];
+    u8 unk2C;
+    u8 unk2D;
+    u8 unk2E;
     u8 unk2F;
-    u16 unk30;
-    u8 fill32[0xC];
-    u16 unk3E;
+    u16 unk30[8];
     u8 fill40[0x6];
     u16 unk46;
     u8 fill48[0x54];
