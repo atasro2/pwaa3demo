@@ -22,7 +22,11 @@ struct ScriptContext {
     u16 unk30[8];
     u8 fill40[0x6];
     u16 unk46;
-    u8 fill48[0x54];
+    u16 unk48;
+    u16 unk4A;
+    u16 unk4C;
+    u16 unk4E;
+    u8 fill50[0x4C];
 };
 
 // script system has been revamped, keeping this for reference only!

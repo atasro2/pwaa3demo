@@ -1,5 +1,8 @@
 #include "global.h"
 #include "script.h"
+#include "animation.h"
+#include "main.h"
+#include "constants/process.h"
 
 extern void (*gUnknown_0814E338[])(struct ScriptContext *);
 
@@ -46,4 +49,95 @@ struct AnimationListEntry * sub_8016FB4(void) {
             return anim;
     }
     return NULL;
+}
+
+void sub_8016FEC(u16 arg0) { // dahlia shawl stuff probs
+    u32 r5 = 0xFF;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u32 array[] = { // ? array of animation offsets? 
+        0x0,
+        0x1A8,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x1,
+        0x6D8,
+    };
+    struct AnimationListEntry * animation = &gAnimation[1];
+    u8 i;
+
+    if(arg0) {
+        if(animation == NULL
+        || (animation->animationInfo.personId != 11 && animation->animationInfo.personId != 33)
+        || !(animation->flags & ANIM_ALLOCATED)) {
+            sub_8016FEC(0); // recursing!!
+            return;
+        }
+    }
+
+    for(i = 0; i < 16; i++) {
+        if(animation->animationInfo.animFrameDataStartPtr - (u8*)0x8249e10 == array[i]) {
+            r5 = i;
+        }
+    }
+
+    if(arg0 && r5 == 0xFF) {
+        sub_8016FEC(0);
+        return;
+    }
+
+    animation = sub_8016FB4();
+    if(arg0 == 0) {
+        DestroyAnimation(animation);
+        return;
+    }
+    if(arg0 == 1) {
+        sub_8016FEC(0);
+        if(r5 == 14)
+            r5 = 7;
+        if(r5 == 15)
+            r5 = 14;
+        PlayAnimation(r5 + 0x74);
+        if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+            s16 xOrigin;
+            animation = &gAnimation[1];
+            xOrigin = animation->animationInfo.xOrigin;
+            animation = sub_8016FB4();
+            animation->animationInfo.xOrigin = xOrigin;
+        }
+        if(gScriptContext.unk1E & 0x8000) { // ! mixing global and local memes continue
+            if(scriptCtx->unk4A & 0xF0) {
+                animation = sub_8016FB4();
+                animation->flags |= ANIM_0x400;
+            }
+        }
+        animation = &gAnimation[1];
+        if(animation->flags & ANIM_0x400) {
+            animation = sub_8016FB4();
+            animation->flags |= ANIM_0x400 | ANIM_QUEUED_PAL_UPLOAD;
+        }
+        if(r5 == 0xC) {
+            scriptCtx->unk4E &= 0xFF00;
+            scriptCtx->unk4E += 11;
+            return;
+        }
+        if(scriptCtx->unk4E == 6) {
+            scriptCtx->unk4E = 9;
+        }
+    } else if(arg0 == 2) {
+        animation->flags &= ~ANIM_ACTIVE;
+    } else if(arg0 == 3) {
+        animation->flags |= ANIM_ACTIVE;
+    } else if(arg0 == 4) {
+        animation->flags |= ANIM_0x400 | ANIM_QUEUED_PAL_UPLOAD;
+    }
 }

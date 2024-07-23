@@ -1,10 +1,6 @@
 	.section .rodata
     .align 2, 0
 
-    .global gUnknown_08028624
-gUnknown_08028624:
-    .incbin "baserom.gba", 0x00028624, 0x40
-
     .global gUnknown_08028664
 gUnknown_08028664:
     .incbin "baserom.gba", 0x00028664, 0x14
