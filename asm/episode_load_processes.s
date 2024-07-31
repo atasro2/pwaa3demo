@@ -3043,12 +3043,12 @@ _08009F04:
 	lsls r3, r3, #3
 	adds r0, r6, r3
 	str r0, [r5]
-	ldr r0, _08009FE4 @ =gUnknown_03003AF0
+	ldr r0, _08009FE4 @ =gMapMarker
 	str r0, [r5, #4]
 	ldr r0, _08009FE8 @ =0x80000050
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
-	bl sub_8019F8C
+	bl MakeMapMarkerSprites
 	adds r0, r7, #0
 	adds r0, #0x24
 	ldrb r2, [r0]
@@ -3117,7 +3117,7 @@ _08009FD4: .4byte 0x80000008
 _08009FD8: .4byte gUnknown_03003C70
 _08009FDC: .4byte 0x800000F0
 _08009FE0: .4byte gMain
-_08009FE4: .4byte gUnknown_03003AF0
+_08009FE4: .4byte gMapMarker
 _08009FE8: .4byte 0x80000050
 _08009FEC: .4byte 0x00001578
 _08009FF0: .4byte gBG1MapBuffer

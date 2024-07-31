@@ -13,7 +13,7 @@ LoadHPBarGraphics: @ 0x08016014
 	ldr r3, _080160A4 @ =0x06011880
 _08016024:
 	movs r1, #0
-	ldr r2, _080160A8 @ =gUnknown_03003AF0
+	ldr r2, _080160A8 @ =gMapMarker
 _08016028:
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -78,7 +78,7 @@ _08016038:
 _0801609C: .4byte gScriptContext
 _080160A0: .4byte 0x06015000
 _080160A4: .4byte 0x06011880
-_080160A8: .4byte gUnknown_03003AF0
+_080160A8: .4byte gMapMarker
 _080160AC: .4byte 0x06011080
 _080160B0: .4byte 0x040000D4
 _080160B4: .4byte gGfxHPBarProgress
@@ -129,7 +129,7 @@ _08016116:
 	ldr r2, [sp]
 	adds r2, #8
 	mov ip, r2
-	ldr r4, _08016208 @ =gUnknown_03003AF0
+	ldr r4, _08016208 @ =gMapMarker
 _08016126:
 	lsls r0, r3, #2
 	adds r0, r0, r3
@@ -244,7 +244,7 @@ _08016136:
 	.align 2, 0
 _08016200: .4byte 0x06015000
 _08016204: .4byte gOamObjects+0x158
-_08016208: .4byte gUnknown_03003AF0
+_08016208: .4byte gMapMarker
 _0801620C: .4byte 0x06011080
 _08016210: .4byte 0xF9FF0000
 _08016214: .4byte 0x000001FF
@@ -672,7 +672,7 @@ _08016570:
 	mov sb, r3
 _08016576:
 	movs r1, #0
-	ldr r2, _08016634 @ =gUnknown_03003AF0
+	ldr r2, _08016634 @ =gMapMarker
 _0801657A:
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -766,7 +766,7 @@ _0801658A:
 	b _08016782
 	.align 2, 0
 _08016630: .4byte 0x06015000
-_08016634: .4byte gUnknown_03003AF0
+_08016634: .4byte gMapMarker
 _08016638: .4byte 0x06011080
 _0801663C: .4byte 0xF9FF0000
 _08016640: .4byte gMain

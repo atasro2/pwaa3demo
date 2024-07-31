@@ -1848,7 +1848,7 @@ _0800F8C4:
 	ldr r0, _0800F93C @ =0x80000200
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r3, _0800F940 @ =gUnknown_03003AF0
+	ldr r3, _0800F940 @ =gMapMarker
 	str r3, [r1]
 	subs r2, #0xa0
 	str r2, [r1, #4]
@@ -1897,7 +1897,7 @@ _0800F930: .4byte 0x040000D4
 _0800F934: .4byte gOamObjects
 _0800F938: .4byte gUnknown_020009D4
 _0800F93C: .4byte 0x80000200
-_0800F940: .4byte gUnknown_03003AF0
+_0800F940: .4byte gMapMarker
 _0800F944: .4byte 0x80000050
 _0800F948: .4byte gOamObjects+0x1A0
 _0800F94C: .4byte gIORegisters
@@ -2332,12 +2332,12 @@ _0800FC64:
 	ldr r2, _0800FD48 @ =0x00000934
 	adds r3, r3, r2
 	str r3, [r4]
-	ldr r0, _0800FD4C @ =gUnknown_03003AF0
+	ldr r0, _0800FD4C @ =gMapMarker
 	str r0, [r4, #4]
 	ldr r0, _0800FD50 @ =0x80000050
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	bl sub_8019F8C
+	bl MakeMapMarkerSprites
 	ldrb r3, [r5, #0xc]
 	cmp r3, #5
 	bne _0800FCD6
@@ -2395,7 +2395,7 @@ _0800FD3C: .4byte 0x000009D4
 _0800FD40: .4byte gOamObjects
 _0800FD44: .4byte 0x80000200
 _0800FD48: .4byte 0x00000934
-_0800FD4C: .4byte gUnknown_03003AF0
+_0800FD4C: .4byte gMapMarker
 _0800FD50: .4byte 0x80000050
 _0800FD54: .4byte gTestimony
 _0800FD58: .4byte gAnimation+0x44

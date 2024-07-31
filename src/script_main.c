@@ -3,10 +3,12 @@
 #include "animation.h"
 #include "main.h"
 #include "graphics.h"
+#include "ewram.h"
 #include "constants/process.h"
+#include "constants/oam_allocations.h"
 
 extern void (*gUnknown_0814E338[])(struct ScriptContext *);
-
+extern u16 gUnknown_0802845E[];
 void sub_8016F74(void) {
     struct ScriptContext * context = &gScriptContext;
     gUnknown_0814E338[context->unk2C](context);
@@ -534,4 +536,273 @@ void sub_80175D8(u8 * dest, u32 charCode, u16 color, struct OamAttrs * oam, u16 
         oam->attr1 = 0x4000 + x;
         oam->attr2 = 0xD400 + (((uintptr_t)dest & 0x7FFF) / 32);
     }
+}
+
+u32 sub_8017980(u32 section, u8 * dest, u32 x, u32 y, u32 color, struct OamAttrs * oamStart, u16 * metadata) {
+    u8 charCount;
+    u16 metadataCount;
+    u32 textSpeed;
+    u32 xStart;
+    u16 * scriptPtr;
+    struct OamAttrs * oam;
+    
+    xStart = x;
+    charCount = 0;
+    metadataCount = 0;
+    textSpeed = 8; // 8???
+    oam = oamStart;
+    scriptPtr = (void*)gUnknown_08270934 + ((u32*)gUnknown_08270934)[1+section];
+    for(;*scriptPtr != 0x45; scriptPtr++) {
+        if(*scriptPtr > 0x80) {
+            sub_80175D8(dest + charCount * 0x80, *scriptPtr - 0x80, color, oam, x, y);
+            x += 14;
+            charCount++;
+            metadata[metadataCount++] = textSpeed;
+            if(oam) {
+                oam++;
+            }
+            continue;
+        }
+        if(*scriptPtr == 0x2E) {
+            x = xStart;
+            y += 18;
+        }
+        if(*scriptPtr == 0xC) {
+            scriptPtr++;
+            metadata[metadataCount++] = *scriptPtr + 0x8000;
+        }
+        else if(*scriptPtr == 0xB) {
+            scriptPtr++;
+            textSpeed = *scriptPtr;
+        }
+        else if(*scriptPtr == 0x20) {
+            scriptPtr++;
+            metadata[metadataCount++] = *scriptPtr + 0x4000;
+        }
+    }
+    sub_80174F8(dest + charCount * 0x80, 0xFF, color, oam, x, y);
+    metadata[metadataCount++] = 0xFFFF;
+    return metadataCount;
+}
+
+void sub_8017AB4(u32 arg0) {
+    gScriptContext.unk44 = arg0;
+    switch(arg0) {
+        default:
+        case 2:
+            return;
+        case 3:
+        case 9:
+            LZ77UnCompWram(NULL, eScriptHeap);
+            sub_8018CA8(&gMain, 0xA0);
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+            LZ77UnCompWram(NULL, eScriptHeap);
+            return;
+        case 1:
+        case 15:
+            LZ77UnCompWram(NULL, eScriptHeap);
+            sub_8018CA8(&gMain, 0x90);
+            break;
+        case 16:
+            LZ77UnCompWram(NULL, eScriptHeap);
+            sub_8018CA8(&gMain, 0xB0);
+            break;
+        case 17:
+            LZ77UnCompWram(NULL, eScriptHeap);
+            sub_8018CA8(&gMain, 0xA0);
+            break;
+    }
+    sub_8007610(gMain.scenarioIdx);
+    ChangeScriptSection(0x80);
+}
+
+void sub_8017BA8(void) {
+    u32 i;
+    for(i = 0; i < 2; i++) {
+        gScriptContext.unk18[i] = 0;
+    }
+}
+
+void sub_8017BC0(void) {
+    u32 r4 = 16;
+    u16 * scriptPtr = gScriptContext.scriptPtr;
+    u32 i;
+
+    if(gScriptContext.unk29 > 2)
+        return;
+    while(TRUE) {
+        if(*scriptPtr < 0x80) {
+            u32 argCount;
+            if (*scriptPtr == 1
+             || *scriptPtr == 2
+             || *scriptPtr == 7
+             || *scriptPtr == 8
+             || *scriptPtr == 9
+             || *scriptPtr == 10
+             || *scriptPtr == 13
+             || *scriptPtr == 21
+             || *scriptPtr == 42
+             || *scriptPtr == 45
+             || *scriptPtr == 46
+             || *scriptPtr == 69) {
+                break;
+            }
+            argCount = gUnknown_0802845E[*scriptPtr];
+            for(i = 0; i < argCount; i++) {
+                scriptPtr++;
+            }
+        }
+        else {
+            r4--;
+            if(r4 == 0)
+                break;
+        }
+        scriptPtr++;
+    }
+    if(gScriptContext.unk29 == 0) {
+        if(*scriptPtr == 1 || *scriptPtr == 0x2E) {
+            gScriptContext.unk18[1] = 1;
+        }
+    }
+    gScriptContext.unk18[gScriptContext.unk29] = r4;
+}
+
+bool32 sub_8017C70(void) {
+    u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
+    u8 i;
+    if(argCount == 0)
+        gScriptContext.scriptPtr++;
+    for(i = 0; i < argCount; i++) {
+        gScriptContext.scriptPtr++;
+    }
+    return FALSE;
+}
+
+void sub_8017CA8(u16 *markerAttr, u16 fieldMask, u16 notFieldMask, u16 delta, u16 *oamAttr) {
+    u32 attr = *markerAttr;
+    u32 field = fieldMask;
+    u32 result = notFieldMask;
+
+    field &= attr;
+    result &= attr;
+
+    field += delta;
+    field &= fieldMask;
+    result += field;
+
+    *markerAttr = result;
+    *oamAttr = result;
+}
+
+void DrawTextAndMapMarkers(void) {
+    struct OamAttrs * oam;
+    u32 i;
+    u32 y, x;
+    u32 size;
+
+    if((gScriptContext.flags & SCRIPT_FULLSCREEN))
+        return;
+    if(gMain.process[GAME_PROCESS] < COURT_PROCESS || gMain.process[GAME_PROCESS] > QUESTIONING_PROCESS)
+        return;
+    oam = &gOamObjects[OAM_IDX_MAP_MARKER];
+    for(i = 0; i < ARRAY_COUNT(gMapMarker); i++) 
+    {
+        if(gMapMarker[i].id != 0xFF)
+        {
+            u16 r4 = oam->attr1 & 0x1FF;
+            u16 r3 = oam->attr0 & 0xFF;
+
+            oam->attr0 = gMapMarker[i].attr0;
+            oam->attr1 = gMapMarker[i].attr1;
+            if(gMapMarker[i].isBlinking)
+            {
+                gMapMarker[i].blinkTimer++;
+                gMapMarker[i].blinkTimer &= 0x1F;
+                if (gMapMarker[i].blinkTimer < 16)
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+            }
+            if(gMapMarker[i].flags & 0x2)
+            {
+                if(gMapMarker[i].direction != 4) {
+                    gMapMarker[i].distanceMoved += gMapMarker[i].speed;
+                    if (gMapMarker[i].distanceMoved >= gMapMarker[i].distanceToMove)
+                    {
+                        gMapMarker[i].speed -= gMapMarker[i].distanceMoved - gMapMarker[i].distanceToMove;
+                        gMapMarker[i].flags &= ~2;
+                    }
+                } else {
+                    r4 += gScriptContext.unk46;
+                    r3 += gScriptContext.unk48;
+                    gScriptContext.unk4A--;
+                    if(gScriptContext.unk4A == 0) {
+                        gMapMarker[i].flags &= ~2;
+                        gMapMarker[i].attr0 &= ~0xFF;
+                        gMapMarker[i].attr0 |= r3 & 0xFF;
+                        gMapMarker[i].attr1 &= ~0x1FF;
+                        gMapMarker[i].attr1 |= r4 & 0x1FF;   
+                    }
+                    oam->attr0 &= ~0xFF;
+                    oam->attr0 |= r3 & 0xFF;
+                    oam->attr1 &= ~0x1FF;
+                    oam->attr1 |= r4 & 0x1FF;
+                }
+                switch(gMapMarker[i].direction)
+                {
+                    case 0:
+                        sub_8017CA8(&gMapMarker[i].attr0, 0xFF, 0xFF00, -gMapMarker[i].speed, &oam->attr0);
+                        break;
+                    case 1:
+                        sub_8017CA8(&gMapMarker[i].attr0, 0xFF, 0xFF00, gMapMarker[i].speed, &oam->attr0);
+                        break;
+                    case 2:
+                        sub_8017CA8(&gMapMarker[i].attr1, 0x1FF, 0xFE00, -gMapMarker[i].speed, &oam->attr1);
+                        break;
+                    case 3:
+                        sub_8017CA8(&gMapMarker[i].attr1, 0x1FF, 0xFE00, gMapMarker[i].speed, &oam->attr1);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if(gMapMarker[i].flags & 0x4)
+                oam->attr0 = SPRITE_ATTR0_CLEAR;
+            if(gMapMarker[i].oamIdx < OAM_IDX_GENERAL_2 || gMapMarker[i].oamIdx > OAM_IDX_ITEMPLATE_ITEM) {
+                gOamObjects[gMapMarker[i].oamIdx].attr0 = gMapMarker[i].attr0;
+                gOamObjects[gMapMarker[i].oamIdx].attr1 = gMapMarker[i].attr1;
+                gOamObjects[gMapMarker[i].oamIdx].attr2 = gMapMarker[i].attr2;
+            }
+            oam++;
+        }
+        else
+        {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+    }
+}
+
+extern const u16 gUnknown_08028370[]; 
+extern const u16 gUnknown_08028288[]; 
+
+void sub_8017EF4(u32 arg0) {
+    if(gScriptContext.unkA == arg0)
+        return;
+    if(arg0 != 12)
+        gScriptContext.flags &= ~SCRIPT_x8000;
+
+    gScriptContext.unk14 = gScriptContext.unk12;
+    gScriptContext.unk12 = 0;
+    gScriptContext.unk12 = gUnknown_08028288[arg0];
+    gScriptContext.unk12 |= gUnknown_08028370[arg0];
+    gScriptContext.unkA = arg0;
 }

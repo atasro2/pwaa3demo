@@ -2186,14 +2186,14 @@ sub_801B188: @ 0x0801B188
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #2
-	ldr r1, _0801B220 @ =gUnknown_03003AF0
+	ldr r1, _0801B220 @ =gMapMarker
 	adds r5, r0, r1
 	adds r4, #0x39
 	bl sub_801A018
 	str r0, [r5, #0x10]
 	strb r6, [r5]
 	ldr r2, _0801B224 @ =0x040000D4
-	ldr r0, _0801B228 @ =gUnknown_08028698
+	ldr r0, _0801B228 @ =gMapMarkerSprites
 	lsls r3, r6, #1
 	adds r3, r3, r6
 	lsls r3, r3, #2
@@ -2237,9 +2237,9 @@ sub_801B188: @ 0x0801B188
 	b _0801B262
 	.align 2, 0
 _0801B21C: .4byte gScriptContext
-_0801B220: .4byte gUnknown_03003AF0
+_0801B220: .4byte gMapMarker
 _0801B224: .4byte 0x040000D4
-_0801B228: .4byte gUnknown_08028698
+_0801B228: .4byte gMapMarkerSprites
 _0801B22C: .4byte gUnknown_081CB694
 _0801B230: .4byte 0x050002C0
 _0801B234: .4byte 0x80000010
@@ -2250,7 +2250,7 @@ _0801B244:
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #2
-	ldr r1, _0801B26C @ =gUnknown_03003AF0
+	ldr r1, _0801B26C @ =gMapMarker
 	adds r5, r0, r1
 	ldrh r2, [r5, #0xe]
 	lsls r1, r2, #3
@@ -2269,10 +2269,10 @@ _0801B262:
 	strb r0, [r5, #5]
 	b _0801B286
 	.align 2, 0
-_0801B26C: .4byte gUnknown_03003AF0
+_0801B26C: .4byte gMapMarker
 _0801B270: .4byte gOamObjects
 _0801B274:
-	ldr r1, _0801B294 @ =gUnknown_03003AF0
+	ldr r1, _0801B294 @ =gMapMarker
 	lsls r0, r4, #2
 	adds r0, r0, r4
 	lsls r0, r0, #2
@@ -2290,7 +2290,7 @@ _0801B286:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801B294: .4byte gUnknown_03003AF0
+_0801B294: .4byte gMapMarker
 
 	thumb_func_start sub_801B298
 sub_801B298: @ 0x0801B298
@@ -2306,7 +2306,7 @@ sub_801B298: @ 0x0801B298
 	str r0, [r4]
 	cmp r2, #0xff
 	beq _0801B2E2
-	ldr r0, _0801B2F4 @ =gUnknown_03003AF0
+	ldr r0, _0801B2F4 @ =gMapMarker
 	lsls r1, r2, #2
 	adds r1, r1, r2
 	lsls r1, r1, #2
@@ -2340,7 +2340,7 @@ _0801B2E2:
 	bx r1
 	.align 2, 0
 _0801B2F0: .4byte gScriptContext
-_0801B2F4: .4byte gUnknown_03003AF0
+_0801B2F4: .4byte gMapMarker
 
 	thumb_func_start sub_801B2F8
 sub_801B2F8: @ 0x0801B2F8
@@ -2353,7 +2353,7 @@ sub_801B2F8: @ 0x0801B2F8
 	adds r2, r0, #0
 	cmp r2, #0xff
 	beq _0801B34C
-	ldr r0, _0801B348 @ =gUnknown_03003AF0
+	ldr r0, _0801B348 @ =gMapMarker
 	lsls r1, r2, #2
 	adds r1, r1, r2
 	lsls r1, r1, #2
@@ -2382,7 +2382,7 @@ sub_801B2F8: @ 0x0801B2F8
 	b _0801B352
 	.align 2, 0
 _0801B344: .4byte gScriptContext
-_0801B348: .4byte gUnknown_03003AF0
+_0801B348: .4byte gMapMarker
 _0801B34C:
 	ldr r0, [r4]
 	adds r0, #4
@@ -2405,7 +2405,7 @@ sub_801B35C: @ 0x0801B35C
 	adds r2, r0, #0
 	cmp r2, #0xff
 	beq _0801B39E
-	ldr r1, _0801B3B0 @ =gUnknown_03003AF0
+	ldr r1, _0801B3B0 @ =gMapMarker
 	lsls r0, r2, #2
 	adds r0, r0, r2
 	lsls r0, r0, #2
@@ -2439,7 +2439,7 @@ _0801B39E:
 	bx r1
 	.align 2, 0
 _0801B3AC: .4byte gScriptContext
-_0801B3B0: .4byte gUnknown_03003AF0
+_0801B3B0: .4byte gMapMarker
 _0801B3B4: .4byte gOamObjects
 
 	thumb_func_start sub_801B3B8
@@ -2453,7 +2453,7 @@ sub_801B3B8: @ 0x0801B3B8
 	adds r2, r0, #0
 	cmp r2, #0xff
 	beq _0801B3EC
-	ldr r0, _0801B3E8 @ =gUnknown_03003AF0
+	ldr r0, _0801B3E8 @ =gMapMarker
 	lsls r1, r2, #2
 	adds r1, r1, r2
 	lsls r1, r1, #2
@@ -2467,7 +2467,7 @@ sub_801B3B8: @ 0x0801B3B8
 	b _0801B3F4
 	.align 2, 0
 _0801B3E4: .4byte gScriptContext
-_0801B3E8: .4byte gUnknown_03003AF0
+_0801B3E8: .4byte gMapMarker
 _0801B3EC:
 	ldr r0, [r4]
 	adds r0, #2
@@ -3498,7 +3498,7 @@ sub_801BC00: @ 0x0801BC00
 	ldrh r0, [r0]
 	ands r2, r0
 	lsls r2, r2, #0xc
-	ldr r0, _0801BC54 @ =gUnknown_03003AF0
+	ldr r0, _0801BC54 @ =gMapMarker
 	lsls r1, r3, #2
 	adds r1, r1, r3
 	lsls r1, r1, #2
@@ -3509,7 +3509,7 @@ sub_801BC00: @ 0x0801BC00
 	adds r0, r0, r2
 	strh r0, [r1, #0xa]
 _0801BC32:
-	ldr r1, _0801BC54 @ =gUnknown_03003AF0
+	ldr r1, _0801BC54 @ =gMapMarker
 	lsls r0, r3, #2
 	adds r0, r0, r3
 	lsls r0, r0, #2
@@ -3525,7 +3525,7 @@ _0801BC32:
 	bx r1
 	.align 2, 0
 _0801BC50: .4byte gScriptContext
-_0801BC54: .4byte gUnknown_03003AF0
+_0801BC54: .4byte gMapMarker
 _0801BC58: .4byte 0x0000CFFF
 
 	thumb_func_start sub_801BC5C

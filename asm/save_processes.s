@@ -181,7 +181,7 @@ sub_8007718: @ 0x08007718
 	ldr r1, _08007850 @ =0x8000002A
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r3, _08007854 @ =gUnknown_03003AF0
+	ldr r3, _08007854 @ =gMapMarker
 	str r3, [r0]
 	ldr r4, _08007858 @ =0xFFFFF060
 	adds r1, r2, r4
@@ -273,7 +273,7 @@ _08007844: .4byte 0xFFFFEA88
 _08007848: .4byte 0x8000004E
 _0800784C: .4byte gIORegisters
 _08007850: .4byte 0x8000002A
-_08007854: .4byte gUnknown_03003AF0
+_08007854: .4byte gMapMarker
 _08007858: .4byte 0xFFFFF060
 _0800785C: .4byte 0x80000050
 _08007860: .4byte gMain
@@ -1164,7 +1164,7 @@ _08007F70:
 	ldr r2, _08008174 @ =0xFFFFE860
 	adds r0, r7, r2
 	str r0, [r4]
-	ldr r0, _08008178 @ =gUnknown_03003AF0
+	ldr r0, _08008178 @ =gMapMarker
 	str r0, [r4, #4]
 	ldr r0, _0800817C @ =0x80000050
 	str r0, [r4, #8]
@@ -1353,7 +1353,7 @@ _08008168: .4byte 0xFFFFE234
 _0800816C: .4byte gIORegisters
 _08008170: .4byte 0x8000002A
 _08008174: .4byte 0xFFFFE860
-_08008178: .4byte gUnknown_03003AF0
+_08008178: .4byte gMapMarker
 _0800817C: .4byte 0x80000050
 _08008180: .4byte 0xFFFFE5B8
 _08008184: .4byte gUnknown_03002920

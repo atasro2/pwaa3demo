@@ -4737,7 +4737,7 @@ _0801F95E:
 	.align 2, 0
 _0801F97C: .4byte gOamObjects
 _0801F980:
-	ldr r1, _0801F9A4 @ =gUnknown_03003AF0
+	ldr r1, _0801F9A4 @ =gMapMarker
 	adds r2, r6, #0
 	adds r2, #0x46
 	ldrh r7, [r2]
@@ -4755,7 +4755,7 @@ _0801F99A:
 	bl sub_8016F98
 	b _0801F9D2
 	.align 2, 0
-_0801F9A4: .4byte gUnknown_03003AF0
+_0801F9A4: .4byte gMapMarker
 _0801F9A8:
 	adds r0, r6, #0
 	adds r0, #0x46

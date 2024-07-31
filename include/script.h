@@ -7,20 +7,30 @@
 #define SCRIPT_SPOTSELECT_INPUT 0x100
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
+#define SCRIPT_x8000 0x8000
 
 struct ScriptContext {
-    /* +0x00 */ u8 fill00[0xB];
+    /* +0x00 */ u16 * scriptPtr;
+    /* +0x04 */ u8 fill04[0x6];
+    /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
-    u8 fill0E[0xE];
+    u8 fill0E[0x4];
+    u16 unk12;
+    u16 unk14;
+    u16 unk16;
+    u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
-    u8 fill20[0xC];
+    u8 fill20[0x9];
+    u8 unk29; // unity: message_line
+    u8 fill2A[0x2];
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;
     u8 unk2F;
     u16 unk30[8];
-    u8 fill40[0x6];
+    u8 fill40[0x4];
+    u16 unk44;
     u16 unk46;
     u16 unk48;
     u16 unk4A;

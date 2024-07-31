@@ -9,8 +9,8 @@ gUnknown_08028664:
 gUnknown_08028678:
     .incbin "baserom.gba", 0x00028678, 0x20
 
-    .global gUnknown_08028698
-gUnknown_08028698:
+    .global gMapMarkerSprites
+gMapMarkerSprites:
     .incbin "baserom.gba", 0x00028698, 0x84
 
     .global gUnknown_0802871C

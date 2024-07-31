@@ -20,4 +20,7 @@
 #define gUnknown_0826F888 ((void*)(0x0826F888))
 #define gUnknown_08252498 ((void*)(0x08252498))
 
+// script
+#define gUnknown_08270934 ((void*)(0x8270934))
+
 #endif
