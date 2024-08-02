@@ -21,7 +21,11 @@ struct ScriptContext {
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
-    u8 fill20[0x9];
+    u8 fill20[0x2];
+    u8 unk22;
+    u8 fill23[0x2];
+    u8 unk25;
+    u8 fill26[0x3];
     u8 unk29; // unity: message_line
     u8 fill2A[0x2];
     u8 unk2C;
@@ -34,7 +38,8 @@ struct ScriptContext {
     u16 unk46;
     u16 unk48;
     u16 unk4A;
-    u16 unk4C;
+    u8 unk4C;
+    u8 unk4D;
     u16 unk4E;
     u8 fill50[0x4C];
 };
@@ -94,7 +99,8 @@ struct TextBoxCharacter
     /* +0x02 */ u16 objAttr2;
     /* +0x04 */ u16 x;
     /* +0x06 */ u16 y;
-    /* +0x08 */ u8 color;
+    /* +0x08 */ u16 color;
+    /* +0x0A */ u8 color2;
 };
 
 struct MapMarker

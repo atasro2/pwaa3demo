@@ -232,19 +232,19 @@ void AgbMain(void)
                         }
                         gMain.unk258 = 0;
                     } else {
-                        struct ScriptContext * ScriptContext = &gScriptContext;
+                        struct ScriptContext * scriptCtx = &gScriptContext;
                         if(gMain.currentBG == 0xE
                         && !(gMain.unk3D & 4)) {
                             CopyBGDataToVram(gMain.currentBG);
-                            ScriptContext->unk2F = 0x1F;
-                            ScriptContext->unk30[0] = 2;
-                            sub_801DF10(ScriptContext);
-                        } else if(ScriptContext->unk30[7] == 0xFFFE) {
-                            ScriptContext->unk2F = 0x12;
-                            ScriptContext->unk30[0] = 0;
-                            sub_801DF10(ScriptContext);
+                            scriptCtx->unk2F = 0x1F;
+                            scriptCtx->unk30[0] = 2;
+                            sub_801DF10(scriptCtx);
+                        } else if(scriptCtx->unk30[7] == 0xFFFE) {
+                            scriptCtx->unk2F = 0x12;
+                            scriptCtx->unk30[0] = 0;
+                            sub_801DF10(scriptCtx);
                             CopyBGDataToVram(gMain.currentBG);
-                            ScriptContext->unk30[7] = 0;
+                            scriptCtx->unk30[7] = 0;
                         } else {
                             nullsub_8(gMain.currentBG, 0);
                             CopyBGDataToVram(gMain.currentBG);

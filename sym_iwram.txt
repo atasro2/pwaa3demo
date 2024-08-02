@@ -47,7 +47,7 @@
 . = 0x00003C54; gUnknown_03003C54 = .;
 . = 0x00003C60; gTestimony = .;
 . = 0x00003C70; gUnknown_03003C70 = .;
-. = 0x00003E50; gUnknown_03003E50 = .;
+. = 0x00003E50; gTextBoxCharacters = .;
 . = 0x00004150; gUnknown_03004150 = .;
 . = 0x00004250; gCourtScroll = .;
 . = 0x00004260; SoundMainRAM_Buffer = .;

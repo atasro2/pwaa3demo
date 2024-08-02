@@ -3141,7 +3141,7 @@ _08013428:
 	adds r5, r6, #0
 	movs r0, #0x20
 	mov sb, r0
-	ldr r0, _08013478 @ =gUnknown_03003E50
+	ldr r0, _08013478 @ =gTextBoxCharacters
 	movs r1, #0x80
 	lsls r1, r1, #8
 	mov r8, r1
@@ -3179,7 +3179,7 @@ _08013444:
 	orrs r0, r1
 	b _0801348C
 	.align 2, 0
-_08013478: .4byte gUnknown_03003E50
+_08013478: .4byte gTextBoxCharacters
 _0801347C: .4byte 0x0000FBFF
 _08013480: .4byte 0x00004009
 _08013484: .4byte gScriptContext

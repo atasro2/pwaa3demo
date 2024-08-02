@@ -806,3 +806,129 @@ void sub_8017EF4(u32 arg0) {
     gScriptContext.unk12 |= gUnknown_08028370[arg0];
     gScriptContext.unkA = arg0;
 }
+
+void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
+    u8 sp0[0x80];
+    u32 things[] = {4, 8, 11, 14, 16};
+    u32 sp98 = x;
+    u32 lol = 2 * 0x800;
+    uintptr_t vram;
+    uintptr_t temp;
+    u32 i;
+    if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+        for(i = 32; i < 64; i++) {
+            if(!(gTextBoxCharacters[i].state & 0x8000)) {
+                sp98 = i - 32;
+                break;
+            }
+        }
+    }
+    vram = 0x6010000 + sp98 * 128;
+    if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+        vram += lol;
+    } else {
+        vram += y * 0x800;
+    }
+    temp = characterCode * 0x80;
+    temp += (uintptr_t)gCharSet;
+    if(gScriptContext.unk22 & 0x20) {
+        u32 val;
+        for(i = 0; i < 5; i++) {
+            if(things[i] > x)
+                break;
+        }
+        if(i == 5) 
+            return;
+        if(i == 0)
+            i = 5;
+        gScriptContext.unk25 = ((5 - i) << 4) | (gScriptContext.unk25 & 0xF);
+    }
+    if(gScriptContext.unk25) {
+        u8 * pixel;
+        u32 half1, half2;
+        if(gScriptContext.unk25 & 0xF0) {
+            DmaCopy16(3, temp, sp0, 0x80);
+            pixel = sp0;
+            temp = (gScriptContext.unk25 & 0xF0) >> 4;
+            for(i = 0; i < 0x80; i++) {
+                half2 = *pixel;
+                half1 = half2 & 0xF;
+                half2 = half2 & 0xF0;
+                if(half1 == 3)
+                    half1 = temp;
+                else if(half1 == 2) {
+                    half1 = 0;
+                    if(temp % 5 != 1) {
+                        half1 = temp - 1;
+                    }
+                } else {
+                    half1 = 0;
+                }
+                if(half2 == 0x30)
+                    half2 = temp << 4;
+                else if(half2 == 0x20 && temp % 5 != 1) {
+                    half2 = (temp - 1) << 4;
+                } else {
+                    half2 = 0;
+                }
+                *pixel++ = half1 | half2;
+            }
+        } else {
+            DmaCopy16(3, temp, sp0, 0x80);
+            pixel = sp0;
+            temp = gScriptContext.unk25 * 3;
+            for(i = 0; i < 0x80; i++) {
+                half2 = *pixel;
+                half1 = half2 & 0xF;
+                half2 = half2 & 0xF0;
+                if(half1)
+                    half1 += temp;
+                if(half2)
+                    half2 += temp << 4;
+                *pixel++ = half1 | half2;
+            }
+        }
+        DmaCopy16(3, sp0, vram, 0x80);
+    } else {
+        DmaCopy16(3, temp, vram, 0x80);
+    }
+    if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+        for(i = 32; i < 64; i++) {
+            if(!(gTextBoxCharacters[i].state & 0x8000)) {
+                temp = i;
+                break;
+            }
+        }
+    } else {
+        temp = x + y * 16;
+    }
+    gTextBoxCharacters[temp].x = x * 14;
+    gTextBoxCharacters[temp].y = y * 18;
+    gTextBoxCharacters[temp].state = characterCode | 0x8000;
+    if((gScriptContext.unk22 & 0xF0) == 0x10) {
+        gTextBoxCharacters[temp].state |= 0x4000;
+        gTextBoxCharacters[temp].x = x * 28;
+    } else {
+        gTextBoxCharacters[temp].state &= ~0x4000;
+    }
+    gTextBoxCharacters[temp].objAttr2 = x * 4 + y * 0x40;
+    if(gScriptContext.unk25 & 0xF0) {
+        gTextBoxCharacters[temp].color = gScriptContext.unk25;
+        gTextBoxCharacters[temp].color |= 0x8000;
+    }
+    else {   
+        gTextBoxCharacters[temp].color = gScriptContext.unk25 & 0xF0;
+    }
+    
+    if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+        gTextBoxCharacters[temp].x += 14;
+        gTextBoxCharacters[temp].y += 36;
+        gTextBoxCharacters[temp].objAttr2 = sp98 * 4 + 0x80;
+        if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+            gTextBoxCharacters[temp].x += gScriptContext.unk4C;
+            gTextBoxCharacters[temp].y += gScriptContext.unk4D;
+        }
+    }
+    gTextBoxCharacters[temp].objAttr2 += 0x400;
+    gTextBoxCharacters[temp].color2 = gScriptContext.unk25;
+}

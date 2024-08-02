@@ -2956,7 +2956,7 @@ _08009E32:
 	ldr r1, _08009F9C @ =0x00000A78
 	adds r0, r6, r1
 	str r0, [r5]
-	ldr r0, _08009FA0 @ =gUnknown_03003E50
+	ldr r0, _08009FA0 @ =gTextBoxCharacters
 	str r0, [r5, #4]
 	ldr r0, _08009FA4 @ =0x80000180
 	str r0, [r5, #8]
@@ -3100,7 +3100,7 @@ _08009F90: .4byte gUnknown_0200035C
 _08009F94: .4byte gScriptContext
 _08009F98: .4byte 0x8000004E
 _08009F9C: .4byte 0x00000A78
-_08009FA0: .4byte gUnknown_03003E50
+_08009FA0: .4byte gTextBoxCharacters
 _08009FA4: .4byte 0x80000180
 _08009FA8: .4byte gUnknown_030070B0
 _08009FAC: .4byte 0x80000012

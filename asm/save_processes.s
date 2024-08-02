@@ -149,7 +149,7 @@ sub_8007718: @ 0x08007718
 	str r1, [r0, #4]
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007828 @ =gUnknown_03003E50
+	ldr r1, _08007828 @ =gTextBoxCharacters
 	str r1, [r0]
 	ldr r3, _0800782C @ =0xFFFFF500
 	adds r1, r2, r3
@@ -262,7 +262,7 @@ _08007818: .4byte gBG1MapBuffer
 _0800781C: .4byte gUnknown_020018D4
 _08007820: .4byte 0x80000400
 _08007824: .4byte gBG2MapBuffer
-_08007828: .4byte gUnknown_03003E50
+_08007828: .4byte gTextBoxCharacters
 _0800782C: .4byte 0xFFFFF500
 _08007830: .4byte 0x80000180
 _08007834: .4byte gUnknown_030070B0
@@ -1109,7 +1109,7 @@ _08007EA6:
 	str r0, [r5, #0x54]
 	movs r4, #0
 	ldr r3, _08008134 @ =gBG2MapBuffer
-	ldr r6, _08008138 @ =gUnknown_03003E50
+	ldr r6, _08008138 @ =gTextBoxCharacters
 	movs r0, #0xe8
 	adds r0, r0, r5
 	mov sb, r0
@@ -1337,7 +1337,7 @@ _08008108:
 	.align 2, 0
 _08008130: .4byte gSaveDataBuffer
 _08008134: .4byte gBG2MapBuffer
-_08008138: .4byte gUnknown_03003E50
+_08008138: .4byte gTextBoxCharacters
 _0800813C: .4byte 0x040000D4
 _08008140: .4byte gUnknown_020020D4
 _08008144: .4byte 0x80000400
