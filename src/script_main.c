@@ -4,11 +4,79 @@
 #include "main.h"
 #include "graphics.h"
 #include "ewram.h"
+#include "save.h"
+#include "sound.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+const u16 gUnknown_08028288[] = {
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800, 0x0800,
+    0x0800, 0x0800, 0x0800, 0x0800
+};
+
+const u16 gUnknown_08028370[] = {
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
+};
+
+const u16 gUnknown_0802845E[] = {
+    0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0000, 0x0002, 0x0003, 0x0001, 0x0001, 0x0001, 0x0000, 0x0001, 0x0002,
+    0x0001, 0x0000, 0x0003, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0004, 0x0001, 0x0001, 0x0001, 0x0003, 0x0000,
+    0x0001, 0x0000, 0x0002, 0x0002, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0001, 0x0003, 0x0000, 0x0001, 0x0000, 0x0000, 0x0002,
+    0x0001, 0x0002, 0x0002, 0x0005, 0x0001, 0x0002, 0x0001, 0x0002, 0x0001, 0x0001, 0x0002, 0x0002, 0x0001, 0x0001, 0x0001, 0x0000,
+    0x0000, 0x0000, 0x0001, 0x0001, 0x0001, 0x0000, 0x0001, 0x0002, 0x0002, 0x0000, 0x0001, 0x0001, 0x0000, 0x0002, 0x0001, 0x0007,
+    0x0001, 0x0002, 0x0001, 0x0001, 0x0002, 0x0001, 0x0002, 0x0001, 0x0000, 0x0001, 0x0001, 0x0002, 0x0003, 0x0000, 0x0000, 0x0003,
+    0x0004, 0x0003, 0x0000, 0x0000, 0x0001, 0x0002, 0x0003, 0x0000, 0x0000, 0x0004, 0x0001, 0x0003, 0x0001, 0x0001, 0x0001, 0x0001,
+    0x0003, 0x0003, 0x0000, 0x0000
+};
+
+const u8 gUnknown_08028546[] = {
+    0x02, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00,
+    0x00, 0x01, 0x01, 0x01, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01,
+    0x00, 0x00
+};
+
+const uintptr_t gScriptTable[] = {
+    0x8271a2c,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0x8271a2c,
+    0x8271a2c,
+    0x8271a2c,
+    0x8271a2c,
+    0x8271a2c,
+    0x8271a2c,
+    0x8271a2c,
+    0,
+    0,
+};
+
+
 extern void (*gUnknown_0814E338[])(struct ScriptContext *);
-extern u16 gUnknown_0802845E[];
+
 void sub_8016F74(void) {
     struct ScriptContext * context = &gScriptContext;
     gUnknown_0814E338[context->unk2C](context);
@@ -551,7 +619,7 @@ u32 sub_8017980(u32 section, u8 * dest, u32 x, u32 y, u32 color, struct OamAttrs
     metadataCount = 0;
     textSpeed = 8; // 8???
     oam = oamStart;
-    scriptPtr = (void*)gUnknown_08270934 + ((u32*)gUnknown_08270934)[1+section];
+    scriptPtr = (void*)std_scripts + ((u32*)std_scripts)[1+section];
     for(;*scriptPtr != 0x45; scriptPtr++) {
         if(*scriptPtr > 0x80) {
             sub_80175D8(dest + charCount * 0x80, *scriptPtr - 0x80, color, oam, x, y);
@@ -704,7 +772,7 @@ void sub_8017CA8(u16 *markerAttr, u16 fieldMask, u16 notFieldMask, u16 delta, u1
     *oamAttr = result;
 }
 
-void DrawTextAndMapMarkers(void) {
+void DrawMapMarkers(void) {
     struct OamAttrs * oam;
     u32 i;
     u32 y, x;
@@ -791,10 +859,7 @@ void DrawTextAndMapMarkers(void) {
     }
 }
 
-extern const u16 gUnknown_08028370[]; 
-extern const u16 gUnknown_08028288[]; 
-
-void sub_8017EF4(u32 arg0) {
+void sub_8017EF4(u32 arg0) { // unity SetScript
     if(gScriptContext.unkA == arg0)
         return;
     if(arg0 != 12)
@@ -931,4 +996,523 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
     }
     gTextBoxCharacters[temp].objAttr2 += 0x400;
     gTextBoxCharacters[temp].color2 = gScriptContext.unk25;
+}
+
+extern bool32 (*gScriptCmdFuncs[0x72])(struct ScriptContext *);
+
+void AdvanceScriptContext(void) {
+    u32 r7 = 0;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    
+    if(gMain.process[GAME_PROCESS] == TITLE_SCREEN_PROCESS)
+        return;
+    
+    gUnknown_0814E338[scriptCtx->unk2C](scriptCtx);
+    
+    if(gMain.blendMode && !(scriptCtx->flags & SCRIPT_x2))
+        return;
+    
+    if((scriptCtx->unk2E & 0xF) == 1)
+        return;
+    for(;;)
+    {
+        if(IsHPBarAnimating() == TRUE)
+            return;
+        if(gMain.blendMode)
+            return;
+    
+        if(scriptCtx->flags & SCRIPT_FULLSCREEN && scriptCtx->unk23 == 2)
+            return;
+        if(scriptCtx->unk23 == 3)
+            return;
+
+        scriptCtx->currentToken = *scriptCtx->scriptPtr++;
+        if(scriptCtx->currentToken < 0x80)
+        {
+            u32 retval;
+            sub_8017EF4(scriptCtx->currentToken);
+            retval = gScriptCmdFuncs[scriptCtx->unkA](NULL);
+            if(retval == 0)
+                continue;
+            scriptCtx->scriptPtr--;
+            return;
+        }
+        if((scriptCtx->unk2E >> 4) != 1) {
+            if(scriptCtx->flags & SCRIPT_x800) {
+                if((gJoypad.heldKeys & B_BUTTON || gJoypad.pressedKeys & A_BUTTON))
+                    scriptCtx->flags |= SCRIPT_x2000;
+            } 
+        }
+        
+        if(!(scriptCtx->flags & SCRIPT_FULLSCREEN)) {
+            if(scriptCtx->flags & SCRIPT_x2000 &&
+               scriptCtx->flags & SCRIPT_x800) {
+                if(r7 != 0)
+                {
+                    scriptCtx->scriptPtr--;
+                    return;
+                }
+            } else {
+                scriptCtx->flags &= ~SCRIPT_x2000;
+                if(scriptCtx->unk27 & 0xF) {
+                    scriptCtx->unk27--;
+                    scriptCtx->scriptPtr--;
+                    return;
+                } else {
+                    scriptCtx->unk27 = scriptCtx->textSpeed + (scriptCtx->unk27 & 0xF0); 
+                }
+            }
+        }
+        scriptCtx->flags |= SCRIPT_x8000;
+        scriptCtx->currentToken -= 0x80;
+        PutCharInTextbox(scriptCtx->currentToken, scriptCtx->unk28, scriptCtx->unk29);
+        scriptCtx->unk28++;
+        if (scriptCtx->currentToken != 0xFF && 
+            scriptCtx->textSpeed > 0 &&
+            !(scriptCtx->flags & SCRIPT_FULLSCREEN) &&
+            scriptCtx->unk29 < 2 &&
+            (r7 == 0 || scriptCtx->soundCueSkip == 1))
+        {
+            if (scriptCtx->soundCueSkip != 0 && scriptCtx->textSpeed > 5)
+                scriptCtx->soundCueSkip = 1;
+            if(scriptCtx->soundCueSkip > 1) {
+                scriptCtx->soundCueSkip--;
+                continue;
+            }
+            if(scriptCtx->soundCueSkip == 1)
+                scriptCtx->soundCueSkip = 2;
+            if(r7 == 0 || scriptCtx->soundCueSkip != 0) {
+                if(scriptCtx->currentSection > 26) {
+                    if (!(gMain.soundFlags & SOUND_FLAG_DISABLE_CUE))
+                    {
+                        if (scriptCtx->soundCueSkip == 0)
+                        {
+                            PlaySE(68);
+                        } else {
+                            if (gUnknown_08028546[scriptCtx->unk24] == 1)
+                            {
+                                PlaySE(46);
+                            }
+                            do{}while(0); // ! fakematch? probably has deadcode somewhere thus needing this (permuter match)
+                            if (gUnknown_08028546[scriptCtx->unk24] == 0)
+                            {
+                                PlaySE(45);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void LoadCurrentScriptIntoRam(void)
+{
+    u32 i;
+
+    gScriptContext.unk28 = 0;
+    gScriptContext.unk29 = 0;
+    gScriptContext.unk4C = 0;
+    gScriptContext.unk4D = 0;
+    gScriptContext.soundCueSkip = 0;
+    gScriptContext.textSpeed = 0;
+    gScriptContext.flags = 0;
+    gScriptContext.unk27 = 0;
+    gScriptContext.unk24 = 0;
+    gScriptContext.unk22 = 0;
+    gScriptContext.unk40 = 0x80;
+    gScriptContext.unk44 = 0;
+    gScriptContext.unk1E = 0;
+    gUnknown_030070B0.unk20 = 0;
+    gScriptContext.unk4E = 0;
+    for(i = 0; i < 3; i++) {
+        gScriptContext.unk54[i][0] = 0;
+        gScriptContext.unk54[i][1] = 0;
+        gScriptContext.unk54[i][2] = 0;
+    }
+    for(i = 0; i < 16; i++) {
+        gUnknown_030070B0.unk00[i] = 0;
+    }
+    DmaCopy16(3, gTextPal, OBJ_PLTT, 0x20);
+
+    for (i = 0; i < ARRAY_COUNT(gTextBoxCharacters); i++)
+    {
+        gTextBoxCharacters[i].state &= ~(0x8000|0x4000);
+    }
+
+    LZ77UnCompWram(gScriptTable[gMain.scenarioIdx], eScriptHeap);
+
+    for (i = 0; i < ARRAY_COUNT(gMapMarker); i++)
+    {
+        gMapMarker[i].id |= 0xFF;
+        gMapMarker[i].isBlinking = 0;
+        gMapMarker[i].flags = 0;
+        gMapMarker[i].attr0 = SPRITE_ATTR0_CLEAR;
+    }
+}
+
+void MarkSectionAsRead(struct Main * main, s32 section)
+{
+    u32 word;
+    u32 bit;
+    
+    if(section == 0xFFFF)
+        return;
+
+    section -= 0x80;
+    if(section < 0)
+        return;
+    
+    word = section / 32;
+    bit = section % 32;
+    main->sectionReadFlags[word] |= 1 << bit;
+}
+
+void sub_8018638(u32 section) // init new section??
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u32 i;
+    
+    if(section != scriptCtx->currentSection+1) {
+        for (i = 0; i < ARRAY_COUNT(gMapMarker); i++)
+        {
+            gMapMarker[i].id |= 0xFF;
+        }
+    }
+    MarkSectionAsRead(&gMain, scriptCtx->currentSection);
+    for (i = 0; i < 0x21; i++)
+    {
+        gTextBoxCharacters[i].state &= ~(0x8000|0x4000);
+    }
+    scriptCtx->currentSection = section;
+    scriptCtx->unkE = section+1;
+    scriptCtx->unk28 = 0;
+    scriptCtx->unk29 = 0;
+    scriptCtx->flags &= ~SCRIPT_LOOP;
+    scriptCtx->flags &= ~SCRIPT_FULLSCREEN;
+    scriptCtx->flags &= ~SCRIPT_x1;
+    if(scriptCtx->unk22 & 0xF) {
+        sub_8017BA8();
+        sub_8017BC0();
+    }
+    if(HasSectionBeenRead(&gMain, scriptCtx->currentSection)) {
+        scriptCtx->flags |= SCRIPT_x800;
+    } else {
+        scriptCtx->flags &= ~SCRIPT_x800;
+    }
+    if(gMain.unk2D0 & 4) { //!debug
+        scriptCtx->flags |= SCRIPT_x800;
+    }
+}
+
+void sub_801873C(u32 idx) // goto jump section
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u32 offset;
+    u32 *heapPtr;
+    u16 *ptr;
+    heapPtr = eScriptHeap;
+    ptr = (u16 *)(heapPtr + idx + 1);
+    offset = ptr[0] / 2;
+    idx = ptr[1];
+    sub_8018638(idx + 0x80);
+    scriptCtx->scriptSectionPtr = eScriptHeap + ((u32 *)eScriptHeap)[idx + 1];
+    scriptCtx->scriptPtr = scriptCtx->scriptSectionPtr + offset;
+}
+
+void ChangeScriptSection(u32 section) {
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    uintptr_t scriptStart;
+    u32 *sectionOffset;
+    //struct Main * main = &gMain;
+    if(gMain.unk2D0 & 8) { //!debug
+        if(section >= 0x80 &&
+           scriptCtx->currentSection >= 0x80) {
+            section = scriptCtx->currentSection + 1; // why?
+        }
+    }
+    if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS ||
+       gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+        if(gMain.process[GAME_PROCESS_STATE] != INVESTIGATION_10) { // psychelock?
+            if(sub_8016ED8() == FALSE) {
+                sub_8017154(2);
+            } else {
+                sub_8017154(4);
+            }
+        }
+    }
+    sub_8018638(section);
+
+    if (scriptCtx->currentSection >= 0x80)
+    {
+        scriptStart = eScriptHeap;
+        sectionOffset = (u32 *)eScriptHeap + (scriptCtx->currentSection-0x80);
+    }
+    else
+    {
+        scriptStart = std_scripts;
+        sectionOffset = (u32 *)std_scripts + scriptCtx->currentSection;
+    }
+    scriptCtx->scriptPtr = sectionOffset[1] + scriptStart;
+    scriptCtx->scriptSectionPtr = scriptCtx->scriptPtr;
+}
+
+void DrawText(void) {
+    struct OamAttrs * oam;
+    u32 matrixNum = 5;
+    bool32 secondaryPaletteLoaded = FALSE;
+    u32 i;
+    if(gMain.showTextboxCharacters) {
+        oam = &gOamObjects[OAM_IDX_TEXT];
+        for(i = 0; i < 32; i++) {
+            if(gTextBoxCharacters[i].state & 0x8000)
+            {
+                if(gScriptContext.flags & SCRIPT_FULLSCREEN)
+                    oam->attr0 = SPRITE_ATTR0(gTextBoxCharacters[i].y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                else
+                    oam->attr0 = SPRITE_ATTR0(gTextBoxCharacters[i].y + 116, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                oam->attr1 = SPRITE_ATTR1_NONAFFINE(gTextBoxCharacters[i].x + 9, FALSE, FALSE, 1);
+                if(gScriptContext.currentSection == 6 ||
+                   gScriptContext.currentSection == 7 ||
+                   gScriptContext.currentSection == 8 ||
+                   gScriptContext.currentSection == 9 ||
+                   gScriptContext.currentSection == 10 ||
+                   gScriptContext.currentSection == 11 ||
+                   gScriptContext.currentSection == 12 ||
+                   gScriptContext.currentSection == 13 ||
+                   gScriptContext.currentSection == 14 ||
+                   gScriptContext.currentSection == 15 ||
+                   gScriptContext.currentSection == 16 ||
+                   gScriptContext.currentSection == 17 ||
+                   gScriptContext.currentSection == 18 ||
+                   gScriptContext.currentSection == 19 ||
+                   gScriptContext.currentSection == 20 ||
+                   gScriptContext.currentSection == 21 ||
+                   gScriptContext.currentSection == 22 ||
+                   gScriptContext.currentSection == 23 ||
+                   gScriptContext.currentSection == 24 ||
+                   gScriptContext.currentSection == 25 ||
+                   gScriptContext.currentSection == 26 ||
+                   gScriptContext.currentSection == 27 ||
+                   gScriptContext.currentSection == 28 ||
+                   gScriptContext.currentSection == 29 ||
+                   gScriptContext.currentSection <= 1 ||
+                   gScriptContext.currentSection == 3 ||
+                   gScriptContext.currentSection == 4) 
+                {
+                    oam->attr0 -= 64;
+                } else if((gScriptContext.flags & SCRIPT_FULLSCREEN) == 0 &&
+                          (gScriptContext.unk22 & 0xF))
+                {
+                    oam->attr1 += gScriptContext.unk18[(u8)(gTextBoxCharacters[i].y / 18)] * 7 - 2;
+                    if((gScriptContext.unk22 & 0xF) == 2) {
+                        if(gScriptContext.unk18[1]) {
+                            oam->attr0 -= 54;
+                        } else {
+                            oam->attr0 = SPRITE_ATTR0(71, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                        }
+                    }
+                }
+                oam->attr2 = gTextBoxCharacters[i].objAttr2;
+                if(gTextBoxCharacters[i].color & 0x8000) {
+                    oam->attr2 &= 0xFFF;
+                    oam->attr2 |= 0xD000;
+                    if(secondaryPaletteLoaded == FALSE) {
+                        static const u16 gUnknown_08028678[] = {
+                            0x0000, 0x318c, 0x4210, 0x4e73, 0x6739, 0x0000, 0x000b, 0x0010, 0x0014, 0x0017, 0x001b, 0x0160, 0x0200, 0x0280, 0x02e0, 0x0360
+                        };
+
+                        DmaCopy16(3, gUnknown_08028678, OBJ_PLTT + 13 * 0x20, 0x20);
+                        secondaryPaletteLoaded = TRUE;
+                    }
+                }
+                if(gTextBoxCharacters[i].state & 0x4000) {
+                    oam->attr0 |= ST_OAM_AFFINE_DOUBLE << 8; // !!!???
+                    oam->attr1 |= matrixNum << 9;
+                    if(gTextBoxCharacters[i].y != 0 || gTextBoxCharacters[i].x >= 198) {
+                        oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    }
+                }
+                //_08018974
+                if(gScriptContext.flags & SCRIPT_x1000) {
+                    oam->attr0 |= ST_OAM_OBJ_BLEND << 10;
+                } else {
+                    oam->attr0 &= ~(ST_OAM_OBJ_BLEND << 10);
+                }
+            } else {
+                oam->attr0 = SPRITE_ATTR0_CLEAR;
+            }
+            //_080189B8
+            oam++;
+        }
+        //oam = &gOamObjects[OAM_IDX_TEXT];
+        if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
+            oam = &gOamObjects[OAM_IDX_TEXT_FULLSCREEN];
+            for(i = 32; i < ARRAY_COUNT(gTextBoxCharacters); i++)
+            {
+                if(gTextBoxCharacters[i].state & 0x8000)
+                {
+                    oam->attr0 = SPRITE_ATTR0(gTextBoxCharacters[i].y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                    oam->attr1 = SPRITE_ATTR1_NONAFFINE(gTextBoxCharacters[i].x + 9, FALSE, FALSE, 1);
+                    oam->attr2 = gTextBoxCharacters[i].objAttr2;
+                    if(gScriptContext.flags & SCRIPT_x1000) {
+                        oam->attr0 |= ST_OAM_OBJ_BLEND << 10;
+                    } else {
+                        oam->attr0 &= ~(ST_OAM_OBJ_BLEND << 10);
+                    }
+                }
+                else
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                oam++;
+            }
+        }
+    } else {
+        oam = &gOamObjects[OAM_IDX_TEXT];
+        for(i = 0; i < 32; i++)
+        {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+    }
+}
+
+void RunScriptContext(void) {
+    if (gMain.advanceScriptContext && gMain.blendMode == 0)
+        AdvanceScriptContext();
+    if((gScriptContext.unk1E & 0x800) == 0)
+        DrawMapMarkers();
+    DrawText();
+}
+
+void RedrawTextboxCharacters(void)
+{
+    u32 i;
+    u8 * src;
+    uintptr_t dst;
+    for(i = 0; i < ARRAY_COUNT(gTextBoxCharacters); i++)
+    {
+        struct TextBoxCharacter *theCharacter = &gTextBoxCharacters[i];
+        if(theCharacter->state & 0x8000)
+        {
+            u32 temp = theCharacter->state & 0x3FFF;
+            temp *= 0x80;
+            temp += (u32)gCharSet; //! why tho
+            if(theCharacter->color2) {
+                u8 * pixel;
+                u32 half1, half2;
+                if(theCharacter->color2 & 0xF0) {
+                    DmaCopy16(3, temp, gTextColorTileBuffer, 0x80);
+                    pixel = gTextColorTileBuffer;
+                    temp = (theCharacter->color2 & 0xF0) >> 4;
+                    for(dst = 0; dst < 0x80; dst++) {
+                        half2 = *pixel;
+                        half1 = half2 & 0xF;
+                        half2 = half2 & 0xF0;
+                        if(half1 == 3)
+                            half1 = temp;
+                        else if(half1 == 2) {
+                            half1 = 0;
+                            if(temp % 5 != 1) {
+                                half1 = temp - 1;
+                            }
+                        } else {
+                            half1 = 0;
+                        }
+                        if(half2 == 0x30)
+                            half2 = temp << 4;
+                        else if(half2 == 0x20 && temp % 5 != 1) {
+                            half2 = (temp - 1) << 4;
+                        } else {
+                            half2 = 0;
+                        }
+                        *pixel++ = half1 | half2;
+                    }
+                } else {
+                    DmaCopy16(3, temp, gTextColorTileBuffer, 0x80);
+                    pixel = gTextColorTileBuffer;
+                    temp = theCharacter->color2 * 3;
+                    for(dst = 0; dst < 0x80; dst++) {
+                        half2 = *pixel;
+                        half1 = half2 & 0xF;
+                        half2 = half2 & 0xF0;
+                        if(half1)
+                            half1 += temp;
+                        if(half2)
+                            half2 += temp << 4;
+                        *pixel++ = half1 | half2;
+                    }
+                }
+                src = gTextColorTileBuffer;
+                dst = (u8*)(OBJ_VRAM0 + i * 0x80);
+                DmaCopy16(3, src, dst, 0x80);
+            }
+            else
+            {
+                dst = (u8*)(OBJ_VRAM0 + i * 0x80);
+                DmaCopy16(3, temp, dst, 0x80);
+            }
+        }
+    }
+}
+
+bool32 HasSectionBeenRead(struct Main * main, s32 section)
+{
+    u32 word;
+    u32 bit;
+    
+    if(section == 0xFFFF)
+        return FALSE;
+
+    section -= 0x80;
+    if(section < 0)
+        return FALSE;
+
+    word = section / 32;
+    bit = section % 32;
+    return main->sectionReadFlags[word] & (1 << bit); // please return a bool :(
+}
+
+void ClearSectionReadFlags(struct Main * main)
+{
+    u16 i;
+    for(i = 0; i < 8; i++)
+    {
+        main->sectionReadFlags[i] = 0;
+        main->talkEndFlags[i] = 0;
+    }
+}
+
+void loadSectionReadFlagsFromSaveDataBuffer(struct Main * main)
+{
+    u16 i;
+    for(i = 0; i < 8; i++)
+    {
+        main->sectionReadFlags[i] = gSaveDataBuffer.main.sectionReadFlags[i];
+    }
+}
+
+void sub_8018CA8(struct Main * main, u32 arg1) {
+    u32 * flags;
+    s32 i;
+    s32 section;
+    s32 word;
+    s32 bit;
+    for(i = 0x80; i < arg1; i++) {
+        if(i == 0xFFFF)
+            return;
+
+        section = i;
+        section -= 0x80;
+        if(section < 0)
+            return;
+        if(section != 0) {
+            word = section / 32;
+            bit = section % 32;
+        } else {
+            word = 0;
+            bit = 0;
+        }
+
+        main->sectionReadFlags[word] &= ~(1 << bit);
+    }
 }

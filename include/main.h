@@ -85,7 +85,9 @@ struct Main
     /* +0x0C6 */ u16 idleAnimationOffset; // unity: Def_wait_foa
     /* +0x0C8 */ u32 scriptFlags[8];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
-    /* +0x0EC */ u8 fillEC[0x16C];
+    /* +0x0EC */ u32 talkEndFlags[8]; // unity: talk_end_flag
+    /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x12C */ u8 fill12C[0x12C];
     /* +0x258 */ u8 unk258;
     /* +0x259 */ u8 fill259[0x3];
     /* +0x25C */ u32 soundFlags;

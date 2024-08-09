@@ -2969,7 +2969,7 @@ _08009E32:
 	ldr r0, _08009FAC @ =0x80000012
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
-	bl sub_8018ABC
+	bl RedrawTextboxCharacters
 	adds r0, r6, #0
 	subs r0, #0x54
 	str r0, [r5]
@@ -3022,7 +3022,7 @@ _08009E32:
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
 	mov r0, r8
-	bl sub_8018C7C
+	bl loadSectionReadFlagsFromSaveDataBuffer
 	mov r0, r8
 	adds r0, #0xc1
 	ldrb r0, [r0]

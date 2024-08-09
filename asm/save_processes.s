@@ -1135,7 +1135,7 @@ _08007F70:
 	ldr r0, _0800814C @ =0x80000180
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	bl sub_8018ABC
+	bl RedrawTextboxCharacters
 	ldr r2, _08008150 @ =0xFFFFE324
 	adds r0, r7, r2
 	str r0, [r4]
@@ -1209,7 +1209,7 @@ _08007F70:
 	ldrb r0, [r0]
 	strb r0, [r5, #0x1a]
 	adds r0, r5, #0
-	bl sub_8018C7C
+	bl loadSectionReadFlagsFromSaveDataBuffer
 	movs r3, #0x80
 	lsls r3, r3, #4
 	adds r0, r7, r3

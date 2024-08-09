@@ -1,31 +1,41 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
+#define SCRIPT_x1 0x1
+#define SCRIPT_x2 0x2
 #define SCRIPT_FULLSCREEN 0x4
 #define SCRIPT_LOOP 0x8
 #define SCRIPT_SPOTSELECT_MOVE_TO_START 0x80
 #define SCRIPT_SPOTSELECT_INPUT 0x100
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
+#define SCRIPT_x800 0x800
+#define SCRIPT_x1000 0x1000
+#define SCRIPT_x2000 0x2000
 #define SCRIPT_x8000 0x8000
 
 struct ScriptContext {
     /* +0x00 */ u16 * scriptPtr;
-    /* +0x04 */ u8 fill04[0x6];
+    /* +0x04 */ u16 * scriptSectionPtr;
+    /* +0x08 */ u16 currentToken;
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
-    u8 fill0E[0x4];
+    /* +0x0E */ u16 unkE; // nextSection?
+    u8 fill0E[0x2];
     u16 unk12;
     u16 unk14;
-    u16 unk16;
+    /* +0x16 */ u16 soundCueSkip;
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
     u8 fill20[0x2];
     u8 unk22;
-    u8 fill23[0x2];
+    u8 unk23;
+    u8 unk24;
     u8 unk25;
-    u8 fill26[0x3];
+    u8 textSpeed;
+    u8 unk27;
+    u8 unk28;
     u8 unk29; // unity: message_line
     u8 fill2A[0x2];
     u8 unk2C;
@@ -33,7 +43,8 @@ struct ScriptContext {
     u8 unk2E;
     u8 unk2F;
     u16 unk30[8];
-    u8 fill40[0x4];
+    u16 unk40;
+    u16 unk42;
     u16 unk44;
     u16 unk46;
     u16 unk48;
@@ -41,7 +52,8 @@ struct ScriptContext {
     u8 unk4C;
     u8 unk4D;
     u16 unk4E;
-    u8 fill50[0x4C];
+    u8 fill50[0x4];
+    u16 unk54[3][12];
 };
 
 // script system has been revamped, keeping this for reference only!
@@ -97,8 +109,8 @@ struct TextBoxCharacter
 {
     /* +0x00 */ u16 state;
     /* +0x02 */ u16 objAttr2;
-    /* +0x04 */ u16 x;
-    /* +0x06 */ u16 y;
+    /* +0x04 */ s16 x;
+    /* +0x06 */ s16 y;
     /* +0x08 */ u16 color;
     /* +0x0A */ u8 color2;
 };
@@ -120,14 +132,21 @@ struct MapMarker
     /* +0x10 */ u8 *volatile vramPtr;
 };
 
+struct Struct30070B0 {
+    u16 unk00[16];
+    u8 unk20;
+};
+
+extern struct Struct30070B0 gUnknown_030070B0; 
 extern struct ScriptContext gScriptContext;
-extern struct TextBoxCharacter gTextBoxCharacters[0x3F];
+extern struct TextBoxCharacter gTextBoxCharacters[0x40];
 extern struct MapMarker gMapMarker[8];
+extern u8 gTextColorTileBuffer[];
 extern u16 gUnknown_03003B70[20];
 
 /* begin script data */
 
-extern const u32 std_scripts[];
+//extern const u32 std_scripts[];
 extern const u8 scenario_0_0_script[];
 extern const u8 scenario_0_1_script[];
 extern const u8 scenario_1_0_script[];
@@ -164,6 +183,7 @@ void MarkSectionAsRead(struct Main *, s32);
 bool32 HasSectionBeenRead(struct Main *, s32);
 void ClearSectionReadFlags(struct Main *);
 void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
+void sub_8018CA8(struct Main * main, u32 arg1);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);

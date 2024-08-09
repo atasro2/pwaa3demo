@@ -361,8 +361,8 @@ gUnknown_0826F888:
 gUnknown_0826FE38:
     .incbin "baserom.gba", 0x0026FE38, 0xAFC
 
-    .global gUnknown_08270934
-gUnknown_08270934:
+    .global std_scripts
+std_scripts:
     .incbin "baserom.gba", 0x00270934, 0x4
 
     .global gUnknown_08270938

@@ -42,7 +42,7 @@
 . = 0x00003A90; gIORegisters = .;
 . = 0x00003AF0; gMapMarker = .;
 . = 0x00003B90; gUnknown_03003B90 = .;
-. = 0x00003BC0; gUnknown_03003BC0 = .;
+. = 0x00003BC0; gTextColorTileBuffer = .;
 . = 0x00003C40; gInvestigation = .;
 . = 0x00003C54; gUnknown_03003C54 = .;
 . = 0x00003C60; gTestimony = .;

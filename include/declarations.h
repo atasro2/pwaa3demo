@@ -50,15 +50,17 @@ extern void nullsub_3(u16,u16);
 
 void ResetHPBar(void);
 void ResetHPBarHealthToMax(void);
-
+bool32 IsHPBarAnimating(void);
+bool32 sub_8016ED8(void);
 //Debug related code
 void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
+void sub_8007610(u32);
 
 void RunScriptContext(void);
 void sub_801DF10(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
 struct AnimationListEntry * sub_8016FB4(void);
-
+bool32 IsHPBarAnimating(void);
 #endif//GUARD_DECLARATIONS_H
