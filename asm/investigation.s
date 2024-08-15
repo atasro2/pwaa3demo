@@ -969,7 +969,7 @@ _0800C6CE:
 	strb r4, [r5, #0xd]
 	movs r0, #1
 	strb r0, [r5, #0x10]
-	bl sub_8011CF8
+	bl ClearAllAnimationSprites
 	ldr r0, _0800C760 @ =gAnimation+0x44
 	bl DestroyAnimation
 	ldr r0, _0800C764 @ =gInvestigation

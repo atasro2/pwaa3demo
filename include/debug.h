@@ -54,7 +54,15 @@ struct DebugContext {
             s16 unkC;
             s16 unkE;
         } sound;
+        struct CourtScrollDebug {
+            struct AnimationListEntry anim;
+            struct AnimationListEntry * animPtr;
+            s8 unk48;
+            s8 unk49;
+        } courtScroll;
     } menu;
 };
+
+void sub_8001610(u16,u16,u16,u16);
 
 #endif//GUARD_DEBUG_H

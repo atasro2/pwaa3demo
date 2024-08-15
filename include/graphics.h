@@ -19,7 +19,7 @@
 #define gPalEvidenceProfileDesc ((void*)(0x08180800))
 #define gUnknown_0826F888 ((void*)(0x0826F888))
 #define gUnknown_08252498 ((void*)(0x08252498))
-
+#define gPalCourtScroll ((void*)(0x0820E74C))
 // script
 #define std_scripts ((void*)(0x8270934))
 

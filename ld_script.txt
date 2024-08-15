@@ -42,6 +42,7 @@ SECTIONS {
         asm/court_record.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
+        src/movietest.o(.text);
         asm/psyche_lock.o(.text);
         asm/hp_bar.o(.text);
         asm/signal_detector.o(.text);

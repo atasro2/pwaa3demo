@@ -30,12 +30,12 @@ gUnknown_0814DC90:
 .4byte 0x8013f39
 .4byte 0x801402d
 
-    .global gUnknown_0814DCA8
-gUnknown_0814DCA8:
+    .global gDebugMovieTestStates
+gDebugMovieTestStates:
 @ replacing .incbin "baserom.gba", 0x0014dca8, 0xc
-.4byte 0x8014401
-.4byte 0x801447d
-.4byte 0x8014689
+.4byte sub_8014400
+.4byte sub_801447C
+.4byte sub_8014688
 
     .global gUnknown_0814DCB4
 gUnknown_0814DCB4:
