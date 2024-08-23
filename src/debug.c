@@ -10,7 +10,7 @@ extern struct DebugContext gDebugCtx;
 void sub_800156C(void) {
     nullsub_20("/   ", 26, 0);
     sub_8006470(*(u8*)REG_ADDR_VCOUNT, 27, 0);
-    if (gMain.unk0 & 1) {
+    if (gMain.frameCounter & 1) {
         nullsub_20("0", 6, 0);
     } else {
         nullsub_20("1", 6, 0);

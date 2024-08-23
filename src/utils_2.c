@@ -107,7 +107,7 @@ u8 Random()
     val1.shorts.low = (s16)main->rngSeed * 3;
     val0.bytes.low += (u8)val1.bytes.high;
     val0.bytes.high = val1.bytes.high;
-    main->rngSeed = val0.w + main->unk0;
+    main->rngSeed = val0.w + main->frameCounter;
     return val0.w;
 }
 

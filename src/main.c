@@ -195,7 +195,7 @@ void AgbMain(void)
         if(main->unk2C7 == 0) {
             if (gMain.currentBgStripe == 0)
             {
-                gMain.unk0++;
+                gMain.frameCounter++;
                 UpdateBackground();
                 UpdateBGTilemaps();
                 MoveAnimationTilesToRam(0);

@@ -626,11 +626,11 @@ _0800A8B4:
 	movs r0, #0x54
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x55
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800A8DC:
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
@@ -896,11 +896,11 @@ _0800AAE4:
 	movs r0, #0x56
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x57
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800AB5C

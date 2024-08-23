@@ -556,7 +556,7 @@ _0800EE2E:
 	ldrb r0, [r0]
 	mov r2, sb
 	ldrb r1, [r2, #0xe]
-	bl sub_8015810
+	bl GetPsycheLockDataIndexByRoomAndPerson
 	cmp r0, #0
 	bge _0800EE50
 _0800EE40:
@@ -843,7 +843,7 @@ _0800F00E:
 	ldrb r6, [r6, #0xd]
 	adds r1, r6, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	movs r1, #1
 	rsbs r1, r1, #0
 	cmp r0, r1
@@ -890,7 +890,7 @@ _0800F0C2:
 	ldrb r2, [r2, #0xd]
 	adds r1, r2, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	movs r1, #1
 	rsbs r1, r1, #0
 	cmp r0, r1
@@ -1713,9 +1713,9 @@ _0800F79C:
 	bne _0800F7E2
 	movs r0, #8
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
-	bl sub_8015BD4
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
+	bl ClearPsycheLockStopPresentButtonsOAM
 	b _0800F7E2
 	.align 2, 0
 _0800F7C8: .4byte gMain
@@ -1727,7 +1727,7 @@ _0800F7D4:
 	ldrb r0, [r0]
 	cmp r0, #1
 	bne _0800F7E2
-	bl sub_80157C0
+	bl ClearPsycheLockLocksAndChainsWithoutAnimating
 _0800F7E2:
 	movs r0, #0
 	strb r0, [r4, #0x13]
@@ -2465,10 +2465,10 @@ _0800FDDC:
 	beq _0800FDFC
 	movs r0, #9
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
 _0800FDFC:
-	bl sub_8015B4C
+	bl SetPsycheLockPresentButtonOAMInCourtRecord
 	b _0800FE2A
 	.align 2, 0
 _0800FE04: .4byte gMain
@@ -2486,7 +2486,7 @@ _0800FE10:
 	ldrb r0, [r0]
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18
-	bl sub_80156F8
+	bl ShowPsycheLockLocksAndChainsWithoutAnimating
 _0800FE2A:
 	movs r0, #1
 	movs r1, #1
@@ -2777,7 +2777,7 @@ _08010044:
 	adds r0, #0xc0
 	ldrb r0, [r0]
 	ldrb r1, [r3, #0xe]
-	bl sub_8015810
+	bl GetPsycheLockDataIndexByRoomAndPerson
 	movs r2, #0x94
 	lsls r2, r2, #2
 	adds r1, r5, r2
@@ -2817,7 +2817,7 @@ _08010080:
 	ldrb r4, [r4, #0xd]
 	adds r1, r4, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	adds r3, r0, #0
 	cmp r3, #0
 	blt _08010104

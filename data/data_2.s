@@ -37,16 +37,16 @@ gDebugMovieTestStates:
 .4byte sub_801447C
 .4byte sub_8014688
 
-    .global gUnknown_0814DCB4
-gUnknown_0814DCB4:
+    .global gPsycheLockChainPalettes
+gPsycheLockChainPalettes:
     .incbin "baserom.gba", 0x0014DCB4, 0x40
 
-    .global gUnknown_0814DCF4
-gUnknown_0814DCF4:
+    .global gPsycheLockLockPositions
+gPsycheLockLockPositions:
     .incbin "baserom.gba", 0x0014DCF4, 0x64
 
-    .global gUnknown_0814DD58
-gUnknown_0814DD58:
+    .global gPsycheLockChainTilemaps
+gPsycheLockChainTilemaps:
     .incbin "baserom.gba", 0x0014DD58, 0x50
 
     .global gUnknown_0814DDA8

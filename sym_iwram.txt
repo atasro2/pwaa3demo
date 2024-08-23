@@ -60,7 +60,7 @@
 . = 0x00005FA0; gMPlayInfo_SE2 = .;
 . = 0x00005FE0; gMPlayMemAccArea = .;
 . = 0x00006020; gDebugCtx = .;
-. = 0x00006D70; gUnknown_03006D70 = .;
+. = 0x00006D70; gPsycheLock = .;
 . = 0x00006D80; gUnknown_03006D80 = .;
 . = 0x000070B0; gUnknown_030070B0 = .;
 . = 0x000070E0; gScriptContext = .;

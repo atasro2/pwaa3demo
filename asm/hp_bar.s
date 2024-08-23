@@ -603,7 +603,7 @@ _080164C2:
 	adds r2, r3, r2
 	adds r2, #8
 	adds r0, r5, #0
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	adds r4, r0, #0
 	subs r5, #0x5b
 	bl Random
@@ -618,7 +618,7 @@ _080164C2:
 	adds r2, r2, r0
 	adds r0, r4, #0
 	adds r1, r5, #0
-	bl sub_8011F90
+	bl SetAnimationScale
 _08016512:
 	adds r7, #8
 	movs r1, #4

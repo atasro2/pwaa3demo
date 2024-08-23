@@ -806,12 +806,12 @@ _0801CFA2:
 	rsbs r2, r2, #0
 	movs r0, #0x23
 	movs r1, #0x78
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r2, #0x70
 	rsbs r2, r2, #0
 	movs r0, #0x22
 	movs r1, #0x78
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	mov r2, sb
 	strh r7, [r2]
 	adds r0, r6, #0

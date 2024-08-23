@@ -3782,7 +3782,7 @@ _0800DC9C:
 	lsls r2, r2, #1
 	adds r0, r0, r2
 	adds r7, r6, r0
-	bl sub_8015900
+	bl AnimatePsycheLockStopBresentButtons
 	ldr r1, _0800DCC4 @ =gUnknown_0814DBE8
 	ldrb r4, [r6, #0xa]
 	lsls r0, r4, #2
@@ -3798,11 +3798,11 @@ _0800DCC8:
 	strb r0, [r7, #8]
 	ldrb r1, [r7, #9]
 	movs r0, #0xb
-	bl sub_8014B40
+	bl SetPsycheLockState
 	movs r0, #1
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015880
+	bl SetPsycheLockState
+	bl ResetPsycheLockStopPresentButtonsState
 	ldr r0, _0800DD18 @ =gMain
 	ldr r1, _0800DD1C @ =0x00000256
 	adds r0, r0, r1
@@ -3817,8 +3817,8 @@ _0800DCC8:
 	adds r0, #1
 	strb r0, [r6, #0xa]
 _0800DD00:
-	bl sub_8015670
-	bl sub_8014BDC
+	bl UpdatePsycheLockAnimation
+	bl IsPsycheLockAnimationInWaitState
 	cmp r0, #0
 	bne _0800DD0E
 	b _0800E26A
@@ -3872,7 +3872,7 @@ _0800DD30:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800DD84
-	bl sub_8015B4C
+	bl SetPsycheLockPresentButtonOAMInCourtRecord
 	movs r0, #0x31
 	bl PlaySE
 	ldr r0, [r4, #8]
@@ -3888,7 +3888,7 @@ _0800DD84:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800DDD8
-	bl sub_8015BFC
+	bl IsPsycheLockStopPresentButtonsAnimating
 	cmp r0, #0
 	bne _0800DDD8
 	movs r1, #0x95
@@ -3922,7 +3922,7 @@ _0800DDD8:
 	ldrb r0, [r0]
 	cmp r0, #0
 	bne _0800DE2C
-	bl sub_8015BFC
+	bl IsPsycheLockStopPresentButtonsAnimating
 	cmp r0, #0
 	bne _0800DE2C
 	ldr r1, _0800DE60 @ =gJoypad
@@ -4111,22 +4111,22 @@ _0800DF60:
 	bl FadeOutBGM
 	movs r0, #5
 	movs r1, #0
-	bl sub_8014B40
+	bl SetPsycheLockState
 	ldrb r0, [r6, #0xb]
 	adds r0, #1
 	strb r0, [r6, #0xb]
 _0800DF7A:
 	movs r0, #0x1f
 	bl sub_800BC08
-	bl sub_8015670
-	bl sub_8014BDC
+	bl UpdatePsycheLockAnimation
+	bl IsPsycheLockAnimationInWaitState
 	cmp r0, #0
 	bne _0800DF8E
 	b _0800E26A
 _0800DF8E:
 	movs r0, #7
 	movs r1, #0
-	bl sub_8014B40
+	bl SetPsycheLockState
 	ldr r4, _0800DFBC @ =gMain
 	adds r0, r4, #0
 	adds r0, #0xa6
@@ -4149,25 +4149,25 @@ _0800DFA6:
 _0800DFBC: .4byte gMain
 _0800DFC0: .4byte 0x0000FFD8
 _0800DFC4:
-	bl sub_8015670
+	bl UpdatePsycheLockAnimation
 	movs r0, #4
 	movs r1, #1
 	movs r2, #1
 	bl InitSpecialEffects
-	bl sub_8014BDC
+	bl IsPsycheLockAnimationInWaitState
 	cmp r0, #0
 	bne _0800DFDC
 	b _0800E26A
 _0800DFDC:
 	movs r0, #6
 	movs r1, #0
-	bl sub_8014B40
+	bl SetPsycheLockState
 	b _0800E216
 _0800DFE6:
-	bl sub_8015670
+	bl UpdatePsycheLockAnimation
 	movs r0, #0
 	bl sub_800BC08
-	bl sub_8014BDC
+	bl IsPsycheLockAnimationInWaitState
 	cmp r0, #0
 	bne _0800DFFA
 	b _0800E26A
@@ -4189,7 +4189,7 @@ _0800E00C:
 	ldr r4, _0800E034 @ =gMain
 	movs r0, #1
 	strb r0, [r4, #0x18]
-	bl sub_800E280
+	bl ReloadInvestigationGraphics
 	bl sub_800E4A4
 	str r5, [r7]
 	movs r0, #0x82
@@ -4273,7 +4273,7 @@ _0800E0C4:
 	bl InitSpecialEffects
 	b _0800E216
 _0800E0D0:
-	bl sub_800E280
+	bl ReloadInvestigationGraphics
 	bl sub_800E4A4
 	ldr r1, _0800E100 @ =gInvestigation
 	movs r0, #0xfe
@@ -4329,7 +4329,7 @@ _0800E120:
 	movs r1, #0
 	ldrsb r1, [r0, r1]
 	movs r0, #0xb
-	bl sub_8014B40
+	bl SetPsycheLockState
 	movs r0, #1
 	b _0800E1FE
 	.align 2, 0
@@ -4421,13 +4421,13 @@ _0800E1FC:
 	movs r0, #7
 _0800E1FE:
 	movs r1, #0
-	bl sub_8014B40
+	bl SetPsycheLockState
 	ldrb r0, [r6, #0xb]
 	adds r0, #1
 	strb r0, [r6, #0xb]
 _0800E20A:
-	bl sub_8015670
-	bl sub_8014BDC
+	bl UpdatePsycheLockAnimation
+	bl IsPsycheLockAnimationInWaitState
 	cmp r0, #0
 	beq _0800E26A
 _0800E216:
@@ -4445,7 +4445,7 @@ _0800E21E:
 	strh r2, [r0]
 	movs r0, #3
 	bl sub_8017154
-	bl sub_800E280
+	bl ReloadInvestigationGraphics
 	bl sub_800E4A4
 	ldr r1, _0800E278 @ =gInvestigation
 	movs r0, #0xfe
@@ -4480,8 +4480,8 @@ _0800E274: .4byte gMain
 _0800E278: .4byte gInvestigation
 _0800E27C: .4byte 0x0000FFFF
 
-	thumb_func_start sub_800E280
-sub_800E280: @ 0x0800E280
+	thumb_func_start ReloadInvestigationGraphics
+ReloadInvestigationGraphics: @ 0x0800E280
 	push {r4, r5, r6, lr}
 	ldr r0, _0800E30C @ =0x040000D4
 	ldr r1, _0800E310 @ =gGfx4bppInvestigationActions
@@ -4587,7 +4587,7 @@ sub_800E364: @ 0x0800E364
 	lsls r1, r1, #0x10
 	lsrs r1, r1, #0x10
 	mov r8, r1
-	bl sub_800E280
+	bl ReloadInvestigationGraphics
 	cmp r4, #0
 	bne _0800E394
 	ldr r0, _0800E390 @ =gInvestigation

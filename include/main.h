@@ -5,6 +5,8 @@
 #define SOUND_FLAG_DISABLE_BGM (1 << 1)
 #define SOUND_FLAG_DISABLE_CUE (1 << 2)
 
+#include "psyche_lock.h"
+
 struct Joypad
 {
     /* +0x00 */ u16 heldKeys;
@@ -19,7 +21,7 @@ struct Joypad
 
 struct Main
 {
-    /* +0x000 */ u32 unk0;
+    /* +0x000 */ u32 frameCounter;
     /* +0x004 */ u32 unk4;
     /* +0x008 */ u8 process[0x4];
     /* +0x00C */ u8 processCopy[0x4];
@@ -47,7 +49,7 @@ struct Main
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
-    /* +0x036 */ u16 unk36;
+    /* +0x036 */ u16 currentDisplayedBG;
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
@@ -77,7 +79,8 @@ struct Main
     /* +0x097 */ u8 effectIntensity;
     /* +0x098 */ u8 fill98[0x6];
     /* +0x09E */ u8 itemPlateAction;
-    /* +0x0A0 */ u8 fillA0[0x22];
+    /* +0x09F */ u8 fillA0[0x21];
+    /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
     /* +0x0C3 */ u8 fillC3[1];
@@ -87,7 +90,14 @@ struct Main
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0EC */ u32 talkEndFlags[8]; // unity: talk_end_flag
     /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
-    /* +0x12C */ u8 fill12C[0x12C];
+    /* +0x12C */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
+    /* +0x1B0 */ struct PsycheLockData psycheLockData[4];
+    /* +0x250 */ u8 fill250[0x2];
+    /* +0x252 */ u16 psycheLockStopPresentButtonsY;
+    /* +0x254 */ u8 psycheLockStopPresentButtonsState;
+    /* +0x255 */ u8 psycheLockStopPresentButtonsSubstate;
+    /* +0x256 */ u8 psycheLockStopPresentButtonsActive;
+    /* +0x257 */ u8 unk257;
     /* +0x258 */ u8 unk258;
     /* +0x259 */ u8 fill259[0x3];
     /* +0x25C */ u32 soundFlags;

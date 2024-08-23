@@ -401,8 +401,8 @@ _08011F88:
 	.align 2, 0
 _08011F8C: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_8011F90
-sub_8011F90: @ 0x08011F90
+	thumb_func_start SetAnimationScale
+SetAnimationScale: @ 0x08011F90
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -502,8 +502,8 @@ _08012058: .4byte gUnknown_08028114
 _0801205C: .4byte gSineTable
 _08012060: .4byte gOamObjects
 
-	thumb_func_start sub_8012064
-sub_8012064: @ 0x08012064
+	thumb_func_start DisableAnimationScale
+DisableAnimationScale: @ 0x08012064
 	push {lr}
 	adds r2, r0, #0
 	cmp r2, #0
@@ -1585,7 +1585,7 @@ PlayAnimation: @ 0x08012824
 _0801284E:
 	adds r0, r3, #0
 	adds r2, r4, #0
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	pop {r4, r5}
 	pop {r1}
 	bx r1
@@ -1593,8 +1593,8 @@ _0801284E:
 _0801285C: .4byte gMain
 _08012860: .4byte gUnknown_080272B8
 
-	thumb_func_start sub_8012864
-sub_8012864: @ 0x08012864
+	thumb_func_start PlayAnimationAtCustomOrigin
+PlayAnimationAtCustomOrigin: @ 0x08012864
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x1c
 	adds r5, r0, #0
@@ -1841,7 +1841,7 @@ _08012A3A:
 	ldrsh r1, [r4, r2]
 	movs r3, #6
 	ldrsh r2, [r4, r3]
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	adds r6, r0, #0
 	ldr r0, [r4, #0x14]
 	movs r1, #0x82

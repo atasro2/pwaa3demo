@@ -27,7 +27,9 @@ struct InvestigationStruct // unity: tantei_work_
 {
     /* +0x00 */ u8 fill00[6];
     /* +0x06 */ bool8 personActive;
-    /* +0x07 */ u8 fill07[0x0B];
+    /* +0x07 */ u8 fill07[0x04];
+    /* +0x0B */ u8 inPsycheLockChallengeFlag;
+    /* +0x0C */ u8 fill0C[0x06];
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
     /* +0x13 */ u8 fill13[9];
 };

@@ -443,7 +443,7 @@ _08008854:
 	movs r0, #0xf
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r3, [r7, #0x17]
 	ldrb r0, [r7, #0xb]
 	cmp r3, r0
@@ -451,7 +451,7 @@ _08008854:
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _0800889A
 	.align 2, 0
 _08008888: .4byte 0x00002C54
@@ -460,7 +460,7 @@ _08008890:
 	movs r0, #9
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800889A:
 	movs r0, #0
 	strb r0, [r7, #0xa]
@@ -524,7 +524,7 @@ _080088D2:
 	lsls r1, r1, #1
 	movs r0, #9
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08008928
 _0800891A:
 	adds r0, r1, #0
@@ -532,7 +532,7 @@ _0800891A:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08008928:
 	ldr r1, [sp, #4]
 	movs r3, #0x10
@@ -549,7 +549,7 @@ _08008928:
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r7, #0x17]
 	adds r0, #1
 	movs r1, #0x96
@@ -669,7 +669,7 @@ _08008A28:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08008CAA
 _08008A38:
 	ldrb r0, [r7, #0x17]
@@ -1278,15 +1278,15 @@ _08009004:
 	movs r0, #0xa
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	strb r5, [r6, #0xa]
 	bl _08009850
 _08009040:
@@ -1297,7 +1297,7 @@ _08009040:
 	movs r0, #0xf
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r1, [r6, #0x17]
 	ldrb r0, [r5]
 	subs r0, #1
@@ -1306,13 +1306,13 @@ _08009040:
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08009072
 _08009068:
 	movs r0, #0xb
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08009072:
 	movs r2, #0x96
 	lsls r2, r2, #2
@@ -1403,7 +1403,7 @@ _0800910E:
 	movs r0, #0x19
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800912A:
 	ldr r1, _0800929C @ =gJoypad
 	movs r0, #0x20
@@ -1433,18 +1433,18 @@ _0800912A:
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #8
 	movs r1, #0x20
 	rsbs r1, r1, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x12
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x2a
 	bl PlaySE
 	movs r0, #0xb
@@ -1470,7 +1470,7 @@ _080091A6:
 	movs r0, #0x1a
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _080091CA:
 	ldr r1, _0800929C @ =gJoypad
 	movs r0, #0x10
@@ -1500,18 +1500,18 @@ _080091CA:
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xa
 	movs r1, #0x88
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x2a
 	bl PlaySE
 	movs r0, #0xa
@@ -1637,7 +1637,7 @@ _08009314:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x10
 	bl FindAnimationFromAnimId
@@ -1728,7 +1728,7 @@ _080093D8:
 	movs r1, #0x40
 	rsbs r1, r1, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xc
 	bl FindAnimationFromAnimId
@@ -1850,7 +1850,7 @@ _080094B8:
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08009506
 _080094F4:
 	adds r0, r2, #0
@@ -1859,7 +1859,7 @@ _080094F4:
 	adds r0, #9
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08009506:
 	movs r0, #0
 	strb r0, [r6, #0xa]
@@ -1880,7 +1880,7 @@ _0800951A:
 	adds r0, #9
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800952C:
 	movs r0, #0
 	strb r0, [r6, #0xb]
@@ -2156,7 +2156,7 @@ _08009758:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _080097B4
 _080097A6:
 	adds r0, r1, #0
@@ -2164,7 +2164,7 @@ _080097A6:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _080097B4:
 	ldr r1, [sp, #4]
 	movs r2, #0x10
@@ -2184,7 +2184,7 @@ _080097B4:
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #1
 	strb r0, [r6, #0x18]
 	strb r0, [r6, #0x19]

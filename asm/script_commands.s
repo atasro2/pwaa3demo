@@ -6369,7 +6369,7 @@ sub_801BE38: @ 0x0801BE38
 	adds r1, r2, #0
 	strb r1, [r0]
 	movs r0, #1
-	bl sub_8015894
+	bl SetPsycheLockStopPresentButtonsState
 	ldr r0, [r4]
 	adds r0, #2
 	str r0, [r4]
@@ -6393,7 +6393,7 @@ sub_801BE74: @ 0x0801BE74
 	movs r1, #0
 	strb r1, [r0]
 	movs r0, #2
-	bl sub_8015894
+	bl SetPsycheLockStopPresentButtonsState
 	movs r0, #0
 	pop {r1}
 	bx r1
@@ -6435,7 +6435,7 @@ _0801BED0: .4byte 0x00000257
 	thumb_func_start sub_801BED4
 sub_801BED4: @ 0x0801BED4
 	push {lr}
-	bl sub_80157C0
+	bl ClearPsycheLockLocksAndChainsWithoutAnimating
 	ldr r0, _0801BEEC @ =gMain
 	ldr r1, _0801BEF0 @ =0x00000257
 	adds r0, r0, r1
@@ -6804,8 +6804,8 @@ sub_801C194: @ 0x0801C194
 	push {lr}
 	movs r0, #8
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
 	ldr r0, _0801C1B8 @ =gMain
 	movs r1, #0
 	strh r1, [r0, #0x34]
@@ -6825,8 +6825,8 @@ sub_801C1C0: @ 0x0801C1C0
 	push {lr}
 	movs r0, #9
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
 	ldr r0, _0801C1E0 @ =gMain
 	ldr r1, _0801C1E4 @ =0x00000257
 	adds r0, r0, r1
