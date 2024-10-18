@@ -30,8 +30,7 @@ SECTIONS {
         asm/utils.o(.text);
         src/utils_2.o(.text);
         src/case_data.o(.text);
-        asm/rom_67A8.o(.text);
-        asm/title_processes.o(.text);
+        src/title_processes.o(.text);
         asm/gameover_process.o(.text);
         src/save_processes.o(.text);
         asm/save_processes.o(.text);
@@ -47,7 +46,6 @@ SECTIONS {
         asm/hp_bar.o(.text);
         asm/signal_detector.o(.text);
         src/script_main.o(.text);
-        asm/script_main.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);
         asm/rom_1D308.o(.text);

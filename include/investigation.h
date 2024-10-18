@@ -31,7 +31,10 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x0B */ u8 inPsycheLockChallengeFlag;
     /* +0x0C */ u8 fill0C[0x06];
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
-    /* +0x13 */ u8 fill13[9];
+    /* +0x13 */ u8 fill13[5];
+	/* +0x18 */ u8 pointerFrame;
+	/* +0x19 */ u8 pointerFrameCounter;
+    /* +0x1A */ u8 fill19[2];
 };
 
 extern struct TalkData gTalkData[32];
