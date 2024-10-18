@@ -68,7 +68,9 @@ struct Main
     /* +0x097 */ u8 effectIntensity;
     /* +0x098 */ u8 fill98[0x6];
     /* +0x09E */ u8 itemPlateAction;
-    /* +0x0A0 */ u8 fillA0[0x22];
+    /* +0x0A0 */ u8 fillA0[0x2];
+    /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
+    /* +0x0A4 */ u8 fillA4[0x1D];
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
     /* +0x0C3 */ u8 fillC3[1];

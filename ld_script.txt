@@ -35,6 +35,7 @@ SECTIONS {
         asm/gameover_process.o(.text);
         src/save_processes.o(.text);
         asm/save_processes.o(.text);
+        src/episode_load_processes.o(.text);
         asm/episode_load_processes.o(.text);
         asm/court.o(.text);
         asm/rom_BC08.o(.text);

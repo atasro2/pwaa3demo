@@ -1,28 +1,8 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_80084D8
-sub_80084D8: @ 0x080084D8
-	push {r4, lr}
-	adds r4, r0, #0
-	movs r0, #0
-	strb r0, [r4, #0x18]
-	strb r0, [r4, #0x19]
-	movs r0, #2
-	movs r1, #0
-	movs r2, #1
-	movs r3, #0x1f
-	bl StartHardwareBlend
-	ldrb r0, [r4, #9]
-	adds r0, #1
-	strb r0, [r4, #9]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-	thumb_func_start sub_80084FC
-sub_80084FC: @ 0x080084FC
+	thumb_func_start EpisodeLoadGfx
+EpisodeLoadGfx: @ 0x080084FC
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r0, _080085A8 @ =gMain
@@ -313,7 +293,7 @@ _0800872C: @ jump table
 	.4byte _08008D14 @ case 11
 _0800875C:
 	adds r0, r7, #0
-	bl sub_80084D8
+	bl EpisodeInit
 	b _08008D58
 _08008764:
 	adds r0, r7, #0
@@ -334,7 +314,7 @@ _08008770:
 	strh r1, [r3]
 	strh r2, [r0, #0xe]
 	adds r0, r7, #0
-	bl sub_80084FC
+	bl EpisodeLoadGfx
 	ldr r0, _080087AC @ =gMain
 	movs r3, #0xf0
 	ldrb r0, [r0, #0x1b]
@@ -1174,7 +1154,7 @@ _08008D9C: @ jump table
 	.4byte _08009716 @ case 100
 _08008F30:
 	adds r0, r6, #0
-	bl sub_80084D8
+	bl EpisodeInit
 	bl _08009850
 _08008F3A:
 	adds r0, r6, #0
@@ -1185,7 +1165,7 @@ _08008F3A:
 	bl _08009850
 _08008F48:
 	adds r0, r6, #0
-	bl sub_80084FC
+	bl EpisodeLoadGfx
 	movs r0, #0xf0
 	ldrb r1, [r6, #0x1b]
 	ands r0, r1
@@ -2304,7 +2284,7 @@ _080098B6:
 _080098BA:
 	bl LoadSaveData
 	mov r0, r8
-	bl sub_80084D8
+	bl EpisodeInit
 	bl _0800A368
 _080098C8:
 	mov r0, r8
