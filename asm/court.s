@@ -496,7 +496,7 @@ _0800A7A8: .4byte gScriptContext
 	thumb_func_start sub_800A7AC
 sub_800A7AC: @ 0x0800A7AC
 	push {r4, lr}
-	ldr r4, _0800A7F0 @ =gUnknown_03002D48
+	ldr r4, _0800A7F0 @ =gOamObjects+0x1A8
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r4]
@@ -529,7 +529,7 @@ _0800A7CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A7F0: .4byte gUnknown_03002D48
+_0800A7F0: .4byte gOamObjects+0x1A8
 _0800A7F4: .4byte 0x000080BA
 _0800A7F8: .4byte 0x00005D90
 _0800A7FC: .4byte 0x000080DA
@@ -559,9 +559,9 @@ _0800A820: @ jump table
 	.4byte _0800A8E4 @ case 4
 _0800A834:
 	movs r0, #0x54
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x55
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldr r0, _0800A850 @ =gTestimony
@@ -572,10 +572,10 @@ _0800A834:
 _0800A850: .4byte gTestimony
 _0800A854:
 	movs r0, #0x54
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -601,11 +601,11 @@ _0800A854:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x52
-	bl sub_8012824
+	bl PlayAnimation
 	b _0800A8DC
 _0800A8A8:
 	adds r0, r6, #0
@@ -616,21 +616,21 @@ _0800A8A8:
 	b _0800A8DC
 _0800A8B4:
 	movs r0, #0x52
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	ldr r0, [r4]
 	cmp r0, #0
 	blt _0800A944
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x54
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x55
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800A8DC:
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
@@ -638,10 +638,10 @@ _0800A8DC:
 	b _0800A944
 _0800A8E4:
 	movs r0, #0x54
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x55
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldr r2, _0800A94C @ =gTestimony
 	ldrh r3, [r4, #0x10]
@@ -677,9 +677,9 @@ _0800A928:
 	cmp r1, r0
 	ble _0800A944
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 _0800A944:
@@ -765,7 +765,7 @@ _0800A9D6:
 	movs r0, #0
 	strb r0, [r1, #1]
 _0800A9EA:
-	ldr r2, _0800AA10 @ =gUnknown_03002D68
+	ldr r2, _0800AA10 @ =gOamObjects+0x1C8
 	ldrb r1, [r1, #1]
 	cmp r1, #0x50
 	bhi _0800AA14
@@ -782,7 +782,7 @@ _0800A9EA:
 	.align 2, 0
 _0800AA08: .4byte gScriptContext
 _0800AA0C: .4byte gTestimony
-_0800AA10: .4byte gUnknown_03002D68
+_0800AA10: .4byte gOamObjects+0x1C8
 _0800AA14:
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -794,7 +794,7 @@ _0800AA1A:
 
 	thumb_func_start sub_800AA20
 sub_800AA20: @ 0x0800AA20
-	ldr r2, _0800AA30 @ =gUnknown_03002D68
+	ldr r2, _0800AA30 @ =gOamObjects+0x1C8
 	movs r1, #0x80
 	lsls r1, r1, #2
 	strh r1, [r2]
@@ -802,17 +802,17 @@ sub_800AA20: @ 0x0800AA20
 	str r1, [r0, #8]
 	bx lr
 	.align 2, 0
-_0800AA30: .4byte gUnknown_03002D68
+_0800AA30: .4byte gOamObjects+0x1C8
 
 	thumb_func_start sub_800AA34
 sub_800AA34: @ 0x0800AA34
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	movs r0, #0x56
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x57
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrb r0, [r6, #0xa]
 	cmp r0, #4
@@ -834,9 +834,9 @@ _0800AA60: @ jump table
 	.4byte _0800AB12 @ case 4
 _0800AA74:
 	movs r0, #0x56
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x57
-	bl sub_8012824
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldrb r0, [r6, #0xa]
@@ -867,11 +867,11 @@ _0800AA8C:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x53
-	bl sub_8012824
+	bl PlayAnimation
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800AB5C
@@ -886,30 +886,30 @@ _0800AAD4:
 	b _0800AB5C
 _0800AAE4:
 	movs r0, #0x53
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	ldr r0, [r4]
 	cmp r0, #0
 	blt _0800AB5E
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #0x56
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x57
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800AB5C
 _0800AB12:
 	movs r0, #0x56
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x57
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x12]
 	subs r0, #7
@@ -932,9 +932,9 @@ _0800AB12:
 	cmp r1, r0
 	bge _0800AB5E
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 	movs r0, #0
@@ -1306,7 +1306,7 @@ _0800AE4C: .4byte gScriptContext
 _0800AE50: .4byte gMain
 _0800AE54:
 	movs r0, #1
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1520,7 +1520,7 @@ _0800AFD8:
 	movs r1, #0x80
 	strh r1, [r0]
 	movs r0, #1
-	bl sub_8012824
+	bl PlayAnimation
 	ldr r0, _0800B02C @ =gMain
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1773,7 +1773,7 @@ VerdictProcess: @ 0x0800B208
 	mov r5, r8
 	push {r5, r6, r7}
 	adds r7, r0, #0
-	ldr r0, _0800B22C @ =gUnknown_03002D28
+	ldr r0, _0800B22C @ =gOamObjects+0x188
 	mov sl, r0
 	ldrb r0, [r7, #9]
 	cmp r0, #8
@@ -1786,7 +1786,7 @@ _0800B220:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0800B22C: .4byte gUnknown_03002D28
+_0800B22C: .4byte gOamObjects+0x188
 _0800B230: .4byte _0800B234
 _0800B234: @ jump table
 	.4byte _0800B258 @ case 0
@@ -2197,7 +2197,7 @@ _0800B5C8: .4byte gPalConfetti0
 _0800B5CC: .4byte 0x050002A0
 _0800B5D0: .4byte 0x80000040
 _0800B5D4:
-	ldr r2, _0800B628 @ =gUnknown_03002D70
+	ldr r2, _0800B628 @ =gOamObjects+0x1D0
 	mov sl, r2
 	movs r6, #0
 _0800B5DA:
@@ -2237,10 +2237,10 @@ _0800B5DA:
 	bl PlaySE
 	b _0800B6CC
 	.align 2, 0
-_0800B628: .4byte gUnknown_03002D70
+_0800B628: .4byte gOamObjects+0x1D0
 _0800B62C: .4byte 0x000004FC
 _0800B630:
-	ldr r0, _0800B688 @ =gUnknown_03002D70
+	ldr r0, _0800B688 @ =gOamObjects+0x1D0
 	mov sl, r0
 	ldrb r0, [r7, #0xa]
 	adds r1, r0, #1
@@ -2283,7 +2283,7 @@ _0800B65A:
 	adds r5, r5, r1
 	b _0800B696
 	.align 2, 0
-_0800B688: .4byte gUnknown_03002D70
+_0800B688: .4byte gOamObjects+0x1D0
 _0800B68C:
 	bl Random
 	adds r1, r4, #0
@@ -2351,11 +2351,11 @@ sub_800B6EC: @ 0x0800B6EC
 	cmp r2, #0
 	bne _0800B70C
 _0800B6FE:
-	ldr r2, _0800B708 @ =gUnknown_03002D48
+	ldr r2, _0800B708 @ =gOamObjects+0x1A8
 	b _0800B74E
 	.align 2, 0
 _0800B704: .4byte gScriptContext
-_0800B708: .4byte gUnknown_03002D48
+_0800B708: .4byte gOamObjects+0x1A8
 _0800B70C:
 	ldrb r0, [r3]
 	cmp r0, #1
@@ -2393,7 +2393,7 @@ _0800B73C:
 _0800B744:
 	strb r0, [r3, #3]
 _0800B746:
-	ldr r2, _0800B760 @ =gUnknown_03002D48
+	ldr r2, _0800B760 @ =gOamObjects+0x1A8
 	ldrh r4, [r4, #0x10]
 	cmp r4, #0x7f
 	bhi _0800B764
@@ -2408,7 +2408,7 @@ _0800B74E:
 	strh r0, [r2, #8]
 	b _0800B7AC
 	.align 2, 0
-_0800B760: .4byte gUnknown_03002D48
+_0800B760: .4byte gOamObjects+0x1A8
 _0800B764:
 	movs r0, #0x80
 	lsls r0, r0, #7
@@ -2565,7 +2565,7 @@ sub_800B898: @ 0x0800B898
 	mov sb, r1
 	lsls r2, r2, #0x18
 	lsrs r2, r2, #0x18
-	ldr r6, _0800B8C4 @ =gUnknown_03002D20
+	ldr r6, _0800B8C4 @ =gOamObjects+0x180
 	movs r0, #1
 	ands r2, r0
 	cmp r2, #0
@@ -2581,7 +2581,7 @@ _0800B8B8:
 	bls _0800B8B8
 	b _0800B946
 	.align 2, 0
-_0800B8C4: .4byte gUnknown_03002D20
+_0800B8C4: .4byte gOamObjects+0x180
 _0800B8C8:
 	ldr r0, _0800B958 @ =0x000001FF
 	ands r5, r0
@@ -2769,7 +2769,7 @@ sub_800BA40: @ 0x0800BA40
 	mov r1, r8
 	ands r1, r0
 	mov r8, r1
-	ldr r6, _0800BA78 @ =gUnknown_03002D20
+	ldr r6, _0800BA78 @ =gOamObjects+0x180
 	movs r0, #1
 	ands r2, r0
 	cmp r2, #0
@@ -2786,7 +2786,7 @@ _0800BA68:
 	b _0800BAF2
 	.align 2, 0
 _0800BA74: .4byte 0x000001FF
-_0800BA78: .4byte gUnknown_03002D20
+_0800BA78: .4byte gOamObjects+0x180
 _0800BA7C:
 	movs r5, #0x80
 	lsls r5, r5, #1
@@ -2869,7 +2869,7 @@ sub_800BB14: @ 0x0800BB14
 	lsrs r2, r2, #0x18
 	ldr r0, _0800BB44 @ =0x000001FF
 	ands r5, r0
-	ldr r6, _0800BB48 @ =gUnknown_03002D20
+	ldr r6, _0800BB48 @ =gOamObjects+0x180
 	movs r0, #1
 	ands r2, r0
 	cmp r2, #0
@@ -2886,7 +2886,7 @@ _0800BB38:
 	b _0800BBBA
 	.align 2, 0
 _0800BB44: .4byte 0x000001FF
-_0800BB48: .4byte gUnknown_03002D20
+_0800BB48: .4byte gOamObjects+0x180
 _0800BB4C:
 	movs r0, #0x80
 	lsls r0, r0, #1
@@ -2958,7 +2958,7 @@ _0800BBE0: .4byte 0x0000AD40
 	thumb_func_start sub_800BBE4
 sub_800BBE4: @ 0x0800BBE4
 	push {r4, lr}
-	ldr r1, _0800BC04 @ =gUnknown_03002D20
+	ldr r1, _0800BC04 @ =gOamObjects+0x180
 	movs r2, #0
 	movs r0, #0x80
 	lsls r0, r0, #5
@@ -2975,4 +2975,4 @@ _0800BBF0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800BC04: .4byte gUnknown_03002D20
+_0800BC04: .4byte gOamObjects+0x180

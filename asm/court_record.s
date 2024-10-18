@@ -165,7 +165,7 @@ sub_800EAEC: @ 0x0800EAEC
 	adds r4, r4, r0
 	ldrh r5, [r4]
 	adds r0, r5, #0
-	bl sub_8011194
+	bl StopSE
 	strh r5, [r4]
 	ldr r1, _0800EBCC @ =gBG2MapBuffer
 	movs r0, #0
@@ -187,7 +187,7 @@ _0800EB0A:
 	ldrb r1, [r7, #0xd]
 	cmp r1, #5
 	bhi _0800EB3C
-	ldr r1, _0800EBD4 @ =gUnknown_03002D40
+	ldr r1, _0800EBD4 @ =gOamObjects+0x1A0
 	movs r0, #0
 	movs r2, #0xaa
 	lsls r2, r2, #7
@@ -202,7 +202,7 @@ _0800EB3C:
 	ldrb r2, [r7, #0xc]
 	cmp r2, #5
 	bne _0800EB4A
-	ldr r1, _0800EBD8 @ =gUnknown_03002D68
+	ldr r1, _0800EBD8 @ =gOamObjects+0x1C8
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
@@ -210,14 +210,14 @@ _0800EB4A:
 	ldrb r5, [r7, #0xb]
 	cmp r5, #2
 	bne _0800EB56
-	ldr r1, _0800EBDC @ =gUnknown_03002D58
+	ldr r1, _0800EBDC @ =gOamObjects+0x1B8
 	ldr r0, _0800EBE0 @ =0x00006560
 	strh r0, [r1, #4]
 _0800EB56:
 	ldrb r0, [r7, #0xb]
 	cmp r0, #3
 	bne _0800EB6A
-	ldr r1, _0800EBDC @ =gUnknown_03002D58
+	ldr r1, _0800EBDC @ =gOamObjects+0x1B8
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
@@ -272,9 +272,9 @@ _0800EBC4: .4byte gMain
 _0800EBC8: .4byte 0x000002C2
 _0800EBCC: .4byte gBG2MapBuffer
 _0800EBD0: .4byte 0x000003FF
-_0800EBD4: .4byte gUnknown_03002D40
-_0800EBD8: .4byte gUnknown_03002D68
-_0800EBDC: .4byte gUnknown_03002D58
+_0800EBD4: .4byte gOamObjects+0x1A0
+_0800EBD8: .4byte gOamObjects+0x1C8
+_0800EBDC: .4byte gOamObjects+0x1B8
 _0800EBE0: .4byte 0x00006560
 _0800EBE4: .4byte gIORegisters
 
@@ -447,7 +447,7 @@ sub_800ED0C: @ 0x0800ED0C
 	str r1, [r4, #8]
 	ldr r1, [r4, #8]
 	bl sub_8010690
-	ldr r5, _0800EDC0 @ =gUnknown_03002CB0
+	ldr r5, _0800EDC0 @ =gOamObjects+0x110
 	str r5, [r4]
 	ldr r0, _0800EDC4 @ =0x07000110
 	str r0, [r4, #4]
@@ -501,7 +501,7 @@ _0800EDB0: .4byte 0x80000E00
 _0800EDB4: .4byte 0x05000220
 _0800EDB8: .4byte 0x05000020
 _0800EDBC: .4byte 0x80000010
-_0800EDC0: .4byte gUnknown_03002CB0
+_0800EDC0: .4byte gOamObjects+0x110
 _0800EDC4: .4byte 0x07000110
 _0800EDC8: .4byte 0x8000002C
 _0800EDCC: .4byte gMain
@@ -556,7 +556,7 @@ _0800EE2E:
 	ldrb r0, [r0]
 	mov r2, sb
 	ldrb r1, [r2, #0xe]
-	bl sub_8015810
+	bl GetPsycheLockDataIndexByRoomAndPerson
 	cmp r0, #0
 	bge _0800EE50
 _0800EE40:
@@ -574,7 +574,7 @@ _0800EE50:
 	ldrb r2, [r1, #0xb]
 	orrs r0, r2
 	strb r0, [r1, #0xb]
-	ldr r5, _0800EEB0 @ =gUnknown_03002D58
+	ldr r5, _0800EEB0 @ =gOamObjects+0x1B8
 	movs r4, #0x80
 	lsls r4, r4, #2
 	strh r4, [r5]
@@ -610,7 +610,7 @@ _0800EE50:
 	b _0800EEBE
 	.align 2, 0
 _0800EEAC: .4byte gInvestigation
-_0800EEB0: .4byte gUnknown_03002D58
+_0800EEB0: .4byte gOamObjects+0x1B8
 _0800EEB4: .4byte 0xFFFFFE48
 _0800EEB8:
 	adds r1, r7, #0
@@ -656,7 +656,7 @@ _0800EEF0:
 _0800EEFC: .4byte gScriptContext
 _0800EF00:
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	movs r0, #8
 	ldrb r1, [r6, #0xc]
 	orrs r0, r1
@@ -843,7 +843,7 @@ _0800F00E:
 	ldrb r6, [r6, #0xd]
 	adds r1, r6, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	movs r1, #1
 	rsbs r1, r1, #0
 	cmp r0, r1
@@ -890,12 +890,12 @@ _0800F0C2:
 	ldrb r2, [r2, #0xd]
 	adds r1, r2, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	movs r1, #1
 	rsbs r1, r1, #0
 	cmp r0, r1
 	beq _0800F112
-	bl sub_8011324
+	bl StopBGM
 	b _0800F112
 	.align 2, 0
 _0800F0F8: .4byte gMain
@@ -1031,7 +1031,7 @@ _0800F204:
 	cmp r1, #0
 	beq _0800F24A
 	movs r0, #4
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1060,7 +1060,7 @@ _0800F242:
 	b _0800F282
 _0800F24A:
 	movs r0, #2
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1135,7 +1135,7 @@ _0800F282:
 	movs r0, #0
 	strh r0, [r1]
 _0800F2EA:
-	bl sub_8011324
+	bl StopBGM
 	adds r0, r5, #0
 	bl ChangeScriptSection
 	ldr r0, _0800F314 @ =0x00000103
@@ -1260,7 +1260,7 @@ sub_800F3E0: @ 0x0800F3E0
 	ands r0, r1
 	strh r0, [r2, #0x1e]
 	movs r0, #0x1e
-	bl sub_80113B8
+	bl FadeOutBGM
 	ldr r1, _0800F424 @ =gCourtRecord
 	movs r0, #8
 	ldrb r2, [r1, #0xc]
@@ -1422,7 +1422,7 @@ sub_800F550: @ 0x0800F550
 	ldrb r1, [r4, #2]
 	cmp r1, #8
 	bls _0800F582
-	ldr r3, _0800F5F4 @ =gUnknown_03002D58
+	ldr r3, _0800F5F4 @ =gOamObjects+0x1B8
 	ldrh r0, [r3, #2]
 	movs r2, #0xfe
 	lsls r2, r2, #8
@@ -1446,7 +1446,7 @@ _0800F582:
 	ldrb r2, [r4, #2]
 	cmp r2, #8
 	bls _0800F596
-	ldr r3, _0800F5F4 @ =gUnknown_03002D58
+	ldr r3, _0800F5F4 @ =gOamObjects+0x1B8
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r3]
@@ -1498,7 +1498,7 @@ _0800F5EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F5F4: .4byte gUnknown_03002D58
+_0800F5F4: .4byte gOamObjects+0x1B8
 _0800F5F8: .4byte 0x000001FF
 _0800F5FC: .4byte gScriptContext
 _0800F600: .4byte gBG1MapBuffer
@@ -1518,7 +1518,7 @@ sub_800F614: @ 0x0800F614
 	ldrb r1, [r4, #2]
 	cmp r1, #8
 	bls _0800F646
-	ldr r3, _0800F670 @ =gUnknown_03002D58
+	ldr r3, _0800F670 @ =gOamObjects+0x1B8
 	ldrh r0, [r3, #2]
 	movs r2, #0xfe
 	lsls r2, r2, #8
@@ -1557,7 +1557,7 @@ _0800F66A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800F670: .4byte gUnknown_03002D58
+_0800F670: .4byte gOamObjects+0x1B8
 _0800F674: .4byte 0x000001FF
 
 	thumb_func_start sub_800F678
@@ -1713,9 +1713,9 @@ _0800F79C:
 	bne _0800F7E2
 	movs r0, #8
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
-	bl sub_8015BD4
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
+	bl ClearPsycheLockStopPresentButtonsOAM
 	b _0800F7E2
 	.align 2, 0
 _0800F7C8: .4byte gMain
@@ -1727,7 +1727,7 @@ _0800F7D4:
 	ldrb r0, [r0]
 	cmp r0, #1
 	bne _0800F7E2
-	bl sub_80157C0
+	bl ClearPsycheLockLocksAndChainsWithoutAnimating
 _0800F7E2:
 	movs r0, #0
 	strb r0, [r4, #0x13]
@@ -1848,7 +1848,7 @@ _0800F8C4:
 	ldr r0, _0800F93C @ =0x80000200
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r3, _0800F940 @ =gUnknown_03003AF0
+	ldr r3, _0800F940 @ =gMapMarker
 	str r3, [r1]
 	subs r2, #0xa0
 	str r2, [r1, #4]
@@ -1870,7 +1870,7 @@ _0800F8F0:
 	ldrb r0, [r5, #0xc]
 	cmp r0, #4
 	bne _0800F95C
-	ldr r3, _0800F948 @ =gUnknown_03002D40
+	ldr r3, _0800F948 @ =gOamObjects+0x1A0
 	movs r1, #0
 	ldr r2, _0800F94C @ =gIORegisters
 	mov sb, r2
@@ -1897,9 +1897,9 @@ _0800F930: .4byte 0x040000D4
 _0800F934: .4byte gOamObjects
 _0800F938: .4byte gUnknown_020009D4
 _0800F93C: .4byte 0x80000200
-_0800F940: .4byte gUnknown_03003AF0
+_0800F940: .4byte gMapMarker
 _0800F944: .4byte 0x80000050
-_0800F948: .4byte gUnknown_03002D40
+_0800F948: .4byte gOamObjects+0x1A0
 _0800F94C: .4byte gIORegisters
 _0800F950: .4byte gScriptContext
 _0800F954: .4byte gSaveDataBuffer
@@ -1907,7 +1907,7 @@ _0800F958: .4byte 0x0000FCFF
 _0800F95C:
 	cmp r0, #5
 	bne _0800F988
-	ldr r3, _0800F978 @ =gUnknown_03002D68
+	ldr r3, _0800F978 @ =gOamObjects+0x1C8
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r3]
@@ -1919,7 +1919,7 @@ _0800F95C:
 	mov r8, r2
 	b _0800F9C4
 	.align 2, 0
-_0800F978: .4byte gUnknown_03002D68
+_0800F978: .4byte gOamObjects+0x1C8
 _0800F97C: .4byte gIORegisters
 _0800F980: .4byte gScriptContext
 _0800F984: .4byte gSaveDataBuffer
@@ -1932,7 +1932,7 @@ _0800F988:
 	mov r8, r1
 	cmp r0, #6
 	bne _0800F9C4
-	ldr r3, _0800FA90 @ =gUnknown_03002D58
+	ldr r3, _0800FA90 @ =gOamObjects+0x1B8
 	ldr r1, _0800FA94 @ =0x0000FCFF
 	adds r0, r1, #0
 	ldrh r2, [r3]
@@ -1962,7 +1962,7 @@ _0800F9C4:
 	ands r0, r2
 	cmp r0, #0
 	beq _0800F9DA
-	ldr r3, _0800FA98 @ =gUnknown_03002D70
+	ldr r3, _0800FA98 @ =gOamObjects+0x1D0
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r3]
@@ -2058,9 +2058,9 @@ _0800FA7E:
 _0800FA84: .4byte gIORegisters
 _0800FA88: .4byte gScriptContext
 _0800FA8C: .4byte gSaveDataBuffer
-_0800FA90: .4byte gUnknown_03002D58
+_0800FA90: .4byte gOamObjects+0x1B8
 _0800FA94: .4byte 0x0000FCFF
-_0800FA98: .4byte gUnknown_03002D70
+_0800FA98: .4byte gOamObjects+0x1D0
 _0800FA9C: .4byte 0x0000FDFF
 _0800FAA0: .4byte 0x0000FBFF
 _0800FAA4: .4byte gOamObjects
@@ -2332,12 +2332,12 @@ _0800FC64:
 	ldr r2, _0800FD48 @ =0x00000934
 	adds r3, r3, r2
 	str r3, [r4]
-	ldr r0, _0800FD4C @ =gUnknown_03003AF0
+	ldr r0, _0800FD4C @ =gMapMarker
 	str r0, [r4, #4]
 	ldr r0, _0800FD50 @ =0x80000050
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	bl sub_8019F8C
+	bl MakeMapMarkerSprites
 	ldrb r3, [r5, #0xc]
 	cmp r3, #5
 	bne _0800FCD6
@@ -2395,7 +2395,7 @@ _0800FD3C: .4byte 0x000009D4
 _0800FD40: .4byte gOamObjects
 _0800FD44: .4byte 0x80000200
 _0800FD48: .4byte 0x00000934
-_0800FD4C: .4byte gUnknown_03003AF0
+_0800FD4C: .4byte gMapMarker
 _0800FD50: .4byte 0x80000050
 _0800FD54: .4byte gTestimony
 _0800FD58: .4byte gAnimation+0x44
@@ -2465,10 +2465,10 @@ _0800FDDC:
 	beq _0800FDFC
 	movs r0, #9
 	movs r1, #0
-	bl sub_8014B40
-	bl sub_8015670
+	bl SetPsycheLockState
+	bl UpdatePsycheLockAnimation
 _0800FDFC:
-	bl sub_8015B4C
+	bl SetPsycheLockPresentButtonOAMInCourtRecord
 	b _0800FE2A
 	.align 2, 0
 _0800FE04: .4byte gMain
@@ -2486,7 +2486,7 @@ _0800FE10:
 	ldrb r0, [r0]
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18
-	bl sub_80156F8
+	bl ShowPsycheLockLocksAndChainsWithoutAnimating
 _0800FE2A:
 	movs r0, #1
 	movs r1, #1
@@ -2504,7 +2504,7 @@ _0800FE40:
 	ldrh r4, [r0]
 	cmp r4, #0
 	bne _0800FE54
-	bl sub_8011354
+	bl UnpauseBGM
 	movs r0, #1
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -2594,7 +2594,7 @@ sub_800FEE8: @ 0x0800FEE8
 	push {r7}
 	adds r5, r0, #0
 	adds r4, r1, #0
-	ldr r7, _0800FF08 @ =gUnknown_03002D40
+	ldr r7, _0800FF08 @ =gOamObjects+0x1A0
 	ldr r3, _0800FF0C @ =gAnimation+0x44
 	ldrb r1, [r5, #0xa]
 	cmp r1, #2
@@ -2607,7 +2607,7 @@ _0800FF02:
 	beq _0800FF18
 	b _08010036
 	.align 2, 0
-_0800FF08: .4byte gUnknown_03002D40
+_0800FF08: .4byte gOamObjects+0x1A0
 _0800FF0C: .4byte gAnimation+0x44
 _0800FF10:
 	cmp r1, #3
@@ -2630,7 +2630,7 @@ _0800FF18:
 	b _080101CE
 _0800FF30:
 	movs r0, #4
-	bl sub_8012824
+	bl PlayAnimation
 	ldr r0, _0800FF50 @ =gMain
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -2777,7 +2777,7 @@ _08010044:
 	adds r0, #0xc0
 	ldrb r0, [r0]
 	ldrb r1, [r3, #0xe]
-	bl sub_8015810
+	bl GetPsycheLockDataIndexByRoomAndPerson
 	movs r2, #0x94
 	lsls r2, r2, #2
 	adds r1, r5, r2
@@ -2817,7 +2817,7 @@ _08010080:
 	ldrb r4, [r4, #0xd]
 	adds r1, r4, r1
 	ldrb r1, [r1]
-	bl sub_8015850
+	bl IsPresentedEvidenceValidForPsycheLock
 	adds r3, r0, #0
 	cmp r3, #0
 	blt _08010104
@@ -3070,7 +3070,7 @@ _080102A0:
 	lsls r0, r1, #0x10
 	asrs r0, r0, #0x11
 	movs r1, #4
-	bl sub_80115D4
+	bl SetBGMVolume
 	movs r0, #0xf
 	bl PlaySE
 	ldrb r0, [r6, #9]
@@ -3124,7 +3124,7 @@ sub_8010310: @ 0x08010310
 	movs r0, #0x80
 	lsls r0, r0, #1
 	movs r1, #0x1e
-	bl sub_80115D4
+	bl SetBGMVolume
 	movs r0, #1
 	strb r0, [r5, #0xa]
 _0801034C:
@@ -3520,7 +3520,7 @@ _0801068C: .4byte 0x80000A00
 sub_8010690: @ 0x08010690
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
-	ldr r1, _080106F4 @ =gUnknown_03002CB0
+	ldr r1, _080106F4 @ =gOamObjects+0x110
 	movs r0, #0x18
 	strh r0, [r1]
 	movs r0, #0xc0
@@ -3571,14 +3571,14 @@ _080106D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080106F4: .4byte gUnknown_03002CB0
+_080106F4: .4byte gOamObjects+0x110
 _080106F8: .4byte 0x000021E0
 _080106FC: .4byte 0x00008048
 _08010700: .4byte 0x00002230
 
 	thumb_func_start sub_8010704
 sub_8010704: @ 0x08010704
-	ldr r1, _0801071C @ =gUnknown_03002CB0
+	ldr r1, _0801071C @ =gOamObjects+0x110
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
@@ -3592,11 +3592,11 @@ _08010710:
 	bls _08010710
 	bx lr
 	.align 2, 0
-_0801071C: .4byte gUnknown_03002CB0
+_0801071C: .4byte gOamObjects+0x110
 
 	thumb_func_start sub_8010720
 sub_8010720: @ 0x08010720
-	ldr r2, _08010750 @ =gUnknown_03002D08
+	ldr r2, _08010750 @ =gOamObjects+0x168
 	cmp r0, #0
 	beq _08010770
 	movs r0, #0x60
@@ -3620,7 +3620,7 @@ sub_8010720: @ 0x08010720
 	strh r0, [r2, #4]
 	b _0801077C
 	.align 2, 0
-_08010750: .4byte gUnknown_03002D08
+_08010750: .4byte gOamObjects+0x168
 _08010754: .4byte 0x000040A0
 _08010758: .4byte 0x000041C8
 _0801075C: .4byte 0x00004060
@@ -3641,7 +3641,7 @@ _0801077C:
 
 	thumb_func_start sub_8010780
 sub_8010780: @ 0x08010780
-	ldr r3, _080107E0 @ =gUnknown_03002D08
+	ldr r3, _080107E0 @ =gOamObjects+0x168
 	cmp r0, #0
 	bne _08010788
 	b _0801089C
@@ -3690,7 +3690,7 @@ _08010788:
 	lsls r0, r0, #2
 	b _080108B4
 	.align 2, 0
-_080107E0: .4byte gUnknown_03002D08
+_080107E0: .4byte gOamObjects+0x168
 _080107E4: .4byte gMain
 _080107E8: .4byte 0x0000403C
 _080107EC: .4byte 0x000041C8
@@ -3783,7 +3783,7 @@ _080108B8:
 
 	thumb_func_start sub_80108BC
 sub_80108BC: @ 0x080108BC
-	ldr r0, _080108F0 @ =gUnknown_03002D08
+	ldr r0, _080108F0 @ =gOamObjects+0x168
 	movs r2, #0x90
 	strh r2, [r0]
 	ldr r1, _080108F4 @ =0x000040B8
@@ -3810,7 +3810,7 @@ sub_80108BC: @ 0x080108BC
 	strh r1, [r0, #8]
 	bx lr
 	.align 2, 0
-_080108F0: .4byte gUnknown_03002D08
+_080108F0: .4byte gOamObjects+0x168
 _080108F4: .4byte 0x000040B8
 _080108F8: .4byte 0x000041C4
 _080108FC: .4byte 0x000041CC
@@ -4189,7 +4189,7 @@ _08010B9C:
 UpdateItemPlate: @ 0x08010BA8
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
-	ldr r5, _08010BD0 @ =gUnknown_03002DA8
+	ldr r5, _08010BD0 @ =gOamObjects+0x208
 	bl sub_8016ED8
 	cmp r0, #1
 	bne _08010BB8
@@ -4209,7 +4209,7 @@ _08010BC6:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08010BD0: .4byte gUnknown_03002DA8
+_08010BD0: .4byte gOamObjects+0x208
 _08010BD4: .4byte _08010BD8
 _08010BD8: @ jump table
 	.4byte _08010DD2 @ case 0
@@ -4227,17 +4227,17 @@ _08010BF4:
 	cmp r0, #0
 	bne _08010C18
 	ldr r1, _08010C0C @ =0x040000D4
-	ldr r0, _08010C10 @ =gUnknown_03002DA8
+	ldr r0, _08010C10 @ =gOamObjects+0x208
 	str r0, [r1]
 	ldr r0, _08010C14 @ =0x07000208
 	b _08010C20
 	.align 2, 0
 _08010C0C: .4byte 0x040000D4
-_08010C10: .4byte gUnknown_03002DA8
+_08010C10: .4byte gOamObjects+0x208
 _08010C14: .4byte 0x07000208
 _08010C18:
 	ldr r1, _08010C3C @ =0x040000D4
-	ldr r0, _08010C40 @ =gUnknown_03002DE0
+	ldr r0, _08010C40 @ =gOamObjects+0x240
 	str r0, [r1]
 	ldr r0, _08010C44 @ =0x07000240
 _08010C20:
@@ -4256,7 +4256,7 @@ _08010C20:
 	b _08010C52
 	.align 2, 0
 _08010C3C: .4byte 0x040000D4
-_08010C40: .4byte gUnknown_03002DE0
+_08010C40: .4byte gOamObjects+0x240
 _08010C44: .4byte 0x07000240
 _08010C48: .4byte 0x80000004
 _08010C4C:
@@ -4364,17 +4364,17 @@ _08010CFC:
 	cmp r0, #0
 	bne _08010D28
 	ldr r1, _08010D1C @ =0x040000D4
-	ldr r0, _08010D20 @ =gUnknown_03002DA8
+	ldr r0, _08010D20 @ =gOamObjects+0x208
 	str r0, [r1]
 	ldr r0, _08010D24 @ =0x07000208
 	b _08010D30
 	.align 2, 0
 _08010D1C: .4byte 0x040000D4
-_08010D20: .4byte gUnknown_03002DA8
+_08010D20: .4byte gOamObjects+0x208
 _08010D24: .4byte 0x07000208
 _08010D28:
 	ldr r1, _08010D50 @ =0x040000D4
-	ldr r0, _08010D54 @ =gUnknown_03002DE0
+	ldr r0, _08010D54 @ =gOamObjects+0x240
 	str r0, [r1]
 	ldr r0, _08010D58 @ =0x07000240
 _08010D30:
@@ -4397,7 +4397,7 @@ _08010D40:
 	b _08010DD0
 	.align 2, 0
 _08010D50: .4byte 0x040000D4
-_08010D54: .4byte gUnknown_03002DE0
+_08010D54: .4byte gOamObjects+0x240
 _08010D58: .4byte 0x07000240
 _08010D5C: .4byte 0x80000004
 _08010D60: .4byte gBG1MapBuffer

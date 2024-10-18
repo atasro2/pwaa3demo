@@ -108,7 +108,7 @@ _0800BCFC:
 _0800BD14:
 	adds r0, r4, #0
 	adds r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	cmp r5, #0
 	beq _0800BD28
@@ -314,7 +314,7 @@ _0800BE94:
 _0800BEBE:
 	adds r0, r4, #0
 	adds r0, #0x83
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	cmp r5, #0
 	beq _0800BEE2

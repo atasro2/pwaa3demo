@@ -49,8 +49,8 @@ _08011CEC: .4byte 0x040000D4
 _08011CF0: .4byte 0x81000440
 _08011CF4: .4byte gMain
 
-	thumb_func_start sub_8011CF8
-sub_8011CF8: @ 0x08011CF8
+	thumb_func_start ClearAllAnimationSprites
+ClearAllAnimationSprites: @ 0x08011CF8
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -110,8 +110,8 @@ _08011D5C: .4byte gAnimation+0x44
 _08011D60: .4byte 0x0000083C
 _08011D64: .4byte gOamObjects
 
-	thumb_func_start sub_8011D68
-sub_8011D68: @ 0x08011D68
+	thumb_func_start FindAnimationFromAnimId
+FindAnimationFromAnimId: @ 0x08011D68
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	ldr r1, _08011D8C @ =gAnimation+0x83C
@@ -148,7 +148,7 @@ sub_8011DA0: @ 0x08011DA0
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r7, r0, #0
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	cmp r4, #0
 	beq _08011E38
@@ -168,7 +168,7 @@ sub_8011DA0: @ 0x08011DA0
 	adds r5, r6, #0
 _08011DCC:
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	mov r1, sp
 	movs r0, #0
 	strh r0, [r1]
@@ -401,8 +401,8 @@ _08011F88:
 	.align 2, 0
 _08011F8C: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_8011F90
-sub_8011F90: @ 0x08011F90
+	thumb_func_start SetAnimationScale
+SetAnimationScale: @ 0x08011F90
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -502,8 +502,8 @@ _08012058: .4byte gUnknown_08028114
 _0801205C: .4byte gSineTable
 _08012060: .4byte gOamObjects
 
-	thumb_func_start sub_8012064
-sub_8012064: @ 0x08012064
+	thumb_func_start DisableAnimationScale
+DisableAnimationScale: @ 0x08012064
 	push {lr}
 	adds r2, r0, #0
 	cmp r2, #0
@@ -1441,7 +1441,7 @@ sub_8012700: @ 0x08012700
 	cmp r0, #0
 	beq _08012736
 	adds r0, r5, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _08012736:
 	movs r0, #0
 	b _08012802
@@ -1559,8 +1559,8 @@ _08012818: .4byte 0x040000D4
 _0801281C: .4byte 0x81000022
 _08012820: .4byte gMain
 
-	thumb_func_start sub_8012824
-sub_8012824: @ 0x08012824
+	thumb_func_start PlayAnimation
+PlayAnimation: @ 0x08012824
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	ldr r2, _0801285C @ =gMain
@@ -1585,7 +1585,7 @@ sub_8012824: @ 0x08012824
 _0801284E:
 	adds r0, r3, #0
 	adds r2, r4, #0
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	pop {r4, r5}
 	pop {r1}
 	bx r1
@@ -1593,8 +1593,8 @@ _0801284E:
 _0801285C: .4byte gMain
 _08012860: .4byte gUnknown_080272B8
 
-	thumb_func_start sub_8012864
-sub_8012864: @ 0x08012864
+	thumb_func_start PlayAnimationAtCustomOrigin
+PlayAnimationAtCustomOrigin: @ 0x08012864
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x1c
 	adds r5, r0, #0
@@ -1841,7 +1841,7 @@ _08012A3A:
 	ldrsh r1, [r4, r2]
 	movs r3, #6
 	ldrsh r2, [r4, r3]
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	adds r6, r0, #0
 	ldr r0, [r4, #0x14]
 	movs r1, #0x82
@@ -2115,7 +2115,7 @@ _08012C50:
 _08012C64: .4byte 0x7FFFFFFF
 _08012C68:
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r5, #0
 	b _08012C86
 _08012C72:
@@ -2246,7 +2246,7 @@ sub_8012D38: @ 0x08012D38
 	lsrs r0, r4, #8
 	movs r1, #0xff
 	ands r4, r1
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	b _08012D72
 	.align 2, 0
@@ -2446,7 +2446,7 @@ _08012EE4: .4byte 0x0000071F
 _08012EE8: .4byte 0xFDFFFFFF
 _08012EEC:
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	b _08012F3C
 _08012EF4:
 	adds r1, r3, #0
@@ -2522,8 +2522,8 @@ _08012F70:
 	.align 2, 0
 _08012F78: .4byte gAnimation
 
-	thumb_func_start sub_8012F7C
-sub_8012F7C: @ 0x08012F7C
+	thumb_func_start DestroyAnimation
+DestroyAnimation: @ 0x08012F7C
 	push {r4, r5, r6, r7, lr}
 	adds r3, r0, #0
 	ldr r6, _0801303C @ =gMain
@@ -3141,7 +3141,7 @@ _08013428:
 	adds r5, r6, #0
 	movs r0, #0x20
 	mov sb, r0
-	ldr r0, _08013478 @ =gUnknown_03003E50
+	ldr r0, _08013478 @ =gTextBoxCharacters
 	movs r1, #0x80
 	lsls r1, r1, #8
 	mov r8, r1
@@ -3179,7 +3179,7 @@ _08013444:
 	orrs r0, r1
 	b _0801348C
 	.align 2, 0
-_08013478: .4byte gUnknown_03003E50
+_08013478: .4byte gTextBoxCharacters
 _0801347C: .4byte 0x0000FBFF
 _08013480: .4byte 0x00004009
 _08013484: .4byte gScriptContext
@@ -3707,7 +3707,7 @@ _08013862:
 	cmp r0, #0
 	bne _0801388A
 	ldrh r0, [r4, #0xc]
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
 	bl sub_801208C
@@ -3733,7 +3733,7 @@ _0801389A:
 	beq _080138D6
 _080138B0:
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	b _0801398A
 _080138B8:
 	adds r0, r1, #0
@@ -3749,7 +3749,7 @@ _080138B8:
 	cmp r1, r0
 	beq _080138D6
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _080138D6:
 	ldr r1, [r4]
 	movs r0, #0x40
@@ -3873,7 +3873,7 @@ _080139AE:
 	movs r0, #0xfb
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8011CF8
+	bl ClearAllAnimationSprites
 _080139C6:
 	bl sub_8013050
 	add sp, #4
@@ -4202,7 +4202,7 @@ _08013C26:
 	cmp r0, #0
 	bne _08013C4E
 	ldrh r0, [r4, #0xc]
-	bl sub_8012824
+	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
 	bl sub_801208C
@@ -4228,7 +4228,7 @@ _08013C5E:
 	beq _08013C9A
 _08013C74:
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	b _08013D4E
 _08013C7C:
 	adds r0, r1, #0
@@ -4244,7 +4244,7 @@ _08013C7C:
 	cmp r1, r0
 	beq _08013C9A
 	adds r0, r4, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _08013C9A:
 	ldr r1, [r4]
 	movs r0, #0x40
@@ -4368,7 +4368,7 @@ _08013D72:
 	movs r0, #0xfb
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8011CF8
+	bl ClearAllAnimationSprites
 _08013D8A:
 	add sp, #4
 	pop {r3, r4, r5}
@@ -5226,367 +5226,3 @@ _080143F6:
 Case3OpeningAnimationEffect: @ 0x080143FC
 	bx lr
 	.align 2, 0
-
-	thumb_func_start sub_8014400
-sub_8014400: @ 0x08014400
-	push {r4, r5, r6, lr}
-	mov r6, r8
-	push {r6}
-	adds r5, r0, #0
-	ldr r0, _0801446C @ =gIORegisters
-	mov r8, r0
-	ldr r1, _08014470 @ =0x00000C64
-	adds r6, r5, r1
-	movs r0, #0xff
-	bl sub_8011D68
-	adds r4, r0, #0
-	str r4, [r6, #0x44]
-	adds r0, r6, #0
-	adds r1, r4, #0
-	movs r2, #0x44
-	bl memcpy
-	bl sub_8011CF8
-	movs r1, #0
-	str r1, [r4]
-	ldr r2, _08014474 @ =0x00000CAC
-	adds r0, r5, r2
-	strb r1, [r0]
-	adds r2, #1
-	adds r0, r5, r2
-	strb r1, [r0]
-	ldrb r0, [r5, #1]
-	adds r0, #1
-	strb r0, [r5, #1]
-	movs r0, #0x4a
-	add r8, r0
-	ldr r0, _08014478 @ =0x0000FDFF
-	mov r1, r8
-	ldrh r1, [r1]
-	ands r0, r1
-	mov r2, r8
-	strh r0, [r2]
-	movs r0, #2
-	bl CopyBGDataToVram
-	movs r0, #0x11
-	movs r1, #0
-	movs r2, #0
-	movs r3, #0
-	bl PlayPersonAnimation
-	pop {r3}
-	mov r8, r3
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801446C: .4byte gIORegisters
-_08014470: .4byte 0x00000C64
-_08014474: .4byte 0x00000CAC
-_08014478: .4byte 0x0000FDFF
-
-	thumb_func_start sub_801447C
-sub_801447C: @ 0x0801447C
-	push {r4, r5, r6, r7, lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, #0
-	ldr r4, _080144D4 @ =gCourtScroll
-	ldr r0, _080144D8 @ =0x00000C64
-	adds r7, r5, r0
-	movs r1, #0
-	mov r8, r1
-	movs r0, #0xff
-	bl sub_8011D68
-	ldrh r0, [r4, #4]
-	cmp r0, #0
-	beq _0801449C
-	b _08014668
-_0801449C:
-	ldr r0, _080144DC @ =gUnknown_080281F0
-	movs r1, #0
-	movs r2, #2
-	bl nullsub_20
-	ldr r0, _080144E0 @ =gJoypad
-	ldrh r1, [r0, #2]
-	movs r0, #0x40
-	ands r0, r1
-	lsls r0, r0, #0x10
-	lsrs r2, r0, #0x10
-	cmp r2, #0
-	beq _080144E8
-	ldr r2, _080144E4 @ =0x00000CAC
-	adds r1, r5, r2
-	ldrb r0, [r1]
-	subs r0, #1
-	strb r0, [r1]
-	movs r3, #1
-	mov r8, r3
-	lsls r0, r0, #0x18
-	cmp r0, #0
-	blt _080144CC
-	b _080145E2
-_080144CC:
-	movs r0, #2
-	strb r0, [r1]
-	b _080145E2
-	.align 2, 0
-_080144D4: .4byte gCourtScroll
-_080144D8: .4byte 0x00000C64
-_080144DC: .4byte gUnknown_080281F0
-_080144E0: .4byte gJoypad
-_080144E4: .4byte 0x00000CAC
-_080144E8:
-	movs r0, #0x80
-	ands r0, r1
-	cmp r0, #0
-	beq _08014510
-	ldr r0, _0801450C @ =0x00000CAC
-	adds r1, r5, r0
-	ldrb r0, [r1]
-	adds r0, #1
-	strb r0, [r1]
-	movs r3, #1
-	mov r8, r3
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #2
-	ble _080145E2
-	strb r2, [r1]
-	b _080145E2
-	.align 2, 0
-_0801450C: .4byte 0x00000CAC
-_08014510:
-	movs r0, #1
-	ands r0, r1
-	cmp r0, #0
-	beq _080145E2
-	movs r6, #0
-	ldr r1, _08014534 @ =0x00000CAC
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #1
-	beq _08014566
-	cmp r0, #1
-	bgt _08014538
-	cmp r0, #0
-	beq _0801453E
-	b _080145A8
-	.align 2, 0
-_08014534: .4byte 0x00000CAC
-_08014538:
-	cmp r0, #2
-	beq _0801458C
-	b _080145A8
-_0801453E:
-	ldr r6, _08014554 @ =gPalCourtScroll
-	ldr r2, _08014558 @ =0x00000CAD
-	adds r0, r5, r2
-	ldrb r0, [r0]
-	lsls r0, r0, #0x18
-	asrs r0, r0, #0x18
-	cmp r0, #0
-	beq _0801455C
-	movs r0, #1
-	b _08014578
-	.align 2, 0
-_08014554: .4byte gPalCourtScroll
-_08014558: .4byte 0x00000CAD
-_0801455C:
-	movs r1, #0x80
-	lsls r1, r1, #5
-	movs r0, #1
-	movs r2, #3
-	b _0801457C
-_08014566:
-	ldr r6, _08014584 @ =gPalCourtScroll
-	ldr r3, _08014588 @ =0x00000CAD
-	adds r0, r5, r3
-	movs r1, #0
-	ldrsb r1, [r0, r1]
-	adds r4, r0, #0
-	cmp r1, #0
-	beq _080145D0
-	movs r0, #2
-_08014578:
-	movs r1, #1
-	movs r2, #0x11
-_0801457C:
-	movs r3, #0
-	bl SetCourtScrollPersonAnim
-	b _080145A8
-	.align 2, 0
-_08014584: .4byte gPalCourtScroll
-_08014588: .4byte 0x00000CAD
-_0801458C:
-	ldr r6, _080145C8 @ =gPalCourtScroll
-	ldr r1, _080145CC @ =0x00000CAD
-	adds r0, r5, r1
-	movs r1, #0
-	ldrsb r1, [r0, r1]
-	adds r4, r0, #0
-	cmp r1, #0
-	beq _080145D0
-	movs r0, #0
-	movs r1, #1
-	movs r2, #3
-	movs r3, #0
-	bl SetCourtScrollPersonAnim
-_080145A8:
-	adds r0, r7, #0
-	adds r0, #0x49
-	movs r1, #0
-	ldrsb r1, [r0, r1]
-	adds r4, r0, #0
-	cmp r1, #0
-	beq _080145D0
-	adds r0, r6, #0
-	movs r1, #0x1e
-	movs r2, #0x1f
-	movs r3, #1
-	bl InitCourtScroll
-	movs r0, #0
-	b _080145E0
-	.align 2, 0
-_080145C8: .4byte gPalCourtScroll
-_080145CC: .4byte 0x00000CAD
-_080145D0:
-	movs r3, #0x80
-	lsls r3, r3, #5
-	adds r0, r6, #0
-	movs r1, #0
-	movs r2, #0x1f
-	bl InitCourtScroll
-	movs r0, #1
-_080145E0:
-	strb r0, [r4]
-_080145E2:
-	adds r4, r7, #0
-	adds r4, #0x48
-	mov r2, r8
-	cmp r2, #0
-	beq _08014632
-	adds r1, r7, #0
-	adds r1, #0x49
-	movs r0, #0
-	strb r0, [r1]
-	movs r0, #0
-	ldrsb r0, [r4, r0]
-	cmp r0, #1
-	beq _0801460C
-	cmp r0, #1
-	bgt _08014606
-	cmp r0, #0
-	beq _0801460C
-	b _08014632
-_08014606:
-	cmp r0, #2
-	beq _08014620
-	b _08014632
-_0801460C:
-	movs r0, #2
-	bl CopyBGDataToVram
-	movs r0, #0x11
-	movs r1, #0
-	movs r2, #0
-	movs r3, #0
-	bl PlayPersonAnimation
-	b _08014632
-_08014620:
-	movs r0, #1
-	bl CopyBGDataToVram
-	movs r0, #3
-	movs r1, #0
-	movs r2, #0
-	movs r3, #0
-	bl PlayPersonAnimation
-_08014632:
-	ldr r0, _08014674 @ =gUnknown_08028208
-	movs r1, #0xa
-	movs r2, #5
-	bl nullsub_20
-	ldr r0, _08014678 @ =gUnknown_08028214
-	movs r1, #0xa
-	movs r2, #6
-	bl nullsub_20
-	ldr r0, _0801467C @ =gUnknown_08028220
-	movs r1, #0xa
-	movs r2, #7
-	bl nullsub_20
-	ldr r0, _08014680 @ =gUnknown_0802822C
-	movs r1, #0xa
-	movs r2, #8
-	bl nullsub_20
-	ldr r0, _08014684 @ =gUnknown_08028238
-	movs r2, #0
-	ldrsb r2, [r4, r2]
-	adds r2, #6
-	movs r1, #0xa
-	bl nullsub_20
-_08014668:
-	pop {r3}
-	mov r8, r3
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08014674: .4byte gUnknown_08028208
-_08014678: .4byte gUnknown_08028214
-_0801467C: .4byte gUnknown_08028220
-_08014680: .4byte gUnknown_0802822C
-_08014684: .4byte gUnknown_08028238
-
-	thumb_func_start sub_8014688
-sub_8014688: @ 0x08014688
-	push {r4, lr}
-	adds r4, r0, #0
-	ldr r0, _080146AC @ =0x00000C64
-	adds r4, r4, r0
-	ldr r0, _080146B0 @ =gUnknown_03004BBC
-	bl sub_8012F7C
-	ldr r0, [r4, #0x44]
-	adds r1, r4, #0
-	movs r2, #0x44
-	bl memcpy
-	ldr r1, _080146B4 @ =gMain
-	movs r0, #3
-	strb r0, [r1, #9]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080146AC: .4byte 0x00000C64
-_080146B0: .4byte gUnknown_03004BBC
-_080146B4: .4byte gMain
-
-	thumb_func_start sub_80146B8
-sub_80146B8: @ 0x080146B8
-	push {r4, lr}
-	adds r4, r0, #0
-	ldr r1, _080146F0 @ =gJoypad
-	movs r0, #8
-	ldrh r1, [r1, #2]
-	ands r0, r1
-	cmp r0, #0
-	beq _080146CC
-	movs r0, #2
-	strb r0, [r4, #1]
-_080146CC:
-	movs r0, #0xa
-	movs r1, #0x14
-	movs r2, #5
-	movs r3, #0xa
-	bl sub_8001610
-	ldr r0, _080146F4 @ =gUnknown_0814DCA8
-	ldrb r2, [r4, #1]
-	lsls r1, r2, #2
-	adds r1, r1, r0
-	ldr r1, [r1]
-	adds r0, r4, #0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080146F0: .4byte gJoypad
-_080146F4: .4byte gUnknown_0814DCA8

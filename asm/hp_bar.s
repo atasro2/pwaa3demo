@@ -13,7 +13,7 @@ LoadHPBarGraphics: @ 0x08016014
 	ldr r3, _080160A4 @ =0x06011880
 _08016024:
 	movs r1, #0
-	ldr r2, _080160A8 @ =gUnknown_03003AF0
+	ldr r2, _080160A8 @ =gMapMarker
 _08016028:
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -78,7 +78,7 @@ _08016038:
 _0801609C: .4byte gScriptContext
 _080160A0: .4byte 0x06015000
 _080160A4: .4byte 0x06011880
-_080160A8: .4byte gUnknown_03003AF0
+_080160A8: .4byte gMapMarker
 _080160AC: .4byte 0x06011080
 _080160B0: .4byte 0x040000D4
 _080160B4: .4byte gGfxHPBarProgress
@@ -110,16 +110,16 @@ sub_80160E0: @ 0x080160E0
 	cmp r0, #0
 	bne _08016110
 	ldr r6, _08016108 @ =0x06011880
-	ldr r0, _0801610C @ =gUnknown_03002DB8
+	ldr r0, _0801610C @ =gOamObjects+0x218
 	str r0, [sp]
 	b _08016116
 	.align 2, 0
 _08016104: .4byte gScriptContext
 _08016108: .4byte 0x06011880
-_0801610C: .4byte gUnknown_03002DB8
+_0801610C: .4byte gOamObjects+0x218
 _08016110:
 	ldr r6, _08016200 @ =0x06015000
-	ldr r1, _08016204 @ =gUnknown_03002CF8
+	ldr r1, _08016204 @ =gOamObjects+0x158
 	str r1, [sp]
 _08016116:
 	movs r3, #0
@@ -129,7 +129,7 @@ _08016116:
 	ldr r2, [sp]
 	adds r2, #8
 	mov ip, r2
-	ldr r4, _08016208 @ =gUnknown_03003AF0
+	ldr r4, _08016208 @ =gMapMarker
 _08016126:
 	lsls r0, r3, #2
 	adds r0, r0, r3
@@ -243,8 +243,8 @@ _08016136:
 	bx r0
 	.align 2, 0
 _08016200: .4byte 0x06015000
-_08016204: .4byte gUnknown_03002CF8
-_08016208: .4byte gUnknown_03003AF0
+_08016204: .4byte gOamObjects+0x158
+_08016208: .4byte gMapMarker
 _0801620C: .4byte 0x06011080
 _08016210: .4byte 0xF9FF0000
 _08016214: .4byte 0x000001FF
@@ -591,7 +591,7 @@ _080164C2:
 	adds r5, r6, #0
 	adds r5, #0x6b
 	adds r0, r5, #0
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _08016512
@@ -603,7 +603,7 @@ _080164C2:
 	adds r2, r3, r2
 	adds r2, #8
 	adds r0, r5, #0
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	adds r4, r0, #0
 	subs r5, #0x5b
 	bl Random
@@ -618,7 +618,7 @@ _080164C2:
 	adds r2, r2, r0
 	adds r0, r4, #0
 	adds r1, r5, #0
-	bl sub_8011F90
+	bl SetAnimationScale
 _08016512:
 	adds r7, #8
 	movs r1, #4
@@ -672,7 +672,7 @@ _08016570:
 	mov sb, r3
 _08016576:
 	movs r1, #0
-	ldr r2, _08016634 @ =gUnknown_03003AF0
+	ldr r2, _08016634 @ =gMapMarker
 _0801657A:
 	lsls r0, r1, #2
 	adds r0, r0, r1
@@ -766,7 +766,7 @@ _0801658A:
 	b _08016782
 	.align 2, 0
 _08016630: .4byte 0x06015000
-_08016634: .4byte gUnknown_03003AF0
+_08016634: .4byte gMapMarker
 _08016638: .4byte 0x06011080
 _0801663C: .4byte 0xF9FF0000
 _08016640: .4byte gMain
@@ -1385,9 +1385,9 @@ _08016AFA:
 	cmp r4, #0
 	bne _08016B62
 	movs r0, #0x4c
-	bl sub_8011194
+	bl StopSE
 	movs r0, #0x9c
-	bl sub_8011194
+	bl StopSE
 	adds r0, r5, #0
 	adds r0, #0xb0
 	strh r4, [r0]
@@ -1612,7 +1612,7 @@ _08016C92:
 _08016CA2:
 	movs r0, #0x14
 	strh r0, [r1]
-	ldr r1, _08016CC4 @ =gUnknown_03002DE0
+	ldr r1, _08016CC4 @ =gOamObjects+0x240
 	movs r0, #0x80
 	lsls r0, r0, #2
 	strh r0, [r1]
@@ -1627,7 +1627,7 @@ _08016CBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08016CC4: .4byte gUnknown_03002DE0
+_08016CC4: .4byte gOamObjects+0x240
 _08016CC8: .4byte gTestimony
 
 	thumb_func_start ProcessHPBar
@@ -1693,7 +1693,7 @@ sub_8016D48: @ 0x08016D48
 _08016D4E:
 	adds r0, r4, #0
 	adds r0, #0x6b
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	cmp r0, #0
 	beq _08016D5C
 	adds r5, #1
@@ -1908,4 +1908,41 @@ _08016ED0: .4byte gMain
 _08016ED4:
 	movs r0, #1
 _08016ED6:
+	bx lr
+
+	thumb_func_start sub_8016ED8
+sub_8016ED8: @ 0x08016ED8
+	ldr r2, _08016F08 @ =gMain
+	adds r0, r2, #0
+	adds r0, #0xac
+	ldr r1, [r0]
+	ldr r0, _08016F0C @ =0x0014011C
+	cmp r1, r0
+	beq _08016F04
+	ldrb r0, [r2, #8]
+	cmp r0, #7
+	bne _08016EF8
+	ldr r1, _08016F10 @ =gScriptContext
+	movs r0, #4
+	ldrh r1, [r1, #0x1c]
+	ands r0, r1
+	cmp r0, #0
+	bne _08016F04
+_08016EF8:
+	adds r0, r2, #0
+	adds r0, #0xb4
+	movs r1, #0
+	ldrsh r0, [r0, r1]
+	cmp r0, #0
+	bne _08016F14
+_08016F04:
+	movs r0, #0
+	b _08016F16
+	.align 2, 0
+_08016F08: .4byte gMain
+_08016F0C: .4byte 0x0014011C
+_08016F10: .4byte gScriptContext
+_08016F14:
+	movs r0, #1
+_08016F16:
 	bx lr

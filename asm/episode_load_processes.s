@@ -443,7 +443,7 @@ _08008854:
 	movs r0, #0xf
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r3, [r7, #0x17]
 	ldrb r0, [r7, #0xb]
 	cmp r3, r0
@@ -451,7 +451,7 @@ _08008854:
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _0800889A
 	.align 2, 0
 _08008888: .4byte 0x00002C54
@@ -460,7 +460,7 @@ _08008890:
 	movs r0, #9
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800889A:
 	movs r0, #0
 	strb r0, [r7, #0xa]
@@ -468,7 +468,7 @@ _0800889A:
 _080088A0:
 	ldrb r0, [r7, #0x17]
 	adds r0, #0xe
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldrb r1, [r7, #0x17]
 	ldrb r2, [r7, #0xb]
@@ -480,7 +480,7 @@ _080088B6:
 	ldrb r0, [r7, #0x17]
 	adds r0, #0xf
 _080088BA:
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldrb r1, [r7, #0x17]
 	adds r0, r1, #1
@@ -493,11 +493,11 @@ _080088CE:
 	adds r0, r1, #0
 	adds r0, #0x10
 _080088D2:
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #8]
 	ldrb r0, [r7, #0x17]
 	adds r0, #0xd
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	ldr r1, [sp, #4]
 	ldrh r0, [r1, #0x10]
@@ -524,7 +524,7 @@ _080088D2:
 	lsls r1, r1, #1
 	movs r0, #9
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08008928
 _0800891A:
 	adds r0, r1, #0
@@ -532,7 +532,7 @@ _0800891A:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08008928:
 	ldr r1, [sp, #4]
 	movs r3, #0x10
@@ -549,7 +549,7 @@ _08008928:
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r7, #0x17]
 	adds r0, #1
 	movs r1, #0x96
@@ -639,7 +639,7 @@ _080089D4:
 	b _08008D58
 _080089EE:
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	b _08008D58
 	.align 2, 0
 _080089F8: .4byte 0xFFFFFED0
@@ -669,12 +669,12 @@ _08008A28:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08008CAA
 _08008A38:
 	ldrb r0, [r7, #0x17]
 	adds r0, #0xa
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldr r2, _08008A58 @ =gUnknown_080267E4
 	movs r4, #0x96
@@ -711,13 +711,13 @@ _08008A84: .4byte 0x0000025A
 _08008A88:
 	ldrb r0, [r7, #0x17]
 	adds r0, #0xa
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
-	bl sub_8012F7C
+	bl DestroyAnimation
 	movs r0, #9
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
-	ldr r6, _08008B0C @ =gUnknown_03002D70
+	ldr r6, _08008B0C @ =gOamObjects+0x1D0
 	ldrh r0, [r0, #0x12]
 	adds r0, #0xe0
 	strh r0, [r6]
@@ -764,7 +764,7 @@ _08008A88:
 	adds r0, #0x40
 	strh r0, [r6, #4]
 	ldr r0, [sp]
-	bl sub_8012F7C
+	bl DestroyAnimation
 	ldrb r0, [r7, #9]
 	adds r0, #1
 	strb r0, [r7, #9]
@@ -772,7 +772,7 @@ _08008A88:
 	strb r0, [r7, #0xa]
 	b _08008D58
 	.align 2, 0
-_08008B0C: .4byte gUnknown_03002D70
+_08008B0C: .4byte gOamObjects+0x1D0
 _08008B10: .4byte 0xFFFFBFC0
 _08008B14: .4byte gUnknown_080267E4
 _08008B18: .4byte 0x00000259
@@ -901,7 +901,7 @@ _08008C24: .4byte gSineTable
 _08008C28: .4byte gOamObjects
 _08008C2C: .4byte gUnknown_080264B0
 _08008C30:
-	ldr r6, _08008C64 @ =gUnknown_03002D70
+	ldr r6, _08008C64 @ =gOamObjects+0x1D0
 	ldr r5, _08008C68 @ =gUnknown_080267E4
 	ldr r2, _08008C6C @ =0x0000025A
 	adds r3, r7, r2
@@ -928,7 +928,7 @@ _08008C30:
 	strh r0, [r6, #0xc]
 	b _08008CAA
 	.align 2, 0
-_08008C64: .4byte gUnknown_03002D70
+_08008C64: .4byte gOamObjects+0x1D0
 _08008C68: .4byte gUnknown_080267E4
 _08008C6C: .4byte 0x0000025A
 _08008C70: .4byte 0xF9FF0000
@@ -950,7 +950,7 @@ _08008C74:
 	strh r0, [r1, #0xc]
 	movs r0, #5
 	bl ChangeScriptSection
-	ldr r6, _08008CBC @ =gUnknown_03002D70
+	ldr r6, _08008CBC @ =gOamObjects+0x1D0
 	ldr r1, _08008CC0 @ =0x0000FEFF
 	adds r0, r1, #0
 	ldrh r2, [r6]
@@ -967,7 +967,7 @@ _08008CAA:
 	.align 2, 0
 _08008CB4: .4byte gScriptContext
 _08008CB8: .4byte 0x0000FFFF
-_08008CBC: .4byte gUnknown_03002D70
+_08008CBC: .4byte gOamObjects+0x1D0
 _08008CC0: .4byte 0x0000FEFF
 _08008CC4:
 	ldr r7, _08008D08 @ =gSineTable
@@ -1278,15 +1278,15 @@ _08009004:
 	movs r0, #0xa
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	strb r5, [r6, #0xa]
 	bl _08009850
 _08009040:
@@ -1297,7 +1297,7 @@ _08009040:
 	movs r0, #0xf
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r1, [r6, #0x17]
 	ldrb r0, [r5]
 	subs r0, #1
@@ -1306,13 +1306,13 @@ _08009040:
 	movs r0, #0x10
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08009072
 _08009068:
 	movs r0, #0xb
 	adds r1, r4, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08009072:
 	movs r2, #0x96
 	lsls r2, r2, #2
@@ -1327,10 +1327,10 @@ _08009072:
 	b _08009850
 _08009088:
 	movs r0, #0xa
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	movs r0, #0x10
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldr r1, [sp]
 	ldrh r0, [r1, #0x10]
@@ -1396,14 +1396,14 @@ _0800910E:
 	cmp r2, #1
 	bls _0800919E
 	movs r0, #0x19
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	cmp r0, #0
 	bne _0800912A
 	movs r0, #0x19
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800912A:
 	ldr r1, _0800929C @ =gJoypad
 	movs r0, #0x20
@@ -1413,38 +1413,38 @@ _0800912A:
 	beq _0800919E
 	ldrb r0, [r6, #0x17]
 	adds r0, #9
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xd
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x13
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x19
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x1a
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #8
 	movs r1, #0x20
 	rsbs r1, r1, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x12
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x2a
 	bl PlaySE
 	movs r0, #0xb
@@ -1463,14 +1463,14 @@ _080091A6:
 	cmp r1, r0
 	bhs _0800923E
 	movs r0, #0x1a
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	cmp r0, #0
 	bne _080091CA
 	movs r0, #0x1a
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _080091CA:
 	ldr r1, _0800929C @ =gJoypad
 	movs r0, #0x10
@@ -1480,38 +1480,38 @@ _080091CA:
 	beq _0800923E
 	ldrb r0, [r6, #0x17]
 	adds r0, #9
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xf
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x13
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x19
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x1a
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xa
 	movs r1, #0x88
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x2a
 	bl PlaySE
 	movs r0, #0xa
@@ -1529,11 +1529,11 @@ _08009246:
 	cmp r0, #0
 	beq _080092A8
 	movs r0, #0x19
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x1a
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x2b
 	bl PlaySE
 	adds r1, r6, #0
@@ -1583,19 +1583,19 @@ _080092B2:
 _080092CA:
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xa
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xd
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #8]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x10
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	ldr r1, [sp, #4]
 	ldrh r0, [r1, #0x10]
@@ -1628,7 +1628,7 @@ _08009314:
 	cmp r2, #3
 	bhi _08009350
 	adds r0, #0xf
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	cmp r0, #0
 	bne _08009350
@@ -1637,10 +1637,10 @@ _08009314:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0x10
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 _08009350:
 	ldr r0, [sp]
@@ -1680,19 +1680,19 @@ _08009388:
 _0800938E:
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldrb r0, [r6, #0x17]
 	adds r0, #8
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xf
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #8]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xc
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	ldr r1, [sp, #4]
 	ldrh r0, [r1, #0x10]
@@ -1719,7 +1719,7 @@ _080093D8:
 	bls _08009408
 	adds r0, r3, #0
 	adds r0, #0xc
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	cmp r0, #0
 	bne _08009408
@@ -1728,10 +1728,10 @@ _080093D8:
 	movs r1, #0x40
 	rsbs r1, r1, #0
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xc
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 _08009408:
 	ldr r0, [sp]
@@ -1769,15 +1769,15 @@ _0800943C:
 _08009442:
 	ldrb r0, [r6, #0x17]
 	adds r0, #9
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xf
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xd
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	str r1, [sp, #8]
 	cmp r1, #0
@@ -1793,7 +1793,7 @@ _08009442:
 	cmp r1, r0
 	bge _08009480
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _08009480:
 	ldr r1, [sp, #4]
 	cmp r1, #0
@@ -1809,7 +1809,7 @@ _08009480:
 	cmp r1, r0
 	ble _080094A0
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _080094A0:
 	ldr r0, [sp, #4]
 	cmp r0, #0
@@ -1828,11 +1828,11 @@ _080094B0:
 _080094B8:
 	ldrb r0, [r6, #0x17]
 	adds r0, #9
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	adds r2, r0, #0
 	str r2, [sp, #0xc]
 	ldrb r0, [r6, #0xa]
@@ -1845,21 +1845,21 @@ _080094B8:
 	ldr r0, [sp]
 	cmp r0, #0
 	beq _080094F4
-	bl sub_8012F7C
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _08009506
 _080094F4:
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 	ldrb r0, [r6, #0x17]
 	adds r0, #9
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _08009506:
 	movs r0, #0
 	strb r0, [r6, #0xa]
@@ -1880,7 +1880,7 @@ _0800951A:
 	adds r0, #9
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _0800952C:
 	movs r0, #0
 	strb r0, [r6, #0xb]
@@ -1999,42 +1999,42 @@ _080095F4:
 	ldrb r0, [r0]
 	str r0, [r6, #8]
 	movs r0, #9
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xa
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xb
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xc
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xd
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xe
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xf
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x10
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x11
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x12
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x19
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x1a
 _0800967A:
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	b _08009850
 	.align 2, 0
 _08009684: .4byte gMain
@@ -2048,48 +2048,48 @@ _0800968C:
 	b _08009850
 _08009698:
 	movs r0, #9
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xa
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xb
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xc
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xd
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xe
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0xf
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x10
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x11
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x12
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x19
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #0x1a
-	bl sub_8011D68
-	bl sub_8012F7C
+	bl FindAnimationFromAnimId
+	bl DestroyAnimation
 	movs r0, #1
 	str r0, [r6, #8]
 	b _08009850
 _08009716:
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xe
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp]
 	movs r1, #0x96
 	lsls r1, r1, #2
@@ -2105,7 +2105,7 @@ _08009734:
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xf
 _08009738:
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #4]
 	ldrb r2, [r6, #0x17]
 	adds r1, r2, #1
@@ -2122,11 +2122,11 @@ _08009754:
 	adds r0, r2, #0
 	adds r0, #0x10
 _08009758:
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #8]
 	ldrb r0, [r6, #0x17]
 	adds r0, #0xd
-	bl sub_8011D68
+	bl FindAnimationFromAnimId
 	str r0, [sp, #0xc]
 	ldr r1, [sp, #4]
 	ldrh r0, [r1, #0x10]
@@ -2156,7 +2156,7 @@ _08009758:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	b _080097B4
 _080097A6:
 	adds r0, r1, #0
@@ -2164,7 +2164,7 @@ _080097A6:
 	movs r1, #0xb8
 	lsls r1, r1, #1
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 _080097B4:
 	ldr r1, [sp, #4]
 	movs r2, #0x10
@@ -2184,7 +2184,7 @@ _080097B4:
 	adds r0, #0x14
 	movs r1, #0x78
 	movs r2, #0x48
-	bl sub_8012864
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #1
 	strb r0, [r6, #0x18]
 	strb r0, [r6, #0x19]
@@ -2241,7 +2241,7 @@ _0800982C:
 	cmp r1, r0
 	bge _08009850
 	adds r0, r2, #0
-	bl sub_8012F7C
+	bl DestroyAnimation
 _08009850:
 	add sp, #0x10
 	pop {r4, r5, r6}
@@ -2579,7 +2579,7 @@ _08009B0E:
 	ands r0, r6
 	cmp r0, #0
 	beq _08009B80
-	ldr r2, _08009B54 @ =gUnknown_03002CD0
+	ldr r2, _08009B54 @ =gOamObjects+0x130
 	movs r7, #0
 	ldr r0, _08009B58 @ =0x0000A1A0
 	mov sl, r0
@@ -2611,7 +2611,7 @@ _08009B40:
 	strh r3, [r2, #4]
 	b _08009B6A
 	.align 2, 0
-_08009B54: .4byte gUnknown_03002CD0
+_08009B54: .4byte gOamObjects+0x130
 _08009B58: .4byte 0x0000A1A0
 _08009B5C: .4byte 0x0000C038
 _08009B60: .4byte 0x00004462
@@ -2631,7 +2631,7 @@ _08009B6A:
 	bls _08009B26
 	b _08009B9C
 _08009B80:
-	ldr r2, _08009BD8 @ =gUnknown_03002CD0
+	ldr r2, _08009BD8 @ =gOamObjects+0x130
 	movs r5, #0
 	ldr r3, _08009BDC @ =0x00004462
 	ldr r1, _08009BE0 @ =0x0000C038
@@ -2680,7 +2680,7 @@ _08009BCC:
 	subs r0, #1
 	b _0800A356
 	.align 2, 0
-_08009BD8: .4byte gUnknown_03002CD0
+_08009BD8: .4byte gOamObjects+0x130
 _08009BDC: .4byte 0x00004462
 _08009BE0: .4byte 0x0000C038
 _08009BE4: .4byte 0x000091E0
@@ -2956,7 +2956,7 @@ _08009E32:
 	ldr r1, _08009F9C @ =0x00000A78
 	adds r0, r6, r1
 	str r0, [r5]
-	ldr r0, _08009FA0 @ =gUnknown_03003E50
+	ldr r0, _08009FA0 @ =gTextBoxCharacters
 	str r0, [r5, #4]
 	ldr r0, _08009FA4 @ =0x80000180
 	str r0, [r5, #8]
@@ -2969,7 +2969,7 @@ _08009E32:
 	ldr r0, _08009FAC @ =0x80000012
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
-	bl sub_8018ABC
+	bl RedrawTextboxCharacters
 	adds r0, r6, #0
 	subs r0, #0x54
 	str r0, [r5]
@@ -3022,7 +3022,7 @@ _08009E32:
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
 	mov r0, r8
-	bl sub_8018C7C
+	bl loadSectionReadFlagsFromSaveDataBuffer
 	mov r0, r8
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -3043,12 +3043,12 @@ _08009F04:
 	lsls r3, r3, #3
 	adds r0, r6, r3
 	str r0, [r5]
-	ldr r0, _08009FE4 @ =gUnknown_03003AF0
+	ldr r0, _08009FE4 @ =gMapMarker
 	str r0, [r5, #4]
 	ldr r0, _08009FE8 @ =0x80000050
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
-	bl sub_8019F8C
+	bl MakeMapMarkerSprites
 	adds r0, r7, #0
 	adds r0, #0x24
 	ldrb r2, [r0]
@@ -3100,7 +3100,7 @@ _08009F90: .4byte gUnknown_0200035C
 _08009F94: .4byte gScriptContext
 _08009F98: .4byte 0x8000004E
 _08009F9C: .4byte 0x00000A78
-_08009FA0: .4byte gUnknown_03003E50
+_08009FA0: .4byte gTextBoxCharacters
 _08009FA4: .4byte 0x80000180
 _08009FA8: .4byte gUnknown_030070B0
 _08009FAC: .4byte 0x80000012
@@ -3117,7 +3117,7 @@ _08009FD4: .4byte 0x80000008
 _08009FD8: .4byte gUnknown_03003C70
 _08009FDC: .4byte 0x800000F0
 _08009FE0: .4byte gMain
-_08009FE4: .4byte gUnknown_03003AF0
+_08009FE4: .4byte gMapMarker
 _08009FE8: .4byte 0x80000050
 _08009FEC: .4byte 0x00001578
 _08009FF0: .4byte gBG1MapBuffer
@@ -3262,7 +3262,7 @@ _0800A11C:
 	mov r6, r8
 	ldrh r1, [r6, #0x28]
 	movs r0, #0x14
-	bl sub_80113E8
+	bl FadeInBGM
 	ldr r0, _0800A148 @ =gMain
 	ldr r1, _0800A178 @ =0x000002C6
 	adds r0, r0, r1
@@ -3410,7 +3410,7 @@ _0800A256:
 	movs r0, #0
 	mov r6, r8
 	strb r0, [r6, #0xa]
-	ldr r2, _0800A284 @ =gUnknown_03002CD0
+	ldr r2, _0800A284 @ =gOamObjects+0x130
 	lsls r0, r1, #0x18
 	cmp r0, #0
 	bne _0800A266
@@ -3433,7 +3433,7 @@ _0800A27A:
 	bl StartHardwareBlend
 	b _0800A368
 	.align 2, 0
-_0800A284: .4byte gUnknown_03002CD0
+_0800A284: .4byte gOamObjects+0x130
 _0800A288:
 	movs r0, #1
 	mov r1, r8
@@ -3441,7 +3441,7 @@ _0800A288:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800A308
-	ldr r2, _0800A2D0 @ =gUnknown_03002CD0
+	ldr r2, _0800A2D0 @ =gOamObjects+0x130
 	movs r7, #0
 _0800A298:
 	movs r5, #0
@@ -3473,7 +3473,7 @@ _0800A2BC:
 	strh r3, [r2, #4]
 	b _0800A2F2
 	.align 2, 0
-_0800A2D0: .4byte gUnknown_03002CD0
+_0800A2D0: .4byte gOamObjects+0x130
 _0800A2D4: .4byte 0x00004062
 _0800A2D8: .4byte 0x00004462
 _0800A2DC: .4byte 0x000091A0
@@ -3498,7 +3498,7 @@ _0800A2F2:
 	bls _0800A298
 	b _0800A324
 _0800A308:
-	ldr r2, _0800A378 @ =gUnknown_03002CD0
+	ldr r2, _0800A378 @ =gOamObjects+0x130
 	movs r5, #0
 	ldr r3, _0800A37C @ =0x00004062
 	ldr r1, _0800A380 @ =0x0000C038
@@ -3560,7 +3560,7 @@ _0800A368:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A378: .4byte gUnknown_03002CD0
+_0800A378: .4byte gOamObjects+0x130
 _0800A37C: .4byte 0x00004062
 _0800A380: .4byte 0x0000C038
 _0800A384: .4byte 0x000091E0

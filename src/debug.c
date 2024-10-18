@@ -3,62 +3,14 @@
 #include "background.h"
 #include "animation.h"
 #include "declarations.h"
-
-struct VramDebug {
-    u16 unk00;
-    u16 unk02;
-    u8 unk04;
-    u8 unk05;
-    u8 unk06;
-    s8 unk07;
-    u16 unk08;
-};
-
-struct FlagDebug {
-    s16 unk00;
-    s8 unk02;
-};
-
-struct ScenarioDebug {
-    s8 unk00;
-};
-
-struct DebugContext {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 process[4];
-    u16 unk8;
-    u16 unkA;
-    u16 unkC;
-    u16 unkE;
-    u16 unk10;
-    u16 unk12;
-    u16 unk14;
-    u16 unk16;
-    u8 unk18;
-    u8 unk19;
-    u8 fill1A[0x2];
-    /* +0x1C */ struct AnimationListEntry anim;
-    u8 unk60;
-    u8 unk61;
-    u8 fill62[0x2];
-    /* +0x64 */ u16 map[0x400];
-    /* +0x864 */ struct OamAttrs oam[128];
-    /* +0xC64 */ union {
-        struct VramDebug vram;
-        struct FlagDebug flag;
-        struct ScenarioDebug scenario;
-    } menu;
-};
+#include "debug.h"
 
 extern struct DebugContext gDebugCtx;
 
 void sub_800156C(void) {
     nullsub_20("/   ", 26, 0);
     sub_8006470(*(u8*)REG_ADDR_VCOUNT, 27, 0);
-    if (gMain.unk0 & 1) {
+    if (gMain.frameCounter & 1) {
         nullsub_20("0", 6, 0);
     } else {
         nullsub_20("1", 6, 0);

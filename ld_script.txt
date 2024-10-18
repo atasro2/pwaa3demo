@@ -30,8 +30,7 @@ SECTIONS {
         asm/utils.o(.text);
         src/utils_2.o(.text);
         src/case_data.o(.text);
-        asm/rom_67A8.o(.text);
-        asm/title_processes.o(.text);
+        src/title_processes.o(.text);
         asm/gameover_process.o(.text);
         src/save_processes.o(.text);
         asm/save_processes.o(.text);
@@ -40,12 +39,15 @@ SECTIONS {
         asm/rom_BC08.o(.text);
         asm/investigation.o(.text);
         asm/court_record.o(.text);
-        asm/sound.o(.text);
+        src/sound.o(.text);
         asm/animation.o(.text);
-        asm/psyche_lock.o(.text);
+        src/movietest.o(.text);
+        src/psyche_lock.o(.text);
         asm/hp_bar.o(.text);
-        asm/code.o(.text);
+        asm/signal_detector.o(.text);
+        src/script_main.o(.text);
         asm/script_commands.o(.text);
+        asm/opening.o(.text);
         asm/rom_1D308.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
@@ -66,8 +68,13 @@ SECTIONS {
         src/main.o(.rodata);
         src/debug.o(.rodata);
         rodata/rodata.o(.rodata);
+        src/sound.o(.rodata);
+        rodata/rodata_2.o(.rodata);
+        src/script_main.o(.rodata);
+        rodata/script_main.o(.rodata);
+        rodata/rodata_3.o(.rodata);
         src/m4a_tables.o(.rodata);
-        rodata/sound.o(.rodata);
+        rodata/song_data.o(.rodata);
         src/agb_sram.o(.rodata);
     } =0
     /* capcom :^)) */
@@ -78,6 +85,8 @@ SECTIONS {
         src/main.o(.data);
         src/debug.o(.data);
         data/data.o(.data);
+        src/sound.o(.data);
+        data/data_2.o(.data);
         data/script_main.o(.data);
     } =0
     . = 0x8180000;

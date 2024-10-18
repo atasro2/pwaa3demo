@@ -7,7 +7,12 @@ gUnknown_0814D894:
 
     .global gUnknown_0814D8D4
 gUnknown_0814D8D4:
-    .incbin "baserom.gba", 0x0014D8D4, 0x14
+@ replacing .incbin "baserom.gba", 0x0014d8d4, 0x14
+    .4byte nullsub_13
+    .4byte sub_8005D80
+    .4byte sub_8005D80
+    .4byte sub_8005F68
+    .4byte sub_8005F68
 
     .global gUnknown_0814D8E8
 gUnknown_0814D8E8:
@@ -19,99 +24,250 @@ gFlagPtrs:
 
     .global gUnknown_0814D93C
 gUnknown_0814D93C:
-    .incbin "baserom.gba", 0x0014D93C, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014d93c, 0x5c
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80253f8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
+.4byte 0x80266c8
 
     .global gUnknown_0814D998
 gUnknown_0814D998:
-    .incbin "baserom.gba", 0x0014D998, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014d998, 0x5c
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x8025410
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x80266b0
+.4byte 0x8025410
+.4byte 0x80266b0
 
     .global gUnknown_0814D9F4
 gUnknown_0814D9F4:
-    .incbin "baserom.gba", 0x0014D9F4, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014d9f4, 0x5c
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
+.4byte 0x80266b8
 
     .global gUnknown_0814DA50
 gUnknown_0814DA50:
-    .incbin "baserom.gba", 0x0014DA50, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014da50, 0x5c
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
 
     .global gUnknown_0814DAAC
 gUnknown_0814DAAC:
-    .incbin "baserom.gba", 0x0014DAAC, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014daac, 0x5c
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
 
     .global gUnknown_0814DB08
 gUnknown_0814DB08:
-    .incbin "baserom.gba", 0x0014DB08, 0x5C
+@ replacing .incbin "baserom.gba", 0x0014db08, 0x5c
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
+.4byte InvestigationDummy
 
-    .global gUnknown_0814DB64
-gUnknown_0814DB64:
-    .incbin "baserom.gba", 0x0014DB64, 0x24
+    .global gSaveGameProcessStates
+gSaveGameProcessStates:
+@ replacing .incbin "baserom.gba", 0x0014db64, 0x24
+.4byte sub_8007718
+.4byte sub_8007880
+.4byte sub_8007A98
+.4byte sub_8007BD4
+.4byte sub_8007E84
+.4byte sub_80082DC
+.4byte sub_8008338
+.4byte sub_80083E4
+.4byte sub_8008434
 
     .global gUnknown_0814DB88
 gUnknown_0814DB88:
-    .incbin "baserom.gba", 0x0014DB88, 0xC
+@ replacing .incbin "baserom.gba", 0x0014db88, 0xc
+.4byte sub_800A51C
+.4byte sub_800A780
+.4byte sub_800A6D4
 
     .global gUnknown_0814DB94
 gUnknown_0814DB94:
-    .incbin "baserom.gba", 0x0014DB94, 0x10
+@ replacing .incbin "baserom.gba", 0x0014db94, 0x10
+.4byte sub_800A968
+.4byte sub_800A9B4
+.4byte sub_800AA20
+.4byte sub_800A804
 
     .global gUnknown_0814DBA4
 gUnknown_0814DBA4:
-    .incbin "baserom.gba", 0x0014DBA4, 0x18
+@ replacing .incbin "baserom.gba", 0x0014dba4, 0x18
+.4byte sub_800AB7C
+.4byte sub_800ACD4
+.4byte nullsub_16
+.4byte sub_800AA34
+.4byte sub_800AEF4
+.4byte sub_800B0B0
 
     .global gInvestigationProcessStates
 gInvestigationProcessStates:
-    .incbin "baserom.gba", 0x0014DBBC, 0x2C
+@ replacing .incbin "baserom.gba", 0x0014dbbc, 0x2c
+.4byte sub_800BFF0
+.4byte sub_800C290
+.4byte sub_800C510
+.4byte sub_800C59C
+.4byte sub_800C604
+.4byte sub_800C628
+.4byte sub_800C76C
+.4byte sub_800CB08
+.4byte sub_800D10C
+.4byte sub_800DB70
+.4byte InvestigationPsycheLock
 
     .global gUnknown_0814DBE8
 gUnknown_0814DBE8:
-    .incbin "baserom.gba", 0x0014DBE8, 0x30
+@ replacing .incbin "baserom.gba", 0x0014dbe8, 0x30
+.4byte 0x800dcc8
+.4byte 0x800dd00
+.4byte 0x800dd20
+.4byte 0x800dd30
+.4byte 0x800de6c
+.4byte 0x800df18
+.4byte 0x800df24
+.4byte 0x800df2a
+.4byte 0x800e038
+.4byte 0x800e108
+.4byte 0x800e15e
+.4byte 0x800e164
 
     .global gUnknown_0814DC18
 gUnknown_0814DC18:
-    .incbin "baserom.gba", 0x0014DC18, 0x20
+@ replacing .incbin "baserom.gba", 0x0014dc18, 0x20
+.4byte 0x800eaed
+.4byte 0x800f3e1
+.4byte 0x800f551
+.4byte 0x800f615
+.4byte 0x800f679
+.4byte 0x800f731
+.4byte 0x800fecd
+.4byte 0x800fee9
 
     .global gUnknown_0814DC38
 gUnknown_0814DC38:
-    .incbin "baserom.gba", 0x0014DC38, 0xC
-
-    .global gUnknown_0814DC44
-gUnknown_0814DC44:
-    .incbin "baserom.gba", 0x0014DC44, 0x20
-
-    .global gUnknown_0814DC64
-gUnknown_0814DC64:
-    .incbin "baserom.gba", 0x0014DC64, 0xC
-
-    .global gUnknown_0814DC70
-gUnknown_0814DC70:
-    .incbin "baserom.gba", 0x0014DC70, 0x20
-
-    .global gUnknown_0814DC90
-gUnknown_0814DC90:
-    .incbin "baserom.gba", 0x0014DC90, 0x18
-
-    .global gUnknown_0814DCA8
-gUnknown_0814DCA8:
-    .incbin "baserom.gba", 0x0014DCA8, 0xC
-
-    .global gUnknown_0814DCB4
-gUnknown_0814DCB4:
-    .incbin "baserom.gba", 0x0014DCB4, 0x40
-
-    .global gUnknown_0814DCF4
-gUnknown_0814DCF4:
-    .incbin "baserom.gba", 0x0014DCF4, 0x64
-
-    .global gUnknown_0814DD58
-gUnknown_0814DD58:
-    .incbin "baserom.gba", 0x0014DD58, 0x50
-
-    .global gUnknown_0814DDA8
-gUnknown_0814DDA8:
-    .incbin "baserom.gba", 0x0014DDA8, 0x1E0
-
-    .global gUnknown_0814DF88
-gUnknown_0814DF88:
-    .incbin "baserom.gba", 0x0014DF88, 0x1E0
-
-
-
+@ replacing .incbin "baserom.gba", 0x0014dc38, 0xc
+.4byte 0x801028d
+.4byte 0x8010311
+.4byte 0x80103b5
