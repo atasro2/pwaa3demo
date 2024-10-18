@@ -5,6 +5,8 @@
 #define SOUND_FLAG_DISABLE_BGM (1 << 1)
 #define SOUND_FLAG_DISABLE_CUE (1 << 2)
 
+#include "psyche_lock.h"
+
 struct Joypad
 {
     /* +0x00 */ u16 heldKeys;
@@ -19,7 +21,7 @@ struct Joypad
 
 struct Main
 {
-    /* +0x000 */ u32 unk0;
+    /* +0x000 */ u32 frameCounter;
     /* +0x004 */ u32 unk4;
     /* +0x008 */ u8 process[0x4];
     /* +0x00C */ u8 processCopy[0x4];
@@ -34,11 +36,20 @@ struct Main
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
-    /* +0x01C */ u8 fill1C[0x14];
+    /* +0x01C */ u8 fill1C[0x4];
+    /* +0x020 */ s16 bgmFadeVolume;
+    /* +0x022 */ u8 fill22[0x2];
+    /* +0x024 */ u8 soundStatus;
+    /* +0x025 */ u8 fill25[0x3];
+    /* +0x028 */ u16 currentPlayingBgm;
+    /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
+    /* +0x02B */ u8 animationFlags; // unity: Obj_flag
+    /* +0x02C */ s16 bgmFadeAmount;
+    /* +0x02E */ s16 bgmVolume;
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 fill32[0x2];
     /* +0x034 */ u16 currentBG;
-    /* +0x036 */ u16 unk36;
+    /* +0x036 */ u16 currentDisplayedBG;
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
@@ -70,7 +81,8 @@ struct Main
     /* +0x09E */ u8 itemPlateAction;
     /* +0x0A0 */ u8 fillA0[0x2];
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
-    /* +0x0A4 */ u8 fillA4[0x1D];
+    /* +0x0A4 */ u8 fillA4[0x1C];
+    /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
     /* +0x0C3 */ u8 fillC3[1];
@@ -78,11 +90,24 @@ struct Main
     /* +0x0C6 */ u16 idleAnimationOffset; // unity: Def_wait_foa
     /* +0x0C8 */ u32 scriptFlags[8];
     /* +0x0E8 */ u32 gameStateFlags; // unity: status_flag matches debug menu
-    /* +0x0EC */ u8 fillEC[0x16C];
+    /* +0x0EC */ u32 talkEndFlags[8]; // unity: talk_end_flag
+    /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x12C */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
+    /* +0x1B0 */ struct PsycheLockData psycheLockData[4];
+    /* +0x250 */ u8 fill250[0x2];
+    /* +0x252 */ u16 psycheLockStopPresentButtonsY;
+    /* +0x254 */ u8 psycheLockStopPresentButtonsState;
+    /* +0x255 */ u8 psycheLockStopPresentButtonsSubstate;
+    /* +0x256 */ u8 psycheLockStopPresentButtonsActive;
+    /* +0x257 */ u8 unk257;
     /* +0x258 */ u8 unk258;
-    /* +0x259 */ u8 fill259[0x7];
+    /* +0x259 */ u8 fill259[0x3];
+    /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 fill264[0x63];
+    /* +0x264 */ u8 fill264[0x5C];
+    /* +0x2C0 */ u16 currentlyPlayingSfx;
+    /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
+    /* +0x2C4 */ u8 fill2C4[0x3];
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
     /* +0x2D0 */ u32 unk2D0;

@@ -17,6 +17,7 @@ enum Process {
     EPISODE_SELECT_PROCESS,
     CONTINUE_SAVE_PROCESS,
     CLEAR_SAVE_PROCESS,
+    DEBUG_MENU_PROCESS,
 };
 
 enum CourtProcessStates {

@@ -1,134 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_8007610
-sub_8007610: @ 0x08007610
-	push {r4, r5, lr}
-	lsls r0, r0, #0x18
-	lsrs r0, r0, #0x18
-	ldr r3, _0800762C @ =gMain
-	movs r4, #1
-	movs r2, #1
-	cmp r0, #0x13
-	bhi _080076B2
-	lsls r0, r0, #2
-	ldr r1, _08007630 @ =_08007634
-	adds r0, r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0800762C: .4byte gMain
-_08007630: .4byte _08007634
-_08007634: @ jump table
-	.4byte _08007684 @ case 0
-	.4byte _08007684 @ case 1
-	.4byte _08007690 @ case 2
-	.4byte _08007690 @ case 3
-	.4byte _08007690 @ case 4
-	.4byte _08007690 @ case 5
-	.4byte _08007690 @ case 6
-	.4byte _08007698 @ case 7
-	.4byte _08007698 @ case 8
-	.4byte _08007698 @ case 9
-	.4byte _08007698 @ case 10
-	.4byte _08007698 @ case 11
-	.4byte _080076A0 @ case 12
-	.4byte _080076A0 @ case 13
-	.4byte _080076A0 @ case 14
-	.4byte _080076A0 @ case 15
-	.4byte _080076A0 @ case 16
-	.4byte _080076A0 @ case 17
-	.4byte _080076A0 @ case 18
-	.4byte _080076A0 @ case 19
-_08007684:
-	movs r4, #1
-	adds r0, r3, #0
-	adds r0, #0xc1
-	ldrb r0, [r0]
-	adds r0, r0, r2
-	b _080076AE
-_08007690:
-	movs r4, #2
-	adds r0, r2, #0
-	adds r0, #0xfe
-	b _080076A6
-_08007698:
-	movs r4, #3
-	adds r0, r2, #0
-	adds r0, #0xf9
-	b _080076A6
-_080076A0:
-	movs r4, #4
-	adds r0, r2, #0
-	adds r0, #0xf4
-_080076A6:
-	adds r1, r3, #0
-	adds r1, #0xc1
-	ldrb r1, [r1]
-	adds r0, r1, r0
-_080076AE:
-	lsls r0, r0, #0x18
-	lsrs r2, r0, #0x18
-_080076B2:
-	adds r0, r3, #0
-	adds r0, #0xc2
-	lsls r1, r4, #4
-	ldrb r5, [r0]
-	cmp r5, r1
-	bge _080076C0
-	strb r1, [r0]
-_080076C0:
-	ldrb r1, [r0]
-	lsrs r0, r1, #4
-	cmp r0, r4
-	bhi _080076D0
-	movs r0, #0xf
-	ands r0, r1
-	cmp r0, r2
-	bls _080076EC
-_080076D0:
-	movs r1, #0
-	movs r0, #0x86
-	lsls r0, r0, #1
-	adds r2, r3, r0
-	movs r3, #1
-	rsbs r3, r3, #0
-_080076DC:
-	lsls r0, r1, #2
-	adds r0, r2, r0
-	str r3, [r0]
-	adds r0, r1, #1
-	lsls r0, r0, #0x18
-	lsrs r1, r0, #0x18
-	cmp r1, #7
-	bls _080076DC
-_080076EC:
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-	thumb_func_start nullsub_11
-nullsub_11: @ 0x080076F4
-	bx lr
-	.align 2, 0
-
-	thumb_func_start SaveGameProcess
-SaveGameProcess: @ 0x080076F8
-	push {lr}
-	ldr r2, _08007710 @ =gUnknown_0814DB64
-	ldr r0, _08007714 @ =gMain
-	ldrb r3, [r0, #9]
-	lsls r1, r3, #2
-	adds r1, r1, r2
-	ldr r1, [r1]
-	bl _call_via_r1
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08007710: .4byte gUnknown_0814DB64
-_08007714: .4byte gMain
-
 	thumb_func_start sub_8007718
 sub_8007718: @ 0x08007718
 	push {r4, r5, r6, lr}
@@ -149,7 +21,7 @@ sub_8007718: @ 0x08007718
 	str r1, [r0, #4]
 	str r3, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007828 @ =gUnknown_03003E50
+	ldr r1, _08007828 @ =gTextBoxCharacters
 	str r1, [r0]
 	ldr r3, _0800782C @ =0xFFFFF500
 	adds r1, r2, r3
@@ -181,7 +53,7 @@ sub_8007718: @ 0x08007718
 	ldr r1, _08007850 @ =0x8000002A
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r3, _08007854 @ =gUnknown_03003AF0
+	ldr r3, _08007854 @ =gMapMarker
 	str r3, [r0]
 	ldr r4, _08007858 @ =0xFFFFF060
 	adds r1, r2, r4
@@ -211,7 +83,7 @@ _08007796:
 	adds r4, r4, r1
 	ldrh r5, [r4]
 	adds r0, r5, #0
-	bl sub_8011194
+	bl StopSE
 	strh r5, [r4]
 	ldr r2, _08007868 @ =gAnimation+0x44
 	ldrb r0, [r2, #0xe]
@@ -262,7 +134,7 @@ _08007818: .4byte gBG1MapBuffer
 _0800781C: .4byte gUnknown_020018D4
 _08007820: .4byte 0x80000400
 _08007824: .4byte gBG2MapBuffer
-_08007828: .4byte gUnknown_03003E50
+_08007828: .4byte gTextBoxCharacters
 _0800782C: .4byte 0xFFFFF500
 _08007830: .4byte 0x80000180
 _08007834: .4byte gUnknown_030070B0
@@ -273,7 +145,7 @@ _08007844: .4byte 0xFFFFEA88
 _08007848: .4byte 0x8000004E
 _0800784C: .4byte gIORegisters
 _08007850: .4byte 0x8000002A
-_08007854: .4byte gUnknown_03003AF0
+_08007854: .4byte gMapMarker
 _08007858: .4byte 0xFFFFF060
 _0800785C: .4byte 0x80000050
 _08007860: .4byte gMain
@@ -591,7 +463,7 @@ _08007B02:
 	ldr r0, _08007BA8 @ =0x80000010
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08007BAC @ =gUnknown_03002CE0
+	ldr r0, _08007BAC @ =gOamObjects+0x140
 	movs r3, #0
 	ldr r2, _08007BB0 @ =0x00004460
 	strh r2, [r0]
@@ -644,7 +516,7 @@ _08007B9C: .4byte 0x80000500
 _08007BA0: .4byte gUnknown_08197404
 _08007BA4: .4byte 0x050003A0
 _08007BA8: .4byte 0x80000010
-_08007BAC: .4byte gUnknown_03002CE0
+_08007BAC: .4byte gOamObjects+0x140
 _08007BB0: .4byte 0x00004460
 _08007BB4: .4byte 0x0000C030
 _08007BB8: .4byte 0x0000A1E0
@@ -819,7 +691,7 @@ _08007CFE:
 	ldrh r4, [r6]
 	cmp r4, #0
 	bne _08007DC4
-	ldr r3, _08007D94 @ =gUnknown_03002CF0
+	ldr r3, _08007D94 @ =gOamObjects+0x150
 	movs r1, #0x89
 	lsls r1, r1, #7
 	strh r1, [r3]
@@ -884,7 +756,7 @@ _08007CFE:
 	strh r1, [r0]
 	b _08007DCC
 	.align 2, 0
-_08007D94: .4byte gUnknown_03002CF0
+_08007D94: .4byte gOamObjects+0x150
 _08007D98: .4byte 0x0000C028
 _08007D9C: .4byte 0x00080220
 _08007DA0: .4byte 0x0008D220
@@ -910,7 +782,7 @@ _08007DCC:
 	movs r1, #0x80
 	lsls r1, r1, #7
 _08007DDA:
-	ldr r3, _08007DFC @ =gUnknown_03002CE0
+	ldr r3, _08007DFC @ =gOamObjects+0x140
 	ldrb r0, [r5, #0x17]
 	cmp r0, #0
 	bne _08007E0C
@@ -928,7 +800,7 @@ _08007DDA:
 	lsls r0, r0, #8
 	b _08007E24
 	.align 2, 0
-_08007DFC: .4byte gUnknown_03002CE0
+_08007DFC: .4byte gOamObjects+0x140
 _08007E00: .4byte 0x0000C030
 _08007E04: .4byte 0x000091E0
 _08007E08: .4byte 0x0000C080
@@ -1109,7 +981,7 @@ _08007EA6:
 	str r0, [r5, #0x54]
 	movs r4, #0
 	ldr r3, _08008134 @ =gBG2MapBuffer
-	ldr r6, _08008138 @ =gUnknown_03003E50
+	ldr r6, _08008138 @ =gTextBoxCharacters
 	movs r0, #0xe8
 	adds r0, r0, r5
 	mov sb, r0
@@ -1135,7 +1007,7 @@ _08007F70:
 	ldr r0, _0800814C @ =0x80000180
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
-	bl sub_8018ABC
+	bl RedrawTextboxCharacters
 	ldr r2, _08008150 @ =0xFFFFE324
 	adds r0, r7, r2
 	str r0, [r4]
@@ -1164,7 +1036,7 @@ _08007F70:
 	ldr r2, _08008174 @ =0xFFFFE860
 	adds r0, r7, r2
 	str r0, [r4]
-	ldr r0, _08008178 @ =gUnknown_03003AF0
+	ldr r0, _08008178 @ =gMapMarker
 	str r0, [r4, #4]
 	ldr r0, _0800817C @ =0x80000050
 	str r0, [r4, #8]
@@ -1209,7 +1081,7 @@ _08007F70:
 	ldrb r0, [r0]
 	strb r0, [r5, #0x1a]
 	adds r0, r5, #0
-	bl sub_8018C7C
+	bl loadSectionReadFlagsFromSaveDataBuffer
 	movs r3, #0x80
 	lsls r3, r3, #4
 	adds r0, r7, r3
@@ -1337,7 +1209,7 @@ _08008108:
 	.align 2, 0
 _08008130: .4byte gSaveDataBuffer
 _08008134: .4byte gBG2MapBuffer
-_08008138: .4byte gUnknown_03003E50
+_08008138: .4byte gTextBoxCharacters
 _0800813C: .4byte 0x040000D4
 _08008140: .4byte gUnknown_020020D4
 _08008144: .4byte 0x80000400
@@ -1353,7 +1225,7 @@ _08008168: .4byte 0xFFFFE234
 _0800816C: .4byte gIORegisters
 _08008170: .4byte 0x8000002A
 _08008174: .4byte 0xFFFFE860
-_08008178: .4byte gUnknown_03003AF0
+_08008178: .4byte gMapMarker
 _0800817C: .4byte 0x80000050
 _08008180: .4byte 0xFFFFE5B8
 _08008184: .4byte gUnknown_03002920
@@ -1470,7 +1342,7 @@ _08008260:
 _08008292:
 	movs r0, #0x1e
 	movs r1, #0xff
-	bl sub_80113E8
+	bl FadeInBGM
 	movs r0, #1
 	movs r1, #0
 	movs r2, #1
@@ -1619,7 +1491,7 @@ _080083BA:
 	b _080083D8
 _080083C0:
 	movs r1, #0
-	ldr r3, _080083E0 @ =gUnknown_03002CE0
+	ldr r3, _080083E0 @ =gOamObjects+0x140
 	movs r2, #0x80
 	lsls r2, r2, #2
 _080083C8:
@@ -1636,7 +1508,7 @@ _080083D8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080083E0: .4byte gUnknown_03002CE0
+_080083E0: .4byte gOamObjects+0x140
 
 	thumb_func_start sub_80083E4
 sub_80083E4: @ 0x080083E4
@@ -1653,7 +1525,7 @@ sub_80083E4: @ 0x080083E4
 	cmp r0, #0
 	beq _0800842C
 	movs r1, #0
-	ldr r4, _08008420 @ =gUnknown_03002CE0
+	ldr r4, _08008420 @ =gOamObjects+0x140
 	movs r3, #0x80
 	lsls r3, r3, #2
 _08008404:
@@ -1671,7 +1543,7 @@ _08008404:
 	movs r0, #5
 	b _08008426
 	.align 2, 0
-_08008420: .4byte gUnknown_03002CE0
+_08008420: .4byte gOamObjects+0x140
 _08008424:
 	movs r0, #4
 _08008426:
@@ -1691,7 +1563,7 @@ sub_8008434: @ 0x08008434
 	ldr r3, _0800847C @ =gScriptContext
 	ldrb r0, [r4, #0x17]
 	lsls r1, r0, #3
-	ldr r0, _08008480 @ =gUnknown_03002CE0
+	ldr r0, _08008480 @ =gOamObjects+0x140
 	adds r2, r1, r0
 	adds r1, r3, #0
 	adds r1, #0x46
@@ -1723,7 +1595,7 @@ sub_8008434: @ 0x08008434
 	b _0800848E
 	.align 2, 0
 _0800847C: .4byte gScriptContext
-_08008480: .4byte gUnknown_03002CE0
+_08008480: .4byte gOamObjects+0x140
 _08008484: .4byte 0x0000FFFF
 _08008488: .4byte 0x0000FDFF
 _0800848C:
