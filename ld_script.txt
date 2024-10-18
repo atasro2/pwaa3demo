@@ -44,6 +44,7 @@ SECTIONS {
         asm/animation.o(.text);
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
+        src/hp_bar.o(.text);
         asm/hp_bar.o(.text);
         asm/signal_detector.o(.text);
         src/script_main.o(.text);
