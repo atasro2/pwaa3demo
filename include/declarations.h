@@ -55,7 +55,6 @@ bool32 sub_8016ED8(void);
 //Debug related code
 void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
-void sub_8007610(u32);
 
 void RunScriptContext(void);
 void sub_801DF10(struct ScriptContext *);

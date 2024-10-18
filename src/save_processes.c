@@ -101,20 +101,19 @@ void sub_8007238(struct Main *main) {
     u8 newFlags;
 
     switch (main->scenarioIdx) {
-    case 0: case 1:
+    case 0 ... 1:
         casesCleared = 1;
         scriptsInCaseCleared += main->scenarioIdx;
         break;
-    case 2: case 3: case 4: case 5: case 6:
+    case 2 ... 6:
         casesCleared = 2;
         scriptsInCaseCleared += main->scenarioIdx - 2;
         break;
-    case 7: case 8: case 9: case 10: case 11:
+    case 7 ... 11:
         casesCleared = 3;
         scriptsInCaseCleared += main->scenarioIdx - 7;
         break;
-    case 12: case 13: case 14: case 15: case 16:
-    case 17: case 18: case 19:
+    case 12 ... 19:
         casesCleared = 4;
         scriptsInCaseCleared += main->scenarioIdx - 12;
         break;
@@ -257,4 +256,50 @@ void ClearSaveProcess(struct Main *main)
     default:
         break;
     }
+}
+
+void sub_8007610(u8 scenario) {
+    struct Main * main = &gMain;
+    u8 casesCleared = 1;
+    u8 scriptsInCaseCleared = 1;
+    u8 i;
+
+    switch (scenario) {
+    case 0 ... 1:
+        casesCleared = 1;
+        scriptsInCaseCleared += main->scenarioIdx;
+        break;
+    case 2 ... 6:
+        casesCleared = 2;
+        scriptsInCaseCleared += main->scenarioIdx - 2;
+        break;
+    case 7 ... 11:
+        casesCleared = 3;
+        scriptsInCaseCleared += main->scenarioIdx - 7;
+        break;
+    case 12 ... 19:
+        casesCleared = 4;
+        scriptsInCaseCleared += main->scenarioIdx - 12;
+        break;
+    }
+    if(main->caseEnabledFlags < (casesCleared << 4))
+        main->caseEnabledFlags = casesCleared << 4;
+    
+    if (main->caseEnabledFlags >> 4 > casesCleared || // if episode has been cleared
+        (main->caseEnabledFlags & 0xF) > scriptsInCaseCleared) { // if part of episode has been cleared
+        for(i = 0; i < 8; i++) {
+            main->sectionReadFlags[i] = 0xFFFFFFFF;
+        }
+    }
+}
+
+void nullsub_11(void) {
+    
+}
+
+extern void (*gSaveGameProcessStates[])(struct Main *);
+
+void SaveGameProcess(struct Main *main)
+{
+    gSaveGameProcessStates[gMain.process[GAME_PROCESS_STATE]](&gMain);
 }

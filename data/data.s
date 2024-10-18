@@ -184,8 +184,8 @@ gUnknown_0814DB08:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 
-    .global gUnknown_0814DB64
-gUnknown_0814DB64:
+    .global gSaveGameProcessStates
+gSaveGameProcessStates:
 @ replacing .incbin "baserom.gba", 0x0014db64, 0x24
 .4byte sub_8007718
 .4byte sub_8007880
