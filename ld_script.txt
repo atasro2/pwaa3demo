@@ -23,12 +23,9 @@ SECTIONS {
         src/crt0.o(.text);
         src/main.o(.text);
         src/debug.o(.text);
-        asm/notdebug.o(.text);
         src/bg.o(.text);
         asm/bg.o(.text);
         src/utils.o(.text);
-        asm/utils.o(.text);
-        src/utils_2.o(.text);
         src/case_data.o(.text);
         src/title_processes.o(.text);
         asm/gameover_process.o(.text);
@@ -46,7 +43,7 @@ SECTIONS {
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
         asm/hp_bar.o(.text);
-        asm/signal_detector.o(.text);
+        src/signal_detector.o(.text);
         src/script_main.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);

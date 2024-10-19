@@ -2,6 +2,25 @@
 #include "background.h"
 #include "ewram.h"
 
+u8 *sub_8002278(u16 arg0)
+{
+    return &gBackgroundTable[arg0].bgData[40];
+}
+
+u32 sub_sub_800228C(u16 arg0)
+{
+    return gBackgroundTable[arg0].controlBits;
+}
+
+// unused
+void sub_80022A0()
+{
+    u32 i;
+    u16 *dest = gBG1MapBuffer;
+    for(i = 0; i < 0x400; i++, dest++) *dest = gTextboxTiles[i];
+    gMain.tilemapUpdateBits |= 2;
+}
+
 // BG_all_init
 void InitBGs()
 {
