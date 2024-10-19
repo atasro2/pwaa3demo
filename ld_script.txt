@@ -36,7 +36,6 @@ SECTIONS {
         asm/save_processes.o(.text);
         asm/episode_load_processes.o(.text);
         asm/court.o(.text);
-        asm/rom_BC08.o(.text);
         asm/investigation.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
@@ -48,7 +47,8 @@ SECTIONS {
         src/script_main.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);
-        asm/rom_1D308.o(.text);
+        asm/demo.o(.text);
+        asm/butterfly.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
         src/m4a.o(.text);

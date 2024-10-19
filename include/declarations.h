@@ -10,7 +10,7 @@ void nullsub_7(void);
 void sub_8013B84(u32);
 void sub_800482C(u32);
 void nullsub_8(u32, u32);
-void sub_801FFBC(void);
+void Butterfly_Unity(void);
 void sub_800156C(void);
 void sub_80015CC(void);
 void sub_80015E8(void);
@@ -57,7 +57,7 @@ void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
 
 void RunScriptContext(void);
-void sub_801DF10(struct ScriptContext *);
+void DemoProc_Special_Unity(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
 struct AnimationListEntry * sub_8016FB4(void);
