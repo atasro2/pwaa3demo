@@ -82,7 +82,7 @@ void sub_8016F74(void) {
     gUnknown_0814E338[context->unk2C](context);
 }
 
-void sub_8016F98(struct ScriptContext * scriptCtx) {
+void Exit_Unity(struct ScriptContext * scriptCtx) {
     scriptCtx->unk30[7] = 0;
     scriptCtx->unk30[6] = 0;
     scriptCtx->unk30[5] = 0;
