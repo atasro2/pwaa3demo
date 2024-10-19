@@ -38,4 +38,8 @@ u8 Random(void);
 void ChangeFlag(u32, u32, bool32);
 bool32 GetFlag(u32 arg0, u32 arg1);
 
+extern s16 gUnknown_08025430[0x800];
+extern s16 gUnknown_08025C30[0x800];
+
+
 #endif//GUARD_UTILS_H

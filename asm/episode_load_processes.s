@@ -1,122 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_80084D8
-sub_80084D8: @ 0x080084D8
-	push {r4, lr}
-	adds r4, r0, #0
-	movs r0, #0
-	strb r0, [r4, #0x18]
-	strb r0, [r4, #0x19]
-	movs r0, #2
-	movs r1, #0
-	movs r2, #1
-	movs r3, #0x1f
-	bl StartHardwareBlend
-	ldrb r0, [r4, #9]
-	adds r0, #1
-	strb r0, [r4, #9]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-
-	thumb_func_start sub_80084FC
-sub_80084FC: @ 0x080084FC
-	push {r4, r5, r6, lr}
-	adds r6, r0, #0
-	ldr r0, _080085A8 @ =gMain
-	movs r1, #0x96
-	lsls r1, r1, #2
-	adds r0, r0, r1
-	movs r1, #0
-	strb r1, [r0]
-	adds r5, r6, #0
-	adds r5, #0x3d
-	ldrb r4, [r5]
-	movs r1, #0x40
-	adds r0, r4, #0
-	orrs r0, r1
-	strb r0, [r5]
-	movs r0, #6
-	bl DecompressBackgroundIntoBuffer
-	movs r0, #6
-	bl CopyBGDataToVram
-	strb r4, [r5]
-	ldr r0, _080085AC @ =gIORegisters
-	adds r0, #0x4a
-	movs r1, #0xd2
-	lsls r1, r1, #5
-	strh r1, [r0]
-	movs r0, #0xa
-	strb r0, [r6, #0x1a]
-	ldr r1, _080085B0 @ =gOamObjects
-	movs r0, #0
-	movs r2, #0x80
-	lsls r2, r2, #2
-_0800853E:
-	strh r2, [r1]
-	adds r1, #8
-	adds r0, #1
-	cmp r0, #0x7f
-	bls _0800853E
-	bl ResetAnimationSystem
-	ldr r1, _080085B4 @ =0x040000D4
-	ldr r0, _080085B8 @ =eBGDecompBuffer
-	str r0, [r1]
-	ldr r0, _080085BC @ =0x06013400
-	str r0, [r1, #4]
-	ldr r0, _080085C0 @ =0x80001400
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldr r0, _080085C4 @ =gPalChoiceSelected
-	str r0, [r1]
-	ldr r0, _080085C8 @ =0x05000320
-	str r0, [r1, #4]
-	ldr r0, _080085CC @ =0x80000020
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldr r0, _080085D0 @ =gGfxSaveGameTiles
-	str r0, [r1]
-	movs r0, #0xc0
-	lsls r0, r0, #0x13
-	str r0, [r1, #4]
-	ldr r0, _080085D4 @ =0x80000800
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	movs r0, #2
-	bl sub_80051CC
-	adds r1, r6, #0
-	adds r1, #0xa2
-	movs r0, #0
-	strh r0, [r1]
-	movs r0, #0x31
-	bl PlaySE
-	movs r0, #1
-	movs r1, #0
-	movs r2, #1
-	movs r3, #0x1f
-	bl StartHardwareBlend
-	ldrb r0, [r6, #9]
-	adds r0, #1
-	strb r0, [r6, #9]
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080085A8: .4byte gMain
-_080085AC: .4byte gIORegisters
-_080085B0: .4byte gOamObjects
-_080085B4: .4byte 0x040000D4
-_080085B8: .4byte eBGDecompBuffer
-_080085BC: .4byte 0x06013400
-_080085C0: .4byte 0x80001400
-_080085C4: .4byte gPalChoiceSelected
-_080085C8: .4byte 0x05000320
-_080085CC: .4byte 0x80000020
-_080085D0: .4byte gGfxSaveGameTiles
-_080085D4: .4byte 0x80000800
-
 	thumb_func_start sub_80085D8
 sub_80085D8: @ 0x080085D8
 	push {r4, r5, r6, r7, lr}
@@ -313,7 +197,7 @@ _0800872C: @ jump table
 	.4byte _08008D14 @ case 11
 _0800875C:
 	adds r0, r7, #0
-	bl sub_80084D8
+	bl EpisodeInit
 	b _08008D58
 _08008764:
 	adds r0, r7, #0
@@ -334,7 +218,7 @@ _08008770:
 	strh r1, [r3]
 	strh r2, [r0, #0xe]
 	adds r0, r7, #0
-	bl sub_80084FC
+	bl EpisodeLoadGfx
 	ldr r0, _080087AC @ =gMain
 	movs r3, #0xf0
 	ldrb r0, [r0, #0x1b]
@@ -1174,7 +1058,7 @@ _08008D9C: @ jump table
 	.4byte _08009716 @ case 100
 _08008F30:
 	adds r0, r6, #0
-	bl sub_80084D8
+	bl EpisodeInit
 	bl _08009850
 _08008F3A:
 	adds r0, r6, #0
@@ -1185,7 +1069,7 @@ _08008F3A:
 	bl _08009850
 _08008F48:
 	adds r0, r6, #0
-	bl sub_80084FC
+	bl EpisodeLoadGfx
 	movs r0, #0xf0
 	ldrb r1, [r6, #0x1b]
 	ands r0, r1
@@ -2304,7 +2188,7 @@ _080098B6:
 _080098BA:
 	bl LoadSaveData
 	mov r0, r8
-	bl sub_80084D8
+	bl EpisodeInit
 	bl _0800A368
 _080098C8:
 	mov r0, r8

@@ -17,8 +17,10 @@
 
 
 // misfits
-#define OAM_IDX_HEALTH 35
-#define OAM_COUNT_HEALTH 5
+#define OAM_IDX_HPBAR 34
+#define OAM_COUNT_HPBAR 14
+#define OAM_IDX_HPBAR_LIFE OAM_IDX_HPBAR+3
+#define OAM_IDX_HPBAR_SOMETHING OAM_IDX_HPBAR+9
 
 #define OAM_IDX_GENERIC_TEXT_ICON 38 // used for episode select, talk button, move button
 #define OAM_IDX_GENERIC_TEXT_ICON1 38

@@ -27,6 +27,16 @@
 #define gPalCourtScroll ((void*)(0x0820E74C))
 #define gUnknown_0826F888 ((void*)(0x0826F888))
 #define gUnknown_08252498 ((void*)(0x08252498))
+
+
+#define gGfxHPBarFrame1 ((void*)(0x08190880))
+#define gGfxHPBarFrame2 ((void*)(0x08190900))
+#define gGfxHPBarFrame3 ((void*)(0x08190A00))
+#define gGfxHPBarProgress ((void*)(0x08190A80))
+#define gPalHPBarFrame ((void*)(0x08197684))
+#define gPalHPBarProgress ((void*)(0x081976A4))
+
+
 // script
 #define std_scripts ((void*)(0x8270934))
 

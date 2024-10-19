@@ -67,7 +67,9 @@ gUnknown_08026718:
 
     .global gSaveVersion
 gSaveVersion:
-    .incbin "baserom.gba", 0x000267B0, 0x34
+    .asciz "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-"
+
+    .align 2, 0
 
     .global gUnknown_080267E4
 gUnknown_080267E4:
