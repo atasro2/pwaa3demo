@@ -238,11 +238,11 @@ void AgbMain(void)
                             CopyBGDataToVram(gMain.currentBG);
                             scriptCtx->unk2F = 0x1F;
                             scriptCtx->unk30[0] = 2;
-                            sub_801DF10(scriptCtx);
+                            DemoProc_Special_Unity(scriptCtx);
                         } else if(scriptCtx->unk30[7] == 0xFFFE) {
                             scriptCtx->unk2F = 0x12;
                             scriptCtx->unk30[0] = 0;
-                            sub_801DF10(scriptCtx);
+                            DemoProc_Special_Unity(scriptCtx);
                             CopyBGDataToVram(gMain.currentBG);
                             scriptCtx->unk30[7] = 0;
                         } else {
@@ -254,7 +254,7 @@ void AgbMain(void)
                     DecompressCurrentBGStripe(gMain.currentBG);
                 }
             }
-            sub_801FFBC();
+            Butterfly_Unity();
         } else {
             if (gMain.currentBgStripe == 0)
                 nullsub_1();

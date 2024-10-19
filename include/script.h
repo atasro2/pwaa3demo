@@ -42,11 +42,11 @@ struct ScriptContext {
     u8 unk2D;
     u8 unk2E;
     u8 unk2F;
-    u16 unk30[8];
+    u16 unk30[8]; // unity: op_work?
     u16 unk40;
     u16 unk42;
     u16 unk44;
-    u16 unk46;
+    u16 unk46; // all work
     u16 unk48;
     u16 unk4A;
     u8 unk4C;
