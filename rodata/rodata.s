@@ -47,11 +47,11 @@ gUnknown_08025C30:
 
     .global gSineTable
 gSineTable:
-    .incbin "baserom.gba", 0x00026430, 0x80
+    .incbin "baserom.gba", 0x00026430, 0x280
 
-    .global gUnknown_080264B0
-gUnknown_080264B0:
-    .incbin "baserom.gba", 0x000264B0, 0x220
+    .global gUnknown_080266B0
+gUnknown_080266B0:
+    .incbin "baserom.gba", 0x000266B0, 0x20
 
     .global gUnknown_080266D0
 gUnknown_080266D0:

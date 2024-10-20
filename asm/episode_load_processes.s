@@ -768,7 +768,7 @@ _08008BD4:
 	bl fix_mul
 	ldr r6, _08008C28 @ =gOamObjects
 	strh r0, [r6, #0x16]
-	ldr r2, _08008C2C @ =gUnknown_080264B0
+	ldr r2, _08008C2C @ =gSineTable+0x80
 	movs r3, #0
 	ldrsh r5, [r2, r3]
 	mov r4, r8
@@ -783,7 +783,7 @@ _08008BD4:
 	.align 2, 0
 _08008C24: .4byte gSineTable
 _08008C28: .4byte gOamObjects
-_08008C2C: .4byte gUnknown_080264B0
+_08008C2C: .4byte gSineTable+0x80
 _08008C30:
 	ldr r6, _08008C64 @ =gOamObjects+0x1D0
 	ldr r5, _08008C68 @ =gUnknown_080267E4
@@ -870,7 +870,7 @@ _08008CC4:
 	bl fix_mul
 	ldr r6, _08008D0C @ =gOamObjects
 	strh r0, [r6, #0x16]
-	ldr r2, _08008D10 @ =gUnknown_080264B0
+	ldr r2, _08008D10 @ =gSineTable+0x80
 	movs r3, #0
 	ldrsh r7, [r2, r3]
 	movs r4, #0
@@ -887,7 +887,7 @@ _08008CFE:
 	.align 2, 0
 _08008D08: .4byte gSineTable
 _08008D0C: .4byte gOamObjects
-_08008D10: .4byte gUnknown_080264B0
+_08008D10: .4byte gSineTable+0x80
 _08008D14:
 	ldr r1, _08008D68 @ =gScriptContext
 	movs r0, #8

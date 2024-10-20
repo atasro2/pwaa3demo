@@ -49,10 +49,10 @@ gPsycheLockLockPositions:
 gPsycheLockChainTilemaps:
     .incbin "baserom.gba", 0x0014DD58, 0x50
 
-    .global gUnknown_0814DDA8
-gUnknown_0814DDA8:
+    .global gPalHPBarLoseLifePalettes
+gPalHPBarLoseLifePalettes:
     .incbin "baserom.gba", 0x0014DDA8, 0x1E0
 
-    .global gUnknown_0814DF88
-gUnknown_0814DF88:
+    .global gPalHPBarGainLifePalettes
+gPalHPBarGainLifePalettes:
     .incbin "baserom.gba", 0x0014DF88, 0x1E0
