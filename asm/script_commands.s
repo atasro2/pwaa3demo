@@ -5192,7 +5192,7 @@ sub_801B50C: @ 0x0801B50C
 	ldrb r2, [r5, #0xa]
 	adds r1, r2, #0
 	muls r1, r0, r1
-	ldr r0, _0801B718 @ =gUnknown_0802873C
+	ldr r0, _0801B718 @ =gSpotSelectData
 	adds r1, r1, r0
 	mov r8, r1
 	ldrh r1, [r6, #0x12]
@@ -5439,7 +5439,7 @@ _0801B654:
 	.align 2, 0
 _0801B710: .4byte gInvestigation
 _0801B714: .4byte gScriptContext
-_0801B718: .4byte gUnknown_0802873C
+_0801B718: .4byte gSpotSelectData
 _0801B71C: .4byte gOamObjects
 _0801B720: .4byte 0x000002C2
 _0801B724: .4byte 0x000001FF
@@ -6991,13 +6991,13 @@ _0801C2D8:
 	bne _0801C310
 	subs r0, r5, #2
 	str r0, [r4]
-	bl sub_8016F74
+	bl op_demo_play_iOS
 	movs r0, #1
 	b _0801C320
 _0801C310:
 	cmp r1, #2
 	bne _0801C318
-	bl sub_8016F74
+	bl op_demo_play_iOS
 _0801C318:
 	ldr r0, [r4]
 	adds r0, #2

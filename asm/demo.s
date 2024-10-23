@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start nullsub_8
-nullsub_8: @ 0x0801D754
+	thumb_func_start CheckBGChange_iOS
+CheckBGChange_iOS: @ 0x0801D754
 	bx lr
 	.align 2, 0
 
@@ -13,7 +13,7 @@ MoveNextScript_Unity: @ 0x0801D758
 	movs r1, #0
 	strh r1, [r4, #0x30]
 	strh r1, [r4, #0x32]
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 	adds r1, r4, #0
 	adds r1, #0x2e
 	movs r0, #0xf0
@@ -975,8 +975,8 @@ _0801DF04:
 	pop {r0}
 	bx r0
 
-	thumb_func_start DemoProc_Special_Unity
-DemoProc_Special_Unity: @ 0x0801DF10
+	thumb_func_start Demo_Proc_iOS
+Demo_Proc_iOS: @ 0x0801DF10
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1629,7 +1629,7 @@ _0801E4B8:
 	adds r0, #0x68
 	ldrh r0, [r0]
 	movs r1, #1
-	bl nullsub_8
+	bl CheckBGChange_iOS
 	b _0801E4E4
 	.align 2, 0
 _0801E4D4: .4byte gSaveDataBuffer
@@ -1638,7 +1638,7 @@ _0801E4D8:
 	adds r0, #0x68
 	ldrh r0, [r0]
 	movs r1, #0
-	bl nullsub_8
+	bl CheckBGChange_iOS
 _0801E4E4:
 	bl sub_801DB60
 _0801E4E8:
@@ -4222,7 +4222,7 @@ _0801F980:
 	strh r1, [r0, #0xe]
 _0801F99A:
 	ldr r0, [sp, #0x10]
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 	b _0801F9D2
 	.align 2, 0
 _0801F9A4: .4byte gMapMarker
@@ -4247,7 +4247,7 @@ _0801F9C0:
 _0801F9CA:
 	strh r0, [r6, #0x1e]
 	ldr r0, [sp, #0x10]
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 _0801F9D2:
 	add sp, #0x1c
 	pop {r3, r4, r5}

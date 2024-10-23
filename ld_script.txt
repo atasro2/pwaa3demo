@@ -71,7 +71,9 @@ SECTIONS {
         rodata/rodata_2.o(.rodata);
         src/script_main.o(.rodata);
         rodata/script_main.o(.rodata);
-        rodata/rodata_3.o(.rodata);
+        rodata/script_commands.o(.rodata);
+        rodata/demo.o(.rodata);
+        rodata/butterfly.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/song_data.o(.rodata);
         src/agb_sram.o(.rodata);
