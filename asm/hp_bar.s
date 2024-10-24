@@ -149,7 +149,7 @@ _0801631A:
 	adds r5, r0, #0
 	ldr r1, _08016414 @ =gSineTable
 	mov r8, r1
-	ldr r2, _08016418 @ =gUnknown_080264B0
+	ldr r2, _08016418 @ =gSineTable+0x80
 	movs r1, #0
 	ldrsh r0, [r2, r1]
 	lsls r5, r5, #0x10
@@ -186,7 +186,7 @@ _0801631A:
 	ldr r2, _0801641C @ =gOamObjects
 	adds r1, r1, r2
 	strh r0, [r1, #6]
-	ldr r1, _08016418 @ =gUnknown_080264B0
+	ldr r1, _08016418 @ =gSineTable+0x80
 	movs r2, #0
 	ldrsh r0, [r1, r2]
 	movs r1, #0x80
@@ -249,7 +249,7 @@ _080163FC:
 	.align 2, 0
 _08016410: .4byte 0x000003FF
 _08016414: .4byte gSineTable
-_08016418: .4byte gUnknown_080264B0
+_08016418: .4byte gSineTable+0x80
 _0801641C: .4byte gOamObjects
 
 	thumb_func_start sub_8016420

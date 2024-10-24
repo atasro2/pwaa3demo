@@ -10,44 +10,44 @@ void MoveSpritesToOAM(void)
     DmaCopy16(3, gOamObjects, OAM, sizeof(gOamObjects));
 }
 
-u32 sub_8006364(u32 arg0) {
-    u16 e = arg0 << 0x14 >> 0x14;
-    if(e < 0x400) {
-        return gUnknown_08025C30[e & 0x3FF];
+s32 sub_8006364(u16 arg0) {
+    arg0 &= 0xFFF;
+    if(arg0 < 0x400) {
+        return gUnknown_08025C30[arg0 & 0x3FF];
     }
-    else if(e > 0xBFF) {
-        if(e == 0xC00) return 0;
-        return gUnknown_08025C30[0x400 - (e & 0x3FF)];
+    else if(arg0 > 0xBFF) {
+        if(arg0 == 0xC00) return 0;
+        return gUnknown_08025C30[0x400 - (arg0 & 0x3FF)];
     }
-    else if(e > 0x7FF) {
-        return -gUnknown_08025C30[(e & 0x3FF)];
+    else if(arg0 > 0x7FF) {
+        return -gUnknown_08025C30[(arg0 & 0x3FF)];
     }
-    else if(e == 0x400) {
+    else if(arg0 == 0x400) {
         return 0;
     }
     else {
-        return -gUnknown_08025C30[0x400 - (e & 0x3FF)];
+        return -gUnknown_08025C30[0x400 - (arg0 & 0x3FF)];
     }
     return 0;
 }
 
-u32 sub_80063E4(u32 arg0) {
-    u16 e = arg0 << 0x14 >> 0x14;
-    if(e < 0x400) {
-        return gUnknown_08025430[e & 0x3FF];
+s32 sub_80063E4(u16 arg0) {
+    arg0 &= 0xFFF;
+    if(arg0 < 0x400) {
+        return gUnknown_08025430[arg0 & 0x3FF];
     }
-    else if(e > 0xBFF) {
-        if(e == 0xC00) return 0xFFFFFF00;
-        return -gUnknown_08025430[(0x400 - (e & 0x3FF))];
+    else if(arg0 > 0xBFF) {
+        if(arg0 == 0xC00) return -0x100;
+        return -gUnknown_08025430[(0x400 - (arg0 & 0x3FF))];
     }
-    else if(e > 0x7FF) {
-        return -gUnknown_08025430[(e & 0x3FF)];
+    else if(arg0 > 0x7FF) {
+        return -gUnknown_08025430[(arg0 & 0x3FF)];
     }
-    else if(e == 0x400) {
+    else if(arg0 == 0x400) {
         return 0x100;
     }
     else {
-        return gUnknown_08025430[0x400 - (e & 0x3FF)];
+        return gUnknown_08025430[0x400 - (arg0 & 0x3FF)];
     }
     return 0x100;
 }

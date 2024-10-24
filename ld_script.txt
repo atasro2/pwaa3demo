@@ -66,6 +66,9 @@ SECTIONS {
     {
         src/main.o(.rodata);
         src/debug.o(.rodata);
+        rodata/bg.o(.rodata);
+        rodata/utils.o(.rodata);
+        rodata/case_data.o(.rodata);
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);

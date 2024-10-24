@@ -25,6 +25,12 @@ extern const s16 gSineTable[256+64];
 #define _Sin( a ) (gSineTable[(a)])
 #define _Cos( a ) (gSineTable[(a)+64])
 
+extern s16 gUnknown_08025430[0x400];
+extern s16 gUnknown_08025C30[0x400];
+
+s32 sub_8006364(u16); // cos 4x res
+s32 sub_80063E4(u16); // sin 4x res
+
 // Converts a number to Q8.8 fixed-point format
 #define Q_8_8(n) ((s16)((n) * 256))
 
@@ -37,9 +43,6 @@ s16 fix_inverse(s16 b);
 u8 Random(void);
 void ChangeFlag(u32, u32, bool32);
 bool32 GetFlag(u32 arg0, u32 arg1);
-
-extern s16 gUnknown_08025430[0x800];
-extern s16 gUnknown_08025C30[0x800];
 
 
 #endif//GUARD_UTILS_H
