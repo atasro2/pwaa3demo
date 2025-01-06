@@ -66,13 +66,18 @@ SECTIONS {
     {
         src/main.o(.rodata);
         src/debug.o(.rodata);
+        rodata/bg.o(.rodata);
+        rodata/utils.o(.rodata);
+        rodata/case_data.o(.rodata);
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);
         src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
         rodata/script_main.o(.rodata);
-        rodata/rodata_3.o(.rodata);
+        rodata/script_commands.o(.rodata);
+        rodata/demo.o(.rodata);
+        rodata/butterfly.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/song_data.o(.rodata);
         src/agb_sram.o(.rodata);

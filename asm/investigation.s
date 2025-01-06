@@ -1278,7 +1278,7 @@ _0800C684: .4byte 0x0000FFFF
 _0800C688:
 	ldrb r0, [r4]
 	movs r1, #0
-	bl nullsub_8
+	bl CheckBGChange_iOS
 	ldrb r0, [r4]
 	bl CopyBGDataToVram
 	ldr r1, _0800C758 @ =gOamObjects+0x130

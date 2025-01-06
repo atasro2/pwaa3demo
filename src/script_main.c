@@ -77,12 +77,12 @@ const uintptr_t gScriptTable[] = {
 
 extern void (*gUnknown_0814E338[])(struct ScriptContext *);
 
-void sub_8016F74(void) {
+void op_demo_play_iOS(void) {
     struct ScriptContext * context = &gScriptContext;
     gUnknown_0814E338[context->unk2C](context);
 }
 
-void Exit_Unity(struct ScriptContext * scriptCtx) {
+void op_proc_exit_iOS(struct ScriptContext * scriptCtx) {
     scriptCtx->unk30[7] = 0;
     scriptCtx->unk30[6] = 0;
     scriptCtx->unk30[5] = 0;
