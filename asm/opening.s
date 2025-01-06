@@ -919,7 +919,7 @@ _0801D0F6:
 	cmp r3, #0x4c
 	bne _0801D104
 	mov r0, sb
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 _0801D104:
 	movs r0, #8
 	subs r0, r0, r4
@@ -1138,17 +1138,17 @@ _0801D2BE:
 	strh r0, [r6, #0x1e]
 _0801D2DC:
 	mov r0, sb
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 	b _0801D2F6
 	.align 2, 0
 _0801D2E4: .4byte 0x0000FF7F
 _0801D2E8:
 	mov r0, sb
-	bl DemoProc_Special_Unity
+	bl Demo_Proc_iOS
 	b _0801D2F6
 _0801D2F0:
 	mov r0, sb
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 _0801D2F6:
 	add sp, #0xc
 	pop {r3, r4, r5}
@@ -1636,7 +1636,7 @@ _0801D6E4:
 	bl sub_801D784
 _0801D6E8:
 	adds r0, r5, #0
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 	b _0801D74C
 _0801D6F0:
 	ldrh r4, [r6, #0x30]
@@ -1683,7 +1683,7 @@ _0801D740:
 	cmp r4, #5
 	bls _0801D72E
 	adds r0, r5, #0
-	bl Exit_Unity
+	bl op_proc_exit_iOS
 _0801D74C:
 	pop {r4, r5, r6, r7}
 	pop {r0}

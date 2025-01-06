@@ -238,15 +238,15 @@ void AgbMain(void)
                             CopyBGDataToVram(gMain.currentBG);
                             scriptCtx->unk2F = 0x1F;
                             scriptCtx->unk30[0] = 2;
-                            DemoProc_Special_Unity(scriptCtx);
+                            Demo_Proc_iOS(scriptCtx);
                         } else if(scriptCtx->unk30[7] == 0xFFFE) {
                             scriptCtx->unk2F = 0x12;
                             scriptCtx->unk30[0] = 0;
-                            DemoProc_Special_Unity(scriptCtx);
+                            Demo_Proc_iOS(scriptCtx);
                             CopyBGDataToVram(gMain.currentBG);
                             scriptCtx->unk30[7] = 0;
                         } else {
-                            nullsub_8(gMain.currentBG, 0);
+                            CheckBGChange_iOS(gMain.currentBG, 0);
                             CopyBGDataToVram(gMain.currentBG);
                         }
                     }
