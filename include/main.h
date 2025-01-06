@@ -81,7 +81,21 @@ struct Main
     /* +0x09E */ u8 itemPlateAction;
     /* +0x0A0 */ u8 fillA0[0x2];
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
-    /* +0x0A4 */ u8 fillA4[0x1C];
+    /* +0x0A4 */ u8 hpBarState; // unity: gauge_rno_0
+    /* +0x0A5 */ u8 hpBarSubState; // unity: gauge_rno_1
+    /* +0x0A6 */ s16 hpBarValue; // unity: gauge_hp
+    /* +0x0A8 */ s16 hpBarDisplayValue; // unity: gauge_hp_disp
+    /* +0x0AA */ s16 hpBarDamageAmount; // unity: gauge_dmg_cnt
+    /* +0x0AC */ s16 hpBarX; // unity: gauge_pos_x
+    /* +0x0AE */ s16 hpBarY; // unity: gauge_pos_y
+    /* +0x0B0 */ s16 hpBarSlideOutDelay; // unity: gauge_cnt_0
+    /* +0x0B2 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
+    /* +0x0B4 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
+    /* disabled these because they break things... */
+    // s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
+    // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
+    /* +0x0B6 */ u8 fillB6[10];
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;

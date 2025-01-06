@@ -4298,7 +4298,7 @@ _0800DDD8:
 	ldrh r1, [r1, #2]
 	cmp r1, r0
 	bne _0800DE2C
-	bl sub_8016D48
+	bl FindPlayingHPBarSmokeAnimations
 	cmp r0, #0
 	bne _0800DE2C
 	adds r0, r6, #0
