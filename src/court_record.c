@@ -5,7 +5,7 @@
 #include "graphics.h"
 #include "main.h"
 #include "sound.h"
-// #include "court.h"
+#include "court.h"
 // #include "script.h"
 // #include "investigation.h"
 #include "animation.h"
@@ -191,4 +191,41 @@ u32 sub_800EC48()
         }
     }
     return 0;
+}
+
+void sub_800ED0C()
+{
+    struct OamAttrs * oam;
+    PlaySE(SE00C_MENU_CHANGE_PAGE);
+    gCourtRecord.nextState = RECORD_MAIN;
+    gCourtRecord.flags |= 2;
+    DmaCopy16(3, OBJ_VRAM0+0x3C00, VRAM+0x1400, 0x1C00);
+    DmaCopy16(3, OBJ_PLTT+0x20, PLTT+0x20, 0x20);
+    UpdateEvidenceSprites(&gCourtRecord);
+    DmaCopy16(3, &gOamObjects[OAM_IDX_EVIDENCE_DISPLAY], OAM + OAM_IDX_EVIDENCE_DISPLAY*8, OAM_COUNT_EVIDENCE_DISPLAY*8);
+    gMain.process[GAME_PROCESS_STATE] = RECORD_LOAD_GFX_CHANGE_STATE;
+    if(gMain.process[GAME_PROCESS_VAR2] == 1)
+    {
+        if(gMain.processCopy[GAME_PROCESS] != INVESTIGATION_PROCESS)
+            UpdateQuestioningMenuSprites(&gMain, &gTestimony, 0);
+        oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS+2];
+        if(!(gMain.gameStateFlags & 0x100))
+        {
+            oam->attr0 = SPRITE_ATTR0(0, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(186, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x190, 1, 5);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(0, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(218, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x198, 1, 5);
+        }
+        else
+        {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        }
+    }
+    UpdateBG2Window(&gCourtRecord);
+    UpdateRecordSprites(&gCourtRecord);
 }

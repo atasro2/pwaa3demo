@@ -1,116 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_800ED0C
-sub_800ED0C: @ 0x0800ED0C
-	push {r4, r5, lr}
-	movs r0, #0x36
-	bl PlaySE
-	ldr r0, _0800EDA0 @ =gCourtRecord
-	movs r1, #1
-	strb r1, [r0, #0xf]
-	movs r1, #2
-	ldrb r2, [r0, #0xc]
-	orrs r1, r2
-	strb r1, [r0, #0xc]
-	ldr r4, _0800EDA4 @ =0x040000D4
-	ldr r1, _0800EDA8 @ =0x06013C00
-	str r1, [r4]
-	ldr r1, _0800EDAC @ =0x06001400
-	str r1, [r4, #4]
-	ldr r1, _0800EDB0 @ =0x80000E00
-	str r1, [r4, #8]
-	ldr r1, [r4, #8]
-	ldr r1, _0800EDB4 @ =0x05000220
-	str r1, [r4]
-	ldr r1, _0800EDB8 @ =0x05000020
-	str r1, [r4, #4]
-	ldr r1, _0800EDBC @ =0x80000010
-	str r1, [r4, #8]
-	ldr r1, [r4, #8]
-	bl sub_8010690
-	ldr r5, _0800EDC0 @ =gOamObjects+0x110
-	str r5, [r4]
-	ldr r0, _0800EDC4 @ =0x07000110
-	str r0, [r4, #4]
-	ldr r0, _0800EDC8 @ =0x8000002C
-	str r0, [r4, #8]
-	ldr r0, [r4, #8]
-	ldr r4, _0800EDCC @ =gMain
-	movs r0, #6
-	strb r0, [r4, #9]
-	ldrb r0, [r4, #0xb]
-	cmp r0, #1
-	bne _0800EDF0
-	ldrb r2, [r4, #0xc]
-	cmp r2, #4
-	beq _0800ED6E
-	ldr r1, _0800EDD0 @ =gTestimony
-	adds r0, r4, #0
-	movs r2, #0
-	bl sub_800B6EC
-_0800ED6E:
-	adds r2, r5, #0
-	adds r2, #0xa8
-	adds r0, r4, #0
-	adds r0, #0xe8
-	ldr r0, [r0]
-	movs r1, #0x80
-	lsls r1, r1, #1
-	ands r0, r1
-	cmp r0, #0
-	bne _0800EDE4
-	movs r1, #0x80
-	lsls r1, r1, #7
-	strh r1, [r2]
-	ldr r0, _0800EDD4 @ =0x000080BA
-	strh r0, [r2, #2]
-	ldr r0, _0800EDD8 @ =0x00005590
-	strh r0, [r2, #4]
-	adds r2, #8
-	strh r1, [r2]
-	ldr r0, _0800EDDC @ =0x000080DA
-	strh r0, [r2, #2]
-	ldr r0, _0800EDE0 @ =0x00005598
-	strh r0, [r2, #4]
-	b _0800EDF0
-	.align 2, 0
-_0800EDA0: .4byte gCourtRecord
-_0800EDA4: .4byte 0x040000D4
-_0800EDA8: .4byte 0x06013C00
-_0800EDAC: .4byte 0x06001400
-_0800EDB0: .4byte 0x80000E00
-_0800EDB4: .4byte 0x05000220
-_0800EDB8: .4byte 0x05000020
-_0800EDBC: .4byte 0x80000010
-_0800EDC0: .4byte gOamObjects+0x110
-_0800EDC4: .4byte 0x07000110
-_0800EDC8: .4byte 0x8000002C
-_0800EDCC: .4byte gMain
-_0800EDD0: .4byte gTestimony
-_0800EDD4: .4byte 0x000080BA
-_0800EDD8: .4byte 0x00005590
-_0800EDDC: .4byte 0x000080DA
-_0800EDE0: .4byte 0x00005598
-_0800EDE4:
-	movs r0, #0x80
-	lsls r0, r0, #2
-	strh r0, [r2]
-	adds r2, r5, #0
-	adds r2, #0xb0
-	strh r0, [r2]
-_0800EDF0:
-	ldr r4, _0800EE04 @ =gCourtRecord
-	adds r0, r4, #0
-	bl UpdateBG2Window
-	adds r0, r4, #0
-	bl sub_8010554
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800EE04: .4byte gCourtRecord
-
 	thumb_func_start sub_800EE08
 sub_800EE08: @ 0x0800EE08
 	push {r4, r5, r6, r7, lr}
@@ -769,7 +659,7 @@ _0800F352:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	movs r0, #0
 	bl sub_8010780
 	ldr r2, _0800F3D0 @ =gMain
@@ -913,7 +803,7 @@ _0800F49C:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	b _0800F530
 	.align 2, 0
 _0800F4AC: .4byte gCourtRecord
@@ -980,7 +870,7 @@ _0800F522:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 _0800F530:
 	pop {r4, r5, r6}
 	pop {r0}
@@ -1036,7 +926,7 @@ _0800F596:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	movs r0, #1
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
@@ -1121,7 +1011,7 @@ _0800F646:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	movs r0, #1
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
@@ -1150,7 +1040,7 @@ CourtRecordChangeRecord: @ 0x0800F678
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	movs r0, #1
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
@@ -1965,7 +1855,7 @@ _0800FD1A:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	ldrb r0, [r5, #0xa]
 	adds r0, #1
 	b _0800FEBA
@@ -2095,7 +1985,7 @@ _0800FE54:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 	b _0800FEBC
 	.align 2, 0
 _0800FE64: .4byte gCourtRecord
@@ -2603,7 +2493,7 @@ _08010264:
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010554
+	bl UpdateRecordSprites
 _08010272:
 	pop {r3}
 	mov r8, r3
@@ -2688,7 +2578,7 @@ EvidenceAddedMain: @ 0x08010310
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010690
+	bl UpdateEvidenceSprites
 	movs r0, #1
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
@@ -2766,7 +2656,7 @@ EvidenceAddedExit: @ 0x080103B4
 	adds r0, r4, #0
 	bl UpdateBG2Window
 	adds r0, r4, #0
-	bl sub_8010690
+	bl UpdateEvidenceSprites
 	movs r0, #1
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
@@ -2947,11 +2837,11 @@ _08010548: .4byte 0x05000280
 _0801054C: .4byte gPalEvidenceProfileDesc
 _08010550: .4byte 0x05000240
 
-	thumb_func_start sub_8010554
-sub_8010554: @ 0x08010554
+	thumb_func_start UpdateRecordSprites
+UpdateRecordSprites: @ 0x08010554
 	push {r4, lr}
 	adds r4, r0, #0
-	bl sub_8010690
+	bl UpdateEvidenceSprites
 	movs r0, #4
 	ldrb r1, [r4, #0xc]
 	ands r0, r1
@@ -3098,8 +2988,8 @@ _08010684: .4byte 0x80000400
 _08010688: .4byte 0x06013C00
 _0801068C: .4byte 0x80000A00
 
-	thumb_func_start sub_8010690
-sub_8010690: @ 0x08010690
+	thumb_func_start UpdateEvidenceSprites
+UpdateEvidenceSprites: @ 0x08010690
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldr r1, _080106F4 @ =gOamObjects+0x110

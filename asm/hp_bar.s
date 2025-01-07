@@ -188,7 +188,7 @@ _0801694C:
 	ldr r1, _080169B0 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #1
-	bl sub_800B6EC
+	bl UpdateQuestioningMenuSprites
 _08016972:
 	ldr r2, _080169B4 @ =gMain
 	adds r3, r2, #0
@@ -638,7 +638,7 @@ _08016CA2:
 	ldr r1, _08016CC8 @ =gTestimony
 	adds r0, r3, #0
 	movs r2, #1
-	bl sub_800B6EC
+	bl UpdateQuestioningMenuSprites
 	bl sub_8016808
 _08016CBE:
 	pop {r4}
