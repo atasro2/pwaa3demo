@@ -35,6 +35,7 @@ SECTIONS {
         asm/episode_load_processes.o(.text);
         asm/court.o(.text);
         asm/investigation.o(.text);
+        src/court_record.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);

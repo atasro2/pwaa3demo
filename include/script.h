@@ -37,7 +37,8 @@ struct ScriptContext {
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
-    u8 fill2A[0x2];
+    u8 slamDesk;
+    u8 fill2B[0x1];
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;

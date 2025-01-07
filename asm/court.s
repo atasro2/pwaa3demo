@@ -83,7 +83,7 @@ _0800A430: .4byte gUnknown_030037B8
 	thumb_func_start CourtProcess
 CourtProcess: @ 0x0800A434
 	push {lr}
-	ldr r2, _0800A448 @ =gUnknown_0814DB88
+	ldr r2, _0800A448 @ =gCourtProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -92,7 +92,7 @@ CourtProcess: @ 0x0800A434
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A448: .4byte gUnknown_0814DB88
+_0800A448: .4byte gCourtProcessStates
 
 	thumb_func_start sub_800A44C
 sub_800A44C: @ 0x0800A44C
@@ -200,8 +200,8 @@ _0800A512:
 	.align 2, 0
 _0800A518: .4byte gUnknown_030037BC
 
-	thumb_func_start sub_800A51C
-sub_800A51C: @ 0x0800A51C
+	thumb_func_start CourtInit
+CourtInit: @ 0x0800A51C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -284,7 +284,7 @@ sub_800A51C: @ 0x0800A51C
 	strh r0, [r3]
 	ldr r1, _0800A6B8 @ =gCourtRecord
 	adds r0, r7, #0
-	bl sub_800E9C4
+	bl InitializeCourtRecordForScenario
 	bl ResetHPBar
 	str r5, [sp, #4]
 	add r1, sp, #4
@@ -386,8 +386,8 @@ _0800A6C8: .4byte gScriptContext
 _0800A6CC: .4byte 0x0000FFFF
 _0800A6D0: .4byte gUnknown_030037B8
 
-	thumb_func_start sub_800A6D4
-sub_800A6D4: @ 0x0800A6D4
+	thumb_func_start CourtExit
+CourtExit: @ 0x0800A6D4
 	push {r4, lr}
 	adds r4, r0, #0
 	bl ClearSectionReadFlags
@@ -470,8 +470,8 @@ _0800A774:
 	.align 2, 0
 _0800A77C: .4byte 0x0400000B
 
-	thumb_func_start sub_800A780
-sub_800A780: @ 0x0800A780
+	thumb_func_start CourtMain
+CourtMain: @ 0x0800A780
 	push {lr}
 	adds r0, #0x8a
 	ldrh r0, [r0]
@@ -535,8 +535,8 @@ _0800A7F8: .4byte 0x00005D90
 _0800A7FC: .4byte 0x000080DA
 _0800A800: .4byte 0x00005D98
 
-	thumb_func_start sub_800A804
-sub_800A804: @ 0x0800A804
+	thumb_func_start TestimonyAnim
+TestimonyAnim: @ 0x0800A804
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldrb r0, [r6, #0xa]
@@ -692,7 +692,7 @@ _0800A94C: .4byte gTestimony
 	thumb_func_start TestimonyProcess
 TestimonyProcess: @ 0x0800A950
 	push {lr}
-	ldr r2, _0800A964 @ =gUnknown_0814DB94
+	ldr r2, _0800A964 @ =gTestimonyProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -701,10 +701,10 @@ TestimonyProcess: @ 0x0800A950
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A964: .4byte gUnknown_0814DB94
+_0800A964: .4byte gTestimonyProcessStates
 
-	thumb_func_start sub_800A968
-sub_800A968: @ 0x0800A968
+	thumb_func_start TestimonyInit
+TestimonyInit: @ 0x0800A968
 	ldr r2, _0800A994 @ =0x040000D4
 	ldr r1, _0800A998 @ =gGfx4bppTestimonyTextTiles
 	str r1, [r2]
@@ -736,8 +736,8 @@ _0800A9A8: .4byte 0x050002A0
 _0800A9AC: .4byte 0x80000010
 _0800A9B0: .4byte gTestimony
 
-	thumb_func_start sub_800A9B4
-sub_800A9B4: @ 0x0800A9B4
+	thumb_func_start TestimonyMain
+TestimonyMain: @ 0x0800A9B4
 	push {lr}
 	adds r0, #0x8a
 	ldrh r0, [r0]
@@ -792,8 +792,8 @@ _0800AA1A:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_800AA20
-sub_800AA20: @ 0x0800AA20
+	thumb_func_start TestimonyExit
+TestimonyExit: @ 0x0800AA20
 	ldr r2, _0800AA30 @ =gOamObjects+0x1C8
 	movs r1, #0x80
 	lsls r1, r1, #2
@@ -804,8 +804,8 @@ sub_800AA20: @ 0x0800AA20
 	.align 2, 0
 _0800AA30: .4byte gOamObjects+0x1C8
 
-	thumb_func_start sub_800AA34
-sub_800AA34: @ 0x0800AA34
+	thumb_func_start QuestioningAnim
+QuestioningAnim: @ 0x0800AA34
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	movs r0, #0x56
@@ -948,7 +948,7 @@ _0800AB5E:
 	thumb_func_start QuestioningProcess
 QuestioningProcess: @ 0x0800AB64
 	push {lr}
-	ldr r2, _0800AB78 @ =gUnknown_0814DBA4
+	ldr r2, _0800AB78 @ =gQuestioningProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -957,10 +957,10 @@ QuestioningProcess: @ 0x0800AB64
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800AB78: .4byte gUnknown_0814DBA4
+_0800AB78: .4byte gQuestioningProcessStates
 
-	thumb_func_start sub_800AB7C
-sub_800AB7C: @ 0x0800AB7C
+	thumb_func_start QuestioningInit
+QuestioningInit: @ 0x0800AB7C
 	push {lr}
 	ldr r1, _0800ABE4 @ =0x040000D4
 	ldr r2, _0800ABE8 @ =gGfxPressPresentButtons
@@ -1118,8 +1118,8 @@ sub_800ACB4: @ 0x0800ACB4
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_800ACD4
-sub_800ACD4: @ 0x0800ACD4
+	thumb_func_start QuestioningMain
+QuestioningMain: @ 0x0800ACD4
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r0, #0x8a
@@ -1380,13 +1380,13 @@ _0800AEE6:
 	.align 2, 0
 _0800AEEC: .4byte gUnknown_030037B8
 
-	thumb_func_start nullsub_16
-nullsub_16: @ 0x0800AEF0
+	thumb_func_start QuestioningExit
+QuestioningExit: @ 0x0800AEF0
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_800AEF4
-sub_800AEF4: @ 0x0800AEF4
+	thumb_func_start QuestioningHoldIt
+QuestioningHoldIt: @ 0x0800AEF4
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldrb r4, [r5, #0xa]
@@ -1600,8 +1600,8 @@ _0800B0A0:
 _0800B0A8: .4byte gTestimony
 _0800B0AC: .4byte gOamObjects
 
-	thumb_func_start sub_800B0B0
-sub_800B0B0: @ 0x0800B0B0
+	thumb_func_start QuestioningObjection
+QuestioningObjection: @ 0x0800B0B0
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldrb r0, [r5, #0xa]

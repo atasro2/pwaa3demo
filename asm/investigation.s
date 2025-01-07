@@ -471,8 +471,8 @@ _0800BFE4: .4byte gUnknown_0814DB08
 _0800BFE8: .4byte gInvestigationProcessStates
 _0800BFEC: .4byte gInvestigation
 
-	thumb_func_start sub_800BFF0
-sub_800BFF0: @ 0x0800BFF0
+	thumb_func_start InvestigationInit
+InvestigationInit: @ 0x0800BFF0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -643,7 +643,7 @@ _0800C0D2:
 	strh r0, [r1]
 	ldr r1, _0800C278 @ =gCourtRecord
 	adds r0, r6, #0
-	bl sub_800E9C4
+	bl InitializeCourtRecordForScenario
 	str r4, [sp, #4]
 	ldr r1, _0800C1FC @ =0x040000D4
 	mov r3, sb
@@ -759,8 +759,8 @@ _0800C284: .4byte 0x0000FFFF
 _0800C288: .4byte gMain
 _0800C28C: .4byte gUnknown_0814DAAC
 
-	thumb_func_start sub_800C290
-sub_800C290: @ 0x0800C290
+	thumb_func_start InvestigationMain
+InvestigationMain: @ 0x0800C290
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -1080,8 +1080,8 @@ _0800C50A:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_800C510
-sub_800C510: @ 0x0800C510
+	thumb_func_start InvestigationExit
+InvestigationExit: @ 0x0800C510
 	push {r4, lr}
 	adds r4, r0, #0
 	bl ClearSectionReadFlags
@@ -1149,8 +1149,8 @@ _0800C590:
 	.align 2, 0
 _0800C598: .4byte gUnknown_0300000B
 
-	thumb_func_start sub_800C59C
-sub_800C59C: @ 0x0800C59C
+	thumb_func_start InvestigationBgScrollWait
+InvestigationBgScrollWait: @ 0x0800C59C
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0
@@ -1206,8 +1206,8 @@ _0800C5FC:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_800C604
-sub_800C604: @ 0x0800C604
+	thumb_func_start InvestigationTextboxSlideWait
+InvestigationTextboxSlideWait: @ 0x0800C604
 	push {r4, lr}
 	adds r4, r0, #0
 	movs r1, #0
@@ -1227,8 +1227,8 @@ _0800C61E:
 	.align 2, 0
 _0800C624: .4byte gScriptContext
 
-	thumb_func_start sub_800C628
-sub_800C628: @ 0x0800C628
+	thumb_func_start InvestigationRoomInit
+InvestigationRoomInit: @ 0x0800C628
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1379,8 +1379,8 @@ _0800C760: .4byte gAnimation+0x44
 _0800C764: .4byte gInvestigation
 _0800C768: .4byte gUnknown_0814DAAC
 
-	thumb_func_start sub_800C76C
-sub_800C76C: @ 0x0800C76C
+	thumb_func_start InvestigationInspect
+InvestigationInspect: @ 0x0800C76C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1855,8 +1855,8 @@ _0800CAFA:
 	.align 2, 0
 _0800CB04: .4byte gAnimation+0x44
 
-	thumb_func_start sub_800CB08
-sub_800CB08: @ 0x0800CB08
+	thumb_func_start InvestigationMove
+InvestigationMove: @ 0x0800CB08
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -2644,8 +2644,8 @@ _0800D0F8:
 	.align 2, 0
 _0800D108: .4byte 0x00000FFF
 
-	thumb_func_start sub_800D10C
-sub_800D10C: @ 0x0800D10C
+	thumb_func_start InvestigationTalk
+InvestigationTalk: @ 0x0800D10C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -3978,8 +3978,8 @@ _0800DB5C:
 	.align 2, 0
 _0800DB6C: .4byte 0x00000FFF
 
-	thumb_func_start sub_800DB70
-sub_800DB70: @ 0x0800DB70
+	thumb_func_start InvestigationPresent
+InvestigationPresent: @ 0x0800DB70
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	adds r4, r1, #0
