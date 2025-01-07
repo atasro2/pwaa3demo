@@ -7,9 +7,9 @@
 #include "sound.h"
 #include "court.h"
 // #include "script.h"
-// #include "investigation.h"
+#include "investigation.h"
 #include "animation.h"
-// #include "psyche_lock.h"
+#include "psyche_lock.h"
 // #include "save.h"
 // #include "ewram.h"
 #include "constants/process.h"
@@ -173,8 +173,8 @@ u32 sub_800EC48()
             PlaySE(SE001_MENU_CONFIRM);
             gMain.process[GAME_PROCESS_STATE] = RECORD_DETAIL_SUBMENU;
             gMain.process[GAME_PROCESS_VAR1] = 0;
-            sub_8010720(0);
-            sub_8010780(0);
+            UpdateRecordInfoActionSprites(0);
+            UpdateRecordPresentActionSprites(0);
             anim = &gAnimation[1];
             if(anim->animationInfo.personId == 0xB || anim->animationInfo.personId == 0x21) {
                 dst = gUnknown_0826FE38;
@@ -228,4 +228,61 @@ void sub_800ED0C()
     }
     UpdateBG2Window(&gCourtRecord);
     UpdateRecordSprites(&gCourtRecord);
+}
+
+u32 sub_800EE08()
+{
+    u32 section;
+    u32 evidenceId;
+    struct OamAttrs * oam;
+    struct AnimationListEntry * anim;
+    anim = &gAnimation[1];
+    if(gMain.process[GAME_PROCESS_VAR2] != 2) {
+        return 1;
+    }
+    evidenceId = gCourtRecord.displayItemList[gCourtRecord.selectedItem];
+    if(evidenceId == 0x21 || evidenceId == 0x57) {
+        if(GetPsycheLockDataIndexByRoomAndPerson(gMain.currentRoomId, anim->animationInfo.personId) < 0) {
+            return 1;
+        }
+    }
+    else {
+        return 1;
+    }
+    gInvestigation.inPsycheLockChallengeFlag |= 1;
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_PRESENT];
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    ClearEvidenceSprites(&gCourtRecord);
+    UpdateRecordInfoActionSprites(0);
+    UpdateRecordPresentActionSprites(0);
+    oam = gOamObjects + OAM_IDX_LR_ARROW;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    oam++;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    SlideInBG2Window(4, 0x12);
+    if(anim->animationInfo.xOrigin & 0xFF00) {
+        if(GetBGControlBits(gMain.currentBG) & 0xF) {
+            gMain.isBGScrolling = 1;
+        }
+        else {
+            gMain.isBGScrolling = 0;
+        }
+        gMain.unk50 = 0;
+        if(gMain.Bg256_pos_x == 0) {
+            gMain.horizontolBGScrollSpeed = 8;
+        }
+        else if(gMain.Bg256_pos_x == 120 || gMain.Bg256_pos_x == 240) {
+            gMain.horizontolBGScrollSpeed = -8;
+        }
+        gScriptContext.unk1E |= 0x40;
+        sub_8017154(0);
+        return 0;
+    }
+    FadeOutBGM(30);
+    gCourtRecord.flags |= 8;
+ 
+    SlideInBG2Window(4, 0x12);
+    SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, (&gMain));
+    sub_8017154(0);
+    return 0;
 }

@@ -493,7 +493,7 @@ sub_80190AC: @ 0x080190AC
 	ldr r5, _080190D0 @ =gScriptContext
 	ldr r4, _080190D4 @ =gMain
 	ldrh r0, [r4, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	lsls r0, r0, #0x10
 	movs r1, #0xf0
 	lsls r1, r1, #0xc
@@ -1523,7 +1523,7 @@ sub_801987C: @ 0x0801987C
 	ldr r5, _080198A0 @ =gScriptContext
 	ldr r4, _080198A4 @ =gMain
 	ldrh r0, [r4, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	lsls r0, r0, #0x10
 	movs r1, #0xf0
 	lsls r1, r1, #0xc

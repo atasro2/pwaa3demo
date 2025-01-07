@@ -1,157 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_800EE08
-sub_800EE08: @ 0x0800EE08
-	push {r4, r5, r6, r7, lr}
-	mov r7, sb
-	mov r6, r8
-	push {r6, r7}
-	ldr r0, _0800EE44 @ =gAnimation+0x44
-	mov sb, r0
-	ldr r7, _0800EE48 @ =gMain
-	ldrb r1, [r7, #0xb]
-	cmp r1, #2
-	bne _0800EE40
-	ldr r6, _0800EE4C @ =gCourtRecord
-	ldr r0, [r6, #0x18]
-	ldrb r2, [r6, #0xd]
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	cmp r0, #0x21
-	beq _0800EE2E
-	cmp r0, #0x57
-	bne _0800EE40
-_0800EE2E:
-	adds r0, r7, #0
-	adds r0, #0xc0
-	ldrb r0, [r0]
-	mov r2, sb
-	ldrb r1, [r2, #0xe]
-	bl GetPsycheLockDataIndexByRoomAndPerson
-	cmp r0, #0
-	bge _0800EE50
-_0800EE40:
-	movs r0, #1
-	b _0800EF22
-	.align 2, 0
-_0800EE44: .4byte gAnimation+0x44
-_0800EE48: .4byte gMain
-_0800EE4C: .4byte gCourtRecord
-_0800EE50:
-	ldr r1, _0800EEAC @ =gInvestigation
-	movs r0, #1
-	movs r2, #0
-	mov r8, r2
-	ldrb r2, [r1, #0xb]
-	orrs r0, r2
-	strb r0, [r1, #0xb]
-	ldr r5, _0800EEB0 @ =gOamObjects+0x1B8
-	movs r4, #0x80
-	lsls r4, r4, #2
-	strh r4, [r5]
-	adds r0, r6, #0
-	bl sub_8010704
-	movs r0, #0
-	bl sub_8010720
-	movs r0, #0
-	bl sub_8010780
-	ldr r0, _0800EEB4 @ =0xFFFFFE48
-	adds r5, r5, r0
-	strh r4, [r5]
-	strh r4, [r5, #8]
-	movs r0, #4
-	movs r1, #0x12
-	bl SlideInBG2Window
-	movs r0, #0xff
-	lsls r0, r0, #8
-	mov r1, sb
-	ldrh r1, [r1, #0x10]
-	ands r0, r1
-	cmp r0, #0
-	beq _0800EF00
-	ldrh r0, [r7, #0x34]
-	bl sub_80051AC
-	movs r1, #0xf
-	ands r1, r0
-	cmp r1, #0
-	beq _0800EEB8
-	adds r1, r7, #0
-	adds r1, #0x3e
-	movs r0, #1
-	b _0800EEBE
-	.align 2, 0
-_0800EEAC: .4byte gInvestigation
-_0800EEB0: .4byte gOamObjects+0x1B8
-_0800EEB4: .4byte 0xFFFFFE48
-_0800EEB8:
-	adds r1, r7, #0
-	adds r1, #0x3e
-	movs r0, #0
-_0800EEBE:
-	strb r0, [r1]
-	ldr r2, _0800EEDC @ =gMain
-	adds r0, r2, #0
-	adds r0, #0x50
-	movs r1, #0
-	strh r1, [r0]
-	subs r0, #0xc
-	movs r1, #0
-	ldrsh r0, [r0, r1]
-	cmp r0, #0
-	bne _0800EEE0
-	adds r1, r2, #0
-	adds r1, #0x4c
-	movs r0, #8
-	b _0800EEEE
-	.align 2, 0
-_0800EEDC: .4byte gMain
-_0800EEE0:
-	cmp r0, #0x78
-	beq _0800EEE8
-	cmp r0, #0xf0
-	bne _0800EEF0
-_0800EEE8:
-	adds r1, r2, #0
-	adds r1, #0x4c
-	movs r0, #0xf8
-_0800EEEE:
-	strb r0, [r1]
-_0800EEF0:
-	ldr r0, _0800EEFC @ =gScriptContext
-	movs r1, #0x40
-	ldrh r2, [r0, #0x1e]
-	orrs r1, r2
-	strh r1, [r0, #0x1e]
-	b _0800EF1A
-	.align 2, 0
-_0800EEFC: .4byte gScriptContext
-_0800EF00:
-	movs r0, #0x1e
-	bl FadeOutBGM
-	movs r0, #8
-	ldrb r1, [r6, #0xc]
-	orrs r0, r1
-	strb r0, [r6, #0xc]
-	movs r0, #4
-	movs r1, #0x12
-	bl SlideInBG2Window
-	ldr r0, _0800EF30 @ =0x00000707
-	str r0, [r7, #8]
-_0800EF1A:
-	movs r0, #0
-	bl sub_8017154
-	movs r0, #0
-_0800EF22:
-	pop {r3, r4}
-	mov r8, r3
-	mov sb, r4
-	pop {r4, r5, r6, r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0800EF30: .4byte 0x00000707
-
 	thumb_func_start sub_800EF34
 sub_800EF34: @ 0x0800EF34
 	push {lr}
@@ -268,11 +117,11 @@ _0800EFE0:
 _0800F00E:
 	ldr r6, _0800F0A4 @ =gCourtRecord
 	adds r0, r6, #0
-	bl sub_8010704
+	bl ClearEvidenceSprites
 	movs r0, #0
-	bl sub_8010720
+	bl UpdateRecordInfoActionSprites
 	movs r0, #0
-	bl sub_8010780
+	bl UpdateRecordPresentActionSprites
 	ldr r1, _0800F0A8 @ =gIORegisters
 	adds r1, #0x4a
 	ldr r0, _0800F0AC @ =0x0000FBFF
@@ -661,7 +510,7 @@ _0800F352:
 	adds r0, r4, #0
 	bl UpdateRecordSprites
 	movs r0, #0
-	bl sub_8010780
+	bl UpdateRecordPresentActionSprites
 	ldr r2, _0800F3D0 @ =gMain
 	adds r0, r2, #0
 	adds r0, #0xe8
@@ -682,9 +531,9 @@ _0800F386:
 	ands r0, r2
 	strh r0, [r1]
 	adds r0, r4, #0
-	bl sub_8010704
+	bl ClearEvidenceSprites
 	movs r0, #0
-	bl sub_8010720
+	bl UpdateRecordInfoActionSprites
 _0800F39E:
 	ldr r1, _0800F3D0 @ =gMain
 	adds r1, #0xe8
@@ -1463,9 +1312,9 @@ _0800F9DA:
 	ands r0, r6
 	strb r0, [r7]
 	adds r0, r4, #0
-	bl sub_8010704
+	bl ClearEvidenceSprites
 	movs r0, #0
-	bl sub_8010720
+	bl UpdateRecordInfoActionSprites
 	movs r0, #1
 	bl sub_80108BC
 	ldr r3, _0800FAA4 @ =gOamObjects
@@ -2894,7 +2743,7 @@ _080105A0:
 	bne _080105D0
 _080105BA:
 	movs r0, #1
-	bl sub_8010720
+	bl UpdateRecordInfoActionSprites
 	b _0801060A
 	.align 2, 0
 _080105C4: .4byte 0x000040E0
@@ -2902,7 +2751,7 @@ _080105C8: .4byte 0x000021A4
 _080105CC: .4byte gMain
 _080105D0:
 	movs r0, #1
-	bl sub_8010780
+	bl UpdateRecordPresentActionSprites
 	b _0801060A
 _080105D8:
 	ldr r1, _080105FC @ =gOamObjects
@@ -2920,14 +2769,14 @@ _080105D8:
 	bne _08010604
 _080105F2:
 	movs r0, #0
-	bl sub_8010720
+	bl UpdateRecordInfoActionSprites
 	b _0801060A
 	.align 2, 0
 _080105FC: .4byte gOamObjects
 _08010600: .4byte gMain
 _08010604:
 	movs r0, #0
-	bl sub_8010780
+	bl UpdateRecordPresentActionSprites
 _0801060A:
 	pop {r4}
 	pop {r0}
@@ -3048,8 +2897,8 @@ _080106F8: .4byte 0x000021E0
 _080106FC: .4byte 0x00008048
 _08010700: .4byte 0x00002230
 
-	thumb_func_start sub_8010704
-sub_8010704: @ 0x08010704
+	thumb_func_start ClearEvidenceSprites
+ClearEvidenceSprites: @ 0x08010704
 	ldr r1, _0801071C @ =gOamObjects+0x110
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -3066,8 +2915,8 @@ _08010710:
 	.align 2, 0
 _0801071C: .4byte gOamObjects+0x110
 
-	thumb_func_start sub_8010720
-sub_8010720: @ 0x08010720
+	thumb_func_start UpdateRecordInfoActionSprites
+UpdateRecordInfoActionSprites: @ 0x08010720
 	ldr r2, _08010750 @ =gOamObjects+0x168
 	cmp r0, #0
 	beq _08010770
@@ -3111,8 +2960,8 @@ _0801077C:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8010780
-sub_8010780: @ 0x08010780
+	thumb_func_start UpdateRecordPresentActionSprites
+UpdateRecordPresentActionSprites: @ 0x08010780
 	ldr r3, _080107E0 @ =gOamObjects+0x168
 	cmp r0, #0
 	bne _08010788

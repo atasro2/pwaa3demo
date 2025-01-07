@@ -1005,7 +1005,7 @@ _0800C47C: .4byte 0x05000300
 _0800C480: .4byte 0x80000010
 _0800C484:
 	ldrh r0, [r5, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -1160,7 +1160,7 @@ InvestigationBgScrollWait: @ 0x0800C59C
 	cmp r0, #0
 	bne _0800C5F0
 	ldrh r0, [r4, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #1
 	ands r1, r0
 	cmp r1, #0
@@ -5386,7 +5386,7 @@ UpdateScrollPromptSprite: @ 0x0800E6A4
 	cmp r0, #1
 	bne _0800E720
 	ldrh r0, [r5, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0

@@ -66,7 +66,8 @@ struct Main
     /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
     /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
     /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
-    /* +0x050 */ u8 fill50[0x38];
+    /* +0x050 */ u16 unk50;
+    /* +0x052 */ u8 fill52[0x36];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
@@ -108,7 +109,8 @@ struct Main
     /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x12C */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1B0 */ struct PsycheLockData psycheLockData[4];
-    /* +0x250 */ u8 fill250[0x2];
+    /* +0x250 */ s8 currentPsycheLockDataIndex;
+    /* +0x251 */ u8 fill251[0x1];
     /* +0x252 */ u16 psycheLockStopPresentButtonsY;
     /* +0x254 */ u8 psycheLockStopPresentButtonsState;
     /* +0x255 */ u8 psycheLockStopPresentButtonsSubstate;
