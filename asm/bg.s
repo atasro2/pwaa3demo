@@ -694,7 +694,7 @@ _080033C0: @ jump table
 	.4byte _08003414 @ case 4
 	.4byte _08003414 @ case 5
 _080033D8:
-	ldr r0, _080033F0 @ =gUnknown_0814D894
+	ldr r0, _080033F0 @ =gCourtScrollGfxFrameIndices
 	ldr r2, _080033F4 @ =gCourtScroll
 	movs r6, #0xc
 	ldrsh r1, [r2, r6]
@@ -707,10 +707,10 @@ _080033D8:
 	mov r8, r1
 	b _0800342E
 	.align 2, 0
-_080033F0: .4byte gUnknown_0814D894
+_080033F0: .4byte gCourtScrollGfxFrameIndices
 _080033F4: .4byte gCourtScroll
 _080033F8:
-	ldr r2, _0800340C @ =gUnknown_0814D894
+	ldr r2, _0800340C @ =gCourtScrollGfxFrameIndices
 	ldr r1, _08003410 @ =gCourtScroll
 	movs r6, #0xc
 	ldrsh r0, [r1, r6]
@@ -721,10 +721,10 @@ _080033F8:
 	adds r2, #0x20
 	b _08003424
 	.align 2, 0
-_0800340C: .4byte gUnknown_0814D894
+_0800340C: .4byte gCourtScrollGfxFrameIndices
 _08003410: .4byte gCourtScroll
 _08003414:
-	ldr r2, _08003488 @ =gUnknown_0814D894
+	ldr r2, _08003488 @ =gCourtScrollGfxFrameIndices
 	ldr r1, _0800348C @ =gCourtScroll
 	movs r6, #0xc
 	ldrsh r0, [r1, r6]
@@ -785,7 +785,7 @@ _08003464:
 	str r2, [r1]
 	b _0800351C
 	.align 2, 0
-_08003488: .4byte gUnknown_0814D894
+_08003488: .4byte gCourtScrollGfxFrameIndices
 _0800348C: .4byte gCourtScroll
 _08003490: .4byte 0x0000FF7F
 _08003494: .4byte 0x040000D4
@@ -6033,13 +6033,13 @@ _08005D74:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start nullsub_13
-nullsub_13: @ 0x08005D7C
+	thumb_func_start WindowDummy
+WindowDummy: @ 0x08005D7C
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8005D80
-sub_8005D80: @ 0x08005D80
+	thumb_func_start ScrollWindowWithPrevWindow
+ScrollWindowWithPrevWindow: @ 0x08005D80
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -6284,8 +6284,8 @@ _08005F58:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_8005F68
-sub_8005F68: @ 0x08005F68
+	thumb_func_start ScrollWindowWithoutPrevWindow
+ScrollWindowWithoutPrevWindow: @ 0x08005F68
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -6460,7 +6460,7 @@ UpdateBG2Window: @ 0x080060AC
 	ldrh r0, [r0]
 	cmp r0, #0
 	bne _080060D4
-	ldr r1, _080060E0 @ =gUnknown_0814D8D4
+	ldr r1, _080060E0 @ =gWindowFunctions
 	ldrb r2, [r4, #3]
 	lsls r0, r2, #2
 	adds r0, r0, r1
@@ -6478,7 +6478,7 @@ _080060D4:
 	bx r0
 	.align 2, 0
 _080060DC: .4byte gMain
-_080060E0: .4byte gUnknown_0814D8D4
+_080060E0: .4byte gWindowFunctions
 _080060E4: .4byte gIORegisters
 
 	thumb_func_start sub_80060E8
@@ -6528,7 +6528,7 @@ sub_8006130: @ 0x08006130
 	ldr r3, _08006174 @ =0x000002C5
 	adds r0, r0, r3
 	strb r6, [r0]
-	ldr r0, _08006178 @ =gUnknown_0814D8E8
+	ldr r0, _08006178 @ =gSpeakerToNametagMap
 	adds r0, r5, r0
 	ldrb r5, [r0]
 	cmp r5, #0
@@ -6553,7 +6553,7 @@ _08006160:
 	.align 2, 0
 _08006170: .4byte gMain
 _08006174: .4byte 0x000002C5
-_08006178: .4byte gUnknown_0814D8E8
+_08006178: .4byte gSpeakerToNametagMap
 _0800617C: .4byte gBG1MapBuffer
 _08006180: .4byte gTextboxTiles
 _08006184:
