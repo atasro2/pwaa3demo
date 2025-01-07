@@ -1,147 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_800EBE8
-sub_800EBE8: @ 0x0800EBE8
-	push {r4, r5, lr}
-	ldr r4, _0800EC14 @ =gScriptContext
-	ldrh r5, [r4, #0xc]
-	ldr r0, _0800EC18 @ =gMain
-	adds r0, #0xc1
-	ldrb r0, [r0]
-	cmp r0, #1
-	bhi _0800EC3A
-	bl Random
-	movs r1, #3
-	ands r1, r0
-	cmp r1, #1
-	beq _0800EC1C
-	cmp r1, #1
-	ble _0800EC10
-	cmp r1, #2
-	beq _0800EC24
-	cmp r1, #3
-	beq _0800EC2C
-_0800EC10:
-	movs r0, #0x20
-	b _0800EC2E
-	.align 2, 0
-_0800EC14: .4byte gScriptContext
-_0800EC18: .4byte gMain
-_0800EC1C:
-	movs r0, #0x21
-	bl ChangeScriptSection
-	b _0800EC3A
-_0800EC24:
-	movs r0, #0x22
-	bl ChangeScriptSection
-	b _0800EC3A
-_0800EC2C:
-	movs r0, #0x23
-_0800EC2E:
-	bl ChangeScriptSection
-	adds r1, r4, #0
-	adds r1, #0x2a
-	movs r0, #1
-	strb r0, [r1]
-_0800EC3A:
-	ldr r0, _0800EC44 @ =gScriptContext
-	strh r5, [r0, #0xe]
-	pop {r4, r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800EC44: .4byte gScriptContext
-
-	thumb_func_start sub_800EC48
-sub_800EC48: @ 0x0800EC48
-	push {lr}
-	ldr r1, _0800ECD8 @ =gJoypad
-	movs r0, #0x80
-	lsls r0, r0, #2
-	ldrh r1, [r1, #2]
-	ands r0, r1
-	cmp r0, #0
-	beq _0800ED04
-	ldr r2, _0800ECDC @ =gUnknown_08026998
-	ldr r1, _0800ECE0 @ =gCourtRecord
-	ldr r0, [r1, #0x18]
-	ldrb r1, [r1, #0xd]
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	lsls r0, r0, #3
-	adds r0, r0, r2
-	ldrh r0, [r0, #6]
-	cmp r0, #0
-	beq _0800ED04
-	bl PauseBGM
-	movs r0, #0x2b
-	bl PlaySE
-	ldr r0, _0800ECE4 @ =gMain
-	movs r2, #0
-	movs r1, #5
-	strb r1, [r0, #9]
-	strb r2, [r0, #0xa]
-	movs r0, #0
-	bl sub_8010720
-	movs r0, #0
-	bl sub_8010780
-	ldr r2, _0800ECE8 @ =gAnimation+0x44
-	ldrb r0, [r2, #0xe]
-	cmp r0, #0xb
-	beq _0800EC9A
-	cmp r0, #0x21
-	bne _0800ECC8
-_0800EC9A:
-	ldr r2, _0800ECEC @ =gUnknown_0826FE38
-	ldr r0, [r2, #4]
-	ldr r1, _0800ECF0 @ =gUnknown_08252498
-	adds r0, r0, r1
-	ldr r2, _0800ECF4 @ =0x050003A0
-	ldr r1, _0800ECF8 @ =0x040000D4
-	str r0, [r1]
-	str r2, [r1, #4]
-	ldr r0, _0800ECFC @ =0x80000010
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	bl sub_8016FB4
-	adds r2, r0, #0
-	ldr r0, [r2]
-	ldr r1, _0800ED00 @ =0xFEFFFFFF
-	ands r0, r1
-	movs r1, #0x41
-	rsbs r1, r1, #0
-	ands r0, r1
-	subs r1, #0x40
-	ands r0, r1
-	str r0, [r2]
-_0800ECC8:
-	movs r0, #2
-	movs r1, #1
-	movs r2, #1
-	movs r3, #0x1f
-	bl StartHardwareBlend
-	movs r0, #1
-	b _0800ED06
-	.align 2, 0
-_0800ECD8: .4byte gJoypad
-_0800ECDC: .4byte gUnknown_08026998
-_0800ECE0: .4byte gCourtRecord
-_0800ECE4: .4byte gMain
-_0800ECE8: .4byte gAnimation+0x44
-_0800ECEC: .4byte gUnknown_0826FE38
-_0800ECF0: .4byte gUnknown_08252498
-_0800ECF4: .4byte 0x050003A0
-_0800ECF8: .4byte 0x040000D4
-_0800ECFC: .4byte 0x80000010
-_0800ED00: .4byte 0xFEFFFFFF
-_0800ED04:
-	movs r0, #0
-_0800ED06:
-	pop {r1}
-	bx r1
-	.align 2, 0
-
 	thumb_func_start sub_800ED0C
 sub_800ED0C: @ 0x0800ED0C
 	push {r4, r5, lr}
@@ -1466,7 +1325,7 @@ _0800F7E2:
 	ldr r0, _0800F824 @ =0x8000016A
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r1, _0800F828 @ =gUnknown_08026998
+	ldr r1, _0800F828 @ =gEvidenceProfileData
 	lsls r0, r2, #3
 	adds r0, r0, r1
 	ldrh r0, [r0, #6]
@@ -1483,7 +1342,7 @@ _0800F818: .4byte 0x040000D4
 _0800F81C: .4byte gMain
 _0800F820: .4byte gUnknown_02000034
 _0800F824: .4byte 0x8000016A
-_0800F828: .4byte gUnknown_08026998
+_0800F828: .4byte gEvidenceProfileData
 _0800F82C: .4byte _0800F830
 _0800F830: @ jump table
 	.4byte _0800F8C4 @ case 0
@@ -1834,7 +1693,7 @@ _0800FAFC:
 	ldr r0, [r4, #0x18]
 	ldrb r1, [r4, #0xd]
 	adds r0, r1, r0
-	ldr r1, _0800FB40 @ =gUnknown_08026998
+	ldr r1, _0800FB40 @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -1862,7 +1721,7 @@ _0800FB30:
 	movs r0, #6
 	b _0800FEBA
 	.align 2, 0
-_0800FB40: .4byte gUnknown_08026998
+_0800FB40: .4byte gEvidenceProfileData
 _0800FB44:
 	movs r0, #0x41
 	ands r0, r1
@@ -1873,7 +1732,7 @@ _0800FB4E:
 	ldr r0, [r4, #0x18]
 	ldrb r2, [r4, #0xd]
 	adds r0, r2, r0
-	ldr r1, _0800FB8C @ =gUnknown_08026998
+	ldr r1, _0800FB8C @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -1902,7 +1761,7 @@ _0800FB7C:
 	movs r0, #6
 	b _0800FEBA
 	.align 2, 0
-_0800FB8C: .4byte gUnknown_08026998
+_0800FB8C: .4byte gEvidenceProfileData
 _0800FB90:
 	adds r0, r5, #0
 	adds r0, #0x8a
@@ -2249,7 +2108,7 @@ _0800FE68:
 	ldr r0, [r4, #0x18]
 	ldrb r3, [r4, #0xd]
 	adds r0, r3, r0
-	ldr r1, _0800FE94 @ =gUnknown_08026998
+	ldr r1, _0800FE94 @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -2263,7 +2122,7 @@ _0800FE68:
 	beq _0800FE9C
 	b _0800FEA0
 	.align 2, 0
-_0800FE94: .4byte gUnknown_08026998
+_0800FE94: .4byte gEvidenceProfileData
 _0800FE98:
 	movs r0, #0x32
 	b _0800FE9E
@@ -2389,7 +2248,7 @@ _0800FF6C:
 	adds r0, r4, r0
 	ldr r4, _0800FFE8 @ =gUnknown_0200AFC0
 	ldr r2, _0800FFEC @ =gUnknown_08026E20
-	ldr r1, _0800FFF0 @ =gUnknown_08026998
+	ldr r1, _0800FFF0 @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -2444,7 +2303,7 @@ _0800FF6C:
 _0800FFE4: .4byte gTestimony
 _0800FFE8: .4byte gUnknown_0200AFC0
 _0800FFEC: .4byte gUnknown_08026E20
-_0800FFF0: .4byte gUnknown_08026998
+_0800FFF0: .4byte gEvidenceProfileData
 _0800FFF4: .4byte 0x040000D4
 _0800FFF8: .4byte 0x05000220
 _0800FFFC: .4byte 0x80000010
@@ -3190,7 +3049,7 @@ LoadEvidenceGraphics: @ 0x08010610
 	adds r5, r0, #0
 	ldr r6, _08010668 @ =gUnknown_0200AFC0
 	ldr r1, _0801066C @ =gUnknown_08026E20
-	ldr r0, _08010670 @ =gUnknown_08026998
+	ldr r0, _08010670 @ =gEvidenceProfileData
 	lsls r5, r5, #3
 	adds r5, r5, r0
 	ldrh r2, [r5, #4]
@@ -3230,7 +3089,7 @@ LoadEvidenceGraphics: @ 0x08010610
 	.align 2, 0
 _08010668: .4byte gUnknown_0200AFC0
 _0801066C: .4byte gUnknown_08026E20
-_08010670: .4byte gUnknown_08026998
+_08010670: .4byte gEvidenceProfileData
 _08010674: .4byte 0x040000D4
 _08010678: .4byte 0x05000220
 _0801067C: .4byte 0x80000010
@@ -4189,7 +4048,7 @@ sub_8010DD8: @ 0x08010DD8
 	push {r4, lr}
 	ldr r4, _08010E18 @ =gUnknown_0200AFC0
 	ldr r2, _08010E1C @ =gUnknown_08026E20
-	ldr r1, _08010E20 @ =gUnknown_08026998
+	ldr r1, _08010E20 @ =gEvidenceProfileData
 	adds r0, #0x98
 	ldrb r0, [r0]
 	lsls r0, r0, #3
@@ -4220,7 +4079,7 @@ sub_8010DD8: @ 0x08010DD8
 	.align 2, 0
 _08010E18: .4byte gUnknown_0200AFC0
 _08010E1C: .4byte gUnknown_08026E20
-_08010E20: .4byte gUnknown_08026998
+_08010E20: .4byte gEvidenceProfileData
 _08010E24: .4byte 0x040000D4
 _08010E28: .4byte 0x05000220
 _08010E2C: .4byte 0x80000010

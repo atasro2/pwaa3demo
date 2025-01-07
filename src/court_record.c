@@ -2,23 +2,30 @@
 #include "background.h"
 #include "court_record.h"
 #include "case_data.h"
-// #include "graphics.h"
+#include "graphics.h"
 #include "main.h"
 #include "sound.h"
 // #include "court.h"
 // #include "script.h"
 // #include "investigation.h"
-// #include "animation.h"
+#include "animation.h"
 // #include "psyche_lock.h"
 // #include "save.h"
 // #include "ewram.h"
 #include "constants/process.h"
-// #include "constants/songs.h"
+#include "constants/songs.h"
 // #include "constants/animation.h"
 #include "constants/oam_allocations.h"
 
+struct EvidenceProfileData
+{
+    /* +0x00 */ u8 * descriptionTiles;
+    /* +0x04 */ u16 evidenceImageId;
+    /* +0x06 */ u16 evidenceDetailId;
+};
 extern void (*gCourtRecordProcessStates[8])(struct Main *, struct CourtRecord *);
 extern void (*gEvidenceAddedProcessStates[3])(struct Main *, struct CourtRecord *);
+extern const struct EvidenceProfileData gEvidenceProfileData[];
 
 //TODO: from hp_bar
 void sub_8016E74(u32); // related to resetting of the bar?
@@ -125,13 +132,12 @@ void CourtRecordInit(struct Main * main, struct CourtRecord * courtRecord) // st
 }
 
 // causes off by 4???
-/*
 void sub_800EBE8()
 {
     u32 section = gScriptContext.currentSection;
     if(gMain.scenarioIdx < 2)
     {
-        u32 rand = Random() & 3;
+        s32 rand = Random() & 3;
         switch(rand)
         {
             default:
@@ -153,4 +159,36 @@ void sub_800EBE8()
     }
     gScriptContext.unkE = section;
 }
-*/
+
+u32 sub_800EC48()
+{
+    u8 * src;
+    u32 * dst;
+    struct AnimationListEntry * anim;
+    if(gJoypad.pressedKeys & L_BUTTON)
+    {
+        if(gEvidenceProfileData[gCourtRecord.displayItemList[gCourtRecord.selectedItem]].evidenceDetailId)
+        {
+            PauseBGM();
+            PlaySE(SE001_MENU_CONFIRM);
+            gMain.process[GAME_PROCESS_STATE] = RECORD_DETAIL_SUBMENU;
+            gMain.process[GAME_PROCESS_VAR1] = 0;
+            sub_8010720(0);
+            sub_8010780(0);
+            anim = &gAnimation[1];
+            if(anim->animationInfo.personId == 0xB || anim->animationInfo.personId == 0x21) {
+                dst = gUnknown_0826FE38;
+                src = gUnknown_08252498 + dst[1];
+                dst = (u32*)(OBJ_PLTT+0x1A0);
+                DmaCopy16(3, src, dst, 0x20);
+                anim = sub_8016FB4();
+                anim->flags &= ~(1<<24);
+                anim->flags &= ~(1<<6);
+                anim->flags &= ~(1<<7);
+            }
+            StartHardwareBlend(2, 1, 1, 0x1F);
+            return 1;
+        }
+    }
+    return 0;
+}

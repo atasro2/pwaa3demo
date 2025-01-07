@@ -27,8 +27,8 @@ gUnknown_08026810:
 gUnknown_08026960:
     .incbin "baserom.gba", 0x00026960, 0x38
 
-    .global gUnknown_08026998
-gUnknown_08026998:
+    .global gEvidenceProfileData
+gEvidenceProfileData:
     .incbin "baserom.gba", 0x00026998, 0x488
 
     .global gUnknown_08026E20
