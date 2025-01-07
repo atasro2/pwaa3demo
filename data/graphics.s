@@ -301,12 +301,12 @@ gUnknown_081FFD48:
 gUnknown_08200308:
     .incbin "baserom.gba", 0x00200308, 0x68E8
 
-    .global gUnknown_08206BF0
-gUnknown_08206BF0:
+    .global gPal_BustupMia
+gPal_BustupMia:
     .incbin "baserom.gba", 0x00206BF0, 0x20
 
-    .global gUnknown_08206C10
-gUnknown_08206C10:
+    .global gMap_BustupMia
+gMap_BustupMia:
     .incbin "baserom.gba", 0x00206C10, 0x1E90
 
     .global gUnknown_08208AA0

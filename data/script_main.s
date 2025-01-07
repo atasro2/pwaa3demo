@@ -7,8 +7,8 @@ gScriptCmdFuncs:
     .4byte sub_801A1A8
     .4byte sub_801A4A0
     .4byte sub_801A4B8
-    .4byte sub_8018D04
-    .4byte sub_8018D40
+    .4byte Command05
+    .4byte Command06
     .4byte sub_801A1A8
     .4byte sub_801A4DC
     .4byte sub_801A4DC
@@ -20,45 +20,45 @@ gScriptCmdFuncs:
     .4byte sub_801A8B8
     .4byte sub_801A8E0
     .4byte sub_801A908
-    .4byte sub_8018D90
+    .4byte Command12
     .4byte sub_801A954
     .4byte sub_801A9BC
     .4byte sub_801AA14
-    .4byte sub_8018DD8
-    .4byte sub_8018E38
-    .4byte sub_8018ED0
-    .4byte sub_8018F2C
-    .4byte sub_8018FCC
-    .4byte sub_8019040
+    .4byte Command16
+    .4byte Command17
+    .4byte Command18
+    .4byte Command19
+    .4byte Command1A
+    .4byte Command1B
     .4byte sub_801AA68
-    .4byte sub_80190AC
-    .4byte sub_8019128
-    .4byte sub_80191C0
+    .4byte Command1D
+    .4byte Command1E
+    .4byte Command1F
     .4byte sub_801ACC0
     .4byte sub_801ACD4
-    .4byte sub_801922C
-    .4byte sub_8019274
-    .4byte sub_80192B8
+    .4byte Command22
+    .4byte Command23
+    .4byte Command24
     .4byte sub_801AD44
     .4byte sub_801AD54
-    .4byte sub_80192CC
-    .4byte sub_801931C
+    .4byte Command27
+    .4byte Command28
     .4byte sub_801AD90
     .4byte sub_801AED8
     .4byte sub_801AF08
     .4byte sub_801AF0C
     .4byte sub_801A1A8
     .4byte sub_801AF40
-    .4byte sub_8019350
+    .4byte Command2F
     .4byte sub_801B00C
-    .4byte sub_80193A0
+    .4byte Command31
     .4byte sub_801B028
     .4byte sub_801B050
     .4byte sub_801B090
     .4byte sub_801B0D8
     .4byte sub_801B140
     .4byte sub_801B158
-    .4byte sub_80193DC
+    .4byte Command38
     .4byte sub_801B188
     .4byte sub_801B298
     .4byte sub_801B2F8
@@ -69,16 +69,16 @@ gScriptCmdFuncs:
     .4byte sub_801BA88
     .4byte sub_801BAB0
     .4byte sub_801BB20
-    .4byte sub_8019414
-    .4byte sub_801943C
+    .4byte Command43
+    .4byte Command44
     .4byte sub_801AA14
-    .4byte sub_8019524
-    .4byte sub_8019704
+    .4byte Command46
+    .4byte Command47
     .4byte sub_801BB64
-    .4byte sub_8019740
+    .4byte Command49
     .4byte sub_801BBCC
     .4byte sub_801BC00
-    .4byte sub_8019754
+    .4byte Command4C
     .4byte sub_801BC5C
     .4byte sub_801BCB0
     .4byte sub_801BD10
@@ -86,8 +86,8 @@ gScriptCmdFuncs:
     .4byte sub_801BE14
     .4byte sub_801BE38
     .4byte sub_801BE74
-    .4byte sub_8019768
-    .4byte sub_80197F4
+    .4byte Command54
+    .4byte Command55
     .4byte sub_801987C
     .4byte sub_801BE94
     .4byte sub_801BED4
@@ -111,11 +111,11 @@ gScriptCmdFuncs:
     .4byte sub_801C328
     .4byte sub_801C340
     .4byte sub_801C36C
-    .4byte sub_8017C70
-    .4byte sub_8017C70
+    .4byte CommandUnimplemented
+    .4byte CommandUnimplemented
     .4byte sub_801C46C
-    .4byte sub_8017C70
-    .4byte sub_8017C70
+    .4byte CommandUnimplemented
+    .4byte CommandUnimplemented
     .4byte sub_8019A8C
     .4byte sub_801C488
 

@@ -47,7 +47,8 @@ struct Main
     /* +0x02C */ s16 bgmFadeAmount;
     /* +0x02E */ s16 bgmVolume;
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
-    /* +0x032 */ u8 fill32[0x2];
+    /* +0x032 */ u8 gottenEvidenceType;
+    /* +0x033 */ u8 gottenEvidenceId;
     /* +0x034 */ u16 currentBG;
     /* +0x036 */ u16 currentDisplayedBG;
     /* +0x038 */ s16 previousBG;
@@ -66,7 +67,8 @@ struct Main
     /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
     /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
     /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
-    /* +0x050 */ u8 fill50[0x38];
+    /* +0x050 */ s16 unk50;
+    /* +0x052 */ u8 fill52[0x36];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
@@ -79,9 +81,28 @@ struct Main
     /* +0x097 */ u8 effectIntensity;
     /* +0x098 */ u8 fill98[0x6];
     /* +0x09E */ u8 itemPlateAction;
-    /* +0x0A0 */ u8 fillA0[0x2];
+    /* +0x0A0 */ u16 affineScale;
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
+<<<<<<< Updated upstream
     /* +0x0A4 */ u8 fillA4[0x1C];
+=======
+    /* +0x0A4 */ u8 hpBarState; // unity: gauge_rno_0
+    /* +0x0A5 */ u8 hpBarSubState; // unity: gauge_rno_1
+    /* +0x0A6 */ s16 hpBarValue; // unity: gauge_hp
+    /* +0x0A8 */ s16 hpBarDisplayValue; // unity: gauge_hp_disp
+    /* +0x0AA */ s16 hpBarDamageAmount; // unity: gauge_dmg_cnt
+    /* +0x0AC */ s16 hpBarX; // unity: gauge_pos_x
+    /* +0x0AE */ s16 hpBarY; // unity: gauge_pos_y
+    /* +0x0B0 */ s16 hpBarSlideOutDelay; // unity: gauge_cnt_0
+    /* +0x0B2 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
+    /* +0x0B4 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
+    /* +0x0B6 */ s16 hpBarValueScenarioEnd; // unity: gauge_hp_scenario_end
+    /* disabled these because they break things... */
+    // s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
+    // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
+    /* +0x0B6 */ u8 fillB8[8];
+>>>>>>> Stashed changes
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;

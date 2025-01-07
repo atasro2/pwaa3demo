@@ -238,7 +238,7 @@ _0800BE06:
 	strb r0, [r3]
 	adds r0, r5, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	movs r0, #3
 	strb r0, [r5, #0xe]
 	movs r0, #0
@@ -980,7 +980,7 @@ _0800C3F6:
 	bl sub_800BC08
 	movs r0, #0xc
 	movs r1, #1
-	bl sub_8012D38
+	bl StartAnimationBlend
 	strb r6, [r4, #0x1b]
 	strb r6, [r4, #0x1a]
 	ldr r1, _0800C474 @ =0x040000D4
@@ -1005,7 +1005,7 @@ _0800C47C: .4byte 0x05000300
 _0800C480: .4byte 0x80000010
 _0800C484:
 	ldrh r0, [r5, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -1160,7 +1160,7 @@ sub_800C59C: @ 0x0800C59C
 	cmp r0, #0
 	bne _0800C5F0
 	ldrh r0, [r4, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #1
 	ands r1, r0
 	cmp r1, #0
@@ -1828,12 +1828,12 @@ _0800CABE:
 	strh r0, [r1]
 	ldr r0, _0800CB04 @ =gAnimation+0x44
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	movs r0, #0xc
 	bl sub_800BC08
 	movs r0, #1
 	movs r1, #1
-	bl sub_8012D38
+	bl StartAnimationBlend
 	movs r0, #0x82
 	lsls r0, r0, #1
 	str r0, [r7, #8]
@@ -4504,13 +4504,13 @@ _0800DF8E:
 	b _0800E216
 _0800DFA6:
 	movs r0, #1
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	adds r1, r4, #0
 	adds r1, #0xaa
 	ldr r0, _0800DFC0 @ =0x0000FFD8
 	strh r0, [r1]
 	movs r0, #4
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	b _0800E216
 	.align 2, 0
 _0800DFBC: .4byte gMain
@@ -4545,7 +4545,7 @@ _0800DFFA:
 	b _0800E26A
 _0800E004:
 	movs r0, #2
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	b _0800E216
 _0800E00C:
 	movs r5, #0
@@ -5386,7 +5386,7 @@ UpdateScrollPromptSprite: @ 0x0800E6A4
 	cmp r0, #1
 	bne _0800E720
 	ldrh r0, [r5, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0

@@ -173,6 +173,8 @@ extern const u8 scenario_3_7_script[];
 
 /* end script data */ 
 
+void sub_8016FEC(u16 arg0);
+
 void ChangeScriptSection(u32);
 void LoadCurrentScriptIntoRam(void);
 void RunScriptContext(void);
@@ -274,7 +276,7 @@ bool32 Command51(struct ScriptContext *);
 bool32 Command52(struct ScriptContext *);
 bool32 Command53(struct ScriptContext *);
 bool32 Command54(struct ScriptContext *);
-bool32 Command55(struct ScriptContext *);
+bool32 Command54(struct ScriptContext *);
 bool32 Command56(struct ScriptContext *);
 bool32 Command57(struct ScriptContext *);
 bool32 Command58(struct ScriptContext *);

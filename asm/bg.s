@@ -2364,10 +2364,10 @@ _080040CC:
 	.align 2, 0
 _080040D4: .4byte 0x050001A0
 _080040D8:
-	ldr r4, _080040DC @ =gUnknown_08206BF0
+	ldr r4, _080040DC @ =gPal_BustupMia
 	b _080040E2
 	.align 2, 0
-_080040DC: .4byte gUnknown_08206BF0
+_080040DC: .4byte gPal_BustupMia
 _080040E0:
 	movs r4, #0
 _080040E2:
@@ -4489,8 +4489,8 @@ _0800519C:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80051AC
-sub_80051AC: @ 0x080051AC
+	thumb_func_start GetBGControlBits
+GetBGControlBits: @ 0x080051AC
 	ldr r1, _080051B8 @ =gBackgroundTable
 	lsls r0, r0, #3
 	adds r1, #4
@@ -5356,7 +5356,7 @@ _0800581C:
 _08005838: .4byte 0xFFFFFE00
 _0800583C:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr
@@ -5619,7 +5619,7 @@ _08005A28:
 _08005A44: .4byte 0xFFFFFE00
 _08005A48:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr
@@ -5740,7 +5740,7 @@ _08005B1C:
 _08005B38: .4byte 0xFFFFFE00
 _08005B3C:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr

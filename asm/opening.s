@@ -176,7 +176,7 @@ _0801CAC4:
 _0801CAE2:
 	ldr r0, _0801CAF0 @ =0x00001E01
 	movs r1, #6
-	bl sub_8012D38
+	bl StartAnimationBlend
 	bl _0801D2DC
 	.align 2, 0
 _0801CAF0: .4byte 0x00001E01
@@ -197,7 +197,7 @@ _0801CB10: .4byte 0x0000FFDF
 _0801CB14:
 	ldr r0, _0801CB20 @ =0x00001E04
 	movs r1, #6
-	bl sub_8012D38
+	bl StartAnimationBlend
 	b _0801D2DC
 	.align 2, 0
 _0801CB20: .4byte 0x00001E04

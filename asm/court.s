@@ -1185,7 +1185,7 @@ _0800AD3C:
 	movs r0, #0x10
 	strh r0, [r1]
 	movs r0, #6
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	bl sub_800A7AC
 	ldr r0, _0800AD6C @ =0x01000007
 	str r0, [r4, #8]
@@ -1501,7 +1501,7 @@ _0800AFD4: .4byte gTestimony
 _0800AFD8:
 	ldr r0, _0800B024 @ =gAnimation+0x44
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	ldrh r0, [r5, #0x34]
 	movs r2, #0
 	strh r0, [r5, #0x38]

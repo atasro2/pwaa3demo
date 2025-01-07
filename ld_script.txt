@@ -44,6 +44,7 @@ SECTIONS {
         asm/hp_bar.o(.text);
         src/signal_detector.o(.text);
         src/script_main.o(.text);
+        src/script_commands.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);
         asm/demo.o(.text);

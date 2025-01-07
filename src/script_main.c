@@ -122,7 +122,7 @@ struct AnimationListEntry * sub_8016FB4(void) {
     return NULL;
 }
 
-void sub_8016FEC(u16 arg0) { // dahlia shawl stuff probs
+void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
     u32 r5 = 0xFF;
     struct ScriptContext * scriptCtx = &gScriptContext;
     u32 array[] = { // ? array of animation offsets? 
@@ -745,7 +745,7 @@ void sub_8017BC0(void) {
     gScriptContext.unk18[gScriptContext.unk29] = r4;
 }
 
-bool32 sub_8017C70(void) {
+bool32 CommandUnimplemented(void) {
     u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
     u8 i;
     if(argCount == 0)

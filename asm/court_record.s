@@ -222,7 +222,7 @@ _0800EB56:
 	lsls r0, r0, #2
 	strh r0, [r1]
 	movs r0, #6
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _0800EB6A:
 	ldr r2, _0800EBE4 @ =gIORegisters
 	adds r3, r2, #0
@@ -599,7 +599,7 @@ _0800EE50:
 	cmp r0, #0
 	beq _0800EF00
 	ldrh r0, [r7, #0x34]
-	bl sub_80051AC
+	bl GetBGControlBits
 	movs r1, #0xf
 	ands r1, r0
 	cmp r1, #0
@@ -849,7 +849,7 @@ _0800F00E:
 	cmp r0, r1
 	beq _0800F0BC
 	movs r0, #3
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	adds r1, r5, #0
 	adds r1, #0xaa
 	movs r0, #0
@@ -870,7 +870,7 @@ _0800F0B4: .4byte gInvestigation
 _0800F0B8: .4byte 0x00000707
 _0800F0BC:
 	movs r0, #8
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _0800F0C2:
 	ldr r2, _0800F0F8 @ =gMain
 	movs r1, #0x94
@@ -947,7 +947,7 @@ _0800F138:
 	beq _0800F17A
 	ldr r0, _0800F1C4 @ =gAnimation+0x44
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	ldrh r0, [r4, #0x34]
 	movs r2, #0
 	strh r0, [r4, #0x38]
@@ -990,7 +990,7 @@ _0800F17A:
 	cmp r5, #0
 	beq _0800F1D4
 	movs r0, #3
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	ldr r0, _0800F1C0 @ =gMain
 	adds r0, #0xaa
 	movs r1, #0
@@ -1004,7 +1004,7 @@ _0800F1CC: .4byte gOamObjects
 _0800F1D0: .4byte gCourtRecord
 _0800F1D4:
 	movs r0, #8
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _0800F1DA:
 	ldr r4, _0800F1FC @ =gMain
 	adds r0, r4, #0
@@ -1129,7 +1129,7 @@ _0800F282:
 	cmp r0, #0
 	beq _0800F2EA
 	movs r0, #3
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	adds r1, r4, #0
 	adds r1, #0xaa
 	movs r0, #0
@@ -1154,7 +1154,7 @@ _0800F318:
 	cmp r0, #0
 	beq _0800F326
 	movs r0, #8
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _0800F326:
 	movs r0, #0x10
 	ldrh r6, [r6, #0x1c]
@@ -1389,7 +1389,7 @@ _0800F510:
 	cmp r0, #0
 	beq _0800F51E
 	movs r0, #8
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _0800F51E:
 	movs r0, #2
 	strb r0, [r4, #9]
@@ -2958,7 +2958,7 @@ _080101CE:
 	cmp r0, #0
 	beq _08010264
 	movs r0, #8
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	b _08010264
 _080101EC:
 	movs r2, #0
@@ -3818,8 +3818,8 @@ _08010900: .4byte 0x00004090
 _08010904: .4byte 0x000080D8
 _08010908: .4byte 0x000041D8
 
-	thumb_func_start sub_801090C
-sub_801090C: @ 0x0801090C
+	thumb_func_start FindEvidenceInCourtRecord
+FindEvidenceInCourtRecord: @ 0x0801090C
 	push {r4, lr}
 	adds r4, r1, #0
 	cmp r0, #0
@@ -3861,8 +3861,8 @@ _08010948:
 	.align 2, 0
 _08010950: .4byte gUnknown_030028DC
 
-	thumb_func_start sub_8010954
-sub_8010954: @ 0x08010954
+	thumb_func_start FindFirstEmptySlotInCourtRecord
+FindFirstEmptySlotInCourtRecord: @ 0x08010954
 	ldr r2, _08010968 @ =gUnknown_030028DC
 	cmp r0, #0
 	beq _0801095C
@@ -3888,8 +3888,8 @@ _08010978:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_801097C
-sub_801097C: @ 0x0801097C
+	thumb_func_start SortCourtRecordAndSyncListCount
+SortCourtRecordAndSyncListCount: @ 0x0801097C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	mov ip, r0
