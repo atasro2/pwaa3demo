@@ -37,8 +37,8 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x0B */ u8 inPsycheLockChallengeFlag;
     /* +0x0C */ u8 selectedAction;
     /* +0x0D */ u8 lastAction;
-    /* +0x0E */ u8 actionState;
-    /* +0x0F */ u8 fill0F[0x02];
+    /* +0x0E */ u8 fill0E[0x02];
+    /* +0x10 */ u8 actionState;
     /* +0x11 */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
     /* +0x13 */ u8 lastActionYOffset; // unity AA4: menu_add_old

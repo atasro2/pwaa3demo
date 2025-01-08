@@ -286,3 +286,84 @@ u32 sub_800EE08()
     sub_8017154(0);
     return 0;
 }
+
+u32 sub_800EF34()
+{
+    if(!(gJoypad.heldKeys & DPAD_RIGHT))
+    {
+        return 0;
+    }
+    SlideInBG2Window(1, 0xC);
+    if(++gCourtRecord.selectedItem >= gCourtRecord.displayItemCount)
+        gCourtRecord.selectedItem = 0;
+    sub_800ED0C();
+    return 1;
+}
+
+u32 sub_800EF78()
+{
+    if(!(gJoypad.heldKeys & DPAD_LEFT))
+        return 0;
+    SlideInBG2Window(2, 0xC);
+    gCourtRecord.selectedItem--;
+    if(gCourtRecord.selectedItem > gCourtRecord.displayItemCount)
+        gCourtRecord.selectedItem = gCourtRecord.displayItemCount-1;
+    sub_800ED0C();
+}
+
+
+u32 sub_800EFBC()
+{
+    u32 section;
+    struct OamAttrs * oam;
+    struct AnimationListEntry * anim;
+    if(!(gJoypad.pressedKeys & A_BUTTON))
+    {
+        return 0;
+    }
+    if(!(sub_800EE08() << 24)) {
+        return 1;
+    }
+    PlaySE(SE001_MENU_CONFIRM);
+    if(gMain.process[GAME_PROCESS_VAR2] == 2) {
+        section = GetEvidenceCommentSection(&gMain, gCourtRecord.displayItemList[gCourtRecord.selectedItem], gCourtRecord.flags & COURT_RECORD_VIEW_PROFILES);
+        ChangeScriptSection(section);
+        SlideTextbox(1);
+    }
+    ClearEvidenceSprites(&gCourtRecord);
+    UpdateRecordInfoActionSprites(0);
+    UpdateRecordPresentActionSprites(0);
+    gIORegisters.lcd_dispcnt &= ~DISPCNT_BG2_ON;
+    oam = gOamObjects + OAM_IDX_LR_ARROW;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    oam++;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    if(gMain.process[GAME_PROCESS_VAR2] == 3) {
+        gInvestigation.actionState = 4;   
+        SlideInBG2Window(4, 0x12);
+        SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, (&gMain));
+        gCourtRecord.flags |= 0x10;
+        if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], gCourtRecord.displayItemList[gCourtRecord.selectedItem]) != -1) {
+            sub_8016E74(3);
+            gMain.hpBarDamageAmount = 0;
+            oam = gOamObjects + 50;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        }
+        else {
+            sub_8016E74(8);
+        }
+        if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], gCourtRecord.displayItemList[gCourtRecord.selectedItem]) != -1) {
+            StopBGM();
+            return 1;
+        }
+        return 1;
+    }
+    gInvestigation.actionState = 3;
+    gInvestigation.inactiveActions = 8;
+    gInvestigation.inactiveActionButtonY = 0xF0;
+    RESTORE_PROCESS_PTR((&gMain));
+
+    return 1;
+}
