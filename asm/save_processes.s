@@ -1280,25 +1280,25 @@ _08008210:
 	beq _08008236
 	b _08008244
 _08008216:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08008244
 _08008226:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08008244
 _08008236:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _08008244:
 	ldr r0, _080082B4 @ =gMain
 	ldr r2, _080082B8 @ =0x000002C2

@@ -620,3 +620,119 @@ bool32 Command55(struct ScriptContext *scriptCtx)
         return 0;
     }
 }
+ 
+bool32 Command56(struct ScriptContext * scriptCtx)
+{
+    struct Main * main;
+    u16 bits;
+    u16 arg0;
+    s32 var0;
+    s32 var1;
+    scriptCtx = &gScriptContext;
+    main = &gMain;
+    bits = GetBGControlBits(main->currentBG);
+    if(bits & 0xF)
+        main->isBGScrolling = 1;
+    else
+        main->isBGScrolling = 0;
+
+    arg0 = *scriptCtx->scriptPtr++;
+    var0 = arg0;
+    var1 = arg0 >> 8;
+    switch(var1)
+    {
+        case BG_SHIFT_LEFT:
+            main->horizontolBGScrollSpeed = -var0 & 0xFF;
+            break;
+        case BG_SHIFT_RIGHT:
+            main->horizontolBGScrollSpeed = var0 & 0xFF;
+            break;
+        case BG_SHIFT_UP:
+            main->verticalBGScrollSpeed = -var0 & 0xFF;
+            break;
+        case BG_SHIFT_DOWN:
+            main->verticalBGScrollSpeed = var0 & 0xFF;
+            break;
+    }
+    main->unk50 = *scriptCtx->scriptPtr;
+    main->unk50 &= 0xF0;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5C(struct ScriptContext *scriptCtx)
+{
+    struct ScriptContext * scriptCtx;
+    struct Main * main;
+    scriptCtx = &gScriptContext;
+    main = &gMain;
+    if((scriptCtx->unk12 & 0xFF) == 0) {
+        u16 args[3];
+        args[0] = scriptCtx->scriptPtr[0];
+        args[1] = scriptCtx->scriptPtr[1];
+        args[2] = scriptCtx->scriptPtr[2];
+        InitSpecialEffectsWithMosaic(args[0], args[1], args[2]);
+        scriptCtx->unk12 |= 1;
+        return 1;
+    }
+    if(!(main->effectType == 0xFFFF || main->effectType == 0))
+        return 1;
+    scriptCtx->scriptPtr += 3;
+    scriptCtx->unk12 &= 0xFF00;
+    return 0;
+}
+
+bool32 Command5F(struct ScriptContext *scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u16 args[3];
+    args[0] = scriptCtx->scriptPtr[0];
+    args[1] = scriptCtx->scriptPtr[1];
+    args[2] = scriptCtx->scriptPtr[2];
+    InitSpecialEffects(args[0], args[1], args[2]);
+    scriptCtx->scriptPtr+=3;
+    return 0;
+}
+
+bool32 Command65(struct ScriptContext *scriptCtx)
+{
+    u16 args[2];
+    scriptCtx = &gScriptContext;
+    PULL_ARGS(scriptCtx, args, 2);
+    gMain.currentCourtroomScene = (args[0] << 4) | (args[1] & 0xF);
+    switch(args[0]) {
+        case 0:
+            if(args[1] == 1) {
+                LoadWitnessBenchGraphics();
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
+            } else {
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 0);
+            }
+            break;
+        case 1:
+            if(args[1] == 1) {
+                LoadCounselBenchGraphics();
+                SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
+            } else {
+                SetOAMForCourtBenchSpritesDefense(0, 0, 0);
+            }
+            break;
+        case 2:
+            if(args[1] == 1) {
+                LoadCounselBenchGraphics();
+                SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
+            } else {
+                SetOAMForCourtBenchSpritesDefense(0, 0, 0);
+            }
+            break;
+    }
+    return 0;
+}
+
+bool32 Command72(struct ScriptContext *scriptCtx) {
+    if(gMain.effectType == 0)
+        return 0;
+    if((gMain.effectType & 0x8000) == 0)
+        return 1;
+    return 0;
+}

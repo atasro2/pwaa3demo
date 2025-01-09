@@ -88,22 +88,22 @@ gScriptCmdFuncs:
     .4byte sub_801BE74
     .4byte Command54
     .4byte Command55
-    .4byte sub_801987C
+    .4byte Command56
     .4byte sub_801BE94
     .4byte sub_801BED4
     .4byte sub_801BEF4
     .4byte sub_801BF3C
     .4byte sub_801BDF0
-    .4byte sub_801990C
+    .4byte Command5C
     .4byte sub_801C020
     .4byte sub_801C0C8
-    .4byte sub_8019980
+    .4byte Command5F
     .4byte sub_801C0F8
     .4byte sub_801C13C
     .4byte sub_801C194
     .4byte sub_801C1C0
     .4byte sub_801C1E8
-    .4byte sub_80199B8
+    .4byte Command65
     .4byte sub_801C214
     .4byte sub_801C25C
     .4byte sub_801C268
@@ -116,7 +116,7 @@ gScriptCmdFuncs:
     .4byte sub_801C46C
     .4byte CommandUnimplemented
     .4byte CommandUnimplemented
-    .4byte sub_8019A8C
+    .4byte Command72
     .4byte sub_801C488
 
     .global gUnknown_0814E338

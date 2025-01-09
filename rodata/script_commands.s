@@ -1,10 +1,6 @@
 	.section .rodata
     .align 2, 0
 
-    .global gMapMarkerSprites
-gMapMarkerSprites:
-    .incbin "baserom.gba", 0x00028698, 0x84
-
     .global gUnknown_0802871C
 gUnknown_0802871C:
     .incbin "baserom.gba", 0x0002871C, 0x12
@@ -19,4 +15,5 @@ gUnknown_08028736:
 
     .global gSpotSelectData
 gSpotSelectData:
+
 

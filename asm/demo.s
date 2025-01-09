@@ -886,7 +886,7 @@ _0801DE4E:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	bl sub_8003F7C
 	mov r0, r8
@@ -942,21 +942,21 @@ _0801DEC2:
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _0801DF04
 _0801DED2:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _0801DF04
 _0801DEE2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _0801DF04
 _0801DEF2:
 	movs r0, #1
@@ -3405,25 +3405,25 @@ _0801F33C:
 	beq _0801F362
 	b _0801F370
 _0801F342:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _0801F370
 _0801F352:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _0801F370
 _0801F362:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _0801F370:
 	ldr r2, _0801F38C @ =gMain
 	adds r0, r6, #0

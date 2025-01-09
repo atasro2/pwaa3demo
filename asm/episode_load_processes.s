@@ -3182,25 +3182,25 @@ _0800A17C:
 	beq _0800A1A2
 	b _0800A1B0
 _0800A182:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _0800A1B0
 _0800A192:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _0800A1B0
 _0800A1A2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _0800A1B0:
 	ldr r0, _0800A1C8 @ =gMain
 	ldr r2, _0800A1CC @ =0x000002C2

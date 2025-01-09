@@ -2458,8 +2458,8 @@ _0800B7C0: .4byte 0x00005590
 _0800B7C4: .4byte 0x000080D0
 _0800B7C8: .4byte 0x00005598
 
-	thumb_func_start sub_800B7CC
-sub_800B7CC: @ 0x0800B7CC
+	thumb_func_start LoadWitnessBenchGraphics
+LoadWitnessBenchGraphics: @ 0x0800B7CC
 	push {r4, r5, lr}
 	sub sp, #0x20
 	ldr r2, _0800B830 @ =0x040000D4
@@ -2555,8 +2555,8 @@ _0800B88C: .4byte gPalWitnessBench
 _0800B890: .4byte 0x05000340
 _0800B894: .4byte 0x80000010
 
-	thumb_func_start sub_800B898
-sub_800B898: @ 0x0800B898
+	thumb_func_start SetOAMForCourtBenchSpritesWitness
+SetOAMForCourtBenchSpritesWitness: @ 0x0800B898
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2755,8 +2755,8 @@ _0800BA34: .4byte gPalCounselBench
 _0800BA38: .4byte 0x05000340
 _0800BA3C: .4byte 0x80000010
 
-	thumb_func_start sub_800BA40
-sub_800BA40: @ 0x0800BA40
+	thumb_func_start SetOAMForCourtBenchSpritesDefense
+SetOAMForCourtBenchSpritesDefense: @ 0x0800BA40
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2857,8 +2857,8 @@ _0800BB08: .4byte 0xFFFFC000
 _0800BB0C: .4byte 0xFFFFAD00
 _0800BB10: .4byte 0xFFFF8000
 
-	thumb_func_start sub_800BB14
-sub_800BB14: @ 0x0800BB14
+	thumb_func_start SetOAMForCourtBenchSpritesProsecution
+SetOAMForCourtBenchSpritesProsecution: @ 0x0800BB14
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

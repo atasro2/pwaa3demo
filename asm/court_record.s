@@ -2433,25 +2433,25 @@ _0800FDA8:
 	beq _0800FDCE
 	b _0800FDDC
 _0800FDAE:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _0800FDDC
 _0800FDBE:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _0800FDDC
 _0800FDCE:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _0800FDDC:
 	ldr r1, _0800FE04 @ =gMain
 	ldr r0, _0800FE08 @ =0x00000A04

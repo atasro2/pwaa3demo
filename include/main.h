@@ -81,11 +81,8 @@ struct Main
     /* +0x097 */ u8 effectIntensity;
     /* +0x098 */ u8 fill98[0x6];
     /* +0x09E */ u8 itemPlateAction;
-    /* +0x0A0 */ u16 affineScale;
+    /* +0x0A0 */ s16 affineScale;
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
-<<<<<<< Updated upstream
-    /* +0x0A4 */ u8 fillA4[0x1C];
-=======
     /* +0x0A4 */ u8 hpBarState; // unity: gauge_rno_0
     /* +0x0A5 */ u8 hpBarSubState; // unity: gauge_rno_1
     /* +0x0A6 */ s16 hpBarValue; // unity: gauge_hp
@@ -102,7 +99,6 @@ struct Main
     // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
     // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
     /* +0x0B6 */ u8 fillB8[8];
->>>>>>> Stashed changes
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
@@ -122,13 +118,15 @@ struct Main
     /* +0x256 */ u8 psycheLockStopPresentButtonsActive;
     /* +0x257 */ u8 unk257;
     /* +0x258 */ u8 unk258;
-    /* +0x259 */ u8 fill259[0x3];
+    /* +0x259 */ u8 unk259;
+    /* +0x25A */ u8 fill25A[0x2];
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
     /* +0x264 */ u8 fill264[0x5C];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
-    /* +0x2C4 */ u8 fill2C4[0x3];
+    /* +0x2C4 */ u8 fill2C4[0x2];
+    /* +0x2C6 */ u8 currentCourtroomScene;
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
     /* +0x2D0 */ u32 unk2D0;

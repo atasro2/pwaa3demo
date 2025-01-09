@@ -2523,7 +2523,7 @@ sub_8004218: @ 0x08004218
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _080042E0
 	.align 2, 0
 _08004234: .4byte gScriptContext
@@ -2560,14 +2560,14 @@ _0800426E:
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08004312
 _0800427E:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _08004312
 _0800428E:
 	ldr r0, _080042A8 @ =0x0000FFFF
@@ -2589,25 +2589,25 @@ _080042AC:
 	beq _080042D2
 	b _080042E0
 _080042B2:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _080042E0
 _080042C2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _080042E0
 _080042D2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _080042E0:
 	movs r0, #0
 	strh r0, [r4, #0x3c]
@@ -2617,21 +2617,21 @@ _080042E8:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08004312
 _080042FE:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 _08004312:
 	pop {r4}
 	pop {r0}
