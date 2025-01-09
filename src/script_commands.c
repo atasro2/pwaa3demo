@@ -9,28 +9,13 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
-#define PULL_ARGS(ctx, array, argCount) \
-{ \
-    u16 i; \
-    for(i = 0; i < argCount; i++) { \
-        args[i] = *scriptCtx->scriptPtr++; \
-    } \
-} \
-
-static inline void PullArgs(struct ScriptContext * scriptCtx, u16 * args, u32 argCount) {
-    u16 i;
-    for(i = 0; i < argCount; i++) {
-        args[i] = *scriptCtx->scriptPtr++;
-    }
+bool32 Command05(struct ScriptContext * scriptCtx) {
+    u16 args[2];
+    scriptCtx = &gScriptContext;
+    PULL_ARGS(scriptCtx, args, 2);
+    FadeInBGM(args[1], args[0]);
+    return 0;
 }
-
-    bool32 Command05(struct ScriptContext * scriptCtx) {
-        u16 args[2];
-        scriptCtx = &gScriptContext;
-        PULL_ARGS(scriptCtx, args, 2);
-        FadeInBGM(args[1], args[0]);
-        return 0;
-    }
 
 bool32 Command06(struct ScriptContext * scriptCtx) {
     u16 args[2];

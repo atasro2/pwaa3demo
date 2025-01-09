@@ -9,14 +9,6 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
-#define PULL_ARGS(ctx, array, argCount) \
-{ \
-    u16 i; \
-    for(i = 0; i < argCount; i++) { \
-        args[i] = *scriptCtx->scriptPtr++; \
-    } \
-} \
-
 void sub_8019AAC(void) {
     struct Main * main = &gMain;
     struct AnimationListEntry * anim;

@@ -1,6 +1,16 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
+
+// Internal script command convenience macro 
+#define PULL_ARGS(ctx, args, argCount)  \
+{                                       \
+    u16 i;                              \
+    for(i = 0; i < argCount; i++) {     \
+        args[i] = *ctx->scriptPtr++;    \
+    }                                   \
+}                                       \
+
 #define SCRIPT_x1 0x1
 #define SCRIPT_x2 0x2
 #define SCRIPT_FULLSCREEN 0x4
