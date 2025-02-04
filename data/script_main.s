@@ -2,17 +2,17 @@
 
     .global gScriptCmdFuncs
 gScriptCmdFuncs:
-    .4byte sub_801A0BC
-    .4byte sub_801A0FC
-    .4byte sub_801A1A8
-    .4byte sub_801A4A0
-    .4byte sub_801A4B8
+    .4byte Command00
+    .4byte Command01
+    .4byte Command02
+    .4byte Command03
+    .4byte Command04
     .4byte Command05
     .4byte Command06
-    .4byte sub_801A1A8
-    .4byte sub_801A4DC
-    .4byte sub_801A4DC
-    .4byte sub_801A1A8
+    .4byte Command02
+    .4byte Command08
+    .4byte Command08
+    .4byte Command02
     .4byte sub_801A7B4
     .4byte sub_801A7DC
     .4byte sub_801A838
@@ -47,7 +47,7 @@ gScriptCmdFuncs:
     .4byte sub_801AED8
     .4byte sub_801AF08
     .4byte sub_801AF0C
-    .4byte sub_801A1A8
+    .4byte Command02
     .4byte sub_801AF40
     .4byte Command2F
     .4byte sub_801B00C

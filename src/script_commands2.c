@@ -318,3 +318,167 @@ void sub_801A054(void) {
         gBG1MapBuffer[623] = gUnknown_08028736[(gScriptContext.unk12 & 0xFF) / 8] + 1;
     }
 }
+
+bool32 Command00(struct ScriptContext * scriptCtx) {
+    u8 i;
+    scriptCtx = &gScriptContext;
+    scriptCtx->textColor = 0;
+    for(i = 0; i < 32; i++) {
+        gTextBoxCharacters[i].state &= 0x3FFF;
+    }
+    return 0;
+}
+
+bool32 Command01(struct ScriptContext * scriptCtx)
+{
+    scriptCtx = &gScriptContext;
+    scriptCtx->unk28 = 0;
+    scriptCtx->unk29++;
+
+    if(scriptCtx->unk22 & 0x20)
+    {
+        scriptCtx->unk22 &= ~0x20;
+        scriptCtx->textColor = 0;
+    }
+
+    if(scriptCtx->unk22 & 0xF)
+    {
+        sub_8017BC0(); // possibly designed for proper centering
+    }
+
+    return 0;
+}
+
+void sub_801A148(u32 arg0) { // ! Unused
+    u32 evidenceId = arg0 & 0x3FFF;
+    u32 isProfile = arg0 & 0x8000;
+    s32 evidenceSlot = FindEvidenceInCourtRecord(isProfile, evidenceId);
+    if(evidenceSlot < 0)
+    {
+        evidenceSlot = FindFirstEmptySlotInCourtRecord(isProfile);
+        if(evidenceSlot >= 0)
+        {
+            if(isProfile)
+            {
+                gCourtRecord.profileList[evidenceSlot] = evidenceId;
+                gCourtRecord.profileCount++;
+            }
+            else
+            {
+                gCourtRecord.evidenceList[evidenceSlot] = evidenceId;
+                gCourtRecord.evidenceCount++;
+            }
+        }
+    }
+}
+
+bool32 Command02(struct ScriptContext * scriptCtx) {
+    u16 i;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    scriptCtx->flags |= SCRIPT_x1;
+    if(gMain.process[GAME_PROCESS_STATE] != TESTIMONY_MAIN && gMain.process[GAME_PROCESS] == TESTIMONY_PROCESS)
+        return 1;
+    if(gMain.process[GAME_PROCESS_STATE] != QUESTIONING_MAIN && gMain.process[GAME_PROCESS] == QUESTIONING_PROCESS)
+        return 1; 
+    if(gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS)
+        return 1;
+    if(gMain.process[GAME_PROCESS] == EVIDENCE_ADDED_PROCESS)
+        return 1;
+    if ((scriptCtx->unk12 & 0xFF) == 0) {
+        sub_8012180(&gAnimation[1], gMain.idleAnimationOffset);
+        scriptCtx->unk12++;
+        return 1;
+    }
+    scriptCtx->unk12++;
+    sub_801A054();
+    if(scriptCtx->unk12 & SCRIPT_x8000) {
+        if(gJoypad.pressedKeys & A_BUTTON) {
+            DmaCopy16(3, gSaveDataBuffer.textBoxCharacters+3, gTextBoxCharacters, sizeof(gTextBoxCharacters));
+            sub_8019E98(0);
+            scriptCtx->unk12 &= ~SCRIPT_x8000;
+        }
+        return 1;
+    }
+    scriptCtx->flags &= ~SCRIPT_SKIP;
+    if(scriptCtx->flags & SCRIPT_SECTION_READ && gJoypad.heldKeys & B_BUTTON) {
+        scriptCtx->flags |= SCRIPT_SKIP;
+    }
+    if(scriptCtx->flags & SCRIPT_SKIP && (scriptCtx->unk12 & 0xFF) < 8) {
+        return 1;
+    }
+    if((gJoypad.pressedKeys & A_BUTTON) || (scriptCtx->flags & SCRIPT_SKIP || scriptCtx->flags & SCRIPT_x4000)) {
+        DmaCopy16(3, gTextBoxCharacters, gUnknown_03007180, sizeof(gTextBoxCharacters));
+        scriptCtx->soundCueSkip = 2;
+        scriptCtx->flags &= ~SCRIPT_SKIP;
+        scriptCtx->flags &= ~SCRIPT_x4000;
+        if(scriptCtx->unk22 & 0x20) {
+            scriptCtx->unk22 &= ~0x20;
+            scriptCtx->textColor = 0;
+        }
+        scriptCtx->flags &= ~SCRIPT_x1;
+        scriptCtx->flags &= ~SCRIPT_LOOP;
+        PlaySE(0x2F);
+        if(scriptCtx->unk23 == 0) {
+            gBG1MapBuffer[622] = 9;
+            gBG1MapBuffer[623] = 9;
+        } else {
+            gBG1MapBuffer[622] = 0;
+            gBG1MapBuffer[623] = 0;
+        }
+        if(scriptCtx->currentToken == 0xA) {
+            ChangeScriptSection(*scriptCtx->scriptPtr);
+        } else if(scriptCtx->currentToken == 0x2) {
+            sub_8012180(&gAnimation[1], gMain.talkingAnimationOffset);
+        } else if(scriptCtx->currentToken == 0x7) {
+            gMain.showTextboxCharacters = FALSE;
+            sub_8016D6C();
+            scriptCtx->flags |= SCRIPT_FULLSCREEN;
+            scriptCtx->unk28 = 0;
+            scriptCtx->unk29++;
+            if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
+                sub_8017154(1);
+            } else {
+                sub_8017154(4);
+            }
+            DmaCopy16(3, &gCharSet[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
+            if(scriptCtx->unk22 & 0xF) {
+                sub_8017BC0();
+            }
+            for(i = 0; i < 0x40; i++) {
+                gTextBoxCharacters[i].y += 18;
+            }
+            sub_80051CC(1);
+            scriptCtx->scriptPtr++;
+            return 1;
+        }
+        scriptCtx->unk12 &= ~0xFF;
+        for(i = 0; i < 0x40; i++) {
+            gTextBoxCharacters[i].state &= 0x3FFF;
+        }
+        scriptCtx->unk28 = 0;
+        scriptCtx->unk29 = 0;
+        if(scriptCtx->unk22 & 0xF) {
+            sub_8017BA8();
+            sub_8017BC0();
+        }
+        scriptCtx->scriptPtr++;
+    }
+    return 1;
+}
+
+bool32 Command03(struct ScriptContext * scriptCtx)
+{
+    scriptCtx = &gScriptContext;
+    scriptCtx->textColor = *scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command04(struct ScriptContext * scriptCtx)
+{
+    scriptCtx = &gScriptContext;
+    if(gJoypad.pressedKeys & *scriptCtx->scriptPtr) // ! This is bugged since it doesn't increment the ptr when returning 0
+        return 0;
+    return 1;
+}
+
+

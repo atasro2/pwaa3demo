@@ -19,10 +19,11 @@
 #define SCRIPT_SPOTSELECT_INPUT 0x100
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
-#define SCRIPT_x800 0x800
+#define SCRIPT_SECTION_READ 0x800 // Unity: READ_MESSAGE
 #define SCRIPT_x1000 0x1000
-#define SCRIPT_x2000 0x2000
-#define SCRIPT_x8000 0x8000
+#define SCRIPT_SKIP 0x2000 // Unity: FAST_MESSAGE
+#define SCRIPT_x4000 0x4000 // Unity: NEXT_MESSAGE
+#define SCRIPT_x8000 0x8000 // Unity: LAST_MESSAGE
 
 struct ScriptContext {
     /* +0x00 */ u16 * scriptPtr;
@@ -32,17 +33,17 @@ struct ScriptContext {
     /* +0x0C */ u16 currentSection;
     /* +0x0E */ u16 unkE; // nextSection?
     u8 fill0E[0x2];
-    u16 unk12;
+    u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
     u8 fill20[0x2];
-    u8 unk22;
+    u8 unk22; // unity: text_flag
     u8 unk23;
     u8 unk24;
-    u8 unk25;
+    u8 textColor;
     u8 textSpeed;
     u8 unk27;
     u8 unk28;
@@ -196,6 +197,10 @@ bool32 HasSectionBeenRead(struct Main *, s32);
 void ClearSectionReadFlags(struct Main *);
 void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
 void sub_8018CA8(struct Main * main, u32 arg1);
+
+void sub_8017154(u8);
+void sub_8017BA8(void);
+void sub_8017BC0(void);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);

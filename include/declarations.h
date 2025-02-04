@@ -56,10 +56,15 @@ bool32 sub_8016ED8(void);
 void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
 
+void sub_8012180(struct AnimationListEntry *, u32);
+
 void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
 struct AnimationListEntry * sub_8016FB4(void);
 bool32 IsHPBarAnimating(void);
+void sub_8016D6C(void);
+
+extern struct TextBoxCharacter gUnknown_03007180[0x40]; 
 #endif//GUARD_DECLARATIONS_H

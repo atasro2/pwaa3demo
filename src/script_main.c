@@ -906,15 +906,15 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
             return;
         if(i == 0)
             i = 5;
-        gScriptContext.unk25 = ((5 - i) << 4) | (gScriptContext.unk25 & 0xF);
+        gScriptContext.textColor = ((5 - i) << 4) | (gScriptContext.textColor & 0xF);
     }
-    if(gScriptContext.unk25) {
+    if(gScriptContext.textColor) {
         u8 * pixel;
         u32 half1, half2;
-        if(gScriptContext.unk25 & 0xF0) {
+        if(gScriptContext.textColor & 0xF0) {
             DmaCopy16(3, temp, sp0, 0x80);
             pixel = sp0;
-            temp = (gScriptContext.unk25 & 0xF0) >> 4;
+            temp = (gScriptContext.textColor & 0xF0) >> 4;
             for(i = 0; i < 0x80; i++) {
                 half2 = *pixel;
                 half1 = half2 & 0xF;
@@ -941,7 +941,7 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         } else {
             DmaCopy16(3, temp, sp0, 0x80);
             pixel = sp0;
-            temp = gScriptContext.unk25 * 3;
+            temp = gScriptContext.textColor * 3;
             for(i = 0; i < 0x80; i++) {
                 half2 = *pixel;
                 half1 = half2 & 0xF;
@@ -977,12 +977,12 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         gTextBoxCharacters[temp].state &= ~0x4000;
     }
     gTextBoxCharacters[temp].objAttr2 = x * 4 + y * 0x40;
-    if(gScriptContext.unk25 & 0xF0) {
-        gTextBoxCharacters[temp].color = gScriptContext.unk25;
+    if(gScriptContext.textColor & 0xF0) {
+        gTextBoxCharacters[temp].color = gScriptContext.textColor;
         gTextBoxCharacters[temp].color |= 0x8000;
     }
     else {   
-        gTextBoxCharacters[temp].color = gScriptContext.unk25 & 0xF0;
+        gTextBoxCharacters[temp].color = gScriptContext.textColor & 0xF0;
     }
     
     if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
@@ -995,7 +995,7 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         }
     }
     gTextBoxCharacters[temp].objAttr2 += 0x400;
-    gTextBoxCharacters[temp].color2 = gScriptContext.unk25;
+    gTextBoxCharacters[temp].color2 = gScriptContext.textColor;
 }
 
 extern bool32 (*gScriptCmdFuncs[0x72])(struct ScriptContext *);
@@ -1038,22 +1038,22 @@ void AdvanceScriptContext(void) {
             return;
         }
         if((scriptCtx->unk2E >> 4) != 1) {
-            if(scriptCtx->flags & SCRIPT_x800) {
+            if(scriptCtx->flags & SCRIPT_SECTION_READ) {
                 if((gJoypad.heldKeys & B_BUTTON || gJoypad.pressedKeys & A_BUTTON))
-                    scriptCtx->flags |= SCRIPT_x2000;
+                    scriptCtx->flags |= SCRIPT_SKIP;
             } 
         }
         
         if(!(scriptCtx->flags & SCRIPT_FULLSCREEN)) {
-            if(scriptCtx->flags & SCRIPT_x2000 &&
-               scriptCtx->flags & SCRIPT_x800) {
+            if(scriptCtx->flags & SCRIPT_SKIP &&
+               scriptCtx->flags & SCRIPT_SECTION_READ) {
                 if(r7 != 0)
                 {
                     scriptCtx->scriptPtr--;
                     return;
                 }
             } else {
-                scriptCtx->flags &= ~SCRIPT_x2000;
+                scriptCtx->flags &= ~SCRIPT_SKIP;
                 if(scriptCtx->unk27 & 0xF) {
                     scriptCtx->unk27--;
                     scriptCtx->scriptPtr--;
@@ -1196,12 +1196,12 @@ void sub_8018638(u32 section) // init new section??
         sub_8017BC0();
     }
     if(HasSectionBeenRead(&gMain, scriptCtx->currentSection)) {
-        scriptCtx->flags |= SCRIPT_x800;
+        scriptCtx->flags |= SCRIPT_SECTION_READ;
     } else {
-        scriptCtx->flags &= ~SCRIPT_x800;
+        scriptCtx->flags &= ~SCRIPT_SECTION_READ;
     }
     if(gMain.unk2D0 & 4) { //!debug
-        scriptCtx->flags |= SCRIPT_x800;
+        scriptCtx->flags |= SCRIPT_SECTION_READ;
     }
 }
 
