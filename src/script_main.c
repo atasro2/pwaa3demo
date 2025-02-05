@@ -186,7 +186,7 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
             animation->animationInfo.xOrigin = xOrigin;
         }
         if(gScriptContext.unk1E & 0x8000) { // ! mixing global and local memes continue
-            if(scriptCtx->unk4A & 0xF0) {
+            if(scriptCtx->unk46[2] & 0xF0) {
                 animation = sub_8016FB4();
                 animation->flags |= ANIM_0x400;
             }
@@ -809,10 +809,10 @@ void DrawMapMarkers(void) {
                         gMapMarker[i].flags &= ~2;
                     }
                 } else {
-                    r4 += gScriptContext.unk46;
-                    r3 += gScriptContext.unk48;
-                    gScriptContext.unk4A--;
-                    if(gScriptContext.unk4A == 0) {
+                    r4 += gScriptContext.unk46[0];
+                    r3 += gScriptContext.unk46[1];
+                    gScriptContext.unk46[2]--;
+                    if(gScriptContext.unk46[2] == 0) {
                         gMapMarker[i].flags &= ~2;
                         gMapMarker[i].attr0 &= ~0xFF;
                         gMapMarker[i].attr0 |= r3 & 0xFF;
@@ -1185,7 +1185,7 @@ void sub_8018638(u32 section) // init new section??
         gTextBoxCharacters[i].state &= ~(0x8000|0x4000);
     }
     scriptCtx->currentSection = section;
-    scriptCtx->unkE = section+1;
+    scriptCtx->nextSection = section+1;
     scriptCtx->unk28 = 0;
     scriptCtx->unk29 = 0;
     scriptCtx->flags &= ~SCRIPT_LOOP;

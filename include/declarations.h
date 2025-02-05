@@ -43,10 +43,14 @@ extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
 extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
 extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
+extern void sub_80053C8(void);
+
 extern void sub_8005A00(u16,u16,u16);
 extern void sub_8005BE8(u16,u16);
 extern void sub_8005C88(u16,u16,u16);
 extern void nullsub_3(u16,u16);
+
+extern void sub_8006130(u32, u32);
 
 void ResetHPBar(void);
 void ResetHPBarHealthToMax(void);
@@ -56,7 +60,7 @@ bool32 sub_8016ED8(void);
 void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
 
-void sub_8012180(struct AnimationListEntry *, u32);
+void SetAnimationFrameOffset(struct AnimationListEntry *, u32);
 
 void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);

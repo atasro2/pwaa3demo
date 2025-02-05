@@ -79,7 +79,10 @@ struct Main
     /* +0x094 */ u16 effectCounter;
     /* +0x096 */ u8 effectDelay;
     /* +0x097 */ u8 effectIntensity;
-    /* +0x098 */ u8 fill98[0x6];
+    /* +0x098 */ u8 itemPlateEvidenceId;
+    /* +0x099 */ u8 itemPlateState;
+    /* +0x09A */ u8 itemPlateSide;
+    /* +0x09B */ u8 fill9B[0x3];
     /* +0x09E */ u8 itemPlateAction;
     /* +0x0A0 */ s16 affineScale;
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu

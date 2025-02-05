@@ -6,6 +6,7 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "constants/songs.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
@@ -15,7 +16,7 @@ void sub_8019AAC(void) {
     switch(main->unk258) {
         case 0:
             PlayAnimation(0x55);
-            PlaySE(0x53);
+            PlaySE(SE029_BEGIN_QUESTIONING);
             main->unk258 = 1;
             break;
         case 1:
@@ -385,7 +386,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
     if(gMain.process[GAME_PROCESS] == EVIDENCE_ADDED_PROCESS)
         return 1;
     if ((scriptCtx->unk12 & 0xFF) == 0) {
-        sub_8012180(&gAnimation[1], gMain.idleAnimationOffset);
+        SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
         scriptCtx->unk12++;
         return 1;
     }
@@ -417,7 +418,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
         }
         scriptCtx->flags &= ~SCRIPT_x1;
         scriptCtx->flags &= ~SCRIPT_LOOP;
-        PlaySE(0x2F);
+        PlaySE(SE005_TEXT_ADVANCE);
         if(scriptCtx->unk23 == 0) {
             gBG1MapBuffer[622] = 9;
             gBG1MapBuffer[623] = 9;
@@ -428,7 +429,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
         if(scriptCtx->currentToken == 0xA) {
             ChangeScriptSection(*scriptCtx->scriptPtr);
         } else if(scriptCtx->currentToken == 0x2) {
-            sub_8012180(&gAnimation[1], gMain.talkingAnimationOffset);
+            SetAnimationFrameOffset(&gAnimation[1], gMain.talkingAnimationOffset);
         } else if(scriptCtx->currentToken == 0x7) {
             gMain.showTextboxCharacters = FALSE;
             sub_8016D6C();
@@ -481,4 +482,254 @@ bool32 Command04(struct ScriptContext * scriptCtx)
     return 1;
 }
 
+bool32 Command08(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    struct OamAttrs * oam;
+    u16 i;
+    scriptCtx->flags |= SCRIPT_FULLSCREEN;
+    scriptCtx->flags |= SCRIPT_x1;
+    if(scriptCtx->unk23)
+        return 1;
+    if(gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS)
+        return 1;
+    if ((scriptCtx->unk12 & 0xFF) == 0) {
+        scriptCtx->unk12 |= 1;
+        if(sub_8016ED8()) {
+            SetOrQueueHPBarState(7);
+        }
+        return 1;
+    }
+    if(gJoypad.pressedKeys & DPAD_UP) {
+        PlaySE(SE000_MENU_CHANGE);
+        scriptCtx->unk12--;
+        if ((scriptCtx->unk12 & 0xFF) == 0) {
+            if(scriptCtx->currentToken == 8) {
+                scriptCtx->unk12 &= ~0xFF;
+                scriptCtx->unk12 += 2;
+            } else {
+                scriptCtx->unk12 &= ~0xFF;
+                scriptCtx->unk12 += 3;
+            }
+        }
+        gOamObjects[OAM_IDX_GENERAL_2].attr2 -= 1;
+    }
+    if(gJoypad.pressedKeys & DPAD_DOWN) {
+        PlaySE(SE000_MENU_CHANGE);
+        scriptCtx->unk12++;
+        if(scriptCtx->currentToken == 8) {
+            if ((scriptCtx->unk12 & 0xFF) == 3) {
+                scriptCtx->unk12 &= ~0xFF;
+                scriptCtx->unk12 += 1;
+            }
+        } else {
+            if ((scriptCtx->unk12 & 0xFF) == 4) {
+                scriptCtx->unk12 &= ~0xFF;
+                scriptCtx->unk12 += 1;
+            }
+        }
+    }
+    if(gJoypad.pressedKeys & A_BUTTON) {
+        PlaySE(SE001_MENU_CONFIRM);
+        sub_8016D6C();
+        scriptCtx->flags &= ~SCRIPT_FULLSCREEN;
+        scriptCtx->flags &= ~SCRIPT_x1;
+        scriptCtx->flags &= ~SCRIPT_SKIP;
+        if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+            sub_8017154(0);
+        }
+        if(gAnimation[1].animationInfo.personId == 0xB || gAnimation[1].animationInfo.personId == 0x21)
+        {
+            if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+                oam = &gOamObjects[48];
+                for(i = 32; i < 64; i++) {
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    oam++;
+                }
+            }
+        }
+        i = 0;
+        oam = &gOamObjects[OAM_IDX_TEXT];
+        for(; i < 32; i++) {
+            gTextBoxCharacters[i].state &= 0x3FFF;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+        i = 32;
+        oam = &gOamObjects[OAM_IDX_TEXT_FULLSCREEN];
+        for(; i < 64; i++) {
+            gTextBoxCharacters[i].state &= 0x3FFF;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+        gOamObjects[OAM_IDX_GENERAL_2].attr0 = SPRITE_ATTR0_CLEAR;
+        scriptCtx->unk28 = 0;
+        scriptCtx->unk29 = 0;
+        if(scriptCtx->unk22 & 0xF) {
+            sub_8017BA8();
+            sub_8017BC0();
+        }
+        sub_80051CC(0);
+        gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+        MoveSpritesToOAM();
+        // ! this code is bugged and doesn't skip parameters correctly because someone was trying to be really smart when writing this code and ended up writing something really dumb :D
+        // ! what the fuck is with the 10
+        for(i = 1; i < 10; i++) {
+            if((scriptCtx->unk12 & 0xFF) == i) {
+                ChangeScriptSection(*scriptCtx->scriptPtr);
+                break;
+            }
+            scriptCtx->scriptPtr++;
+        }
+        if(sub_8016ED8())
+            SetOrQueueHPBarState(8);
+        scriptCtx->scriptPtr++;
+        return 1;
+    }
+    if(scriptCtx->currentToken == 8)
+        i = scriptCtx->unk29;
+    else
+        i = scriptCtx->unk29-1;
+    gOamObjects[OAM_IDX_GENERAL_2].attr0 = ((scriptCtx->unk12 & 0xFF) + i) * 18;
+    gOamObjects[OAM_IDX_GENERAL_2].attr1 = 0x4009;
+    gOamObjects[OAM_IDX_GENERAL_2].attr2 = 0x4FC;
+    return 1;
+}
 
+bool32 Command0B(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    scriptCtx->textSpeed = *scriptCtx->scriptPtr;
+    if(scriptCtx->textSpeed == 0xFF)
+    {
+        scriptCtx->textSpeed = 3;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command0C(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    if ((scriptCtx->unk12 & 0xFF) == 0)
+        scriptCtx->unk12 |= *scriptCtx->scriptPtr;
+    else
+        scriptCtx->unk12--;
+    if((scriptCtx->flags & SCRIPT_SECTION_READ) && (scriptCtx->flags & SCRIPT_SKIP)) {
+        if(scriptCtx->flags & SCRIPT_x8000) {
+            if(*(scriptCtx->scriptPtr+1) > 0x80) // Only skip if there is text directly after the wait
+                scriptCtx->unk12 &= ~0xFF;
+        }
+    }
+    if(scriptCtx->unk12 & 0xFF)
+        return TRUE;
+    scriptCtx->scriptPtr++;
+    scriptCtx->unkA = 0;
+    return FALSE;
+}
+
+bool32 Command0D(struct ScriptContext * scriptCtx) {
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    ChangeScriptSection(scriptCtx->nextSection);
+    return FALSE;
+}
+
+bool32 Command0E(struct ScriptContext * scriptCtx) {
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    scriptCtx->unk24 = *scriptCtx->scriptPtr >> 8;
+    scriptCtx->unk24 &= 0x7F;
+    if(scriptCtx->unk24 == 21 && gMain.scenarioIdx < 10 && !GetFlag(0, 0x8D)) {
+        scriptCtx->unk24 = 2;
+    }
+    if(gMain.showTextboxCharacters == TRUE) {
+        sub_80053C8();
+        sub_8006130(scriptCtx->unk24 & 0x7F, *scriptCtx->scriptPtr & 0xFF);
+    }
+    scriptCtx->scriptPtr++;
+    scriptCtx->soundCueSkip = 2;
+    return FALSE;
+}
+
+bool32 Command0F(struct ScriptContext * scriptCtx) {
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    scriptCtx->unk10 = *scriptCtx->scriptPtr++;
+    if(scriptCtx->scriptPtr) { // ! this does not dereference the pointer 
+        scriptCtx->unk2A = 1;
+    }
+    scriptCtx->scriptPtr++;
+    return FALSE;
+}
+
+bool32 Command10(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u32 flagType;
+    u32 id;
+    bool32 setFlag;
+    flagType = id = (setFlag = *scriptCtx->scriptPtr);
+    scriptCtx->scriptPtr++;
+    flagType = (flagType & 0x7F00) >> 8;
+    id &= 0xFF;
+    setFlag >>= 15;
+    ChangeFlag(flagType, id, setFlag);
+    return FALSE;
+}
+
+bool32 Command11(struct ScriptContext * scriptCtx)
+{
+    PlaySE(SE007_MENU_OPEN_SUBMENU);
+    gScriptContext.flags |= 0x10;
+    gMain.gameStateFlags |= 0x100;
+    BACKUP_PROCESS();
+    SET_PROCESS(COURT_RECORD_PROCESS, RECORD_INIT, 0, 1);
+    SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
+    return FALSE;
+}
+
+bool32 Command13(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    if((scriptCtx->unk12 & 0xFF) == 0) {
+        gMain.itemPlateState = 3;
+        gMain.itemPlateEvidenceId = *scriptCtx->scriptPtr;
+        gMain.itemPlateSide = (*scriptCtx->scriptPtr >> 8) & 0xF;
+        if(((*scriptCtx->scriptPtr >> 8) & 0xF0) == 0) {
+            PlaySE(SE009_DISPLAY_EVIDENCE);
+        }
+    }
+    if((scriptCtx->unk12 & 0xF0) == 0) {
+        scriptCtx->unk12++;
+        return TRUE;
+    }
+    scriptCtx->scriptPtr++;
+    return FALSE;
+}
+
+bool32 Command14(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    if((scriptCtx->unk12 & 0xFF) == 0) {
+        gMain.itemPlateState = 1;
+        if (scriptCtx->unk46[0] != 30000 || scriptCtx->unk46[1] != 30000 || scriptCtx->unk46[2] != 30000)
+            PlaySE(SE009_DISPLAY_EVIDENCE);
+    }
+    if((scriptCtx->unk12 & 0xF0) == 0) {
+        scriptCtx->unk12++;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 Command15(struct ScriptContext * scriptCtx)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    if((scriptCtx->unk12 & 2) == 0)
+        scriptCtx->unk12++;
+    if(scriptCtx->flags & SCRIPT_LOOP)
+        return 1;
+    if(scriptCtx->currentToken == 0x15)
+        SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
+    scriptCtx->flags &= ~SCRIPT_SKIP;
+    scriptCtx->flags |= SCRIPT_LOOP;
+    return TRUE;
+}

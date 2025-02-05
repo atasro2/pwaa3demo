@@ -659,8 +659,8 @@ _08012174:
 	.align 2, 0
 _0801217C: .4byte gUnknown_08028128
 
-	thumb_func_start sub_8012180
-sub_8012180: @ 0x08012180
+	thumb_func_start SetAnimationFrameOffset
+SetAnimationFrameOffset: @ 0x08012180
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r2, r1, #0

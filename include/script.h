@@ -31,8 +31,8 @@ struct ScriptContext {
     /* +0x08 */ u16 currentToken;
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
-    /* +0x0E */ u16 unkE; // nextSection?
-    u8 fill0E[0x2];
+    /* +0x0E */ u16 nextSection; // nextSection?
+    u16 unk10;
     u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
@@ -48,7 +48,8 @@ struct ScriptContext {
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
-    u8 fill2A[0x2];
+    u8 unk2A;
+    u8 unk2B;
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;
@@ -57,9 +58,7 @@ struct ScriptContext {
     u16 unk40;
     u16 unk42;
     u16 unk44;
-    u16 unk46; // all work
-    u16 unk48;
-    u16 unk4A;
+    u16 unk46[3]; // unity: all_work
     u8 unk4C;
     u8 unk4D;
     u16 unk4E;
