@@ -285,8 +285,8 @@ gCharSet:
 gUnknown_081A6794:
     .incbin "baserom.gba", 0x001A6794, 0x24F00
 
-    .global gUnknown_081CB694
-gUnknown_081CB694:
+    .global gPalMapMarkers
+gPalMapMarkers:
     .incbin "baserom.gba", 0x001CB694, 0x34694
 
     .global gUnknown_081FFD28

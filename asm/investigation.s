@@ -2697,7 +2697,7 @@ _0800D174:
 	adds r0, #1
 	bl sub_0800DB02
 _0800D17E:
-	ldr r3, _0800D230 @ =gUnknown_03002920
+	ldr r3, _0800D230 @ =gTalkData
 	ldrb r1, [r3]
 	adds r0, r1, #0
 	ldr r5, _0800D234 @ =gOamObjects+0x130
@@ -2791,7 +2791,7 @@ _0800D212:
 	bls _0800D212
 	b _0800D268
 	.align 2, 0
-_0800D230: .4byte gUnknown_03002920
+_0800D230: .4byte gTalkData
 _0800D234: .4byte gOamObjects+0x130
 _0800D238: .4byte gAnimation+0x52
 _0800D23C: .4byte 0x06013400
@@ -2942,7 +2942,7 @@ _0800D34C:
 	ldr r0, _0800D3F0 @ =0x80000010
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r3, _0800D3F4 @ =gUnknown_03002920
+	ldr r3, _0800D3F4 @ =gTalkData
 	ldrb r1, [r3]
 	adds r0, r1, #0
 	mov r5, sl
@@ -3010,7 +3010,7 @@ _0800D3E4: .4byte 0x80000100
 _0800D3E8: .4byte gPalCheckmark
 _0800D3EC: .4byte 0x05000360
 _0800D3F0: .4byte 0x80000010
-_0800D3F4: .4byte gUnknown_03002920
+_0800D3F4: .4byte gTalkData
 _0800D3F8: .4byte gAnimation+0x52
 _0800D3FC: .4byte gJoypad
 _0800D400: .4byte gMain
@@ -3586,7 +3586,7 @@ _0800D864:
 	ldrh r2, [r5, #2]
 	ands r0, r2
 	strh r0, [r5, #2]
-	ldr r3, _0800D92C @ =gUnknown_03002920
+	ldr r3, _0800D92C @ =gTalkData
 	ldrb r1, [r3]
 	adds r0, r1, #0
 	subs r5, #0x80
@@ -3682,7 +3682,7 @@ _0800D904:
 	.align 2, 0
 _0800D924: .4byte gOamObjects+0x130
 _0800D928: .4byte gOamObjects+0x1B0
-_0800D92C: .4byte gUnknown_03002920
+_0800D92C: .4byte gTalkData
 _0800D930: .4byte gAnimation+0x52
 _0800D934: .4byte 0x06013400
 _0800D938: .4byte gUnknown_0200AFC0
@@ -3785,7 +3785,7 @@ _0800D9EC:
 	.align 2, 0
 _0800D9F8: .4byte gOamObjects+0x130
 _0800D9FC:
-	ldr r3, _0800DAB0 @ =gUnknown_03002920
+	ldr r3, _0800DAB0 @ =gTalkData
 	ldrb r1, [r3]
 	adds r0, r1, #0
 	ldr r5, _0800DAB4 @ =gOamObjects+0x130
@@ -3880,7 +3880,7 @@ _0800DA92:
 	bls _0800DA92
 	b _0800DAEC
 	.align 2, 0
-_0800DAB0: .4byte gUnknown_03002920
+_0800DAB0: .4byte gTalkData
 _0800DAB4: .4byte gOamObjects+0x130
 _0800DAB8: .4byte gAnimation+0x52
 _0800DABC: .4byte 0x06013400
@@ -5590,7 +5590,7 @@ _0800E850:
 	beq _0800E860
 	adds r1, r4, #4
 	mov r0, sp
-	bl sub_8012504
+	bl CheckRectCollisionWithArea
 	cmp r0, #0
 	bne _0800E7DE
 _0800E860:
@@ -5673,7 +5673,7 @@ sub_800E8F0: @ 0x0800E8F0
 	mov r7, r8
 	push {r7}
 	sub sp, #4
-	ldr r2, _0800E98C @ =gUnknown_03002920
+	ldr r2, _0800E98C @ =gTalkData
 	ldrb r1, [r2]
 	adds r0, r1, #0
 	cmp r0, #0xff
@@ -5751,7 +5751,7 @@ _0800E958:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800E98C: .4byte gUnknown_03002920
+_0800E98C: .4byte gTalkData
 _0800E990: .4byte gUnknown_03003870
 _0800E994: .4byte gAnimation+0x52
 _0800E998: .4byte gUnknown_0200AFC0

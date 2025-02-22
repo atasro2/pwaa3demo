@@ -182,7 +182,7 @@ bool32 Command1B(struct ScriptContext * scriptCtx)
     // and causes some optimization to behave differently for some
     // ungodly reason.
     // And here I thought I could get away with not making a new variable
-    // for the script context just to be fucked sideways by the compiler and
+    // for the script context just to be screwed sideways by the compiler and
     // exactly this function.
     struct ScriptContext * scriptCtx = &gScriptContext;
     struct Main * main = &gMain;

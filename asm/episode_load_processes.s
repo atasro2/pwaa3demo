@@ -2633,7 +2633,7 @@ _08009BF4:
 	lsls r1, r1, #3
 	adds r0, r4, r1
 	str r0, [r6]
-	ldr r0, _08009D50 @ =gUnknown_03002920
+	ldr r0, _08009D50 @ =gTalkData
 	str r0, [r6, #4]
 	ldr r0, _08009D54 @ =0x80000140
 	str r0, [r6, #8]
@@ -2731,7 +2731,7 @@ _08009D40: .4byte gMain
 _08009D44: .4byte 0x8000016A
 _08009D48: .4byte gPalExamineCursors
 _08009D4C: .4byte 0x05000300
-_08009D50: .4byte gUnknown_03002920
+_08009D50: .4byte gTalkData
 _08009D54: .4byte 0x80000140
 _08009D58: .4byte 0x000008D8
 _08009D5C: .4byte gUnknown_03003B90
@@ -2757,7 +2757,7 @@ _08009DA0:
 	bl sub_800E8F0
 	b _08009E32
 _08009DAA:
-	ldr r0, _08009DDC @ =gUnknown_081CB694
+	ldr r0, _08009DDC @ =gPalMapMarkers
 	str r0, [r6]
 	ldr r0, _08009DE0 @ =0x050002C0
 	str r0, [r6, #4]
@@ -2782,7 +2782,7 @@ _08009DAA:
 	str r2, [r6, #8]
 	b _08009E30
 	.align 2, 0
-_08009DDC: .4byte gUnknown_081CB694
+_08009DDC: .4byte gPalMapMarkers
 _08009DE0: .4byte 0x050002C0
 _08009DE4: .4byte gGfx4bppTestimonyTextTiles
 _08009DE8: .4byte 0x06013000
@@ -2942,7 +2942,7 @@ _08009F04:
 	ands r1, r2
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	bl sub_8006130
+	bl SetTextboxNametag
 	ldr r1, _08009FEC @ =0x00001578
 	adds r0, r6, r1
 	str r0, [r5]

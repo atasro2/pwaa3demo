@@ -41,7 +41,7 @@ struct ScriptContext {
     u16 unk1E;
     u8 fill20[0x2];
     u8 unk22; // unity: text_flag
-    u8 unk23;
+    u8 textboxState;
     u8 unk24;
     u8 textColor;
     u8 textSpeed;
@@ -142,6 +142,17 @@ struct MapMarker
     /* +0x10 */ u8 *volatile vramPtr;
 };
 
+struct MapMarkerSprite
+{
+    /* +0x00 */ u8 *tiles;
+    /* +0x04 */ u16 size;
+    /* +0x06 */ u16 attr0;
+    /* +0x08 */ u16 attr1;
+    /* +0x0A */ u16 attr2;
+};
+
+extern const struct MapMarkerSprite sMapMarkerSprites[];
+
 struct Struct30070B0 {
     u16 unk00[16];
     u8 unk20;
@@ -201,8 +212,11 @@ void sub_8017154(u8);
 void sub_8017BA8(void);
 void sub_8017BC0(void);
 
+void sub_801873C(u32);
+
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
+u8 * sub_801A018(void);
 
 /* begin commands */
 bool32 Command00(struct ScriptContext *);

@@ -1182,7 +1182,7 @@ _0800F34C:
 _0800F352:
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	ldr r4, _0800F3CC @ =gCourtRecord
 	adds r0, r4, #0
 	bl UpdateBG2Window

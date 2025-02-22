@@ -403,7 +403,7 @@ sub_800A6D4: @ 0x0800A6D4
 	ldr r0, [r1, #8]
 	ldr r0, _0800A728 @ =0x0100000A
 	str r0, [r4, #8]
-	bl sub_80053C8
+	bl CopyTextboxTilesToBG1MapBuffer
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1355,7 +1355,7 @@ _0800AE8E:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -1573,7 +1573,7 @@ _0800B046:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]

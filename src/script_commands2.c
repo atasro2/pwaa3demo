@@ -165,14 +165,6 @@ void sub_8019E98(u16 color) {
     }
 }
 
-struct MapMarkerSprite
-{
-    /* +0x00 */ u8 *tiles;
-    /* +0x04 */ u16 size;
-    /* +0x06 */ u16 attr0;
-    /* +0x08 */ u16 attr1;
-    /* +0x0A */ u16 attr2;
-};
 const struct MapMarkerSprite sMapMarkerSprites[] = {
     {
         .tiles = 0,
@@ -314,7 +306,7 @@ void sub_801A054(void) {
         gScriptContext.unk12 &= 0xFF00;
         gScriptContext.unk12 += 1;
     }
-    if(gMain.showTextboxCharacters == TRUE && gScriptContext.unk23 == 0) {
+    if(gMain.showTextboxCharacters == TRUE && gScriptContext.textboxState == 0) {
         gBG1MapBuffer[622] = gUnknown_08028736[(gScriptContext.unk12 & 0xFF) / 8];
         gBG1MapBuffer[623] = gUnknown_08028736[(gScriptContext.unk12 & 0xFF) / 8] + 1;
     }
@@ -419,7 +411,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
         scriptCtx->flags &= ~SCRIPT_x1;
         scriptCtx->flags &= ~SCRIPT_LOOP;
         PlaySE(SE005_TEXT_ADVANCE);
-        if(scriptCtx->unk23 == 0) {
+        if(scriptCtx->textboxState == 0) {
             gBG1MapBuffer[622] = 9;
             gBG1MapBuffer[623] = 9;
         } else {
@@ -489,7 +481,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
     u16 i;
     scriptCtx->flags |= SCRIPT_FULLSCREEN;
     scriptCtx->flags |= SCRIPT_x1;
-    if(scriptCtx->unk23)
+    if(scriptCtx->textboxState)
         return 1;
     if(gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS)
         return 1;
@@ -572,7 +564,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
         sub_80051CC(0);
         gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
         MoveSpritesToOAM();
-        // ! this code is bugged and doesn't skip parameters correctly because someone was trying to be really smart when writing this code and ended up writing something really dumb :D
+        // ! this code is technically bugged but the ChangeScriptSection correct it
         // ! what the fuck is with the 10
         for(i = 1; i < 10; i++) {
             if((scriptCtx->unk12 & 0xFF) == i) {
@@ -642,8 +634,8 @@ bool32 Command0E(struct ScriptContext * scriptCtx) {
         scriptCtx->unk24 = 2;
     }
     if(gMain.showTextboxCharacters == TRUE) {
-        sub_80053C8();
-        sub_8006130(scriptCtx->unk24 & 0x7F, *scriptCtx->scriptPtr & 0xFF);
+        CopyTextboxTilesToBG1MapBuffer();
+        SetTextboxNametag(scriptCtx->unk24 & 0x7F, *scriptCtx->scriptPtr & 0xFF);
     }
     scriptCtx->scriptPtr++;
     scriptCtx->soundCueSkip = 2;

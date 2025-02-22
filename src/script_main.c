@@ -1021,9 +1021,9 @@ void AdvanceScriptContext(void) {
         if(gMain.blendMode)
             return;
     
-        if(scriptCtx->flags & SCRIPT_FULLSCREEN && scriptCtx->unk23 == 2)
+        if(scriptCtx->flags & SCRIPT_FULLSCREEN && scriptCtx->textboxState == 2)
             return;
-        if(scriptCtx->unk23 == 3)
+        if(scriptCtx->textboxState == 3)
             return;
 
         scriptCtx->currentToken = *scriptCtx->scriptPtr++;

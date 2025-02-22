@@ -1142,8 +1142,8 @@ _080124F2:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8012504
-sub_8012504: @ 0x08012504
+	thumb_func_start CheckRectCollisionWithArea
+CheckRectCollisionWithArea: @ 0x08012504
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

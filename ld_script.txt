@@ -46,6 +46,7 @@ SECTIONS {
         src/script_main.o(.text);
         src/script_commands.o(.text);
         src/script_commands2.o(.text);
+        src/script_commands3.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);
         asm/demo.o(.text);

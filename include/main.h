@@ -128,7 +128,8 @@ struct Main
     /* +0x264 */ u8 fill264[0x5C];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
-    /* +0x2C4 */ u8 fill2C4[0x2];
+    /* +0x2C4 */ u8 fill2C4[0x1];
+    /* +0x2C5 */ u8 currentNametagRightSide;
     /* +0x2C6 */ u8 currentCourtroomScene;
     /* +0x2C7 */ u8 unk2C7;
     /* +0x2C8 */ u8 fill2C8[0x8];
