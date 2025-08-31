@@ -101,7 +101,7 @@ struct Main
     // s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
     // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
     // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
-    /* +0x0B6 */ u8 fillB8[8];
+    /* +0x0B8 */ u8 fillB8[8];
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
