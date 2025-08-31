@@ -861,8 +861,8 @@ void UpdateSpecialEffects(void)
             if(main->effectCounter >= main->effectDelay)
             {
                 main->effectCounter = 0;
-                ioRegs->lcd_mosaic = ((gScriptContext.unk46 + (main->effectIntensity & Random())) << 8)
-                                   | ((gScriptContext.unk46 + (main->effectIntensity & Random())) << 12);
+                ioRegs->lcd_mosaic = ((gScriptContext.unk46[0] + (main->effectIntensity & Random())) << 8)
+                                   | ((gScriptContext.unk46[0] + (main->effectIntensity & Random())) << 12);
             }
             break;
         case 20:

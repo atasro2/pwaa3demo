@@ -19,7 +19,7 @@
 . = 0x000028C0; gCourtRecord = .;
 . = 0x000028DC; gUnknown_030028DC = .;
 . = 0x000028FC; gUnknown_030028FC = .;
-. = 0x00002920; gUnknown_03002920 = .;
+. = 0x00002920; gTalkData = .;
 . = 0x00002BA0; gOamObjects = .;
 . = 0x00002FA0; gBG0MapBuffer = .;
 . = 0x000033A4; gUnknown_030033A4 = .;

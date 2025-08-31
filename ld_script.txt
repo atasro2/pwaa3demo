@@ -45,6 +45,9 @@ SECTIONS {
         asm/hp_bar.o(.text);
         src/signal_detector.o(.text);
         src/script_main.o(.text);
+        src/script_commands.o(.text);
+        src/script_commands2.o(.text);
+        src/script_commands3.o(.text);
         asm/script_commands.o(.text);
         asm/opening.o(.text);
         asm/demo.o(.text);
@@ -76,6 +79,7 @@ SECTIONS {
         src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
         rodata/script_main.o(.rodata);
+        src/script_commands2.o(.rodata);
         rodata/script_commands.o(.rodata);
         rodata/demo.o(.rodata);
         rodata/butterfly.o(.rodata);

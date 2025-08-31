@@ -94,7 +94,7 @@ _080168AA:
 	ldrh r0, [r0]
 	bl ChangeScriptSection
 	movs r0, #5
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _080168C0:
 	pop {r0}
 	bx r0
@@ -492,7 +492,7 @@ _08016BA0:
 	movs r0, #1
 	strb r0, [r1]
 	movs r0, #0
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	bl sub_8016D6C
 _08016BAE:
 	ldr r2, _08016BC8 @ =gMain
@@ -550,7 +550,7 @@ _08016C0C:
 	movs r0, #1
 	strb r0, [r1]
 	movs r0, #0
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	bl sub_8016D6C
 _08016C1A:
 	ldr r0, _08016C2C @ =gMain
@@ -588,7 +588,7 @@ _08016C50:
 	movs r0, #1
 	strb r0, [r1]
 	movs r0, #0
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 _08016C5A:
 	ldr r3, _08016C74 @ =gMain
 	adds r1, r3, #0
@@ -847,7 +847,7 @@ ResetHPBar: @ 0x08016E2C
 	adds r0, #0xaa
 	strh r2, [r0]
 	movs r0, #0
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -868,8 +868,8 @@ ResetHPBarHealthToMax: @ 0x08016E5C
 	.align 2, 0
 _08016E70: .4byte gMain
 
-	thumb_func_start sub_8016E74
-sub_8016E74: @ 0x08016E74
+	thumb_func_start SetOrQueueHPBarState
+SetOrQueueHPBarState: @ 0x08016E74
 	adds r3, r0, #0
 	ldr r2, _08016EB0 @ =gMain
 	cmp r3, #8

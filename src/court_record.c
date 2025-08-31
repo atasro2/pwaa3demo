@@ -28,7 +28,7 @@ extern void (*gEvidenceAddedProcessStates[3])(struct Main *, struct CourtRecord 
 extern const struct EvidenceProfileData gEvidenceProfileData[];
 
 //TODO: from hp_bar
-void sub_8016E74(u32); // related to resetting of the bar?
+void SetOrQueueHPBarState(u32); // related to resetting of the bar?
 
 void InitializeCourtRecordForScenario(struct Main * main, struct CourtRecord * courtRecord) // Status_init
 {
@@ -59,7 +59,7 @@ void InitializeCourtRecordForScenario(struct Main * main, struct CourtRecord * c
 
 void CourtRecordProcess(struct Main * main) // Status
 {
-    if(!gScriptContext.unk23) {
+    if(!gScriptContext.textboxState) {
         gBG1MapBuffer[622] = 9;
         gBG1MapBuffer[623] = 9;
     }
@@ -113,7 +113,7 @@ void CourtRecordInit(struct Main * main, struct CourtRecord * courtRecord) // st
     {
         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_PRESENT];
         oam->attr0 = SPRITE_ATTR0_CLEAR;
-        sub_8016E74(6);
+        SetOrQueueHPBarState(6);
     }
     gIORegisters.lcd_dispcnt |= DISPCNT_BG2_ON;
     gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_WRAP | BGCNT_TXT256x256;
@@ -157,7 +157,7 @@ void sub_800EBE8()
                 break;
         }
     }
-    gScriptContext.unkE = section;
+    gScriptContext.nextSection = section;
 }
 
 u32 sub_800EC48()
@@ -344,7 +344,7 @@ u32 sub_800EFBC()
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, (&gMain));
         gCourtRecord.flags |= 0x10;
         if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], gCourtRecord.displayItemList[gCourtRecord.selectedItem]) != -1) {
-            sub_8016E74(3);
+            SetOrQueueHPBarState(3);
             gMain.hpBarDamageAmount = 0;
             oam = gOamObjects + 50;
             oam->attr0 = SPRITE_ATTR0_CLEAR;
@@ -352,7 +352,7 @@ u32 sub_800EFBC()
             oam->attr0 = SPRITE_ATTR0_CLEAR;
         }
         else {
-            sub_8016E74(8);
+            SetOrQueueHPBarState(8);
         }
         if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], gCourtRecord.displayItemList[gCourtRecord.selectedItem]) != -1) {
             StopBGM();

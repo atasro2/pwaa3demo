@@ -218,7 +218,7 @@ _08007894:
 	ldr r1, _08007A34 @ =0x800000F0
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A38 @ =gUnknown_03002920
+	ldr r1, _08007A38 @ =gTalkData
 	str r1, [r0]
 	ldr r5, _08007A3C @ =0xFFFFF5B8
 	adds r1, r2, r5
@@ -365,7 +365,7 @@ _08007A28: .4byte gCourtScroll
 _08007A2C: .4byte 0x80000008
 _08007A30: .4byte gUnknown_03003C70
 _08007A34: .4byte 0x800000F0
-_08007A38: .4byte gUnknown_03002920
+_08007A38: .4byte gTalkData
 _08007A3C: .4byte 0xFFFFF5B8
 _08007A40: .4byte 0x80000140
 _08007A44: .4byte gUnknown_03003B90
@@ -1044,7 +1044,7 @@ _08007F70:
 	ldr r3, _08008180 @ =0xFFFFE5B8
 	adds r0, r7, r3
 	str r0, [r4]
-	ldr r0, _08008184 @ =gUnknown_03002920
+	ldr r0, _08008184 @ =gTalkData
 	str r0, [r4, #4]
 	ldr r0, _08008188 @ =0x80000140
 	str r0, [r4, #8]
@@ -1228,7 +1228,7 @@ _08008174: .4byte 0xFFFFE860
 _08008178: .4byte gMapMarker
 _0800817C: .4byte 0x80000050
 _08008180: .4byte 0xFFFFE5B8
-_08008184: .4byte gUnknown_03002920
+_08008184: .4byte gTalkData
 _08008188: .4byte 0x80000140
 _0800818C: .4byte 0xFFFFE838
 _08008190: .4byte gUnknown_03003B90
@@ -1280,25 +1280,25 @@ _08008210:
 	beq _08008236
 	b _08008244
 _08008216:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08008244
 _08008226:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08008244
 _08008236:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _08008244:
 	ldr r0, _080082B4 @ =gMain
 	ldr r2, _080082B8 @ =0x000002C2
