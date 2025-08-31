@@ -425,7 +425,7 @@ void sub_80175D8(u8 * dest, u32 charCode, u16 color, struct OamAttrs * oam, u16 
     if(color) {
 
         DmaCopy16(3, temp, glyphBuf, 0x80);
-        pixel = glyphBuf;
+        pixel = (u32*)glyphBuf;
         for(i = 0; i < 7; i++) {
             row = 0;
             temp = pixel[i];
@@ -1140,7 +1140,7 @@ void LoadCurrentScriptIntoRam(void)
         gTextBoxCharacters[i].state &= ~(0x8000|0x4000);
     }
 
-    LZ77UnCompWram(gScriptTable[gMain.scenarioIdx], eScriptHeap);
+    LZ77UnCompWram((void *)gScriptTable[gMain.scenarioIdx], eScriptHeap);
 
     for (i = 0; i < ARRAY_COUNT(gMapMarker); i++)
     {
@@ -1245,15 +1245,15 @@ void ChangeScriptSection(u32 section) {
 
     if (scriptCtx->currentSection >= 0x80)
     {
-        scriptStart = eScriptHeap;
+        scriptStart = (uintptr_t)eScriptHeap;
         sectionOffset = (u32 *)eScriptHeap + (scriptCtx->currentSection-0x80);
     }
     else
     {
-        scriptStart = std_scripts;
+        scriptStart = (uintptr_t)std_scripts;
         sectionOffset = (u32 *)std_scripts + scriptCtx->currentSection;
     }
-    scriptCtx->scriptPtr = sectionOffset[1] + scriptStart;
+    scriptCtx->scriptPtr = (u16 *)(sectionOffset[1] + scriptStart);
     scriptCtx->scriptSectionPtr = scriptCtx->scriptPtr;
 }
 
@@ -1443,12 +1443,12 @@ void RedrawTextboxCharacters(void)
                     }
                 }
                 src = gTextColorTileBuffer;
-                dst = (u8*)(OBJ_VRAM0 + i * 0x80);
+                dst = (uintptr_t)(OBJ_VRAM0 + i * 0x80);
                 DmaCopy16(3, src, dst, 0x80);
             }
             else
             {
-                dst = (u8*)(OBJ_VRAM0 + i * 0x80);
+                dst = (uintptr_t)(OBJ_VRAM0 + i * 0x80);
                 DmaCopy16(3, temp, dst, 0x80);
             }
         }

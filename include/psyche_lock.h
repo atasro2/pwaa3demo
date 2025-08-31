@@ -96,5 +96,8 @@ void sub_8016E7C(void);
 void sub_80170AC(void);
 void sub_8017134(void);
 bool32 sub_801715C(void);
+s32 GetPsycheLockDataIndexByRoomAndPerson(u16 roomId, u16 personId);
+s32 IsPresentedEvidenceValidForPsycheLock(struct PsycheLockData * data, u16 evidenceId);
+void ShowPsycheLockLocksAndChainsWithoutAnimating(u32 numPsycheLocks);
 
 #endif//GUARD_PSYCHE_LOCK_H

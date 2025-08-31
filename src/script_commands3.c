@@ -7,6 +7,7 @@
 #include "save.h"
 #include "sound.h"
 #include "utils.h"
+#include "hp_bar.h"
 #include "constants/songs.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
@@ -296,7 +297,7 @@ bool32 Command33(struct ScriptContext *scriptCtx)
     return 0;
 }
 
-bool32 Command34(struct ScriptContext *scriptCtx)
+bool32 Command34(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext *scriptCtx = &gScriptContext;
     gMain.currentRoomId = *scriptCtx->scriptPtr;
@@ -496,7 +497,7 @@ bool32 Command3D(struct ScriptContext *scriptCtx)
     return 0;
 }
 
-bool32 Command3E(struct ScriptContext *scriptCtx)
+bool32 Command3E(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext *scriptCtx = &gScriptContext;
     sub_8017154(1);

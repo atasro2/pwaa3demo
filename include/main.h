@@ -214,4 +214,8 @@ void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
 void sub_8000E78(u32, u32, u32);
 void sub_8000EB4(u32, u32, u32);
+
+void InitSpecialEffectsWithMosaic(u32 type, u32 delay, u32 intensity);
+void InitSpecialEffects(u32 type, u32 delay, u32 intensity);
+
 #endif//GUARD_MAIN_H

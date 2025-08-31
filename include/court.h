@@ -45,4 +45,10 @@ void QuestioningHoldIt(struct Main *);
 void QuestioningObjection(struct Main *);
 /* end process functions */
 
+void LoadWitnessBenchGraphics(void);
+void LoadCounselBenchGraphics(void);
+void SetOAMForCourtBenchSpritesWitness(u32, u32, u32);
+void SetOAMForCourtBenchSpritesDefense(u32, u32, u32);
+void SetOAMForCourtBenchSpritesProsecution(u32, u32, u32);
+
 #endif//GUARD_COURT_H

@@ -6,6 +6,8 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "hp_bar.h"
+#include "court.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
@@ -174,7 +176,7 @@ bool32 Command1A(struct ScriptContext * scriptCtx)
     return 0;
 }
 
-bool32 Command1B(struct ScriptContext * scriptCtx)
+bool32 Command1B(struct ScriptContext * unused_scriptCtx)
 {
     // ! No comments about this absolute stupidity from capcom until now
     // but if you assign gScriptContext to the scriptCtx from 
@@ -575,7 +577,7 @@ bool32 Command54(struct ScriptContext *scriptCtx)
     return 0;
 }
 
-bool32 Command55(struct ScriptContext *scriptCtx)
+bool32 Command55(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext *scriptCtx = &gScriptContext;
     struct Main * main = &gMain;
@@ -645,7 +647,7 @@ bool32 Command56(struct ScriptContext * scriptCtx)
     return 0;
 }
 
-bool32 Command5C(struct ScriptContext *scriptCtx)
+bool32 Command5C(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx;
     struct Main * main;
@@ -667,7 +669,7 @@ bool32 Command5C(struct ScriptContext *scriptCtx)
     return 0;
 }
 
-bool32 Command5F(struct ScriptContext *scriptCtx)
+bool32 Command5F(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     u16 args[3];

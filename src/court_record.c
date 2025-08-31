@@ -12,6 +12,7 @@
 #include "psyche_lock.h"
 // #include "save.h"
 // #include "ewram.h"
+#include "hp_bar.h"
 #include "constants/process.h"
 #include "constants/songs.h"
 // #include "constants/animation.h"
@@ -26,9 +27,6 @@ struct EvidenceProfileData
 extern void (*gCourtRecordProcessStates[8])(struct Main *, struct CourtRecord *);
 extern void (*gEvidenceAddedProcessStates[3])(struct Main *, struct CourtRecord *);
 extern const struct EvidenceProfileData gEvidenceProfileData[];
-
-//TODO: from hp_bar
-void SetOrQueueHPBarState(u32); // related to resetting of the bar?
 
 void InitializeCourtRecordForScenario(struct Main * main, struct CourtRecord * courtRecord) // Status_init
 {

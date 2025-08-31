@@ -236,6 +236,8 @@ void InvestigationPsycheLock(struct Main *, struct InvestigationStruct *);
 void LoadLocationChoiceGraphics(void);
 void LoadTalkChoiceGraphics(void);
 
+void ReloadInvestigationGraphics(void);
+
 /* Segment 1 */
 void InvestigationSegmentSetup_1_0(struct Main *main);
 void InvestigationRoomSetup_1_0(struct Main *main);

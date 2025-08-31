@@ -6,6 +6,7 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "hp_bar.h"
 #include "constants/songs.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
@@ -202,7 +203,7 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
         .attr2 = 0x0000,
     },
     {
-        .tiles = 0x800,
+        .tiles = (u8*)0x800,
         .size = 0x800,
         .attr0 = 0x0200,
         .attr1 = 0x4000,
@@ -230,7 +231,7 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
         .attr2 = 0x0000,
     },
     {
-        .tiles = 0x800,
+        .tiles = (u8*)0x800,
         .size = 0x800,
         .attr0 = 0x0200,
         .attr1 = 0x4000,
@@ -365,7 +366,7 @@ void sub_801A148(u32 arg0) { // ! Unused
     }
 }
 
-bool32 Command02(struct ScriptContext * scriptCtx) {
+bool32 Command02(struct ScriptContext * unused_scriptCtx) {
     u16 i;
     struct ScriptContext * scriptCtx = &gScriptContext;
     scriptCtx->flags |= SCRIPT_x1;
@@ -433,7 +434,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
             } else {
                 sub_8017154(4);
             }
-            DmaCopy16(3, &gCharSet[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
+            DmaCopy16(3, &((u8*)gCharSet)[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
             if(scriptCtx->unk22 & 0xF) {
                 sub_8017BC0();
             }
@@ -474,7 +475,7 @@ bool32 Command04(struct ScriptContext * scriptCtx)
     return 1;
 }
 
-bool32 Command08(struct ScriptContext * scriptCtx)
+bool32 Command08(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     struct OamAttrs * oam;
@@ -588,7 +589,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
     return 1;
 }
 
-bool32 Command0B(struct ScriptContext * scriptCtx)
+bool32 Command0B(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     scriptCtx->textSpeed = *scriptCtx->scriptPtr;
@@ -600,7 +601,7 @@ bool32 Command0B(struct ScriptContext * scriptCtx)
     return 0;
 }
 
-bool32 Command0C(struct ScriptContext * scriptCtx)
+bool32 Command0C(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     if ((scriptCtx->unk12 & 0xFF) == 0)
@@ -620,13 +621,13 @@ bool32 Command0C(struct ScriptContext * scriptCtx)
     return FALSE;
 }
 
-bool32 Command0D(struct ScriptContext * scriptCtx) {
+bool32 Command0D(struct ScriptContext * unused_scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
     ChangeScriptSection(scriptCtx->nextSection);
     return FALSE;
 }
 
-bool32 Command0E(struct ScriptContext * scriptCtx) {
+bool32 Command0E(struct ScriptContext * unused_scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
     scriptCtx->unk24 = *scriptCtx->scriptPtr >> 8;
     scriptCtx->unk24 &= 0x7F;
@@ -642,7 +643,7 @@ bool32 Command0E(struct ScriptContext * scriptCtx) {
     return FALSE;
 }
 
-bool32 Command0F(struct ScriptContext * scriptCtx) {
+bool32 Command0F(struct ScriptContext * unused_scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
     scriptCtx->unk10 = *scriptCtx->scriptPtr++;
     if(scriptCtx->scriptPtr) { // ! this does not dereference the pointer 
@@ -652,7 +653,7 @@ bool32 Command0F(struct ScriptContext * scriptCtx) {
     return FALSE;
 }
 
-bool32 Command10(struct ScriptContext * scriptCtx)
+bool32 Command10(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     u32 flagType;
@@ -678,7 +679,7 @@ bool32 Command11(struct ScriptContext * scriptCtx)
     return FALSE;
 }
 
-bool32 Command13(struct ScriptContext * scriptCtx)
+bool32 Command13(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     if((scriptCtx->unk12 & 0xFF) == 0) {
@@ -697,7 +698,7 @@ bool32 Command13(struct ScriptContext * scriptCtx)
     return FALSE;
 }
 
-bool32 Command14(struct ScriptContext * scriptCtx)
+bool32 Command14(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     if((scriptCtx->unk12 & 0xFF) == 0) {
@@ -712,7 +713,7 @@ bool32 Command14(struct ScriptContext * scriptCtx)
     return FALSE;
 }
 
-bool32 Command15(struct ScriptContext * scriptCtx)
+bool32 Command15(struct ScriptContext * unused_scriptCtx)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     if((scriptCtx->unk12 & 2) == 0)
