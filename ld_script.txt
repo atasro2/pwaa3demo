@@ -75,6 +75,7 @@ SECTIONS {
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);
+        src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
         rodata/script_main.o(.rodata);
         src/script_commands2.o(.rodata);

@@ -80,11 +80,3 @@ gUnknown_0802822C:
     .global gUnknown_08028238
 gUnknown_08028238:
     .incbin "baserom.gba", 0x00028238, 0x4
-
-    .global gUnknown_0802823C
-gUnknown_0802823C:
-    .incbin "baserom.gba", 0x0002823C, 0x30
-
-    .global gUnknown_0802826C
-gUnknown_0802826C:
-    .incbin "baserom.gba", 0x0002826C, 0x1C
