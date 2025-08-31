@@ -23,10 +23,10 @@ struct CourtRecord
     /* +0x11 */ u8 profileCount; // unity AA4: name_page_max
     /* +0x12 */ u8 selectedItemBackup; // unity AA4: page_now_bk
     /* +0x13 */ u8 fullScreenPage; // unity AA4: exception_page
-    /* +0x14 */ u8 * displayItemList; // unity AA4: now_file
-    /* +0x18 */ u8 evidenceList[0x20]; // unity AA4: item_file
-    /* +0x38 */ u8 profileList[0x20]; // unity AA4: name_file
-    /* +0x58 */ u8 fill58[2];
+    /* +0x14 */ u8 fill14[4]; // ! fill could be wrong 
+    /* +0x18 */ u8 * displayItemList; // unity AA4: now_file
+    /* +0x1C */ u8 evidenceList[0x20]; // unity AA4: item_file
+    /* +0x3C */ u8 profileList[0x20]; // unity AA4: name_file
 };
 
 extern struct CourtRecord gCourtRecord;

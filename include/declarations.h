@@ -43,10 +43,14 @@ extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
 extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
 extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
+extern void CopyTextboxTilesToBG1MapBuffer(void);
+
 extern void sub_8005A00(u16,u16,u16);
 extern void sub_8005BE8(u16,u16);
 extern void sub_8005C88(u16,u16,u16);
 extern void nullsub_3(u16,u16);
+
+extern void SetTextboxNametag(u32, u32);
 
 void ResetHPBar(void);
 void ResetHPBarHealthToMax(void);
@@ -56,10 +60,15 @@ bool32 sub_8016ED8(void);
 void nullsub_20(char *,u32,u32);
 void sub_8006470(u32,u32,u32);
 
+void SetAnimationFrameOffset(struct AnimationListEntry *, u32);
+
 void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
 struct AnimationListEntry * sub_8016FB4(void);
 bool32 IsHPBarAnimating(void);
+void sub_8016D6C(void);
+
+extern struct TextBoxCharacter gUnknown_03007180[0x40]; 
 #endif//GUARD_DECLARATIONS_H

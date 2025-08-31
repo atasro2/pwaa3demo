@@ -2364,10 +2364,10 @@ _080040CC:
 	.align 2, 0
 _080040D4: .4byte 0x050001A0
 _080040D8:
-	ldr r4, _080040DC @ =gUnknown_08206BF0
+	ldr r4, _080040DC @ =gPal_BustupMia
 	b _080040E2
 	.align 2, 0
-_080040DC: .4byte gUnknown_08206BF0
+_080040DC: .4byte gPal_BustupMia
 _080040E0:
 	movs r4, #0
 _080040E2:
@@ -2523,7 +2523,7 @@ sub_8004218: @ 0x08004218
 	movs r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _080042E0
 	.align 2, 0
 _08004234: .4byte gScriptContext
@@ -2560,14 +2560,14 @@ _0800426E:
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08004312
 _0800427E:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _08004312
 _0800428E:
 	ldr r0, _080042A8 @ =0x0000FFFF
@@ -2589,25 +2589,25 @@ _080042AC:
 	beq _080042D2
 	b _080042E0
 _080042B2:
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _080042E0
 _080042C2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _080042E0
 _080042D2:
 	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _080042E0:
 	movs r0, #0
 	strh r0, [r4, #0x3c]
@@ -2617,21 +2617,21 @@ _080042E8:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08004312
 _080042FE:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 _08004312:
 	pop {r4}
 	pop {r0}
@@ -4489,8 +4489,8 @@ _0800519C:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80051AC
-sub_80051AC: @ 0x080051AC
+	thumb_func_start GetBGControlBits
+GetBGControlBits: @ 0x080051AC
 	ldr r1, _080051B8 @ =gBackgroundTable
 	lsls r0, r0, #3
 	adds r1, #4
@@ -4551,7 +4551,7 @@ _080051F0:
 	ands r1, r2
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	bl sub_8006130
+	bl SetTextboxNametag
 	b _08005294
 	.align 2, 0
 _0800521C: .4byte gBG1MapBuffer
@@ -4567,7 +4567,7 @@ _08005228:
 	strb r0, [r1]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	b _08005294
 _08005240:
 	ldr r3, _0800529C @ =gBG1MapBuffer
@@ -4764,8 +4764,8 @@ _080053BC: .4byte gIORegisters
 _080053C0: .4byte 0xFFAF0000
 _080053C4: .4byte 0x0000FDFF
 
-	thumb_func_start sub_80053C8
-sub_80053C8: @ 0x080053C8
+	thumb_func_start CopyTextboxTilesToBG1MapBuffer
+CopyTextboxTilesToBG1MapBuffer: @ 0x080053C8
 	push {r4, r5, lr}
 	movs r1, #0xe0
 	lsls r1, r1, #1
@@ -4799,10 +4799,10 @@ SlideTextbox: @ 0x080053FC
 	movs r0, #0
 	strb r0, [r1, #0x18]
 	strb r0, [r1, #0x19]
-	bl sub_80053C8
+	bl CopyTextboxTilesToBG1MapBuffer
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	cmp r4, #1
 	bne _08005464
 	ldr r0, _0800544C @ =gScriptContext
@@ -5356,7 +5356,7 @@ _0800581C:
 _08005838: .4byte 0xFFFFFE00
 _0800583C:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr
@@ -5619,7 +5619,7 @@ _08005A28:
 _08005A44: .4byte 0xFFFFFE00
 _08005A48:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr
@@ -5740,7 +5740,7 @@ _08005B1C:
 _08005B38: .4byte 0xFFFFFE00
 _08005B3C:
 	adds r0, r5, #0
-	bl sub_80051AC
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl GetBGPalettePtr
@@ -6515,8 +6515,8 @@ _08006124: .4byte gBG3MapBuffer
 _08006128: .4byte 0x040000D4
 _0800612C: .4byte 0x800002C0
 
-	thumb_func_start sub_8006130
-sub_8006130: @ 0x08006130
+	thumb_func_start SetTextboxNametag
+SetTextboxNametag: @ 0x08006130
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

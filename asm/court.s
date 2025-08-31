@@ -403,7 +403,7 @@ sub_800A6D4: @ 0x0800A6D4
 	ldr r0, [r1, #8]
 	ldr r0, _0800A728 @ =0x0100000A
 	str r0, [r4, #8]
-	bl sub_80053C8
+	bl CopyTextboxTilesToBG1MapBuffer
 	adds r0, r4, #0
 	adds r0, #0xc1
 	ldrb r0, [r0]
@@ -1185,7 +1185,7 @@ _0800AD3C:
 	movs r0, #0x10
 	strh r0, [r1]
 	movs r0, #6
-	bl sub_8016E74
+	bl SetOrQueueHPBarState
 	bl sub_800A7AC
 	ldr r0, _0800AD6C @ =0x01000007
 	str r0, [r4, #8]
@@ -1355,7 +1355,7 @@ _0800AE8E:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -1501,7 +1501,7 @@ _0800AFD4: .4byte gTestimony
 _0800AFD8:
 	ldr r0, _0800B024 @ =gAnimation+0x44
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	ldrh r0, [r5, #0x34]
 	movs r2, #0
 	strh r0, [r5, #0x38]
@@ -1573,7 +1573,7 @@ _0800B046:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8006130
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -2458,8 +2458,8 @@ _0800B7C0: .4byte 0x00005590
 _0800B7C4: .4byte 0x000080D0
 _0800B7C8: .4byte 0x00005598
 
-	thumb_func_start sub_800B7CC
-sub_800B7CC: @ 0x0800B7CC
+	thumb_func_start LoadWitnessBenchGraphics
+LoadWitnessBenchGraphics: @ 0x0800B7CC
 	push {r4, r5, lr}
 	sub sp, #0x20
 	ldr r2, _0800B830 @ =0x040000D4
@@ -2555,8 +2555,8 @@ _0800B88C: .4byte gPalWitnessBench
 _0800B890: .4byte 0x05000340
 _0800B894: .4byte 0x80000010
 
-	thumb_func_start sub_800B898
-sub_800B898: @ 0x0800B898
+	thumb_func_start SetOAMForCourtBenchSpritesWitness
+SetOAMForCourtBenchSpritesWitness: @ 0x0800B898
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2755,8 +2755,8 @@ _0800BA34: .4byte gPalCounselBench
 _0800BA38: .4byte 0x05000340
 _0800BA3C: .4byte 0x80000010
 
-	thumb_func_start sub_800BA40
-sub_800BA40: @ 0x0800BA40
+	thumb_func_start SetOAMForCourtBenchSpritesDefense
+SetOAMForCourtBenchSpritesDefense: @ 0x0800BA40
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2857,8 +2857,8 @@ _0800BB08: .4byte 0xFFFFC000
 _0800BB0C: .4byte 0xFFFFAD00
 _0800BB10: .4byte 0xFFFF8000
 
-	thumb_func_start sub_800BB14
-sub_800BB14: @ 0x0800BB14
+	thumb_func_start SetOAMForCourtBenchSpritesProsecution
+SetOAMForCourtBenchSpritesProsecution: @ 0x0800BB14
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

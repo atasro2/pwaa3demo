@@ -25,16 +25,26 @@ struct ExaminationData
 
 struct InvestigationStruct // unity: tantei_work_
 {
-    /* +0x00 */ u8 fill00[6];
+    /* +0x00 */ u16 pointerX;
+    /* +0x02 */ u16 pointerY;
+    /* +0x04 */ u8 fill04[2];
     /* +0x06 */ bool8 personActive;
-    /* +0x07 */ u8 fill07[0x04];
+    /* +0x07 */ u8 inspectionPaused;
+    /* +0x08 */ u8 unk8;
+    /* +0x09 */ u8 spotselectStartCounter;
+    /* +0x0A */ u8 spotselectId;
     /* +0x0B */ u8 inPsycheLockChallengeFlag;
-    /* +0x0C */ u8 fill0C[0x06];
+    /* +0x0C */ u8 selectedAction;
+    /* +0x0D */ u8 lastAction;
+    /* +0x0E */ u8 fill0E[0x02];
+    /* +0x10 */ u8 actionState;
+    /* +0x11 */ u8 unk11;
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
     /* +0x13 */ u8 fill13[5];
     /* +0x18 */ u8 pointerFrame;
     /* +0x19 */ u8 pointerFrameCounter;
-    /* +0x1A */ u8 fill19[2];
+    /* +0x1A */ u8 pointerColor;
+    /* +0x1B */ u8 pointerColorCounter;
 };
 
 extern struct TalkData gTalkData[32];

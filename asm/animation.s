@@ -252,8 +252,8 @@ _08011E70: .4byte gAnimation+0x83C
 _08011E74: .4byte 0xFFFFF808
 _08011E78: .4byte gUnknown_080280F0
 
-	thumb_func_start sub_8011E7C
-sub_8011E7C: @ 0x08011E7C
+	thumb_func_start SetAnimationOriginCoords
+SetAnimationOriginCoords: @ 0x08011E7C
 	push {lr}
 	cmp r0, #0
 	bne _08011E94
@@ -526,8 +526,8 @@ _08012084:
 	.align 2, 0
 _08012088: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_801208C
-sub_801208C: @ 0x0801208C
+	thumb_func_start ChangeAnimationActivity
+ChangeAnimationActivity: @ 0x0801208C
 	push {r4, lr}
 	adds r3, r0, #0
 	cmp r3, #0
@@ -659,8 +659,8 @@ _08012174:
 	.align 2, 0
 _0801217C: .4byte gUnknown_08028128
 
-	thumb_func_start sub_8012180
-sub_8012180: @ 0x08012180
+	thumb_func_start SetAnimationFrameOffset
+SetAnimationFrameOffset: @ 0x08012180
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r2, r1, #0
@@ -1142,8 +1142,8 @@ _080124F2:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8012504
-sub_8012504: @ 0x08012504
+	thumb_func_start CheckRectCollisionWithArea
+CheckRectCollisionWithArea: @ 0x08012504
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -2226,8 +2226,8 @@ _08012D2C: .4byte gAnimation
 _08012D30: .4byte gOamObjects
 _08012D34: .4byte 0x000001FF
 
-	thumb_func_start sub_8012D38
-sub_8012D38: @ 0x08012D38
+	thumb_func_start StartAnimationBlend
+StartAnimationBlend: @ 0x08012D38
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2436,7 +2436,7 @@ sub_8012E68: @ 0x08012E68
 	beq _08012EEC
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	b _08012F3C
 	.align 2, 0
 _08012ED8: .4byte gMain
@@ -3690,7 +3690,7 @@ _08013848:
 	bne _080138B0
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	b _0801398A
 _08013862:
 	ldr r0, [r4]
@@ -3710,14 +3710,14 @@ _08013862:
 	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 _0801388A:
 	ldrh r7, [r5, #0x36]
 	cmp r7, #0x80
 	bne _080138D6
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	b _080138D6
 _0801389A:
 	adds r0, r1, #0
@@ -4185,7 +4185,7 @@ _08013C0C:
 	bne _08013C74
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	b _08013D4E
 _08013C26:
 	ldr r0, [r4]
@@ -4205,14 +4205,14 @@ _08013C26:
 	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
-	bl sub_801208C
+	bl ChangeAnimationActivity
 _08013C4E:
 	ldrh r7, [r5, #0x36]
 	cmp r7, #0x80
 	bne _08013C9A
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_801208C
+	bl ChangeAnimationActivity
 	b _08013C9A
 _08013C5E:
 	adds r0, r1, #0
@@ -4474,7 +4474,7 @@ _08013E44:
 	adds r0, r5, r3
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08013E78
 	.align 2, 0
 _08013E5C: .4byte gScriptContext
@@ -4486,7 +4486,7 @@ _08013E6C:
 	adds r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _08013E78:
 	add sp, #4
 	pop {r4, r5}
@@ -4567,7 +4567,7 @@ _08013F00:
 	adds r0, r5, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08013F2E
 	.align 2, 0
 _08013F14: .4byte gScriptContext
@@ -4579,7 +4579,7 @@ _08013F20:
 	adds r0, r5, r2
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _08013F2E:
 	add sp, #4
 	pop {r4, r5}
@@ -4650,7 +4650,7 @@ _08013FAC:
 	ldrh r0, [r4, #0xc]
 	cmp r0, #0xe
 	bne _08013FB6
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 _08013FB6:
 	movs r1, #0xc
 	ldrsh r0, [r4, r1]
@@ -4676,7 +4676,7 @@ _08013FDA:
 	subs r0, #0xb4
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _0801401E
 	.align 2, 0
 _08013FE8: .4byte gScriptContext
@@ -4704,7 +4704,7 @@ _08014012:
 	adds r0, #0x20
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _0801401E:
 	add sp, #4
 	pop {r4, r5, r6}
@@ -4806,7 +4806,7 @@ _080140D4:
 	subs r0, #0xb4
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08014124
 	.align 2, 0
 _080140E4: .4byte gScriptContext
@@ -4838,7 +4838,7 @@ _08014116:
 	subs r0, r0, r3
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BB14
+	bl SetOAMForCourtBenchSpritesProsecution
 _08014124:
 	add sp, #4
 	pop {r4, r5, r6}
@@ -4910,7 +4910,7 @@ _080141A4:
 	ldrh r0, [r4, #0xc]
 	cmp r0, #0xe
 	bne _080141AE
-	bl sub_800B7CC
+	bl LoadWitnessBenchGraphics
 _080141AE:
 	movs r1, #0xc
 	ldrsh r0, [r4, r1]
@@ -4936,7 +4936,7 @@ _080141D2:
 	subs r0, r0, r3
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08014214
 	.align 2, 0
 _080141E0: .4byte gScriptContext
@@ -4963,7 +4963,7 @@ _0801420A:
 	rsbs r0, r3, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 _08014214:
 	add sp, #4
 	pop {r4, r5, r6}
@@ -5065,7 +5065,7 @@ _080142C8:
 	subs r0, r0, r3
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800B898
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08014316
 	.align 2, 0
 _080142D8: .4byte gScriptContext
@@ -5096,7 +5096,7 @@ _0801430A:
 	adds r0, r3, r1
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800BA40
+	bl SetOAMForCourtBenchSpritesDefense
 _08014316:
 	add sp, #4
 	pop {r4, r5, r6}

@@ -912,28 +912,28 @@ void sub_8015C18(void) {
 
 // ! DEBUG related code?
 void sub_8015C48(void) {
-    if(gScriptContext.unk46 == 0) {
-        gScriptContext.unk46 = 1;
-        gScriptContext.unk48 = 1;
+    if(gScriptContext.unk46[0] == 0) {
+        gScriptContext.unk46[0] = 1;
+        gScriptContext.unk46[1] = 1;
         gMain.currentBG = 0;
         gIORegisters.lcd_dispcnt &= ~DISPCNT_BG0_ON;
         return;
     }
     if(gJoypad.pressedKeys & R_BUTTON) {
-        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk48));
+        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk46[1]));
         HideAllSprites();
-        gScriptContext.unk48++;
-        if(gScriptContext.unk48 == 0xB6)
-            gScriptContext.unk48 = 1;
-        PlayAnimation(gScriptContext.unk48);
+        gScriptContext.unk46[1]++;
+        if(gScriptContext.unk46[1] == 0xB6)
+            gScriptContext.unk46[1] = 1;
+        PlayAnimation(gScriptContext.unk46[1]);
     }
     if(gJoypad.pressedKeys & L_BUTTON) {
-        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk48));
+        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk46[1]));
         HideAllSprites();
-        gScriptContext.unk48--;
-        if(gScriptContext.unk48 == 0)
-            gScriptContext.unk48 = 0xB5;
-        PlayAnimation(gScriptContext.unk48);
+        gScriptContext.unk46[1]--;
+        if(gScriptContext.unk46[1] == 0)
+            gScriptContext.unk46[1] = 0xB5;
+        PlayAnimation(gScriptContext.unk46[1]);
     }
     if(gJoypad.pressedKeys & DPAD_LEFT) {
         if(gMain.currentBG > 0)
@@ -960,12 +960,12 @@ void sub_8015C48(void) {
         gMain.previousBG = gMain.currentBG;
     }
     if(gJoypad.pressedKeys & A_BUTTON) {
-        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk48));
+        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk46[1]));
         HideAllSprites();
-        PlayAnimation(gScriptContext.unk48);
+        PlayAnimation(gScriptContext.unk46[1]);
     }
     if(gJoypad.pressedKeys & B_BUTTON) {
-        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk48));
+        DestroyAnimation(FindAnimationFromAnimId(gScriptContext.unk46[1]));
         HideAllSprites();
     }
 }

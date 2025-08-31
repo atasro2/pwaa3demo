@@ -122,7 +122,7 @@ struct AnimationListEntry * sub_8016FB4(void) {
     return NULL;
 }
 
-void sub_8016FEC(u16 arg0) { // dahlia shawl stuff probs
+void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
     u32 r5 = 0xFF;
     struct ScriptContext * scriptCtx = &gScriptContext;
     u32 array[] = { // ? array of animation offsets? 
@@ -186,7 +186,7 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff probs
             animation->animationInfo.xOrigin = xOrigin;
         }
         if(gScriptContext.unk1E & 0x8000) { // ! mixing global and local memes continue
-            if(scriptCtx->unk4A & 0xF0) {
+            if(scriptCtx->unk46[2] & 0xF0) {
                 animation = sub_8016FB4();
                 animation->flags |= ANIM_0x400;
             }
@@ -745,7 +745,7 @@ void sub_8017BC0(void) {
     gScriptContext.unk18[gScriptContext.unk29] = r4;
 }
 
-bool32 sub_8017C70(void) {
+bool32 CommandUnimplemented(void) {
     u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
     u8 i;
     if(argCount == 0)
@@ -809,10 +809,10 @@ void DrawMapMarkers(void) {
                         gMapMarker[i].flags &= ~2;
                     }
                 } else {
-                    r4 += gScriptContext.unk46;
-                    r3 += gScriptContext.unk48;
-                    gScriptContext.unk4A--;
-                    if(gScriptContext.unk4A == 0) {
+                    r4 += gScriptContext.unk46[0];
+                    r3 += gScriptContext.unk46[1];
+                    gScriptContext.unk46[2]--;
+                    if(gScriptContext.unk46[2] == 0) {
                         gMapMarker[i].flags &= ~2;
                         gMapMarker[i].attr0 &= ~0xFF;
                         gMapMarker[i].attr0 |= r3 & 0xFF;
@@ -906,15 +906,15 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
             return;
         if(i == 0)
             i = 5;
-        gScriptContext.unk25 = ((5 - i) << 4) | (gScriptContext.unk25 & 0xF);
+        gScriptContext.textColor = ((5 - i) << 4) | (gScriptContext.textColor & 0xF);
     }
-    if(gScriptContext.unk25) {
+    if(gScriptContext.textColor) {
         u8 * pixel;
         u32 half1, half2;
-        if(gScriptContext.unk25 & 0xF0) {
+        if(gScriptContext.textColor & 0xF0) {
             DmaCopy16(3, temp, sp0, 0x80);
             pixel = sp0;
-            temp = (gScriptContext.unk25 & 0xF0) >> 4;
+            temp = (gScriptContext.textColor & 0xF0) >> 4;
             for(i = 0; i < 0x80; i++) {
                 half2 = *pixel;
                 half1 = half2 & 0xF;
@@ -941,7 +941,7 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         } else {
             DmaCopy16(3, temp, sp0, 0x80);
             pixel = sp0;
-            temp = gScriptContext.unk25 * 3;
+            temp = gScriptContext.textColor * 3;
             for(i = 0; i < 0x80; i++) {
                 half2 = *pixel;
                 half1 = half2 & 0xF;
@@ -977,12 +977,12 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         gTextBoxCharacters[temp].state &= ~0x4000;
     }
     gTextBoxCharacters[temp].objAttr2 = x * 4 + y * 0x40;
-    if(gScriptContext.unk25 & 0xF0) {
-        gTextBoxCharacters[temp].color = gScriptContext.unk25;
+    if(gScriptContext.textColor & 0xF0) {
+        gTextBoxCharacters[temp].color = gScriptContext.textColor;
         gTextBoxCharacters[temp].color |= 0x8000;
     }
     else {   
-        gTextBoxCharacters[temp].color = gScriptContext.unk25 & 0xF0;
+        gTextBoxCharacters[temp].color = gScriptContext.textColor & 0xF0;
     }
     
     if(gScriptContext.flags & SCRIPT_FULLSCREEN) {
@@ -995,7 +995,7 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
         }
     }
     gTextBoxCharacters[temp].objAttr2 += 0x400;
-    gTextBoxCharacters[temp].color2 = gScriptContext.unk25;
+    gTextBoxCharacters[temp].color2 = gScriptContext.textColor;
 }
 
 extern bool32 (*gScriptCmdFuncs[0x72])(struct ScriptContext *);
@@ -1021,9 +1021,9 @@ void AdvanceScriptContext(void) {
         if(gMain.blendMode)
             return;
     
-        if(scriptCtx->flags & SCRIPT_FULLSCREEN && scriptCtx->unk23 == 2)
+        if(scriptCtx->flags & SCRIPT_FULLSCREEN && scriptCtx->textboxState == 2)
             return;
-        if(scriptCtx->unk23 == 3)
+        if(scriptCtx->textboxState == 3)
             return;
 
         scriptCtx->currentToken = *scriptCtx->scriptPtr++;
@@ -1038,22 +1038,22 @@ void AdvanceScriptContext(void) {
             return;
         }
         if((scriptCtx->unk2E >> 4) != 1) {
-            if(scriptCtx->flags & SCRIPT_x800) {
+            if(scriptCtx->flags & SCRIPT_SECTION_READ) {
                 if((gJoypad.heldKeys & B_BUTTON || gJoypad.pressedKeys & A_BUTTON))
-                    scriptCtx->flags |= SCRIPT_x2000;
+                    scriptCtx->flags |= SCRIPT_SKIP;
             } 
         }
         
         if(!(scriptCtx->flags & SCRIPT_FULLSCREEN)) {
-            if(scriptCtx->flags & SCRIPT_x2000 &&
-               scriptCtx->flags & SCRIPT_x800) {
+            if(scriptCtx->flags & SCRIPT_SKIP &&
+               scriptCtx->flags & SCRIPT_SECTION_READ) {
                 if(r7 != 0)
                 {
                     scriptCtx->scriptPtr--;
                     return;
                 }
             } else {
-                scriptCtx->flags &= ~SCRIPT_x2000;
+                scriptCtx->flags &= ~SCRIPT_SKIP;
                 if(scriptCtx->unk27 & 0xF) {
                     scriptCtx->unk27--;
                     scriptCtx->scriptPtr--;
@@ -1185,7 +1185,7 @@ void sub_8018638(u32 section) // init new section??
         gTextBoxCharacters[i].state &= ~(0x8000|0x4000);
     }
     scriptCtx->currentSection = section;
-    scriptCtx->unkE = section+1;
+    scriptCtx->nextSection = section+1;
     scriptCtx->unk28 = 0;
     scriptCtx->unk29 = 0;
     scriptCtx->flags &= ~SCRIPT_LOOP;
@@ -1196,12 +1196,12 @@ void sub_8018638(u32 section) // init new section??
         sub_8017BC0();
     }
     if(HasSectionBeenRead(&gMain, scriptCtx->currentSection)) {
-        scriptCtx->flags |= SCRIPT_x800;
+        scriptCtx->flags |= SCRIPT_SECTION_READ;
     } else {
-        scriptCtx->flags &= ~SCRIPT_x800;
+        scriptCtx->flags &= ~SCRIPT_SECTION_READ;
     }
     if(gMain.unk2D0 & 4) { //!debug
-        scriptCtx->flags |= SCRIPT_x800;
+        scriptCtx->flags |= SCRIPT_SECTION_READ;
     }
 }
 

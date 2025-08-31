@@ -1,6 +1,16 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
+
+// Internal script command convenience macro 
+#define PULL_ARGS(ctx, args, argCount)  \
+{                                       \
+    u16 i;                              \
+    for(i = 0; i < argCount; i++) {     \
+        args[i] = *ctx->scriptPtr++;    \
+    }                                   \
+}                                       \
+
 #define SCRIPT_x1 0x1
 #define SCRIPT_x2 0x2
 #define SCRIPT_FULLSCREEN 0x4
@@ -9,10 +19,11 @@
 #define SCRIPT_SPOTSELECT_INPUT 0x100
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
 #define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
-#define SCRIPT_x800 0x800
+#define SCRIPT_SECTION_READ 0x800 // Unity: READ_MESSAGE
 #define SCRIPT_x1000 0x1000
-#define SCRIPT_x2000 0x2000
-#define SCRIPT_x8000 0x8000
+#define SCRIPT_SKIP 0x2000 // Unity: FAST_MESSAGE
+#define SCRIPT_x4000 0x4000 // Unity: NEXT_MESSAGE
+#define SCRIPT_x8000 0x8000 // Unity: LAST_MESSAGE
 
 struct ScriptContext {
     /* +0x00 */ u16 * scriptPtr;
@@ -20,24 +31,25 @@ struct ScriptContext {
     /* +0x08 */ u16 currentToken;
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
-    /* +0x0E */ u16 unkE; // nextSection?
-    u8 fill0E[0x2];
-    u16 unk12;
+    /* +0x0E */ u16 nextSection; // nextSection?
+    u16 unk10;
+    u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E;
     u8 fill20[0x2];
-    u8 unk22;
-    u8 unk23;
+    u8 unk22; // unity: text_flag
+    u8 textboxState;
     u8 unk24;
-    u8 unk25;
+    u8 textColor;
     u8 textSpeed;
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
-    u8 fill2A[0x2];
+    u8 unk2A;
+    u8 unk2B;
     u8 unk2C;
     u8 unk2D;
     u8 unk2E;
@@ -46,9 +58,7 @@ struct ScriptContext {
     u16 unk40;
     u16 unk42;
     u16 unk44;
-    u16 unk46; // all work
-    u16 unk48;
-    u16 unk4A;
+    u16 unk46[3]; // unity: all_work
     u8 unk4C;
     u8 unk4D;
     u16 unk4E;
@@ -132,6 +142,17 @@ struct MapMarker
     /* +0x10 */ u8 *volatile vramPtr;
 };
 
+struct MapMarkerSprite
+{
+    /* +0x00 */ u8 *tiles;
+    /* +0x04 */ u16 size;
+    /* +0x06 */ u16 attr0;
+    /* +0x08 */ u16 attr1;
+    /* +0x0A */ u16 attr2;
+};
+
+extern const struct MapMarkerSprite sMapMarkerSprites[];
+
 struct Struct30070B0 {
     u16 unk00[16];
     u8 unk20;
@@ -173,6 +194,8 @@ extern const u8 scenario_3_7_script[];
 
 /* end script data */ 
 
+void sub_8016FEC(u16 arg0);
+
 void ChangeScriptSection(u32);
 void LoadCurrentScriptIntoRam(void);
 void RunScriptContext(void);
@@ -185,8 +208,15 @@ void ClearSectionReadFlags(struct Main *);
 void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
 void sub_8018CA8(struct Main * main, u32 arg1);
 
+void sub_8017154(u8);
+void sub_8017BA8(void);
+void sub_8017BC0(void);
+
+void sub_801873C(u32);
+
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
+u8 * sub_801A018(void);
 
 /* begin commands */
 bool32 Command00(struct ScriptContext *);
@@ -274,7 +304,7 @@ bool32 Command51(struct ScriptContext *);
 bool32 Command52(struct ScriptContext *);
 bool32 Command53(struct ScriptContext *);
 bool32 Command54(struct ScriptContext *);
-bool32 Command55(struct ScriptContext *);
+bool32 Command54(struct ScriptContext *);
 bool32 Command56(struct ScriptContext *);
 bool32 Command57(struct ScriptContext *);
 bool32 Command58(struct ScriptContext *);
