@@ -40,10 +40,11 @@ struct Main
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
     /* +0x024 */ u8 soundStatus;
-    /* +0x025 */ u8 fill25[0x3];
+    /* +0x025 */ u8 fill25[0x2];
+    /* +0x027 */ u8 animationFlags; // unity: Obj_flag
     /* +0x028 */ u16 currentPlayingBgm;
     /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
-    /* +0x02B */ u8 animationFlags; // unity: Obj_flag
+    /* +0x02B */ u8 unk2B;
     /* +0x02C */ s16 bgmFadeAmount;
     /* +0x02E */ s16 bgmVolume;
     /* +0x030 */ u16 rngSeed; // unity: Random_seed

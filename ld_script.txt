@@ -38,6 +38,7 @@ SECTIONS {
         src/court_record.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
+        src/animation.o(.text);
         asm/animation.o(.text);
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
