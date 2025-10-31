@@ -2309,7 +2309,7 @@ _0801EA3A:
 	str r4, [sp]
 	movs r2, #0x78
 	movs r3, #0x50
-	bl sub_8012700
+	bl PlayPersonAnimationAtCustomOrigin
 	ldrh r1, [r5]
 	mov r0, r8
 	adds r0, #0xc4

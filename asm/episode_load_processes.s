@@ -2649,7 +2649,7 @@ _08009BF4:
 	ldr r3, _08009D64 @ =0x000028A0
 	adds r4, r4, r3
 	adds r0, r4, #0
-	bl sub_8012948
+	bl RestoreAnimationsFromBuffer
 	mov r0, r8
 	ldrb r0, [r0, #8]
 	cmp r0, #4

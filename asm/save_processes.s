@@ -75,7 +75,7 @@ _08007796:
 	cmp r1, #7
 	bls _08007796
 	adds r0, r2, #0
-	bl sub_8012A94
+	bl SaveAnimationDataToBuffer
 	movs r0, #0
 	strb r0, [r6, #0x18]
 	ldr r4, _08007860 @ =gMain
@@ -1085,7 +1085,7 @@ _08007F70:
 	movs r3, #0x80
 	lsls r3, r3, #4
 	adds r0, r7, r3
-	bl sub_8012948
+	bl RestoreAnimationsFromBuffer
 	ldr r0, [r5, #8]
 	ldr r1, _080081A8 @ =0x00FFFF00
 	ands r0, r1

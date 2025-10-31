@@ -1420,7 +1420,7 @@ _08003956:
 	ldrsb r0, [r5, r0]
 	rsbs r0, r0, #0
 	movs r1, #0
-	bl sub_8012C90
+	bl OffsetAllAnimations
 	b _08003AF4
 _08003964:
 	movs r2, #0x40
@@ -1531,7 +1531,7 @@ _08003A2E:
 	ldrsb r1, [r5, r1]
 	rsbs r1, r1, #0
 	movs r0, #0
-	bl sub_8012C90
+	bl OffsetAllAnimations
 	b _08003AF4
 _08003A3C:
 	movs r0, #0x80
@@ -1629,7 +1629,7 @@ _08003AE8:
 	ldrsb r1, [r5, r1]
 	rsbs r1, r1, #0
 	movs r0, #0
-	bl sub_8012C90
+	bl OffsetAllAnimations
 _08003AF4:
 	adds r0, r7, #0
 	adds r0, #0x42
