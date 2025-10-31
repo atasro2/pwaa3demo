@@ -53,6 +53,9 @@
 #define gPal_BustupMia ((void*)(GFX_BASE_ADDR + 0x86BF0))
 #define gMap_BustupMia ((void*)(GFX_BASE_ADDR + 0x86C10))
 
+#define gGfxSeqAnimation35 ((void*)(0x0826e5b0))
+#define gUnknown_08252494 ((void*)(0x08252494))
+
 // script
 #define std_scripts ((void*)(0x8270934))
 

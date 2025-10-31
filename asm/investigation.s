@@ -5548,7 +5548,7 @@ _0800E7E2:
 	str r0, [sp]
 _0800E802:
 	mov r0, sp
-	bl sub_8012258
+	bl CheckRectCollisionWithAnim
 	adds r2, r0, #0
 	ldr r4, _0800E818 @ =gUnknown_03003C70
 	b _0800E828
