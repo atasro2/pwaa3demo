@@ -818,7 +818,7 @@ _080034C6:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r0, r5, #1
 	lsls r0, r0, #0x10
@@ -3847,7 +3847,7 @@ _08004C98:
 	ldrh r0, [r5]
 	movs r1, #0x1f
 	movs r2, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	adds r7, #2
 	adds r5, #2
@@ -3913,7 +3913,7 @@ _08004D26:
 	ldrh r0, [r5]
 	movs r1, #0x1f
 	movs r2, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	adds r7, #2
 	adds r5, #2
@@ -4979,8 +4979,8 @@ _0800551C:
 	.align 2, 0
 _08005570: .4byte 0x00000259
 
-	thumb_func_start sub_8005574
-sub_8005574: @ 0x08005574
+	thumb_func_start AdjustColorByMode
+AdjustColorByMode: @ 0x08005574
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -5345,7 +5345,7 @@ _0800581C:
 	ldrh r0, [r4]
 	mov r1, r8
 	adds r2, r7, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -5376,7 +5376,7 @@ _08005862:
 	ldrh r0, [r4]
 	mov r1, r8
 	adds r2, r7, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -5408,7 +5408,7 @@ _080058A4:
 	ldrh r0, [r4]
 	mov r1, r8
 	adds r2, r7, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -5472,7 +5472,7 @@ _08005920:
 	ldrh r0, [r4]
 	mov r1, sb
 	mov r2, r8
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -5550,7 +5550,7 @@ _080059BA:
 	ldrh r0, [r4]
 	adds r1, r7, #0
 	adds r2, r6, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1

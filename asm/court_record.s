@@ -1746,7 +1746,7 @@ _0800FF6C:
 	ldr r0, [r4, #0x18]
 	ldrb r4, [r4, #0xd]
 	adds r0, r4, r0
-	ldr r4, _0800FFE8 @ =gUnknown_0200AFC0
+	ldr r4, _0800FFE8 @ =eGeneralScratchpadBuffer
 	ldr r2, _0800FFEC @ =gUnknown_08026E20
 	ldr r1, _0800FFF0 @ =gEvidenceProfileData
 	ldrb r0, [r0]
@@ -1801,7 +1801,7 @@ _0800FF6C:
 	b _080101CE
 	.align 2, 0
 _0800FFE4: .4byte gTestimony
-_0800FFE8: .4byte gUnknown_0200AFC0
+_0800FFE8: .4byte eGeneralScratchpadBuffer
 _0800FFEC: .4byte gUnknown_08026E20
 _0800FFF0: .4byte gEvidenceProfileData
 _0800FFF4: .4byte 0x040000D4
@@ -2547,7 +2547,7 @@ _0801060A:
 LoadEvidenceGraphics: @ 0x08010610
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
-	ldr r6, _08010668 @ =gUnknown_0200AFC0
+	ldr r6, _08010668 @ =eGeneralScratchpadBuffer
 	ldr r1, _0801066C @ =gUnknown_08026E20
 	ldr r0, _08010670 @ =gEvidenceProfileData
 	lsls r5, r5, #3
@@ -2573,7 +2573,7 @@ LoadEvidenceGraphics: @ 0x08010610
 	str r0, [r4, #8]
 	ldr r0, [r4, #8]
 	ldr r6, [r5]
-	ldr r5, _08010668 @ =gUnknown_0200AFC0
+	ldr r5, _08010668 @ =eGeneralScratchpadBuffer
 	adds r0, r6, #0
 	adds r1, r5, #0
 	bl LZ77UnCompWram
@@ -2587,7 +2587,7 @@ LoadEvidenceGraphics: @ 0x08010610
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010668: .4byte gUnknown_0200AFC0
+_08010668: .4byte eGeneralScratchpadBuffer
 _0801066C: .4byte gUnknown_08026E20
 _08010670: .4byte gEvidenceProfileData
 _08010674: .4byte 0x040000D4
@@ -2975,7 +2975,7 @@ SortCourtRecordAndSyncListCount: @ 0x0801097C
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	mov ip, r0
-	ldr r4, _08010A20 @ =gUnknown_0200AFC0
+	ldr r4, _08010A20 @ =eGeneralScratchpadBuffer
 	ldr r1, _08010A24 @ =0x040000D4
 	mov r3, ip
 	adds r3, #0x3c
@@ -3059,7 +3059,7 @@ _08010A12:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010A20: .4byte gUnknown_0200AFC0
+_08010A20: .4byte eGeneralScratchpadBuffer
 _08010A24: .4byte 0x040000D4
 _08010A28: .4byte 0x80000010
 _08010A2C: .4byte 0x0000FFFF
@@ -3546,7 +3546,7 @@ _08010DD2:
 	thumb_func_start sub_8010DD8
 sub_8010DD8: @ 0x08010DD8
 	push {r4, lr}
-	ldr r4, _08010E18 @ =gUnknown_0200AFC0
+	ldr r4, _08010E18 @ =eGeneralScratchpadBuffer
 	ldr r2, _08010E1C @ =gUnknown_08026E20
 	ldr r1, _08010E20 @ =gEvidenceProfileData
 	adds r0, #0x98
@@ -3577,7 +3577,7 @@ sub_8010DD8: @ 0x08010DD8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010E18: .4byte gUnknown_0200AFC0
+_08010E18: .4byte eGeneralScratchpadBuffer
 _08010E1C: .4byte gUnknown_08026E20
 _08010E20: .4byte gEvidenceProfileData
 _08010E24: .4byte 0x040000D4

@@ -64,7 +64,7 @@ struct AnimationListEntry
     /* +0x2C */ u8 bgId;
     /* +0x2D */ u8 roomId;
     /* +0x2E */ s16 specialEffectVar;
-    /* +0x30 */ u8 * unk30;
+    /* +0x30 */ u8 * overridePalette;
     /* +0x34 */ struct SpriteTemplate * spriteData;
     /* +0x38 */ struct AnimationFrame * frameData;
     /* +0x3C */ u16 tileNum;

@@ -807,7 +807,7 @@ _0801DDB2:
 	ldrh r0, [r4]
 	movs r1, #0x1f
 	movs r2, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -837,7 +837,7 @@ _0801DDF0:
 	ldrh r0, [r4]
 	movs r1, #0x1f
 	movs r2, #0
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1
@@ -2177,7 +2177,7 @@ _0801E944:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -2528,7 +2528,7 @@ _0801EC24:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -2691,7 +2691,7 @@ _0801ED76:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -2859,7 +2859,7 @@ _0801EED4:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -2927,7 +2927,7 @@ _0801EF64:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -3090,7 +3090,7 @@ _0801F0B6:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2
@@ -3257,7 +3257,7 @@ _0801F212:
 	movs r1, #0x20
 	movs r2, #0
 	str r3, [sp, #0x18]
-	bl sub_8005574
+	bl AdjustColorByMode
 	strh r0, [r7]
 	ldr r3, [sp, #0x18]
 	adds r3, #2

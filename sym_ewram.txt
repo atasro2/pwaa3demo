@@ -13,7 +13,7 @@
 . = 0x000010D4; gUnknown_020010D4 = .;
 . = 0x000018D4; gUnknown_020018D4 = .;
 . = 0x000020D4; gUnknown_020020D4 = .;
-. = 0x0000AFC0; gUnknown_0200AFC0 = .;
+. = 0x0000AFC0; eGeneralScratchpadBuffer = .;
 . = 0x0000B1C0; gUnknown_0200B1C0 = .;
 . = 0x00011DC0; gUnknown_02011DC0 = .;
 . = 0x00011FC0; gUnknown_02011FC0 = .;

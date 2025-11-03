@@ -3,12 +3,12 @@
 #include "ewram.h"
 #include "sound.h"
 // #include "utils.h"
-// #include "script.h"
+#include "script.h"
 #include "background.h"
 #include "graphics.h"
 #include "debug.h"
 // #include "constants/animation.h"
-// #include "constants/process.h"
+#include "constants/process.h"
 
 // #include "data/animation.h"
 
@@ -1009,5 +1009,140 @@ void DestroyAnimation(struct AnimationListEntry *animation)
             DmaCopy16(3, var1, dst, size);
         }
         animation->flags = 0;
+    }
+}
+
+void UpdateAllAnimationSprites()
+{
+    struct Main * main = &gMain;
+    u32 var0 = 0x80;
+    struct OamAttrs *oam = &gOamObjects[ARRAY_COUNT(gOamObjects)];
+    struct ScriptContext *context = &gScriptContext;
+    struct AnimationListEntry *animation;
+    u32 i, j;
+    for (animation = gAnimation[0].next; animation != NULL; animation = animation->next)
+    {
+        if ((animation->flags & ANIM_ALLOCATED) == 0)
+            continue;
+        animation->animtionOamEndIdx = var0;
+        if ((main->animationFlags & 2) && (animation->flags & ANIM_ACTIVE))
+        {
+            void *ptr = (void *)animation->spriteData;
+            struct SpriteTemplate *spriteTemplates = animation->spriteData;
+            s32 xOrigin = animation->animationInfo.xOrigin - main->shakeAmountX;
+            s32 yOrigin = animation->animationInfo.yOrigin - main->shakeAmountY;
+            u32 tileNum = animation->tileNum & 0x3FF;
+            s32 spriteCount = *(u16 *)ptr;
+            struct SpriteSizeData *spriteSizeData = eGeneralScratchpadBuffer;
+            spriteSizeData += var0;
+            for (i = 0; i < spriteCount; i++)
+            {
+                s32 y;
+                var0--;
+                oam--;
+                spriteSizeData--;
+                spriteTemplates++;
+                *spriteSizeData = gSpriteSizeTable[spriteTemplates->data >> 0xC];
+                oam->attr0 = (spriteTemplates->data & 0x3000) << 2; // Sprite Shape
+                if (animation->flags & ANIM_ENABLE_ROTATION) {
+                    xOrigin -= spriteSizeData->width / 2;
+                    yOrigin -= spriteSizeData->height / 2;
+                    oam->attr0 |= ST_OAM_AFFINE_DOUBLE << 8;
+                }
+                y = yOrigin + spriteTemplates->y;
+                if (y < -96)
+                    y = -88;
+                if (y > 224)
+                    y = 224;
+                oam->attr0 |= y & 0xFF;
+                if (animation->flags & ANIM_BLEND_ACTIVE)
+                    oam->attr0 |= 0x400;
+                oam->attr1 = spriteTemplates->data & 0xC000;
+                if (animation->flags & ANIM_ENABLE_XFLIP)
+                {
+                    u16 x = (xOrigin - (spriteTemplates->x + spriteSizeData->width)) & 0x1FF;
+                    oam->attr1 |= 0x1000 | x;
+                }
+                else
+                {
+                    u16 x = (xOrigin + spriteTemplates->x) & 0x1FF;
+                    oam->attr1 |= (*(u8 *)(&animation->spritePriorityMatrixIndex)) << 9 | x;
+                }
+                if(animation->flags & 0x200000) {
+                    oam->attr0 |= 0x300;
+                    oam->attr1 &= 0xC1FF;
+                    oam->attr1 |= animation->spritePriorityMatrixIndex << 9;
+                }
+                if(spriteTemplates->data & 0x200) {
+                    oam->attr1 |= 0x1000;
+                }
+                oam->attr2 = tileNum | *((u8 *)(&animation->spritePriorityMatrixIndex) + 1) << 10;
+                if (animation->frameData->flags & 1)
+                    oam->attr2 |= (animation->animationInfo.paletteSlot + ((spriteTemplates->data >> 9) & 7)) << 12;
+                else if (animation->frameData->flags & 8)
+                    oam->attr2 |= (animation->animationInfo.paletteSlot + ((spriteTemplates->data >> 10) & 3)) << 12;
+                else
+                    oam->attr2 |= (animation->animationInfo.paletteSlot + ((spriteTemplates->data >> 11) & 1)) << 12;
+                tileNum += spriteSizeData->tileSize / TILE_SIZE_4BPP;
+                if(main->effectType == 1 || main->effectType == 2 || main->effectType == 0xFFFF || context->flags & 0x40) {
+                    oam->attr0 |= 0x1000; // mosaic
+                }
+                if(animation->flags & 0x800) {
+                    oam->attr0 |= 0x1000; // mosaic
+                }
+            }
+        }
+        animation->animtionOamStartIdx = animation->animtionOamEndIdx - animation->animationInfo.spriteCount;
+        var0 -= animation->animtionOamStartIdx;
+        for (var0 -= 1; var0 != -1; var0--)
+        {
+            oam--;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        }
+        var0 = animation->animtionOamStartIdx;
+        if(animation->animationInfo.animId == 0x6B 
+        || animation->animationInfo.animId == 0x6C
+        || animation->animationInfo.animId == 0x6D) {
+            struct OamAttrs * oam1 = &gOamObjects[var0];
+            struct OamAttrs * oam2 = &gOamObjects[animation->animationInfo.animId-0x31];
+            u32 palslot;
+            u8 * src;
+            oam2->attr0 = oam1->attr0;
+            oam2->attr1 = oam1->attr1;
+            palslot = animation->animationInfo.paletteSlot << 0xC;
+            oam2->attr2 = palslot | (oam1->attr2 & 0x3FF);
+            oam1->attr0 = SPRITE_ATTR0_CLEAR;
+            src = animation->animationInfo.animGfxDataStartPtr+4;
+            DmaCopy16(3, src, OBJ_PLTT + (animation->animationInfo.paletteSlot & 0xF) * 0x20, 0x20);
+        }
+    }
+    if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+        if(gAnimation[1].animationInfo.personId == 0xB || gAnimation[1].animationInfo.personId == 0x21) {
+            if(gAnimation[1].flags & ANIM_ALLOCATED && gMain.showTextboxCharacters && context->flags & SCRIPT_FULLSCREEN) {
+                for(i = 2; i < 0x22; i++) {
+                    if(gOamObjects[i].attr0 & 0x200) {
+                        gOamObjects[i].attr0 = gOamObjects[0x39].attr0;
+                        gOamObjects[i].attr1 = gOamObjects[0x39].attr1;
+                        gOamObjects[i].attr2 = gOamObjects[0x39].attr2;
+                        break;
+                    }
+                }
+                oam = &gOamObjects[0x30];
+                for(i = 0x20; i < 0x40; i++) {
+                    if(gTextBoxCharacters[i].state & 0x8000) {
+                        oam->attr0 = gTextBoxCharacters[i].y;
+                        oam->attr1 = gTextBoxCharacters[i].x + 0x4009;
+                        oam->attr2 = gTextBoxCharacters[i].objAttr2;
+                        if(gScriptContext.flags & 0x1000) {
+                            oam->attr0 |= 0x400;
+                        }
+                        else {
+                            oam->attr0 &= ~0x400;
+                        }
+                    }
+                    oam++;
+                }
+            }
+        }
     }
 }

@@ -873,7 +873,7 @@ _08020072:
 	mov r0, r8
 	cmp r0, #5
 	bls _08020060
-	bl sub_8013050
+	bl UpdateAllAnimationSprites
 	movs r0, #0
 	b _08020394
 _08020084:
@@ -899,7 +899,7 @@ _080200A4:
 	mov r4, r8
 	cmp r4, #5
 	bls _08020088
-	bl sub_8013050
+	bl UpdateAllAnimationSprites
 	ldr r6, [sp, #4]
 	ldrh r6, [r6]
 	cmp r6, #5
@@ -1122,7 +1122,7 @@ _08020258:
 	mov r4, r8
 	cmp r4, #0x7f
 	bls _08020258
-	bl sub_8013050
+	bl UpdateAllAnimationSprites
 	b _080206DC
 	.align 2, 0
 _0802026C: .4byte gOamObjects
@@ -1694,7 +1694,7 @@ _080206CA:
 	cmp r6, #0x7f
 	bls _080206CA
 _080206D8:
-	bl sub_8013050
+	bl UpdateAllAnimationSprites
 _080206DC:
 	add sp, #0x18
 	pop {r3, r4, r5}
