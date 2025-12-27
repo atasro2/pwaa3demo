@@ -145,9 +145,90 @@ gGfxHPBarProgress:
 gGfxPsycheLockChainsTiles:
     .incbin "graphics/psyche_lock_chain_tileset.4bpp.lz"
 
-    .global gUnknown_08191E6C
+@ psychelock chain animations
+	.global gUnknown_08191E6C
 gUnknown_08191E6C:
-    .incbin "baserom.gba", 0x00191E6C, 0x5098
+	.incbin "graphics/psyche_lock_chain_animation_01.bin.lz"
+
+	.global gUnknown_081920A4
+gUnknown_081920A4:
+	.incbin "graphics/psyche_lock_chain_animation_02.bin.lz"
+
+	.global gUnknown_08192494
+gUnknown_08192494:
+	.incbin "graphics/psyche_lock_chain_animation_03.bin.lz"
+
+	.global gUnknown_081928C8
+gUnknown_081928C8:
+	.incbin "graphics/psyche_lock_chain_animation_04.bin.lz"
+
+	.global gUnknown_08192F34
+gUnknown_08192F34:
+	.incbin "graphics/psyche_lock_chain_animation_05.bin.lz"
+
+	.global gUnknown_081936A8
+gUnknown_081936A8:
+	.incbin "graphics/psyche_lock_chain_animation_06.bin.lz"
+
+	.global gUnknown_0819382C
+gUnknown_0819382C:
+	.incbin "graphics/psyche_lock_chain_animation_07.bin.lz"
+
+	.global gUnknown_08193A94
+gUnknown_08193A94:
+	.incbin "graphics/psyche_lock_chain_animation_08.bin.lz"
+
+	.global gUnknown_08193EF4
+gUnknown_08193EF4:
+	.incbin "graphics/psyche_lock_chain_animation_09.bin.lz"
+
+	.global gUnknown_08194354
+gUnknown_08194354:
+	.incbin "graphics/psyche_lock_chain_animation_10.bin.lz"
+
+	.global gUnknown_08194B68
+gUnknown_08194B68:
+	.incbin "graphics/psyche_lock_chain_animation_11.bin.lz"
+
+	.global gUnknown_08194DC8
+gUnknown_08194DC8:
+	.incbin "graphics/psyche_lock_chain_animation_12.bin.lz"
+
+	.global gUnknown_08195168
+gUnknown_08195168:
+	.incbin "graphics/psyche_lock_chain_animation_13.bin.lz"
+
+	.global gUnknown_08195518
+gUnknown_08195518:
+	.incbin "graphics/psyche_lock_chain_animation_14.bin.lz"
+
+	.global gUnknown_08195A10
+gUnknown_08195A10:
+	.incbin "graphics/psyche_lock_chain_animation_15.bin.lz"
+
+	.global gUnknown_08195F24
+gUnknown_08195F24:
+	.incbin "graphics/psyche_lock_chain_animation_16.bin.lz"
+
+	.global gUnknown_081960BC
+gUnknown_081960BC:
+	.incbin "graphics/psyche_lock_chain_animation_17.bin.lz"
+
+	.global gUnknown_08196368
+gUnknown_08196368:
+	.incbin "graphics/psyche_lock_chain_animation_18.bin.lz"
+
+	.global gUnknown_0819669C
+gUnknown_0819669C:
+	.incbin "graphics/psyche_lock_chain_animation_19.bin.lz"
+
+	.global gUnknown_08196A28
+gUnknown_08196A28:
+	.incbin "graphics/psyche_lock_chain_animation_20.bin.lz"
+
+	.global gUnknown_08196EE4
+gUnknown_08196EE4:
+	.incbin "graphics/unk_196EE4.gbapal"
 
     .global gPalCrossExamUI
 gPalCrossExamUI:
