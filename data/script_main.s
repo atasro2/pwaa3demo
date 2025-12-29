@@ -66,58 +66,58 @@ gScriptCmdFuncs:
     .4byte Command3D
     .4byte Command3E
     .4byte Command3F
-    .4byte sub_801BA88
-    .4byte sub_801BAB0
-    .4byte sub_801BB20
+    .4byte Command40
+    .4byte Command41
+    .4byte Command42
     .4byte Command43
     .4byte Command44
     .4byte Command15
     .4byte Command46
     .4byte Command47
-    .4byte sub_801BB64
+    .4byte Command48
     .4byte Command49
-    .4byte sub_801BBCC
-    .4byte sub_801BC00
+    .4byte Command4A
+    .4byte Command4B
     .4byte Command4C
-    .4byte sub_801BC5C
-    .4byte sub_801BCB0
-    .4byte sub_801BD10
-    .4byte sub_801BDAC
-    .4byte sub_801BE14
-    .4byte sub_801BE38
-    .4byte sub_801BE74
+    .4byte Command4D
+    .4byte Command4E
+    .4byte Command4F
+    .4byte Command50
+    .4byte Command51
+    .4byte Command52
+    .4byte Command53
     .4byte Command54
     .4byte Command55
     .4byte Command56
-    .4byte sub_801BE94
-    .4byte sub_801BED4
-    .4byte sub_801BEF4
-    .4byte sub_801BF3C
-    .4byte sub_801BDF0
+    .4byte Command57
+    .4byte Command58
+    .4byte Command59
+    .4byte Command5A
+    .4byte Command5B
     .4byte Command5C
-    .4byte sub_801C020
-    .4byte sub_801C0C8
+    .4byte Command5D
+    .4byte Command5E
     .4byte Command5F
-    .4byte sub_801C0F8
-    .4byte sub_801C13C
-    .4byte sub_801C194
-    .4byte sub_801C1C0
-    .4byte sub_801C1E8
+    .4byte Command60
+    .4byte Command61
+    .4byte Command62
+    .4byte Command63
+    .4byte Command64
     .4byte Command65
-    .4byte sub_801C214
-    .4byte sub_801C25C
-    .4byte sub_801C268
-    .4byte sub_801C288
-    .4byte sub_801C328
-    .4byte sub_801C340
-    .4byte sub_801C36C
+    .4byte Command66
+    .4byte Command67
+    .4byte Command68
+    .4byte Command69
+    .4byte Command6A
+    .4byte Command6B
+    .4byte Command6C
     .4byte CommandUnimplemented
     .4byte CommandUnimplemented
-    .4byte sub_801C46C
+    .4byte Command6F
     .4byte CommandUnimplemented
     .4byte CommandUnimplemented
     .4byte Command72
-    .4byte sub_801C488
+    .4byte Command73
 
     .global gUnknown_0814E338
 gUnknown_0814E338: @ Demo_proc_tbl in gs1 iOS

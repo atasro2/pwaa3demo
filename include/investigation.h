@@ -38,9 +38,10 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x0D */ u8 lastAction;
     /* +0x0E */ u8 fill0E[0x02];
     /* +0x10 */ u8 actionState;
-    /* +0x11 */ u8 unk11;
+    /* +0x11 */ u8 inactiveActionButtonY;
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
-    /* +0x13 */ u8 fill13[5];
+    /* +0x13 */ u8 lastActionYOffset;
+    /* +0x14 */ u8 fill14[4];
     /* +0x18 */ u8 pointerFrame;
     /* +0x19 */ u8 pointerFrameCounter;
     /* +0x1A */ u8 pointerColor;
@@ -231,6 +232,7 @@ void InvestigationTalk(struct Main *, struct InvestigationStruct *);
 void InvestigationPresent(struct Main *, struct InvestigationStruct *);
 void InvestigationPsycheLock(struct Main *, struct InvestigationStruct *);
 
+void SetInvestigationStateToReturnAfterPsycheLocks(u16, u16);
 void LoadLocationChoiceGraphics(void);
 void LoadTalkChoiceGraphics(void);
 

@@ -4943,8 +4943,8 @@ _0800E358: .4byte gOamObjects+0x1A0
 _0800E35C: .4byte 0x000040E0
 _0800E360: .4byte 0xFFFFC000
 
-	thumb_func_start sub_800E364
-sub_800E364: @ 0x0800E364
+	thumb_func_start SetInvestigationStateToReturnAfterPsycheLocks
+SetInvestigationStateToReturnAfterPsycheLocks: @ 0x0800E364
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

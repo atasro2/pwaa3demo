@@ -36,7 +36,8 @@ struct Main
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
-    /* +0x01C */ u8 fill1C[0x4];
+    /* +0x01C */ u8 fill1C[0x2];
+    /* +0x01E */ u16 loopBridgeSection;
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
     /* +0x024 */ u8 soundStatus;
@@ -114,18 +115,22 @@ struct Main
     /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x12C */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1B0 */ struct PsycheLockData psycheLockData[4];
-    /* +0x250 */ u8 fill250[0x2];
+    /* +0x254 */ s8 currentPsycheLockDataIndex;
+    /* +0x251 */ u8 fill251[0x1];
     /* +0x252 */ u16 psycheLockStopPresentButtonsY;
     /* +0x254 */ u8 psycheLockStopPresentButtonsState;
     /* +0x255 */ u8 psycheLockStopPresentButtonsSubstate;
     /* +0x256 */ u8 psycheLockStopPresentButtonsActive;
-    /* +0x257 */ u8 unk257;
+    /* +0x257 */ u8 psycheLockShownByScriptFlag;
     /* +0x258 */ u8 unk258;
     /* +0x259 */ u8 unk259;
     /* +0x25A */ u8 fill25A[0x2];
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 fill264[0x5C];
+    /* +0x264 */ u8 fill264[0x1C];
+    /* +0x280 */ u16 psycheLockedTalkSections[8];
+    /* +0x290 */ u16 numPsycheLockedTalkSections;
+    /* +0x292 */ u8 fill292[0x2E];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
     /* +0x2C4 */ u8 fill2C4[0x1];
