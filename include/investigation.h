@@ -233,6 +233,7 @@ void InvestigationTalk(struct Main *, struct InvestigationStruct *);
 void InvestigationPresent(struct Main *, struct InvestigationStruct *);
 void InvestigationPsycheLock(struct Main *, struct InvestigationStruct *);
 
+void SetInvestigationStateToReturnAfterPsycheLocks(u16, u16);
 void LoadLocationChoiceGraphics(void);
 void LoadTalkChoiceGraphics(void);
 

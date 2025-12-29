@@ -2641,7 +2641,7 @@ _08009BF4:
 	ldr r2, _08009D58 @ =0x000008D8
 	adds r0, r4, r2
 	str r0, [r6]
-	ldr r0, _08009D5C @ =gUnknown_03003B90
+	ldr r0, _08009D5C @ =gLoadedPsycheLockedTalkSections
 	str r0, [r6, #4]
 	ldr r0, _08009D60 @ =0x80000014
 	str r0, [r6, #8]
@@ -2734,7 +2734,7 @@ _08009D4C: .4byte 0x05000300
 _08009D50: .4byte gTalkData
 _08009D54: .4byte 0x80000140
 _08009D58: .4byte 0x000008D8
-_08009D5C: .4byte gUnknown_03003B90
+_08009D5C: .4byte gLoadedPsycheLockedTalkSections
 _08009D60: .4byte 0x80000014
 _08009D64: .4byte 0x000028A0
 _08009D68: .4byte 0x00FFFF00

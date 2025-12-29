@@ -226,7 +226,7 @@ _08007894:
 	ldr r1, _08007A40 @ =0x80000140
 	str r1, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08007A44 @ =gUnknown_03003B90
+	ldr r1, _08007A44 @ =gLoadedPsycheLockedTalkSections
 	str r1, [r0]
 	ldr r1, _08007A48 @ =0xFFFFF838
 	adds r2, r2, r1
@@ -368,7 +368,7 @@ _08007A34: .4byte 0x800000F0
 _08007A38: .4byte gTalkData
 _08007A3C: .4byte 0xFFFFF5B8
 _08007A40: .4byte 0x80000140
-_08007A44: .4byte gUnknown_03003B90
+_08007A44: .4byte gLoadedPsycheLockedTalkSections
 _08007A48: .4byte 0xFFFFF838
 _08007A4C: .4byte 0x80000014
 _08007A50: .4byte gGfxNewGameContinue
@@ -1052,7 +1052,7 @@ _08007F70:
 	ldr r1, _0800818C @ =0xFFFFE838
 	adds r0, r7, r1
 	str r0, [r4]
-	ldr r0, _08008190 @ =gUnknown_03003B90
+	ldr r0, _08008190 @ =gLoadedPsycheLockedTalkSections
 	str r0, [r4, #4]
 	ldr r0, _08008194 @ =0x80000014
 	str r0, [r4, #8]
@@ -1231,7 +1231,7 @@ _08008180: .4byte 0xFFFFE5B8
 _08008184: .4byte gTalkData
 _08008188: .4byte 0x80000140
 _0800818C: .4byte 0xFFFFE838
-_08008190: .4byte gUnknown_03003B90
+_08008190: .4byte gLoadedPsycheLockedTalkSections
 _08008194: .4byte 0x80000014
 _08008198: .4byte 0xFFFFDF78
 _0800819C: .4byte 0xFFFFDF79

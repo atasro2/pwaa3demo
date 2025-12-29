@@ -163,7 +163,7 @@ extern struct ScriptContext gScriptContext;
 extern struct TextBoxCharacter gTextBoxCharacters[0x40];
 extern struct MapMarker gMapMarker[8];
 extern u8 gTextColorTileBuffer[];
-extern u16 gUnknown_03003B70[20];
+extern u16 gLoadedPsycheLockedTalkSections[20];
 
 /* begin script data */
 
@@ -201,6 +201,7 @@ void LoadCurrentScriptIntoRam(void);
 void RunScriptContext(void);
 void InitScriptSection(struct ScriptContext *scriptCtx);
 void RedrawTextboxCharacters(void);
+void PutCharInTextbox(u32 characterCode, u32 x, u32 y);
 
 void MarkSectionAsRead(struct Main *, s32);
 bool32 HasSectionBeenRead(struct Main *, s32);
