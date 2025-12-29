@@ -48,6 +48,7 @@ SECTIONS {
         src/script_commands2.o(.text);
         src/script_commands3.o(.text);
         asm/opening.o(.text);
+        src/demo.o(.text);
         asm/demo.o(.text);
         asm/butterfly.o(.text);
         /* library functions */

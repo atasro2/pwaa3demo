@@ -195,6 +195,7 @@ extern const u8 scenario_3_7_script[];
 /* end script data */ 
 
 void sub_8016FEC(u16 arg0);
+void op_proc_exit_iOS(struct ScriptContext * scriptCtx);
 
 void ChangeScriptSection(u32);
 void LoadCurrentScriptIntoRam(void);

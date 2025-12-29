@@ -1513,7 +1513,7 @@ _0801D5D8:
 _0801D5F6:
 	adds r0, r5, #0
 	movs r1, #0x6f
-	bl sub_801D7B8
+	bl FadeOutObj_Unity
 	b _0801D74C
 _0801D600:
 	ldrh r4, [r6, #0x30]
@@ -1543,7 +1543,7 @@ _0801D60C:
 _0801D632:
 	adds r0, r5, #0
 	movs r1, #0x70
-	bl sub_801D818
+	bl FadeInObj_Unity
 	b _0801D74C
 _0801D63C:
 	ldrh r4, [r6, #0x30]
@@ -1570,7 +1570,7 @@ _0801D648:
 _0801D666:
 	adds r0, r5, #0
 	movs r1, #0x70
-	bl sub_801D7B8
+	bl FadeOutObj_Unity
 	b _0801D74C
 _0801D670:
 	ldrh r4, [r6, #0x30]
@@ -1597,7 +1597,7 @@ _0801D67C:
 _0801D69A:
 	adds r0, r5, #0
 	movs r1, #0x6e
-	bl sub_801D7B8
+	bl FadeOutObj_Unity
 	b _0801D74C
 _0801D6A4:
 	ldrh r4, [r6, #0x30]
@@ -1628,7 +1628,7 @@ _0801D6B0:
 _0801D6D8:
 	adds r0, r5, #0
 	movs r1, #0x71
-	bl sub_801D818
+	bl FadeInObj_Unity
 	b _0801D74C
 _0801D6E2:
 	movs r0, #0x72
@@ -1666,7 +1666,7 @@ _0801D6FC:
 _0801D722:
 	adds r0, r5, #0
 	movs r1, #0x72
-	bl sub_801D818
+	bl FadeInObj_Unity
 	b _0801D74C
 _0801D72C:
 	movs r4, #0
