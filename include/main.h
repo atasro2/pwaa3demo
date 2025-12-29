@@ -52,7 +52,7 @@ struct Main
     /* +0x032 */ u8 gottenEvidenceType;
     /* +0x033 */ u8 gottenEvidenceId;
     /* +0x034 */ u16 currentBG;
-    /* +0x036 */ u16 currentDisplayedBG;
+    /* +0x036 */ u16 currentDisplayBG;
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;

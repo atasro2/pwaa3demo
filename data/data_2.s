@@ -7,8 +7,8 @@ gUnknown_0814DC64:
 .4byte sub_8011714
 .4byte sub_8011C08
 
-    .global gUnknown_0814DC70
-gUnknown_0814DC70:
+    .global gSpecialAnimationEffectFunctions
+gSpecialAnimationEffectFunctions:
 .4byte sub_801438C
 .4byte sub_801438C
 .4byte sub_801438C
