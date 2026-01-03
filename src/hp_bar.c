@@ -2,6 +2,9 @@
 #include "animation.h"
 #include "graphics.h"
 #include "utils.h"
+#include "hp_bar.h"
+#include "court.h"
+#include "constants/process.h"
 #include "constants/oam_allocations.h"
 
 int FindPlayingHPBarSmokeAnimations(void);
@@ -307,4 +310,80 @@ void AnimateHPBar(void)
         SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, tileStart, oamidx, 0, 8, 20);
     }
     sub_80160E0(gMain.hpBarX + xOffset, gMain.hpBarY + yOffset);
+}
+
+void sub_8016808(void) {
+    if(gMain.hpBarQueuedState > 0) {
+        gMain.hpBarState = gMain.hpBarQueuedState;
+    }
+    else {
+        gMain.hpBarState = 0;
+    }
+    if(gMain.hpBarX > 283) {
+        gMain.hpBarX = 284;
+        gMain.hpBarY = 20;
+        if(gMain.itemPlateState == 4) {
+            gOamObjects[72].attr0 = 0x200;
+            gMain.itemPlateState = 3;
+            UpdateItemPlate(&gMain);
+        }
+    }
+    gMain.hpBarSubState = 0;
+    gMain.hpBarSlideOutDelay = 0;
+    gMain.hpBarQueuedState = 0;
+}
+
+void sub_801688C(void) {
+    if (gMain.hpBarValue <= 0) {
+        if(gMain.process[GAME_PROCESS] == COURT_PROCESS || gMain.process[GAME_PROCESS] == QUESTIONING_PROCESS || gMain.process[GAME_PROCESS] == TESTIMONY_PROCESS) {
+            ChangeScriptSection(gUnknown_080266E8[gMain.scenarioIdx]);
+            SetOrQueueHPBarState(5);
+        }
+    }
+}
+
+void sub_80168CC(void) {
+    switch(gMain.hpBarSubState) {
+        case 0: {
+            gMain.hpBarSubState = 1;
+        }
+        case 1: {
+            gMain.hpBarX -= 4;
+            if((*(u32*)gMain.process & 0x00FFFFFF) == 0x00070A04) {
+                if(gMain.hpBarX <= 84) {
+                    gMain.hpBarX = 84;
+                    sub_8016808();
+                }
+            }
+            else {
+                if(gMain.hpBarX <= 156) {
+                    gMain.hpBarX = 156;
+                    sub_8016808();
+                }
+            }
+        }
+    }
+}
+
+void sub_8016934(void) {
+    switch(gMain.hpBarSubState) {
+        case 0: {
+            gMain.hpBarSubState = 1;
+            sub_8016D6C();
+            gOamObjects[72].attr0 = 0x200;
+            gOamObjects[73].attr0 = 0x200;
+            UpdateQuestioningMenuSprites(&gMain, &gTestimony, 1);
+        }
+        case 1: {
+            gMain.hpBarX += 4;
+            if(gMain.hpBarState == 3) {
+                gMain.hpBarX += 4;
+            }
+            if(gMain.hpBarX >= 284) {
+                gMain.hpBarX = 284;
+                gMain.hpBarY = 20;
+                sub_8016808();
+            }
+        }
+    }
 }

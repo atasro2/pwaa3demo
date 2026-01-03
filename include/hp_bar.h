@@ -3,4 +3,6 @@
 
 void SetOrQueueHPBarState(u32);
 
+extern u16 gUnknown_080266E8[];
+
 #endif//GUARD_HP_BAR_H
