@@ -15,6 +15,7 @@
 #define SCRIPT_x2 0x2
 #define SCRIPT_FULLSCREEN 0x4
 #define SCRIPT_LOOP 0x8
+#define SCRIPT_x40 0x40
 #define SCRIPT_SPOTSELECT_MOVE_TO_START 0x80
 #define SCRIPT_SPOTSELECT_INPUT 0x100
 #define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
@@ -38,8 +39,8 @@ struct ScriptContext {
     /* +0x16 */ u16 soundCueSkip;
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
-    u16 unk1E;
-    u8 fill20[0x2];
+    u16 unk1E; // unity: status2
+    u16 unk20;
     u8 unk22; // unity: text_flag
     u8 textboxState;
     u8 unk24;
@@ -52,8 +53,8 @@ struct ScriptContext {
     u8 unk2B;
     u8 unk2C;
     u8 unk2D;
-    u8 unk2E;
-    u8 unk2F;
+    u8 unk2E; // unity: op_flg
+    u8 unk2F; // unity: op_para
     u16 unk30[8]; // unity: op_work?
     u16 unk40;
     u16 unk42;
@@ -61,7 +62,7 @@ struct ScriptContext {
     u16 unk46[3]; // unity: all_work
     u8 unk4C;
     u8 unk4D;
-    u16 unk4E;
+    u16 unk4E; // unity: choustate
     u8 fill50[0x4];
     u16 unk54[3][12];
 };

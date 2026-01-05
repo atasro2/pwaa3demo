@@ -33,6 +33,7 @@
 #define gUnknown_0820E33C ((void*)(GFX_BASE_ADDR + 0x8E33C))
 #define gPalCourtScroll ((void*)(0x0820E74C))
 #define gUnknown_0826F888 ((void*)(0x0826F888))
+#define gUnknown_0826FE38 ((void*)(0x0826FE38))
 #define gUnknown_08252498 ((void*)(0x08252498))
 
 
@@ -51,6 +52,9 @@
 
 #define gPal_BustupMia ((void*)(GFX_BASE_ADDR + 0x86BF0))
 #define gMap_BustupMia ((void*)(GFX_BASE_ADDR + 0x86C10))
+
+#define gUnknown_08208AA0 ((void*)(GFX_BASE_ADDR + 0x88AA0))
+#define gUnknown_08208AC0 ((void*)(GFX_BASE_ADDR + 0x88AC0))
 
 // script
 #define std_scripts ((void*)(0x8270934))

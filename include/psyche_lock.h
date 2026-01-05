@@ -97,4 +97,9 @@ void sub_80170AC(void);
 void sub_8017134(void);
 bool32 sub_801715C(void);
 
+void sub_8015C18(void);
+void SetPsycheLockState(u32, u32);
+void UpdatePsycheLockAnimation(void);
+
+
 #endif//GUARD_PSYCHE_LOCK_H

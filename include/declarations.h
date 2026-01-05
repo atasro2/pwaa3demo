@@ -45,6 +45,7 @@ extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
 extern void CopyTextboxTilesToBG1MapBuffer(void);
 
+extern void sub_8004940(u32,u32);
 extern void sub_8005A00(u16,u16,u16);
 extern void sub_8005BE8(u16,u16);
 extern void sub_8005C88(u16,u16,u16);
@@ -71,4 +72,13 @@ bool32 IsHPBarAnimating(void);
 void sub_8016D6C(void);
 
 extern struct TextBoxCharacter gUnknown_03007180[0x40]; 
+
+extern u16 gPsycheLockChainPalettes[][16];
+extern s16 gPsycheLockLockPositions[];
+extern u8 * gPsycheLockChainTilemaps[];
+
+u16 sub_8005574(u16, s32, s32);
+void sub_8006EAC(struct Main*);
+void sub_8012700(u16, u16, s32, s32, s32);
+
 #endif//GUARD_DECLARATIONS_H
