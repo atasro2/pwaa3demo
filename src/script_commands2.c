@@ -386,7 +386,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
     sub_801A054();
     if(scriptCtx->unk12 & SCRIPT_x8000) {
         if(gJoypad.pressedKeys & A_BUTTON) {
-            DmaCopy16(3, gSaveDataBuffer.textBoxCharacters+3, gTextBoxCharacters, sizeof(gTextBoxCharacters));
+            DmaCopy16(3, gSaveDataBuffer.textBoxCharacters, gTextBoxCharacters, sizeof(gTextBoxCharacters));
             sub_8019E98(0);
             scriptCtx->unk12 &= ~SCRIPT_x8000;
         }

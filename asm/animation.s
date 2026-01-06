@@ -1706,8 +1706,8 @@ _0801293C: .4byte 0x05000200
 _08012940: .4byte gUnknown_03004150
 _08012944: .4byte 0x040000D4
 
-	thumb_func_start sub_8012948
-sub_8012948: @ 0x08012948
+	thumb_func_start RestoreAnimationsFromBuffer
+RestoreAnimationsFromBuffer: @ 0x08012948
 	push {r4, r5, r6, lr}
 	sub sp, #0x1c
 	adds r4, r0, #0
@@ -1872,8 +1872,8 @@ _08012A88: .4byte gUnknown_08027090
 _08012A8C: .4byte 0x040000D4
 _08012A90: .4byte 0x8000000E
 
-	thumb_func_start sub_8012A94
-sub_8012A94: @ 0x08012A94
+	thumb_func_start SaveAnimationDataToBuffer
+SaveAnimationDataToBuffer: @ 0x08012A94
 	adds r1, r0, #0
 	ldr r2, _08012ACC @ =gAnimation+0x44
 	ldr r3, _08012AD0 @ =0x0000083C

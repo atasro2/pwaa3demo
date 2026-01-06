@@ -2297,7 +2297,7 @@ _0800FC64:
 	ldrh r0, [r5, #0x34]
 	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x34]
-	bl sub_8004FAC
+	bl CopyBGDataToVramAndScrollBG
 	ldr r3, _0800FD30 @ =gSaveDataBuffer
 	adds r0, r3, #0
 	adds r0, #0x4d
@@ -2408,7 +2408,7 @@ _0800FD70: .4byte 0xFDFFFFFF
 _0800FD74: .4byte gCourtRecord
 _0800FD78:
 	ldrh r0, [r5, #0x34]
-	bl sub_8004FAC
+	bl CopyBGDataToVramAndScrollBG
 	ldr r0, _0800FDA0 @ =gMain
 	ldr r2, _0800FDA4 @ =0x000002C6
 	adds r0, r0, r2

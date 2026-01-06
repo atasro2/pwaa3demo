@@ -1877,7 +1877,7 @@ _080095F4:
 	ldr r1, _08009684 @ =gMain
 	movs r0, #0
 	str r0, [r1, #4]
-	ldr r0, _08009688 @ =gUnknown_080266D0
+	ldr r0, _08009688 @ =gCaseStartProcess
 	ldrb r4, [r4]
 	adds r0, r4, r0
 	ldrb r0, [r0]
@@ -1922,7 +1922,7 @@ _0800967A:
 	b _08009850
 	.align 2, 0
 _08009684: .4byte gMain
-_08009688: .4byte gUnknown_080266D0
+_08009688: .4byte gCaseStartProcess
 _0800968C:
 	adds r0, r6, #0
 	adds r0, #0x8a
@@ -2649,7 +2649,7 @@ _08009BF4:
 	ldr r3, _08009D64 @ =0x000028A0
 	adds r4, r4, r3
 	adds r0, r4, #0
-	bl sub_8012948
+	bl RestoreAnimationsFromBuffer
 	mov r0, r8
 	ldrb r0, [r0, #8]
 	cmp r0, #4
@@ -2900,7 +2900,7 @@ _08009E32:
 	adds r2, #0x1c
 	adds r0, r6, r2
 	str r0, [r5]
-	ldr r0, _08009FD8 @ =gUnknown_03003C70
+	ldr r0, _08009FD8 @ =gExaminationData
 	str r0, [r5, #4]
 	ldr r0, _08009FDC @ =0x800000F0
 	str r0, [r5, #8]
@@ -2998,7 +2998,7 @@ _08009FC8: .4byte gTestimony
 _08009FCC: .4byte 0x80000004
 _08009FD0: .4byte gCourtScroll
 _08009FD4: .4byte 0x80000008
-_08009FD8: .4byte gUnknown_03003C70
+_08009FD8: .4byte gExaminationData
 _08009FDC: .4byte 0x800000F0
 _08009FE0: .4byte gMain
 _08009FE4: .4byte gMapMarker
@@ -3047,7 +3047,7 @@ _0800A042:
 	bl DecompressBackgroundIntoBuffer
 	mov r2, r8
 	ldrh r0, [r2, #0x34]
-	bl sub_8004FAC
+	bl CopyBGDataToVramAndScrollBG
 	ldr r0, _0800A14C @ =gScriptContext
 	adds r2, r0, #0
 	adds r2, #0x40
@@ -3240,7 +3240,7 @@ _0800A1DC:
 	subs r0, #2
 	strh r1, [r0]
 	bl sub_800A38C
-	ldr r0, _0800A218 @ =gUnknown_080266D0
+	ldr r0, _0800A218 @ =gCaseStartProcess
 	mov r1, r8
 	adds r1, #0xc1
 	ldrb r1, [r1]
@@ -3252,7 +3252,7 @@ _0800A1DC:
 	.align 2, 0
 _0800A210: .4byte gMain
 _0800A214: .4byte gSaveDataBuffer
-_0800A218: .4byte gUnknown_080266D0
+_0800A218: .4byte gCaseStartProcess
 
 	thumb_func_start sub_0800A21C
 sub_0800A21C: @ 0x0800A21C

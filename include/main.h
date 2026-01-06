@@ -41,7 +41,8 @@ struct Main
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
     /* +0x024 */ u8 soundStatus;
-    /* +0x025 */ u8 fill25[0x3];
+    /* +0x025 */ u8 fill25[0x2];
+    /* +0x027 */ u8 unk27;
     /* +0x028 */ u16 currentPlayingBgm;
     /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
     /* +0x02B */ u8 animationFlags; // unity: Obj_flag
@@ -69,7 +70,9 @@ struct Main
     /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
     /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
     /* +0x050 */ s16 unk50;
-    /* +0x052 */ u8 fill52[0x36];
+    /* +0x052 */ u8 fill52[0x2];
+    /* +0x058 */ u32 * bgStripeDestPtr;
+    /* +0x058 */ u32 bgStripeOffsets[12];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer

@@ -4231,8 +4231,8 @@ _08004F98:
 	.align 2, 0
 _08004FA8: .4byte gUnknown_030037ED
 
-	thumb_func_start sub_8004FAC
-sub_8004FAC: @ 0x08004FAC
+	thumb_func_start CopyBGDataToVramAndScrollBG
+CopyBGDataToVramAndScrollBG: @ 0x08004FAC
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

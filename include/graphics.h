@@ -20,10 +20,12 @@
 #define gGfxGuiltyNotGuilty2 ((void*)(GFX_BASE_ADDR + 0xCB60))
 
 #define gGfxNewGameContinue ((void*)(GFX_BASE_ADDR + 0xE360))
+#define gUnknown_0818E780 ((void*)(GFX_BASE_ADDR + 0xE780))
 #define gGfxInvestigationStopButton ((void*)(GFX_BASE_ADDR + 0x10480))
 #define gGfxPsycheLockChainsTiles ((void*)(GFX_BASE_ADDR + 0x10C00))
 #define gPalPressPresentButtons ((void*)(GFX_BASE_ADDR + 0x17004))
 #define gPalNewGameContinue ((void*)(GFX_BASE_ADDR + 0x172C4))
+#define gUnknown_08197404 ((void*)(GFX_BASE_ADDR + 0x17404))
 #define gGfxSaveYesNo ((void*)(0x081987e4))
 #define gPalChoiceSelected ((void*)(0x081977a4))
 #define gTextPal ((void*)(0x0819F674))

@@ -5550,12 +5550,12 @@ _0800E802:
 	mov r0, sp
 	bl sub_8012258
 	adds r2, r0, #0
-	ldr r4, _0800E818 @ =gUnknown_03003C70
+	ldr r4, _0800E818 @ =gExaminationData
 	b _0800E828
 	.align 2, 0
 _0800E810: .4byte gMain
 _0800E814: .4byte 0xFFFF0000
-_0800E818: .4byte gUnknown_03003C70
+_0800E818: .4byte gExaminationData
 _0800E81C:
 	cmp r1, #0xfe
 	bne _0800E826
@@ -5580,11 +5580,11 @@ _0800E828:
 	adds r1, #0xf0
 	strh r1, [r0]
 _0800E844:
-	ldr r4, _0800E84C @ =gUnknown_03003C70
+	ldr r4, _0800E84C @ =gExaminationData
 	b _0800E862
 	.align 2, 0
 _0800E848: .4byte gMain
-_0800E84C: .4byte gUnknown_03003C70
+_0800E84C: .4byte gExaminationData
 _0800E850:
 	cmp r1, #0xfe
 	beq _0800E860
