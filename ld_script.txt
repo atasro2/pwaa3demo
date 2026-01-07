@@ -28,7 +28,7 @@ SECTIONS {
         src/utils.o(.text);
         src/case_data.o(.text);
         src/title_processes.o(.text);
-        asm/gameover_process.o(.text);
+        src/gameover_process.o(.text);
         src/save_processes.o(.text);
         src/episode_load_processes.o(.text);
         asm/episode_load_processes.o(.text);
@@ -70,6 +70,7 @@ SECTIONS {
         rodata/bg.o(.rodata);
         rodata/utils.o(.rodata);
         rodata/case_data.o(.rodata);
+        src/gameover_process.o(.rodata);
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);

@@ -1,0 +1,209 @@
+#include "global.h"
+#include "graphics.h"
+#include "background.h"
+#include "sound.h"
+#include "constants/process.h"
+#include "constants/oam_allocations.h"
+
+const u8 gMapTrialGameOverDoors[152] = {
+    0x01, 0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+    0x03, 0x03, 0x03, 0x04, 0x05, 0x06, 0x07, 0x01,
+    0x08, 0x16, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+    0x09, 0x0A, 0x0B, 0x05, 0x06, 0x07, 0x01, 0x08,
+    0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x0D, 0x0B, 0x05, 0x06, 0x07, 0x01, 0x08, 0x0C,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0D,
+    0x0B, 0x05, 0x06, 0x07, 0x01, 0x08, 0x0C, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0D, 0x0B,
+    0x05, 0x06, 0x07, 0x01, 0x08, 0x0C, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x0D, 0x0B, 0x05,
+    0x06, 0x07, 0x01, 0x08, 0x0C, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x0D, 0x0B, 0x05, 0x06,
+    0x07, 0x01, 0x08, 0x0C, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x0D, 0x0B, 0x05, 0x06, 0x07,
+    0x01, 0x0E, 0x0F, 0x10, 0x10, 0x10, 0x10, 0x10,
+    0x10, 0x10, 0x11, 0x12, 0x05, 0x06, 0x07, 0x01,
+    0x13, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14, 0x14,
+    0x14, 0x14, 0x15, 0x05, 0x06, 0x07, 0x00, 0x00,
+};
+
+void GameOverScreenProcess(struct Main *main)
+{
+    struct IORegisters *ioRegsp = &gIORegisters; // r4
+    //struct OamAttrs * oam = &gOamObjects[OAM_IDX_GAME_OVER]; // r3 
+    u32 i, j;
+    u32 temp;
+    switch (main->process[GAME_PROCESS_STATE])
+    {
+    case 0:
+        //oam->attr0 = SPRITE_ATTR0(48, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        //oam->attr1 = SPRITE_ATTR1_NONAFFINE((-64-24) & 0x1FF, FALSE, FALSE, 3);
+        //oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 5);
+        //oam++;
+        //oam->attr0 = SPRITE_ATTR0(48, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        //oam->attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH+24, FALSE, FALSE, 3);
+        //oam->attr2 = SPRITE_ATTR2(0x1E0, 0, 5);
+        DmaCopy16(3, gGfxGameOverDoors, VRAM+0x1400, 0x2E0);
+        DmaCopy16(3, gPalGameOverDoors, PLTT+0x20, 0x20);
+        //DmaCopy16(3, gGfxGameOverText, VRAM+0x13400, 0x1000);
+        //DmaCopy16(3, gPalGameOverText, PLTT+0x2A0, 0x20);
+        for(i = 0; i < 0x400; i++)
+        {
+            gBG2MapBuffer[i] = 0;
+        }
+        ioRegsp->lcd_bg2vofs = 0;
+        ioRegsp->lcd_bg2hofs = 8;
+        ioRegsp->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
+        ioRegsp->lcd_dispcnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
+        main->tilemapUpdateBits = 4 | 8;
+        main->process[GAME_PROCESS_STATE]++;
+        main->process[GAME_PROCESS_VAR1] = 0;
+        break;
+    case 1:
+        //temp = oam->attr1 & 0x1FF;
+        //temp += 8;
+        //temp &= 0x1FF;
+        //oam->attr1 &= ~0x1FF;
+        //oam->attr1 += temp; // shitty way to add 8 to the X coordinate but ok
+        //oam++;
+        //oam->attr1 -= 8;
+        for(i = 0; i < 10; i++)
+        {
+            u16 * ptr2 = &gBG2MapBuffer[i*32];
+            ptr2 += main->process[GAME_PROCESS_VAR1];
+            for(j = 0; j < main->process[GAME_PROCESS_VAR1]; j++)
+            {
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x10A0;
+                *ptr2 = temp;
+                *(ptr2+0x140) = temp; 
+                ptr2--;
+            }
+        }
+        for(i = 0; i < 10; i++)
+        {
+            u16 * ptr2 = &gBG2MapBuffer[i*32];
+            ptr2 += 0x1F-main->process[GAME_PROCESS_VAR1];
+            for(j = 0; j < main->process[GAME_PROCESS_VAR1]; j++)
+            {
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x14A0;
+                *ptr2 = temp;
+                *(ptr2+0x140) = temp; 
+                ptr2++;
+            }
+        }
+        if(main->process[GAME_PROCESS_VAR1] < 0xF)
+        {
+            main->process[GAME_PROCESS_VAR1]++;
+        }
+        else
+        {
+            PlaySE(0x56);
+            main->process[GAME_PROCESS_STATE]++;
+            main->process[GAME_PROCESS_VAR1] = 0;
+        }
+        break;
+    case 2:
+        if(main->process[GAME_PROCESS_VAR1] >= 120) // 2 seconds?
+        {
+            StartHardwareBlend(2, 3, 1, 0x1F);
+            main->process[GAME_PROCESS_STATE]++;
+        }
+        else
+        {
+            main->process[GAME_PROCESS_VAR1]++;
+        }
+        break;
+    case 3:
+        if(main->blendMode == 0)
+        {
+            DmaFill16(3, 0, PLTT, 0x400);
+            SET_PROCESS_PTR(TITLE_SCREEN_PROCESS, 0, 0, 0, main);
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void sub_8006EAC(struct Main* main) {
+    struct IORegisters *ioRegsp = &gIORegisters;
+    u32 i, j;
+    u32 temp;
+
+
+    switch (gScriptContext.unk46[0]) {
+    case 0:
+        DmaCopy16(3, gGfxGameOverDoors, VRAM+0x1400, 0x2E0);
+        DmaCopy16(3, gPalGameOverDoors, PLTT+0x20, 0x20);
+        for(i = 0; i < 0x400; i++)
+        {
+            gBG0MapBuffer[i] = 0;
+        }
+        ioRegsp->lcd_bg0hofs = 8;
+        ioRegsp->lcd_bg0cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
+        ioRegsp->lcd_dispcnt = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
+        main->tilemapUpdateBits = 1 | 2 | 8;
+        gScriptContext.unk46[0] = 1;
+        gScriptContext.unk46[1] = 0;
+        gScriptContext.unk46[2] = 0;
+        break;
+    case 1:
+        for(i = 0; i < 10; i++)
+        {
+            u16 * ptr2 = &gBG0MapBuffer[i*32];
+            ptr2 += gScriptContext.unk46[1];
+            for(j = 0; j < gScriptContext.unk46[1]; j++)
+            {
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x10A0;
+                *ptr2 = temp;
+                *(ptr2+0x140) = temp; 
+                ptr2--;
+            }
+        }
+        for(i = 0; i < 10; i++)
+        {
+            u16 * ptr2 = &gBG0MapBuffer[i*32];
+            ptr2 += 0x1F-gScriptContext.unk46[1];
+            for(j = 0; j < gScriptContext.unk46[1]; j++)
+            {
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x14A0;
+                *ptr2 = temp;
+                *(ptr2+0x140) = temp; 
+                ptr2++;
+            }
+        }
+        if(gScriptContext.unk46[1] < 0xF)
+        {
+            gScriptContext.unk46[1]++;
+        }
+        else
+        {
+            PlaySE(0x56);
+            gScriptContext.unk46[0]++;
+            gScriptContext.unk46[1] = 0;
+        }
+        break;
+    case 2:
+        if(gScriptContext.unk46[1] >= 120) // 2 seconds?
+        {
+            StartHardwareBlend(2, 3, 1, 0x1F);
+            gScriptContext.unk46[0]++;
+        }
+        else
+        {
+            gScriptContext.unk46[1]++;
+        }
+        break;
+    case 3:
+        if(main->blendMode == 0) {
+            gScriptContext.unk46[0] = 0x63;
+            gScriptContext.unk46[1] = 0;
+            gScriptContext.unk46[2] = 0;
+            for(i = 0; i < 0x400; i++)
+            {
+                gBG0MapBuffer[i] = 0;
+            }
+        }
+        return;
+    }
+}

@@ -27,6 +27,8 @@
 #define gPalNewGameContinue ((void*)(GFX_BASE_ADDR + 0x172C4))
 #define gUnknown_08197404 ((void*)(GFX_BASE_ADDR + 0x17404))
 #define gGfxSaveYesNo ((void*)(0x081987e4))
+#define gGfxGameOverDoors ((void*)0x0818b880)
+#define gPalGameOverDoors ((void*)0x08197264)
 #define gPalChoiceSelected ((void*)(0x081977a4))
 #define gTextPal ((void*)(0x0819F674))
 #define gCharSet ((void*)(GFX_BASE_ADDR + 0x1F694))
