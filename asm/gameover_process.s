@@ -374,7 +374,7 @@ _08006FBA:
 	cmp r5, #9
 	bls _08006F82
 	movs r5, #0
-	ldr r1, _08007040 @ =gUnknown_03007128
+	ldr r1, _08007040 @ =gScriptContext+0x48
 	mov r8, r1
 	ldr r0, _0800703C @ =gUnknown_08026718
 	adds r0, #0xe
@@ -436,7 +436,7 @@ _08007012:
 	.align 2, 0
 _08007038: .4byte gBG0MapBuffer
 _0800703C: .4byte gUnknown_08026718
-_08007040: .4byte gUnknown_03007128
+_08007040: .4byte gScriptContext+0x48
 _08007044: .4byte gScriptContext
 _08007048:
 	adds r1, r2, #0
