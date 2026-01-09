@@ -183,7 +183,7 @@ _0800A4F0:
 	ands r0, r2
 	cmp r0, #0
 	beq _0800A4FE
-	bl sub_8016D6C
+	bl ClearHPBarOAM
 _0800A4FE:
 	movs r0, #0x31
 	bl PlaySE
@@ -1112,7 +1112,7 @@ sub_800ACB4: @ 0x0800ACB4
 	adds r0, r4, #0
 	bl ChangeScriptSection
 	bl RunScriptContext
-	bl sub_8016DA4
+	bl CheckAndDrawHPBar
 	pop {r4}
 	pop {r0}
 	bx r0

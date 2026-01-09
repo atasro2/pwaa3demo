@@ -40,7 +40,6 @@ SECTIONS {
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
-        asm/hp_bar.o(.text);
         src/signal_detector.o(.text);
         src/script_main.o(.text);
         src/script_commands.o(.text);

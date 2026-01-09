@@ -424,7 +424,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
             SetAnimationFrameOffset(&gAnimation[1], gMain.talkingAnimationOffset);
         } else if(scriptCtx->currentToken == 0x7) {
             gMain.showTextboxCharacters = FALSE;
-            sub_8016D6C();
+            ClearHPBarOAM();
             scriptCtx->flags |= SCRIPT_FULLSCREEN;
             scriptCtx->unk28 = 0;
             scriptCtx->unk29++;
@@ -523,7 +523,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
     }
     if(gJoypad.pressedKeys & A_BUTTON) {
         PlaySE(SE001_MENU_CONFIRM);
-        sub_8016D6C();
+        ClearHPBarOAM();
         scriptCtx->flags &= ~SCRIPT_FULLSCREEN;
         scriptCtx->flags &= ~SCRIPT_x1;
         scriptCtx->flags &= ~SCRIPT_SKIP;

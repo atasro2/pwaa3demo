@@ -101,11 +101,8 @@ struct Main
     /* +0x0B2 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
     /* +0x0B4 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
     /* +0x0B6 */ s16 hpBarValueScenarioEnd; // unity: gauge_hp_scenario_end
-    /* disabled these because they break things... */
-    // s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
-    // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
-    // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
-    /* +0x0B8 */ u8 fillB8[8];
+    /* +0x0B8 */ s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    /* +0x0BC */ s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
@@ -133,7 +130,17 @@ struct Main
     /* +0x264 */ u8 fill264[0x1C];
     /* +0x280 */ u16 psycheLockedTalkSections[8];
     /* +0x290 */ u16 numPsycheLockedTalkSections;
-    /* +0x292 */ u8 fill292[0x2E];
+    struct Spotlight {
+        u8 state;
+        s8 respawnDelay;
+        u8 filler2;
+        u8 filler3;
+        s32 x;
+        s32 y;
+        s32 xVelocity;
+        s32 yVelocity;
+    /* +0x294 */ } spotlights[2]; // IDK IF THIS STILL EXISTS IN THE STRUCT BUT I'M KEEPING IT FOR NOW BECAUSE OF HP_BAR UNTIL SOMETHING ELSE USES THIS
+    /* +0x2BC */ u8 fill2BC[0x4];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
     /* +0x2C4 */ u8 fill2C4[0x1];

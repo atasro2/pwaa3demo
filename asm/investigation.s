@@ -4314,7 +4314,7 @@ _0800DDD8:
 	ands r0, r1
 	cmp r0, #0
 	beq _0800DE2C
-	bl sub_8016D6C
+	bl ClearHPBarOAM
 	movs r0, #0x31
 	bl PlaySE
 	ldr r0, [r4, #8]
