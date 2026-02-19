@@ -69,8 +69,8 @@ struct Main
     /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
     /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
     /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
-    /* +0x050 */ s16 unk50;
-    /* +0x052 */ u8 fill52[0x2];
+    /* +0x050 */ u16 unk50;
+    /* +0x052 */ u16 unk52;
     /* +0x058 */ u32 * bgStripeDestPtr;
     /* +0x058 */ u32 bgStripeOffsets[12];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
@@ -143,7 +143,7 @@ struct Main
     /* +0x2BC */ u8 fill2BC[0x4];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
-    /* +0x2C4 */ u8 fill2C4[0x1];
+    /* +0x2C4 */ u8 currentSpeaker;
     /* +0x2C5 */ u8 currentNametagRightSide;
     /* +0x2C6 */ u8 currentCourtroomScene;
     /* +0x2C7 */ u8 unk2C7;

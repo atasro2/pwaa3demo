@@ -24,7 +24,6 @@ SECTIONS {
         src/main.o(.text);
         src/debug.o(.text);
         src/bg.o(.text);
-        asm/bg.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
         src/title_processes.o(.text);
@@ -91,6 +90,7 @@ SECTIONS {
     {
         src/main.o(.data);
         src/debug.o(.data);
+        src/bg.o(.data);
         data/data.o(.data);
         src/sound.o(.data);
         data/data_2.o(.data);

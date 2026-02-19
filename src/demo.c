@@ -12,7 +12,7 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
-void CheckBGChange_iOS(u32 arg0, u32 arg1) {
+void CheckBGChange_iOS(u16 arg0, u32 arg1) {
     
 }
 
@@ -172,7 +172,7 @@ void sub_801D984(void) {
         u16 buf[0x10];
         DmaCopy16(3, src, buf, 0x20);
         for(i = 0; i < 0x10; i++) {
-            buf[i] = sub_800549C(buf[i], 0x20, 0);
+            buf[i] = ColorFadeSepia(buf[i], 0x20, 0);
         }
         DmaCopy16(3, buf, dst, 0x20);
         //The assembly loads gBG2MapBuffer here???
@@ -262,13 +262,13 @@ void sub_801DB60(void) {
         if (scriptCtx->unk30[4]) {
             ioRegs->lcd_bg3cnt |= BGCNT_256COLOR;
             for(i = 0x20; i < 0x100; i++) {
-                src[i] = sub_8005574(src[i], 0x1F, 0);
+                src[i] = ColorFadeGrayscale(src[i], 0x1F, 0);
             }
             DmaCopy16(3, src, PLTT, 0x200);
         } else {
             ioRegs->lcd_bg3cnt &= ~BGCNT_256COLOR;
             for(i = 0; i < 0x10; i++) {
-                src[i] = sub_8005574(src[i], 0x1F, 0);
+                src[i] = ColorFadeGrayscale(src[i], 0x1F, 0);
             }
             DmaCopy16(3, src, PLTT+0x40, 0x20);
         }
@@ -284,7 +284,7 @@ void sub_801DB60(void) {
         break;
     }
     SetOAMForCourtBenchSpritesWitness(0, 0, 0);
-    sub_8003F7C(0);
+    EnableDetentionCenterMask(0);
     if (scriptCtx->unk46[2] & 0xF00) {
         s32 temp = (scriptCtx->unk46[2] & 0xF00) >> 8;
         if (((scriptCtx->unk46[2] & 0xF00) >> 8) < 4) {
@@ -308,7 +308,7 @@ void sub_801DB60(void) {
             SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
             return;
         case 4:
-            sub_8003F7C(1);
+            EnableDetentionCenterMask(1);
             ioRegs->lcd_bg0cnt |= BGCNT_MOSAIC;
             break;
         }
@@ -747,7 +747,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
-                    *dst = sub_8005574(*src, 0x20, 0);
+                    *dst = ColorFadeGrayscale(*src, 0x20, 0);
                     src++;
                     dst++;
                 }
@@ -863,7 +863,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
-                    *dst = sub_8005574(*src, 0x20, 0);
+                    *dst = ColorFadeGrayscale(*src, 0x20, 0);
                     src++;
                     dst++;
                 }
@@ -906,7 +906,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             dst = (u32*)(OBJ_PLTT+0x1A0);
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
-                    *dst = sub_8005574(*src, 0x20, 0);
+                    *dst = ColorFadeGrayscale(*src, 0x20, 0);
                     src++;
                     dst++;
                 }
@@ -949,7 +949,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 anim = &gAnimation[1];
                 if (anim->flags & ANIM_0x400) {
                     for(i = 0; i < 0x10; i++) {
-                        *dst = sub_8005574(*src, 0x20, 0);
+                        *dst = ColorFadeGrayscale(*src, 0x20, 0);
                         src++;
                         dst++;
                     }
@@ -975,7 +975,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
-                    *dst = sub_8005574(*src, 0x20, 0);
+                    *dst = ColorFadeGrayscale(*src, 0x20, 0);
                     src++;
                     dst++;
                 }
@@ -1018,7 +1018,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
-                    *dst = sub_8005574(*src, 0x20, 0);
+                    *dst = ColorFadeGrayscale(*src, 0x20, 0);
                     src++;
                     dst++;
                 }
@@ -1061,7 +1061,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 anim = &gAnimation[1]; 
                 if (anim->flags & ANIM_0x400) {
                     for(i = 0; i < 0x10; i++) {
-                        *dst = sub_8005574(*src, 0x20, 0);
+                        *dst = ColorFadeGrayscale(*src, 0x20, 0);
                         src++;
                         dst++;
                     }

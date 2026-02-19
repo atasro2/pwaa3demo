@@ -2137,8 +2137,8 @@ _08012C88:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8012C90
-sub_8012C90: @ 0x08012C90
+	thumb_func_start OffsetAllAnimations
+OffsetAllAnimations: @ 0x08012C90
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -3473,7 +3473,7 @@ _080136A8:
 	movs r1, #0x20
 	movs r2, #0
 _080136AE:
-	bl sub_8005574
+	bl ColorFadeGrayscale
 	strh r0, [r4]
 	adds r4, #2
 	adds r0, r5, #0
@@ -3529,7 +3529,7 @@ _08013716:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1

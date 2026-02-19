@@ -440,7 +440,7 @@ bool32 Command02(struct ScriptContext * scriptCtx) {
             for(i = 0; i < 0x40; i++) {
                 gTextBoxCharacters[i].y += 18;
             }
-            sub_80051CC(1);
+            SetTextboxSize(1);
             scriptCtx->scriptPtr++;
             return 1;
         }
@@ -561,7 +561,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
             sub_8017BA8();
             sub_8017BC0();
         }
-        sub_80051CC(0);
+        SetTextboxSize(0);
         gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
         MoveSpritesToOAM();
         // ! this code is technically bugged but the ChangeScriptSection correct it
@@ -628,14 +628,14 @@ bool32 Command0D(struct ScriptContext * scriptCtx) {
 
 bool32 Command0E(struct ScriptContext * scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
-    scriptCtx->unk24 = *scriptCtx->scriptPtr >> 8;
-    scriptCtx->unk24 &= 0x7F;
-    if(scriptCtx->unk24 == 21 && gMain.scenarioIdx < 10 && !GetFlag(0, 0x8D)) {
-        scriptCtx->unk24 = 2;
+    scriptCtx->textboxNameId = *scriptCtx->scriptPtr >> 8;
+    scriptCtx->textboxNameId &= 0x7F;
+    if(scriptCtx->textboxNameId == 21 && gMain.scenarioIdx < 10 && !GetFlag(0, 0x8D)) {
+        scriptCtx->textboxNameId = 2;
     }
     if(gMain.showTextboxCharacters == TRUE) {
         CopyTextboxTilesToBG1MapBuffer();
-        SetTextboxNametag(scriptCtx->unk24 & 0x7F, *scriptCtx->scriptPtr & 0xFF);
+        SetTextboxNametag(scriptCtx->textboxNameId & 0x7F, *scriptCtx->scriptPtr & 0xFF);
     }
     scriptCtx->scriptPtr++;
     scriptCtx->soundCueSkip = 2;

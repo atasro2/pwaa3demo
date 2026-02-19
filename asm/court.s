@@ -2493,7 +2493,7 @@ _0800B800:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r0, r5, #1
 	lsls r0, r0, #0x10
@@ -2693,7 +2693,7 @@ _0800B9A8:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r0, r5, #1
 	lsls r0, r0, #0x10

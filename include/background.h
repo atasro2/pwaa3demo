@@ -78,10 +78,10 @@ extern void sub_80037C8(void);
 void SetTextboxNametag(u32, u32);
 void UpdateBGTilemaps(void);
 //u16 sub_800389C(u16 color, u16 y, u16 mode);
-u16 sub_800549C(u16 color, u16 y, u16 mode);
+u16 ColorFadeSepia(u16 color, u16 y, u16 mode);
 
-void sub_8003F7C(u32);
-void sub_80051CC(u32);
+void EnableDetentionCenterMask(bool16);
+void SetTextboxSize(u32);
 void sub_80060E8(void);
 void sub_800610C(void);
 #endif//GUARD_BACKGROUND_H

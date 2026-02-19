@@ -43,14 +43,14 @@ struct ScriptContext {
     u16 unk20;
     u8 unk22; // unity: text_flag
     u8 textboxState;
-    u8 unk24;
+    u8 textboxNameId;
     u8 textColor;
     u8 textSpeed;
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
     u8 unk2A;
-    u8 unk2B;
+    u8 textboxYPos;
     u8 unk2C;
     u8 unk2D;
     u8 unk2E; // unity: op_flg

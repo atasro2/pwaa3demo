@@ -1,23 +1,6 @@
 	.section .data
     .align 2, 0
 
-    .global gUnknown_0814D894
-gUnknown_0814D894:
-    .incbin "baserom.gba", 0x0014D894, 0x40
-
-    .global gUnknown_0814D8D4
-gUnknown_0814D8D4:
-@ replacing .incbin "baserom.gba", 0x0014d8d4, 0x14
-    .4byte nullsub_13
-    .4byte sub_8005D80
-    .4byte sub_8005D80
-    .4byte sub_8005F68
-    .4byte sub_8005F68
-
-    .global gUnknown_0814D8E8
-gUnknown_0814D8E8:
-    .incbin "baserom.gba", 0x0014D8E8, 0x48
-
     .global gFlagPtrs
 gFlagPtrs:
     .incbin "baserom.gba", 0x0014D930, 0xC

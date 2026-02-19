@@ -40,7 +40,7 @@ void EpisodeLoadGfx(struct Main * main)
     DmaCopy16(3, eBGDecompBuffer, OBJ_VRAM0+0x3400, 0x2800);
     DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
     DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
-    sub_80051CC(2);
+    SetTextboxSize(2);
     main->xPosCounter = 0;
     PlaySE(SE007_MENU_OPEN_SUBMENU);
     StartHardwareBlend(1, 0, 1, 0x1F);

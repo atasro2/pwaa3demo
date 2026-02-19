@@ -17,9 +17,9 @@ struct SaveData
     /* +0x0308 */ struct IORegisters ioRegs;
     /* +0x035C */ struct ScriptContext scriptCtx;
     /* +0x03F8 */ struct Struct30070B0 struct30070B0;
-    /* +0x???? */ struct CourtRecord courtRecord;
-    /* +0x???? */ struct CourtScroll courtScroll;
-    /* +0x???? */ struct TestimonyStruct testimony;
+    /* +0x041C */ struct CourtRecord courtRecord;
+    /* +0x0478 */ struct CourtScroll courtScroll;
+    /* +0x0488 */ struct TestimonyStruct testimony;
     /* +0x???? */ struct InvestigationStruct investigation;
     /* +0x???? */ struct ExaminationData examinationData[24];
     /* +0x???? */ struct TalkData talkData[32];
@@ -27,10 +27,10 @@ struct SaveData
     /* +0x???? */ struct MapMarker mapMarker[8];
     /* +0x???? */ struct OamAttrs oam[128];
     /* +0x???? */ struct TextBoxCharacter textBoxCharacters[0x40];
-    /* +0x???? */ u16 bg0Map[0x400];
-    /* +0x???? */ u16 bg1Map[0x400];
-    /* +0x???? */ u16 bg2Map[0x400];
-    /* +0x???? */ struct AnimationBackupStruct backupAnimations[0x20];
+    /* +0x10D4 */ u16 bg0Map[0x400];
+    /* +0x18D4 */ u16 bg1Map[0x400];
+    /* +0x20D4 */ u16 bg2Map[0x400];
+    /* +0x28D4 */ struct AnimationBackupStruct backupAnimations[0x20];
 };
 
 extern EWRAM_DATA struct SaveData gSaveDataBuffer;
