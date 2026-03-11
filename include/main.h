@@ -124,7 +124,8 @@ struct Main
     /* +0x257 */ u8 psycheLockShownByScriptFlag;
     /* +0x258 */ u8 unk258;
     /* +0x259 */ u8 unk259;
-    /* +0x25A */ u8 fill25A[0x2];
+    /* +0x25A */ u8 unk25A;
+    /* +0x25B */ u8 unk25B;
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
     /* +0x264 */ u8 fill264[0x1C];

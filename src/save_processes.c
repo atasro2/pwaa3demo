@@ -655,9 +655,9 @@ void SaveGameExitSaveScreen(struct Main * main) {
     RESTORE_PROCESS_PTR(main);
     if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS && main->process[GAME_PROCESS_VAR1] == 3) {
         if (main->process[GAME_PROCESS_STATE] == INVESTIGATION_MOVE) {
-            sub_800E874();
+            LoadLocationChoiceGraphics();
         } else if (main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK) {
-            sub_800E8F0();
+            LoadTalkChoiceGraphics();
         }
     }
     if(gMain.currentCourtroomScene & 0xF) {

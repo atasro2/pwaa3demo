@@ -13,11 +13,7 @@ gUnknown_080267E4:
 
     .global gUnknown_080267F8
 gUnknown_080267F8:
-    .incbin "baserom.gba", 0x000267F8, 0x1
-
-    .global gUnknown_080267F9
-gUnknown_080267F9:
-    .incbin "baserom.gba", 0x000267F9, 0x17
+    .incbin "baserom.gba", 0x000267F8, 0x18
 
     .global gUnknown_08026810
 gUnknown_08026810:

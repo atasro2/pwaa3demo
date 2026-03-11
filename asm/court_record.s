@@ -4304,7 +4304,7 @@ _08010C6C:
 _08010C98: .4byte gBG1MapBuffer
 _08010C9C:
 	adds r0, r4, #0
-	bl sub_8010DD8
+	bl LoadItemPlateGfx
 	adds r0, r4, #0
 	adds r0, #0x9a
 	ldrb r0, [r0]
@@ -4406,7 +4406,7 @@ _08010D64:
 	cmp r2, #6
 	bhi _08010DD2
 	adds r0, r4, #0
-	bl sub_8010DD8
+	bl LoadItemPlateGfx
 	movs r1, #0
 	movs r0, #0x10
 	strh r0, [r5]
@@ -4461,8 +4461,8 @@ _08010DD2:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_8010DD8
-sub_8010DD8: @ 0x08010DD8
+	thumb_func_start LoadItemPlateGfx
+LoadItemPlateGfx: @ 0x08010DD8
 	push {r4, lr}
 	ldr r4, _08010E18 @ =gUnknown_0200AFC0
 	ldr r2, _08010E1C @ =gUnknown_08026E20

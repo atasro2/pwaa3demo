@@ -5607,8 +5607,8 @@ _0800E86C:
 	pop {r1}
 	bx r1
 
-	thumb_func_start sub_800E874
-sub_800E874: @ 0x0800E874
+	thumb_func_start LoadLocationChoiceGraphics
+LoadLocationChoiceGraphics: @ 0x0800E874
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -5667,8 +5667,8 @@ _0800E8E4: .4byte 0x040000D4
 _0800E8E8: .4byte 0x06013400
 _0800E8EC: .4byte 0x80000400
 
-	thumb_func_start sub_800E8F0
-sub_800E8F0: @ 0x0800E8F0
+	thumb_func_start LoadTalkChoiceGraphics
+LoadTalkChoiceGraphics: @ 0x0800E8F0
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
