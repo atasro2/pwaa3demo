@@ -63,9 +63,13 @@
 #define gPalHPBarFrame ((void*)(0x08197684))
 #define gPalHPBarProgress ((void*)(0x081976A4))
 
+#define gUnknown_081FFD28 ((void*)(GFX_BASE_ADDR + 0x7FD28))
+#define gUnknown_081FFD48 ((void*)(GFX_BASE_ADDR + 0x7FD48))
+
 #define gPal_BustupMia ((void*)(GFX_BASE_ADDR + 0x86BF0))
 #define gMap_BustupMia ((void*)(GFX_BASE_ADDR + 0x86C10))
 
+#define gUnknown_08200308 ((void*)(GFX_BASE_ADDR + 0x80308))
 #define gUnknown_08208AA0 ((void*)(GFX_BASE_ADDR + 0x88AA0))
 #define gUnknown_08208AC0 ((void*)(GFX_BASE_ADDR + 0x88AC0))
 #define gGfxSpeedlinesFirstAndLastColumns ((void*)(GFX_BASE_ADDR + 0x8DB9C))
