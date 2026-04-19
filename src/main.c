@@ -791,13 +791,13 @@ void UpdateSpecialEffects(void)
             {
                 main->effectCounter = 0;
                 main->effectIntensity++;
-                sub_8005A00(main->currentBG, main->effectIntensity, 0);
+                LoadAndAdjustBGPaletteSepia(main->currentBG, main->effectIntensity, 0);
                 if(main->effectType == 15 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8005BE8(main->effectIntensity, 0);
+                    LoadAndAdjustCurrentAnimation01PaletteSepia(main->effectIntensity, 0);
                 if(main->currentBG == 1
                 || main->currentBG == 2 
                 || main->currentBG == 3)
-                    sub_8005C88(main->currentBG, main->effectIntensity, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteSepia(main->currentBG, main->effectIntensity, 0);
             }
             
             if(main->effectIntensity == 0x20)
@@ -810,13 +810,13 @@ void UpdateSpecialEffects(void)
             {
                 main->effectCounter = 0;
                 main->effectIntensity--;
-                sub_8005A00(main->currentBG, main->effectIntensity, 0);
+                LoadAndAdjustBGPaletteSepia(main->currentBG, main->effectIntensity, 0);
                 if(main->effectType == 16 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8005BE8(main->effectIntensity, 0);
+                    LoadAndAdjustCurrentAnimation01PaletteSepia(main->effectIntensity, 0);
                 if(main->currentBG == 1
                 || main->currentBG == 2 
                 || main->currentBG == 3)
-                    sub_8005C88(main->currentBG, main->effectIntensity, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteSepia(main->currentBG, main->effectIntensity, 0);
             }
             
             if(main->effectIntensity == 0)

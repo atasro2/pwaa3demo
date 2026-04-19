@@ -9,9 +9,12 @@
 
 #define gPalEvidenceProfileDesc ((void*)(0x08180800))
 #define gGfxSaveGameTiles ((void*)(0x08180820))
+#define gGfx4bppNametags ((void*)(GFX_BASE_ADDR + 0x1820))
+#define gGfxDetentionCenterBottomTiles ((void*)(GFX_BASE_ADDR + 0x6820))
 #define gGfx4bppTestimonyArrows ((void*)(GFX_BASE_ADDR + 0x6880))
 #define gGfx4bppInvestigationActions ((void*)(GFX_BASE_ADDR + 0x8B80))
 #define gGfx4bppInvestigationScrollButton ((void*)(GFX_BASE_ADDR + 0x9D80))
+#define gGfx4bppTestimonyTextTiles ((void*)(GFX_BASE_ADDR + 0x9F80))
 #define gGfxPressPresentButtons ((void*)(GFX_BASE_ADDR + 0xA780))
 #define gGfxExamineCursor ((void*)(GFX_BASE_ADDR + 0xB180))
 
@@ -20,11 +23,19 @@
 #define gGfxGuiltyNotGuilty2 ((void*)(GFX_BASE_ADDR + 0xCB60))
 
 #define gGfxNewGameContinue ((void*)(GFX_BASE_ADDR + 0xE360))
+#define gUnknown_0818E780 ((void*)(GFX_BASE_ADDR + 0xE780))
 #define gGfxInvestigationStopButton ((void*)(GFX_BASE_ADDR + 0x10480))
 #define gGfxPsycheLockChainsTiles ((void*)(GFX_BASE_ADDR + 0x10C00))
+#define gPalActionButtons ((void*)(GFX_BASE_ADDR + 0x16F64))
 #define gPalPressPresentButtons ((void*)(GFX_BASE_ADDR + 0x17004))
 #define gPalNewGameContinue ((void*)(GFX_BASE_ADDR + 0x172C4))
+#define gUnknown_08197404 ((void*)(GFX_BASE_ADDR + 0x17404))
+#define gGfxFromSaveOrBeginningOptions ((void*)(0x081977e4))
 #define gGfxSaveYesNo ((void*)(0x081987e4))
+#define gGfxGameOverDoors ((void*)0x0818b880)
+#define gPalInvestigationScrollPrompt ((void*)(GFX_BASE_ADDR + 0x16FC4))
+#define gPalTestimonyTextTiles ((void*)(GFX_BASE_ADDR + 0x16FE4))
+#define gPalGameOverDoors ((void*)0x08197264)
 #define gPalChoiceSelected ((void*)(0x081977a4))
 #define gTextPal ((void*)(0x0819F674))
 #define gCharSet ((void*)(GFX_BASE_ADDR + 0x1F694))
@@ -33,6 +44,7 @@
 #define gUnknown_0820E33C ((void*)(GFX_BASE_ADDR + 0x8E33C))
 #define gPalCourtScroll ((void*)(0x0820E74C))
 #define gUnknown_0826F888 ((void*)(0x0826F888))
+#define gUnknown_0826FE38 ((void*)(0x0826FE38))
 #define gUnknown_08252498 ((void*)(0x08252498))
 
 
@@ -41,6 +53,8 @@
 #define gGfxHPBarFrame3 ((void*)(0x08190A00))
 #define gGfxHPBarProgress ((void*)(0x08190A80))
 
+#define gPalWitnessBench ((void*)(0x08197424))
+#define gPalCounselBench ((void*)(0x08197444))
 #define gPalGuilty ((void*)(0x08197284))
 #define gPalNotGuilty ((void*)(0x081972A4))
 
@@ -49,8 +63,16 @@
 #define gPalHPBarFrame ((void*)(0x08197684))
 #define gPalHPBarProgress ((void*)(0x081976A4))
 
+#define gUnknown_081FFD28 ((void*)(GFX_BASE_ADDR + 0x7FD28))
+#define gUnknown_081FFD48 ((void*)(GFX_BASE_ADDR + 0x7FD48))
+
 #define gPal_BustupMia ((void*)(GFX_BASE_ADDR + 0x86BF0))
 #define gMap_BustupMia ((void*)(GFX_BASE_ADDR + 0x86C10))
+
+#define gUnknown_08200308 ((void*)(GFX_BASE_ADDR + 0x80308))
+#define gUnknown_08208AA0 ((void*)(GFX_BASE_ADDR + 0x88AA0))
+#define gUnknown_08208AC0 ((void*)(GFX_BASE_ADDR + 0x88AC0))
+#define gGfxSpeedlinesFirstAndLastColumns ((void*)(GFX_BASE_ADDR + 0x8DB9C))
 
 // script
 #define std_scripts ((void*)(0x8270934))

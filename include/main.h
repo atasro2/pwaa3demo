@@ -41,7 +41,8 @@ struct Main
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
     /* +0x024 */ u8 soundStatus;
-    /* +0x025 */ u8 fill25[0x3];
+    /* +0x025 */ u8 fill25[0x2];
+    /* +0x027 */ u8 unk27;
     /* +0x028 */ u16 currentPlayingBgm;
     /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
     /* +0x02B */ u8 animationFlags; // unity: Obj_flag
@@ -68,8 +69,10 @@ struct Main
     /* +0x04D */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
     /* +0x04E */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
     /* +0x04F */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
-    /* +0x050 */ s16 unk50;
-    /* +0x052 */ u8 fill52[0x36];
+    /* +0x050 */ u16 unk50;
+    /* +0x052 */ u16 unk52;
+    /* +0x058 */ u32 * bgStripeDestPtr;
+    /* +0x058 */ u32 bgStripeOffsets[12];
     /* +0x088 */ u16 blendTarget; // unity: Fade_object
     /* +0x08A */ u16 blendMode; // unity: Fade_status
     /* +0x08C */ u16 blendCounter; // unity: Fade_timer
@@ -98,11 +101,8 @@ struct Main
     /* +0x0B2 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
     /* +0x0B4 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
     /* +0x0B6 */ s16 hpBarValueScenarioEnd; // unity: gauge_hp_scenario_end
-    /* disabled these because they break things... */
-    // s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
-    // s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
-    // s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
-    /* +0x0B8 */ u8 fillB8[8];
+    /* +0x0B8 */ s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    /* +0x0BC */ s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
     /* +0x0C0 */ u8 currentRoomId;
     /* +0x0C1 */ u8 scenarioIdx;
     /* +0x0C2 */ u8 caseEnabledFlags;
@@ -124,16 +124,27 @@ struct Main
     /* +0x257 */ u8 psycheLockShownByScriptFlag;
     /* +0x258 */ u8 unk258;
     /* +0x259 */ u8 unk259;
-    /* +0x25A */ u8 fill25A[0x2];
+    /* +0x25A */ u8 unk25A;
+    /* +0x25B */ u8 unk25B;
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
     /* +0x264 */ u8 fill264[0x1C];
     /* +0x280 */ u16 psycheLockedTalkSections[8];
     /* +0x290 */ u16 numPsycheLockedTalkSections;
-    /* +0x292 */ u8 fill292[0x2E];
+    struct Spotlight {
+        u8 state;
+        s8 respawnDelay;
+        u8 filler2;
+        u8 filler3;
+        s32 x;
+        s32 y;
+        s32 xVelocity;
+        s32 yVelocity;
+    /* +0x294 */ } spotlights[2]; // IDK IF THIS STILL EXISTS IN THE STRUCT BUT I'M KEEPING IT FOR NOW BECAUSE OF HP_BAR UNTIL SOMETHING ELSE USES THIS
+    /* +0x2BC */ u8 fill2BC[0x4];
     /* +0x2C0 */ u16 currentlyPlayingSfx;
     /* +0x2C2 */ u16 currentlyPlayingLoopedSfx;
-    /* +0x2C4 */ u8 fill2C4[0x1];
+    /* +0x2C4 */ u8 currentSpeaker;
     /* +0x2C5 */ u8 currentNametagRightSide;
     /* +0x2C6 */ u8 currentCourtroomScene;
     /* +0x2C7 */ u8 unk2C7;

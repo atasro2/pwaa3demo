@@ -24,15 +24,12 @@ SECTIONS {
         src/main.o(.text);
         src/debug.o(.text);
         src/bg.o(.text);
-        asm/bg.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
         src/title_processes.o(.text);
-        asm/gameover_process.o(.text);
+        src/gameover_process.o(.text);
         src/save_processes.o(.text);
-        asm/save_processes.o(.text);
         src/episode_load_processes.o(.text);
-        asm/episode_load_processes.o(.text);
         asm/court.o(.text);
         asm/investigation.o(.text);
         asm/court_record.o(.text);
@@ -41,14 +38,13 @@ SECTIONS {
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
-        asm/hp_bar.o(.text);
         src/signal_detector.o(.text);
         src/script_main.o(.text);
         src/script_commands.o(.text);
         src/script_commands2.o(.text);
         src/script_commands3.o(.text);
-        asm/opening.o(.text);
-        asm/demo.o(.text);
+        src/opening.o(.text);
+        src/demo.o(.text);
         asm/butterfly.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
@@ -71,6 +67,7 @@ SECTIONS {
         rodata/bg.o(.rodata);
         rodata/utils.o(.rodata);
         rodata/case_data.o(.rodata);
+        src/gameover_process.o(.rodata);
         rodata/rodata.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);
@@ -79,7 +76,7 @@ SECTIONS {
         rodata/script_main.o(.rodata);
         src/script_commands2.o(.rodata);
         rodata/script_commands.o(.rodata);
-        rodata/demo.o(.rodata);
+        src/demo.o(.rodata);
         rodata/butterfly.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/song_data.o(.rodata);
@@ -92,6 +89,7 @@ SECTIONS {
     {
         src/main.o(.data);
         src/debug.o(.data);
+        src/bg.o(.data);
         data/data.o(.data);
         src/sound.o(.data);
         data/data_2.o(.data);

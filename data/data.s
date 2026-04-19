@@ -1,23 +1,6 @@
 	.section .data
     .align 2, 0
 
-    .global gUnknown_0814D894
-gUnknown_0814D894:
-    .incbin "baserom.gba", 0x0014D894, 0x40
-
-    .global gUnknown_0814D8D4
-gUnknown_0814D8D4:
-@ replacing .incbin "baserom.gba", 0x0014d8d4, 0x14
-    .4byte nullsub_13
-    .4byte sub_8005D80
-    .4byte sub_8005D80
-    .4byte sub_8005F68
-    .4byte sub_8005F68
-
-    .global gUnknown_0814D8E8
-gUnknown_0814D8E8:
-    .incbin "baserom.gba", 0x0014D8E8, 0x48
-
     .global gFlagPtrs
 gFlagPtrs:
     .incbin "baserom.gba", 0x0014D930, 0xC
@@ -187,15 +170,15 @@ gUnknown_0814DB08:
     .global gSaveGameProcessStates
 gSaveGameProcessStates:
 @ replacing .incbin "baserom.gba", 0x0014db64, 0x24
-.4byte sub_8007718
-.4byte sub_8007880
-.4byte sub_8007A98
-.4byte sub_8007BD4
-.4byte sub_8007E84
-.4byte sub_80082DC
-.4byte sub_8008338
-.4byte sub_80083E4
-.4byte sub_8008434
+.4byte SaveGameInit1
+.4byte SaveGameInit2
+.4byte SaveGameInitButtons
+.4byte SaveGameWaitForInput
+.4byte SaveGameExitSaveScreen
+.4byte SaveGame5
+.4byte SaveGame6
+.4byte SaveGame7
+.4byte SaveGame8
 
     .global gUnknown_0814DB88
 gUnknown_0814DB88:

@@ -58,7 +58,7 @@ _0800A3E4:
 	rsbs r1, r1, #0
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, _0800A430 @ =gUnknown_030037B8
+	ldr r0, _0800A430 @ =gMain+0x8
 	ldr r0, [r0]
 	str r0, [r4, #0xc]
 	lsls r0, r5, #0x18
@@ -78,7 +78,7 @@ _0800A420: .4byte 0xFFFFF660
 _0800A424: .4byte 0x8000016A
 _0800A428: .4byte gScriptContext
 _0800A42C: .4byte 0xFFFFF679
-_0800A430: .4byte gUnknown_030037B8
+_0800A430: .4byte gMain+0x8
 
 	thumb_func_start CourtProcess
 CourtProcess: @ 0x0800A434
@@ -183,11 +183,11 @@ _0800A4F0:
 	ands r0, r2
 	cmp r0, #0
 	beq _0800A4FE
-	bl sub_8016D6C
+	bl ClearHPBarOAM
 _0800A4FE:
 	movs r0, #0x31
 	bl PlaySE
-	ldr r1, _0800A518 @ =gUnknown_030037BC
+	ldr r1, _0800A518 @ =gMain+0xC
 	subs r2, r1, #4
 	ldr r0, [r2]
 	str r0, [r1]
@@ -198,7 +198,7 @@ _0800A512:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0800A518: .4byte gUnknown_030037BC
+_0800A518: .4byte gMain+0xC
 
 	thumb_func_start sub_800A51C
 sub_800A51C: @ 0x0800A51C
@@ -351,7 +351,7 @@ sub_800A51C: @ 0x0800A51C
 	adds r6, #0x4e
 	movs r0, #0x10
 	strh r0, [r6]
-	ldr r1, _0800A6D0 @ =gUnknown_030037B8
+	ldr r1, _0800A6D0 @ =gMain+0x8
 	adds r0, #0xf3
 	str r0, [r1]
 	add sp, #8
@@ -384,7 +384,7 @@ _0800A6C0: .4byte 0x85000006
 _0800A6C4: .4byte 0x85000004
 _0800A6C8: .4byte gScriptContext
 _0800A6CC: .4byte 0x0000FFFF
-_0800A6D0: .4byte gUnknown_030037B8
+_0800A6D0: .4byte gMain+0x8
 
 	thumb_func_start sub_800A6D4
 sub_800A6D4: @ 0x0800A6D4
@@ -447,10 +447,10 @@ _0800A748:
 	lsrs r0, r0, #4
 	cmp r0, #3
 	bne _0800A774
-	ldr r0, _0800A75C @ =gUnknown_0300000B
+	ldr r0, _0800A75C @ =0x0300000B
 	b _0800A772
 	.align 2, 0
-_0800A75C: .4byte gUnknown_0300000B
+_0800A75C: .4byte 0x0300000B
 _0800A760:
 	cmp r0, #0xe
 	bne _0800A774
@@ -1112,7 +1112,7 @@ sub_800ACB4: @ 0x0800ACB4
 	adds r0, r4, #0
 	bl ChangeScriptSection
 	bl RunScriptContext
-	bl sub_8016DA4
+	bl CheckAndDrawHPBar
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1368,7 +1368,7 @@ _0800AED4:
 	bl sub_800A4A0
 	cmp r0, #0
 	beq _0800AEE2
-	ldr r1, _0800AEEC @ =gUnknown_030037B8
+	ldr r1, _0800AEEC @ =gMain+0x8
 	movs r0, #7
 	str r0, [r1]
 _0800AEE2:
@@ -1378,7 +1378,7 @@ _0800AEE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800AEEC: .4byte gUnknown_030037B8
+_0800AEEC: .4byte gMain+0x8
 
 	thumb_func_start nullsub_16
 nullsub_16: @ 0x0800AEF0
@@ -1744,12 +1744,12 @@ _0800B1DC:
 	movs r0, #1
 	bl SlideTextbox
 _0800B1E2:
-	ldr r1, _0800B1EC @ =gUnknown_030037B8
+	ldr r1, _0800B1EC @ =gMain+0x8
 	ldr r0, [r5, #0xc]
 	str r0, [r1]
 	b _0800B1F4
 	.align 2, 0
-_0800B1EC: .4byte gUnknown_030037B8
+_0800B1EC: .4byte gMain+0x8
 _0800B1F0:
 	subs r0, #1
 	strb r0, [r1, #1]
@@ -2325,7 +2325,7 @@ _0800B6CC:
 	strb r0, [r7, #9]
 	b _0800B6DA
 _0800B6D4:
-	ldr r1, _0800B6E8 @ =gUnknown_030037B8
+	ldr r1, _0800B6E8 @ =gMain+0x8
 	ldr r0, [r7, #0xc]
 	str r0, [r1]
 _0800B6DA:
@@ -2337,7 +2337,7 @@ _0800B6DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B6E8: .4byte gUnknown_030037B8
+_0800B6E8: .4byte gMain+0x8
 
 	thumb_func_start sub_800B6EC
 sub_800B6EC: @ 0x0800B6EC
@@ -2493,7 +2493,7 @@ _0800B800:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r0, r5, #1
 	lsls r0, r0, #0x10
@@ -2693,7 +2693,7 @@ _0800B9A8:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r0, r5, #1
 	lsls r0, r0, #0x10

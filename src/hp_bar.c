@@ -1,8 +1,12 @@
 #include "global.h"
+#include "hp_bar.h"
+#include "court.h"
 #include "animation.h"
+#include "case_data.h"
 #include "graphics.h"
 #include "utils.h"
 #include "constants/oam_allocations.h"
+#include "constants/process.h"
 
 int FindPlayingHPBarSmokeAnimations(void);
 
@@ -307,4 +311,411 @@ void AnimateHPBar(void)
         SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, tileStart, oamidx, 0, 8, 20);
     }
     sub_80160E0(gMain.hpBarX + xOffset, gMain.hpBarY + yOffset);
+}
+
+void ReturnToQueuedOrZeroHPBarState(void)
+{
+    if (gMain.hpBarQueuedState > 0) {
+        gMain.hpBarState = gMain.hpBarQueuedState;
+    } else {
+        gMain.hpBarState = 0;
+    }
+    if (gMain.hpBarX > 0x11B) {
+        gMain.hpBarX = 0x11C;
+        gMain.hpBarY = 0x14;
+        if (gMain.itemPlateState == 4) {
+            gOamObjects[72].attr0 = SPRITE_ATTR0_CLEAR;
+            gMain.itemPlateState = 3;
+            UpdateItemPlate(&gMain);
+        }
+    }
+    gMain.hpBarSubState = 0;
+    gMain.hpBarSlideOutDelay = 0;
+    gMain.hpBarQueuedState = 0;
+}
+
+
+void sub_801688C(void)
+{
+    if (gMain.hpBarValue <= 0)
+    {
+        if(gMain.process[GAME_PROCESS] == COURT_PROCESS || gMain.process[GAME_PROCESS] == QUESTIONING_PROCESS || gMain.process[GAME_PROCESS] == TESTIMONY_PROCESS)
+        {
+            ChangeScriptSection(gCaseGameoverSections[gMain.scenarioIdx]);
+            SetOrQueueHPBarState(5);
+        }
+    }
+}
+
+void sub_80168CC(void) {
+    switch(gMain.hpBarSubState)
+    {
+        case 0:
+            gMain.hpBarSubState++; // ????
+        case 1:
+            gMain.hpBarX -= 4;
+            if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS
+            && gMain.process[GAME_PROCESS_STATE] == INVESTIGATION_10 
+            && gMain.process[GAME_PROCESS_VAR1] == 7)
+            {
+                if(gMain.hpBarX <= 84)
+                {
+                    gMain.hpBarX = 84;
+                    ReturnToQueuedOrZeroHPBarState();
+                }
+            }
+            else
+            {
+                if(gMain.hpBarX <= 156)
+                {
+                    gMain.hpBarX = 156;
+                    ReturnToQueuedOrZeroHPBarState();
+                }
+            }
+    }
+}
+
+void sub_8016934(void) {
+    switch(gMain.hpBarSubState)
+    {
+        case 0:
+            gMain.hpBarSubState++; // ????
+            ClearHPBarOAM();
+            gOamObjects[72].attr0 = SPRITE_ATTR0_CLEAR;
+            gOamObjects[73].attr0 = SPRITE_ATTR0_CLEAR;
+            sub_800B6EC(&gMain, &gTestimony, 1);
+        case 1:
+            gMain.hpBarX += 4;
+            if(gMain.hpBarState == 3)
+                gMain.hpBarX += 4;
+            if(gMain.hpBarX >= 284)
+            {
+                gMain.hpBarX = 284;
+                gMain.hpBarY = 20;
+                ReturnToQueuedOrZeroHPBarState();
+            }
+    }
+}
+
+
+void sub_80169BC(void)
+{
+    switch(gMain.hpBarSubState)
+    {
+        case 0: // remove hp?
+            if(gMain.hpBarDamageAmount < 0)
+                PlaySE(156);
+            else if(gMain.hpBarDamageAmount > 0)
+                PlaySE(76);
+            gMain.hpBarValue -= gMain.hpBarDamageAmount;
+            if(gMain.hpBarValue < 0)
+                gMain.hpBarValue = 0;
+            if(gMain.hpBarValue > 80)
+                gMain.hpBarValue = 80;
+            gMain.spotlights[0].x = gMain.hpBarDamageAmount;
+            gMain.hpBarDamageAmount = 0;
+            gMain.hpBarQ16_16DisplayValue = Q_16_16(gMain.hpBarDisplayValue);
+            gMain.hpBarQ16_16DisplayChangeAmount = Q_16_16(gMain.hpBarValue - gMain.hpBarDisplayValue);
+            if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
+                gMain.hpBarQ16_16DisplayChangeAmount /= 40;
+            else
+                gMain.hpBarQ16_16DisplayChangeAmount /= 100;
+            gTestimony.animationOffsetX = 40;
+            gMain.advanceScriptContext = FALSE;
+            gMain.hpBarSubState++;
+            break;
+        case 1:
+        {
+            gMain.hpBarQ16_16DisplayValue += gMain.hpBarQ16_16DisplayChangeAmount;
+            gMain.hpBarDisplayValue = Q_16_16_TO_INT(gMain.hpBarQ16_16DisplayValue);
+            if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
+            {
+                if(gMain.hpBarDisplayValue < gMain.hpBarValue)
+                     gMain.hpBarDisplayValue = gMain.hpBarValue;
+            }
+            else 
+            {
+                if(gMain.hpBarDisplayValue > gMain.hpBarValue)
+                    gMain.hpBarDisplayValue = gMain.hpBarValue;
+            }
+            if(gTestimony.animationOffsetX > 0)
+                gTestimony.animationOffsetX--;
+            if(gMain.hpBarValue == gMain.hpBarDisplayValue)
+            {
+                if(gTestimony.animationOffsetX > 0)
+                {
+                    if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
+                        gMain.hpBarDisplayValue++;
+                    else
+                        gMain.hpBarDisplayValue--;
+                }
+                else 
+                {
+                    if(FindPlayingHPBarSmokeAnimations() == 0)
+                    {
+                        StopSE(76);
+                        StopSE(156);
+                        gMain.hpBarSlideOutDelay = 0;
+                        gMain.hpBarSubState++;
+                    }
+                }
+            }
+            break;
+        }
+        case 2:
+            if(gMain.hpBarSlideOutDelay < 30)
+            {
+                gMain.hpBarSlideOutDelay++;
+                break;
+            }
+            gMain.hpBarX += 4;
+            if(gMain.hpBarX >= 284)
+            {
+                gMain.hpBarX = 284;
+                ReturnToQueuedOrZeroHPBarState();
+                if(gMain.spotlights[0].x > 0)
+                    gMain.advanceScriptContext = TRUE;
+            }
+    }
+}
+void sub_8016B6C(void) {
+    if(gMain.hpBarSubState == 0)
+    {
+        gMain.hpBarSubState = 1;
+        gMain.hpBarDisplayFlag = 0;
+    }
+}
+
+void sub_8016B88(void)
+{
+    switch (gMain.hpBarSubState) {
+    case 0:
+        gMain.hpBarSubState = 1;
+        SetOrQueueHPBarState(0);
+        ClearHPBarOAM();
+        // fallthrough
+    case 1:
+        if (gMain.hpBarX > 80) {
+            gMain.hpBarX -= 8;
+            break;
+        }
+        gMain.hpBarX = 80;
+        if (gMain.hpBarY != 0) {
+            gMain.hpBarY -= 4;
+        }
+        // why check hpBarX?
+        if (gMain.hpBarX == 80 && gMain.hpBarY == 0) {
+            ReturnToQueuedOrZeroHPBarState();
+        }
+        break;
+    }
+}
+
+void sub_8016BF4(void)
+{
+    switch (gMain.hpBarSubState) {
+    case 0:
+        gMain.hpBarSubState = 1;
+        SetOrQueueHPBarState(0);
+        ClearHPBarOAM();
+        // fallthrough
+    case 1:
+        if (gMain.hpBarY != 4) {
+            gMain.hpBarY -= 4;
+            break;
+        }
+        ReturnToQueuedOrZeroHPBarState();
+        break;
+    }
+}
+
+void sub_8016C38(void)
+{
+    struct OamAttrs * oam;
+    switch (gMain.hpBarSubState) {
+    case 0:
+        gMain.hpBarSubState = 1;
+        SetOrQueueHPBarState(0);
+        // fallthrough
+    case 1:
+        if (gMain.hpBarX + 8 < 156) {
+            gMain.hpBarX += 8;
+            break;
+        }
+        gMain.hpBarX = 156;
+        if (gMain.hpBarY > 20) {
+            gMain.hpBarY -= 8;
+            break;
+        }
+        if (gMain.hpBarY + 4 < 20) {
+            gMain.hpBarY += 4;
+            break;
+        }
+        gMain.hpBarY = 20;
+        oam = &gOamObjects[72]; 
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        sub_800B6EC(&gMain, &gTestimony, 1);
+        ReturnToQueuedOrZeroHPBarState();
+        break;
+    }
+}
+
+void ProcessHPBar(void)
+{
+    switch (gMain.hpBarState) {
+    case 0:
+        sub_801688C();
+        break;
+    case 1:
+        sub_80168CC();
+        break;
+    case 2:
+    case 3:
+        sub_8016934();
+        break;
+    case 4:
+        sub_80169BC();
+        break;
+    case 5:
+        sub_8016B6C();
+        break;
+    case 6:
+        sub_8016B88();
+        break;
+    case 7:
+        sub_8016BF4();
+        break;
+    case 8:
+        sub_8016C38();
+        break;
+    }
+    CheckAndDrawHPBar();
+}
+
+int FindPlayingHPBarSmokeAnimations(void)
+{
+    int count = 0;
+    int i;
+    for(i = 0; i < 3; i++)
+    {
+        if(FindAnimationFromAnimId(107 + i))
+            count++;
+    }
+    return count;
+}
+
+void ClearHPBarOAM(void)
+{
+    int i;
+    s32 oamIdx;
+    struct OamAttrs *var_r0;
+
+    oamIdx = !(gScriptContext.flags & SCRIPT_FULLSCREEN) ? OAM_IDX_TEXT_FULLSCREEN : OAM_IDX_HPBAR;
+    for(i = 0; i < 14; i++) {
+        gOamObjects[oamIdx+i].attr0 = SPRITE_ATTR0_CLEAR;
+    }
+}
+
+void CheckAndDrawHPBar(void)
+{
+    if (sub_8016ED8() != 0) {
+        ClearHPBarOAM();
+        if (gMain.itemPlateState == 4) {
+            UpdateItemPlate(&gMain);
+        }
+        if(gMain.currentBG != 0x81) {
+
+            if (
+                (
+                    gMain.process[GAME_PROCESS] == SAVE_GAME_PROCESS && 
+                    (
+                        gMain.process[GAME_PROCESS_STATE] == 0 ||
+                        gMain.process[GAME_PROCESS_STATE] == 1
+                    )   
+                ) || 
+                (
+                    (
+                       !(
+                            gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS &&
+                            gMain.process[GAME_PROCESS_STATE] != RECORD_TAKE_THAT_SPECIAL &&
+                            (
+                                gMain.process[GAME_PROCESS_VAR2] == 0 ||
+                                gMain.process[GAME_PROCESS_VAR2] == 4 ||
+                                gMain.process[GAME_PROCESS_VAR2] == 5
+                            )
+                        ) &&
+                        !(
+                            gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS &&
+                            gMain.process[GAME_PROCESS_STATE] == RECORD_DETAIL_SUBMENU &&
+                            (
+                                gMain.process[GAME_PROCESS_VAR1] == 2 ||
+                                gMain.process[GAME_PROCESS_VAR1] == 3 ||
+                                gMain.process[GAME_PROCESS_VAR1] == 6
+                            )
+                        ) 
+                    ) &&
+                    (
+                        gMain.process[0] == COURT_PROCESS ||
+                        gMain.process[0] == INVESTIGATION_PROCESS ||
+                        gMain.process[0] == TESTIMONY_PROCESS ||
+                        gMain.process[0] == QUESTIONING_PROCESS ||
+                        gMain.process[0] == COURT_RECORD_PROCESS
+                    )
+                )
+            )
+            {
+                    LoadHPBarGraphics();
+                    AnimateHPBar();
+            }
+        }
+    }
+}
+
+void ResetHPBar(void)
+{
+    gMain.hpBarX = 284;
+    gMain.hpBarY = 20;
+    gMain.hpBarDisplayFlag = 1;
+    gMain.hpBarDamageAmount = 0;
+    SetOrQueueHPBarState(0);
+}
+
+void ResetHPBarHealthToMax(void)
+{
+    gMain.hpBarValueScenarioEnd = 80;
+    gMain.hpBarDisplayValue = 80;
+    gMain.hpBarValue = 80;
+}
+
+void SetOrQueueHPBarState(u32 wantedState)
+{
+    if(wantedState == 8 && (gMain.hpBarState == 2 || gMain.hpBarState == 3))
+        return;
+    gMain.hpBarSubState = 0;
+    gMain.hpBarSlideOutDelay = 0;
+    gMain.hpBarQueuedState = 0;
+    if(gMain.hpBarState == 0)
+        gMain.hpBarState = wantedState;
+    else
+        gMain.hpBarQueuedState = wantedState;
+}
+
+bool32 IsHPBarAnimating(void)
+{
+    if(gMain.hpBarState == 0 || gMain.hpBarState == 5)
+        return FALSE;
+    return TRUE; 
+}
+
+bool32 sub_8016ED8(void) {
+    struct Main * main = &gMain;
+    if(main->hpBarX == 284 && main->hpBarY == 20)
+        return FALSE;
+    if(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && gScriptContext.flags & SCRIPT_FULLSCREEN)
+        return FALSE;
+    if(main->hpBarDisplayFlag)
+        return TRUE;
+    return FALSE;
 }

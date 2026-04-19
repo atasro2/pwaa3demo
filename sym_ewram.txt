@@ -15,9 +15,6 @@
 . = 0x000020D4; gUnknown_020020D4 = .;
 . = 0x0000AFC0; gUnknown_0200AFC0 = .;
 . = 0x0000B1C0; gUnknown_0200B1C0 = .;
-. = 0x00011DC0; gUnknown_02011DC0 = .;
-. = 0x00011FC0; gUnknown_02011FC0 = .;
-. = 0x00011FC4; gUnknown_02011FC4 = .;
 . = 0x0002B1C0; gUnknown_0202B1C0 = .;
 . = 0x0002CFC0; eBGDecompBuffer = .;
 . = 0x0002D740; gUnknown_0202D740 = .;

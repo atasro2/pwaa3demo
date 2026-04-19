@@ -12,10 +12,6 @@
 #include "constants/animation.h"
 #include "constants/script.h"
 
-extern u16 gPsycheLockChainPalettes[][16];
-extern s16 gPsycheLockLockPositions[];
-extern u8 * gPsycheLockChainTilemaps[];
-
 void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains);
 
 void InitPsycheLockChain(struct PsycheLockChains * chains, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
@@ -904,6 +900,7 @@ bool32 IsPsycheLockStopPresentButtonsAnimating(void)
     return TRUE;
 }
 
+// Unity: GSPsylock.KeyObjDelete()
 void sub_8015C18(void) {
     u32 i;
     for(i = 0; i < gPsycheLock.numLocksTotal; i++)

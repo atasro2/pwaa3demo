@@ -1706,8 +1706,8 @@ _0801293C: .4byte 0x05000200
 _08012940: .4byte gUnknown_03004150
 _08012944: .4byte 0x040000D4
 
-	thumb_func_start sub_8012948
-sub_8012948: @ 0x08012948
+	thumb_func_start RestoreAnimationsFromBuffer
+RestoreAnimationsFromBuffer: @ 0x08012948
 	push {r4, r5, r6, lr}
 	sub sp, #0x1c
 	adds r4, r0, #0
@@ -1872,8 +1872,8 @@ _08012A88: .4byte gUnknown_08027090
 _08012A8C: .4byte 0x040000D4
 _08012A90: .4byte 0x8000000E
 
-	thumb_func_start sub_8012A94
-sub_8012A94: @ 0x08012A94
+	thumb_func_start SaveAnimationDataToBuffer
+SaveAnimationDataToBuffer: @ 0x08012A94
 	adds r1, r0, #0
 	ldr r2, _08012ACC @ =gAnimation+0x44
 	ldr r3, _08012AD0 @ =0x0000083C
@@ -2137,8 +2137,8 @@ _08012C88:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8012C90
-sub_8012C90: @ 0x08012C90
+	thumb_func_start OffsetAllAnimations
+OffsetAllAnimations: @ 0x08012C90
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -3454,7 +3454,7 @@ _08013654:
 	ldr r7, _080136A0 @ =0x0000FFFE
 	adds r4, r5, #0
 _08013682:
-	ldr r0, _080136A4 @ =gUnknown_03003840
+	ldr r0, _080136A4 @ =gMain+0x90
 	ldrh r0, [r0]
 	cmp r0, r7
 	bne _080136A8
@@ -3467,13 +3467,13 @@ _08013694: .4byte 0x000001FF
 _08013698: .4byte 0x040000D4
 _0801369C: .4byte 0x05000200
 _080136A0: .4byte 0x0000FFFE
-_080136A4: .4byte gUnknown_03003840
+_080136A4: .4byte gMain+0x90
 _080136A8:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
 _080136AE:
-	bl sub_8005574
+	bl ColorFadeGrayscale
 	strh r0, [r4]
 	adds r4, #2
 	adds r0, r5, #0
@@ -3529,7 +3529,7 @@ _08013716:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1

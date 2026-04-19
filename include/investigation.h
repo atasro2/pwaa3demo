@@ -23,7 +23,7 @@ struct ExaminationData
     /* +0x04 */ struct Point4 area;
 };  
 
-struct InvestigationStruct // unity: tantei_work_
+struct InvestigationStruct // unity AA4: TANTEI_WK
 {
     /* +0x00 */ u16 pointerX;
     /* +0x02 */ u16 pointerY;
