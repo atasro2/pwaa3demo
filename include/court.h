@@ -7,7 +7,7 @@ struct TestimonyStruct
     /* +0x01 */ u8 timer; // unity AA4: wait_timer
     /* +0x02 */ u8 pressPromptY; // unity AA4: pos_y_yusaburu
     /* +0x03 */ u8 presentPromptY; // unity AA4: pos_y_tukitukeru
-    /* +0x04 */ u8 unk4; // ??
+    /* +0x04 */ u8 animationOffsetX; // this gets (ab)userd both for testimony arrows and health bar stuff
     u8 fill5[3];
 };
 
@@ -16,6 +16,13 @@ extern struct TestimonyStruct gTestimony;
 void SetCurrentEpisodeBit();
 void UpdateQuestioningMenuSprites(struct Main *, struct TestimonyStruct *, u32);
 void UpdateHealthSprites(struct Main *, struct TestimonyStruct *);
+
+void SetOAMForCourtBenchSpritesDefense(s32, s32, s32);
+void SetOAMForCourtBenchSpritesProsecution(s32, s32, s32);
+void SetOAMForCourtBenchSpritesWitness(s32, s32, s32);
+
+void LoadCounselBenchGraphics();
+void LoadWitnessBenchGraphics();
 
 void CourtProcess(struct Main *);
 void TestimonyProcess(struct Main *);
@@ -44,11 +51,5 @@ void QuestioningAnim(struct Main *);
 void QuestioningHoldIt(struct Main *);
 void QuestioningObjection(struct Main *);
 /* end process functions */
-
-void LoadWitnessBenchGraphics(void);
-void LoadCounselBenchGraphics(void);
-void SetOAMForCourtBenchSpritesWitness(u32, u32, u32);
-void SetOAMForCourtBenchSpritesDefense(u32, u32, u32);
-void SetOAMForCourtBenchSpritesProsecution(u32, u32, u32);
 
 #endif//GUARD_COURT_H

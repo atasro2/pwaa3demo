@@ -58,7 +58,7 @@ struct CourtScroll
 
 extern struct CourtScroll gCourtScroll;
 
-u8 * GetBGPalettePtr(u32 bgId);
+u8 * sub_8002278(u16 bgId);
 
 void InitBGs(void);
 void InitBG3(void);
@@ -77,8 +77,13 @@ void UpdateBG2Window(struct CourtRecord *);
 extern void sub_80037C8(void);
 void SetTextboxNametag(u32, u32);
 void UpdateBGTilemaps(void);
-u16 AdjustColorByMode(u16 color, u16 y, u16 mode);
 
 void sub_80051CC(u32);
+//u16 sub_800389C(u16 color, u16 y, u16 mode);
+u16 ColorFadeSepia(u16 color, u16 y, u16 mode);
 
+void EnableDetentionCenterMask(bool16);
+void SetTextboxSize(u32);
+void sub_80060E8(void);
+void sub_800610C(void);
 #endif//GUARD_BACKGROUND_H

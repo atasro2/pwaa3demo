@@ -1089,12 +1089,12 @@ void AdvanceScriptContext(void) {
                         {
                             PlaySE(68);
                         } else {
-                            if (gUnknown_08028546[scriptCtx->unk24] == 1)
+                            if (gUnknown_08028546[scriptCtx->textboxNameId] == 1)
                             {
                                 PlaySE(46);
                             }
                             do{}while(0); // ! fakematch? probably has deadcode somewhere thus needing this (permuter match)
-                            if (gUnknown_08028546[scriptCtx->unk24] == 0)
+                            if (gUnknown_08028546[scriptCtx->textboxNameId] == 0)
                             {
                                 PlaySE(45);
                             }
@@ -1118,7 +1118,7 @@ void LoadCurrentScriptIntoRam(void)
     gScriptContext.textSpeed = 0;
     gScriptContext.flags = 0;
     gScriptContext.unk27 = 0;
-    gScriptContext.unk24 = 0;
+    gScriptContext.textboxNameId = 0;
     gScriptContext.unk22 = 0;
     gScriptContext.unk40 = 0x80;
     gScriptContext.unk44 = 0;

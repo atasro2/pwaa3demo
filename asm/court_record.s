@@ -253,12 +253,12 @@ _0800F33A:
 	ldrh r2, [r1, #0x1c]
 	ands r0, r2
 	strh r0, [r1, #0x1c]
-	ldr r1, _0800F3C0 @ =gUnknown_030037BC
+	ldr r1, _0800F3C0 @ =gMain+0xC
 	movs r0, #0x83
 	lsls r0, r0, #1
 	str r0, [r1]
 _0800F34C:
-	ldr r1, _0800F3C4 @ =gUnknown_030037B8
+	ldr r1, _0800F3C4 @ =gMain+0x8
 	ldr r0, _0800F3C8 @ =0x00000506
 	str r0, [r1]
 _0800F352:
@@ -313,8 +313,8 @@ _0800F3B2:
 	.align 2, 0
 _0800F3B8: .4byte gScriptContext
 _0800F3BC: .4byte 0x0000FFEF
-_0800F3C0: .4byte gUnknown_030037BC
-_0800F3C4: .4byte gUnknown_030037B8
+_0800F3C0: .4byte gMain+0xC
+_0800F3C4: .4byte gMain+0x8
 _0800F3C8: .4byte 0x00000506
 _0800F3CC: .4byte gCourtRecord
 _0800F3D0: .4byte gMain
@@ -348,7 +348,7 @@ CourtRecordMain: @ 0x0800F3E0
 	ldrb r2, [r1, #0xc]
 	orrs r0, r2
 	strb r0, [r1, #0xc]
-	ldr r1, _0800F428 @ =gUnknown_030037B8
+	ldr r1, _0800F428 @ =gMain+0x8
 	ldr r0, _0800F42C @ =0x00000707
 	str r0, [r1]
 	b _0800F530
@@ -356,7 +356,7 @@ CourtRecordMain: @ 0x0800F3E0
 _0800F41C: .4byte gScriptContext
 _0800F420: .4byte 0x0000FFBF
 _0800F424: .4byte gCourtRecord
-_0800F428: .4byte gUnknown_030037B8
+_0800F428: .4byte gMain+0x8
 _0800F42C: .4byte 0x00000707
 _0800F430:
 	bl sub_800EC48
@@ -566,7 +566,7 @@ _0800F596:
 	movs r0, #0x21
 	strh r0, [r1]
 _0800F5DA:
-	ldr r0, _0800F60C @ =gUnknown_030037B8
+	ldr r0, _0800F60C @ =gMain+0x8
 	ldr r1, [r5, #0xc]
 	str r1, [r0]
 	ldr r2, _0800F610 @ =0x000002BA
@@ -586,7 +586,7 @@ _0800F5FC: .4byte gScriptContext
 _0800F600: .4byte gBG1MapBuffer
 _0800F604: .4byte 0x000004DC
 _0800F608: .4byte 0x000004DE
-_0800F60C: .4byte gUnknown_030037B8
+_0800F60C: .4byte gMain+0x8
 _0800F610: .4byte 0x000002BA
 
 	thumb_func_start CourtRecordChangeState
@@ -1379,7 +1379,7 @@ _0800FC64:
 	ldrh r0, [r5, #0x34]
 	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x34]
-	bl sub_8004FAC
+	bl CopyBGDataToVramAndScrollBG
 	ldr r3, _0800FD30 @ =gSaveDataBuffer
 	adds r0, r3, #0
 	adds r0, #0x4d
@@ -1490,7 +1490,7 @@ _0800FD70: .4byte 0xFDFFFFFF
 _0800FD74: .4byte gCourtRecord
 _0800FD78:
 	ldrh r0, [r5, #0x34]
-	bl sub_8004FAC
+	bl CopyBGDataToVramAndScrollBG
 	ldr r0, _0800FDA0 @ =gMain
 	ldr r2, _0800FDA4 @ =0x000002C6
 	adds r0, r0, r2
@@ -2006,14 +2006,14 @@ _08010194:
 	ands r0, r3
 	strh r0, [r1, #0x1c]
 _0801019E:
-	ldr r1, _080101B0 @ =gUnknown_030037B8
+	ldr r1, _080101B0 @ =gMain+0x8
 	ldr r0, [r5, #0xc]
 	str r0, [r1]
 	b _08010272
 	.align 2, 0
 _080101A8: .4byte gScriptContext
 _080101AC: .4byte 0x0000FFEF
-_080101B0: .4byte gUnknown_030037B8
+_080101B0: .4byte gMain+0x8
 _080101B4:
 	adds r0, #1
 	strb r0, [r5, #0xb]
@@ -2271,7 +2271,7 @@ EvidenceAddedExit: @ 0x080103B4
 	ldrsb r0, [r4, r0]
 	cmp r0, #0
 	bne _08010414
-	ldr r1, _080103EC @ =gUnknown_030037B8
+	ldr r1, _080103EC @ =gMain+0x8
 	ldr r0, [r5, #0xc]
 	str r0, [r1]
 	subs r1, #8
@@ -2286,7 +2286,7 @@ EvidenceAddedExit: @ 0x080103B4
 	bl SetInactiveActionButtons
 	b _08010414
 	.align 2, 0
-_080103EC: .4byte gUnknown_030037B8
+_080103EC: .4byte gMain+0x8
 _080103F0: .4byte gInvestigation
 _080103F4:
 	ldrb r5, [r5, #9]
@@ -2906,18 +2906,18 @@ FindEvidenceInCourtRecord: @ 0x0801090C
 	adds r4, r1, #0
 	cmp r0, #0
 	beq _08010928
-	ldr r3, _08010920 @ =gUnknown_030028FC
+	ldr r3, _08010920 @ =gCourtRecord+0x3C
 	adds r0, r3, #0
 	subs r0, #0x3c
 	ldrb r1, [r0, #0x11]
 	b _08010930
 	.align 2, 0
-_08010920: .4byte gUnknown_030028FC
+_08010920: .4byte gCourtRecord+0x3C
 _08010924:
 	adds r0, r2, #0
 	b _08010948
 _08010928:
-	ldr r3, _08010950 @ =gUnknown_030028DC
+	ldr r3, _08010950 @ =gCourtRecord+0x1C
 	adds r0, r3, #0
 	subs r0, #0x1c
 	ldrb r1, [r0, #0x10]
@@ -2941,11 +2941,11 @@ _08010948:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08010950: .4byte gUnknown_030028DC
+_08010950: .4byte gCourtRecord+0x1C
 
 	thumb_func_start FindFirstEmptySlotInCourtRecord
 FindFirstEmptySlotInCourtRecord: @ 0x08010954
-	ldr r2, _08010968 @ =gUnknown_030028DC
+	ldr r2, _08010968 @ =gCourtRecord+0x1C
 	cmp r0, #0
 	beq _0801095C
 	adds r2, #0x20
@@ -2958,7 +2958,7 @@ _0801095E:
 	adds r0, r1, #0
 	b _08010978
 	.align 2, 0
-_08010968: .4byte gUnknown_030028DC
+_08010968: .4byte gCourtRecord+0x1C
 _0801096C:
 	adds r1, #1
 	adds r2, #1
@@ -3084,7 +3084,7 @@ sub_8010A34: @ 0x08010A34
 	ldrh r1, [r4]
 	cmp r1, r0
 	beq _08010AE0
-	ldr r6, _08010A98 @ =gUnknown_0300710A
+	ldr r6, _08010A98 @ =gScriptContext+0x2A
 	movs r1, #0xf0
 	lsls r1, r1, #8
 	adds r5, r1, #0
@@ -3115,7 +3115,7 @@ _08010A72:
 _08010A8C: .4byte gUnknown_0814D998
 _08010A90: .4byte gMain
 _08010A94: .4byte 0x0000FFFF
-_08010A98: .4byte gUnknown_0300710A
+_08010A98: .4byte gScriptContext+0x2A
 _08010A9C: .4byte gScriptContext
 _08010AA0:
 	ldrh r0, [r4]
@@ -3386,7 +3386,7 @@ _08010C6C:
 _08010C98: .4byte gBG1MapBuffer
 _08010C9C:
 	adds r0, r4, #0
-	bl sub_8010DD8
+	bl LoadItemPlateGfx
 	adds r0, r4, #0
 	adds r0, #0x9a
 	ldrb r0, [r0]
@@ -3488,7 +3488,7 @@ _08010D64:
 	cmp r2, #6
 	bhi _08010DD2
 	adds r0, r4, #0
-	bl sub_8010DD8
+	bl LoadItemPlateGfx
 	movs r1, #0
 	movs r0, #0x10
 	strh r0, [r5]
@@ -3543,8 +3543,8 @@ _08010DD2:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_8010DD8
-sub_8010DD8: @ 0x08010DD8
+	thumb_func_start LoadItemPlateGfx
+LoadItemPlateGfx: @ 0x08010DD8
 	push {r4, lr}
 	ldr r4, _08010E18 @ =eGeneralScratchpadBuffer
 	ldr r2, _08010E1C @ =gUnknown_08026E20
@@ -3592,7 +3592,7 @@ sub_8010E38: @ 0x08010E38
 	mov r7, r8
 	push {r7}
 	adds r7, r0, #0
-	ldr r4, _08010F24 @ =gUnknown_030020C2
+	ldr r4, _08010F24 @ =gBG1MapBuffer+0x42
 	adds r4, #2
 	movs r2, #0
 	adds r3, r7, #0
@@ -3600,7 +3600,7 @@ sub_8010E38: @ 0x08010E38
 	movs r0, #0
 	ldrsb r0, [r3, r0]
 	adds r0, #1
-	ldr r1, _08010F24 @ =gUnknown_030020C2
+	ldr r1, _08010F24 @ =gBG1MapBuffer+0x42
 	mov r8, r1
 	cmp r2, r0
 	bhs _08010E90
@@ -3717,13 +3717,13 @@ _08010F1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08010F24: .4byte gUnknown_030020C2
+_08010F24: .4byte gBG1MapBuffer+0x42
 
 	thumb_func_start sub_8010F28
 sub_8010F28: @ 0x08010F28
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
-	ldr r4, _08011008 @ =gUnknown_030020F8
+	ldr r4, _08011008 @ =gBG1MapBuffer+0x78
 	subs r4, #2
 	movs r2, #0
 	adds r3, r7, #0
@@ -3731,7 +3731,7 @@ sub_8010F28: @ 0x08010F28
 	movs r0, #0
 	ldrsb r0, [r3, r0]
 	adds r0, #1
-	ldr r1, _08011008 @ =gUnknown_030020F8
+	ldr r1, _08011008 @ =gBG1MapBuffer+0x78
 	mov ip, r1
 	cmp r2, r0
 	bhs _08010F76
@@ -3844,7 +3844,7 @@ _08011002:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011008: .4byte gUnknown_030020F8
+_08011008: .4byte gBG1MapBuffer+0x78
 
 	thumb_func_start sub_801100C
 sub_801100C: @ 0x0801100C
@@ -3854,7 +3854,7 @@ sub_801100C: @ 0x0801100C
 	ldrb r0, [r0]
 	cmp r0, #2
 	bls _0801102A
-	ldr r1, _08011040 @ =gUnknown_030020C0
+	ldr r1, _08011040 @ =gBG1MapBuffer+0x40
 	movs r0, #0
 	ldr r3, _08011044 @ =0x0000013F
 	movs r2, #0
@@ -3877,7 +3877,7 @@ _0801102A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08011040: .4byte gUnknown_030020C0
+_08011040: .4byte gBG1MapBuffer+0x40
 _08011044: .4byte 0x0000013F
 _08011048: .4byte _0801104C
 _0801104C: @ jump table

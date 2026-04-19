@@ -13,8 +13,8 @@ gPalEvidenceProfileDesc:
 gGfxSaveGameTiles:
     .incbin "graphics/ui/message_box/save_game_tiles.4bpp"
 
-    .global gUnknown_08181820
-gUnknown_08181820:
+    .global gGfx4bppNametags
+gGfx4bppNametags:
     .incbin "baserom.gba", 0x00181820, 0x5000
 
     .global gGfxDetentionCenterBottomTiles

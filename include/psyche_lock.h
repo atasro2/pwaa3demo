@@ -100,4 +100,9 @@ s32 GetPsycheLockDataIndexByRoomAndPerson(u16 roomId, u16 personId);
 s32 IsPresentedEvidenceValidForPsycheLock(struct PsycheLockData * data, u16 evidenceId);
 void ShowPsycheLockLocksAndChainsWithoutAnimating(u32 numPsycheLocks);
 
+void sub_8015C18(void);
+void SetPsycheLockState(u32, u32);
+void UpdatePsycheLockAnimation(void);
+
+
 #endif//GUARD_PSYCHE_LOCK_H

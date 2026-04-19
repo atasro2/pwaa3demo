@@ -900,7 +900,7 @@ char * gScriptNames[] = {
     "SCE3-3 SAIBAN2   ",
 };
 
-extern u8 gUnknown_080266D0[]; // scenario process array
+extern u8 gCaseStartProcess[]; // scenario process array
 
 void sub_8002198(struct DebugContext * debug) {
     struct ScenarioDebug * scenarioDebug = &debug->menu.scenario;
@@ -920,7 +920,7 @@ void sub_8002198(struct DebugContext * debug) {
     if(gJoypad.pressedKeys & A_BUTTON) {
         ResetGameState();
         main->scenarioIdx = scenarioDebug->unk00;
-        SET_PROCESS_PTR(gUnknown_080266D0[main->scenarioIdx], 0, 0, 0, main);
+        SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
     } else {
         nullsub_20("SCENARIO SELECT     ", 5, 3);
         nullsub_20(gScriptNames[scenarioDebug->unk00], 5, 5);

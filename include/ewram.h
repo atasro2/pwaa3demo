@@ -11,6 +11,7 @@ extern u8 eUnknown_02002BC1;
 
 #define eGeneralScratchpadBuffer ((void *)EWRAM_START+0xAFC0)
 #define eScriptHeap ((void*) (EWRAM_START + 0x11FC0))
+#define gUnknown_0202B1C0 ((void*) (EWRAM_START + 0x2B1C0))
 #define eBGDecompBuffer ((void*) (EWRAM_START + 0x2CFC0))
 #define eBGDecompBuffer2 ((void*) (EWRAM_START + 0x36500))
 #define eSpeedlineDecompBuffer ((void*) (EWRAM_START + 0x3B000))

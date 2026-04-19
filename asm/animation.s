@@ -249,7 +249,7 @@ _08013654:
 	ldr r7, _080136A0 @ =0x0000FFFE
 	adds r4, r5, #0
 _08013682:
-	ldr r0, _080136A4 @ =gUnknown_03003840
+	ldr r0, _080136A4 @ =gMain+0x90
 	ldrh r0, [r0]
 	cmp r0, r7
 	bne _080136A8
@@ -262,13 +262,13 @@ _08013694: .4byte 0x000001FF
 _08013698: .4byte 0x040000D4
 _0801369C: .4byte 0x05000200
 _080136A0: .4byte 0x0000FFFE
-_080136A4: .4byte gUnknown_03003840
+_080136A4: .4byte gMain+0x90
 _080136A8:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
 _080136AE:
-	bl AdjustColorByMode
+	bl ColorFadeGrayscale
 	strh r0, [r4]
 	adds r4, #2
 	adds r0, r5, #0
@@ -324,7 +324,7 @@ _08013716:
 	ldrh r0, [r4]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_800549C
+	bl ColorFadeSepia
 	strh r0, [r4]
 	adds r4, #2
 	adds r5, #1

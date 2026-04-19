@@ -24,7 +24,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             gIORegisters.lcd_bg1vofs = 0;
             scriptCtx->textboxState = 0;
             CopyTextboxTilesToBG1MapBuffer();
-            SetTextboxNametag(gScriptContext.unk24 & 0x7F, gMain.currentNametagRightSide);
+            SetTextboxNametag(gScriptContext.textboxNameId & 0x7F, gMain.currentNametagRightSide);
             DmaCopy16(3, gPalEvidenceProfileDesc, PLTT, 0x20);
             break;
         case 1: // disable textbox
@@ -592,7 +592,7 @@ bool32 Command3F(struct ScriptContext *_unused)
             gIORegisters.lcd_bg1vofs = 0;
             scriptCtx->textboxState = 0;
             CopyTextboxTilesToBG1MapBuffer();
-            SetTextboxNametag(scriptCtx->unk24 & 0x7F, gMain.currentNametagRightSide);
+            SetTextboxNametag(scriptCtx->textboxNameId & 0x7F, gMain.currentNametagRightSide);
             DmaCopy16(3, gPalEvidenceProfileDesc, PLTT, 0x20);
             rect.x = gMain.Bg256_pos_x + investigation->pointerX + 12;
             rect.y = gMain.Bg256_pos_y + investigation->pointerY;
