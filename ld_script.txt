@@ -45,7 +45,6 @@ SECTIONS {
         src/script_commands3.o(.text);
         src/opening.o(.text);
         src/demo.o(.text);
-        asm/butterfly.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
         src/m4a.o(.text);
@@ -77,7 +76,6 @@ SECTIONS {
         src/script_commands2.o(.rodata);
         rodata/script_commands.o(.rodata);
         src/demo.o(.rodata);
-        rodata/butterfly.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/song_data.o(.rodata);
         src/agb_sram.o(.rodata);

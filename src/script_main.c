@@ -1126,9 +1126,9 @@ void LoadCurrentScriptIntoRam(void)
     gUnknown_030070B0.unk20 = 0;
     gScriptContext.unk4E = 0;
     for(i = 0; i < 3; i++) {
-        gScriptContext.unk54[i][0] = 0;
-        gScriptContext.unk54[i][1] = 0;
-        gScriptContext.unk54[i][2] = 0;
+        gScriptContext.unk54[i].unk0 = 0;
+        gScriptContext.unk54[i].unk2 = 0;
+        gScriptContext.unk54[i].unk4 = 0;
     }
     for(i = 0; i < 16; i++) {
         gUnknown_030070B0.unk00[i] = 0;
