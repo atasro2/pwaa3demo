@@ -6,6 +6,7 @@
 #include "agb_sram.h"
 #include "save.h"
 #include "graphics.h"
+#include "court.h"
 // #include "constants/script.h"
 #include "constants/songs.h"
 #include "constants/process.h"

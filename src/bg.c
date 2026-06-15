@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "ewram.h"
 #include "save.h"
+#include "m4a.h"
 #include "constants/process.h"
 
 u16 gCourtScrollGfxFrameIndices[2][0x10] = {
@@ -18,6 +19,8 @@ extern const u16 gMapCourtRecordNormalWindow[32*12];
 extern const u16 gMapCourtRecordSaveWindow[32*12];
 extern const u16 gMapSpeedlines[0x2C0];
 extern const u16 gUnknown_08024E78[0x2C0];
+
+void LoadAndAdjustBGPaletteGreenTint(u16 bgId, u16 intensity, u16 mode);
 
 u8 *sub_8002278(u16 arg0)
 {
@@ -920,14 +923,14 @@ void DecompressCurrentBGStripe(u32 bgId)
         }
     }
     else
-        gMain.bgStripeDestPtr = (u8*)gMain.bgStripeDestPtr + i;
+        gMain.bgStripeDestPtr = (u32*)((u8*)gMain.bgStripeDestPtr + i);
     switch (gMain.unk258) {
     case 1:
     case 2:
     case 6: {
         u8 * src = gUnknown_0202B1C0;
         LZ77UnCompWram(bgData, src);
-        bgData = gMain.bgStripeDestPtr;
+        bgData = (u8*)gMain.bgStripeDestPtr;
         DmaCopy16(3, src, bgData, i / 4);
         bgData += i / 2;
         src += i / 4 ;
@@ -1018,7 +1021,7 @@ void DecompressBackgroundIntoBuffer(u32 bgId)
     for(i = 1; i < 11; i++)
     {
         if(i > 1) {
-            gMain.bgStripeDestPtr = (u8*)gMain.bgStripeDestPtr + size;
+            gMain.bgStripeDestPtr = (void*)gMain.bgStripeDestPtr + size;
             bgData = gBackgroundTable[bgId].bgData;
             bgData += gMain.bgStripeOffsets[i];
         }
@@ -1026,9 +1029,9 @@ void DecompressBackgroundIntoBuffer(u32 bgId)
         case 1:
         case 2:
         case 6: {
-            u8 * src = gSaveDataBuffer.bg0Map; // what
+            u8 * src = (void*)gSaveDataBuffer.bg0Map; // what
             LZ77UnCompWram(bgData, src);
-            bgData = gMain.bgStripeDestPtr;
+            bgData = (void*)gMain.bgStripeDestPtr;
             DmaCopy16(3, src, bgData, size / 4);
             bgData += size / 2;
             src += size / 4 ;
@@ -1089,21 +1092,21 @@ s32 sub_800407C(s32 bgId)
     switch (gAnimation[1].animationInfo.personId) {
     case 39:
         src = NULL;
-        dst = PLTT+0x1E0;
+        dst = (void*)PLTT+0x1E0;
         break;
     case 40:
         src = NULL;
-        dst = PLTT+0x1A0;
+        dst = (void*)PLTT+0x1A0;
         break;
     case 37:
         src = gPal_BustupMia;
-        dst = PLTT+0x1C0;
+        dst = (void*)PLTT+0x1C0;
         break;
     default:
     case 36:
     case 38:
         src = NULL;
-        dst = PLTT+0x1C0;
+        dst = (void*)PLTT+0x1C0;
     }
     DmaCopy16(3, src, dst, 0x20); // i hate capcom
     
@@ -1120,7 +1123,7 @@ s32 sub_800407C(s32 bgId)
     } while(0);
     DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
     src = eSpeedlineDecompBuffer;
-    dst = VRAM+0x8B00;
+    dst = (void*)VRAM+0x8B00;
     DmaCopy16(3, src, dst, 0x5000);
     src = gBG2MapBuffer;
     dst = BG_SCREEN_ADDR(30);
@@ -1201,7 +1204,7 @@ void sub_8004318() {
     struct Main * main = &gMain;
     u16 * src;
     u16 * dst;
-    src = gMapSpeedlines;
+    src = (void*)gMapSpeedlines;
     dst = gBG3MapBuffer;
     DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
     if(main->effectType == 0xFFFE) {
@@ -1219,7 +1222,7 @@ void sub_8004390(u8* tiles, u32 arg1, u32 is4bpp) {
     u16 * dst;
     u32 i, j;
     if((arg1 & 0xF) == 0) {
-        src = gMapSpeedlines;
+        src = (void*)gMapSpeedlines;
         dst = gBG3MapBuffer;
         DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         if(arg1 & 0x1000000) {
@@ -2414,7 +2417,7 @@ void sub_80060E8(void)
 {
     u16 * src;
     u16 * dst;
-    src = gMapSpeedlines;
+    src = (void*)gMapSpeedlines;
     dst = gBG3MapBuffer;
     DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
 }
@@ -2423,7 +2426,7 @@ void sub_800610C(void)
 {
     u16 * src;
     u16 * dst;
-    src = gUnknown_08024E78;
+    src = (void*)gUnknown_08024E78;
     dst = gBG3MapBuffer;
     DmaCopy16(3, src, dst, sizeof(gUnknown_08024E78));
 }

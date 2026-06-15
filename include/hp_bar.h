@@ -6,6 +6,7 @@ void ResetHPBar(void);
 void ResetHPBarHealthToMax(void);
 bool32 IsHPBarAnimating(void);
 bool32 sub_8016ED8(void);
+void CheckAndDrawHPBar(void);
 
 extern u16 gUnknown_080266E8[];
 

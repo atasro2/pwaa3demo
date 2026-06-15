@@ -1017,7 +1017,7 @@ bool8 sub_800EC48(void)
             if ((anim->animationInfo.personId == 0xB) || (anim->animationInfo.personId == 0x21)) {
                 dst = gUnknown_0826FE38;
                 src = ((u32*)dst)[1] + gUnknown_08252498;
-                dst = (u32*)(OBJ_PLTT+0x1A0);
+                dst = (void*)(OBJ_PLTT+0x1A0);
                 DmaCopy16(3, src, dst, 0x20);
                 anim = sub_8016FB4();
                 anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;

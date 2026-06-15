@@ -163,10 +163,10 @@ void sub_801D984(void) {
     ip += 0x4D0;
     DmaCopy16(3, ip, eVRAMScratchpadBuffer, 0x4B00);
     src = eSpeedlineDecompBuffer;
-    dst = (u8*)VRAM + 0x8B20;
+    dst = (void*)VRAM + 0x8B20;
     DmaCopy16(3, src, dst, 0x5000);
     src = gUnknown_08208AA0;
-    dst = (u8*)PLTT + 0x1C0;
+    dst = (void*)PLTT + 0x1C0;
     DmaCopy16(3, src, dst, 0x20);
     if(gMain.unk3D & 8) {
         u16 buf[0x10];
@@ -179,8 +179,8 @@ void sub_801D984(void) {
     } else {
         DmaCopy16(3, src, dst, 0x20);
     }
-    src = gBG2MapBuffer;
-    dst = (u8*)BG_SCREEN_ADDR(30);
+    src = (void*)gBG2MapBuffer;
+    dst = (void*)BG_SCREEN_ADDR(30);
     DmaCopy16(3, src, dst, 0x580);
     REG_BG2CNT = ioRegs->lcd_bg2cnt;
     for(i = 0; i < 0x20; i++) {
@@ -743,7 +743,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             scriptCtx->unk30[0] = 1;
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
@@ -796,7 +796,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             anim->flags |= 0x80;
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             DmaCopy16(3, src, dst, 0x20);
             anim = sub_8016FB4();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
@@ -833,7 +833,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             if (++scriptCtx->unk30[1] >= scriptCtx->unk46[0] * 7) {
                 dst = gUnknown_0826F888;
                 src = gUnknown_08252498 + 1[(u32*)dst];
-                dst = (u32*)(OBJ_PLTT+0x1A0);
+                dst = (void*)(OBJ_PLTT+0x1A0);
                 DmaCopy16(3, src, dst, 0x20);
                 ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 7);
                 *(u16*)&REG_BLDALPHA = ioRegs->lcd_bldalpha;
@@ -859,7 +859,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
         case 0:
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
@@ -903,7 +903,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
             anim = &gAnimation[1];
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
                     *dst = ColorFadeGrayscale(*src, 0x20, 0);
@@ -945,7 +945,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             if (++scriptCtx->unk30[1] >= scriptCtx->unk46[1] * 7) {   
                 dst = gUnknown_0826F888;
                 src = ((u32*)dst)[1] + gUnknown_08252498;
-                dst = (u32*)(OBJ_PLTT+0x1A0);
+                dst = (void*)(OBJ_PLTT+0x1A0);
                 anim = &gAnimation[1];
                 if (anim->flags & ANIM_0x400) {
                     for(i = 0; i < 0x10; i++) {
@@ -971,7 +971,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
         case 0:
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
@@ -1014,7 +1014,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
         case 0:
             dst = gUnknown_0826FE38;
             src = ((u32*)dst)[1] + gUnknown_08252498;
-            dst = (u32*)(OBJ_PLTT+0x1A0);
+            dst = (void*)(OBJ_PLTT+0x1A0);
             anim = &gAnimation[1];
             if (anim->flags & ANIM_0x400) {
                 for(i = 0; i < 0x10; i++) {
@@ -1057,7 +1057,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             if (++scriptCtx->unk30[1] >= scriptCtx->unk46[1] * 7) {
                 dst = gUnknown_0826F888;
                 src = ((u32*)dst)[1] + gUnknown_08252498;
-                dst = (u32*)(OBJ_PLTT+0x1A0);
+                dst = (void*)(OBJ_PLTT+0x1A0);
                 anim = &gAnimation[1]; 
                 if (anim->flags & ANIM_0x400) {
                     for(i = 0; i < 0x10; i++) {
@@ -1108,7 +1108,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             scriptCtx->unk30[1] = 1;
             break;
         case 2:
-            src = sub_8002278(14);    
+            src = (void*)sub_8002278(14);    
             DmaCopy16(3, src, PLTT+0x40, 0x20);
             if (scriptCtx->unk46[0]) {
                 switch (scriptCtx->unk46[1]) {
@@ -1344,10 +1344,10 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_WRAP;
             ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_SCREENBASE(31) | BGCNT_WRAP;
             src = eBGDecompBuffer+0x4B00;
-            dst = VRAM + 0x9000;
+            dst = (void*)VRAM + 0x9000;
             DmaCopy16(3, src, dst, 0x4B00);
-            src = sub_8002278(scriptCtx->unk46[0]);
-            dst = PLTT+0x60;
+            src = (void*)sub_8002278(scriptCtx->unk46[0]);
+            dst = (void*)PLTT+0x60;
             DmaCopy16(3, src, dst, 0x20);
             sub_800610C();
             ioRegs->lcd_bldy = 0;
@@ -1370,11 +1370,11 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             scriptCtx->unk30[0] = 3;
             break;
         case 3:
-            src = VRAM + 0x9000;
-            dst = VRAM + 0x4000;
+            src = (void*)VRAM + 0x9000;
+            dst = (void*)VRAM + 0x4000;
             DmaCopy16(3, src, dst, 0x4B00);
-            src = PLTT + 0x60;
-            dst = PLTT + 0x40;
+            src = (void*)PLTT + 0x60;
+            dst = (void*)PLTT + 0x40;
             DmaCopy16(3, src, dst, 0x20);
             sub_80060E8();
             ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_SCREENBASE(31) | BGCNT_WRAP | BGCNT_TXT256x256;

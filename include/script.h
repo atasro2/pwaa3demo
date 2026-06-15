@@ -237,6 +237,12 @@ void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
 u8 * sub_801A018(void);
 
+void sub_801A054(void);
+void op_demo_play_iOS(void); // needs a better name
+void sub_8017AB4(u32 arg0);
+void sub_8019AAC(void);
+void sub_8019BEC(void);
+
 /* begin commands */
 bool32 Command00(struct ScriptContext *);
 bool32 Command01(struct ScriptContext *);

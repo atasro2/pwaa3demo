@@ -305,7 +305,7 @@ void sub_8007610(u8 scenario) {
     }
 }
 
-void nullsub_11(void) {
+void nullsub_11(u32 arg0) {
     
 }
 

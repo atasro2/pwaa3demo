@@ -280,4 +280,6 @@ void InvestigationDummy(struct Main *main);
 
 void InvestigationProcess(struct Main *);
 
+void SetRoomSeq(u32, u32);
+
 #endif//GUARD_INVESTIGATION_H

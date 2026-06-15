@@ -7,6 +7,11 @@
 #include "save.h"
 #include "sound.h"
 #include "utils.h"
+#include "demo.h"
+
+void sub_801D308(struct ScriptContext* scriptCtx);
+void sub_801D474(struct ScriptContext* scriptCtx);
+void sub_801D548(struct ScriptContext *scriptCtx);
 
 void sub_801C8BC(struct ScriptContext* scriptCtx) {
     struct IORegisters * ioRegs = &gIORegisters;
@@ -192,7 +197,7 @@ void sub_801C8BC(struct ScriptContext* scriptCtx) {
         LZ77UnCompWram(gUnknown_081FFD48, dst);
         DmaCopy16(3, src, PLTT+0x20, 0x20);
         src = eBGDecompBuffer;
-        dst = VRAM+0x1000;
+        dst = (void*)VRAM+0x1000;
         DmaCopy16(3, src, dst, 0xC00);
         for(i = 0; i < 0x400; i++)
             gBG0MapBuffer[i] = 0x108B;
@@ -240,8 +245,8 @@ void sub_801C8BC(struct ScriptContext* scriptCtx) {
                 r4 = scriptCtx2->unk46[0] % 8;
                 if (r4 == 0) {
                     for(i = 21; i != 0; i--) {
-                        src = &gBG3MapBuffer[(i-1)*32];
-                        dst = &gBG3MapBuffer[i*32];
+                        src = (void*)&gBG3MapBuffer[(i-1)*32];
+                        dst = (void*)&gBG3MapBuffer[i*32];
                         DmaCopy16(3, src, dst, 0x40);
                     }
                 }
@@ -284,7 +289,7 @@ void sub_801C8BC(struct ScriptContext* scriptCtx) {
             for(i = 0; i < 0x400; i++)
                 gBG0MapBuffer[i] = 0x108B;
             DmaCopy16(3, gBG0MapBuffer, BG_SCREEN_ADDR(28), sizeof(gBG0MapBuffer));
-            src = VRAM+0x1160;
+            src = (void*)VRAM+0x1160;
             DmaFill16(3, 0x1111, src, TILE_SIZE_4BPP);
             *(u32*)&REG_DISPCNT = gIORegisters.lcd_dispcnt;
             *(u32*)&REG_BLDCNT = gIORegisters.lcd_bldcnt;
@@ -324,7 +329,7 @@ void sub_801C8BC(struct ScriptContext* scriptCtx) {
 void sub_801D308(struct ScriptContext* scriptCtx)
 {
     struct Main * main = &gMain;
-    u8 * map = gBG2MapBuffer;
+    u8 * map = (u8*)gBG2MapBuffer;
     u16 i, j, k;
     u8 * src;
 

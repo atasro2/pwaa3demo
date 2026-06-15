@@ -43,6 +43,8 @@ void CalculateSaveChecksum();
 bool32 CheckSaveChecksum();
 void sub_8007610(u8);
 
+void nullsub_11(u32);
+
 void SaveGameInit1(struct Main *);
 void SaveGameInit2(struct Main *);
 void SaveGameInitButtons(struct Main *);

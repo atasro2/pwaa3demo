@@ -6,6 +6,7 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "hp_bar.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 

@@ -29,6 +29,8 @@ void TestimonyProcess(struct Main *);
 void QuestioningProcess(struct Main *);
 void VerdictProcess(struct Main *);
 
+void sub_800A38C(void);
+
 
 /* begin process functions */
 
