@@ -230,8 +230,8 @@ gUnknown_08196A28:
 gUnknown_08196EE4:
 	.incbin "graphics/unk_196EE4.gbapal"
 
-    .global gPalCrossExamUI
-gPalCrossExamUI:
+    .global gPalCrossExaminationUI
+gPalCrossExaminationUI:
     .incbin "graphics/unk_14DA80.gbapal"
 
     .global gUnknown_08196F24

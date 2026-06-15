@@ -1420,3 +1420,703 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
         break;
     }
 }
+
+struct Unk8028764 {
+    s16 unk0;
+    s16 unk2;
+};
+
+const s8 gUnknown_08028741[] = {
+	0, 1, 3, 5, 8, 12, 16, 14, 13, 11, 7, 4, 2, 0, 6, 4
+};
+const s8 gUnknown_08028751[] = {
+	0, -1, -3, -4, -2, 0, 3, 5, 0, 2, 4, 2, -2, -4, -2, -1
+};
+
+const struct Unk8028764 Butterfly_Offset_Unity[] = {
+	{-80, -40},
+    {-96, -8}, 
+    {-64, 6},
+	{64, -16},
+    {80, -32},
+    {90, 8},
+	{-180, -80},
+    {-192, -48},
+    {-160, -32},
+	{204, -48}, 
+    {200, 0},
+    {204, 16}
+};
+
+const u8 gUnknown_08028794[] = {
+    0,
+    2,
+    3
+};
+
+
+void init_move_butterfly_Unity(u32 butterflyId)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    struct Butterfly * butterfly = &scriptCtx->unk54[butterflyId];
+    s16 x = butterfly->unk0;
+    s16 y = butterfly->unk2;
+    s16 offsetX = Butterfly_Offset_Unity[butterfly->unk14[3]].unk0;
+    s16 offsetY = Butterfly_Offset_Unity[butterfly->unk14[3]].unk2;
+    s16 var_r3 = offsetX > x ? 1 : -1;
+    s16 var_r0 = offsetX > x ? offsetX - x : x - offsetX;
+    s16 var_r3_2 = offsetY > y ? 1 : -1;
+    s16 var_r0_2 = offsetY > y ? offsetY - y : y - offsetY;
+
+    if (var_r0 >= var_r0_2) {
+        butterfly->unkA = -var_r0;
+    } else {
+        butterfly->unkA = -var_r0_2;
+    }
+    
+    butterfly->unk10 = var_r0;
+    butterfly->unk12 = var_r0_2;
+    butterfly->unkC = var_r3;
+    butterfly->unkE = var_r3_2;
+    butterfly->unk6 = 0;
+}
+
+void move_butterfly_Unity(u32 butterflyId)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    struct Butterfly * butterfly = &scriptCtx->unk54[butterflyId];
+    struct AnimationListEntry *temp_r7 = FindAnimationFromAnimId(butterflyId + 0x83);
+    struct AnimationListEntry *personAnim = &gAnimation[1];
+    u16 temp_r2 = Butterfly_Offset_Unity[butterfly->unk14[3]].unk0;
+    u16 temp_r3 = Butterfly_Offset_Unity[butterfly->unk14[3]].unk2;
+    s16 a;
+    s16 b;
+    u16 c;
+    if (butterfly->unkC > 0) {
+        temp_r7->flags &= ~1;
+    } else {
+        temp_r7->flags |= 1;
+    }
+    if (butterfly->unk10 >= butterfly->unk12) {
+        butterfly->unk0 +=  butterfly->unkC;
+        butterfly->unkA += butterfly->unk12 * 2;
+        if (butterfly->unkA >= 0) {
+            butterfly->unk2 += butterfly->unkE;
+            butterfly->unkA -= butterfly->unk10 * 2;
+        }
+        butterfly->unk6++;
+        if (butterfly->unk6 >= butterfly->unk10) {
+            butterfly->unk0 = temp_r2;
+            butterfly->unk2 = temp_r3;
+        }
+    } else {
+        butterfly->unk2 += butterfly->unkE;
+        butterfly->unkA += butterfly->unk10 * 2;
+        if (butterfly->unkA >= 0) {
+            butterfly->unk0 += butterfly->unkC;
+            butterfly->unkA -= butterfly->unk12 * 2;
+        }
+        butterfly->unk6++;
+        if (butterfly->unk6 >= butterfly->unk12) {
+            butterfly->unk0 = temp_r2;
+            butterfly->unk2 = temp_r3;
+        }
+    }
+    // !! Worst fakematch ever
+    c = a = butterfly->unk0;
+    if (butterfly->unk0 == temp_r2 && butterfly->unk2 == temp_r3) {
+        butterfly->unk14[0] = butterfly->unk14[3] + a - a;
+        a = (butterfly->unk14[1] / 2) & 0xF;
+        b = (butterfly->unk14[2] / 3) & 0xF;
+        butterfly->unk0 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk0;
+        butterfly->unk2 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk2;
+        temp_r7->animationInfo.xOrigin = personAnim->animationInfo.xOrigin + butterfly->unk0 + gUnknown_08028751[a];
+        temp_r7->animationInfo.yOrigin = personAnim->animationInfo.yOrigin + butterfly->unk2 + gUnknown_08028741[b];
+        if (Butterfly_Offset_Unity[butterfly->unk14[0]].unk0 < 0) {
+            temp_r7->flags &= ~1;
+        } else {
+            temp_r7->flags |= 1;
+        }
+        if (scriptCtx->unk4E == 0xA) {
+            butterfly->unk4 = 0;
+        } else {
+            butterfly->unk4 = 7;
+            scriptCtx->unk52 = (Random() & 0xF) * 40;
+            if (++scriptCtx->unk50 > 2) {
+                scriptCtx->unk50 = 0;
+            }
+        }
+        butterfly->unk14[3] = 0;
+        butterfly->unk8 = 0;
+    } else {
+        a = (butterfly->unk14[1] / 2) & 0xF;
+        b = (butterfly->unk14[2] / 3) & 0xF;
+        temp_r7->animationInfo.xOrigin = personAnim->animationInfo.xOrigin + c  + gUnknown_08028751[a];
+        temp_r7->animationInfo.yOrigin = personAnim->animationInfo.yOrigin + butterfly->unk2 + gUnknown_08028741[b];
+    }
+    butterfly->unk14[1]++;
+    butterfly->unk14[2]++;
+}
+
+s16 CheckButterfly_Unity(u32 arg0)
+{
+    u32 i;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    for(i = 0; i < 3; i++) {
+        struct Butterfly * butterfly = &scriptCtx->unk54[i];
+        if(butterfly->unk14[0] == arg0)
+            return i;
+    }
+    return -1;
+}
+
+s16 CheckMoveButterfly_Unity(void)
+{
+    u32 i;
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    for(i = 0; i < 3; i++) {
+        struct Butterfly * butterfly = &scriptCtx->unk54[i];
+        if(butterfly->unk4 == 6)
+            return i;
+    }
+    return -1;
+}
+
+s16 CheckLRButterfly_Unity(u16 arg0)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    s16 count = 0;
+    u32 i;
+    for(i = 0; i < 3; i++) {
+        if(arg0 == 0) {
+            if(scriptCtx->unk54[i].unk14[0] <= 2) {
+                count++;
+            }
+        } else {
+            if(scriptCtx->unk54[i].unk14[0] > 2) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+void InstructionButterfly_Unity(u32 arg0)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    struct Butterfly * butterfly = &scriptCtx->unk54[arg0];
+    s16 unk0 = 0;
+    s16 unk1;
+    switch (butterfly->unk14[0])
+    {
+        case 0:
+        {
+            if (CheckButterfly_Unity(1) != -1)
+            {
+                if (CheckButterfly_Unity(2) != -1)
+                {
+                    scriptCtx->unk52 = (Random() & 0xF) * 20;
+                    if (++scriptCtx->unk50 > 2) {
+                        scriptCtx->unk50 = 0;
+                    }
+                    butterfly->unk14[3] = 0;
+                    butterfly->unk8 = 0;
+                    break;
+                }
+                butterfly->unk14[3] = 2;
+            }
+            else
+            {
+                butterfly->unk14[3] = 1;
+            }
+            init_move_butterfly_Unity(arg0);
+            butterfly->unk4 = 6;
+            break;
+        }
+        case 1:
+        {
+            // ! what?
+            unk1 = ((Random() & 0xF) * (Random() & 0xF)) & 3;
+            switch (unk1)
+            {
+                case 0:
+                    unk1 = CheckButterfly_Unity(0);
+                    unk0 = 0;
+                    break;
+                case 1:
+                    unk1 = CheckButterfly_Unity(2);
+                    unk0 = 2;
+                    break;
+                case 2:
+                case 3:
+                    unk1 = CheckLRButterfly_Unity(1);
+                    if (unk1 < 2)
+                    {
+                        unk1 = CheckButterfly_Unity(5);
+                        unk0 = 5;
+                    }
+                    break;
+            }
+            if (unk1 != -1)
+            {
+                scriptCtx->unk52 = (Random() & 0xF) * 20;
+                if (++scriptCtx->unk50 > 2) {
+                    scriptCtx->unk50 = 0;
+                }
+                butterfly->unk14[3] = 0;
+                butterfly->unk8 = 0;
+            }
+            else
+            {
+                butterfly->unk14[3] = unk0;
+                init_move_butterfly_Unity(arg0);
+                butterfly->unk4 = 6;
+            }
+            break;
+        }
+        case 2:
+        {
+            unk1 = ((Random() & 0xF) * (Random() & 0xF)) & 3;
+            switch (unk1)
+            {
+                case 0:
+                    unk1 = CheckButterfly_Unity(0);
+                    unk0 = 0;
+                    break;
+                case 1:
+                    unk1 = CheckButterfly_Unity(1);
+                    unk0 = 1;
+                    break;
+                case 2:
+                    unk1 = CheckButterfly_Unity(0);
+                    unk0 = 0;
+                    break;
+                case 3:
+                    unk1 = CheckButterfly_Unity(1);
+                    unk0 = 1;
+                    break;
+            }
+            if (unk1 != -1)
+            {
+                scriptCtx->unk52 = (Random() & 0xF) * 20;
+                if (++scriptCtx->unk50 > 2) {
+                    scriptCtx->unk50 = 0;
+                }
+                butterfly->unk14[3] = 0;
+                butterfly->unk8 = 0;
+            }
+            else
+            {
+                butterfly->unk14[3] = unk0;
+                init_move_butterfly_Unity(arg0);
+                butterfly->unk4 = 6;
+            }
+            break;
+        }
+        case 3:
+        {
+            unk1 = ((Random() & 0xF) * (Random() & 0xF)) & 3;
+            switch (unk1)
+            {
+                case 0:
+                    unk1 = CheckButterfly_Unity(5);
+                    unk0 = 5;
+                    break;
+                case 1:
+                    unk1 = CheckButterfly_Unity(4);
+                    unk0 = 4;
+                    break;
+                case 2:
+                case 3:
+                    unk1 = CheckLRButterfly_Unity(0);
+                    if (unk1 < 2)
+                    {
+                        unk1 = CheckButterfly_Unity(2);
+                        unk0 = 2;
+                    }
+                    break;
+            }
+            if (unk1 != -1)
+            {
+                scriptCtx->unk52 = (Random() & 0xF) * 20;
+                if (++scriptCtx->unk50 > 2) {
+                    scriptCtx->unk50 = 0;
+                }
+                butterfly->unk8 = 0; // ! Why is this assignment order different from every other case???
+                butterfly->unk14[3] = 0;
+            }
+            else
+            {
+                butterfly->unk14[3] = unk0;
+                init_move_butterfly_Unity(arg0);
+                butterfly->unk4 = 6;
+            }
+            break;
+        }
+        case 4:
+        {
+            unk1 = ((Random() & 0xF) * (Random() & 0xF)) & 3;
+            switch (unk1)
+            {
+                case 0:
+                    unk1 = CheckButterfly_Unity(3);
+                    unk0 = 3;
+                    break;
+                case 1:
+                    unk1 = CheckButterfly_Unity(5);
+                    unk0 = 5;
+                    break;
+                case 2:
+                    unk1 = CheckButterfly_Unity(5);
+                    unk0 = 5;
+                    break;
+                case 3:
+                    unk1 = 1;
+                    break;
+            }
+            if (unk1 != -1)
+            {
+                scriptCtx->unk52 = (Random() & 0xF) * 20;
+                if (++scriptCtx->unk50 > 2) {
+                    scriptCtx->unk50 = 0;
+                }
+                butterfly->unk14[3] = 0;
+                butterfly->unk8 = 0;
+            }
+            else
+            {
+                butterfly->unk14[3] = unk0;
+                init_move_butterfly_Unity(arg0);
+                butterfly->unk4 = 6;
+            }
+            break;
+        }
+        case 5:
+        {
+            unk1 = ((Random() & 0xF) * (Random() & 0xF)) & 3;
+            switch (unk1)
+            {
+                case 0:
+                    unk1 = CheckButterfly_Unity(3);
+                    unk0 = 3;
+                    break;
+                case 1:
+                    unk1 = CheckButterfly_Unity(4);
+                    unk0 = 4;
+                    break;
+                case 2:
+                    unk1 = CheckButterfly_Unity(3);
+                    unk0 = 3;
+                    break;
+                case 4:
+                    unk1 = CheckButterfly_Unity(4);
+                    unk0 = 4;
+                    break;
+            }
+            if (unk1 != -1)
+            {
+                scriptCtx->unk52 = (Random() & 0xF) * 20;
+                if (++scriptCtx->unk50 > 2) {
+                    scriptCtx->unk50 = 0;
+                }
+                butterfly->unk14[3] = 0;
+                butterfly->unk8 = 0;
+            }
+            else
+            {
+                butterfly->unk14[3] = unk0;
+                init_move_butterfly_Unity(arg0);
+                butterfly->unk4 = 6;
+            }
+            break;
+        }
+    }
+}
+
+void Butterfly_Unity(void)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    struct AnimationListEntry * anim;
+    struct AnimationListEntry * anim2;
+    u32 temp;
+    u32 i;
+    u16 a;
+    u16 b;
+    if (scriptCtx->unk4E != 0)
+    {
+        anim = &gAnimation[1];
+        if (((anim->animationInfo.personId != 11 && anim->animationInfo.personId != 33) || !(anim->flags & ANIM_ALLOCATED)) && (scriptCtx->unk4E != 5 && scriptCtx->unk4E != 6))
+        {
+            scriptCtx->unk20 = scriptCtx->unk4E;
+            scriptCtx->unk4E = 5;
+        }
+    }
+    switch (scriptCtx->unk4E & 0xFF) {
+    default:
+        return;
+    case 0:
+    case 6:
+        return;
+    case 7:
+        for(i = 0; i < 6; i++) {
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                DestroyAnimation(anim);
+            }
+        }
+        UpdateAllAnimationSprites();
+        scriptCtx->unk4E = 0;
+        break;
+    case 5:
+        for(i = 0; i < 6; i++) {
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                anim->flags &= ~ANIM_ACTIVE;
+                anim->flags &= ~ANIM_0x80;
+            }
+        }
+        UpdateAllAnimationSprites();
+        if (scriptCtx->unk4E == 5) {
+            scriptCtx->unk4E = 6;
+        } else {
+            scriptCtx->unk4E = 0;
+        }
+        return;
+    case 9:
+        for(i = 0; i < 6; i++) {
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                anim->flags |= ANIM_ACTIVE;
+            }
+        }
+        if (scriptCtx->unk4E != 0) {
+            scriptCtx->unk4E = scriptCtx->unk20;
+        }
+        break;
+    case 1:
+        for(i = 0; i < 3; i++) {
+            struct Butterfly * butterfly = &scriptCtx->unk54[i];
+            anim = &gAnimation[1];
+            butterfly->unk4 = 1;
+            butterfly->unk14[0] = gUnknown_08028794[i] + 6;
+            butterfly->unk14[1] = i * 2;
+            butterfly->unk14[2] = i * 3;
+            butterfly->unk14[3] = gUnknown_08028794[i];
+            butterfly->unk8 = 0;
+
+            PlayAnimationAtCustomOrigin(i + 0x83, anim->animationInfo.xOrigin + Butterfly_Offset_Unity[butterfly->unk14[0]].unk0, anim->animationInfo.yOrigin + Butterfly_Offset_Unity[butterfly->unk14[0]].unk2);
+            butterfly->unk0 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk0;
+            butterfly->unk2 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk2;
+        }
+        temp = 2; // ?
+        scriptCtx->unk50 = 0;
+        scriptCtx->unk51 = 0;
+        scriptCtx->unk52 = 0;
+        scriptCtx->unk4E = 2;
+        break;
+    case 3:
+        for(i = 0; i < 3; i++) {
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                bool32 r1; 
+                bool32 r2;
+                r1 = 0;
+                if(i != 0) 
+                    r1 = 1;
+                r2 = 0;
+                // ! reads oob
+                if (scriptCtx->unk46[2] > scriptCtx->unk46[i-1]) 
+                    r2 = 1;
+                if ((r1 & r2) || (i == 0)) {
+                    PlayAnimationAtCustomOrigin(i + 0x86, anim->animationInfo.xOrigin, anim->animationInfo.yOrigin);
+                    anim2 = FindAnimationFromAnimId(i + 0x86);
+                    anim2->animationInfo.vramPtr = anim->animationInfo.vramPtr;
+                    DestroyAnimation(anim);
+                    scriptCtx->unk54[i].unk4 = 5;
+                    if (i == 2) {
+                        scriptCtx->unk4E = 2;
+                    }
+                }
+            }
+        } 
+        scriptCtx->unk46[2]++;
+        for(i = 0x4E; i < 128; i++) {
+            gOamObjects[i].attr0 = SPRITE_ATTR0_CLEAR;
+        }
+        UpdateAllAnimationSprites();
+        return;
+    case 8:
+        for(i = 0; i < 3; i++) {
+            struct Butterfly * butterfly = &scriptCtx->unk54[i];
+            anim = &gAnimation[1];
+            butterfly->unk4 = 7;
+            butterfly->unk14[0] = gUnknown_08028794[i];
+            butterfly->unk14[1] = i * 2;
+            butterfly->unk14[2] = i * 3;
+            butterfly->unk14[3] = 0;
+            butterfly->unk8 = 0;
+
+            PlayAnimationAtCustomOrigin(i + 0x83, anim->animationInfo.xOrigin + Butterfly_Offset_Unity[butterfly->unk14[0]].unk0, anim->animationInfo.yOrigin + Butterfly_Offset_Unity[butterfly->unk14[0]].unk2);
+        }
+        temp = 2; // ?
+        scriptCtx->unk50 = 0;
+        scriptCtx->unk51 = 0;
+        scriptCtx->unk52 = ((Random() & 0xF) * 20) * 2;
+        scriptCtx->unk4E = 2;
+        break;
+    case 4:
+        for(i = 0; i < 3; i++) {
+            struct Butterfly * butterfly = &scriptCtx->unk54[i];
+            if((butterfly->unk4 & 0xF) == 1) {
+                butterfly->unk14[0] = butterfly->unk14[3];
+            }
+            butterfly->unk4 = 4;
+        }
+        scriptCtx->unk50 = 0;
+        scriptCtx->unk51 = 0;
+        scriptCtx->unk52 = 0;
+        scriptCtx->unk4E = 10;
+        break;
+    case 11:
+        for(i = 0; i < 3; i++) {
+            struct Butterfly * butterfly = &scriptCtx->unk54[i];
+            butterfly->unk4 = 9;
+        }
+        scriptCtx->unk50 = 0;
+        scriptCtx->unk51 = 0;
+        scriptCtx->unk52 = 0;
+        scriptCtx->unk4E = 12;
+        break;
+    case 2:
+    case 10:
+    case 12:
+        break;
+    }
+    temp = 0;
+    for(i = 0; i < 3; i++) {
+        struct Butterfly * butterfly = &scriptCtx->unk54[i];
+        switch (butterfly->unk4 & 0xF) {
+        case 0:
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                DestroyAnimation(anim);
+                temp = 1;
+            }
+            if (i == 2) {
+                u32 j = 0;
+                u32 k = 0;
+                for(; j < 3; j++) {
+                    anim = FindAnimationFromAnimId(j + 0x83);
+                    if (anim == NULL) {
+                        k += 1;
+                    }
+                }
+                if (k == 3) {
+                    scriptCtx->unk4E = 0;
+                }
+            }
+            break;
+        case 1:
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                anim2 = &gAnimation[1];
+                a = (butterfly->unk14[1] / 2) & 0xF;
+                b = (butterfly->unk14[2] / 3) & 0xF;
+                butterfly->unk0 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk0;
+                butterfly->unk2 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk2;
+                anim->animationInfo.xOrigin = anim2->animationInfo.xOrigin + butterfly->unk0 + gUnknown_08028751[a];
+                anim->animationInfo.yOrigin = anim2->animationInfo.yOrigin + butterfly->unk2 + gUnknown_08028741[b];
+                if (Butterfly_Offset_Unity[butterfly->unk14[0]].unk0 < 0) {
+                    anim->flags &= ~1;
+                } else {
+                    anim->flags |= 1;
+                }
+                butterfly->unk14[1]++;
+                butterfly->unk14[2]++;
+                init_move_butterfly_Unity(i);
+                butterfly->unk4 = 6;
+            }
+            break;
+        case 5:
+            butterfly->unk4 = 2;
+            if (i == 2) {
+                u32 j = 0;
+                u32 k = 0;
+                for(; j < 3; j++) {
+                    anim = FindAnimationFromAnimId(j + 0x86);
+                    if (anim  == NULL) {
+                        k += 1;
+                    }
+                }
+                if (k == 3) {
+                    scriptCtx->unk4E = 0;
+                }
+            }
+            break;
+        case 7:
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                anim2 = &gAnimation[1];
+                a = (butterfly->unk14[1] / 2) & 0xF;
+                b = (butterfly->unk14[2] / 3) & 0xF;
+                butterfly->unk0 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk0;
+                butterfly->unk2 = Butterfly_Offset_Unity[butterfly->unk14[0]].unk2;
+                anim->animationInfo.xOrigin = anim2->animationInfo.xOrigin + butterfly->unk0 + gUnknown_08028751[a];
+                anim->animationInfo.yOrigin = anim2->animationInfo.yOrigin + butterfly->unk2 + gUnknown_08028741[b];
+                if (Butterfly_Offset_Unity[butterfly->unk14[0]].unk0 < 0) {
+                    anim->flags &= ~1;
+                } else {
+                    anim->flags |= 1;
+                }
+                butterfly->unk14[1]++;
+                butterfly->unk14[2]++;
+                if (i != scriptCtx->unk50 || ++butterfly->unk8 <= scriptCtx->unk52)
+                {
+                    break;
+                }
+                if (CheckMoveButterfly_Unity() != -1) {
+                    scriptCtx->unk52 = (Random() & 0xF) * 20;
+                    if (++scriptCtx->unk50 > 2) {
+                        scriptCtx->unk50 = 0;
+                    }
+                    butterfly->unk14[3] = 0;
+                    butterfly->unk8 = 0;
+                } else {
+                    InstructionButterfly_Unity(i);
+                }
+            }
+            break;
+        case 4:
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                butterfly->unk14[3] = gUnknown_08028794[i] + 6;
+                init_move_butterfly_Unity(i);
+                butterfly->unk4 = 6;
+            }
+            break;
+        case 6:
+            move_butterfly_Unity(i);
+            break;
+        case 9:
+            if (scriptCtx->unk52 <= 0xE) {
+                scriptCtx->unk52 += 1;
+                break;
+            }
+            anim = FindAnimationFromAnimId(i + 0x83);
+            if (anim != NULL) {
+                anim->animationInfo.xOrigin += 6;
+                anim->animationInfo.yOrigin -= 2;
+                if (anim->animationInfo.yOrigin < 0) {
+                    butterfly->unk4 = 0;
+                }
+            }
+            break;
+        }
+    }
+    if (temp != 0) {
+        for(i = 0x4E; i < 128; i++) {
+            gOamObjects[i].attr0 = SPRITE_ATTR0_CLEAR;
+        }
+    }
+    UpdateAllAnimationSprites();
+}

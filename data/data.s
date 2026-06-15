@@ -9,81 +9,84 @@ gFlagPtrs:
 
     .global gCourtRecordInitialItemLists
 gCourtRecordInitialItemLists:
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
+@ replacing .incbin "baserom.gba", 0x0014d93c, 0x5c
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8 
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
 
-    .global gUnknown_0814D998
-gUnknown_0814D998:
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x8025410
-.4byte 0x80266b0
+    .global gCourtPresentData
+gCourtPresentData:
+@ replacing .incbin "baserom.gba", 0x0014d998, 0x5c
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_08025410
+.4byte gUnknown_080266B0
 
-    .global gUnknown_0814D9F4
-gUnknown_0814D9F4:
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
+    .global gInvestigationPresentData
+gInvestigationPresentData:
+@ replacing .incbin "baserom.gba", 0x0014d9f4, 0x5c
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
 
     .global gUnknown_0814DA50
 gUnknown_0814DA50:
@@ -227,20 +230,3 @@ gUnknown_0814DBE8:
 .4byte 0x800e108
 .4byte 0x800e15e
 .4byte 0x800e164
-
-    .global gCourtRecordProcessStates
-gCourtRecordProcessStates:
-.4byte CourtRecordInit
-.4byte CourtRecordMain
-.4byte CourtRecordExit
-.4byte CourtRecordChangeState
-.4byte CourtRecordChangeRecord
-.4byte CourtRecordDetailSubMenu
-.4byte CourtRecordLoadGfxChangeState
-.4byte CourtRecordTakeThatSpecial
-
-    .global gEvidenceAddedProcessStates
-gEvidenceAddedProcessStates:
-.4byte EvidenceAddedInit
-.4byte EvidenceAddedMain
-.4byte EvidenceAddedExit

@@ -1035,7 +1035,7 @@ sub_800AC18: @ 0x0800AC18
 	movs r2, #1
 	bl UpdateQuestioningMenuSprites
 	ldr r0, _0800AC50 @ =gCourtRecord
-	bl sub_8010420
+	bl UpdateCourtRecordArrows
 	ldr r2, _0800AC54 @ =gOamObjects
 	ldr r1, _0800AC58 @ =gScriptContext
 	movs r0, #8

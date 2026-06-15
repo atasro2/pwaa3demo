@@ -87,7 +87,9 @@ struct Main
     /* +0x098 */ u8 itemPlateEvidenceId;
     /* +0x099 */ u8 itemPlateState;
     /* +0x09A */ u8 itemPlateSide;
-    /* +0x09B */ u8 fill9B[0x3];
+    /* +0x09B */ u8 itemPlateRotation;
+    /* +0x09C */ s8 itemPlateSize;
+    /* +0x09D */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x09E */ u8 itemPlateAction;
     /* +0x0A0 */ s16 affineScale;
     /* +0x0A2 */ u16 xPosCounter; // used in episode selection menu
@@ -129,7 +131,7 @@ struct Main
     /* +0x25B */ u8 unk25B;
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 fill264[0x1C];
+    /* +0x264 */ u8 currentRoomSeq[28];
     /* +0x280 */ u16 psycheLockedTalkSections[8];
     /* +0x290 */ u16 numPsycheLockedTalkSections;
     struct Spotlight {
@@ -215,6 +217,7 @@ extern struct OamAttrs gOamObjects[128];
 #define SET_PROCESS_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
 #define SET_PROCESS(no_0, no_1, no_2, no_3) (*(u32*)gMain.process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
 #define SET_PROCESS_BACKUP_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->processCopy = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
+#define SET_PROCESS_BACKUP(no_0, no_1, no_2, no_3) (*(u32*)gMain.processCopy = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
 #define BACKUP_PROCESS() (*(u32*)gMain.processCopy = *(u32*)gMain.process)
 #define BACKUP_PROCESS_PTR(main) (*(u32*)main->processCopy = *(u32*)gMain.process)
 #define RESTORE_PROCESS() (*(u32*)gMain.process = *(u32*)gMain.processCopy)
