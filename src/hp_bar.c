@@ -383,7 +383,7 @@ void sub_8016934(void) {
             ClearHPBarOAM();
             gOamObjects[72].attr0 = SPRITE_ATTR0_CLEAR;
             gOamObjects[73].attr0 = SPRITE_ATTR0_CLEAR;
-            sub_800B6EC(&gMain, &gTestimony, 1);
+            UpdateQuestioningMenuSprites(&gMain, &gTestimony, 1);
         case 1:
             gMain.hpBarX += 4;
             if(gMain.hpBarState == 3)
@@ -556,7 +556,7 @@ void sub_8016C38(void)
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;
-        sub_800B6EC(&gMain, &gTestimony, 1);
+        UpdateQuestioningMenuSprites(&gMain, &gTestimony, 1);
         ReturnToQueuedOrZeroHPBarState();
         break;
     }

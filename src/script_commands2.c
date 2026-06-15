@@ -646,7 +646,7 @@ bool32 Command0F(struct ScriptContext * scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
     scriptCtx->unk10 = *scriptCtx->scriptPtr++;
     if(scriptCtx->scriptPtr) { // ! this does not dereference the pointer 
-        scriptCtx->unk2A = 1;
+        scriptCtx->slamDesk = TRUE;
     }
     scriptCtx->scriptPtr++;
     return FALSE;

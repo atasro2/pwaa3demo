@@ -32,6 +32,7 @@ SECTIONS {
         src/episode_load_processes.o(.text);
         asm/court.o(.text);
         asm/investigation.o(.text);
+        src/court_record.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
@@ -68,6 +69,7 @@ SECTIONS {
         rodata/case_data.o(.rodata);
         src/gameover_process.o(.rodata);
         rodata/rodata.o(.rodata);
+        src/court_record.o(.rodata);
         src/sound.o(.rodata);
         rodata/rodata_2.o(.rodata);
         src/hp_bar.o(.rodata);
@@ -89,6 +91,7 @@ SECTIONS {
         src/debug.o(.data);
         src/bg.o(.data);
         data/data.o(.data);
+        src/court_record.o(.data);
         src/sound.o(.data);
         data/data_2.o(.data);
         data/script_main.o(.data);

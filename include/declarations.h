@@ -77,6 +77,4 @@ u16 ColorFadeGrayscale(u16 color, u16 intensity, u16 mode);
 void sub_8006EAC(struct Main*);
 void sub_8012700(u16, u16, s32, s32, s32);
 
-void sub_800B6EC(struct Main*, struct Testimony *, u32);
-
 #endif//GUARD_DECLARATIONS_H

@@ -47,7 +47,7 @@ struct ScriptContext {
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
     /* +0x0E */ u16 nextSection; // nextSection?
-    u16 unk10;
+    u16 unk10; // unity: tukkomi_no
     u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
@@ -63,7 +63,7 @@ struct ScriptContext {
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
-    u8 unk2A;
+    u8 slamDesk; // unity: tukkomi_flag
     u8 textboxYPos;
     u8 unk2C;
     u8 unk2D;

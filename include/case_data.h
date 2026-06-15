@@ -19,6 +19,7 @@ struct InvestigationPresentData
     /* +0x04 */ u8 isProfile; // unity: end
     /* +0x06 */ u16 interestedSection; // unity: mess_true
     /* +0x08 */ u16 uninterestedSection; // unity: mess_false
+    /* +0x0A */ u8 fillA[6];
 };
 
 extern const u8 gCaseStartProcess[];

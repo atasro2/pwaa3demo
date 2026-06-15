@@ -149,8 +149,8 @@ gGfxPsycheLockChainsTiles:
 gUnknown_08191E6C:
     .incbin "baserom.gba", 0x00191E6C, 0x5098
 
-    .global gPalCrossExamUI
-gPalCrossExamUI:
+    .global gPalCrossExaminationUI
+gPalCrossExaminationUI:
     .incbin "graphics/unk_14DA80.gbapal"
 
     .global gUnknown_08196F24
