@@ -27,4 +27,4 @@ gMapSpeedlines:
 
     .global gUnknown_08024E78
 gUnknown_08024E78:
-    .incbin "baserom.gba", 0x00024E78, 0x5B8
+    .incbin "baserom.gba", 0x00024E78, 0x580

@@ -5,86 +5,86 @@
 gFlagPtrs:
     .incbin "baserom.gba", 0x0014D930, 0xC
 
-    .global gUnknown_0814D93C
-gUnknown_0814D93C:
+    .global gCourtRecordInitialItemLists
+gCourtRecordInitialItemLists:
 @ replacing .incbin "baserom.gba", 0x0014d93c, 0x5c
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80253f8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
-.4byte 0x80266c8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080253F8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8 
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
+.4byte gUnknown_080266C8
 
-    .global gUnknown_0814D998
-gUnknown_0814D998:
+    .global gCourtPresentData
+gCourtPresentData:
 @ replacing .incbin "baserom.gba", 0x0014d998, 0x5c
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x8025410
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x80266b0
-.4byte 0x8025410
-.4byte 0x80266b0
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_08025410
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_080266B0
+.4byte gUnknown_08025410
+.4byte gUnknown_080266B0
 
-    .global gUnknown_0814D9F4
-gUnknown_0814D9F4:
+    .global gInvestigationPresentData
+gInvestigationPresentData:
 @ replacing .incbin "baserom.gba", 0x0014d9f4, 0x5c
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
-.4byte 0x80266b8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
+.4byte gUnknown_080266B8
 
     .global gUnknown_0814DA50
 gUnknown_0814DA50:
@@ -235,22 +235,3 @@ gUnknown_0814DBE8:
 .4byte 0x800e108
 .4byte 0x800e15e
 .4byte 0x800e164
-
-    .global gUnknown_0814DC18
-gUnknown_0814DC18:
-@ replacing .incbin "baserom.gba", 0x0014dc18, 0x20
-.4byte 0x800eaed
-.4byte 0x800f3e1
-.4byte 0x800f551
-.4byte 0x800f615
-.4byte 0x800f679
-.4byte 0x800f731
-.4byte 0x800fecd
-.4byte 0x800fee9
-
-    .global gUnknown_0814DC38
-gUnknown_0814DC38:
-@ replacing .incbin "baserom.gba", 0x0014dc38, 0xc
-.4byte 0x801028d
-.4byte 0x8010311
-.4byte 0x80103b5

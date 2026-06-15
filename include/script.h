@@ -26,6 +26,20 @@
 #define SCRIPT_x4000 0x4000 // Unity: NEXT_MESSAGE
 #define SCRIPT_x8000 0x8000 // Unity: LAST_MESSAGE
 
+struct Butterfly {
+    u16 unk0;
+    u16 unk2;
+    u16 unk4;
+    u16 unk6;
+    u16 unk8;
+    s16 unkA;
+    s16 unkC;
+    u16 unkE;
+    s16 unk10;
+    s16 unk12;
+    u8 unk14[4];
+};
+
 struct ScriptContext {
     /* +0x00 */ u16 * scriptPtr;
     /* +0x04 */ u16 * scriptSectionPtr;
@@ -33,14 +47,14 @@ struct ScriptContext {
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
     /* +0x0E */ u16 nextSection; // nextSection?
-    u16 unk10;
+    u16 unk10; // unity: tukkomi_no
     u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
     u16 unk18[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E; // unity: status2
-    u16 unk20;
+    u16 unk20; // unity: choustateBK
     u8 unk22; // unity: text_flag
     u8 textboxState;
     u8 textboxNameId;
@@ -49,7 +63,7 @@ struct ScriptContext {
     u8 unk27;
     u8 unk28;
     u8 unk29; // unity: message_line
-    u8 unk2A;
+    u8 slamDesk; // unity: tukkomi_flag
     u8 textboxYPos;
     u8 unk2C;
     u8 unk2D;
@@ -63,8 +77,10 @@ struct ScriptContext {
     u8 unk4C;
     u8 unk4D;
     u16 unk4E; // unity: choustate
-    u8 fill50[0x4];
-    u16 unk54[3][12];
+    u8 unk50; // unity: chou_no
+    u8 unk51; // unity: chou_st
+    u16 unk52; // unity: chou_cnt
+    struct Butterfly unk54[3];
 };
 
 // script system has been revamped, keeping this for reference only!

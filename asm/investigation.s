@@ -643,7 +643,7 @@ _0800C0D2:
 	strh r0, [r1]
 	ldr r1, _0800C278 @ =gCourtRecord
 	adds r0, r6, #0
-	bl sub_800E9C4
+	bl InitializeCourtRecordForScenario
 	str r4, [sp, #4]
 	ldr r1, _0800C1FC @ =0x040000D4
 	mov r3, sb
