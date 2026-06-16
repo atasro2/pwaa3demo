@@ -86,7 +86,7 @@ bool32 HavePsycheLockChainsFinishedAnimating(struct PsycheLockChains * chains)
 
 void LoadPsycheLockChainGraphics(void)
 {
-    gMain.currentDisplayedBG = 0x80;
+    gMain.currentDisplayBG = 0x80;
     gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(28) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     gIORegisters.lcd_bg3cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
@@ -225,7 +225,7 @@ void sub_8014BF4(void) { // psylock_move_whiteshock
     {
         case 0:
             PlaySE(0x7A);
-            gMain.currentDisplayedBG = 0x80;
+            gMain.currentDisplayBG = 0x80;
             gMain.tilemapUpdateBits |= 1;
             // invert palette colors
             for(i = 32; i < 256; i++)

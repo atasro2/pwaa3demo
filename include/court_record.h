@@ -3,6 +3,7 @@
 
 #define COURT_RECORD_VIEW_PROFILES 0x1
 
+// TODO: verify struct
 struct CourtRecord
 {
     /* +0x00 */ s8 windowOffset; // unity AA4: bg_x_add

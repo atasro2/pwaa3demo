@@ -67,7 +67,7 @@ struct AnimationListEntry
     /* +0x2C */ u8 bgId;
     /* +0x2D */ u8 roomId;
     /* +0x2E */ s16 specialEffectVar;
-    /* +0x30 */ u8 * unk30;
+    /* +0x30 */ u8 * overridePalette;
     /* +0x34 */ struct SpriteTemplate * spriteData;
     /* +0x38 */ struct AnimationFrame * frameData;
     /* +0x3C */ u16 tileNum;
@@ -164,5 +164,11 @@ void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
 
 void sub_80146F0(u32 animId, u32 animOffset);
+
+void UpdateAnimationBlend(struct AnimationListEntry *animation);
+u32 AdvanceAnimationFrame(struct AnimationListEntry * animation);
+void UpdateAllAnimationSprites();
+void UpdatePersonAnimationForCourtScroll(struct AnimationListEntry * animation);
+void (*gSpecialAnimationEffectFunctions[8])(struct AnimationListEntry *);
 
 #endif//GUARD_ANIMATION_H

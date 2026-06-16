@@ -109,7 +109,7 @@ void CapcomLogoProcess(struct Main *main)
         gIORegisters.lcd_bg2hofs = 0;
         gIORegisters.lcd_bg2vofs = 8;
         src = eScriptHeap;
-        dst = VRAM + 0x4020; //TODO: i was lazy. there is a macro for tile blocks
+        dst = (void*)(VRAM + 0x4020); //TODO: i was lazy. there is a macro for tile blocks
         DmaCopy16(3, src, dst, 0x800);
         DmaFill16(3, 0, VRAM + 0x4000, 0x20); // clear first tile in block 1
         ioRegsp->lcd_dispcnt = DISPCNT_MODE_0 | DISPCNT_BG3_ON;

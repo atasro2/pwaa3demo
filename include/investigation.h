@@ -25,27 +25,28 @@ struct ExaminationData
 
 struct InvestigationStruct // unity AA4: TANTEI_WK
 {
-    /* +0x00 */ u16 pointerX;
-    /* +0x02 */ u16 pointerY;
-    /* +0x04 */ u8 fill04[2];
+    /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
+    /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
+    /* +0x04 */ u8 selectedOption; // unity AA4: sel_place
+    /* +0x05 */ u8 previousSelectedOption;
     /* +0x06 */ bool8 personActive;
-    /* +0x07 */ u8 inspectionPaused;
-    /* +0x08 */ u8 unk8;
-    /* +0x09 */ u8 spotselectStartCounter;
-    /* +0x0A */ u8 spotselectId;
+    /* +0x07 */ bool8 inspectionPaused; // unity AA4: ckeck_no_flag
+    /* +0x08 */ u8 inactiveActions; // unity AA4: menu_mv_be_flag
+    /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
+    /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
     /* +0x0B */ u8 inPsycheLockChallengeFlag;
     /* +0x0C */ u8 selectedAction;
     /* +0x0D */ u8 lastAction;
     /* +0x0E */ u8 fill0E[0x02];
     /* +0x10 */ u8 actionState;
-    /* +0x11 */ u8 inactiveActionButtonY;
+    /* +0x11 */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
     /* +0x12 */ u8 selectedActionYOffset; // unity AA4: menu_add
-    /* +0x13 */ u8 lastActionYOffset;
-    /* +0x14 */ u8 fill14[4];
+    /* +0x13 */ u8 lastActionYOffset; // unity AA4: menu_add_old
+    /* +0x14 */ bool8 activeOptions[4]; // unity AA4: sel_place_be
     /* +0x18 */ u8 pointerFrame;
     /* +0x19 */ u8 pointerFrameCounter;
-    /* +0x1A */ u8 pointerColor;
-    /* +0x1B */ u8 pointerColorCounter;
+    /* +0x18 */ u8 pointerColor; // unity AA4: yubi_col_no
+    /* +0x19 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
 };
 
 extern struct TalkData gTalkData[32];
@@ -236,6 +237,8 @@ void SetInvestigationStateToReturnAfterPsycheLocks(u16, u16);
 void LoadLocationChoiceGraphics(void);
 void LoadTalkChoiceGraphics(void);
 
+void ReloadInvestigationGraphics(void);
+
 /* Segment 1 */
 void InvestigationSegmentSetup_1_0(struct Main *main);
 void InvestigationRoomSetup_1_0(struct Main *main);
@@ -276,5 +279,7 @@ void InvestigationRoomUpdate_3_6(struct Main *main);
 void InvestigationDummy(struct Main *main);
 
 void InvestigationProcess(struct Main *);
+
+void SetRoomSeq(u32, u32);
 
 #endif//GUARD_INVESTIGATION_H

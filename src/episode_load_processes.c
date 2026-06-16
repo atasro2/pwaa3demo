@@ -6,6 +6,7 @@
 #include "agb_sram.h"
 #include "save.h"
 #include "graphics.h"
+#include "court.h"
 // #include "constants/script.h"
 #include "constants/songs.h"
 #include "constants/process.h"
@@ -693,7 +694,7 @@ void ContinueSaveProcess(struct Main * main) {
                 DecompressBackgroundIntoBuffer(6);
                 CopyBGDataToVram(6);
                 main->unk3D = oldunk3D;
-                main->unk27 &= ~3;
+                main->animationFlags &= ~3;
                 oam = gOamObjects;
                 for (i = 0; i < MAX_OAM_OBJ_COUNT; ++i) {
                     oam->attr0 = 0x200;

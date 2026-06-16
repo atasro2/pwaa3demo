@@ -41,18 +41,19 @@ struct Main
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
     /* +0x024 */ u8 soundStatus;
-    /* +0x025 */ u8 fill25[0x2];
-    /* +0x027 */ u8 unk27;
+    /* +0x025 */ u8 unk25;
+    /* +0x026 */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
+    /* +0x027 */ u8 animationFlags; // unity: Obj_flag
     /* +0x028 */ u16 currentPlayingBgm;
-    /* +0x02A */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
-    /* +0x02B */ u8 animationFlags; // unity: Obj_flag
+    /* +0x02A */ u8 unk2A;
+    /* +0x02B */ u8 unk2B;
     /* +0x02C */ s16 bgmFadeAmount;
     /* +0x02E */ s16 bgmVolume;
     /* +0x030 */ u16 rngSeed; // unity: Random_seed
     /* +0x032 */ u8 gottenEvidenceType;
     /* +0x033 */ u8 gottenEvidenceId;
     /* +0x034 */ u16 currentBG;
-    /* +0x036 */ u16 currentDisplayedBG;
+    /* +0x036 */ u16 currentDisplayBG;
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
@@ -117,7 +118,7 @@ struct Main
     /* +0x10C */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x12C */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1B0 */ struct PsycheLockData psycheLockData[4];
-    /* +0x254 */ s8 currentPsycheLockDataIndex;
+    /* +0x250 */ s8 currentPsycheLockDataIndex;
     /* +0x251 */ u8 fill251[0x1];
     /* +0x252 */ u16 psycheLockStopPresentButtonsY;
     /* +0x254 */ u8 psycheLockStopPresentButtonsState;
@@ -232,4 +233,8 @@ void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
 void sub_8000E78(u32, u32, u32);
 void sub_8000EB4(u32, u32, u32);
+
+void InitSpecialEffectsWithMosaic(u32 type, u32 delay, u32 intensity);
+void InitSpecialEffects(u32 type, u32 delay, u32 intensity);
+
 #endif//GUARD_MAIN_H

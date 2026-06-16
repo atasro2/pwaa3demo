@@ -1017,7 +1017,7 @@ bool8 sub_800EC48(void)
             if ((anim->animationInfo.personId == 0xB) || (anim->animationInfo.personId == 0x21)) {
                 dst = gUnknown_0826FE38;
                 src = ((u32*)dst)[1] + gUnknown_08252498;
-                dst = (u32*)(OBJ_PLTT+0x1A0);
+                dst = (void*)(OBJ_PLTT+0x1A0);
                 DmaCopy16(3, src, dst, 0x20);
                 anim = sub_8016FB4();
                 anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
@@ -1187,7 +1187,7 @@ bool8 sub_800EFBC(void)
             }
         } else {
             gInvestigation.actionState = 3;
-            gInvestigation.unk8 = 8;
+            gInvestigation.inactiveActions = 8;
             gInvestigation.inactiveActionButtonY = 0xF0;
             RESTORE_PROCESS();
         }
@@ -1467,7 +1467,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.currentDisplayedBG == 0x80) {
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.currentDisplayBG == 0x80) {
                     SetPsycheLockState(8, 0);
                     UpdatePsycheLockAnimation();
                     ClearPsycheLockStopPresentButtonsOAM();
@@ -1585,7 +1585,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             main->advanceScriptContext = FALSE;
             gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
             gIORegisters.lcd_dispcnt &= ~DISPCNT_BG2_ON;
-            main->unk27 &= ~(2 | 1);
+            main->animationFlags &= ~(2 | 1);
             ClearEvidenceSprites(courtRecord);
             UpdateRecordInfoActionSprites(0);
             UpdateEvidenceDetailActionSprites(1);
@@ -1685,7 +1685,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             MakeMapMarkerSprites();
             if(main->processCopy[GAME_PROCESS] == TESTIMONY_PROCESS)
                 gTestimony.timer = 0;
-            main->unk27 |= (2 | 1);
+            main->animationFlags |= (2 | 1);
             anim = &gAnimation[1];
             if ((anim->animationInfo.personId == 0xB) || (anim->animationInfo.personId == 0x21)) {
                 dst = gUnknown_0826FE38;

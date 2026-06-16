@@ -1,16 +1,16 @@
 	.section .rodata
     .align 2, 0
 
-    .global gUnknown_08027090
-gUnknown_08027090:
+    .global gPersonAnimData
+gPersonAnimData:
     .incbin "baserom.gba", 0x00027090, 0x228
 
-    .global gUnknown_080272B8
-gUnknown_080272B8:
+    .global gAnimationData
+gAnimationData:
     .incbin "baserom.gba", 0x000272B8, 0xDFC
 
-    .global gUnknown_080280B4
-gUnknown_080280B4:
+    .global gSpriteSizeTable
+gSpriteSizeTable:
     .incbin "baserom.gba", 0x000280B4, 0x3C
 
     .global gUnknown_080280F0

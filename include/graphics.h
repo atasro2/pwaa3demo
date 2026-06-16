@@ -77,6 +77,7 @@
 #define gUnknown_0826F888 ((void*)(0x0826F888))
 #define gUnknown_0826FE38 ((void*)(0x0826FE38))
 #define gUnknown_08252498 ((void*)(0x08252498))
+#define gUnknown_0826FE38 ((void*)(0x0826FE38))
 
 
 #define gGfxHPBarFrame1 ((void*)(0x08190880))
@@ -100,6 +101,8 @@
 #define gPal_BustupMia ((void*)(GFX_BASE_ADDR + 0x86BF0))
 #define gMap_BustupMia ((void*)(GFX_BASE_ADDR + 0x86C10))
 
+#define gGfxSeqAnimation35 ((void*)(0x0826e5b0))
+#define gUnknown_08252494 ((void*)(0x08252494))
 #define gUnknown_08200308 ((void*)(GFX_BASE_ADDR + 0x80308))
 #define gUnknown_08208AA0 ((void*)(GFX_BASE_ADDR + 0x88AA0))
 #define gUnknown_08208AC0 ((void*)(GFX_BASE_ADDR + 0x88AC0))

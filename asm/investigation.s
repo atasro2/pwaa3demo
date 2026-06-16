@@ -471,8 +471,8 @@ _0800BFE4: .4byte gUnknown_0814DB08
 _0800BFE8: .4byte gInvestigationProcessStates
 _0800BFEC: .4byte gInvestigation
 
-	thumb_func_start sub_800BFF0
-sub_800BFF0: @ 0x0800BFF0
+	thumb_func_start InvestigationInit
+InvestigationInit: @ 0x0800BFF0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -759,8 +759,8 @@ _0800C284: .4byte 0x0000FFFF
 _0800C288: .4byte gMain
 _0800C28C: .4byte gUnknown_0814DAAC
 
-	thumb_func_start sub_800C290
-sub_800C290: @ 0x0800C290
+	thumb_func_start InvestigationMain
+InvestigationMain: @ 0x0800C290
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -1080,8 +1080,8 @@ _0800C50A:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_800C510
-sub_800C510: @ 0x0800C510
+	thumb_func_start InvestigationExit
+InvestigationExit: @ 0x0800C510
 	push {r4, lr}
 	adds r4, r0, #0
 	bl ClearSectionReadFlags
@@ -1149,8 +1149,8 @@ _0800C590:
 	.align 2, 0
 _0800C598: .4byte 0x0300000B
 
-	thumb_func_start sub_800C59C
-sub_800C59C: @ 0x0800C59C
+	thumb_func_start InvestigationBgScrollWait
+InvestigationBgScrollWait: @ 0x0800C59C
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0
@@ -1206,8 +1206,8 @@ _0800C5FC:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_800C604
-sub_800C604: @ 0x0800C604
+	thumb_func_start InvestigationTextboxSlideWait
+InvestigationTextboxSlideWait: @ 0x0800C604
 	push {r4, lr}
 	adds r4, r0, #0
 	movs r1, #0
@@ -1227,8 +1227,8 @@ _0800C61E:
 	.align 2, 0
 _0800C624: .4byte gScriptContext
 
-	thumb_func_start sub_800C628
-sub_800C628: @ 0x0800C628
+	thumb_func_start InvestigationRoomInit
+InvestigationRoomInit: @ 0x0800C628
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1379,8 +1379,8 @@ _0800C760: .4byte gAnimation+0x44
 _0800C764: .4byte gInvestigation
 _0800C768: .4byte gUnknown_0814DAAC
 
-	thumb_func_start sub_800C76C
-sub_800C76C: @ 0x0800C76C
+	thumb_func_start InvestigationInspect
+InvestigationInspect: @ 0x0800C76C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1855,8 +1855,8 @@ _0800CAFA:
 	.align 2, 0
 _0800CB04: .4byte gAnimation+0x44
 
-	thumb_func_start sub_800CB08
-sub_800CB08: @ 0x0800CB08
+	thumb_func_start InvestigationMove
+InvestigationMove: @ 0x0800CB08
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1931,7 +1931,7 @@ _0800CB8C:
 	movs r0, #1
 	mov r2, sb
 	strb r0, [r2]
-	ldr r2, _0800CC08 @ =gUnknown_0200AFC0
+	ldr r2, _0800CC08 @ =eGeneralScratchpadBuffer
 	ldr r1, _0800CC0C @ =gUnknown_08026960
 	ldrb r3, [r5]
 	lsls r0, r3, #2
@@ -1982,7 +1982,7 @@ _0800CBDE:
 _0800CBFC: .4byte gOamObjects+0x130
 _0800CC00: .4byte 0x0000012D
 _0800CC04: .4byte 0x06013400
-_0800CC08: .4byte gUnknown_0200AFC0
+_0800CC08: .4byte eGeneralScratchpadBuffer
 _0800CC0C: .4byte gUnknown_08026960
 _0800CC10: .4byte 0x040000D4
 _0800CC14: .4byte 0x80000400
@@ -2503,7 +2503,7 @@ _0800CFE0:
 	movs r0, #1
 	mov r1, sb
 	strb r0, [r1]
-	ldr r2, _0800D05C @ =gUnknown_0200AFC0
+	ldr r2, _0800D05C @ =eGeneralScratchpadBuffer
 	ldr r1, _0800D060 @ =gUnknown_08026960
 	ldrb r3, [r5]
 	lsls r0, r3, #2
@@ -2553,7 +2553,7 @@ _0800D030:
 _0800D050: .4byte gOamObjects+0x130
 _0800D054: .4byte 0x0000012D
 _0800D058: .4byte 0x06013400
-_0800D05C: .4byte gUnknown_0200AFC0
+_0800D05C: .4byte eGeneralScratchpadBuffer
 _0800D060: .4byte gUnknown_08026960
 _0800D064: .4byte 0x040000D4
 _0800D068: .4byte 0x80000400
@@ -2644,8 +2644,8 @@ _0800D0F8:
 	.align 2, 0
 _0800D108: .4byte 0x00000FFF
 
-	thumb_func_start sub_800D10C
-sub_800D10C: @ 0x0800D10C
+	thumb_func_start InvestigationTalk
+InvestigationTalk: @ 0x0800D10C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -2742,7 +2742,7 @@ _0800D1BC:
 	movs r0, #1
 	mov r2, r8
 	strb r0, [r2]
-	ldr r2, _0800D240 @ =gUnknown_0200AFC0
+	ldr r2, _0800D240 @ =eGeneralScratchpadBuffer
 	ldr r1, _0800D244 @ =gUnknown_08026810
 	ldrb r3, [r6]
 	lsls r0, r3, #2
@@ -2795,7 +2795,7 @@ _0800D230: .4byte gTalkData
 _0800D234: .4byte gOamObjects+0x130
 _0800D238: .4byte gAnimation+0x52
 _0800D23C: .4byte 0x06013400
-_0800D240: .4byte gUnknown_0200AFC0
+_0800D240: .4byte eGeneralScratchpadBuffer
 _0800D244: .4byte gUnknown_08026810
 _0800D248: .4byte 0x040000D4
 _0800D24C: .4byte 0x80000400
@@ -3631,7 +3631,7 @@ _0800D8AE:
 	movs r0, #1
 	mov r4, r8
 	strb r0, [r4]
-	ldr r2, _0800D938 @ =gUnknown_0200AFC0
+	ldr r2, _0800D938 @ =eGeneralScratchpadBuffer
 	ldr r1, _0800D93C @ =gUnknown_08026810
 	ldrb r3, [r6]
 	lsls r0, r3, #2
@@ -3685,7 +3685,7 @@ _0800D928: .4byte gOamObjects+0x1B0
 _0800D92C: .4byte gTalkData
 _0800D930: .4byte gAnimation+0x52
 _0800D934: .4byte 0x06013400
-_0800D938: .4byte gUnknown_0200AFC0
+_0800D938: .4byte eGeneralScratchpadBuffer
 _0800D93C: .4byte gUnknown_08026810
 _0800D940: .4byte 0x040000D4
 _0800D944: .4byte 0x80000400
@@ -3832,7 +3832,7 @@ _0800DA3E:
 	movs r0, #1
 	mov r3, r8
 	strb r0, [r3]
-	ldr r2, _0800DAC0 @ =gUnknown_0200AFC0
+	ldr r2, _0800DAC0 @ =eGeneralScratchpadBuffer
 	ldr r1, _0800DAC4 @ =gUnknown_08026810
 	ldrb r4, [r6]
 	lsls r0, r4, #2
@@ -3884,7 +3884,7 @@ _0800DAB0: .4byte gTalkData
 _0800DAB4: .4byte gOamObjects+0x130
 _0800DAB8: .4byte gAnimation+0x52
 _0800DABC: .4byte 0x06013400
-_0800DAC0: .4byte gUnknown_0200AFC0
+_0800DAC0: .4byte eGeneralScratchpadBuffer
 _0800DAC4: .4byte gUnknown_08026810
 _0800DAC8: .4byte 0x040000D4
 _0800DACC: .4byte 0x80000400
@@ -3978,8 +3978,8 @@ _0800DB5C:
 	.align 2, 0
 _0800DB6C: .4byte 0x00000FFF
 
-	thumb_func_start sub_800DB70
-sub_800DB70: @ 0x0800DB70
+	thumb_func_start InvestigationPresent
+InvestigationPresent: @ 0x0800DB70
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	adds r4, r1, #0
@@ -5548,7 +5548,7 @@ _0800E7E2:
 	str r0, [sp]
 _0800E802:
 	mov r0, sp
-	bl sub_8012258
+	bl CheckRectCollisionWithAnim
 	adds r2, r0, #0
 	ldr r4, _0800E818 @ =gExaminationData
 	b _0800E828
@@ -5623,7 +5623,7 @@ LoadLocationChoiceGraphics: @ 0x0800E874
 	ldr r0, _0800E8D8 @ =0x0000012D
 	adds r4, r4, r0
 	movs r7, #0
-	ldr r2, _0800E8DC @ =gUnknown_0200AFC0
+	ldr r2, _0800E8DC @ =eGeneralScratchpadBuffer
 	ldr r1, _0800E8E0 @ =gUnknown_08026960
 	mov r8, r1
 	ldr r5, _0800E8E4 @ =0x040000D4
@@ -5661,7 +5661,7 @@ _0800E8C0:
 	.align 2, 0
 _0800E8D4: .4byte gMain
 _0800E8D8: .4byte 0x0000012D
-_0800E8DC: .4byte gUnknown_0200AFC0
+_0800E8DC: .4byte eGeneralScratchpadBuffer
 _0800E8E0: .4byte gUnknown_08026960
 _0800E8E4: .4byte 0x040000D4
 _0800E8E8: .4byte 0x06013400
@@ -5700,7 +5700,7 @@ _0800E91A:
 _0800E924:
 	adds r4, r2, #4
 	movs r6, #0
-	ldr r2, _0800E998 @ =gUnknown_0200AFC0
+	ldr r2, _0800E998 @ =eGeneralScratchpadBuffer
 	ldr r1, _0800E99C @ =gUnknown_08026810
 	mov r8, r1
 	ldr r5, _0800E9A0 @ =0x040000D4
@@ -5754,7 +5754,7 @@ _0800E958:
 _0800E98C: .4byte gTalkData
 _0800E990: .4byte gMain+0xC0
 _0800E994: .4byte gAnimation+0x52
-_0800E998: .4byte gUnknown_0200AFC0
+_0800E998: .4byte eGeneralScratchpadBuffer
 _0800E99C: .4byte gUnknown_08026810
 _0800E9A0: .4byte 0x040000D4
 _0800E9A4: .4byte 0x06013400

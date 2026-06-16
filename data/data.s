@@ -3,7 +3,9 @@
 
     .global gFlagPtrs
 gFlagPtrs:
-    .incbin "baserom.gba", 0x0014D930, 0xC
+    .4byte 0x03003878
+    .4byte 0x03003898
+    .4byte 0x0300389C
 
     .global gCourtRecordInitialItemLists
 gCourtRecordInitialItemLists:
@@ -88,7 +90,6 @@ gInvestigationPresentData:
 
     .global gUnknown_0814DA50
 gUnknown_0814DA50:
-@ replacing .incbin "baserom.gba", 0x0014da50, 0x5c
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy
@@ -115,7 +116,6 @@ gUnknown_0814DA50:
 
     .global gUnknown_0814DAAC
 gUnknown_0814DAAC:
-@ replacing .incbin "baserom.gba", 0x0014daac, 0x5c
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy
@@ -142,7 +142,6 @@ gUnknown_0814DAAC:
 
     .global gUnknown_0814DB08
 gUnknown_0814DB08:
-@ replacing .incbin "baserom.gba", 0x0014db08, 0x5c
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy
@@ -180,49 +179,45 @@ gSaveGameProcessStates:
 .4byte SaveGame7
 .4byte SaveGame8
 
-    .global gUnknown_0814DB88
-gUnknown_0814DB88:
-@ replacing .incbin "baserom.gba", 0x0014db88, 0xc
-.4byte sub_800A51C
-.4byte sub_800A780
-.4byte sub_800A6D4
+    .global gCourtProcessStates
+gCourtProcessStates:
+.4byte CourtInit
+.4byte CourtMain
+.4byte CourtExit
 
-    .global gUnknown_0814DB94
-gUnknown_0814DB94:
-@ replacing .incbin "baserom.gba", 0x0014db94, 0x10
-.4byte sub_800A968
-.4byte sub_800A9B4
-.4byte sub_800AA20
-.4byte sub_800A804
+    .global gTestimonyProcessStates
+gTestimonyProcessStates:
+.4byte TestimonyInit
+.4byte TestimonyMain
+.4byte TestimonyExit
+.4byte TestimonyAnim
 
-    .global gUnknown_0814DBA4
-gUnknown_0814DBA4:
-@ replacing .incbin "baserom.gba", 0x0014dba4, 0x18
-.4byte sub_800AB7C
-.4byte sub_800ACD4
-.4byte nullsub_16
-.4byte sub_800AA34
-.4byte sub_800AEF4
-.4byte sub_800B0B0
+    .global gQuestioningProcessStates
+gQuestioningProcessStates:
+.4byte QuestioningInit
+.4byte QuestioningMain
+.4byte QuestioningExit
+.4byte QuestioningAnim
+.4byte QuestioningHoldIt
+.4byte QuestioningObjection
 
     .global gInvestigationProcessStates
 gInvestigationProcessStates:
-@ replacing .incbin "baserom.gba", 0x0014dbbc, 0x2c
-.4byte sub_800BFF0
-.4byte sub_800C290
-.4byte sub_800C510
-.4byte sub_800C59C
-.4byte sub_800C604
-.4byte sub_800C628
-.4byte sub_800C76C
-.4byte sub_800CB08
-.4byte sub_800D10C
-.4byte sub_800DB70
+.4byte InvestigationInit
+.4byte InvestigationMain
+.4byte InvestigationExit
+.4byte InvestigationBgScrollWait
+.4byte InvestigationTextboxSlideWait
+.4byte InvestigationRoomInit
+.4byte InvestigationInspect
+.4byte InvestigationMove
+.4byte InvestigationTalk
+.4byte InvestigationPresent
 .4byte InvestigationPsycheLock
 
     .global gUnknown_0814DBE8
 gUnknown_0814DBE8:
-@ replacing .incbin "baserom.gba", 0x0014dbe8, 0x30
+@ static void * states[]; for InvestigationPsycheLock()
 .4byte 0x800dcc8
 .4byte 0x800dd00
 .4byte 0x800dd20

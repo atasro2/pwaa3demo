@@ -305,7 +305,7 @@ void sub_8007610(u8 scenario) {
     }
 }
 
-void nullsub_11(void) {
+void nullsub_11(u32 arg0) {
     
 }
 
@@ -375,7 +375,7 @@ void SaveGameInit2(struct Main *main)
     DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
     DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
     gScriptContext.unk22 = 0;
-    main->unk27 &= ~3;
+    main->animationFlags &= ~3;
     oam = gOamObjects;
     for(i = 0; i < MAX_OAM_OBJ_COUNT; i++)
     {
@@ -627,7 +627,7 @@ void SaveGameExitSaveScreen(struct Main * main) {
     if (main->process[GAME_PROCESS_STATE] != 8 || main->process[GAME_PROCESS_VAR1] != 6) {
         sub_8017154(3);
     }
-    gMain.unk27 |= 3;
+    gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
     DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT+0x100, 0x20);
     main->soundFlags = gSaveDataBuffer.main.soundFlags;

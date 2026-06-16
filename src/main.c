@@ -13,6 +13,7 @@
 #include "court.h"
 #include "declarations.h"
 #include "graphics.h"
+#include "hp_bar.h"
 #include "constants/animation.h"
 #include "constants/oam_allocations.h"
 

@@ -77,6 +77,8 @@ void UpdateBG2Window(struct CourtRecord *);
 extern void sub_80037C8(void);
 void SetTextboxNametag(u32, u32);
 void UpdateBGTilemaps(void);
+
+void sub_80051CC(u32);
 //u16 sub_800389C(u16 color, u16 y, u16 mode);
 u16 ColorFadeSepia(u16 color, u16 y, u16 mode);
 

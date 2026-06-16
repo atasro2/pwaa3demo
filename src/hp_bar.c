@@ -5,6 +5,8 @@
 #include "case_data.h"
 #include "graphics.h"
 #include "utils.h"
+#include "sound.h"
+#include "constants/process.h"
 #include "constants/oam_allocations.h"
 #include "constants/process.h"
 

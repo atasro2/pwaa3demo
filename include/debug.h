@@ -65,4 +65,6 @@ struct DebugContext {
 
 void sub_8001610(u16,u16,u16,u16);
 
+extern char gUnknown_0802813C[];
+
 #endif//GUARD_DEBUG_H

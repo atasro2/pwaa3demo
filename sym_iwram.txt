@@ -19,7 +19,7 @@
 . = 0x00003C60; gTestimony = .;
 . = 0x00003C70; gExaminationData = .;
 . = 0x00003E50; gTextBoxCharacters = .;
-. = 0x00004150; gUnknown_03004150 = .;
+. = 0x00004150; gObjPaletteBuffer = .;
 . = 0x00004250; gCourtScroll = .;
 . = 0x00004260; SoundMainRAM_Buffer = .;
 . = 0x00004660; gSoundInfo = .;
