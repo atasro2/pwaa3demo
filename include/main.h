@@ -57,7 +57,7 @@ struct Main
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
-    /* +0x03D */ u8 unk3D;
+    /* +0x03D */ s8 unk3D;
     /* +0x03E */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x03F */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x040 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x

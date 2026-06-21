@@ -39,10 +39,10 @@ struct AnimationInfo
     /* +0x03 */ u8 unk3;
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
-    /* +0x08 */ u8 * animFrameDataStartPtr;
-    /* +0x0C */ u8 * tileDataPtr;
-    /* +0x10 */ u8 * vramPtr;
-    /* +0x14 */ u8 * animGfxDataStartPtr;
+    /* +0x08 */ uintptr_t animFrameDataStartPtr;
+    /* +0x0C */ uintptr_t tileDataPtr;
+    /* +0x10 */ uintptr_t vramPtr;
+    /* +0x14 */ uintptr_t animGfxDataStartPtr;
     /* +0x18 */ u8 paletteSlot;
     /* +0x19 */ u8 spriteCount;
     /* +0x1A */ u8 priority;
@@ -84,7 +84,7 @@ struct AnimationBackupStruct
     /* +0x03 */ u8 unk3; // animationInfo.unk3
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
-    /* +0x08 */ u8 * animFrameDataStartPtr;
+    /* +0x08 */ uintptr_t animFrameDataStartPtr;
     /* +0x0C */ u16 frameDurationCounter;
     /* +0x0E */ u8 unkE; // unk2A
     /* +0x0F */ u8 unkF; // unk2B
