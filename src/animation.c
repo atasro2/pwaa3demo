@@ -1,27 +1,119 @@
 #include "global.h"
 #include "animation.h"
+#include "court.h"
 #include "ewram.h"
 #include "sound.h"
-// #include "utils.h"
+#include "utils.h"
 #include "script.h"
 #include "background.h"
 #include "graphics.h"
 #include "debug.h"
-// #include "constants/animation.h"
+#include "constants/animation.h"
 #include "constants/process.h"
 
 // #include "data/animation.h"
 
-extern char gUnknown_080280F0[];
-extern char gUnknown_08028100[];
-extern char gUnknown_08028114[];
-extern char gUnknown_08028128[];
-extern char gUnknown_08028150[];
-extern char gUnknown_08028168[];
-
 extern struct PersonAnimationData gPersonAnimData[];
-extern struct SpriteSizeData gSpriteSizeTable[];
 extern struct AnimationData gAnimationData[];
+
+const struct SpriteSizeData gSpriteSizeTable[15] = {
+	[0] = {
+		.tileSize = 32,
+		.height = 8,
+		.width = 8,
+	},
+	[1] = {
+		.tileSize = 64,
+		.height = 8,
+		.width = 16,
+	},
+	[2] = {
+		.tileSize = 64,
+		.height = 16,
+		.width = 8,
+	},
+	[3] = {
+		.tileSize = 3,
+		.height = 0,
+		.width = 0,
+	},
+	[4] = {
+		.tileSize = 128,
+		.height = 16,
+		.width = 16,
+	},
+	[5] = {
+		.tileSize = 128,
+		.height = 8,
+		.width = 32,
+	},
+	[6] = {
+		.tileSize = 128,
+		.height = 32,
+		.width = 8,
+	},
+	[7] = {
+		.tileSize = 7,
+		.height = 0,
+		.width = 0,
+	},
+	[8] = {
+		.tileSize = 512,
+		.height = 32,
+		.width = 32,
+	},
+	[9] = {
+		.tileSize = 256,
+		.height = 16,
+		.width = 32,
+	},
+	[10] = {
+		.tileSize = 256,
+		.height = 32,
+		.width = 16,
+	},
+	[11] = {
+		.tileSize = 11,
+		.height = 0,
+		.width = 0,
+	},
+	[12] = {
+		.tileSize = 2048,
+		.height = 64,
+		.width = 64,
+	},
+	[13] = {
+		.tileSize = 1024,
+		.height = 32,
+		.width = 64,
+	},
+	[14] = {
+		.tileSize = 1024,
+		.height = 64,
+		.width = 32,
+	},
+};
+
+void (*gSpecialAnimationEffectFunctions[8])(struct AnimationListEntry *) = {
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+};
+
+void (*gCourtScrollPersonAnimationUpdateFuncs[6])(struct AnimationListEntry *, struct CourtScroll *) = {
+    ScrollMode0AnimationUpdate,
+    ScrollMode1AnimationUpdate,
+    ScrollMode2AnimationUpdate,
+    ScrollMode3AnimationUpdate,
+    ScrollMode4AnimationUpdate,
+    ScrollMode5AnimationUpdate,
+};
+
 extern u16 gObjPaletteBuffer[16][16];
 
 struct AnimationListEntry * CreateAnimationFromAnimationInfo(struct AnimationInfo * animationInfo, u32 arg1, u32 flags);
@@ -109,7 +201,7 @@ struct AnimationListEntry * FindAnimationFromAnimId(u32 animId)
             }
             animation--;
         }
-        nullsub_20(gUnknown_080280F0, 0, 3);
+        nullsub_20("OBJ PULL ERROR!", 0, 3);
         return NULL;
     }
 }
@@ -118,13 +210,11 @@ void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin,
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
-    {
-        animation->animationInfo.xOrigin = xOrigin;
-        animation->animationInfo.yOrigin = yOrigin;
-    }
+    animation->animationInfo.xOrigin = xOrigin;
+    animation->animationInfo.yOrigin = yOrigin;
 }
 
 void SetAnimationRotScaleParams(struct AnimationListEntry *animation, u32 rotscaleIdx)
@@ -134,51 +224,45 @@ void SetAnimationRotScaleParams(struct AnimationListEntry *animation, u32 rotsca
     oamIdx = rotscaleIdx << 2;
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
+    if (rotscaleIdx > 0x1f)
     {
-        if (rotscaleIdx > 0x1f)
-        {
-            nullsub_20(gUnknown_08028114, 0, 4);
-            rotscaleIdx = 0x1f;
-        }
-        animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
-        animation->rotationAmount &= 0xff;
-        animation->spritePriorityMatrixIndex &= 0xff00;
-        animation->spritePriorityMatrixIndex |= rotscaleIdx;
-        cos = _Cos(animation->rotationAmount);
-        sin = -_Sin(animation->rotationAmount);
-        gOamObjects[oamIdx++].attr3 = cos;
-        gOamObjects[oamIdx++].attr3 = -sin;
-        gOamObjects[oamIdx++].attr3 = sin;
-        gOamObjects[oamIdx++].attr3 = cos;
+        nullsub_20("OBJ PARA NUM ERROR!", 0, 4);
+        rotscaleIdx = 0x1f;
     }
+    animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
+    animation->rotationAmount &= 0xff;
+    animation->spritePriorityMatrixIndex &= 0xff00;
+    animation->spritePriorityMatrixIndex |= rotscaleIdx;
+    cos = _Cos(animation->rotationAmount);
+    sin = -_Sin(animation->rotationAmount);
+    gOamObjects[oamIdx++].attr3 = cos;
+    gOamObjects[oamIdx++].attr3 = -sin;
+    gOamObjects[oamIdx++].attr3 = sin;
+    gOamObjects[oamIdx++].attr3 = cos;
 }
 
 void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation)
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
-    {
-        animation->rotationAmount = rotation;
-        SetAnimationRotScaleParams(animation, rotscaleIdx);
-    }
+    animation->rotationAmount = rotation;
+    SetAnimationRotScaleParams(animation, rotscaleIdx);
 }
 
 void DisableAnimationRotation(struct AnimationListEntry *animation)
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
-    {
-        animation->flags &= ~ANIM_ENABLE_ROTATION;
-    }
+    animation->flags &= ~ANIM_ENABLE_ROTATION;
 }
 
 void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 scale)
@@ -188,37 +272,33 @@ void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u3
     oamIdx = rotscaleIdx << 2;
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
+    if (rotscaleIdx > 0x1f)
     {
-        if (rotscaleIdx > 0x1f)
-        {
-            nullsub_20(gUnknown_08028114, 0, 4);
-            rotscaleIdx = 0x1f;
-        }
-        animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
-        animation->rotationAmount &= 0xff;
-        animation->spritePriorityMatrixIndex &= 0xff00;
-        animation->spritePriorityMatrixIndex |= rotscaleIdx;
-        temp = fix_inverse(scale);
-        gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
-        gOamObjects[oamIdx++].attr3 = fix_mul(_Sin(0), temp);
-        gOamObjects[oamIdx++].attr3 = fix_mul(-_Sin(0), temp);
-        gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
+        nullsub_20("OBJ PARA NUM ERROR!", 0, 4);
+        rotscaleIdx = 0x1f;
     }
+    animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
+    animation->rotationAmount &= 0xff;
+    animation->spritePriorityMatrixIndex &= 0xff00;
+    animation->spritePriorityMatrixIndex |= rotscaleIdx;
+    temp = fix_inverse(scale);
+    gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
+    gOamObjects[oamIdx++].attr3 = fix_mul(_Sin(0), temp);
+    gOamObjects[oamIdx++].attr3 = fix_mul(-_Sin(0), temp);
+    gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
 }
 
 void DisableAnimationScale(struct AnimationListEntry *animation)
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
-    {
-        animation->flags &= ~ANIM_ENABLE_ROTATION;
-    }
+    animation->flags &= ~ANIM_ENABLE_ROTATION;
 }
 
 void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 activate)
@@ -227,9 +307,10 @@ void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 activa
 
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else if(animation->flags & ANIM_ALLOCATED)
+    if(animation->flags & ANIM_ALLOCATED)
     {
         if (activate)
         {
@@ -250,33 +331,29 @@ void SetAnimationXFlip(struct AnimationListEntry *animation, bool32 flipX)
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
+    if (flipX)
+        animation->flags |= 1;
     else
-    {
-        if (flipX)
-            animation->flags |= 1;
-        else
-            animation->flags &= ~1;
-    }
+        animation->flags &= ~1;
 }
 
 void SetAnimationPriority(struct AnimationListEntry *animation, u32 priority)
 {
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
     }
-    else
+    if (priority > 3)
     {
-        if (priority > 3)
-        {
-            nullsub_20(gUnknown_08028128, 0, 4);
-            priority = 3;
-        }
-        animation->spritePriorityMatrixIndex &= 0xff;
-        animation->spritePriorityMatrixIndex |= priority << 8;
+        nullsub_20("OBJ PRIORITY ERROR.", 0, 4);
+        priority = 3;
     }
+    animation->spritePriorityMatrixIndex &= 0xff;
+    animation->spritePriorityMatrixIndex |= priority << 8;
 }
 
 void SetAnimationFrameOffset(struct AnimationListEntry *animation, u32 animOffset)
@@ -285,59 +362,55 @@ void SetAnimationFrameOffset(struct AnimationListEntry *animation, u32 animOffse
     uintptr_t animFrameData;
     if (animation == NULL)
     {
-        nullsub_20(gUnknown_08028100, 0, 4);
+        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        return;
+    }
+    if (animation->animationInfo.animId == 0xFF)
+    {
+        uintptr_t framePtr;
+        framePtr = (uintptr_t)gPersonAnimData[animation->animationInfo.personId].frameData + animOffset;
+        if (animation->animationInfo.animFrameDataStartPtr == framePtr)
+            return;
+        animation->animationInfo.animFrameDataStartPtr = framePtr;
+        animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gPersonAnimData[animation->animationInfo.personId].gfxData;
+        sub_8016FEC(1);
     }
     else
     {
-        if (animation->animationInfo.animId == 0xFF)
+        if (animation->animationInfo.animId > 0x8)
         {
-            uintptr_t framePtr;
-            framePtr = (uintptr_t)gPersonAnimData[animation->animationInfo.personId].frameData + animOffset;
-            if (animation->animationInfo.animFrameDataStartPtr == framePtr)
-                return;
-            animation->animationInfo.animFrameDataStartPtr = framePtr;
-            animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gPersonAnimData[animation->animationInfo.personId].gfxData;
-            sub_8016FEC(1);
-        }
-        else
-        {
-            if (animation->animationInfo.animId > 0x8)
+            if (animation->animationInfo.animId <= 0x1D)
             {
-                if (animation->animationInfo.animId <= 0x1D)
-                {
-                    animation->animationInfo.animFrameDataStartPtr = (uintptr_t)gUnknown_08252494 + animOffset; // ! These globals are defines *sob*
-                    animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gUnknown_08252494;
-                }
-                else
-                {
-                    if (animation->animationInfo.animId > 0x89)
-                    {
-                        nullsub_20(gUnknown_0802813C, 0, 4);
-                        return;
-                    }
-                    animation->animationInfo.animFrameDataStartPtr = (uintptr_t)gGfxSeqAnimation35 + animOffset;
-                    animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gUnknown_08252494;
-                }
+                animation->animationInfo.animFrameDataStartPtr = (uintptr_t)gUnknown_08252494 + animOffset; // ! These globals are defines *sob*
+                animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gUnknown_08252494;
             }
             else
             {
+                if (animation->animationInfo.animId > 0x89)
+                {
+                    nullsub_20("NOT MOTION DATA.", 0, 4);
+                    return;
+                }
                 animation->animationInfo.animFrameDataStartPtr = (uintptr_t)gGfxSeqAnimation35 + animOffset;
                 animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gUnknown_08252494;
             }
         }
-        animation->flags |= (ANIM_PLAYING | ANIM_QUEUED_TILE_UPLOAD);
-        animation->frameDurationCounter = 0xFFFF;
-        // comments mostly based on h3rmit docs
-        // animation->animFrameDataStartPtr animation block beginning
-        animFrameData = animation->animationInfo.animFrameDataStartPtr;
-        animGfxData = animation->animationInfo.animGfxDataStartPtr + 1 [(u32 *)animFrameData]; // offsets the graphics pointer
-        animation->animationInfo.animGfxDataStartPtr = animGfxData;
-        animation->animationInfo.tileDataPtr = animGfxData + 4 + (*(u32 *)animGfxData) * 0x20; // skip first u32(number of palettes) and the palettes, pointer to tiles
-        animation->frameData = (struct AnimationFrame *)(animFrameData + 8); // skips animation block header, pointer to frame data
-        animation->spriteData = (struct SpriteTemplate *)(animFrameData + animation->frameData->spriteDataOffset); // Frame tilemap pointer
-        if(gMain.unk3D & 0x8) {
-            gMain.unk3D |= 0x10;
+        else
+        {
+            animation->animationInfo.animFrameDataStartPtr = (uintptr_t)gGfxSeqAnimation35 + animOffset;
+            animation->animationInfo.animGfxDataStartPtr = (uintptr_t)gUnknown_08252494;
         }
+    }
+    animation->flags |= (ANIM_PLAYING | ANIM_QUEUED_TILE_UPLOAD);
+    animation->frameDurationCounter = 0xFFFF;
+    animFrameData = animation->animationInfo.animFrameDataStartPtr;
+    animGfxData = animation->animationInfo.animGfxDataStartPtr + 1 [(u32 *)animFrameData];
+    animation->animationInfo.animGfxDataStartPtr = animGfxData;
+    animation->animationInfo.tileDataPtr = animGfxData + 4 + (*(u32 *)animGfxData) * 0x20;
+    animation->frameData = (struct AnimationFrame *)(animFrameData + 8);
+    animation->spriteData = (struct SpriteTemplate *)(animFrameData + animation->frameData->spriteDataOffset);
+    if(gMain.unk3D & 0x8) {
+        gMain.unk3D |= 0x10;
     }
 }
 
@@ -763,7 +836,7 @@ struct AnimationListEntry * CreateAnimationFromAnimationInfo(struct AnimationInf
     uintptr_t animGfxData;
     struct AnimationListEntry *animation = AllocateAnimationWithId(animationInfo->animId);
     if (animation == NULL) {
-        nullsub_20(gUnknown_080280F0, 0, 5);
+        nullsub_20("OBJ PULL ERROR!", 0, 5);
         return NULL;
     }
     DmaCopy16(3, animationInfo, &animation->animationInfo, sizeof(animation->animationInfo));
@@ -1284,11 +1357,11 @@ void MoveAnimationTilesToRam(bool32 arg0)
         gMain.unk3D &= flag;
     }
     // 13788
-    nullsub_20(gUnknown_08028150, 0, 13);
+    nullsub_20("                     ", 0, 13);
     vcount = *(u8*)&REG_VCOUNT;
     if(vcount < 160) {
         if(!arg0)
-            nullsub_20(gUnknown_08028168, 0, 13);
+            nullsub_20("OBJ TRANS TIMEOVER!", 0, 13);
     }
 }
 
@@ -1380,6 +1453,200 @@ void UpdateAnimations(u32 arg0)
     UpdateAllAnimationSprites();
 }
 
-void nullsub_7() {
+void nullsub_7() { // null subbed butterfly copy of UpdateAllAnimationSprites?
     
+}
+
+void sub_80139F4(void) // copy of MoveAnimationTilesToRam for butterflies
+{
+    struct AnimationListEntry *animation;
+    for (animation = gAnimation[0].next; animation != NULL; animation = animation->next)
+    {
+        uintptr_t tileData;
+        uintptr_t tileStart;
+        struct SpriteTemplate * spriteTemplate; // ip
+        struct SpriteSizeData * spriteSizeData; // r7
+        uintptr_t tileDest; // r6
+        uintptr_t nextTileDest; // r8
+        u32 spriteCount; // sl
+        u32 palCount; //sp08
+        u32 i;
+
+        if(!(animation->flags & ANIM_QUEUED_TILE_UPLOAD))
+            continue;
+        if(!(animation->flags & ANIM_ACTIVE))
+            continue;
+        if((animation->animationInfo.animId != 131
+            && animation->animationInfo.animId != 132
+            && animation->animationInfo.animId != 133)) 
+           continue;
+        tileDest = animation->animationInfo.vramPtr;
+        spriteTemplate = animation->spriteData;
+        spriteCount = *(u16*)animation->spriteData;
+        spriteSizeData = eGeneralScratchpadBuffer;
+        spriteSizeData += animation->animtionOamEndIdx;
+        animation->flags &= ~ANIM_QUEUED_TILE_UPLOAD;
+        palCount = *(u32*)animation->animationInfo.animGfxDataStartPtr;
+        // RLE
+        if(palCount & 0x80000000)
+        {
+            for(i = 0; i < spriteCount; i++)
+            {
+                u32 * offsets;
+                u32 tileNum;
+                u32 size;
+                spriteTemplate++;
+                spriteSizeData--;
+                size = spriteSizeData->tileSize;
+                nextTileDest = tileDest + size;
+                tileNum = (spriteTemplate->data & 0x1FF);
+                tileStart = animation->animationInfo.tileDataPtr;
+                offsets = (u32*)tileStart;
+                tileStart += offsets[tileNum];
+                tileData = tileStart;
+                while(nextTileDest > tileDest)
+                {
+                    if(*(u16*)tileData & 0x8000)
+                    {
+                        u32 repeatCount = *(u16*)tileData & 0x7FFF;
+                        DmaFill16(3, *((u16*)tileData+1), tileDest, repeatCount*=2);
+                        tileDest += repeatCount;
+                        tileData += 4;
+                    }
+                    else
+                    {
+                        u32 size = *(u16*)tileData * 2;
+                        tileData+=2;
+                        DmaCopy16(3, tileData, tileDest, size);
+                        tileDest += size;
+                        tileData += size;
+                    }
+                }
+            }
+        }
+        // plain
+        else
+        {
+            u32 tileNumMask;
+            // This is correct trust me
+            if(animation->frameData->flags & 1)
+                tileNumMask = 0x1FF;
+            else if(animation->frameData->flags & 8)
+                tileNumMask = 0x1FF;
+            else
+                tileNumMask = 0x1FF;
+            for(i = 0; i < spriteCount; i++)
+            {
+                u16 * sizePtr;
+                u32 tileNum;
+                spriteTemplate++;
+                spriteSizeData--;
+                sizePtr = &spriteSizeData->tileSize; // !! SCRUB C probably fakematch
+                tileData = animation->animationInfo.tileDataPtr + (spriteTemplate->data & tileNumMask) * TILE_SIZE_4BPP;
+                DmaCopy16(3, tileData, tileDest, *sizePtr);
+                tileDest += *sizePtr;
+            }
+        }
+        animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
+    }
+    if(gMain.unk3D & 0x10) {
+        u32 flag = ~0x10;
+        gMain.unk3D &= flag;
+    }
+}
+
+void sub_8013B84(u32 arg0) // copy of UpdateAnimations
+{
+    struct Main * main = &gMain;
+    struct AnimationListEntry *animation;
+    struct AnimationListEntry *animation2 = gAnimation;
+    struct CourtScroll * courtScroll = &gCourtScroll;
+    struct ScriptContext * context = &gScriptContext;
+    struct IORegisters * ioRegs = &gIORegisters;
+
+    if(main->animationFlags & 1)
+    {
+        for (animation = animation2->next; animation != NULL; animation = animation->next)
+        {
+            if((animation->animationInfo.animId != 131
+                && animation->animationInfo.animId != 132
+                && animation->animationInfo.animId != 133)) 
+                continue;
+            if(animation->animationInfo.animId >= 27 && animation->animationInfo.animId <= 29)
+            {
+                if(main->currentBG != animation->bgId)
+                {
+                    if(context->flags & 0x20) {
+                        animation->bgId = main->currentBG;
+                    }
+                    else if(main->currentRoomId == animation->roomId) {
+                        ChangeAnimationActivity(animation, 0);
+                        continue;
+                    }
+                    else {
+                        DestroyAnimation(animation);
+                        continue;
+                    }
+                }
+                else
+                {
+                    if(!(animation->flags & ANIM_ACTIVE))
+                    {
+                        if(main->currentBgStripe == 0)
+                        {
+                            PlayAnimation(animation->animationInfo.animId);
+                            ChangeAnimationActivity(animation, 1);
+                        }
+                    }
+                }
+                if(main->currentDisplayBG == 0x80)
+                    ChangeAnimationActivity(animation, 0);
+            } else if(animation->animationInfo.animId >= 138 && animation->animationInfo.animId <= 167) {
+                if(arg0 != animation->bgId) {
+                    DestroyAnimation(animation);
+                    continue;
+                }
+            } else if(animation->animationInfo.animId >= 168 && animation->animationInfo.animId <= 176) {
+                if(main->currentBG != animation->bgId)
+                    DestroyAnimation(animation);
+            }
+            if(animation->flags & 0x40) {
+                if(animation->animationInfo.animId == 0x70) {
+                    animation->flags |= ANIM_ACTIVE | ANIM_BLEND_ACTIVE;
+                    ioRegs->lcd_bldcnt |= BLDCNT_TGT2_BG3;
+                    ioRegs->lcd_bldalpha = BLDALPHA_BLEND(8, 11); // blend target 2 wtf??
+                }
+                *(u16*)REG_ADDR_BLDCNT = ioRegs->lcd_bldcnt;
+                *(u16*)REG_ADDR_BLDALPHA = ioRegs->lcd_bldalpha;
+            }
+            if(animation->flags & 0x80) {
+                animation->flags |= ANIM_ACTIVE | ANIM_BLEND_ACTIVE;
+                ioRegs->lcd_bldcnt |= BLDCNT_TGT2_BG3;
+            }
+            if(((animation->flags & (ANIM_BLEND_ACTIVE | 0x80)) == ANIM_BLEND_ACTIVE) && !(animation->animationInfo.animId <= 137 && animation->animationInfo.animId >= 82)) {
+                UpdateAnimationBlend(animation);
+            }
+            if(animation->flags & ANIM_PLAYING && AdvanceAnimationFrame(animation) == 0)
+                continue;
+            if(animation->animationInfo.animId <= 8)
+                gSpecialAnimationEffectFunctions[animation->animationInfo.animId - 1](animation);
+            if(courtScroll->state != 0 && animation->animationInfo.animId == 0xFF) {
+                UpdatePersonAnimationForCourtScroll(animation);
+            }
+        }
+    }
+    animation = &gAnimation[1];
+    if(courtScroll->state != 0 && !(animation->flags & ANIM_ALLOCATED)) {
+        UpdatePersonAnimationForCourtScroll(animation);
+    }
+    if(main->animationFlags & 0x4)
+    {
+        main->animationFlags &= ~0x4;
+        ClearAllAnimationSprites();
+    }
+}
+
+void sub_8013DB0(struct DebugContext * debug) {
+    if(gJoypad.pressedKeys & START_BUTTON)
+        debug->unk1 = 3;
 }

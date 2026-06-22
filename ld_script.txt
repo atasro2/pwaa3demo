@@ -35,7 +35,7 @@ SECTIONS {
         src/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
-        asm/animation.o(.text);
+        src/animation_effects.o(.text);
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
@@ -71,7 +71,10 @@ SECTIONS {
         rodata/rodata.o(.rodata);
         src/court_record.o(.rodata);
         src/sound.o(.rodata);
-        rodata/rodata_2.o(.rodata);
+        rodata/animation.o(.rodata);
+        src/animation.o(.rodata);
+        src/animation_effects.o(.rodata);
+        src/movietest.o(.rodata);
         src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
         rodata/script_main.o(.rodata);
@@ -93,6 +96,7 @@ SECTIONS {
         data/data.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);
+        src/animation.o(.data);
         data/data_2.o(.data);
         data/script_main.o(.data);
     } =0

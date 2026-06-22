@@ -511,7 +511,13 @@ void sub_8011C08(struct DebugContext *ctx) {
     sound->unk0 = sound->unk2;
     ctx->unk1--;
 }
-extern void (*gUnknown_0814DC64[])(struct DebugContext *ctx);
+
+void (*gUnknown_0814DC64[])(struct DebugContext *ctx) = {
+    sub_80116B0,
+    sub_8011714,
+    sub_8011C08
+
+};
 
 void sub_8011C60(struct DebugContext *ctx) {
     if (gJoypad.pressedKeys & START_BUTTON)

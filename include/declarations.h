@@ -5,9 +5,6 @@
 
 void DoGameProcess(void);
 void UpdateHardwareBlend(void);
-void sub_80139F4(void);
-void nullsub_7(void);
-void sub_8013B84(u32);
 void sub_800482C(u32);
 void CheckBGChange_iOS(u16, u32);
 void Butterfly_Unity(void);
