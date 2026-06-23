@@ -645,7 +645,7 @@ bool32 Command0E(struct ScriptContext * unused_scriptCtx) {
 
 bool32 Command0F(struct ScriptContext * unused_scriptCtx) {
     struct ScriptContext * scriptCtx = &gScriptContext;
-    scriptCtx->unk10 = *scriptCtx->scriptPtr++;
+    scriptCtx->holdItSection = *scriptCtx->scriptPtr++;
     if(scriptCtx->scriptPtr) { // ! this does not dereference the pointer 
         scriptCtx->slamDesk = TRUE;
     }

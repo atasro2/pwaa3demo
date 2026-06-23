@@ -41,8 +41,8 @@ u32 SaveGameData();
 u32 LoadSaveData();
 void CalculateSaveChecksum();
 bool32 CheckSaveChecksum();
+void sub_8007238(struct Main *);
 void sub_8007610(u8);
-
 void nullsub_11(u32);
 
 void SaveGameInit1(struct Main *);

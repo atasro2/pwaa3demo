@@ -30,7 +30,7 @@ SECTIONS {
         src/gameover_process.o(.text);
         src/save_processes.o(.text);
         src/episode_load_processes.o(.text);
-        asm/court.o(.text);
+        src/court.o(.text);
         asm/investigation.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
@@ -94,6 +94,8 @@ SECTIONS {
         src/debug.o(.data);
         src/bg.o(.data);
         data/data.o(.data);
+        src/court.o(.data);
+        data/testimony.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);
         src/animation.o(.data);

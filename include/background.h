@@ -65,6 +65,7 @@ void InitBG3(void);
 void UpdateBackground(void);
 void DecompressCurrentBGStripe(u32);
 void DecompressBackgroundIntoBuffer(u32);
+void CopyTextboxTilesToBG1MapBuffer(void);
 void CopyBGDataToVram(u32);
 u32 GetBGControlBits(u32);
 u8 * GetBGPalettePtr(u32);

@@ -27,7 +27,10 @@
 #define gGfxGuiltyNotGuilty2 ((void*)(GFX_BASE_ADDR + 0xCB60))
 
 #define gGfxNewGameContinue ((void*)(GFX_BASE_ADDR + 0xE360))
+#define gGfxConfetti ((void*)(GFX_BASE_ADDR + 0xE760))
 #define gUnknown_0818E780 ((void*)(GFX_BASE_ADDR + 0xE780))
+#define gGfxWitnessBench1 ((void*)(GFX_BASE_ADDR + 0xF180))
+#define gGfxCounselBench1 ((void*)(GFX_BASE_ADDR + 0xF780))
 #define gGfxInvestigationStopButton ((void*)(GFX_BASE_ADDR + 0x10480))
 #define gGfxPsycheLockChainsTiles ((void*)(GFX_BASE_ADDR + 0x10C00))
 #define gPalCrossExaminationUI ((void*)(GFX_BASE_ADDR + 0x16F04))
@@ -42,6 +45,7 @@
 #define gPalInvestigationScrollPrompt ((void*)(GFX_BASE_ADDR + 0x16FC4))
 #define gPalTestimonyTextTiles ((void*)(GFX_BASE_ADDR + 0x16FE4))
 #define gPalGameOverDoors ((void*)0x08197264)
+#define gPalConfetti0 ((void*)(GFX_BASE_ADDR + 0x17384))
 #define gPalChoiceSelected ((void*)(0x081977a4))
 
 #define gUnknown_08198FE4 ((void*)(GFX_BASE_ADDR + 0x18FE4))

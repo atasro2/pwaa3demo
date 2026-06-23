@@ -40,8 +40,6 @@ extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
 extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
 extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
-extern void CopyTextboxTilesToBG1MapBuffer(void);
-
 extern void sub_8004940(u32,u32);
 extern void LoadAndAdjustBGPaletteSepia(u16,u16,u16);
 extern void LoadAndAdjustCurrentAnimation01PaletteSepia(u16,u16);

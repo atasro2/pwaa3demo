@@ -17,9 +17,9 @@ void SetCurrentEpisodeBit();
 void UpdateQuestioningMenuSprites(struct Main *, struct TestimonyStruct *, u32);
 void UpdateHealthSprites(struct Main *, struct TestimonyStruct *);
 
-void SetOAMForCourtBenchSpritesDefense(s32, s32, s32);
-void SetOAMForCourtBenchSpritesProsecution(s32, s32, s32);
-void SetOAMForCourtBenchSpritesWitness(s32, s32, s32);
+void SetOAMForCourtBenchSpritesDefense(s32, s32, u8);
+void SetOAMForCourtBenchSpritesProsecution(s32, s32, u8);
+void SetOAMForCourtBenchSpritesWitness(s32, s32, u8);
 
 void LoadCounselBenchGraphics();
 void LoadWitnessBenchGraphics();
