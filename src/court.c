@@ -166,7 +166,7 @@ void sub_800A7AC(void)
     oam->attr0 = SPRITE_ATTR0_CLEAR;
     oam++;
     oam->attr0 = SPRITE_ATTR0_CLEAR;
-    oam++;
+    oam = &gOamObjects[OAM_IDX_GENERAL_2];
     if (sub_8016ED8() != 0) {
         oam = &gOamObjects[OAM_IDX_ITEMPLATE_ITEM+7];
     }
