@@ -1567,13 +1567,13 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     };
     
     if(main->process[GAME_PROCESS_VAR1] == 9)
-    goto _08010E54;
+        goto _08010E54;
     
     psycheLockData = &main->psycheLockData[main->currentPsycheLockDataIndex];
     AnimatePsycheLockStopBresentButtons();
     goto *states[main->process[GAME_PROCESS_VAR1]];
     
-    _08010A78:
+_08010A78:
     ResetHPBar();
     psycheLockData->numLocksRemaining = psycheLockData->numLocksTotal;
     SetPsycheLockState(11, psycheLockData->numLocksTotal);
@@ -1582,16 +1582,16 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     gMain.psycheLockStopPresentButtonsActive = 0;
     investigation->inPsycheLockChallengeFlag |= 1;
     main->process[GAME_PROCESS_VAR1]++;
-    _08010AA6:
+_08010AA6:
     UpdatePsycheLockAnimation();
     if(IsPsycheLockAnimationInWaitState())
-    main->process[GAME_PROCESS_VAR1]++;
+        main->process[GAME_PROCESS_VAR1]++;
     return;
-    _08010AC4:
+_08010AC4:
     ChangeScriptSection(psycheLockData->startScriptSection);
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
-    _08010AD4:
+_08010AD4:
     if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_PRESENT
     && gJoypad.pressedKeys == R_BUTTON
     && gMain.psycheLockStopPresentButtonsState == 0
@@ -1628,211 +1628,211 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     if(main->hpBarValue <= 0
     && main->hpBarDisplayValue <= 0
     && IsHPBarAnimating() == FALSE)
-    main->process[GAME_PROCESS_VAR1] = 11;
+        main->process[GAME_PROCESS_VAR1] = 11;
     return;
-    _08010C14:
+_08010C14:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-        gMain.advanceScriptContext = FALSE;
-        gMain.showTextboxCharacters = FALSE;
-        gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
-        gIORegisters.lcd_bg1vofs = 0;
-        SetPsycheLockState(4, 0);
-        main->process[GAME_PROCESS_VAR2]++;
-        case 1:
-        UpdatePsycheLockAnimation();
-        if(IsPsycheLockAnimationInWaitState()) {
+            gMain.advanceScriptContext = FALSE;
+            gMain.showTextboxCharacters = FALSE;
+            gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+            gIORegisters.lcd_bg1vofs = 0;
+            SetPsycheLockState(4, 0);
             main->process[GAME_PROCESS_VAR2]++;
-            break;
-        }
-        break;
-        case 2:
-        psycheLockData->numLocksRemaining--;
-        if(psycheLockData->numLocksRemaining == 0 && gMain.preventUnlockFlag == 0) {
-            if((gScriptContext.unk1E & 0x100) == 0) {
-                main->process[GAME_PROCESS_VAR1] = 7;
-                main->process[GAME_PROCESS_VAR2] = 0;
-                sub_8017154(3);
+        case 1:
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
+                main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
-        }
-        gMain.advanceScriptContext = TRUE;
-        if(gMain.preventUnlockFlag == 0)
-        SlideTextbox(1);
-        main->process[GAME_PROCESS_VAR1] = 3;
-        main->process[GAME_PROCESS_VAR2] = 0;
-        break;
+            break;
+        case 2:
+            psycheLockData->numLocksRemaining--;
+            if(psycheLockData->numLocksRemaining == 0 && gMain.preventUnlockFlag == 0) {
+                if((gScriptContext.unk1E & 0x100) == 0) {
+                    main->process[GAME_PROCESS_VAR1] = 7;
+                    main->process[GAME_PROCESS_VAR2] = 0;
+                    sub_8017154(3);
+                    break;
+                }
+            }
+            gMain.advanceScriptContext = TRUE;
+            if(gMain.preventUnlockFlag == 0)
+                SlideTextbox(1);
+            main->process[GAME_PROCESS_VAR1] = 3;
+            main->process[GAME_PROCESS_VAR2] = 0;
+            break;
     }
     return;
-    _08010CA4:
+_08010CA4:
     ChangeScriptSection(psycheLockData->invalidEvidencePresentedSection);
     SlideTextbox(1);
-    _08010CB0:
+_08010CB0:
     main->process[GAME_PROCESS_VAR1] = 3;
     return;
-    _08010CB6:
+_08010CB6:
     gMain.hpBarY = 100;
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-        gMain.advanceScriptContext = FALSE;
-        FadeOutBGM(30);
-        SetPsycheLockState(5, 0);
-        main->process[GAME_PROCESS_VAR2]++;
+            gMain.advanceScriptContext = FALSE;
+            FadeOutBGM(30);
+            SetPsycheLockState(5, 0);
+            main->process[GAME_PROCESS_VAR2]++;
         case 1:
-        sub_800BC08(31);
-        UpdatePsycheLockAnimation();
-        if(!IsPsycheLockAnimationInWaitState())
-        break;
-        SetPsycheLockState(7, 0);
-        if(gMain.hpBarValue < 80) {
-            SetOrQueueHPBarState(1);
-            gMain.hpBarDamageAmount = -40;
+            sub_800BC08(31);
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
+                break;
+            SetPsycheLockState(7, 0);
+            if(gMain.hpBarValue < 80) {
+                SetOrQueueHPBarState(1);
+                gMain.hpBarDamageAmount = -40;
                 SetOrQueueHPBarState(4);
             }
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 2:
-        UpdatePsycheLockAnimation();
-        InitSpecialEffects(4, 1, 1);
-        if(!IsPsycheLockAnimationInWaitState())
-        break;
-        SetPsycheLockState(6, 0);
-        main->process[GAME_PROCESS_VAR2]++;
-        break;
+            UpdatePsycheLockAnimation();
+            InitSpecialEffects(4, 1, 1);
+            if(!IsPsycheLockAnimationInWaitState())
+                break;
+            SetPsycheLockState(6, 0);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
         case 3:
-        UpdatePsycheLockAnimation();
-        sub_800BC08(0);
-        if(!IsPsycheLockAnimationInWaitState())
-        break;
-        if(IsHPBarAnimating())
-        break;
-        SetOrQueueHPBarState(2);
-        main->process[GAME_PROCESS_VAR2]++;
-        break;
+            UpdatePsycheLockAnimation();
+            sub_800BC08(0);
+            if(!IsPsycheLockAnimationInWaitState())
+                break;
+            if(IsHPBarAnimating())
+                break;
+            SetOrQueueHPBarState(2);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
         case 4:
-        investigation->selectedAction = 3;
-        investigation->lastAction = 3;
-        gMain.advanceScriptContext = 1;
-        ReloadInvestigationGraphics();
-        ClearInvestigationActionButtonOAM();
-        psycheLockData->enabled = 0;
-        SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-        gMain.hpBarY = 20;
+            investigation->selectedAction = 3;
+            investigation->lastAction = 3;
+            gMain.advanceScriptContext = 1;
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            psycheLockData->enabled = 0;
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            gMain.hpBarY = 20;
     }
     return;
-    _08010D9C:
+_08010D9C:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-        ChangeScriptSection(psycheLockData->cancelScriptSection);
-        if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
-        SlideTextbox(1);
-        main->process[GAME_PROCESS_VAR2]++;
-        break;
+            ChangeScriptSection(psycheLockData->cancelScriptSection);
+            if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
+                SlideTextbox(1);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
         case 1:
-        if(gScriptContext.flags & 8) {
-            main->process[GAME_PROCESS_VAR2]++;
-            FadeOutBGM(30);
-            sub_800BC08(30);
-            StartHardwareBlend(2, 4, 1, 0x1F);
-        }
-        break;
+            if(gScriptContext.flags & 8) {
+                main->process[GAME_PROCESS_VAR2]++;
+                FadeOutBGM(30);
+                sub_800BC08(30);
+                StartHardwareBlend(2, 4, 1, 0x1F);
+            }
+            break;
         case 2:
-        if(main->blendMode)
-            break;
-        InitSpecialEffects(4, 1, 1);
-        main->process[GAME_PROCESS_VAR2]++;
-        break;
-        case 3:
-        SetPsycheLockState(7, 0);
-        main->process[GAME_PROCESS_VAR2]++;
-        case 4:
-        UpdatePsycheLockAnimation();
-        if(IsPsycheLockAnimationInWaitState()) {
+            if(main->blendMode)
+                break;
+            InitSpecialEffects(4, 1, 1);
             main->process[GAME_PROCESS_VAR2]++;
             break;
-        }
-        break;
+        case 3:
+            SetPsycheLockState(7, 0);
+            main->process[GAME_PROCESS_VAR2]++;
+        case 4:
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
         case 5:
-        ReloadInvestigationGraphics();
-        ClearInvestigationActionButtonOAM();
-        gInvestigation.inPsycheLockChallengeFlag &= ~1;
-        sub_8017154(3);
-        SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-        if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
-        PlayBGM(psycheLockData->bgmToPlayAfterStop);
-        StartHardwareBlend(1, 1, 1, 0x1F);
-        break;
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
+            sub_8017154(3);
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
+            StartHardwareBlend(1, 1, 1, 0x1F);
+            break;
     }
     return;
-    _08010E54:
+_08010E54:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-        gMain.advanceScriptContext = FALSE;
-        investigation->inPsycheLockChallengeFlag |= 1;
-        SlideTextbox(0);
-        SetPsycheLockState(11, main->currentPsycheLockDataIndex);
-        SetPsycheLockState(1, 0);
-        main->process[GAME_PROCESS_VAR2]++;
+            gMain.advanceScriptContext = FALSE;
+            investigation->inPsycheLockChallengeFlag |= 1;
+            SlideTextbox(0);
+            SetPsycheLockState(11, main->currentPsycheLockDataIndex);
+            SetPsycheLockState(1, 0);
+            main->process[GAME_PROCESS_VAR2]++;
         case 1:
-        UpdatePsycheLockAnimation();
-        if(IsPsycheLockAnimationInWaitState()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
+        case 2:
+            gMain.advanceScriptContext = TRUE;
+            SlideTextbox(1);
+            RESTORE_PROCESS();
+    }
+    return;
+_08010EA6: // what the fuck
+    return;
+_08010EAC:
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            ChangeScriptSection(psycheLockData->noHPLeftScriptSection);
+            if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
+                SlideTextbox(1);
             main->process[GAME_PROCESS_VAR2]++;
             break;
-        }
-        break;
-        case 2:
-        gMain.advanceScriptContext = TRUE;
-        SlideTextbox(1);
-        RESTORE_PROCESS();
-    }
-    return;
-    _08010EA6: // what the fuck
-    return;
-    _08010EAC:
-    switch(main->process[GAME_PROCESS_VAR2]) {
-        case 0:
-        ChangeScriptSection(psycheLockData->noHPLeftScriptSection);
-        if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
-        SlideTextbox(1);
-        main->process[GAME_PROCESS_VAR2]++;
-        break;
         case 1:
-        if(gScriptContext.flags & 8) {
-            main->process[GAME_PROCESS_VAR2]++;
-            sub_800BC08(30);
-            StartHardwareBlend(2, 1, 1, 0x1F);
-        }
-        break;
+            if(gScriptContext.flags & 8) {
+                main->process[GAME_PROCESS_VAR2]++;
+                sub_800BC08(30);
+                StartHardwareBlend(2, 1, 1, 0x1F);
+            }
+            break;
         case 2:
-        if(main->blendMode == 0) {
-            FadeOutBGM(30);
-            main->process[GAME_PROCESS_VAR2]++;
-        }
-        break;
+            if(main->blendMode == 0) {
+                FadeOutBGM(30);
+                main->process[GAME_PROCESS_VAR2]++;
+            }
+            break;
         case 3:
-        InitSpecialEffects(4, 1, 1);
-        SetPsycheLockState(7, 0);
-        main->process[GAME_PROCESS_VAR2]++;
-        case 4:
-        UpdatePsycheLockAnimation();
-        if(IsPsycheLockAnimationInWaitState()) {
+            InitSpecialEffects(4, 1, 1);
+            SetPsycheLockState(7, 0);
             main->process[GAME_PROCESS_VAR2]++;
+        case 4:
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
             break;
-        }
-        break;
         case 5:
-        gMain.hpBarDisplayValue = 1;
-        gMain.hpBarValue = 1;
-        sub_8017154(3);
-        ReloadInvestigationGraphics();
-        ClearInvestigationActionButtonOAM();
-        gInvestigation.inPsycheLockChallengeFlag &= ~1;
-        SlideTextbox(0);
-        SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-        if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
-        PlayBGM(psycheLockData->bgmToPlayAfterStop);
-        StartHardwareBlend(1, 1, 1, 0x1F);
-        break;
+            gMain.hpBarDisplayValue = 1;
+            gMain.hpBarValue = 1;
+            sub_8017154(3);
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
+            SlideTextbox(0);
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
+            StartHardwareBlend(1, 1, 1, 0x1F);
+            break;
     }
 }
 
