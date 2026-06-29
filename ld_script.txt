@@ -31,7 +31,7 @@ SECTIONS {
         src/save_processes.o(.text);
         src/episode_load_processes.o(.text);
         src/court.o(.text);
-        asm/investigation.o(.text);
+        src/investigation.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
@@ -77,7 +77,6 @@ SECTIONS {
         src/movietest.o(.rodata);
         src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
-        rodata/script_main.o(.rodata);
         src/script_commands2.o(.rodata);
         rodata/script_commands.o(.rodata);
         src/demo.o(.rodata);
@@ -95,7 +94,7 @@ SECTIONS {
         src/bg.o(.data);
         data/data.o(.data);
         src/court.o(.data);
-        data/testimony.o(.data);
+        src/investigation.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);
         src/animation.o(.data);

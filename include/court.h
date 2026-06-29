@@ -12,7 +12,7 @@ struct TestimonyStruct
 };
 
 extern struct TestimonyStruct gTestimony;
-
+void sub_800A3A0(u8);
 void SetCurrentEpisodeBit();
 void UpdateQuestioningMenuSprites(struct Main *, struct TestimonyStruct *, u32);
 void UpdateHealthSprites(struct Main *, struct TestimonyStruct *);
@@ -29,7 +29,7 @@ void TestimonyProcess(struct Main *);
 void QuestioningProcess(struct Main *);
 void VerdictProcess(struct Main *);
 
-void sub_800A38C(void);
+void SetCurrentEpisodeBit(void);
 
 
 /* begin process functions */

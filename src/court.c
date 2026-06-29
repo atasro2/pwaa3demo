@@ -16,7 +16,7 @@
 
 static void SetMosaicFlagOnCourtBenchSprites(void);
 
-void sub_800A38C(void) {
+void SetCurrentEpisodeBit(void) {
     sub_8007610(gMain.scenarioIdx);
 }
 
@@ -105,11 +105,10 @@ void CourtInit(struct Main * main)
     main->tilemapUpdateBits = 0xF; 
     main->advanceScriptContext = TRUE;
     main->showTextboxCharacters = TRUE;
-    sub_800A38C(); // in place of SetCurrentEpisodeBit?
+    SetCurrentEpisodeBit();
     gScriptContext.holdItSection = 0;
     gScriptContext.currentSection = 0xFFFF;
     ChangeScriptSection(0x80);
-    //SetCurrentEpisodeBit();
     SetTimedKeysAndDelay(DPAD_RIGHT | DPAD_LEFT, 15);
     StartHardwareBlend(1, 1, 1, 0x1F);
     ioRegs->lcd_bldy = 0x10;

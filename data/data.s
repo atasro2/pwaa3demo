@@ -88,8 +88,8 @@ gInvestigationPresentData:
 .4byte gUnknown_080266B8
 .4byte gUnknown_080266B8
 
-    .global gUnknown_0814DA50
-gUnknown_0814DA50:
+    .global gInvestigationSegmentSetupFunctions
+gInvestigationSegmentSetupFunctions:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy
@@ -114,8 +114,8 @@ gUnknown_0814DA50:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 
-    .global gUnknown_0814DAAC
-gUnknown_0814DAAC:
+    .global gInvestigationRoomSetupFunctions
+gInvestigationRoomSetupFunctions:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy
@@ -140,8 +140,8 @@ gUnknown_0814DAAC:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 
-    .global gUnknown_0814DB08
-gUnknown_0814DB08:
+    .global gInvestigationRoomUpdateFunctions
+gInvestigationRoomUpdateFunctions:
 .4byte InvestigationDummy
 .4byte InvestigationDummy
 .4byte InvestigationDummy

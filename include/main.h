@@ -131,7 +131,9 @@ struct Main
     /* +0x25B */ u8 unk25B;
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 currentRoomSeq[27];
+    /* +0x264 */ u8 currentRoomSeq[25];
+    /* +0x27D */ u8 preventUnlockFlag;
+    /* +0x27E */ u8 fill27E[2];
     /* +0x280 */ u16 psycheLockedTalkSections[8];
     /* +0x290 */ u16 numPsycheLockedTalkSections;
     struct Spotlight {

@@ -932,7 +932,7 @@ void ContinueSaveProcess(struct Main * main) {
                 gMain.hpBarValueScenarioEnd = gSaveDataBuffer.main.hpBarValueScenarioEnd;
                 gMain.hpBarDisplayValue = gSaveDataBuffer.main.hpBarValueScenarioEnd;
                 gMain.hpBarValue = gSaveDataBuffer.main.hpBarValueScenarioEnd;
-                sub_800A38C();
+                SetCurrentEpisodeBit();
                 SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             }
             break;
