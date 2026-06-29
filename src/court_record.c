@@ -1288,7 +1288,7 @@ bool8 sub_800F120(void)
         UpdateRecordInfoActionSprites(0);
     }
     gMain.gameStateFlags &= ~0x300;
-    gScriptContext.unk10 = 0;
+    gScriptContext.holdItSection = 0;
     return TRUE;
 }
 

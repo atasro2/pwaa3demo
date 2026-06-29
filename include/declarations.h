@@ -5,9 +5,6 @@
 
 void DoGameProcess(void);
 void UpdateHardwareBlend(void);
-void sub_80139F4(void);
-void nullsub_7(void);
-void sub_8013B84(u32);
 void sub_800482C(u32);
 void CheckBGChange_iOS(u16, u32);
 void Butterfly_Unity(void);
@@ -42,8 +39,6 @@ extern void LoadAndAdjustBGPaletteByMode(u16,u16,u16);
 extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
 extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
 extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
-
-extern void CopyTextboxTilesToBG1MapBuffer(void);
 
 extern void sub_8004940(u32,u32);
 extern void LoadAndAdjustBGPaletteSepia(u16,u16,u16);

@@ -52,7 +52,7 @@ extern u8 gUnknown_080267F8[12][2];
 
 void sub_80085D8(struct AnimationListEntry * anim, u8 * arg1) {
     u16 i;
-    u8 * src = anim->animationInfo.vramPtr;
+    u8 * src = (u8*)anim->animationInfo.vramPtr;
     u8 * dst = arg1;
     struct SpriteTemplate * sprite = anim->spriteData;
     u32 spriteCount = *(u16*)anim->spriteData;
@@ -932,7 +932,7 @@ void ContinueSaveProcess(struct Main * main) {
                 gMain.hpBarValueScenarioEnd = gSaveDataBuffer.main.hpBarValueScenarioEnd;
                 gMain.hpBarDisplayValue = gSaveDataBuffer.main.hpBarValueScenarioEnd;
                 gMain.hpBarValue = gSaveDataBuffer.main.hpBarValueScenarioEnd;
-                sub_800A38C();
+                SetCurrentEpisodeBit();
                 SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             }
             break;

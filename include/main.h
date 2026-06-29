@@ -36,7 +36,7 @@ struct Main
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
-    /* +0x01C */ u8 fill1C[0x2];
+    /* +0x01C */ u16 testimonyBeginningSection;
     /* +0x01E */ u16 loopBridgeSection;
     /* +0x020 */ s16 bgmFadeVolume;
     /* +0x022 */ u8 fill22[0x2];
@@ -57,7 +57,7 @@ struct Main
     /* +0x038 */ s16 previousBG;
     /* +0x03A */ u8 fill3A[2];
     /* +0x03C */ s8 currentBgStripe;
-    /* +0x03D */ u8 unk3D;
+    /* +0x03D */ s8 unk3D;
     /* +0x03E */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x03F */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x040 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
@@ -131,7 +131,9 @@ struct Main
     /* +0x25B */ u8 unk25B;
     /* +0x25C */ u32 soundFlags;
     /* +0x260 */ u32 unk260;
-    /* +0x264 */ u8 currentRoomSeq[28];
+    /* +0x264 */ u8 currentRoomSeq[25];
+    /* +0x27D */ u8 preventUnlockFlag;
+    /* +0x27E */ u8 fill27E[2];
     /* +0x280 */ u16 psycheLockedTalkSections[8];
     /* +0x290 */ u16 numPsycheLockedTalkSections;
     struct Spotlight {

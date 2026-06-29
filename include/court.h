@@ -12,14 +12,14 @@ struct TestimonyStruct
 };
 
 extern struct TestimonyStruct gTestimony;
-
+void sub_800A3A0(u8);
 void SetCurrentEpisodeBit();
 void UpdateQuestioningMenuSprites(struct Main *, struct TestimonyStruct *, u32);
 void UpdateHealthSprites(struct Main *, struct TestimonyStruct *);
 
-void SetOAMForCourtBenchSpritesDefense(s32, s32, s32);
-void SetOAMForCourtBenchSpritesProsecution(s32, s32, s32);
-void SetOAMForCourtBenchSpritesWitness(s32, s32, s32);
+void SetOAMForCourtBenchSpritesDefense(s32, s32, u8);
+void SetOAMForCourtBenchSpritesProsecution(s32, s32, u8);
+void SetOAMForCourtBenchSpritesWitness(s32, s32, u8);
 
 void LoadCounselBenchGraphics();
 void LoadWitnessBenchGraphics();
@@ -29,7 +29,7 @@ void TestimonyProcess(struct Main *);
 void QuestioningProcess(struct Main *);
 void VerdictProcess(struct Main *);
 
-void sub_800A38C(void);
+void SetCurrentEpisodeBit(void);
 
 
 /* begin process functions */
