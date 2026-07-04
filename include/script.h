@@ -47,7 +47,7 @@ struct ScriptContext {
     /* +0x0A */ u16 unkA;
     /* +0x0C */ u16 currentSection;
     /* +0x0E */ u16 nextSection; // nextSection?
-    u16 unk10; // unity: tukkomi_no
+    u16 holdItSection; // unity: tukkomi_no
     u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;

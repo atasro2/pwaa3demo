@@ -98,5 +98,7 @@ void sub_8015C18(void);
 void SetPsycheLockState(u32, u32);
 void UpdatePsycheLockAnimation(void);
 
+#define PSYLOCK_ENABLE_PRESENT 0x1
+#define PSYLOCK_ENABLE_STOP 0x2
 
 #endif//GUARD_PSYCHE_LOCK_H

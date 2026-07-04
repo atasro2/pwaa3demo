@@ -10,8 +10,6 @@
 #include "constants/oam_allocations.h"
 #include "constants/process.h"
 
-int FindPlayingHPBarSmokeAnimations(void);
-
 extern u16 gPalHPBarLoseLifePalettes[15][16];
 extern u16 gPalHPBarGainLifePalettes[15][16];
 

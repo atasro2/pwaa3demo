@@ -157,7 +157,7 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
     }
 
     for(i = 0; i < 16; i++) {
-        if(animation->animationInfo.animFrameDataStartPtr - (u8*)0x8249e10 == array[i]) {
+        if(animation->animationInfo.animFrameDataStartPtr - 0x8249e10 == array[i]) {
             r5 = i;
         }
     }
@@ -225,19 +225,19 @@ void sub_8017154(u8 arg0) {
         case 0:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x1C00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x1C00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x84);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x1E00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x1E00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x85);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x2D00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x2D00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
                 DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0 + 0x3000, 0x400);
@@ -246,19 +246,19 @@ void sub_8017154(u8 arg0) {
         case 1:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x3200;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x3200;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x84);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x3000;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x3000;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x85);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x2E00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x2E00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
@@ -266,19 +266,19 @@ void sub_8017154(u8 arg0) {
         case 2:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x1800;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x1800;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x84);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x1A00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x1A00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x85);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x1C00;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x1C00;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
@@ -286,19 +286,19 @@ void sub_8017154(u8 arg0) {
         case 3:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x84);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x200;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x200;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x85);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x400;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x400;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
                 DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
@@ -309,19 +309,19 @@ void sub_8017154(u8 arg0) {
         case 4:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x2800;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x2800;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x84);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x2880;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x2880;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }
             animation = FindAnimationFromAnimId(0x85);
             if(animation) {
-                animation->animationInfo.vramPtr = OBJ_VRAM0 + 0x2900;
+                animation->animationInfo.vramPtr = (uintptr_t)OBJ_VRAM0 + 0x2900;
                 animation->flags |= ANIM_ACTIVE | ANIM_QUEUED_TILE_UPLOAD;
                 animation->tileNum = ((uintptr_t)animation->animationInfo.vramPtr / 32) & 0x3FF;
             }

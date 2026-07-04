@@ -41,7 +41,7 @@ void sub_801447C(struct DebugContext * debugCtx) {
     FindAnimationFromAnimId(0xFF); // !??
     if(courtScroll->state)
         return;
-    nullsub_20(gUnknown_080281F0, 0, 2); // "                       "
+    nullsub_20("                       ", 0, 2);
     if(gJoypad.pressedKeys & DPAD_UP) {
         courtScrollDebug->unk48--;
         r8 = 1;
@@ -107,11 +107,11 @@ void sub_801447C(struct DebugContext * debugCtx) {
                 break;
         }
     }
-    nullsub_20(gUnknown_08028208, 10, 5); // "MOVIE TEST"
-    nullsub_20(gUnknown_08028214, 10, 6); // " MOVIE00"
-    nullsub_20(gUnknown_08028220, 10, 7); // " MOVIE01"
-    nullsub_20(gUnknown_0802822C, 10, 8); // " MOVIE02"
-    nullsub_20(gUnknown_08028238, 10, 6 + courtScrollDebug->unk48); // ">"
+    nullsub_20("MOVIE TEST", 10, 5);
+    nullsub_20(" MOVIE00", 10, 6);
+    nullsub_20(" MOVIE01", 10, 7);
+    nullsub_20(" MOVIE02", 10, 8);
+    nullsub_20(">", 10, 6 + courtScrollDebug->unk48);
 }
 
 void sub_8014688(struct DebugContext * debugCtx) {

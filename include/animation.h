@@ -39,10 +39,10 @@ struct AnimationInfo
     /* +0x03 */ u8 unk3;
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
-    /* +0x08 */ u8 * animFrameDataStartPtr;
-    /* +0x0C */ u8 * tileDataPtr;
-    /* +0x10 */ u8 * vramPtr;
-    /* +0x14 */ u8 * animGfxDataStartPtr;
+    /* +0x08 */ uintptr_t animFrameDataStartPtr;
+    /* +0x0C */ uintptr_t tileDataPtr;
+    /* +0x10 */ uintptr_t vramPtr;
+    /* +0x14 */ uintptr_t animGfxDataStartPtr;
     /* +0x18 */ u8 paletteSlot;
     /* +0x19 */ u8 spriteCount;
     /* +0x1A */ u8 priority;
@@ -84,7 +84,7 @@ struct AnimationBackupStruct
     /* +0x03 */ u8 unk3; // animationInfo.unk3
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
-    /* +0x08 */ u8 * animFrameDataStartPtr;
+    /* +0x08 */ uintptr_t animFrameDataStartPtr;
     /* +0x0C */ u16 frameDurationCounter;
     /* +0x0E */ u8 unkE; // unk2A
     /* +0x0F */ u8 unkF; // unk2B
@@ -123,6 +123,7 @@ struct SpriteSizeData {
 };
 
 extern struct AnimationListEntry gAnimation[32];
+extern void (*gCourtScrollPersonAnimationUpdateFuncs[6])(struct AnimationListEntry *, struct CourtScroll *);
 
 void SpeechBubbleAnimationEffect(struct AnimationListEntry *);
 
@@ -163,12 +164,15 @@ void MoveAnimationTilesToRam(bool32 arg0);
 void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
 
-void sub_80146F0(u32 animId, u32 animOffset);
+void SetCurrentPersonAnimationOffset(u32 animId, u32 animOffset);
 
 void UpdateAnimationBlend(struct AnimationListEntry *animation);
 u32 AdvanceAnimationFrame(struct AnimationListEntry * animation);
 void UpdateAllAnimationSprites();
+void sub_80139F4();
+void nullsub_7(void);
+void sub_8013B84(u32);
+
 void UpdatePersonAnimationForCourtScroll(struct AnimationListEntry * animation);
-void (*gSpecialAnimationEffectFunctions[8])(struct AnimationListEntry *);
 
 #endif//GUARD_ANIMATION_H

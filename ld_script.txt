@@ -30,14 +30,12 @@ SECTIONS {
         src/gameover_process.o(.text);
         src/save_processes.o(.text);
         src/episode_load_processes.o(.text);
-        asm/court.o(.text);
-        asm/investigation.o(.text);
+        src/court.o(.text);
+        src/investigation.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
-        asm/animation.o(.text);
-        src/animation2.o(.text);
-        asm/animation2.o(.text);
+        src/animation_effects.o(.text);
         src/movietest.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
@@ -73,10 +71,12 @@ SECTIONS {
         rodata/rodata.o(.rodata);
         src/court_record.o(.rodata);
         src/sound.o(.rodata);
-        rodata/rodata_2.o(.rodata);
+        rodata/animation.o(.rodata);
+        src/animation.o(.rodata);
+        src/animation_effects.o(.rodata);
+        src/movietest.o(.rodata);
         src/hp_bar.o(.rodata);
         src/script_main.o(.rodata);
-        rodata/script_main.o(.rodata);
         src/script_commands2.o(.rodata);
         rodata/script_commands.o(.rodata);
         src/demo.o(.rodata);
@@ -93,8 +93,11 @@ SECTIONS {
         src/debug.o(.data);
         src/bg.o(.data);
         data/data.o(.data);
+        src/court.o(.data);
+        src/investigation.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);
+        src/animation.o(.data);
         data/data_2.o(.data);
         data/script_main.o(.data);
     } =0
