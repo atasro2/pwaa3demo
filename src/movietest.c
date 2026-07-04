@@ -121,7 +121,11 @@ void sub_8014688(struct DebugContext * debugCtx) {
     gMain.process[GAME_PROCESS_STATE] = 3;
 }
 
-extern void (*gDebugMovieTestStates[])(struct DebugContext *ctx);
+void (*gDebugMovieTestStates[])(struct DebugContext *ctx) = {
+    sub_8014400,
+    sub_801447C,
+    sub_8014688,
+};
 
 void sub_80146B8(struct DebugContext * debugCtx) {
     if(gJoypad.pressedKeys & START_BUTTON)

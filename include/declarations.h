@@ -64,10 +64,6 @@ void ClearHPBarOAM(void);
 
 extern struct TextBoxCharacter gUnknown_03007180[0x40]; 
 
-extern u16 gPsycheLockChainPalettes[][16];
-extern s16 gPsycheLockLockPositions[];
-extern u8 * gPsycheLockChainTilemaps[];
-
 u16 ColorFadeGrayscale(u16 color, u16 intensity, u16 mode);
 void sub_8006EAC(struct Main*);
 void sub_8012700(u16, u16, s32, s32, s32);

@@ -8,6 +8,200 @@
 #include "sound.h"
 #include "constants/oam_allocations.h"
 
+const struct CourtPresentData gUnknown_080266B0 = {
+    .presentingSection = 0xFFFF,
+    .evidenceId = 0xFFFF,
+    .presentedSection = 0xFFFF,
+    .flagId = 0xFF,
+    .action = 0xFF,
+};
+
+const struct InvestigationPresentData gUnknown_080266B8 = {
+    .roomId = 0xFF,
+    .roomseq = 0xFF,
+    .evidenceId = 0xFF,
+    .personId = 0xFF,
+    .isProfile = 0xFF,
+    .interestedSection = 0xFFFF,
+    .uninterestedSection = 0xFFFF,
+    .fillA = {0},
+};
+
+const u8 gUnknown_080266C8[8] = {
+    0x00, 0x02, 0x03, 0x04, 0xfe, 0x05, 0x06, 0xff
+};
+
+const u8 * gCourtRecordInitialItemLists[23] = {
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080253F8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+    gUnknown_080266C8,
+};
+
+const struct CourtPresentData * gCourtPresentData[23] = {
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_08025410,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_080266B0,
+    &gUnknown_08025410,
+    &gUnknown_080266B0,
+};
+
+const struct InvestigationPresentData * gInvestigationPresentData[23] = {
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+    &gUnknown_080266B8,
+};
+
+void (*gInvestigationSegmentSetupFunctions[])(struct Main *) = {
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+};
+
+void (*gInvestigationRoomSetupFunctions[])(struct Main *) = {
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+};
+
+void (*gInvestigationRoomUpdateFunctions[])(struct Main *) = {
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+    InvestigationDummy,
+};
+
+const u8 gCaseStartProcess[24] = {
+  0x03, 0x03, 0x04, 0x03, 0x04, 0x03, 0x03, 0x04,
+  0x03, 0x04, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+  0x04, 0x04, 0x03, 0x03, 0x04, 0x03, 0x04, 0x00
+};
+
+const u16 gCaseGameoverSections[24] = {
+    0x009d, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000,
+};
+
 void InvestigationSetPersonAnimation(u32 arg0, u32 arg1, u32 arg2) // Set_char
 {
     struct Main *main = &gMain;

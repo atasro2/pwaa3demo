@@ -10,6 +10,9 @@
 . = 0x00002FA0; gBG0MapBuffer = .;
 . = 0x000037A0; gJoypad = .;
 . = 0x000037B0; gMain = .;
+. = 0x00003878; gFlags0 = .;
+. = 0x00003898; gFlags1 = .;
+. = 0x0000389C; gFlags2 = .;
 . = 0x00003A90; gIORegisters = .;
 . = 0x00003AF0; gMapMarker = .;
 . = 0x00003B90; gLoadedPsycheLockedTalkSections = .;

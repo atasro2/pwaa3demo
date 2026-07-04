@@ -1,5 +1,6 @@
     .section gfx_data, "aw", %progbits
     .include "asm/macros.inc"
+    .align 2, 0
 
     .global gUnknown_08180000
 gUnknown_08180000:

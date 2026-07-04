@@ -101,4 +101,9 @@ void UpdatePsycheLockAnimation(void);
 #define PSYLOCK_ENABLE_PRESENT 0x1
 #define PSYLOCK_ENABLE_STOP 0x2
 
+extern u16 gPsycheLockChainPalettes[][16];
+extern s16 gPsycheLockLockPositions[];
+extern u8 * gPsycheLockChainTilemaps[];
+
+
 #endif//GUARD_PSYCHE_LOCK_H

@@ -1,6 +1,8 @@
 #ifndef GUARD_UTILS_H
 #define GUARD_UTILS_H
 
+#include "case_data.h"
+
 struct Point 
 {
     /* +0x00 */ u16 x;
@@ -25,9 +27,6 @@ extern const s16 gSineTable[256+64];
 #define _Sin( a ) (gSineTable[(a)])
 #define _Cos( a ) (gSineTable[(a)+64])
 
-extern s16 gUnknown_08025430[0x400];
-extern s16 gUnknown_08025C30[0x400];
-
 s32 sub_8006364(u16); // cos 4x res
 s32 sub_80063E4(u16); // sin 4x res
 
@@ -43,6 +42,16 @@ s16 fix_inverse(s16 b);
 u8 Random(void);
 void ChangeFlag(u32, u32, bool32);
 bool32 GetFlag(u32 arg0, u32 arg1);
+
+extern const u8 gUnknown_080253F8[8];
+extern const u8 gUnknown_08025400[16];
+extern const struct CourtPresentData gUnknown_08025410;
+extern const struct CourtPresentData gUnknown_08025418;
+extern const struct CourtPresentData gUnknown_08025420;
+extern const struct CourtPresentData gUnknown_08025428;
+
+extern const s16 gUnknown_08025430[0x400];
+extern const s16 gUnknown_08025C30[0x400];
 
 
 #endif//GUARD_UTILS_H

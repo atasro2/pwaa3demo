@@ -540,7 +540,7 @@ struct SpotSelectData
     /* +0x2B */ u8 bottom;
 };
 
-extern const struct SpotSelectData gSpotSelectData[];
+const struct SpotSelectData gSpotSelectData[] = {};
 
 bool32 Command3F(struct ScriptContext *_unused)
 {
@@ -1259,9 +1259,6 @@ bool32 Command73(struct ScriptContext *_unused)
     }
     return 0;
 }
-
-extern u8 gUnknown_0802872E[];
-extern u16 gUnknown_0802871C[];
 
 u32 sub_801C4E4(void) {
     u8 i;

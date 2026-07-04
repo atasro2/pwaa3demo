@@ -16,6 +16,10 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+u8 *const gUnknown_08026810[84] = {0}; // ???
+
+u8 *const gUnknown_08026960[14] = {0}; // ???
+
 void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct *) = {
 	InvestigationInit, // RNO1_TANTEI_INIT
 	InvestigationMain, // RNO1_TANTEI_MAIN
@@ -681,7 +685,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     }
 }
 
-extern const u8 * gUnknown_08026960[];
+// extern const u8 * gUnknown_08026960[];
 
 void InvestigationMove(struct Main * main, struct InvestigationStruct * investigation) // tantei_move
 {
@@ -1000,7 +1004,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
     }
 }
  
-extern const u8 * gUnknown_08026810[];
+// extern const u8 * gUnknown_08026810[];
 
 void InvestigationTalk(struct Main * main, struct InvestigationStruct * investigation) // tantei_talk
 {

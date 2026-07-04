@@ -329,7 +329,7 @@ bool32 Command51(struct ScriptContext *);
 bool32 Command52(struct ScriptContext *);
 bool32 Command53(struct ScriptContext *);
 bool32 Command54(struct ScriptContext *);
-bool32 Command54(struct ScriptContext *);
+bool32 Command55(struct ScriptContext *);
 bool32 Command56(struct ScriptContext *);
 bool32 Command57(struct ScriptContext *);
 bool32 Command58(struct ScriptContext *);
@@ -358,6 +358,14 @@ bool32 Command6E(struct ScriptContext *);
 bool32 Command6F(struct ScriptContext *);
 bool32 Command70(struct ScriptContext *);
 bool32 Command71(struct ScriptContext *);
+bool32 Command72(struct ScriptContext *);
+bool32 Command73(struct ScriptContext *);
+
+bool32 CommandUnimplemented(struct ScriptContext *);
 /* end commands */
+
+extern const u16 gUnknown_0802871C[9];
+extern const u8 gUnknown_0802872E[8];
+extern const u8 gUnknown_08028736[6];
 
 #endif//GUARD_SCRIPT_H

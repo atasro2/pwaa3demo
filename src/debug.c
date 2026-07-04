@@ -900,7 +900,7 @@ char * gScriptNames[] = {
     "SCE3-3 SAIBAN2   ",
 };
 
-extern u8 gCaseStartProcess[]; // scenario process array
+// extern u8 gCaseStartProcess[]; // scenario process array
 
 void sub_8002198(struct DebugContext * debug) {
     struct ScenarioDebug * scenarioDebug = &debug->menu.scenario;

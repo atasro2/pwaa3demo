@@ -6,7 +6,9 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "script.h"
 #include "hp_bar.h"
+#include "opening.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
@@ -75,8 +77,129 @@ const uintptr_t gScriptTable[] = {
     0,
 };
 
+bool32 (*gScriptCmdFuncs[0x74])(struct ScriptContext *) = {
+    Command00,
+    Command01,
+    Command02,
+    Command03,
+    Command04,
+    Command05,
+    Command06,
+    Command02,
+    Command08,
+    Command08,
+    Command02,
+    Command0B,
+    Command0C,
+    Command0D,
+    Command0E,
+    Command0F,
+    Command10,
+    Command11,
+    Command12,
+    Command13,
+    Command14,
+    Command15,
+    Command16,
+    Command17,
+    Command18,
+    Command19,
+    Command1A,
+    Command1B,
+    Command1C,
+    Command1D,
+    Command1E,
+    Command1F,
+    Command20,
+    Command21,
+    Command22,
+    Command23,
+    Command24,
+    Command25,
+    Command26,
+    Command27,
+    Command28,
+    Command29,
+    Command2A,
+    Command2B,
+    Command2C,
+    Command02,
+    Command2E,
+    Command2F,
+    Command30,
+    Command31,
+    Command32,
+    Command33,
+    Command34,
+    Command35,
+    Command36,
+    Command37,
+    Command38,
+    Command39,
+    Command3A,
+    Command3B,
+    Command3C,
+    Command3D,
+    Command3E,
+    Command3F,
+    Command40,
+    Command41,
+    Command42,
+    Command43,
+    Command44,
+    Command15,
+    Command46,
+    Command47,
+    Command48,
+    Command49,
+    Command4A,
+    Command4B,
+    Command4C,
+    Command4D,
+    Command4E,
+    Command4F,
+    Command50,
+    Command51,
+    Command52,
+    Command53,
+    Command54,
+    Command55,
+    Command56,
+    Command57,
+    Command58,
+    Command59,
+    Command5A,
+    Command5B,
+    Command5C,
+    Command5D,
+    Command5E,
+    Command5F,
+    Command60,
+    Command61,
+    Command62,
+    Command63,
+    Command64,
+    Command65,
+    Command66,
+    Command67,
+    Command68,
+    Command69,
+    Command6A,
+    Command6B,
+    Command6C,
+    CommandUnimplemented,
+    CommandUnimplemented,
+    Command6F,
+    CommandUnimplemented,
+    CommandUnimplemented,
+    Command72,
+    Command73,
+};
 
-extern void (*gUnknown_0814E338[])(struct ScriptContext *);
+// Demo_proc_tbl in gs1 iOS
+void (*gUnknown_0814E338[])(struct ScriptContext *) = {
+    sub_801C8BC,
+};
 
 void op_demo_play_iOS(void) {
     struct ScriptContext * context = &gScriptContext;
@@ -746,7 +869,7 @@ void sub_8017BC0(void) {
     gScriptContext.unk18[gScriptContext.unk29] = r4;
 }
 
-bool32 CommandUnimplemented(void) {
+bool32 CommandUnimplemented(struct ScriptContext *arg0) {
     u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
     u8 i;
     if(argCount == 0)
@@ -998,8 +1121,6 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
     gTextBoxCharacters[temp].objAttr2 += 0x400;
     gTextBoxCharacters[temp].color2 = gScriptContext.textColor;
 }
-
-extern bool32 (*gScriptCmdFuncs[0x72])(struct ScriptContext *);
 
 void AdvanceScriptContext(void) {
     u32 r7 = 0;

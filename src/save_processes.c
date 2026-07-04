@@ -8,7 +8,9 @@
 #include "constants/songs.h"
 #include "constants/oam_allocations.h"
 
-extern void (*gSaveGameProcessStates[])(struct Main *);/* = {
+const char gSaveVersion[0x32] = "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-";
+
+void (*gSaveGameProcessStates[])(struct Main *) = {
 	SaveGameInit1,
 	SaveGameInit2,
 	SaveGameInitButtons,
@@ -19,7 +21,7 @@ extern void (*gSaveGameProcessStates[])(struct Main *);/* = {
 	SaveGame7,
 	SaveGame8
 };
-*/
+
 u32 SaveGameData()
 {
     u32 mult;

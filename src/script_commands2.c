@@ -246,6 +246,18 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
     },
 };
 
+const u16 gUnknown_0802871C[9] = {
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFF,
+};
+const u8 gUnknown_0802872E[8] = {
+    0x04, 0x05, 0x06, 0x07, 0x08, 0x0c, 0xff, 0xff
+};
+const u8 gUnknown_08028736[6] = {
+    0x20, 0x22, 0x24, 0x26, 0x24, 0x22
+};
+
 void MakeMapMarkerSprites()
 {
     u32 i = 0;
@@ -301,7 +313,6 @@ u8 * sub_801A018(void) // get vram address for marker
     return vramPtr;
 }
 
-extern const u8 gUnknown_08028736[];
 void sub_801A054(void) {
     if((gScriptContext.unk12 & 0xFF) == 0x28) {
         gScriptContext.unk12 &= 0xFF00;
