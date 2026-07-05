@@ -49,10 +49,10 @@
 #define gPalInvestigationScrollPrompt ((void*)(GFX_BASE_ADDR + 0x16FC4))
 #define gPalTestimonyTextTiles ((void*)(GFX_BASE_ADDR + 0x16FE4))
 #define gPalGameOverDoors ((void*)0x08197264)
-#define gPalConfetti0 ((void*)(GFX_BASE_ADDR + 0x17384))
+#define gPalConfetti ((void*)(GFX_BASE_ADDR + 0x17384))
 #define gPalChoiceSelected ((void*)(0x081977a4))
 
-#define gUnknown_08198FE4 ((void*)(GFX_BASE_ADDR + 0x18FE4))
+#define gEvidenceProfileDescriptions ((void*)(GFX_BASE_ADDR + 0x18FE4))
 #define gUnknown_08199444 ((void*)(GFX_BASE_ADDR + 0x19444))
 #define gUnknown_0819984C ((void*)(GFX_BASE_ADDR + 0x1984C))
 #define gUnknown_08199CA0 ((void*)(GFX_BASE_ADDR + 0x19CA0))
@@ -61,7 +61,7 @@
 #define gUnknown_0819A970 ((void*)(GFX_BASE_ADDR + 0x1A970))
 #define gUnknown_0819AE04 ((void*)(GFX_BASE_ADDR + 0x1AE04))
 
-#define gUnknown_0819B260 ((void*)(GFX_BASE_ADDR + 0x1B260)) 
+#define gEvidenceProfilePictures ((void*)(GFX_BASE_ADDR + 0x1B260)) 
 #define gUnknown_0819B500 ((void*)(GFX_BASE_ADDR + 0x1B500)) 
 #define gUnknown_0819B8A4 ((void*)(GFX_BASE_ADDR + 0x1B8A4)) 
 #define gUnknown_0819BDA0 ((void*)(GFX_BASE_ADDR + 0x1BDA0)) 

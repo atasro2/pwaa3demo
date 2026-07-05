@@ -4,7 +4,7 @@
 
     .global gUnknown_08180000
 gUnknown_08180000:
-    .incbin "baserom.gba", 0x00180000, 0x800
+	.incbin "graphics/unk_180000.4bpp"
 
     .global gPalEvidenceProfileDesc
 gPalEvidenceProfileDesc:
@@ -16,7 +16,7 @@ gGfxSaveGameTiles:
 
     .global gGfx4bppNametags
 gGfx4bppNametags:
-    .incbin "baserom.gba", 0x00181820, 0x5000
+	.incbin "graphics/ui/message_box/nametags.4bpp"
 
     .global gGfxDetentionCenterBottomTiles
 gGfxDetentionCenterBottomTiles:
@@ -88,7 +88,7 @@ gGfxGuiltyNotGuilty2:
 
     .global gUnknown_0818D360
 gUnknown_0818D360:
-    .incbin "baserom.gba", 0x0018D360, 0x1000
+	.incbin "graphics/unk_18D360.4bpp"
 
     .global gGfxNewGameContinue
 gGfxNewGameContinue:
@@ -100,7 +100,7 @@ gGfxConfetti:
 
     .global gUnknown_0818E780
 gUnknown_0818E780:
-    .incbin "baserom.gba", 0x0018E780, 0xA00
+	.incbin "graphics/unk_18E780.4bpp"
 
     .global gGfxWitnessBench1
 gGfxWitnessBench1:
@@ -108,7 +108,7 @@ gGfxWitnessBench1:
 
     .global gUnknown_0818F580
 gUnknown_0818F580:
-    .incbin "baserom.gba", 0x0018F580, 0x200
+	.incbin "graphics/unk_18F580.4bpp"
 
     .global gGfxCounselBench1
 gGfxCounselBench1:
@@ -116,7 +116,7 @@ gGfxCounselBench1:
 
     .global gUnknown_0818FB80
 gUnknown_0818FB80:
-    .incbin "baserom.gba", 0x0018FB80, 0x900
+	.incbin "graphics/unk_18FB80.4bpp"
 
     .global gGfxInvestigationStopButton
 gGfxInvestigationStopButton:
@@ -235,17 +235,18 @@ gUnknown_08196EE4:
 gPalCrossExaminationUI:
     .incbin "graphics/unk_14DA80.gbapal"
 
-    .global gUnknown_08196F24
+	.global gUnknown_08196F24
 gUnknown_08196F24:
-    .incbin "baserom.gba", 0x00196F24, 0x40
+	.incbin "graphics/gUnknown_08196F24.gbapal"
 
-    .global gPalActionButtons1
-gPalActionButtons1:
+	.global gUnknown_08196F44
+gUnknown_08196F44:
+	.incbin "graphics/gUnknown_08196F44.gbapal"
+
+    .global gPalActionButtons
+gPalActionButtons:
     .incbin "graphics/ui/investigation/action_buttons_0.gbapal"
-
-    .global gUnknown_08196F84
-gUnknown_08196F84:
-    .incbin "baserom.gba", 0x00196F84, 0x20
+    .incbin "graphics/ui/investigation/action_buttons_1.gbapal"
 
     .global gPalCourtRecordActionText
 gPalCourtRecordActionText:
@@ -266,10 +267,22 @@ gPalPressPresentButtons:
     .global gPalExamineCursors
 gPalExamineCursors:
     .incbin "graphics/ui/investigation/examine_cursor_00.gbapal"
-
-    .global gUnknown_08197044
-gUnknown_08197044:
-    .incbin "baserom.gba", 0x00197044, 0x200
+    .incbin "graphics/ui/investigation/examine_cursor_01.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_02.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_03.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_04.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_05.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_06.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_07.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_08.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_09.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_10.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_11.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_12.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_13.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_14.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_15.gbapal"
+    .incbin "graphics/ui/investigation/examine_cursor_16.gbapal"
 
     .global gPalCheckmark
 gPalCheckmark:
@@ -290,22 +303,22 @@ gPalNotGuilty:
     .global gPalNewGameContinue
 gPalNewGameContinue:
     .incbin "graphics/ui/new_game_continue_0.gbapal"
+    .incbin "graphics/ui/new_game_continue_1.gbapal"
+    .incbin "graphics/ui/new_game_continue_2.gbapal"
+    .incbin "graphics/ui/new_game_continue_3.gbapal"
+    .incbin "graphics/ui/new_game_continue_4.gbapal"
+    .incbin "graphics/ui/new_game_continue_5.gbapal"
 
-    .global gUnknown_081972E4
-gUnknown_081972E4:
-    .incbin "baserom.gba", 0x001972E4, 0xA0
-
-    .global gPalConfetti0
-gPalConfetti0:
+    .global gPalConfetti
+gPalConfetti:
     .incbin "graphics/ui/trial/confetti_0.gbapal"
-
-    .global gUnknown_081973A4
-gUnknown_081973A4:
-    .incbin "baserom.gba", 0x001973A4, 0x60
+    .incbin "graphics/ui/trial/confetti_1.gbapal"
+    .incbin "graphics/ui/trial/confetti_2.gbapal"
+    .incbin "graphics/ui/trial/confetti_3.gbapal"
 
     .global gUnknown_08197404
 gUnknown_08197404:
-    .incbin "baserom.gba", 0x00197404, 0x20
+	.incbin "graphics/ui/gUnknown_08197404.gbapal"
 
     .global gPalWitnessBench
 gPalWitnessBench:
@@ -314,10 +327,86 @@ gPalWitnessBench:
     .global gPalCounselBench
 gPalCounselBench:
     .incbin "graphics/counsel_bench.gbapal"
-
-    .global gUnknown_08197464
+    
+	.global gUnknown_08197464
 gUnknown_08197464:
-    .incbin "baserom.gba", 0x00197464, 0x200
+	.incbin "graphics/gUnknown_08197464.gbapal"
+
+
+	.global gUnknown_08197484
+gUnknown_08197484:
+	.incbin "graphics/gUnknown_08197484.gbapal"
+
+
+	.global gUnknown_081974A4
+gUnknown_081974A4:
+	.incbin "graphics/gUnknown_081974A4.gbapal"
+
+
+	.global gUnknown_081974C4
+gUnknown_081974C4:
+	.incbin "graphics/gUnknown_081974C4.gbapal"
+
+
+	.global gUnknown_081974E4
+gUnknown_081974E4:
+	.incbin "graphics/gUnknown_081974E4.gbapal"
+
+
+	.global gUnknown_08197504
+gUnknown_08197504:
+	.incbin "graphics/gUnknown_08197504.gbapal"
+
+
+	.global gUnknown_08197524
+gUnknown_08197524:
+	.incbin "graphics/gUnknown_08197524.gbapal"
+
+
+	.global gUnknown_08197544
+gUnknown_08197544:
+	.incbin "graphics/gUnknown_08197544.gbapal"
+
+
+	.global gUnknown_08197564
+gUnknown_08197564:
+	.incbin "graphics/gUnknown_08197564.gbapal"
+
+
+	.global gUnknown_08197584
+gUnknown_08197584:
+	.incbin "graphics/gUnknown_08197584.gbapal"
+
+
+	.global gUnknown_081975A4
+gUnknown_081975A4:
+	.incbin "graphics/gUnknown_081975A4.gbapal"
+
+
+	.global gUnknown_081975C4
+gUnknown_081975C4:
+	.incbin "graphics/gUnknown_081975C4.gbapal"
+
+
+	.global gUnknown_081975E4
+gUnknown_081975E4:
+	.incbin "graphics/gUnknown_081975E4.gbapal"
+
+
+	.global gUnknown_08197604
+gUnknown_08197604:
+	.incbin "graphics/gUnknown_08197604.gbapal"
+
+
+	.global gUnknown_08197624
+gUnknown_08197624:
+	.incbin "graphics/gUnknown_08197624.gbapal"
+
+
+	.global gUnknown_08197644
+gUnknown_08197644:
+	.incbin "graphics/gUnknown_08197644.gbapal"
+
 
     .global gPalInvestigationPsycheLock
 gPalInvestigationPsycheLock:
@@ -330,10 +419,13 @@ gPalHPBarFrame:
     .global gPalHPBarProgress
 gPalHPBarProgress:
     .incbin "graphics/ui/healthbar_progress_1.gbapal"
-
-    .global gUnknown_081976C4
-gUnknown_081976C4:
-    .incbin "baserom.gba", 0x001976C4, 0xE0
+    .incbin "graphics/ui/healthbar_progress_2.gbapal"
+    .incbin "graphics/ui/healthbar_progress_3.gbapal"
+    .incbin "graphics/ui/healthbar_progress_4.gbapal"
+    .incbin "graphics/ui/healthbar_progress_5.gbapal"
+    .incbin "graphics/ui/healthbar_progress_6.gbapal"
+    .incbin "graphics/ui/healthbar_progress_7.gbapal"
+    .incbin "graphics/ui/healthbar_progress_8.gbapal"
 
     .global gPalChoiceSelected
 gPalChoiceSelected:
@@ -341,7 +433,7 @@ gPalChoiceSelected:
 
     .global gUnknown_081977C4
 gUnknown_081977C4:
-    .incbin "baserom.gba", 0x001977C4, 0x20
+	.incbin "graphics/gUnknown_081977C4.gbapal"
 
     .global gGfxFromSaveOrBeginningOptions
 gGfxFromSaveOrBeginningOptions:
@@ -351,25 +443,40 @@ gGfxFromSaveOrBeginningOptions:
 gGfxSaveYesNo:
     .incbin "graphics/save_yes_no.4bpp"
 
-    .global gUnknown_08198FE4
-gUnknown_08198FE4:
-    .incbin "baserom.gba", 0x00198FE4, 0x6690
+    .global gEvidenceProfileDescriptions
+gEvidenceProfileDescriptions:
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_08198FE4.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_08199444.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_0819984C.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_08199CA0.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_0819A0FC.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_0819A55C.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_0819A970.4bpp.lz"
+	.incbin "graphics/evidence_profile_descriptions/gUnknown_0819AE04.4bpp.lz"
+
+    .global gEvidenceProfilePictures
+gEvidenceProfilePictures:
+    .incbin "baserom.gba", 0x0019B260, 0x4414
+
+@ BEGIN CHARSETS
 
     .global gTextPal
 gTextPal:
-    .incbin "baserom.gba", 0x0019F674, 0x20
+    .incbin "graphics/charset.gbapal"
 
     .global gCharSet
 gCharSet:
-    .incbin "baserom.gba", 0x0019F694, 0x7100
+    .incbin "graphics/charset.4bpp"
 
-    .global gUnknown_081A6794
-gUnknown_081A6794:
-    .incbin "baserom.gba", 0x001A6794, 0x24F00
+@ END CHARSETS
 
     .global gPalMapMarkers
 gPalMapMarkers:
-    .incbin "baserom.gba", 0x001CB694, 0x34694
+    .incbin "graphics/map_markers/palette.gbapal"
+
+    .global gUnknown_081CB6B4
+gUnknown_081CB6B4:
+    .incbin "baserom.gba", 0x001CB6B4, 0x34674
 
     .global gUnknown_081FFD28
 gUnknown_081FFD28:

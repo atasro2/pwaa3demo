@@ -28,7 +28,7 @@ struct EvidenceProfileData
 const struct EvidenceProfileData gEvidenceProfileData[] = 
 {
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 9,
         .evidenceDetailId = 0,
     },
@@ -368,32 +368,32 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 41,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 45,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 46,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 29,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 30,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 29,
         .evidenceDetailId = 0,
     },
@@ -633,27 +633,27 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 82,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 73,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 53,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 48,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 49,
         .evidenceDetailId = 0,
     },
@@ -755,7 +755,7 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
 };
 
 u8 *const gUnknown_08026E20[] = {
-    gUnknown_0819B260,
+    gEvidenceProfilePictures,
     gUnknown_0819B500,
     gUnknown_0819B8A4,
     gUnknown_0819BDA0,
