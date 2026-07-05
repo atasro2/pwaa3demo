@@ -552,10 +552,16 @@ gUnknown_0826FE38:
 
     .global std_scripts
 std_scripts:
-    .incbin "baserom.gba", 0x00270934, 0x4
+    .incbin "baserom.gba", 0x00270934, 0x10F8
 
-    .global gUnknown_08270938
-gUnknown_08270938:
-    .incbin "baserom.gba", 0x00270938, 0x58F6C8
+    .global scenario_0_0_script
+scenario_0_0_script:
+    .incbin "baserom.gba", 0x00271A2C, 0x390C
 
+    .global gUnknown_08275338
+gUnknown_08275338:
+    .incbin "baserom.gba", 0x00275338, 0x180
+
+gPadding:
+    .incbin "baserom.gba", 0x00400000, 0x400000
 
