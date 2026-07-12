@@ -8,6 +8,18 @@ TALK_LOCATION_CHOICES := graphics/talk_location_choices
 $(TALK_LOCATION_CHOICES)/%.4bpp: $(TALK_LOCATION_CHOICES)/%.png
 	$(GBAGFX) $< $@ -mwidth 8 -mheight 4
 
+graphics/case1_opening_phoenix_legs.4bpp.lz: graphics/case1_opening_phoenix_legs.4bpp
+	$(GBAGFX) $< $@ -search 1
+
+graphics/case1_opening_phoenix_and_doug.8bpp: graphics/case1_opening_phoenix_and_doug.png
+	$(GBAGFX) $< $@ -mwidth 8 -mheight 16
+
+graphics/case1_opening_phoenix_and_doug.8bpp.lz: graphics/case1_opening_phoenix_and_doug.8bpp
+	$(GBAGFX) $< $@ -search 1
+
+graphics/capcom_logo.4bpp.lz: graphics/capcom_logo.4bpp
+	$(GBAGFX) $< $@ -search 1
+
 graphics/title_screen.8bpp.lz: graphics/title_screen.8bpp
 	$(GBAGFX) $< $@ -search 8
 graphics/title_screen_demo.8bpp.lz: graphics/title_screen_demo.8bpp

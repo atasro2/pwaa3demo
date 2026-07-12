@@ -506,51 +506,77 @@ gBackgrounds:
 
     .global gUnknown_081FFD28
 gUnknown_081FFD28:
-    .incbin "baserom.gba", 0x001FFD28, 0x20
+	.incbin "graphics/case1_opening_phoenix_legs.gbapal"
 
     .global gUnknown_081FFD48
 gUnknown_081FFD48:
-    .incbin "baserom.gba", 0x001FFD48, 0x5C0
+	.incbin "graphics/case1_opening_phoenix_legs.4bpp.lz"
 
-    .global gUnknown_08200308
+	.global gUnknown_08200308
 gUnknown_08200308:
-    .incbin "baserom.gba", 0x00200308, 0x68E8
+	.incbin "graphics/case1_opening_phoenix_and_doug.gbapal"
+
+	.global gUnknown_08200508
+gUnknown_08200508:
+	.incbin "graphics/case1_opening_phoenix_and_doug.8bpp.lz"
+
+	.global gUnknown_082012F8
+gUnknown_082012F8:
+	.incbin "graphics/striped_images/gUnknown_002012F8.4bpp.striped"
+
+	.global gUnknown_08204424
+gUnknown_08204424:
+	.incbin "graphics/striped_images/gUnknown_00204424.4bpp.striped"
 
     .global gPal_BustupMia
 gPal_BustupMia:
-    .incbin "baserom.gba", 0x00206BF0, 0x20
+	.incbin "graphics/bustup_mia.gbapal"
 
     .global gMap_BustupMia
 gMap_BustupMia:
-    .incbin "baserom.gba", 0x00206C10, 0x1E90
+	.incbin "graphics/bustup_mia.bin"
 
     .global gUnknown_08208AA0
 gUnknown_08208AA0:
-    .incbin "baserom.gba", 0x00208AA0, 0x20
+	.incbin "graphics/unk_208AA0.gbapal"
 
-    .global gUnknown_08208AC0
+	.global gUnknown_08208AC0
 gUnknown_08208AC0:
-    .incbin "baserom.gba", 0x00208AC0, 0x50DC
+	.incbin "graphics/unk_208AC0.bin"
+
+	.global gUnknown_08208F70
+gUnknown_08208F70:
+	.incbin "graphics/208F70.4bpp"
+
+	.global gUnknown_0820CCF0
+gUnknown_0820CCF0:
+	.incbin "graphics/speedlines.4bpp.striped"
 
     .global gGfxSpeedlinesFirstAndLastColumns
 gGfxSpeedlinesFirstAndLastColumns:
     .incbin "graphics/speedlines_first_and_last_columns.4bpp"
 
-    .global gUnknown_0820E31C
+	.global gUnknown_0820E31C
 gUnknown_0820E31C:
-    .incbin "baserom.gba", 0x0020E31C, 0x20
+	.incbin "graphics/capcom_logo.gbapal"
 
-    .global gUnknown_0820E33C
+	.global gUnknown_0820E33C
 gUnknown_0820E33C:
-    .incbin "baserom.gba", 0x0020E33C, 0x410
+	.incbin "graphics/capcom_logo.4bpp.lz"
 
     .global gPalCourtScroll
 gPalCourtScroll:
     .incbin "graphics/court_scrolls/court_scroll.gbapal"
 
+    .global gGfxCourtScroll
+gGfxCourtScroll:
+    .incbin "graphics/court_scrolls/court_scroll.4bpp"
+
+@ BEGIN ANIMATIONS?
+
     .global gUnknown_0820E76C
 gUnknown_0820E76C:
-    .incbin "baserom.gba", 0x0020E76C, 0x43D28
+    .incbin "baserom.gba", 0x0021AF6C, 0x37528
 
     .global gUnknown_08252494
 gUnknown_08252494:
@@ -578,15 +604,15 @@ gUnknown_0826FE38:
 
     .global std_scripts
 std_scripts:
-    .incbin "baserom.gba", 0x00270934, 0x10F8
+	.incbin "script/std_scripts.phscr"
 
     .global scenario_0_0_script
 scenario_0_0_script:
-    .incbin "baserom.gba", 0x00271A2C, 0x390C
+	.incbin "script/scenario_0_0_script.phscr.lz"
 
     .global gUnknown_08275338
 gUnknown_08275338:
-    .incbin "baserom.gba", 0x00275338, 0x180
+	.incbin "script/gUnknown_08275338.phscr"
 
 @ needed to fill out the rom
 gPadding:
