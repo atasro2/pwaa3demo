@@ -456,7 +456,20 @@ gEvidenceProfileDescriptions:
 
     .global gEvidenceProfilePictures
 gEvidenceProfilePictures:
-    .incbin "baserom.gba", 0x0019B260, 0x4414
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819B260.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819B500.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819B8A4.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819BDA0.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819C094.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819C590.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819C9F8.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819CE48.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819D384.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819D9F8.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819DF94.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819E560.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819EB70.epicon.lz"
+	.incbin "graphics/evidence_profile_pictures/gUnknown_0819EFE8.epicon.lz"
 
 @ BEGIN CHARSETS
 
@@ -562,6 +575,9 @@ scenario_0_0_script:
 gUnknown_08275338:
     .incbin "baserom.gba", 0x00275338, 0x180
 
+@ needed to fill out the rom
 gPadding:
-    .incbin "baserom.gba", 0x00400000, 0x400000
+    .rept 0x400000
+    .byte 0xFF
+    .endr
 
