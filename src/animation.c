@@ -294,6 +294,7 @@ const struct PersonAnimationData gPersonAnimData[46] = {
         .unkA = 0x0,
     },
 };
+
 const struct AnimationData gAnimationData[179] = {
     {
         .gfxData = (void*)0x00000000,
