@@ -487,9 +487,22 @@ gCharSet:
 gPalMapMarkers:
     .incbin "graphics/map_markers/palette.gbapal"
 
-    .global gUnknown_081CB6B4
-gUnknown_081CB6B4:
-    .incbin "baserom.gba", 0x001CB6B4, 0x34674
+    .global gBackgrounds
+gBackgrounds:
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081CB6B4.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081D0458.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081D2000.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081D3A04.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081D569C.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081DBB9C.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081E1A08.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081E911C.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081ECBB4.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081EEB48.4bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081EF7D0.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081F2D90.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081F7D50.8bpp.striped"
+	.incbin "graphics/striped_images/backgrounds/gUnknown_081FC188.4bpp.striped"
 
     .global gUnknown_081FFD28
 gUnknown_081FFD28:
