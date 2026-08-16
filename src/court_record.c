@@ -28,7 +28,7 @@ struct EvidenceProfileData
 const struct EvidenceProfileData gEvidenceProfileData[] = 
 {
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 9,
         .evidenceDetailId = 0,
     },
@@ -368,32 +368,32 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 41,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 45,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 46,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 29,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 30,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 29,
         .evidenceDetailId = 0,
     },
@@ -633,27 +633,27 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 82,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 73,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 53,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 48,
         .evidenceDetailId = 0,
     },
     {
-        .descriptionTiles = gUnknown_08198FE4,
+        .descriptionTiles = gEvidenceProfileDescriptions,
         .evidenceImageId = 49,
         .evidenceDetailId = 0,
     },
@@ -755,7 +755,7 @@ const struct EvidenceProfileData gEvidenceProfileData[] =
 };
 
 u8 *const gUnknown_08026E20[] = {
-    gUnknown_0819B260,
+    gEvidenceProfilePictures,
     gUnknown_0819B500,
     gUnknown_0819B8A4,
     gUnknown_0819BDA0,
@@ -1019,7 +1019,7 @@ bool8 sub_800EC48(void)
                 src = ((u32*)dst)[1] + gUnknown_08252498;
                 dst = (void*)(OBJ_PLTT+0x1A0);
                 DmaCopy16(3, src, dst, 0x20);
-                anim = sub_8016FB4();
+                anim = FindDahliaShawlAnimation();
                 anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
                 anim->flags &= ~ANIM_0x40;
                 anim->flags &= ~ANIM_0x80;
@@ -1167,7 +1167,7 @@ bool8 sub_800EFBC(void)
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;
-        if (gMain.process[3] == 3) {
+        if (gMain.process[GAME_PROCESS_VAR2] == 3) {
             gInvestigation.actionState = 4;   
             SlideInBG2Window(4, 0x12);
             SET_PROCESS(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0);
@@ -1692,7 +1692,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 src = ((u32*)dst)[1] + gUnknown_08252498;
                 dst = (u32*)(OBJ_PLTT+0x1A0);
                 DmaCopy16(3, src, dst, 0x20);
-                anim = sub_8016FB4();
+                anim = FindDahliaShawlAnimation();
                 anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
                 anim->flags &= ~ANIM_0x40;
                 anim->flags &= ~ANIM_0x80;

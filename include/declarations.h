@@ -58,15 +58,11 @@ void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
-struct AnimationListEntry * sub_8016FB4(void);
+struct AnimationListEntry * FindDahliaShawlAnimation(void);
 bool32 IsHPBarAnimating(void);
 void ClearHPBarOAM(void);
 
 extern struct TextBoxCharacter gUnknown_03007180[0x40]; 
-
-extern u16 gPsycheLockChainPalettes[][16];
-extern s16 gPsycheLockLockPositions[];
-extern u8 * gPsycheLockChainTilemaps[];
 
 u16 ColorFadeGrayscale(u16 color, u16 intensity, u16 mode);
 void sub_8006EAC(struct Main*);

@@ -317,7 +317,7 @@ bool32 Command24(struct ScriptContext *scriptCtx)
 {
     gMain.advanceScriptContext = FALSE;
     gMain.showTextboxCharacters = FALSE;
-    SET_PROCESS(2, 0, 0, 0);
+    SET_PROCESS(GAME_OVER_PROCESS, 0, 0, 0);
     return 0;
 }
 
@@ -342,7 +342,7 @@ bool32 Command28(struct ScriptContext *scriptCtx)
     if (arg0)
     {
         BACKUP_PROCESS();
-        SET_PROCESS(5, 0, 0, 0); // start testimony
+        SET_PROCESS(TESTIMONY_PROCESS, TESTIMONY_INIT, 0, 0); // start testimony
     }
     else
     {
@@ -415,17 +415,17 @@ bool32 Command44(struct ScriptContext * scriptCtx)
     {
         DmaCopy16(3, gGfxGuilty1, OBJ_VRAM0+0x3400, 0x1000);
         DmaCopy16(3, gPalGuilty, OBJ_PLTT+0xA0, 0x20);
-        SET_PROCESS(VERDICT_PROCESS,0,0,0);
+        SET_PROCESS(VERDICT_PROCESS,VERDICT_SHRINK_KANJI1,0,0);
     }
     else 
     {
         DmaCopy16(3, gGfxNotGuilty1, OBJ_VRAM0+0x3400, 0x800);
         DmaCopy16(3, gGfxGuiltyNotGuilty2, OBJ_VRAM0+0x3C00, 0x800);
         DmaCopy16(3, gPalNotGuilty, OBJ_PLTT+0xA0, 0x20);
-        SET_PROCESS(VERDICT_PROCESS,0,0,1);
+        SET_PROCESS(VERDICT_PROCESS,VERDICT_SHRINK_KANJI1,0,1);
     }
-    oam->attr0 = SPRITE_ATTR0((~16 & 255), ST_OAM_AFFINE_DOUBLE, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    oam->attr1 = SPRITE_ATTR1_AFFINE((~16 & 511), 0, 3);
+    oam->attr0 = SPRITE_ATTR0((~0x10 & 0xFF), ST_OAM_AFFINE_DOUBLE, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_AFFINE((~0x10 & 0x1FF), 0, 3);
     oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 5);
     oam++;
     oam->attr0 = SPRITE_ATTR0_CLEAR;

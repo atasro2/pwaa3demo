@@ -763,7 +763,7 @@ void VerdictProcess(struct Main * main)
         }
         case VERDICT_INIT_CONFETTI: { // B3C8
             DmaCopy16(3, gGfxConfetti, OBJ_VRAM0+0x1F80, 0x20);
-            DmaCopy16(3, gPalConfetti0, OBJ_PLTT+0xA0, 0x80);
+            DmaCopy16(3, gPalConfetti, OBJ_PLTT+0xA0, 0x80);
             main->process[GAME_PROCESS_STATE]++;
             break;
         }

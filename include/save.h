@@ -53,5 +53,6 @@ void SaveGameExitSaveScreen(struct Main *);
 void SaveGame5(struct Main *);
 void SaveGame6(struct Main *);
 void SaveGame7(struct Main *);
+void SaveGame8(struct Main *);
 
 #endif//GUARD_SAVE_H

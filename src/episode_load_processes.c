@@ -12,6 +12,29 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+u8 * const gUnknown_080267E4[5] = {
+    OBJ_VRAM0+0x3300,
+    OBJ_VRAM1+0x300,
+    OBJ_VRAM1+0x1300,
+    OBJ_VRAM1+0x2300,
+    OBJ_VRAM1+0x3300,
+};
+
+const u8 gUnknown_080267F8[12][2] = {
+    { 0x01, 0x01 },
+    { 0x02, 0x02 },
+    { 0x04, 0x04 },
+    { 0x08, 0x08 },
+    { 0x02, 0x01 },
+    { 0x04, 0x01 },
+    { 0x04, 0x02 },
+    { 0x08, 0x04 },
+    { 0x01, 0x02 },
+    { 0x01, 0x04 },
+    { 0x02, 0x04 },
+    { 0x04, 0x08 },
+};
+
 void EpisodeInit(struct Main * main)
 {
     main->advanceScriptContext = FALSE;
@@ -48,7 +71,7 @@ void EpisodeLoadGfx(struct Main * main)
     main->process[GAME_PROCESS_STATE]++;
 }
 
-extern u8 gUnknown_080267F8[12][2];
+// extern u8 gUnknown_080267F8[12][2];
 
 void sub_80085D8(struct AnimationListEntry * anim, u8 * arg1) {
     u16 i;
@@ -91,7 +114,7 @@ void sub_80086B0(u8 * arg0, u8 * arg1) {
     }
 }
 
-extern u8 * gUnknown_080267E4[];
+// extern u8 * gUnknown_080267E4[];
 
 void EpisodeClearedProcess(struct Main * main)
 {

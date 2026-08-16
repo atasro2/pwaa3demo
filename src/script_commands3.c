@@ -34,7 +34,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             scriptCtx->textboxState = 1;
             break;
         case 2:
-            if(gMain.process[GAME_PROCESS] == 3)
+            if(gMain.process[GAME_PROCESS] == COURT_PROCESS)
             {
                 DestroyAnimation(&gAnimation[1]);
                 gInvestigation.personActive = 0;
@@ -43,7 +43,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             SlideTextbox(1);
             break;
         case 3:
-            if(gMain.process[GAME_PROCESS] == 3)
+            if(gMain.process[GAME_PROCESS] == COURT_PROCESS)
             {
                 DestroyAnimation(&gAnimation[1]);
                 gInvestigation.personActive = 0;
@@ -56,7 +56,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
                 gMain.showTextboxCharacters = FALSE;
                 gInvestigation.actionState = 1;
             }
-            if(gMain.process[GAME_PROCESS] == 4)
+            if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS)
             {
                 gInvestigation.selectedActionYOffset = 0;
                 if(gMain.process[GAME_PROCESS_STATE] == 6)
@@ -383,7 +383,7 @@ bool32 Command39(struct ScriptContext *scriptCtx)
             oamIdx = GetMapMarkerIndexFromId(0xFF);
             mapMarker = &gMapMarker[oamIdx];
             oamIdx += 0x39;
-            mapMarker->vramPtr = sub_801A018();
+            mapMarker->vramPtr = GetNextMapMarkerVramAddress();
             mapMarker->id = id;
             DmaCopy16(3, sMapMarkerSprites[id].tiles, mapMarker->vramPtr, size = sMapMarkerSprites[id].size); // weird shit going on here
             DmaCopy16(3, gPalMapMarkers, OBJ_PLTT + 0xC0, 0x20);
@@ -520,10 +520,10 @@ void sub_801B47C(u8 oamIdx, u8 matrixNum, u32 arg2) {
     arg2 += 0x10000;
     gOamObjects[oamIdx].attr1 |= matrixNum << 9;
     gOamObjects[oamIdx].attr0 |= ST_OAM_AFFINE_DOUBLE << 8;
-    gOamObjects[matrixIdx].attr3 = sub_8006364(0) * 0x10000 / arg2;
-    gOamObjects[matrixIdx+1].attr3 = sub_80063E4(0) * 0x10000  / arg2;
-    gOamObjects[matrixIdx+2].attr3 = -(sub_80063E4(0) * 0x10000 / arg2);
-    gOamObjects[matrixIdx+3].attr3 = sub_8006364(0) * 0x10000 / arg2;
+    gOamObjects[matrixIdx].attr3 = HighResolutionCosine(0) * 0x10000 / arg2;
+    gOamObjects[matrixIdx+1].attr3 = HighResolutionSine(0) * 0x10000  / arg2;
+    gOamObjects[matrixIdx+2].attr3 = -(HighResolutionSine(0) * 0x10000 / arg2);
+    gOamObjects[matrixIdx+3].attr3 = HighResolutionCosine(0) * 0x10000 / arg2;
 }
 
 struct SpotSelectData
@@ -540,7 +540,7 @@ struct SpotSelectData
     /* +0x2B */ u8 bottom;
 };
 
-extern const struct SpotSelectData gSpotSelectData[];
+const struct SpotSelectData gSpotSelectData[] = {};
 
 bool32 Command3F(struct ScriptContext *_unused)
 {
@@ -1259,9 +1259,6 @@ bool32 Command73(struct ScriptContext *_unused)
     }
     return 0;
 }
-
-extern u8 gUnknown_0802872E[];
-extern u16 gUnknown_0802871C[];
 
 u32 sub_801C4E4(void) {
     u8 i;

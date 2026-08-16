@@ -62,6 +62,7 @@ Temporary Items
 *.8bpp
 *.gbapal
 *.striped
+*.epicon
 tools/agbcc/
 tools/binutils/
 build/

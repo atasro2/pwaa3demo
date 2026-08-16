@@ -242,7 +242,7 @@ void sub_801DB60(void) {
         break;
     }
     if (scriptCtx->unk1E & 2) {
-        if (gMain.process[0] == 4 && gMain.process[1] == 10) {
+        if (gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS && gMain.process[GAME_PROCESS_STATE] == INVESTIGATION_10) {
             sub_8015C18();
             gMain.psycheLockShownByScriptFlag = 0;
             ioRegs->lcd_bg3cnt |= BGCNT_PRIORITY(3);
@@ -798,7 +798,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             src = ((u32*)dst)[1] + gUnknown_08252498;
             dst = (void*)(OBJ_PLTT+0x1A0);
             DmaCopy16(3, src, dst, 0x20);
-            anim = sub_8016FB4();
+            anim = FindDahliaShawlAnimation();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             if (scriptCtx->unk4E == 6) {
                 scriptCtx->unk4E = scriptCtx->unk20;
@@ -872,7 +872,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             }
             main->blendDelay = scriptCtx->unk46[0];
             main->blendDeltaY = scriptCtx->unk46[1];
-            anim = sub_8016FB4();
+            anim = FindDahliaShawlAnimation();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             anim->flags &= ~ANIM_0x40;
             anim->flags &= ~ANIM_0x80;
@@ -915,7 +915,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             }
             main->blendDelay = scriptCtx->unk46[0];
             main->blendDeltaY = scriptCtx->unk46[1];
-            anim = sub_8016FB4();
+            anim = FindDahliaShawlAnimation();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD; 
             anim->flags &= ~ANIM_0x40; 
             anim->flags &= ~ANIM_0x80; 
@@ -934,7 +934,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 main->blendCounter = 0xFFFF;
                 ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x10, 0);
                 ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ;
-                anim = sub_8016FB4();
+                anim = FindDahliaShawlAnimation();
                 anim->flags |= ANIM_0x80;
                 scriptCtx->unk30[1] = 0;
                 scriptCtx->unk46[1] = 1;
@@ -984,7 +984,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             }
             main->blendDelay = scriptCtx->unk46[1];
             main->blendDeltaY = scriptCtx->unk46[0];
-            anim = sub_8016FB4();
+            anim = FindDahliaShawlAnimation();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD; 
             anim->flags &= ~ANIM_0x40; 
             anim->flags &= ~ANIM_0x80; 
@@ -1027,7 +1027,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             }
             main->blendDelay = scriptCtx->unk46[0];
             main->blendDeltaY = scriptCtx->unk46[1];
-            anim = sub_8016FB4();
+            anim = FindDahliaShawlAnimation();
             anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD; 
             anim->flags &= ~ANIM_0x40; 
             anim->flags &= ~ANIM_0x80; 
@@ -1046,7 +1046,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 main->blendMode = 0;
                 main->blendCounter = 0xFFFF;
                 ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ;
-                anim = sub_8016FB4();
+                anim = FindDahliaShawlAnimation();
                 anim->flags |= ANIM_0x80;
                 scriptCtx->unk30[1] = 0;
                 scriptCtx->unk46[1] = 1;
@@ -1303,8 +1303,8 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
     case 51:
         if (arg0->unk46[0] != 0) {
             arg0->unk1E &= ~0x100;
-            main->process[2] = 7;
-            main->process[3] = 0;
+            main->process[GAME_PROCESS_VAR1] = 7;
+            main->process[GAME_PROCESS_VAR2] = 0;
         } else {
             arg0->unk1E |= 0x100;
         }

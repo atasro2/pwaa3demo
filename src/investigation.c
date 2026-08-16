@@ -16,6 +16,10 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+u8 *const gUnknown_08026810[84] = {0}; // ???
+
+u8 *const gUnknown_08026960[14] = {0}; // ???
+
 void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct *) = {
 	InvestigationInit, // RNO1_TANTEI_INIT
 	InvestigationMain, // RNO1_TANTEI_MAIN
@@ -58,7 +62,7 @@ void sub_800BC08(u32 arg0) {
             break;
         case 11:
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags |= 0x80;
             for(i = 0; i < 3; i++) {
                 animation = FindAnimationFromAnimId(0x83+i);
@@ -80,12 +84,12 @@ void sub_800BC08(u32 arg0) {
             }
             // BDA4
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             break;
         case 10:
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             break;
         case 13:
@@ -116,7 +120,7 @@ void sub_800BC08(u32 arg0) {
                 gIORegisters.lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
                 gIORegisters.lcd_bldalpha = BLDALPHA_BLEND(31, 7);
                 gMain.blendDeltaY = 0;
-                animation = sub_8016FB4();
+                animation = FindDahliaShawlAnimation();
                 animation->flags |= 0x80;
                 sub_800BC08(0);
                 *(u16*)REG_ADDR_BLDALPHA = gIORegisters.lcd_bldalpha;
@@ -144,7 +148,7 @@ void sub_800BC08(u32 arg0) {
             sub_800BC08(1);
             // fallthrough
         case 31:
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_BLEND_ACTIVE;
             animation->flags &= ~0x80;
             break;
@@ -681,7 +685,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     }
 }
 
-extern const u8 * gUnknown_08026960[];
+// extern const u8 * gUnknown_08026960[];
 
 void InvestigationMove(struct Main * main, struct InvestigationStruct * investigation) // tantei_move
 {
@@ -1000,7 +1004,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
     }
 }
  
-extern const u8 * gUnknown_08026810[];
+// extern const u8 * gUnknown_08026810[];
 
 void InvestigationTalk(struct Main * main, struct InvestigationStruct * investigation) // tantei_talk
 {

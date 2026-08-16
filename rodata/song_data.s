@@ -1,4 +1,5 @@
 	.section .rodata
+    .align 2, 0
 
     .incbin "baserom.gba", 0x00028A70, 0xA1E4
     
