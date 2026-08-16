@@ -27,8 +27,8 @@ extern const s16 gSineTable[256+64];
 #define _Sin( a ) (gSineTable[(a)])
 #define _Cos( a ) (gSineTable[(a)+64])
 
-s32 sub_8006364(u16); // cos 4x res
-s32 sub_80063E4(u16); // sin 4x res
+s32 HighResolutionCosine(u16); // cos 4x res
+s32 HighResolutionSine(u16); // sin 4x res
 
 // Converts a number to Q8.8 fixed-point format
 #define Q_8_8(n) ((s16)((n) * 256))
@@ -50,8 +50,8 @@ extern const struct CourtPresentData gUnknown_08025418;
 extern const struct CourtPresentData gUnknown_08025420;
 extern const struct CourtPresentData gUnknown_08025428;
 
-extern const s16 gUnknown_08025430[0x400];
-extern const s16 gUnknown_08025C30[0x400];
+extern const s16 gHighResolutionSineRising[0x400];
+extern const s16 gHighResolutionSineFalling[0x400];
 
 
 #endif//GUARD_UTILS_H

@@ -1030,10 +1030,10 @@ void sub_8015E20(u8 arg0, u8 matrixNum, u16 arg2) {
     gOamObjects[arg0].attr0 |= ST_OAM_AFFINE_DOUBLE << 8;
     angle = (arg2 * 0x400) / 90;
     matrixOam = matrixNum * 4;
-    gOamObjects[matrixOam].attr3 = sub_8006364(angle);
-    gOamObjects[matrixOam+1].attr3 = sub_80063E4(angle);
-    gOamObjects[matrixOam+2].attr3 = -(sub_80063E4(angle) * 2);
-    gOamObjects[matrixOam+3].attr3 = sub_8006364(angle) * 2;
+    gOamObjects[matrixOam].attr3 = HighResolutionCosine(angle);
+    gOamObjects[matrixOam+1].attr3 = HighResolutionSine(angle);
+    gOamObjects[matrixOam+2].attr3 = -(HighResolutionSine(angle) * 2);
+    gOamObjects[matrixOam+3].attr3 = HighResolutionCosine(angle) * 2;
     x = gOamObjects[arg0].attr1 & 0x1FF;
     y = gOamObjects[arg0].attr0 & 0xFF;
     if(gOamObjects[matrixOam].attr3 & 0xF000) {

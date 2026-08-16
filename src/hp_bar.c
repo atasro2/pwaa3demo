@@ -689,11 +689,11 @@ void CheckAndDrawHPBar(void)
                         ) 
                     ) &&
                     (
-                        gMain.process[0] == COURT_PROCESS ||
-                        gMain.process[0] == INVESTIGATION_PROCESS ||
-                        gMain.process[0] == TESTIMONY_PROCESS ||
-                        gMain.process[0] == QUESTIONING_PROCESS ||
-                        gMain.process[0] == COURT_RECORD_PROCESS
+                        gMain.process[GAME_PROCESS] == COURT_PROCESS ||
+                        gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS ||
+                        gMain.process[GAME_PROCESS] == TESTIMONY_PROCESS ||
+                        gMain.process[GAME_PROCESS] == QUESTIONING_PROCESS ||
+                        gMain.process[GAME_PROCESS] == COURT_RECORD_PROCESS
                     )
                 )
             )

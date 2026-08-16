@@ -34,7 +34,7 @@ const u16 gUnknown_08028370[] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
 };
 
-const u16 gUnknown_0802845E[] = {
+const u16 gScriptCommandArgumentCounts[] = {
     0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0000, 0x0002, 0x0003, 0x0001, 0x0001, 0x0001, 0x0000, 0x0001, 0x0002,
     0x0001, 0x0000, 0x0003, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0004, 0x0001, 0x0001, 0x0001, 0x0003, 0x0000,
     0x0001, 0x0000, 0x0002, 0x0002, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0001, 0x0003, 0x0000, 0x0001, 0x0000, 0x0000, 0x0002,
@@ -218,8 +218,8 @@ void op_proc_exit_iOS(struct ScriptContext * scriptCtx) {
     scriptCtx->unk2D = 99;
 }
 
-struct AnimationListEntry * sub_8016FB4(void) {
-    u32 dahliaThing[] = { // TODO: give this a good name please
+struct AnimationListEntry * FindDahliaShawlAnimation(void) {
+    u32 dahliaShawlAnimations[] = {
         0x74,
         0x75,
         0x76,
@@ -238,8 +238,8 @@ struct AnimationListEntry * sub_8016FB4(void) {
         0xFF,
     };
     u32 i;
-    for(i = 0; dahliaThing[i] != 0xFF; i++) {
-        struct AnimationListEntry * anim = FindAnimationFromAnimId(dahliaThing[i]);
+    for(i = 0; dahliaShawlAnimations[i] != 0xFF; i++) {
+        struct AnimationListEntry * anim = FindAnimationFromAnimId(dahliaShawlAnimations[i]);
         if(anim)
             return anim;
     }
@@ -290,7 +290,7 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
         return;
     }
 
-    animation = sub_8016FB4();
+    animation = FindDahliaShawlAnimation();
     if(arg0 == 0) {
         DestroyAnimation(animation);
         return;
@@ -306,21 +306,21 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
             s16 xOrigin;
             animation = &gAnimation[1];
             xOrigin = animation->animationInfo.xOrigin;
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->animationInfo.xOrigin = xOrigin;
         }
         if(gScriptContext.unk1E & 0x8000) { // ! mixing global and local memes continue
             if(scriptCtx->unk46[2] & 0xF0) {
-                animation = sub_8016FB4();
+                animation = FindDahliaShawlAnimation();
                 animation->flags |= ANIM_0x400;
             }
         }
         animation = &gAnimation[1];
         if(animation->flags & ANIM_0x400) {
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags |= ANIM_0x400 | ANIM_QUEUED_PAL_UPLOAD;
         }
-        if(r5 == 0xC) {
+        if(r5 == 12) {
             scriptCtx->unk4E &= 0xFF00;
             scriptCtx->unk4E += 11;
             return;
@@ -337,7 +337,7 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
     }
 }
 
-void sub_8017154(u8 arg0) {
+void sub_8017154(u8 arg0) { // dahlia butterflies
     struct AnimationListEntry * animation = &gAnimation[1];
     if(animation == NULL
     || (animation->animationInfo.personId != 11 && animation->animationInfo.personId != 33)
@@ -849,7 +849,7 @@ void sub_8017BC0(void) {
              || *scriptPtr == 69) {
                 break;
             }
-            argCount = gUnknown_0802845E[*scriptPtr];
+            argCount = gScriptCommandArgumentCounts[*scriptPtr];
             for(i = 0; i < argCount; i++) {
                 scriptPtr++;
             }
@@ -870,7 +870,7 @@ void sub_8017BC0(void) {
 }
 
 bool32 CommandUnimplemented(struct ScriptContext *arg0) {
-    u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
+    u8 argCount = gScriptCommandArgumentCounts[gScriptContext.unkA];
     u8 i;
     if(argCount == 0)
         gScriptContext.scriptPtr++;

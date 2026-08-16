@@ -235,7 +235,7 @@ void sub_801873C(u32);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
-u8 * sub_801A018(void);
+u8 * GetNextMapMarkerVramAddress(void);
 
 void sub_801A054(void);
 void op_demo_play_iOS(void); // needs a better name

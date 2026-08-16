@@ -46,7 +46,7 @@ const struct CourtPresentData gUnknown_08025428 = { // ?
     .action = 0xFF,
 };
 
-const s16 gUnknown_08025430[0x400] = {
+const s16 gHighResolutionSineRising[0x400] = {
     0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0001, 0x0002, 0x0002,
     0x0003, 0x0003, 0x0003, 0x0004, 0x0004, 0x0005, 0x0005, 0x0005,
     0x0006, 0x0006, 0x0007, 0x0007, 0x0007, 0x0008, 0x0008, 0x0009,
@@ -177,7 +177,7 @@ const s16 gUnknown_08025430[0x400] = {
     0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff,
 };
 
-const s16 gUnknown_08025C30[0x400] = {
+const s16 gHighResolutionSineFalling[0x400] = {
     0x0100, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff,
     0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff,
     0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff, 0x00ff,
@@ -356,44 +356,44 @@ void MoveSpritesToOAM(void)
     DmaCopy16(3, gOamObjects, OAM, sizeof(gOamObjects));
 }
 
-s32 sub_8006364(u16 arg0) {
+s32 HighResolutionCosine(u16 arg0) {
     arg0 &= 0xFFF;
     if(arg0 < 0x400) {
-        return gUnknown_08025C30[arg0 & 0x3FF];
+        return gHighResolutionSineFalling[arg0 & 0x3FF];
     }
     else if(arg0 > 0xBFF) {
         if(arg0 == 0xC00) return 0;
-        return gUnknown_08025C30[0x400 - (arg0 & 0x3FF)];
+        return gHighResolutionSineFalling[0x400 - (arg0 & 0x3FF)];
     }
     else if(arg0 > 0x7FF) {
-        return -gUnknown_08025C30[(arg0 & 0x3FF)];
+        return -gHighResolutionSineFalling[(arg0 & 0x3FF)];
     }
     else if(arg0 == 0x400) {
         return 0;
     }
     else {
-        return -gUnknown_08025C30[0x400 - (arg0 & 0x3FF)];
+        return -gHighResolutionSineFalling[0x400 - (arg0 & 0x3FF)];
     }
     return 0;
 }
 
-s32 sub_80063E4(u16 arg0) {
+s32 HighResolutionSine(u16 arg0) {
     arg0 &= 0xFFF;
     if(arg0 < 0x400) {
-        return gUnknown_08025430[arg0 & 0x3FF];
+        return gHighResolutionSineRising[arg0 & 0x3FF];
     }
     else if(arg0 > 0xBFF) {
         if(arg0 == 0xC00) return -0x100;
-        return -gUnknown_08025430[(0x400 - (arg0 & 0x3FF))];
+        return -gHighResolutionSineRising[(0x400 - (arg0 & 0x3FF))];
     }
     else if(arg0 > 0x7FF) {
-        return -gUnknown_08025430[(arg0 & 0x3FF)];
+        return -gHighResolutionSineRising[(arg0 & 0x3FF)];
     }
     else if(arg0 == 0x400) {
         return 0x100;
     }
     else {
-        return gUnknown_08025430[0x400 - (arg0 & 0x3FF)];
+        return gHighResolutionSineRising[0x400 - (arg0 & 0x3FF)];
     }
     return 0x100;
 }

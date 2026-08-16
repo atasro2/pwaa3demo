@@ -89,7 +89,7 @@ void ScrollMode4AnimationUpdate(struct AnimationListEntry * animation, struct Co
         }
     }
     if(animation->animationInfo.personId == 11 || animation->animationInfo.personId == 33) {
-        struct AnimationListEntry * anim2 = sub_8016FB4();
+        struct AnimationListEntry * anim2 = FindDahliaShawlAnimation();
         anim2->animationInfo.xOrigin = animation->animationInfo.xOrigin;
         if(scriptCtx->unk4E == 6) {
             scriptCtx->unk4E = 9;
@@ -132,7 +132,7 @@ void ScrollMode5AnimationUpdate(struct AnimationListEntry * animation, struct Co
         }
     }
     if(animation->animationInfo.personId == 11 || animation->animationInfo.personId == 33) {
-        struct AnimationListEntry * anim2 = sub_8016FB4();
+        struct AnimationListEntry * anim2 = FindDahliaShawlAnimation();
         anim2->animationInfo.xOrigin = animation->animationInfo.xOrigin;
     }
     if(courtScroll->frameCounter == 0xD) {
@@ -169,7 +169,7 @@ void ScrollMode0AnimationUpdate(struct AnimationListEntry * animation, struct Co
         }
     }
     if(animation->animationInfo.personId == 11 || animation->animationInfo.personId == 33) {
-        struct AnimationListEntry * anim2 = sub_8016FB4();
+        struct AnimationListEntry * anim2 = FindDahliaShawlAnimation();
         anim2->animationInfo.xOrigin = animation->animationInfo.xOrigin;
         if(scriptCtx->unk4E == 6) {
             scriptCtx->unk4E = 9;
@@ -212,7 +212,7 @@ void ScrollMode1AnimationUpdate(struct AnimationListEntry * animation, struct Co
         }
     }
     if(animation->animationInfo.personId == 11 || animation->animationInfo.personId == 33) {
-        struct AnimationListEntry * anim2 = sub_8016FB4();
+        struct AnimationListEntry * anim2 = FindDahliaShawlAnimation();
         anim2->animationInfo.xOrigin = animation->animationInfo.xOrigin;
     }
     if(courtScroll->frameCounter == 0xD) {

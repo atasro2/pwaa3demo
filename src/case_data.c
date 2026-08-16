@@ -7,6 +7,7 @@
 #include "utils.h"
 #include "sound.h"
 #include "constants/oam_allocations.h"
+#include "constants/process.h"
 
 const struct CourtPresentData gUnknown_080266B0 = {
     .presentingSection = 0xFFFF,
@@ -239,7 +240,7 @@ void sub_8006728(u32 section, u32 flagId) // unused? Set_event2?
         sprite->attr1 = SPRITE_ATTR1_NONAFFINE(60 * i, 0, 0, 3);
         sprite->attr2 = SPRITE_ATTR2((0x100 + i * 0x20), 0, 5);
     }
-    SET_PROCESS(4, 1, 0, 0);
+    SET_PROCESS(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0);
     ChangeFlag(0, flagId, TRUE);
     ChangeScriptSection(section);
     SlideTextbox(1);

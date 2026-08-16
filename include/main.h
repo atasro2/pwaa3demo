@@ -216,10 +216,10 @@ extern struct OamAttrs gOamObjects[128];
 #define GAME_PROCESS_VAR1 2
 #define GAME_PROCESS_VAR2 3
 
-#define SET_PROCESS_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
-#define SET_PROCESS(no_0, no_1, no_2, no_3) (*(u32*)gMain.process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
-#define SET_PROCESS_BACKUP_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->processCopy = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
-#define SET_PROCESS_BACKUP(no_0, no_1, no_2, no_3) (*(u32*)gMain.processCopy = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
+#define SET_PROCESS_PTR(proc, state, var1, var2, main) (*(u32*)main->process = ((proc) | ((state) << 8) | ((var1) << 16) | ((var2) << 24)))
+#define SET_PROCESS(proc, state, var1, var2) (*(u32*)gMain.process = ((proc) | ((state) << 8) | ((var1) << 16) | ((var2) << 24)))
+#define SET_PROCESS_BACKUP_PTR(proc, state, var1, var2, main) (*(u32*)main->processCopy = ((proc) | ((state) << 8) | ((var1) << 16) | ((var2) << 24)))
+#define SET_PROCESS_BACKUP(proc, state, var1, var2) (*(u32*)gMain.processCopy = ((proc) | ((state) << 8) | ((var1) << 16) | ((var2) << 24)))
 #define BACKUP_PROCESS() (*(u32*)gMain.processCopy = *(u32*)gMain.process)
 #define BACKUP_PROCESS_PTR(main) (*(u32*)main->processCopy = *(u32*)gMain.process)
 #define RESTORE_PROCESS() (*(u32*)gMain.process = *(u32*)gMain.processCopy)

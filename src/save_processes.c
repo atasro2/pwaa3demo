@@ -347,7 +347,7 @@ void SaveGameInit1(struct Main *main)
         src = ((u32*)dst)[1] + gUnknown_08252498;
         dst = (u32*)(OBJ_PLTT+0x1A0);
         DmaCopy16(3, src, dst, 0x20);
-        anim = sub_8016FB4();
+        anim = FindDahliaShawlAnimation();
         anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
         anim->flags &= ~ANIM_0x40;
         anim->flags &= ~ANIM_0x80;
@@ -687,7 +687,7 @@ void SaveGameExitSaveScreen(struct Main * main) {
         src = ((u32*)dst)[1] + gUnknown_08252498;
         dst = (u32*)(OBJ_PLTT+0x1A0);
         DmaCopy16(3, src, dst, 0x20);
-        anim = sub_8016FB4();
+        anim = FindDahliaShawlAnimation();
         anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
         anim->flags &= ~ANIM_0x40;
         anim->flags &= ~ANIM_0x80;
@@ -770,7 +770,7 @@ void SaveGame7(struct Main* main) {
     u16 i;
     u32 temp;
     if (main->blendMode == 0) {
-        if (--main->process[2]) {
+        if (--main->process[GAME_PROCESS_VAR1]) {
             for(i = 0; i < 8; i++) {
                 struct OamAttrs * oam = &gOamObjects[OAM_IDX_SAVE_PROMPT + i];
                 oam->attr0 = SPRITE_ATTR0_CLEAR;

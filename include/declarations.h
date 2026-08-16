@@ -58,7 +58,7 @@ void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);
 void nullsub_10(void);
 void nullsub_6(u32, u32, u32, u32);
-struct AnimationListEntry * sub_8016FB4(void);
+struct AnimationListEntry * FindDahliaShawlAnimation(void);
 bool32 IsHPBarAnimating(void);
 void ClearHPBarOAM(void);
 

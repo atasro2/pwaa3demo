@@ -297,7 +297,7 @@ u32 GetMapMarkerIndexFromId(u32 id) // GetExplCharWorkIndexById
     return 0xFF;
 }
 
-u8 * sub_801A018(void) // get vram address for marker
+u8 * GetNextMapMarkerVramAddress(void) // get vram address for marker
 {
     u32 i = 0;
     u32 id;

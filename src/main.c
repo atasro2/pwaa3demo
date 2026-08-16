@@ -16,6 +16,7 @@
 #include "hp_bar.h"
 #include "constants/animation.h"
 #include "constants/oam_allocations.h"
+#include "constants/process.h"
 
 void UpdateSpecialEffects(void);
 
@@ -74,7 +75,7 @@ void sub_80001F0(void) {
 
 void CheckClearSaveComboAndSwitchProcess(void)
 {
-    if ((gMain.process[GAME_PROCESS] == 0))
+    if ((gMain.process[GAME_PROCESS] == CAPCOM_LOGO_PROCESS))
     {
         u16 keys = KEY_NEW();
         if(R_BUTTON & keys && B_BUTTON & keys)
@@ -546,7 +547,7 @@ void UpdateHardwareBlend(void)
                     u16 i;
                     u8 * src;
                     u32 * dst;
-                    anim = sub_8016FB4();
+                    anim = FindDahliaShawlAnimation();
                     anim->flags |= 0x80;
                     anim->flags |= 0x22000000;
                     dst = gUnknown_0826F888;
