@@ -8,9 +8,9 @@ void UpdateHardwareBlend(void);
 void sub_800482C(u32);
 void CheckBGChange_iOS(u16, u32);
 void Butterfly_Unity(void);
-void sub_800156C(void);
-void sub_80015CC(void);
-void sub_80015E8(void);
+void DebugPrintHeader(void);
+void sub_debug_80015CC(void);
+void sub_debug_80015E8(void);
 
 void CapcomLogoProcess(struct Main *);
 void TitleScreenProcess(struct Main *);
@@ -49,14 +49,14 @@ extern void nullsub_3(u16,u16);
 extern void SetTextboxNametag(u32, u32);
 
 //Debug related code
-void nullsub_20(char *,u32,u32);
-void sub_8006470(u32,u32,u32);
+void DebugPrintString(char *s, u32 x, u32 y);
+void DebugPrintInt(u32 i, u32 x, u32 y);
 
 void SetAnimationFrameOffset(struct AnimationListEntry *, u32);
 
 void RunScriptContext(void);
 void Demo_Proc_iOS(struct ScriptContext *);
-void nullsub_10(void);
+void nullsub_debug_10(void);
 void nullsub_6(u32, u32, u32, u32);
 struct AnimationListEntry * FindDahliaShawlAnimation(void);
 bool32 IsHPBarAnimating(void);

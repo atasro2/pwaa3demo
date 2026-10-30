@@ -252,8 +252,8 @@ bool32 Command2E(struct ScriptContext *scriptCtx) {
     {
         gTextBoxCharacters[i].state &= ~0xC000;
     }
-    scriptCtx->unk28 = 0;
-    scriptCtx->unk29 = 0;
+    scriptCtx->current_pos_in_line = 0;
+    scriptCtx->current_line = 0;
     if(scriptCtx->unk22 & 0xF) {
         sub_8017BA8();
         sub_8017BC0();
@@ -500,7 +500,7 @@ bool32 Command3D(struct ScriptContext *scriptCtx)
 bool32 Command3E(struct ScriptContext *unused_scriptCtx)
 {
     struct ScriptContext *scriptCtx = &gScriptContext;
-    sub_8017154(1);
+    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_01);
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x1F80, 0x80);
     DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT + 0x140, 0x20);
     gInvestigation.pointerX = 0xF0;
@@ -605,7 +605,7 @@ bool32 Command3F(struct ScriptContext *_unused)
             else
                 ChangeScriptSection(spotselect->defaultSection);
             scriptCtx->flags &= ~(SCRIPT_SPOTSELECT_INPUT | SCRIPT_LOOP);
-            sub_8017154(0);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_00_RESTORE_TESTIMONY_ELEMENTS);
             return 0;
         }
         return 1;
@@ -947,7 +947,7 @@ bool32 Command52(struct ScriptContext *_unused)
     gMain.psycheLockStopPresentButtonsActive |= *scriptCtx->scriptPtr;
     SetPsycheLockStopPresentButtonsState(1);
     gScriptContext.scriptPtr++;
-    sub_8017154(4);
+    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_04);
     return 0;
 }
 
@@ -1130,7 +1130,7 @@ bool32 Command67(struct ScriptContext *_unused)
 bool32 Command68(struct ScriptContext *_unused)
 {
     gAnimation[1].flags |= 0x400;
-    sub_8016FEC(4);
+    ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_ANIM_0x400_AND_UPLOAD_PAL);
     return 0;
 }
 
@@ -1169,7 +1169,7 @@ bool32 Command69(struct ScriptContext *_unused)
 bool32 Command6A(struct ScriptContext *_unused)
 {
     struct ScriptContext *scriptCtx = &gScriptContext;
-    sub_8017AB4(*scriptCtx->scriptPtr);
+    PerformScriptSwitch(*scriptCtx->scriptPtr);
     return 0;
 }
 

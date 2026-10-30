@@ -1116,7 +1116,7 @@ bool8 sub_800EE08(void)
         SlideInBG2Window(4, 0x12);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, main);
     }
-    sub_8017154(0);
+    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_00_RESTORE_TESTIMONY_ELEMENTS);
     return FALSE;
 }
 
@@ -2314,7 +2314,7 @@ u32 GetQuestioningPresentedSection(u32 section, u32 evidenceId)
             if(!GetFlag(0, presentData->flagId))
                 continue;
         }
-        if(gScriptContext.unk44) {
+        if(gScriptContext.current_switched_script) {
             // ! this is needed for matching
             if ((presentData->presentingSection & 0xF000) == 0)
             if ((presentData->presentingSection & 0xF000) == 0)

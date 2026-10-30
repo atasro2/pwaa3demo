@@ -80,3 +80,4 @@ ddump
 *.cs
 *.cheats
 *.ss*
+compile_flags.txt

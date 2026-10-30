@@ -613,13 +613,13 @@ gUnknown_08245AC4:
 	.incbin "graphics/animations/characters/animation04.seq"
 
 
-	.global gUnknown_08247920
-gUnknown_08247920:
+	.global gGfxCharacterDahliaTiles
+gGfxCharacterDahliaTiles:
 	.incbin "graphics/animations/characters/animation05.pix"
 
 
-	.global gUnknown_08249E10
-gUnknown_08249E10:
+	.global gGfxCharacterDahliaSequence
+gGfxCharacterDahliaSequence:
 	.incbin "graphics/animations/characters/animation05.seq"
 
 

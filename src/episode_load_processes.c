@@ -606,7 +606,7 @@ void SelectEpisodeProcess(struct Main * main)
                 main->scenarioIdx = 0;
                 break;
             }
-            sub_8007610(main->scenarioIdx);
+            SetClearedCasesAndReadFlagsByScenario(main->scenarioIdx);
             gMain.unk4 = 0;
             SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             DestroyAnimation(FindAnimationFromAnimId(9));
@@ -831,7 +831,7 @@ void ContinueSaveProcess(struct Main * main) {
 
             if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
                 if(!(main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK && main->process[GAME_PROCESS_VAR1] == 6)) {
-                    sub_8017154(3);
+                    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
                 }
                 DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
                 DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
@@ -860,7 +860,7 @@ void ContinueSaveProcess(struct Main * main) {
                 }
             }
             DmaCopy16(3, &gSaveDataBuffer.scriptCtx, &gScriptContext, sizeof(gScriptContext));
-            sub_8017AB4(gScriptContext.unk44);
+            PerformScriptSwitch(gScriptContext.current_switched_script);
             DmaCopy16(3, &gSaveDataBuffer.scriptCtx, &gScriptContext, sizeof(gScriptContext));
 
             
@@ -874,7 +874,7 @@ void ContinueSaveProcess(struct Main * main) {
             DmaCopy16(3, &gSaveDataBuffer.courtScroll, &gCourtScroll, sizeof(gCourtScroll));
             DmaCopy16(3, gSaveDataBuffer.examinationData, gExaminationData, sizeof(gExaminationData));
             loadSectionReadFlagsFromSaveDataBuffer(main);
-            sub_8007610(main->scenarioIdx);
+            SetClearedCasesAndReadFlagsByScenario(main->scenarioIdx);
             if(gMain.unk3D & 8) {
                 gMain.unk3D |= 0x10;
             }

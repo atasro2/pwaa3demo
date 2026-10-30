@@ -28,7 +28,7 @@ void sub_8014400(struct DebugContext * debugCtx) {
     anim->flags = 0;
     courtScrollDebug->unk48 = 0;
     courtScrollDebug->unk49 = 0;
-    debugCtx->unk1++;
+    debugCtx->currentSubMenuProcess++;
     ioRegs->lcd_dispcnt &= ~DISPCNT_BG1_ON;
     CopyBGDataToVram(2);
     PlayPersonAnimation(17 , 0, 0, 0);
@@ -41,7 +41,7 @@ void sub_801447C(struct DebugContext * debugCtx) {
     FindAnimationFromAnimId(0xFF); // !??
     if(courtScroll->state)
         return;
-    nullsub_20("                       ", 0, 2);
+    DebugPrintString("                       ", 0, 2);
     if(gJoypad.pressedKeys & DPAD_UP) {
         courtScrollDebug->unk48--;
         r8 = 1;
@@ -107,11 +107,11 @@ void sub_801447C(struct DebugContext * debugCtx) {
                 break;
         }
     }
-    nullsub_20("MOVIE TEST", 10, 5);
-    nullsub_20(" MOVIE00", 10, 6);
-    nullsub_20(" MOVIE01", 10, 7);
-    nullsub_20(" MOVIE02", 10, 8);
-    nullsub_20(">", 10, 6 + courtScrollDebug->unk48);
+    DebugPrintString("MOVIE TEST", 10, 5);
+    DebugPrintString(" MOVIE00", 10, 6);
+    DebugPrintString(" MOVIE01", 10, 7);
+    DebugPrintString(" MOVIE02", 10, 8);
+    DebugPrintString(">", 10, 6 + courtScrollDebug->unk48);
 }
 
 void sub_8014688(struct DebugContext * debugCtx) {
@@ -127,9 +127,9 @@ void (*gDebugMovieTestStates[])(struct DebugContext *ctx) = {
     sub_8014688,
 };
 
-void sub_80146B8(struct DebugContext * debugCtx) {
+void DebugSubMenuMovieMain(struct DebugContext * debugCtx) {
     if(gJoypad.pressedKeys & START_BUTTON)
-        debugCtx->unk1 = 2;
-    sub_8001610(10, 20, 5, 10);
-    gDebugMovieTestStates[debugCtx->unk1](debugCtx);
+        debugCtx->currentSubMenuProcess = 2;
+    DebugPrintClearRect(10, 20, 5, 10);
+    gDebugMovieTestStates[debugCtx->currentSubMenuProcess](debugCtx);
 }

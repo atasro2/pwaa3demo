@@ -398,11 +398,11 @@ s32 HighResolutionSine(u16 arg0) {
     return 0x100;
 }
 
-void sub_8006470(u32 arg0, u32 arg1, u32 arg2) {
+void DebugPrintInt(u32 i, u32 x, u32 y) {
 
 }
 
-void nullsub_20(char *arg0, u32 arg1, u32 arg2) {
+void DebugPrintString(char *s, u32 x, u32 y) {
 
 }
 

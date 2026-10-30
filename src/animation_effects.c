@@ -239,7 +239,7 @@ void UpdatePersonAnimationForCourtScroll(struct AnimationListEntry * animation)
 {
     struct CourtScroll * courtScroll = &gCourtScroll;
     if(animation == NULL) {
-        nullsub_20("NOT FOUND OBJ WORK.", 0, 4);
+        DebugPrintString("NOT FOUND OBJ WORK.", 0, 4);
         return;
     }
     gCourtScrollPersonAnimationUpdateFuncs[courtScroll->scrollMode](&gAnimation[1], courtScroll);

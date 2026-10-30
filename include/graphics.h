@@ -138,6 +138,10 @@
 #define gUnknown_08208AC0 ((void*)(GFX_BASE_ADDR + 0x88AC0))
 #define gGfxSpeedlinesFirstAndLastColumns ((void*)(GFX_BASE_ADDR + 0x8DB9C))
 
+
+#define gGfxCharacterDahliaTiles ((void*)(0x08247920))
+#define gGfxCharacterDahliaSequence ((void*)(0x08249E10))
+
 // script
 #define std_scripts ((void*)(0x8270934))
 

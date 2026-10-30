@@ -109,7 +109,7 @@ void sub_800BC08(u32 arg0) {
                 gMain.blendDeltaY = 0x10;
                 ChangeAnimationActivity(animation, 0);
                 animation->animationInfo.personId = 3;
-                sub_8016FEC(0);
+                ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
                 animation->flags &= ~4;
                 animation->flags &= ~0x04000000;
                 animation->flags &= ~ANIM_BLEND_ACTIVE;
@@ -455,7 +455,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
     if(gScriptContext.textboxState != 1)
         return;
     if (main->blendCounter == 0xFFFF) {
-        sub_8016FEC(0);
+        ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
     }
     if(main->blendMode)
         return;
@@ -495,7 +495,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
     gInvestigation.personActive = 0;
     SetInactiveActionButtons(&gInvestigation, 0xF);
     gInvestigationRoomSetupFunctions[main->scenarioIdx](main);
-    sub_8017154(3);
+    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
     sub_800BC08(0xA);
     UpdateScrollPromptSprite(main, 0);
     StartHardwareBlend(1, 1, 1, 0x1F);
@@ -1656,7 +1656,7 @@ _08010C14:
                 if((gScriptContext.unk1E & 0x100) == 0) {
                     main->process[GAME_PROCESS_VAR1] = 7;
                     main->process[GAME_PROCESS_VAR2] = 0;
-                    sub_8017154(3);
+                    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
                     break;
                 }
             }
@@ -1760,7 +1760,7 @@ _08010D9C:
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
             gInvestigation.inPsycheLockChallengeFlag &= ~1;
-            sub_8017154(3);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
                 PlayBGM(psycheLockData->bgmToPlayAfterStop);
@@ -1827,7 +1827,7 @@ _08010EAC:
         case 5:
             gMain.hpBarDisplayValue = 1;
             gMain.hpBarValue = 1;
-            sub_8017154(3);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
             gInvestigation.inPsycheLockChallengeFlag &= ~1;

@@ -272,7 +272,7 @@ void ClearSaveProcess(struct Main *main)
     }
 }
 
-void sub_8007610(u8 scenario) {
+void SetClearedCasesAndReadFlagsByScenario(u8 scenario) {
     struct Main * main = &gMain;
     u8 casesCleared = 1;
     u8 scriptsInCaseCleared = 1;
@@ -627,7 +627,7 @@ void SaveGameExitSaveScreen(struct Main * main) {
     loadSectionReadFlagsFromSaveDataBuffer(main);
     RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
     if (main->process[GAME_PROCESS_STATE] != 8 || main->process[GAME_PROCESS_VAR1] != 6) {
-        sub_8017154(3);
+        ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
     }
     gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));

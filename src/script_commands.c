@@ -261,7 +261,7 @@ bool32 Command1E(struct ScriptContext * scriptCtx)
     }
     else
     {
-        sub_8016FEC(0);
+        ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
         DestroyAnimation(&gAnimation[1]);
         gInvestigation.personActive = 0;
         SetInactiveActionButtons(&gInvestigation, 15);

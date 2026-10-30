@@ -765,7 +765,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
             // fallthrough
         case 1:
             if (++scriptCtx->unk30[1] > scriptCtx->unk46[0] * 15) {
-                sub_8016FEC(0);
+                ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
                 DestroyAnimation(&gAnimation[1]);
                 ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 7);
                 if (scriptCtx->unk4E != 5 && scriptCtx->unk4E != 6) {
@@ -889,7 +889,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 ioRegs->lcd_bldy = 0x10;
                 main->blendCounter = 0xFFFF;
                 if (scriptCtx->unk46[2] & BLDCNT_TGT1_OBJ) {
-                    sub_8016FEC(0);
+                    ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
                     DestroyAnimation(&gAnimation[1]);
                 }
                 MoveNextScript_Unity(arg0);
@@ -1002,7 +1002,7 @@ void Demo_Proc_iOS(struct ScriptContext * arg0) {
                 ioRegs->lcd_bldy = 0x10;
                 main->blendMode = 0;
                 main->blendCounter = 0xFFFF;
-                sub_8016FEC(0);
+                ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
                 DestroyAnimation(&gAnimation[1]);
                 MoveNextScript_Unity(arg0);
             }

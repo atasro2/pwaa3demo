@@ -17,7 +17,7 @@
 static void SetMosaicFlagOnCourtBenchSprites(void);
 
 void SetCurrentEpisodeBit(void) {
-    sub_8007610(gMain.scenarioIdx);
+    SetClearedCasesAndReadFlagsByScenario(gMain.scenarioIdx);
 }
 
 void sub_800A3A0(u8 arg0) {
