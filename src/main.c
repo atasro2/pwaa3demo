@@ -16,6 +16,7 @@
 #include "hp_bar.h"
 #include "constants/animation.h"
 #include "constants/oam_allocations.h"
+#include "constants/process.h"
 
 void UpdateSpecialEffects(void);
 
@@ -74,7 +75,7 @@ void sub_80001F0(void) {
 
 void CheckClearSaveComboAndSwitchProcess(void)
 {
-    if ((gMain.process[GAME_PROCESS] == 0))
+    if ((gMain.process[GAME_PROCESS] == CAPCOM_LOGO_PROCESS))
     {
         u16 keys = KEY_NEW();
         if(R_BUTTON & keys && B_BUTTON & keys)
@@ -262,15 +263,15 @@ void AgbMain(void)
         }
         UpdateBGMFade();
         m4aSoundMain();
-        sub_800156C();
+        DebugPrintHeader();
         nullsub_6(gMain.process[GAME_PROCESS], 10, 0, 2);
         nullsub_6(gMain.process[GAME_PROCESS_STATE], 12, 0, 2);
         nullsub_6(gMain.process[GAME_PROCESS_VAR1], 14, 0, 2);
         nullsub_6(gMain.process[GAME_PROCESS_VAR2], 16, 0, 2);
         if(gMain.unk2D0 & 2)
-            sub_80015CC();
+            sub_debug_80015CC();
         if(gMain.unk2D0 & 1)
-            sub_80015E8();
+            sub_debug_80015E8();
     }
 }
 
@@ -293,7 +294,7 @@ void DoGameProcess(void)
     }
     ProcessHPBar();
     gGameProcesses[gMain.process[GAME_PROCESS]](&gMain);
-    sub_8006470(gMain.unk4 / 3600, 0, 2);
+    DebugPrintInt(gMain.unk4 / 3600, 0, 2);
     gMain.unk4++;
 
     if (courtScroll->state != 0)
@@ -361,7 +362,7 @@ void ResetGameState(void)
     ResetAnimationSystem(); //init animation system?
     ResetSoundControl();
     LoadCurrentScriptIntoRam();
-    nullsub_10();
+    nullsub_debug_10();
     ResetHPBar();
     ResetHPBarHealthToMax();
     SetTimedKeysAndDelay(DPAD_RIGHT | DPAD_LEFT, 15);
@@ -387,7 +388,7 @@ void sub_8000844(void) // partial ResetGameState
     ioRegsp->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP; // TODO: add TXT/AFF macro once known which one is used
     HideAllSprites();
     ResetAnimationSystem(); //init animation system?
-    nullsub_10();
+    nullsub_debug_10();
     ResetHPBar();
     ResetHPBarHealthToMax();
     SetTimedKeysAndDelay(DPAD_RIGHT | DPAD_LEFT, 15);
@@ -546,7 +547,7 @@ void UpdateHardwareBlend(void)
                     u16 i;
                     u8 * src;
                     u32 * dst;
-                    anim = sub_8016FB4();
+                    anim = FindDahliaShawlAnimation();
                     anim->flags |= 0x80;
                     anim->flags |= 0x22000000;
                     dst = gUnknown_0826F888;

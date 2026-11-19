@@ -5,25 +5,25 @@
 #include "main.h"
 
 struct DebugContext {
-    u8 unk0;
-    u8 unk1;
+    u8 currentSubmenu;
+    u8 currentSubMenuProcess;
     u8 unk2;
     u8 unk3;
     u8 process[4];
-    u16 unk8;
-    u16 unkA;
-    u16 unkC;
-    u16 unkE;
-    u16 unk10;
-    u16 unk12;
-    u16 unk14;
-    u16 unk16;
+    u16 bak_lcd_dispcnt;
+    u16 bak_lcd_win0h;
+    u16 bak_lcd_win0v;
+    u16 bak_lcd_winin;
+    u16 bak_lcd_winout;
+    u16 unk12; // padding?
+    u16 bak_lcd_bg3hofs;
+    u16 bak_lcd_bg3vofs;
     u8 unk18;
     u8 unk19;
     u8 fill1A[0x2];
     /* +0x1C */ struct AnimationListEntry anim;
-    u8 unk60;
-    u8 unk61;
+    u8 bak_showTextboxCharacters;
+    u8 bak_advanceScriptContext;
     u8 fill62[0x2];
     /* +0x64 */ u16 map[0x400];
     /* +0x864 */ struct OamAttrs oam[128];
@@ -63,7 +63,7 @@ struct DebugContext {
     } menu;
 };
 
-void sub_8001610(u16,u16,u16,u16);
+void DebugPrintClearRect(u16,u16,u16,u16);
 
 extern char gUnknown_0802813C[];
 

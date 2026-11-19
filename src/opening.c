@@ -396,10 +396,10 @@ void sub_801D474(struct ScriptContext* scriptCtx)
         scriptCtx->unk30[3] += scriptCtx->unk46[1];
     }
     temp_r4 = scriptCtx->unk30[3] | 0x10000;
-    pa = (sub_8006364(temp_r7) << 0x10) / temp_r4;
-    pb = (sub_80063E4(temp_r7) << 0x10) / temp_r4;
-    pc = ((-sub_80063E4(temp_r7)) << 0x10) / temp_r4;
-    pd = (sub_8006364(temp_r7) << 0x10) / temp_r4;
+    pa = (HighResolutionCosine(temp_r7) << 0x10) / temp_r4;
+    pb = (HighResolutionSine(temp_r7) << 0x10) / temp_r4;
+    pc = ((-HighResolutionSine(temp_r7)) << 0x10) / temp_r4;
+    pd = (HighResolutionCosine(temp_r7) << 0x10) / temp_r4;
     x = ((0 - (pa * 120)) - (pb * 80)) + (120 * 0x100);
     y = ((0 - (pc * 120)) - (pd * 80)) + (80 * 0x100);
     gIORegisters.lcd_bg2pa = pa;

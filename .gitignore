@@ -62,6 +62,7 @@ Temporary Items
 *.8bpp
 *.gbapal
 *.striped
+*.epicon
 tools/agbcc/
 tools/binutils/
 build/
@@ -79,3 +80,4 @@ ddump
 *.cs
 *.cheats
 *.ss*
+compile_flags.txt

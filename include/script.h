@@ -51,7 +51,7 @@ struct ScriptContext {
     u16 unk12; // unity: work
     u16 unk14;
     /* +0x16 */ u16 soundCueSkip;
-    u16 unk18[2];
+    u16 current_textbox_lines[2];
     /* +0x1C */ u16 flags; // message status, flags
     u16 unk1E; // unity: status2
     u16 unk20; // unity: choustateBK
@@ -61,8 +61,8 @@ struct ScriptContext {
     u8 textColor;
     u8 textSpeed;
     u8 unk27;
-    u8 unk28;
-    u8 unk29; // unity: message_line
+    u8 current_pos_in_line;
+    u8 current_line; // unity: message_line
     u8 slamDesk; // unity: tukkomi_flag
     u8 textboxYPos;
     u8 unk2C;
@@ -72,7 +72,7 @@ struct ScriptContext {
     u16 unk30[8]; // unity: op_work?
     u16 unk40;
     u16 unk42;
-    u16 unk44;
+    u16 current_switched_script;
     u16 unk46[3]; // unity: all_work
     u8 unk4C;
     u8 unk4D;
@@ -209,9 +209,34 @@ extern const u8 scenario_3_6_script[];
 extern const u8 scenario_3_7_script[];
 
 
-/* end script data */ 
+/* end script data */
 
-void sub_8016FEC(u16 arg0);
+enum DAHLIA_SHAWL_ACTIONS {
+    DAHLIA_SHAWL_DESTROY,
+    DAHLIA_SHAWL_SELECT_AND_UPLOAD,
+    DAHLIA_SHAWL_DISABLE,
+    DAHLIA_SHAWL_ENABLE,
+    DAHLIA_SHAWL_ANIM_0x400_AND_UPLOAD_PAL,
+};
+
+enum DAHLIA_BUTTERFLY_ACTIONS {
+    DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_00_RESTORE_TESTIMONY_ELEMENTS,
+    DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_01,
+    DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_02,
+    DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS,
+    DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_04,
+    DAHLIA_BUTTERFLY_DUMMY_05,
+    DAHLIA_BUTTERFLY_DUMMY_06,
+    DAHLIA_BUTTERFLY_DUMMY_07,
+    DAHLIA_BUTTERFLY_DUMMY_08,
+    DAHLIA_BUTTERFLY_DUMMY_09,
+    DAHLIA_BUTTERFLY_DUMMY_10,
+    DAHLIA_BUTTERFLY_DUMMY_11,
+    DAHLIA_BUTTERFLY_DISABLE,
+    DAHLIA_BUTTERFLY_ENABLE,
+};
+
+void ControlDahliaCharacterShawlAnimation(u16 action);
 void op_proc_exit_iOS(struct ScriptContext * scriptCtx);
 
 void ChangeScriptSection(u32);
@@ -225,9 +250,9 @@ void MarkSectionAsRead(struct Main *, s32);
 bool32 HasSectionBeenRead(struct Main *, s32);
 void ClearSectionReadFlags(struct Main *);
 void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
-void sub_8018CA8(struct Main * main, u32 arg1);
+void ClearSingleSectionReadFlag(struct Main * main, u32 arg1);
 
-void sub_8017154(u8);
+void ControlDahliaCharacterButterflyAnimation(u8);
 void sub_8017BA8(void);
 void sub_8017BC0(void);
 
@@ -235,11 +260,11 @@ void sub_801873C(u32);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
-u8 * sub_801A018(void);
+u8 * GetNextMapMarkerVramAddress(void);
 
 void sub_801A054(void);
 void op_demo_play_iOS(void); // needs a better name
-void sub_8017AB4(u32 arg0);
+void PerformScriptSwitch(u32 arg0);
 void sub_8019AAC(void);
 void sub_8019BEC(void);
 
@@ -329,7 +354,7 @@ bool32 Command51(struct ScriptContext *);
 bool32 Command52(struct ScriptContext *);
 bool32 Command53(struct ScriptContext *);
 bool32 Command54(struct ScriptContext *);
-bool32 Command54(struct ScriptContext *);
+bool32 Command55(struct ScriptContext *);
 bool32 Command56(struct ScriptContext *);
 bool32 Command57(struct ScriptContext *);
 bool32 Command58(struct ScriptContext *);
@@ -358,6 +383,14 @@ bool32 Command6E(struct ScriptContext *);
 bool32 Command6F(struct ScriptContext *);
 bool32 Command70(struct ScriptContext *);
 bool32 Command71(struct ScriptContext *);
+bool32 Command72(struct ScriptContext *);
+bool32 Command73(struct ScriptContext *);
+
+bool32 CommandUnimplemented(struct ScriptContext *);
 /* end commands */
+
+extern const u16 gUnknown_0802871C[9];
+extern const u8 gUnknown_0802872E[8];
+extern const u8 gUnknown_08028736[6];
 
 #endif//GUARD_SCRIPT_H

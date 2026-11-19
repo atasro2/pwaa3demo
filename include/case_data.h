@@ -22,15 +22,15 @@ struct InvestigationPresentData
     /* +0x0A */ u8 fillA[6];
 };
 
-extern const u8 gCaseStartProcess[];
-extern const u16 gCaseGameoverSections[];
+extern const u8 gCaseStartProcess[24];
+extern const u16 gCaseGameoverSections[24];
 
-extern const u8 * gCourtRecordInitialItemLists[22];
-extern const struct CourtPresentData * gCourtPresentData[22];
-extern const struct InvestigationPresentData * gInvestigationPresentData[22];
-extern void (*gInvestigationSegmentSetupFunctions[])(struct Main *);
-extern void (*gInvestigationRoomSetupFunctions[])(struct Main *);
-extern void (*gInvestigationRoomUpdateFunctions[])(struct Main *);
+extern const u8 * gCourtRecordInitialItemLists[23];
+extern const struct CourtPresentData * gCourtPresentData[23];
+extern const struct InvestigationPresentData * gInvestigationPresentData[23];
+extern void (*gInvestigationSegmentSetupFunctions[23])(struct Main *);
+extern void (*gInvestigationRoomSetupFunctions[23])(struct Main *);
+extern void (*gInvestigationRoomUpdateFunctions[23])(struct Main *);
 
 void InvestigationSetPersonAnimation(u32 arg0, u32 arg1, u32 arg2);
 void InvestigationSetScriptSectionAndFlag(u32 section, u32 flagId);

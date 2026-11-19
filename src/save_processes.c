@@ -8,7 +8,9 @@
 #include "constants/songs.h"
 #include "constants/oam_allocations.h"
 
-extern void (*gSaveGameProcessStates[])(struct Main *);/* = {
+const char gSaveVersion[0x32] = "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-";
+
+void (*gSaveGameProcessStates[])(struct Main *) = {
 	SaveGameInit1,
 	SaveGameInit2,
 	SaveGameInitButtons,
@@ -19,7 +21,7 @@ extern void (*gSaveGameProcessStates[])(struct Main *);/* = {
 	SaveGame7,
 	SaveGame8
 };
-*/
+
 u32 SaveGameData()
 {
     u32 mult;
@@ -270,7 +272,7 @@ void ClearSaveProcess(struct Main *main)
     }
 }
 
-void sub_8007610(u8 scenario) {
+void SetClearedCasesAndReadFlagsByScenario(u8 scenario) {
     struct Main * main = &gMain;
     u8 casesCleared = 1;
     u8 scriptsInCaseCleared = 1;
@@ -345,7 +347,7 @@ void SaveGameInit1(struct Main *main)
         src = ((u32*)dst)[1] + gUnknown_08252498;
         dst = (u32*)(OBJ_PLTT+0x1A0);
         DmaCopy16(3, src, dst, 0x20);
-        anim = sub_8016FB4();
+        anim = FindDahliaShawlAnimation();
         anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
         anim->flags &= ~ANIM_0x40;
         anim->flags &= ~ANIM_0x80;
@@ -625,7 +627,7 @@ void SaveGameExitSaveScreen(struct Main * main) {
     loadSectionReadFlagsFromSaveDataBuffer(main);
     RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
     if (main->process[GAME_PROCESS_STATE] != 8 || main->process[GAME_PROCESS_VAR1] != 6) {
-        sub_8017154(3);
+        ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
     }
     gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
@@ -685,7 +687,7 @@ void SaveGameExitSaveScreen(struct Main * main) {
         src = ((u32*)dst)[1] + gUnknown_08252498;
         dst = (u32*)(OBJ_PLTT+0x1A0);
         DmaCopy16(3, src, dst, 0x20);
-        anim = sub_8016FB4();
+        anim = FindDahliaShawlAnimation();
         anim->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
         anim->flags &= ~ANIM_0x40;
         anim->flags &= ~ANIM_0x80;
@@ -768,7 +770,7 @@ void SaveGame7(struct Main* main) {
     u16 i;
     u32 temp;
     if (main->blendMode == 0) {
-        if (--main->process[2]) {
+        if (--main->process[GAME_PROCESS_VAR1]) {
             for(i = 0; i < 8; i++) {
                 struct OamAttrs * oam = &gOamObjects[OAM_IDX_SAVE_PROMPT + i];
                 oam->attr0 = SPRITE_ATTR0_CLEAR;

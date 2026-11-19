@@ -12,6 +12,48 @@
 #include "constants/animation.h"
 #include "constants/script.h"
 
+u16 gPsycheLockChainPalettes[2][16] = {
+    {
+        0x0000, 0x0842, 0x1084, 0x14a5, 0x18c6, 0x1ce8, 0x252a, 0x294b,
+        0x318d, 0x39ce, 0x4210, 0x4632, 0x4a53, 0x5295, 0x5ad6, 0x6318
+    },
+    {
+        0x0000, 0x0842, 0x1084, 0x18c6, 0x2529, 0x2d6b, 0x39ce, 0x4210,
+        0x4a52, 0x4e73, 0x56b5, 0x5ad6, 0x6318, 0x6739, 0x6f7b, 0x739c
+    },
+};
+s16 gPsycheLockLockPositions[] = {
+    0x0058, 0x0058, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0018, 0x0050, 0x0098, 0x0050, 0x0000, 0x0000,
+    0x0000, 0x0000, 0x0000, 0x0000, 0x0058, 0x0058, 0x0010, 0x0040,
+    0x00a0, 0x0040, 0x0000, 0x0000, 0x0000, 0x0000, 0x0028, 0x0028,
+    0x0088, 0x0028, 0x0008, 0x0058, 0x00a8, 0x0058, 0x0000, 0x0000,
+    0x0058, 0x0058, 0x0028, 0x0018, 0x0088, 0x0018, 0x0008, 0x0050,
+    0x00a8, 0x0050,
+};
+u8 * gPsycheLockChainTilemaps[] = {
+    gUnknown_08191E6C,
+    gUnknown_081920A4,
+    gUnknown_08192494,
+    gUnknown_081928C8,
+    gUnknown_08192F34,
+    gUnknown_081936A8,
+    gUnknown_0819382C,
+    gUnknown_08193A94,
+    gUnknown_08193EF4,
+    gUnknown_08194354,
+    gUnknown_08194B68,
+    gUnknown_08194DC8,
+    gUnknown_08195168,
+    gUnknown_08195518,
+    gUnknown_08195A10,
+    gUnknown_08195F24,
+    gUnknown_081960BC,
+    gUnknown_08196368,
+    gUnknown_0819669C,
+    gUnknown_08196A28,
+};
+
 void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains);
 
 void InitPsycheLockChain(struct PsycheLockChains * chains, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
@@ -988,10 +1030,10 @@ void sub_8015E20(u8 arg0, u8 matrixNum, u16 arg2) {
     gOamObjects[arg0].attr0 |= ST_OAM_AFFINE_DOUBLE << 8;
     angle = (arg2 * 0x400) / 90;
     matrixOam = matrixNum * 4;
-    gOamObjects[matrixOam].attr3 = sub_8006364(angle);
-    gOamObjects[matrixOam+1].attr3 = sub_80063E4(angle);
-    gOamObjects[matrixOam+2].attr3 = -(sub_80063E4(angle) * 2);
-    gOamObjects[matrixOam+3].attr3 = sub_8006364(angle) * 2;
+    gOamObjects[matrixOam].attr3 = HighResolutionCosine(angle);
+    gOamObjects[matrixOam+1].attr3 = HighResolutionSine(angle);
+    gOamObjects[matrixOam+2].attr3 = -(HighResolutionSine(angle) * 2);
+    gOamObjects[matrixOam+3].attr3 = HighResolutionCosine(angle) * 2;
     x = gOamObjects[arg0].attr1 & 0x1FF;
     y = gOamObjects[arg0].attr0 & 0xFF;
     if(gOamObjects[matrixOam].attr3 & 0xF000) {

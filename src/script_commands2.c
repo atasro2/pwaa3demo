@@ -246,6 +246,18 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
     },
 };
 
+const u16 gUnknown_0802871C[9] = {
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
+    0xFFFF,
+};
+const u8 gUnknown_0802872E[8] = {
+    0x04, 0x05, 0x06, 0x07, 0x08, 0x0c, 0xff, 0xff
+};
+const u8 gUnknown_08028736[6] = {
+    0x20, 0x22, 0x24, 0x26, 0x24, 0x22
+};
+
 void MakeMapMarkerSprites()
 {
     u32 i = 0;
@@ -285,7 +297,7 @@ u32 GetMapMarkerIndexFromId(u32 id) // GetExplCharWorkIndexById
     return 0xFF;
 }
 
-u8 * sub_801A018(void) // get vram address for marker
+u8 * GetNextMapMarkerVramAddress(void) // get vram address for marker
 {
     u32 i = 0;
     u32 id;
@@ -301,7 +313,6 @@ u8 * sub_801A018(void) // get vram address for marker
     return vramPtr;
 }
 
-extern const u8 gUnknown_08028736[];
 void sub_801A054(void) {
     if((gScriptContext.unk12 & 0xFF) == 0x28) {
         gScriptContext.unk12 &= 0xFF00;
@@ -326,8 +337,8 @@ bool32 Command00(struct ScriptContext * scriptCtx) {
 bool32 Command01(struct ScriptContext * scriptCtx)
 {
     scriptCtx = &gScriptContext;
-    scriptCtx->unk28 = 0;
-    scriptCtx->unk29++;
+    scriptCtx->current_pos_in_line = 0;
+    scriptCtx->current_line++;
 
     if(scriptCtx->unk22 & 0x20)
     {
@@ -419,20 +430,21 @@ bool32 Command02(struct ScriptContext * unused_scriptCtx) {
             gBG1MapBuffer[622] = 0;
             gBG1MapBuffer[623] = 0;
         }
-        if(scriptCtx->currentToken == 0xA) {
+        // action depends on next command
+        if(scriptCtx->currentToken == 0xA) { // pagebreak_section
             ChangeScriptSection(*scriptCtx->scriptPtr);
-        } else if(scriptCtx->currentToken == 0x2) {
+        } else if(scriptCtx->currentToken == 0x2) { // paragraph
             SetAnimationFrameOffset(&gAnimation[1], gMain.talkingAnimationOffset);
-        } else if(scriptCtx->currentToken == 0x7) {
+        } else if(scriptCtx->currentToken == 0x7) { // fullscreen_text
             gMain.showTextboxCharacters = FALSE;
             ClearHPBarOAM();
             scriptCtx->flags |= SCRIPT_FULLSCREEN;
-            scriptCtx->unk28 = 0;
-            scriptCtx->unk29++;
+            scriptCtx->current_pos_in_line = 0;
+            scriptCtx->current_line++;
             if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
-                sub_8017154(1);
+                ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_01);
             } else {
-                sub_8017154(4);
+                ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_04);
             }
             DmaCopy16(3, &((u8*)gCharSet)[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
             if(scriptCtx->unk22 & 0xF) {
@@ -449,8 +461,8 @@ bool32 Command02(struct ScriptContext * unused_scriptCtx) {
         for(i = 0; i < 0x40; i++) {
             gTextBoxCharacters[i].state &= 0x3FFF;
         }
-        scriptCtx->unk28 = 0;
-        scriptCtx->unk29 = 0;
+        scriptCtx->current_pos_in_line = 0;
+        scriptCtx->current_line = 0;
         if(scriptCtx->unk22 & 0xF) {
             sub_8017BA8();
             sub_8017BC0();
@@ -529,7 +541,7 @@ bool32 Command08(struct ScriptContext * unused_scriptCtx)
         scriptCtx->flags &= ~SCRIPT_x1;
         scriptCtx->flags &= ~SCRIPT_SKIP;
         if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
-            sub_8017154(0);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_00_RESTORE_TESTIMONY_ELEMENTS);
         }
         if(gAnimation[1].animationInfo.personId == 0xB || gAnimation[1].animationInfo.personId == 0x21)
         {
@@ -556,8 +568,8 @@ bool32 Command08(struct ScriptContext * unused_scriptCtx)
             oam++;
         }
         gOamObjects[OAM_IDX_GENERAL_2].attr0 = SPRITE_ATTR0_CLEAR;
-        scriptCtx->unk28 = 0;
-        scriptCtx->unk29 = 0;
+        scriptCtx->current_pos_in_line = 0;
+        scriptCtx->current_line = 0;
         if(scriptCtx->unk22 & 0xF) {
             sub_8017BA8();
             sub_8017BC0();
@@ -580,9 +592,9 @@ bool32 Command08(struct ScriptContext * unused_scriptCtx)
         return 1;
     }
     if(scriptCtx->currentToken == 8)
-        i = scriptCtx->unk29;
+        i = scriptCtx->current_line;
     else
-        i = scriptCtx->unk29-1;
+        i = scriptCtx->current_line-1;
     gOamObjects[OAM_IDX_GENERAL_2].attr0 = ((scriptCtx->unk12 & 0xFF) + i) * 18;
     gOamObjects[OAM_IDX_GENERAL_2].attr1 = 0x4009;
     gOamObjects[OAM_IDX_GENERAL_2].attr2 = 0x4FC;

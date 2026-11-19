@@ -6,7 +6,11 @@
 #include "ewram.h"
 #include "save.h"
 #include "sound.h"
+#include "script.h"
 #include "hp_bar.h"
+#include "opening.h"
+#include "graphics.h"
+#include "constants/animation.h"
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
@@ -32,7 +36,7 @@ const u16 gUnknown_08028370[] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
 };
 
-const u16 gUnknown_0802845E[] = {
+const u16 gScriptCommandArgumentCounts[] = {
     0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0000, 0x0002, 0x0003, 0x0001, 0x0001, 0x0001, 0x0000, 0x0001, 0x0002,
     0x0001, 0x0000, 0x0003, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 0x0001, 0x0002, 0x0004, 0x0001, 0x0001, 0x0001, 0x0003, 0x0000,
     0x0001, 0x0000, 0x0002, 0x0002, 0x0000, 0x0001, 0x0001, 0x0002, 0x0001, 0x0001, 0x0003, 0x0000, 0x0001, 0x0000, 0x0000, 0x0002,
@@ -75,8 +79,129 @@ const uintptr_t gScriptTable[] = {
     0,
 };
 
+bool32 (*gScriptCmdFuncs[0x74])(struct ScriptContext *) = {
+    Command00,
+    Command01,
+    Command02,
+    Command03,
+    Command04,
+    Command05,
+    Command06,
+    Command02,
+    Command08,
+    Command08,
+    Command02,
+    Command0B,
+    Command0C,
+    Command0D,
+    Command0E,
+    Command0F,
+    Command10,
+    Command11,
+    Command12,
+    Command13,
+    Command14,
+    Command15,
+    Command16,
+    Command17,
+    Command18,
+    Command19,
+    Command1A,
+    Command1B,
+    Command1C,
+    Command1D,
+    Command1E,
+    Command1F,
+    Command20,
+    Command21,
+    Command22,
+    Command23,
+    Command24,
+    Command25,
+    Command26,
+    Command27,
+    Command28,
+    Command29,
+    Command2A,
+    Command2B,
+    Command2C,
+    Command02,
+    Command2E,
+    Command2F,
+    Command30,
+    Command31,
+    Command32,
+    Command33,
+    Command34,
+    Command35,
+    Command36,
+    Command37,
+    Command38,
+    Command39,
+    Command3A,
+    Command3B,
+    Command3C,
+    Command3D,
+    Command3E,
+    Command3F,
+    Command40,
+    Command41,
+    Command42,
+    Command43,
+    Command44,
+    Command15,
+    Command46,
+    Command47,
+    Command48,
+    Command49,
+    Command4A,
+    Command4B,
+    Command4C,
+    Command4D,
+    Command4E,
+    Command4F,
+    Command50,
+    Command51,
+    Command52,
+    Command53,
+    Command54,
+    Command55,
+    Command56,
+    Command57,
+    Command58,
+    Command59,
+    Command5A,
+    Command5B,
+    Command5C,
+    Command5D,
+    Command5E,
+    Command5F,
+    Command60,
+    Command61,
+    Command62,
+    Command63,
+    Command64,
+    Command65,
+    Command66,
+    Command67,
+    Command68,
+    Command69,
+    Command6A,
+    Command6B,
+    Command6C,
+    CommandUnimplemented,
+    CommandUnimplemented,
+    Command6F,
+    CommandUnimplemented,
+    CommandUnimplemented,
+    Command72,
+    Command73,
+};
 
-extern void (*gUnknown_0814E338[])(struct ScriptContext *);
+// Demo_proc_tbl in gs1 iOS
+void (*gUnknown_0814E338[])(struct ScriptContext *) = {
+    sub_801C8BC,
+};
 
 void op_demo_play_iOS(void) {
     struct ScriptContext * context = &gScriptContext;
@@ -95,38 +220,38 @@ void op_proc_exit_iOS(struct ScriptContext * scriptCtx) {
     scriptCtx->unk2D = 99;
 }
 
-struct AnimationListEntry * sub_8016FB4(void) {
-    u32 dahliaThing[] = { // TODO: give this a good name please
-        0x74,
-        0x75,
-        0x76,
-        0x77,
-        0x78,
-        0x79,
-        0x7A,
-        0x7B,
-        0x7C,
-        0x7D,
-        0x7E,
-        0x7F,
-        0x80,
-        0x81,
-        0x82,
+struct AnimationListEntry * FindDahliaShawlAnimation(void) {
+    u32 dahliaShawlAnimations[] = {
+        ANIM_DAHLIA_SHAWL_00,
+        ANIM_DAHLIA_SHAWL_01,
+        ANIM_DAHLIA_SHAWL_02,
+        ANIM_DAHLIA_SHAWL_03,
+        ANIM_DAHLIA_SHAWL_04,
+        ANIM_DAHLIA_SHAWL_05,
+        ANIM_DAHLIA_SHAWL_06,
+        ANIM_DAHLIA_SHAWL_07,
+        ANIM_DAHLIA_SHAWL_08,
+        ANIM_DAHLIA_SHAWL_09,
+        ANIM_DAHLIA_SHAWL_10,
+        ANIM_DAHLIA_SHAWL_11,
+        ANIM_DAHLIA_SHAWL_12,
+        ANIM_DAHLIA_SHAWL_13,
+        ANIM_DAHLIA_SHAWL_14,
         0xFF,
     };
     u32 i;
-    for(i = 0; dahliaThing[i] != 0xFF; i++) {
-        struct AnimationListEntry * anim = FindAnimationFromAnimId(dahliaThing[i]);
+    for(i = 0; dahliaShawlAnimations[i] != 0xFF; i++) {
+        struct AnimationListEntry * anim = FindAnimationFromAnimId(dahliaShawlAnimations[i]);
         if(anim)
             return anim;
     }
     return NULL;
 }
 
-void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
-    u32 r5 = 0xFF;
+void ControlDahliaCharacterShawlAnimation(u16 action) { // dahlia shawl stuff / Unity CtrlChinamiObj
+    u32 dahlia_sequence_index = 0xFF;
     struct ScriptContext * scriptCtx = &gScriptContext;
-    u32 array[] = { // ? array of animation offsets? 
+    u32 array[] = { // array of animation offsets into dahlias character sequence
         0x0,
         0x1A8,
         0x1,
@@ -147,57 +272,63 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
     struct AnimationListEntry * animation = &gAnimation[1];
     u8 i;
 
-    if(arg0) {
+    // action isnt DESTROY, if theres no character on screen
+    // or the character isnt dahlia
+    // or the character is dahlia but the animation isnt allocated
+    // DESTROY any shawl loaded and return
+    if(action) {
         if(animation == NULL
         || (animation->animationInfo.personId != 11 && animation->animationInfo.personId != 33)
         || !(animation->flags & ANIM_ALLOCATED)) {
-            sub_8016FEC(0); // recursing!!
+            ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY); // recursing!!
             return;
         }
     }
 
+    // find out which flavor of shawl we would need according to the animation offset in dahlias sequence
     for(i = 0; i < 16; i++) {
-        if(animation->animationInfo.animFrameDataStartPtr - 0x8249e10 == array[i]) {
-            r5 = i;
+        if(animation->animationInfo.animFrameDataStartPtr - (u32)gGfxCharacterDahliaSequence == array[i]) {
+            dahlia_sequence_index = i;
         }
     }
 
-    if(arg0 && r5 == 0xFF) {
-        sub_8016FEC(0);
+    // we didnt find a suitable flavor, DESTROY whats on screen
+    if(action && dahlia_sequence_index == 0xFF) {
+        ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
         return;
     }
 
-    animation = sub_8016FB4();
-    if(arg0 == 0) {
+    animation = FindDahliaShawlAnimation();
+    if(action == DAHLIA_SHAWL_DESTROY) {
         DestroyAnimation(animation);
         return;
     }
-    if(arg0 == 1) {
-        sub_8016FEC(0);
-        if(r5 == 14)
-            r5 = 7;
-        if(r5 == 15)
-            r5 = 14;
-        PlayAnimation(r5 + 0x74);
+    if(action == DAHLIA_SHAWL_SELECT_AND_UPLOAD) {
+        ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
+        if(dahlia_sequence_index == 14)
+            dahlia_sequence_index = 7;
+        if(dahlia_sequence_index == 15)
+            dahlia_sequence_index = 14;
+        PlayAnimation(dahlia_sequence_index + ANIM_DAHLIA_SHAWL_00);
         if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
             s16 xOrigin;
             animation = &gAnimation[1];
             xOrigin = animation->animationInfo.xOrigin;
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->animationInfo.xOrigin = xOrigin;
         }
         if(gScriptContext.unk1E & 0x8000) { // ! mixing global and local memes continue
             if(scriptCtx->unk46[2] & 0xF0) {
-                animation = sub_8016FB4();
+                animation = FindDahliaShawlAnimation();
                 animation->flags |= ANIM_0x400;
             }
         }
         animation = &gAnimation[1];
         if(animation->flags & ANIM_0x400) {
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags |= ANIM_0x400 | ANIM_QUEUED_PAL_UPLOAD;
         }
-        if(r5 == 0xC) {
+        if(dahlia_sequence_index == 12) {
             scriptCtx->unk4E &= 0xFF00;
             scriptCtx->unk4E += 11;
             return;
@@ -205,23 +336,25 @@ void sub_8016FEC(u16 arg0) { // dahlia shawl stuff / Unity CtrlChinamiObj
         if(scriptCtx->unk4E == 6) {
             scriptCtx->unk4E = 9;
         }
-    } else if(arg0 == 2) {
+    } else if(action == DAHLIA_SHAWL_DISABLE) {
         animation->flags &= ~ANIM_ACTIVE;
-    } else if(arg0 == 3) {
+    } else if(action == DAHLIA_SHAWL_ENABLE) {
         animation->flags |= ANIM_ACTIVE;
-    } else if(arg0 == 4) {
+    } else if(action == DAHLIA_SHAWL_ANIM_0x400_AND_UPLOAD_PAL) {
         animation->flags |= ANIM_0x400 | ANIM_QUEUED_PAL_UPLOAD;
     }
 }
 
-void sub_8017154(u8 arg0) {
+void ControlDahliaCharacterButterflyAnimation(u8 action) { // dahlia butterflies
     struct AnimationListEntry * animation = &gAnimation[1];
     if(animation == NULL
     || (animation->animationInfo.personId != 11 && animation->animationInfo.personId != 33)
     || !(animation->flags & ANIM_ALLOCATED)) {
         return;
     }
-    switch(arg0) {
+    // upload butterflies into different vram locations, restoring elements as needed
+    // alternatively en or disable the animations
+    switch(action) { // enum DAHLIA_BUTTERFLY_ACTIONS
         case 0:
             animation = FindAnimationFromAnimId(0x83);
             if(animation) {
@@ -369,7 +502,6 @@ void sub_8017154(u8 arg0) {
             }
             break;
     }
-    //_080174F2 func end
 }
 
 void sub_80174F8(u8 * dest, u32 charCode, u16 color, struct OamAttrs * oam, u16 x, u16 y) {
@@ -654,8 +786,8 @@ u32 sub_8017980(u32 section, u8 * dest, u32 x, u32 y, u32 color, struct OamAttrs
     return metadataCount;
 }
 
-void sub_8017AB4(u32 arg0) {
-    gScriptContext.unk44 = arg0;
+void PerformScriptSwitch(u32 arg0) {
+    gScriptContext.current_switched_script = arg0;
     switch(arg0) {
         default:
         case 2:
@@ -663,7 +795,7 @@ void sub_8017AB4(u32 arg0) {
         case 3:
         case 9:
             LZ77UnCompWram(NULL, eScriptHeap);
-            sub_8018CA8(&gMain, 0xA0);
+            ClearSingleSectionReadFlag(&gMain, (32 + 0x80));
             break;
         case 4:
         case 5:
@@ -680,25 +812,25 @@ void sub_8017AB4(u32 arg0) {
         case 1:
         case 15:
             LZ77UnCompWram(NULL, eScriptHeap);
-            sub_8018CA8(&gMain, 0x90);
+            ClearSingleSectionReadFlag(&gMain, (16 + 0x80));
             break;
         case 16:
             LZ77UnCompWram(NULL, eScriptHeap);
-            sub_8018CA8(&gMain, 0xB0);
+            ClearSingleSectionReadFlag(&gMain, (48 + 0x80));
             break;
         case 17:
             LZ77UnCompWram(NULL, eScriptHeap);
-            sub_8018CA8(&gMain, 0xA0);
+            ClearSingleSectionReadFlag(&gMain, (32 + 0x80));
             break;
     }
-    sub_8007610(gMain.scenarioIdx);
+    SetClearedCasesAndReadFlagsByScenario(gMain.scenarioIdx);
     ChangeScriptSection(0x80);
 }
 
 void sub_8017BA8(void) {
     u32 i;
     for(i = 0; i < 2; i++) {
-        gScriptContext.unk18[i] = 0;
+        gScriptContext.current_textbox_lines[i] = 0;
     }
 }
 
@@ -707,26 +839,26 @@ void sub_8017BC0(void) {
     u16 * scriptPtr = gScriptContext.scriptPtr;
     u32 i;
 
-    if(gScriptContext.unk29 > 2)
+    if(gScriptContext.current_line > 2)
         return;
     while(TRUE) {
         if(*scriptPtr < 0x80) {
             u32 argCount;
-            if (*scriptPtr == 1
-             || *scriptPtr == 2
-             || *scriptPtr == 7
-             || *scriptPtr == 8
-             || *scriptPtr == 9
-             || *scriptPtr == 10
-             || *scriptPtr == 13
-             || *scriptPtr == 21
-             || *scriptPtr == 42
-             || *scriptPtr == 45
-             || *scriptPtr == 46
-             || *scriptPtr == 69) {
+            if (*scriptPtr == 0x01 // newline
+             || *scriptPtr == 0x02 // paragraph
+             || *scriptPtr == 0x07 // fullscreen_text
+             || *scriptPtr == 0x08 // choice2
+             || *scriptPtr == 0x09 // choice3
+             || *scriptPtr == 0x0A // pagebreak_section
+             || *scriptPtr == 0x0D // section end
+             || *scriptPtr == 0x15 // halt
+             || *scriptPtr == 0x2A // todo
+             || *scriptPtr == 0x2D // nextpage_button
+             || *scriptPtr == 0x2E // nextpage_nobutton
+             || *scriptPtr == 0x45) { // todo
                 break;
             }
-            argCount = gUnknown_0802845E[*scriptPtr];
+            argCount = gScriptCommandArgumentCounts[*scriptPtr];
             for(i = 0; i < argCount; i++) {
                 scriptPtr++;
             }
@@ -738,16 +870,16 @@ void sub_8017BC0(void) {
         }
         scriptPtr++;
     }
-    if(gScriptContext.unk29 == 0) {
-        if(*scriptPtr == 1 || *scriptPtr == 0x2E) {
-            gScriptContext.unk18[1] = 1;
+    if(gScriptContext.current_line == 0) {
+        if(*scriptPtr == 0x01 || *scriptPtr == 0x2E) { // newline or nextpage_nobutton
+            gScriptContext.current_textbox_lines[1] = 1;
         }
     }
-    gScriptContext.unk18[gScriptContext.unk29] = r4;
+    gScriptContext.current_textbox_lines[gScriptContext.current_line] = r4;
 }
 
-bool32 CommandUnimplemented(void) {
-    u8 argCount = gUnknown_0802845E[gScriptContext.unkA];
+bool32 CommandUnimplemented(struct ScriptContext *arg0) {
+    u8 argCount = gScriptCommandArgumentCounts[gScriptContext.unkA];
     u8 i;
     if(argCount == 0)
         gScriptContext.scriptPtr++;
@@ -863,7 +995,7 @@ void DrawMapMarkers(void) {
 void sub_8017EF4(u32 arg0) { // unity SetScript
     if(gScriptContext.unkA == arg0)
         return;
-    if(arg0 != 12)
+    if(arg0 != 12) // clear if command isnt "wait"
         gScriptContext.flags &= ~SCRIPT_x8000;
 
     gScriptContext.unk14 = gScriptContext.unk12;
@@ -999,8 +1131,6 @@ void PutCharInTextbox(u32 characterCode, u32 x, u32 y) {
     gTextBoxCharacters[temp].color2 = gScriptContext.textColor;
 }
 
-extern bool32 (*gScriptCmdFuncs[0x72])(struct ScriptContext *);
-
 void AdvanceScriptContext(void) {
     u32 r7 = 0;
     struct ScriptContext * scriptCtx = &gScriptContext;
@@ -1066,12 +1196,12 @@ void AdvanceScriptContext(void) {
         }
         scriptCtx->flags |= SCRIPT_x8000;
         scriptCtx->currentToken -= 0x80;
-        PutCharInTextbox(scriptCtx->currentToken, scriptCtx->unk28, scriptCtx->unk29);
-        scriptCtx->unk28++;
+        PutCharInTextbox(scriptCtx->currentToken, scriptCtx->current_pos_in_line, scriptCtx->current_line);
+        scriptCtx->current_pos_in_line++;
         if (scriptCtx->currentToken != 0xFF && 
             scriptCtx->textSpeed > 0 &&
             !(scriptCtx->flags & SCRIPT_FULLSCREEN) &&
-            scriptCtx->unk29 < 2 &&
+            scriptCtx->current_line < 2 &&
             (r7 == 0 || scriptCtx->soundCueSkip == 1))
         {
             if (scriptCtx->soundCueSkip != 0 && scriptCtx->textSpeed > 5)
@@ -1111,8 +1241,8 @@ void LoadCurrentScriptIntoRam(void)
 {
     u32 i;
 
-    gScriptContext.unk28 = 0;
-    gScriptContext.unk29 = 0;
+    gScriptContext.current_pos_in_line = 0;
+    gScriptContext.current_line = 0;
     gScriptContext.unk4C = 0;
     gScriptContext.unk4D = 0;
     gScriptContext.soundCueSkip = 0;
@@ -1122,7 +1252,7 @@ void LoadCurrentScriptIntoRam(void)
     gScriptContext.textboxNameId = 0;
     gScriptContext.unk22 = 0;
     gScriptContext.unk40 = 0x80;
-    gScriptContext.unk44 = 0;
+    gScriptContext.current_switched_script = 0;
     gScriptContext.unk1E = 0;
     gUnknown_030070B0.unk20 = 0;
     gScriptContext.unk4E = 0;
@@ -1187,8 +1317,8 @@ void sub_8018638(u32 section) // init new section??
     }
     scriptCtx->currentSection = section;
     scriptCtx->nextSection = section+1;
-    scriptCtx->unk28 = 0;
-    scriptCtx->unk29 = 0;
+    scriptCtx->current_pos_in_line = 0;
+    scriptCtx->current_line = 0;
     scriptCtx->flags &= ~SCRIPT_LOOP;
     scriptCtx->flags &= ~SCRIPT_FULLSCREEN;
     scriptCtx->flags &= ~SCRIPT_x1;
@@ -1236,9 +1366,9 @@ void ChangeScriptSection(u32 section) {
        gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS) {
         if(gMain.process[GAME_PROCESS_STATE] != INVESTIGATION_10) { // psychelock?
             if(sub_8016ED8() == FALSE) {
-                sub_8017154(2);
+                ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_02);
             } else {
-                sub_8017154(4);
+                ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_04);
             }
         }
     }
@@ -1305,9 +1435,9 @@ void DrawText(void) {
                 } else if((gScriptContext.flags & SCRIPT_FULLSCREEN) == 0 &&
                           (gScriptContext.unk22 & 0xF))
                 {
-                    oam->attr1 += gScriptContext.unk18[(u8)(gTextBoxCharacters[i].y / 18)] * 7 - 2;
+                    oam->attr1 += gScriptContext.current_textbox_lines[(u8)(gTextBoxCharacters[i].y / 18)] * 7 - 2;
                     if((gScriptContext.unk22 & 0xF) == 2) {
-                        if(gScriptContext.unk18[1]) {
+                        if(gScriptContext.current_textbox_lines[1]) {
                             oam->attr0 -= 54;
                         } else {
                             oam->attr0 = SPRITE_ATTR0(71, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
@@ -1492,7 +1622,7 @@ void loadSectionReadFlagsFromSaveDataBuffer(struct Main * main)
     }
 }
 
-void sub_8018CA8(struct Main * main, u32 arg1) {
+void ClearSingleSectionReadFlag(struct Main * main, u32 arg1) {
     u32 * flags;
     s32 i;
     s32 section;

@@ -42,7 +42,7 @@ u32 LoadSaveData();
 void CalculateSaveChecksum();
 bool32 CheckSaveChecksum();
 void sub_8007238(struct Main *);
-void sub_8007610(u8);
+void SetClearedCasesAndReadFlagsByScenario(u8);
 void nullsub_11(u32);
 
 void SaveGameInit1(struct Main *);
@@ -53,5 +53,6 @@ void SaveGameExitSaveScreen(struct Main *);
 void SaveGame5(struct Main *);
 void SaveGame6(struct Main *);
 void SaveGame7(struct Main *);
+void SaveGame8(struct Main *);
 
 #endif//GUARD_SAVE_H

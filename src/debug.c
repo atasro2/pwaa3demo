@@ -7,24 +7,24 @@
 
 extern struct DebugContext gDebugCtx;
 
-void sub_800156C(void) {
-    nullsub_20("/   ", 26, 0);
-    sub_8006470(*(u8*)REG_ADDR_VCOUNT, 27, 0);
+void DebugPrintHeader(void) {
+    DebugPrintString("/   ", 26, 0);
+    DebugPrintInt(*(u8*)REG_ADDR_VCOUNT, 27, 0);
     if (gMain.frameCounter & 1) {
-        nullsub_20("0", 6, 0);
+        DebugPrintString("0", 6, 0);
     } else {
-        nullsub_20("1", 6, 0);
+        DebugPrintString("1", 6, 0);
     }
-    nullsub_20("      ", 11, 0);
+    DebugPrintString("      ", 11, 0);
 }
 
-void sub_80015CC(void) {
+void sub_debug_80015CC(void) {
     gOamObjects[0].attr0 = 0;
     gOamObjects[0].attr1 = 8 + *(u8*)REG_ADDR_VCOUNT;
     gOamObjects[0].attr2 = 0xFE;
 }
 
-void sub_80015E8(void) {
+void sub_debug_80015E8(void) {
     struct Main * main = &gMain;
     u32 i;
 
@@ -34,15 +34,15 @@ void sub_80015E8(void) {
     }
 }
 
-void nullsub_10() {
+void nullsub_debug_10() {
 
 }
 
-void sub_8001610(u16 arg0, u16 arg1, u16 arg2, u16 arg3) {
+void DebugPrintClearRect(u16 left, u16 right, u16 top, u16 bottom) {
     s32 i, j;
-    for(i = arg0; i <= arg1; i++) {
-        for(j = arg2; j <= arg3; j++) {
-            nullsub_20(" ", i, j);
+    for(i = left; i <= right; i++) {
+        for(j = top; j <= bottom; j++) {
+            DebugPrintString(" ", i, j);
         }
     }
 }
@@ -54,23 +54,23 @@ void DebugProcessInit(struct DebugContext * debug) {
 
     debug->unk3 = 0;
     debug->unk2 = 0;
-    debug->unk1 = 0;
-    debug->unk0 = 0;
+    debug->currentSubMenuProcess = 0;
+    debug->currentSubmenu = 0;
     main->process[GAME_PROCESS_STATE] = 1;
-    debug->unk8 = ioRegs->lcd_dispcnt;
-    debug->unkA = ioRegs->lcd_win0h;
-    debug->unkC = ioRegs->lcd_win0v;
-    debug->unkE = ioRegs->lcd_winin;
-    debug->unk10 = ioRegs->lcd_winout;
-    debug->unk14 = ioRegs->lcd_bg3hofs;
-    debug->unk16 = ioRegs->lcd_bg3vofs;
+    debug->bak_lcd_dispcnt = ioRegs->lcd_dispcnt;
+    debug->bak_lcd_win0h = ioRegs->lcd_win0h;
+    debug->bak_lcd_win0v = ioRegs->lcd_win0v;
+    debug->bak_lcd_winin = ioRegs->lcd_winin;
+    debug->bak_lcd_winout = ioRegs->lcd_winout;
+    debug->bak_lcd_bg3hofs = ioRegs->lcd_bg3hofs;
+    debug->bak_lcd_bg3vofs = ioRegs->lcd_bg3vofs;
     DmaCopy16(3, gOamObjects, debug->oam, OAM_SIZE);
-    debug->unk60 = main->showTextboxCharacters;
-    debug->unk61 = main->advanceScriptContext;
+    debug->bak_showTextboxCharacters = main->showTextboxCharacters;
+    debug->bak_advanceScriptContext = main->advanceScriptContext;
     main->showTextboxCharacters = FALSE;
     main->advanceScriptContext = FALSE;
     for(i = 0; i < 128; i++)
-        gOamObjects[i].attr1 = 0x12C;
+        gOamObjects[i].attr1 = 300;
     debug->anim = gAnimation[0];
     gAnimation[0].next = NULL;
     DmaCopy16(3, gBG3MapBuffer, debug->map, 0x800);
@@ -81,68 +81,68 @@ void DebugProcessInit(struct DebugContext * debug) {
 
 void DebugProcessMain(struct DebugContext * debug) {
     int length = 7;
-    nullsub_20("DEBUG MENU", 10, 3);
-    nullsub_20(" VRAM VIEW", 9, 5);
-    nullsub_20(" SOUND TEST", 9, 6);
-    nullsub_20(" OBJ TEST", 9, 7);
-    nullsub_20(" MOVIE TEST", 9, 8);
-    nullsub_20(" FLAG EDIT", 9, 9);
-    nullsub_20(" SCENARIO", 9, 10);
-    nullsub_20(" EXIT", 9, 11);
-    nullsub_20(">", 9, 5 + debug->unk0);
-    if((gJoypad.pressedKeys & DPAD_UP) && debug->unk0 > 0) {
-        debug->unk0--;
-    } else if((gJoypad.pressedKeys & DPAD_DOWN) && debug->unk0 < length - 1) {
-        debug->unk0++;
+    DebugPrintString("DEBUG MENU", 10, 3);
+    DebugPrintString(" VRAM VIEW", 9, 5);
+    DebugPrintString(" SOUND TEST", 9, 6);
+    DebugPrintString(" OBJ TEST", 9, 7);
+    DebugPrintString(" MOVIE TEST", 9, 8);
+    DebugPrintString(" FLAG EDIT", 9, 9);
+    DebugPrintString(" SCENARIO", 9, 10);
+    DebugPrintString(" EXIT", 9, 11);
+    DebugPrintString(">", 9, 5 + debug->currentSubmenu);
+    if((gJoypad.pressedKeys & DPAD_UP) && debug->currentSubmenu > 0) {
+        debug->currentSubmenu--;
+    } else if((gJoypad.pressedKeys & DPAD_DOWN) && debug->currentSubmenu < length - 1) {
+        debug->currentSubmenu++;
     } else if(gJoypad.pressedKeys & A_BUTTON) {
         gMain.process[GAME_PROCESS_STATE] = 2;
-        sub_8001610(0, 29, 0, 19);
+        DebugPrintClearRect(0, 29, 0, 19);
     }
 }
 
-void sub_8001EB0(struct DebugContext * debug);
-void sub_800214C(struct DebugContext * debug);
+void DebugSubMenuVramMain(struct DebugContext * debug);
+void DebugSubMenuFlagMain(struct DebugContext * debug);
 void DebugProcessExit(struct DebugContext * debug);
-extern void sub_8002248(struct DebugContext * debug);
-extern void sub_8011C60(struct DebugContext * debug);
-extern void sub_8013DB0(struct DebugContext * debug);
-extern void sub_80146B8(struct DebugContext * debug);
+extern void DebugSubMenuScenarioMain(struct DebugContext * debug);
+extern void DebugSubMenuSoundMain(struct DebugContext * debug);
+extern void DebugSubMenuObjMain(struct DebugContext * debug);
+extern void DebugSubMenuMovieMain(struct DebugContext * debug);
 
-void (*gUnknown_0814D348[])(struct DebugContext * debug) = {
-    sub_8001EB0,
-    sub_8011C60,
-    sub_8013DB0,
-    sub_80146B8,
-    sub_800214C,
-    sub_8002248,
+void (*gDebugSubMenuProcesses[])(struct DebugContext * debug) = {
+    DebugSubMenuVramMain,
+    DebugSubMenuSoundMain,
+    DebugSubMenuObjMain,
+    DebugSubMenuMovieMain,
+    DebugSubMenuFlagMain,
+    DebugSubMenuScenarioMain,
     DebugProcessExit,
 };
 
 void DebugProcessSubMenuMain(struct DebugContext * debug) {
-    gUnknown_0814D348[debug->unk0](debug);
+    gDebugSubMenuProcesses[debug->currentSubmenu](debug);
 }
 
 void DebugProcessExit(struct DebugContext * debug) {
     struct Main * main = &gMain;
     struct IORegisters * ioRegs = &gIORegisters;
     DmaCopy16(3, debug->map, gBG3MapBuffer, 0x800);
-    ioRegs->lcd_dispcnt = debug->unk8;
-    ioRegs->lcd_win0h = debug->unkA;
-    ioRegs->lcd_win0v = debug->unkC;
-    ioRegs->lcd_winin = debug->unkE;
-    ioRegs->lcd_winout = debug->unk10;
-    ioRegs->lcd_bg3hofs = debug->unk14;
-    ioRegs->lcd_bg3vofs = debug->unk16;
+    ioRegs->lcd_dispcnt = debug->bak_lcd_dispcnt;
+    ioRegs->lcd_win0h = debug->bak_lcd_win0h;
+    ioRegs->lcd_win0v = debug->bak_lcd_win0v;
+    ioRegs->lcd_winin = debug->bak_lcd_winin;
+    ioRegs->lcd_winout = debug->bak_lcd_winout;
+    ioRegs->lcd_bg3hofs = debug->bak_lcd_bg3hofs;
+    ioRegs->lcd_bg3vofs = debug->bak_lcd_bg3vofs;
     gAnimation[0] = debug->anim;
     ActivateAllAllocatedAnimations();
     DmaCopy16(3, debug->oam, gOamObjects, OAM_SIZE);
-    sub_8001610(0, 29, 0, 19);
-    main->showTextboxCharacters = debug->unk60;
-    main->advanceScriptContext = debug->unk61;
+    DebugPrintClearRect(0, 29, 0, 19);
+    main->showTextboxCharacters = debug->bak_showTextboxCharacters;
+    main->advanceScriptContext = debug->bak_advanceScriptContext;
     *(u32*)main->process = *(u32*)gDebugCtx.process;
 }
 
-void (*gUnknown_0814D364[])(struct DebugContext * debug) = {
+void (*gDebugProcessStates[])(struct DebugContext * debug) = {
     DebugProcessInit,
     DebugProcessMain,
     DebugProcessSubMenuMain,
@@ -150,10 +150,10 @@ void (*gUnknown_0814D364[])(struct DebugContext * debug) = {
 };
 
 void DebugProcess(struct Main * main) {
-    gUnknown_0814D364[main->process[GAME_PROCESS_STATE]](&gDebugCtx);
+    gDebugProcessStates[main->process[GAME_PROCESS_STATE]](&gDebugCtx);
 }
 
-void sub_8001918(struct DebugContext * debug) {
+void sub_debug_8001918(struct DebugContext * debug) {
     struct IORegisters * ioRegs = &gIORegisters;
     struct VramDebug * vramDebug = &debug->menu.vram;
     ioRegs->lcd_dispcnt |= DISPCNT_WIN0_ON;
@@ -163,20 +163,20 @@ void sub_8001918(struct DebugContext * debug) {
     ioRegs->lcd_winout = WINOUT_WIN01_BG0;
     vramDebug->unk08 = ioRegs->lcd_bg3cnt;
     ioRegs->lcd_bg3cnt &= ~(BGCNT_256COLOR | 0xC);
-    nullsub_20("OBJ MODE", 20, 3);
-    nullsub_20("16  COL ", 20, 4);
-    nullsub_20("0   PAL ", 20, 5);
-    nullsub_20("0   BG", 20, 6);
+    DebugPrintString("OBJ MODE", 20, 3);
+    DebugPrintString("16  COL ", 20, 4);
+    DebugPrintString("0   PAL ", 20, 5);
+    DebugPrintString("0   BG", 20, 6);
     vramDebug->unk00 = 0;
     vramDebug->unk02 = 0;
     vramDebug->unk04 = 0;
     vramDebug->unk05 = 0;
     vramDebug->unk06 = 0;
     vramDebug->unk07 = 4;
-    debug->unk1++;
+    debug->currentSubMenuProcess++;
 }
 
-void sub_80019C0(struct DebugContext * debug) {
+void sub_debug_80019C0(struct DebugContext * debug) {
     char addresses[][3] = {
         "0",
         "1",
@@ -229,33 +229,33 @@ void sub_80019C0(struct DebugContext * debug) {
     }
     for(i = 0; i < 0x10; i++) {
         if(vramDebug->unk00 + i <= 0x10) {
-            nullsub_20(addresses[vramDebug->unk00 + i], i + 2, 1);
+            DebugPrintString(addresses[vramDebug->unk00 + i], i + 2, 1);
         } else {
-            nullsub_20(addresses[vramDebug->unk00 + i-0x10], i + 2, 1);
+            DebugPrintString(addresses[vramDebug->unk00 + i-0x10], i + 2, 1);
         }
     }
     if(vramDebug->unk00 == 0x10) {
-        nullsub_20("1\0", 1, 1);
+        DebugPrintString("1\0", 1, 1);
     } else {
-        nullsub_20(" ", 1, 1);
+        DebugPrintString(" ", 1, 1);
     }
     for(i = 0; i < 0x10; i++) {
         if(vramDebug->unk02 + i < 0x10) {
-            nullsub_20(" ", 0, i + 2);
-            nullsub_20(addresses[vramDebug->unk02 + i], 1, i + 2);
+            DebugPrintString(" ", 0, i + 2);
+            DebugPrintString(addresses[vramDebug->unk02 + i], 1, i + 2);
         } else {
-            nullsub_20("1\0", 0, i + 2);
-            nullsub_20(addresses[vramDebug->unk02 + i-0x10], 1, i + 2);
+            DebugPrintString("1\0", 0, i + 2);
+            DebugPrintString(addresses[vramDebug->unk02 + i-0x10], 1, i + 2);
         }
     }
 }
 
-void sub_8001B2C(struct DebugContext * debug) {
+void sub_debug_8001B2C(struct DebugContext * debug) {
     u16 r6;
     u8 i, j;
     struct VramDebug * vramDebug = &debug->menu.vram;
     if(vramDebug->unk07 == 4)
-        sub_80019C0(debug);
+        sub_debug_80019C0(debug);
     r6 = 0;
     if(vramDebug->unk05)
         vramDebug->unk02 = 0;
@@ -269,12 +269,12 @@ void sub_8001B2C(struct DebugContext * debug) {
     }
 }
 
-void sub_8001BBC(struct DebugContext * debug) {
+void sub_debug_8001BBC(struct DebugContext * debug) {
     struct VramDebug * vramDebug = &debug->menu.vram;
     u8 i, j;
     
     if(vramDebug->unk07 == 4)
-        sub_80019C0(debug);
+        sub_debug_80019C0(debug);
     for(i = 0; i < 16; i++) {
         for(j = 0; j < 16; j++) {
             gBG3MapBuffer[j + (i + 2) * 32 + 0x23] = (vramDebug->unk02 + i) * 32 + j + vramDebug->unk00 + (vramDebug->unk04 << 12);
@@ -282,12 +282,12 @@ void sub_8001BBC(struct DebugContext * debug) {
     }
 }
 
-void sub_8001C24(struct DebugContext * debug) {
+void sub_debug_8001C24(struct DebugContext * debug) {
     struct IORegisters * ioRegs = &gIORegisters;
     struct VramDebug * vramDebug = &debug->menu.vram;
     s32 i;
     for(i = 0; i < 4; i++) {
-        nullsub_20("  ", 18, 3 + i);
+        DebugPrintString("  ", 18, 3 + i);
     }
     if(gJoypad.pressedKeys & A_BUTTON) {
         vramDebug->unk07 = 4;
@@ -301,18 +301,18 @@ void sub_8001C24(struct DebugContext * debug) {
         if(vramDebug->unk07 > 3)
             vramDebug->unk07 = 0;
     }
-    nullsub_20(" >", 18, vramDebug->unk07 + 3);
+    DebugPrintString(" >", 18, vramDebug->unk07 + 3);
     switch(vramDebug->unk07) {
         case 0:
             if(gJoypad.pressedKeys & DPAD_LEFT || gJoypad.pressedKeys & DPAD_RIGHT) {
-                if(debug->unk1 == 2) {
-                    debug->unk1 = 1;
+                if(debug->currentSubMenuProcess == 2) {
+                    debug->currentSubMenuProcess = 1;
                     ioRegs->lcd_winin = WININ_WIN0_BG0 | WININ_WIN0_OBJ;
-                    nullsub_20("OBJ MODE", 20, 3);
+                    DebugPrintString("OBJ MODE", 20, 3);
                 } else {
-                    debug->unk1 = 2;
+                    debug->currentSubMenuProcess = 2;
                     ioRegs->lcd_winin = WININ_WIN0_BG0 | WININ_WIN0_BG3;
-                    nullsub_20("SCR MODE", 20, 3);
+                    DebugPrintString("SCR MODE", 20, 3);
                 }
             }
             break;
@@ -321,15 +321,15 @@ void sub_8001C24(struct DebugContext * debug) {
                 if(vramDebug->unk05) {
                     ioRegs->lcd_bg3cnt &= ~BGCNT_256COLOR;
                     vramDebug->unk05 = 0;
-                    nullsub_20("16  COL", 20, 4);
+                    DebugPrintString("16  COL", 20, 4);
                 } else {
                     ioRegs->lcd_bg3cnt |= BGCNT_256COLOR;
                     ioRegs->lcd_bg3cnt &= ~0xC; // clear char base
                     vramDebug->unk06 = 0;
                     vramDebug->unk05 = 1;
-                    nullsub_20("256 COL", 20, 4);
-                    nullsub_20("0   PAL", 20, 5);
-                    nullsub_20("0   BG", 20, 6);
+                    DebugPrintString("256 COL", 20, 4);
+                    DebugPrintString("0   PAL", 20, 5);
+                    DebugPrintString("0   BG", 20, 6);
                 }
             } 
             break;
@@ -340,14 +340,14 @@ void sub_8001C24(struct DebugContext * debug) {
                 else if(gJoypad.pressedKeys & DPAD_RIGHT) 
                     vramDebug->unk04++;
                 vramDebug->unk04 &= 0xF;
-                nullsub_20("    PAL", 20, 5);
-                sub_8006470(vramDebug->unk04, 20, 5);
+                DebugPrintString("    PAL", 20, 5);
+                DebugPrintInt(vramDebug->unk04, 20, 5);
             } else {
-                nullsub_20("0   PAL", 20, 5);
+                DebugPrintString("0   PAL", 20, 5);
             }
             break;
         case 3:
-            if(debug->unk1 == 2) {
+            if(debug->currentSubMenuProcess == 2) {
                 if(vramDebug->unk05 == 0) {
                     if(gJoypad.pressedKeys & DPAD_LEFT && vramDebug->unk06 > 0)
                         vramDebug->unk06--;
@@ -358,8 +358,8 @@ void sub_8001C24(struct DebugContext * debug) {
                     ioRegs->lcd_bg3cnt &= ~0xC;
                     ioRegs->lcd_bg3cnt |= vramDebug->unk06 << 2;
                     ioRegs->lcd_winin = WININ_WIN0_BG0 | WININ_WIN0_BG3;
-                    nullsub_20("    BG", 20, 6);
-                    sub_8006470(vramDebug->unk06, 20, 6);
+                    DebugPrintString("    BG", 20, 6);
+                    DebugPrintInt(vramDebug->unk06, 20, 6);
                 }
             }
             break;
@@ -367,7 +367,7 @@ void sub_8001C24(struct DebugContext * debug) {
     // _08001E52
 }
 
-void sub_8001E60(struct DebugContext * debug) {
+void sub_debug_8001E60(struct DebugContext * debug) {
     struct VramDebug * vramDebug = &debug->menu.vram;
     struct IORegisters * ioRegs = &gIORegisters;
     s32 i, j;
@@ -384,25 +384,25 @@ void sub_8001E60(struct DebugContext * debug) {
     }
 }
 
-void (*gUnknown_0814D374[])(struct DebugContext * debug) = {
-    sub_8001918,
-    sub_8001B2C,
-    sub_8001BBC,
-    sub_8001E60,
+void (*gDebugSubMenuVramProcessStates[])(struct DebugContext * debug) = {
+    sub_debug_8001918,
+    sub_debug_8001B2C,
+    sub_debug_8001BBC,
+    sub_debug_8001E60,
 };
 
-void sub_8001EB0(struct DebugContext * debug) {
+void DebugSubMenuVramMain(struct DebugContext * debug) {
     struct VramDebug * vramDebug = &debug->menu.vram;
     if(gJoypad.pressedKeys & START_BUTTON)
-        debug->unk1 = 3;
-    gUnknown_0814D374[debug->unk1](debug);
+        debug->currentSubMenuProcess = 3;
+    gDebugSubMenuVramProcessStates[debug->currentSubMenuProcess](debug);
     if(vramDebug->unk07 != 4)
-        sub_8001C24(debug);
+        sub_debug_8001C24(debug);
     else if(gJoypad.pressedKeys & A_BUTTON)
         vramDebug->unk07 = 0;
 }
 
-void sub_8001F08(struct DebugContext * debug) {
+void sub_debug_8001F08(struct DebugContext * debug) {
     struct FlagDebug * flagDebug = &debug->menu.flag;
 
     if(gJoypad.heldKeys & DPAD_ANY)
@@ -431,12 +431,12 @@ void sub_8001F08(struct DebugContext * debug) {
     }
 }
 
-void sub_8001F98(struct DebugContext * debug) {
+void sub_debug_8001F98(struct DebugContext * debug) {
     struct FlagDebug * flagDebug = &debug->menu.flag;
     
     flagDebug->unk02 = 0;
     flagDebug->unk00 = 0;
-    debug->unk1++;
+    debug->currentSubMenuProcess++;
 }
 
 struct FlagDebugData {
@@ -806,14 +806,14 @@ struct FlagDebugData gFlagDebugData[2] = {
     }
 };
 
-void sub_8001FB0(struct DebugContext * debug) {
+void sub_debug_8001FB0(struct DebugContext * debug) {
     struct FlagDebug * flagDebug = &debug->menu.flag;
     struct FlagDebugData * flagDebugData;
     bool32 flagSet;
     s32 i, j, k;
     s32 unk1;
 
-    sub_8001F08(debug);
+    sub_debug_8001F08(debug);
     flagDebugData = &gFlagDebugData[flagDebug->unk02];
     if(flagDebug->unk00 >= flagDebugData->flagCount) {
         s32 flagcount = ARRAY_COUNT(gFlagDebugData);
@@ -832,10 +832,10 @@ void sub_8001FB0(struct DebugContext * debug) {
     if(gJoypad.pressedKeys & A_BUTTON) {
         ChangeFlag(flagDebugData->flagType, flagDebug->unk00, flagSet ? FALSE : TRUE);
     }
-    sub_8001610(5, 25, 2, 8);
-    nullsub_20(flagDebugData->name, 5, 6);
-    nullsub_20(flagDebugData->flagNames[flagDebug->unk00], 5, 7);
-    sub_8006470(flagDebug->unk00, 9, 6);
+    DebugPrintClearRect(5, 25, 2, 8);
+    DebugPrintString(flagDebugData->name, 5, 6);
+    DebugPrintString(flagDebugData->flagNames[flagDebug->unk00], 5, 7);
+    DebugPrintInt(flagDebug->unk00, 9, 6);
     unk1 = (flagDebug->unk00 / 32) * 32;
     for(i = 0; i < 2; i++) {
         for(j = 0; j < 4; j++) {
@@ -847,32 +847,32 @@ void sub_8001FB0(struct DebugContext * debug) {
                     if(i != 0)
                         r5 = 1;
                 }
-                sub_8006470(flagSet, j * 5 + k + 5, i + 3 + r5);
+                DebugPrintInt(flagSet, j * 5 + k + 5, i + 3 + r5);
             }
         }
     }
 }
 
-void sub_8002140(struct DebugContext * debug) {
+void sub_debug_8002140(struct DebugContext * debug) {
     gMain.process[GAME_PROCESS_STATE] = 3;
 }
 
 void (*gUnknown_0814D824[])(struct DebugContext * debug) = {
-    sub_8001F98,
-    sub_8001FB0,
-    sub_8002140,
+    sub_debug_8001F98,
+    sub_debug_8001FB0,
+    sub_debug_8002140,
 };
 
-void sub_800214C(struct DebugContext * debug) {
+void DebugSubMenuFlagMain(struct DebugContext * debug) {
     if(gJoypad.pressedKeys & START_BUTTON)
-        debug->unk1 = 2;
-    gUnknown_0814D824[debug->unk1](debug);
+        debug->currentSubMenuProcess = 2;
+    gUnknown_0814D824[debug->currentSubMenuProcess](debug);
 }
 
-void sub_800217C(struct DebugContext * debug) {
+void sub_debug_800217C(struct DebugContext * debug) {
     struct ScenarioDebug * scenarioDebug = &debug->menu.scenario;
     scenarioDebug->unk00 = gMain.scenarioIdx;
-    debug->unk1++;
+    debug->currentSubMenuProcess++;
 }
 
 char * gScriptNames[] = {
@@ -900,9 +900,9 @@ char * gScriptNames[] = {
     "SCE3-3 SAIBAN2   ",
 };
 
-extern u8 gCaseStartProcess[]; // scenario process array
+// extern u8 gCaseStartProcess[]; // scenario process array
 
-void sub_8002198(struct DebugContext * debug) {
+void sub_debug_8002198(struct DebugContext * debug) {
     struct ScenarioDebug * scenarioDebug = &debug->menu.scenario;
     struct Main * main = &gMain;
     s32 scriptCount = 21;
@@ -922,23 +922,23 @@ void sub_8002198(struct DebugContext * debug) {
         main->scenarioIdx = scenarioDebug->unk00;
         SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
     } else {
-        nullsub_20("SCENARIO SELECT     ", 5, 3);
-        nullsub_20(gScriptNames[scenarioDebug->unk00], 5, 5);
+        DebugPrintString("SCENARIO SELECT     ", 5, 3);
+        DebugPrintString(gScriptNames[scenarioDebug->unk00], 5, 5);
     }
 }
 
-void sub_800223C(struct DebugContext * debug) {
+void sub_debug_800223C(struct DebugContext * debug) {
     gMain.process[GAME_PROCESS_STATE] = 3;
 }
 
 void (*gUnknown_0814D888[])(struct DebugContext * debug) = {
-    sub_800217C,
-    sub_8002198,
-    sub_800223C,
+    sub_debug_800217C,
+    sub_debug_8002198,
+    sub_debug_800223C,
 };
 
-void sub_8002248(struct DebugContext * debug) {
+void DebugSubMenuScenarioMain(struct DebugContext * debug) {
     if(gJoypad.pressedKeys & START_BUTTON)
-        debug->unk1 = 2;
-    gUnknown_0814D888[debug->unk1](debug);
+        debug->currentSubMenuProcess = 2;
+    gUnknown_0814D888[debug->currentSubMenuProcess](debug);
 }

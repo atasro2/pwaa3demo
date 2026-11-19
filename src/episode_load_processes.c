@@ -12,6 +12,29 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+u8 * const gUnknown_080267E4[5] = {
+    OBJ_VRAM0+0x3300,
+    OBJ_VRAM1+0x300,
+    OBJ_VRAM1+0x1300,
+    OBJ_VRAM1+0x2300,
+    OBJ_VRAM1+0x3300,
+};
+
+const u8 gUnknown_080267F8[12][2] = {
+    { 0x01, 0x01 },
+    { 0x02, 0x02 },
+    { 0x04, 0x04 },
+    { 0x08, 0x08 },
+    { 0x02, 0x01 },
+    { 0x04, 0x01 },
+    { 0x04, 0x02 },
+    { 0x08, 0x04 },
+    { 0x01, 0x02 },
+    { 0x01, 0x04 },
+    { 0x02, 0x04 },
+    { 0x04, 0x08 },
+};
+
 void EpisodeInit(struct Main * main)
 {
     main->advanceScriptContext = FALSE;
@@ -48,7 +71,7 @@ void EpisodeLoadGfx(struct Main * main)
     main->process[GAME_PROCESS_STATE]++;
 }
 
-extern u8 gUnknown_080267F8[12][2];
+// extern u8 gUnknown_080267F8[12][2];
 
 void sub_80085D8(struct AnimationListEntry * anim, u8 * arg1) {
     u16 i;
@@ -91,7 +114,7 @@ void sub_80086B0(u8 * arg0, u8 * arg1) {
     }
 }
 
-extern u8 * gUnknown_080267E4[];
+// extern u8 * gUnknown_080267E4[];
 
 void EpisodeClearedProcess(struct Main * main)
 {
@@ -583,7 +606,7 @@ void SelectEpisodeProcess(struct Main * main)
                 main->scenarioIdx = 0;
                 break;
             }
-            sub_8007610(main->scenarioIdx);
+            SetClearedCasesAndReadFlagsByScenario(main->scenarioIdx);
             gMain.unk4 = 0;
             SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             DestroyAnimation(FindAnimationFromAnimId(9));
@@ -808,7 +831,7 @@ void ContinueSaveProcess(struct Main * main) {
 
             if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
                 if(!(main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK && main->process[GAME_PROCESS_VAR1] == 6)) {
-                    sub_8017154(3);
+                    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
                 }
                 DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
                 DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
@@ -837,7 +860,7 @@ void ContinueSaveProcess(struct Main * main) {
                 }
             }
             DmaCopy16(3, &gSaveDataBuffer.scriptCtx, &gScriptContext, sizeof(gScriptContext));
-            sub_8017AB4(gScriptContext.unk44);
+            PerformScriptSwitch(gScriptContext.current_switched_script);
             DmaCopy16(3, &gSaveDataBuffer.scriptCtx, &gScriptContext, sizeof(gScriptContext));
 
             
@@ -851,7 +874,7 @@ void ContinueSaveProcess(struct Main * main) {
             DmaCopy16(3, &gSaveDataBuffer.courtScroll, &gCourtScroll, sizeof(gCourtScroll));
             DmaCopy16(3, gSaveDataBuffer.examinationData, gExaminationData, sizeof(gExaminationData));
             loadSectionReadFlagsFromSaveDataBuffer(main);
-            sub_8007610(main->scenarioIdx);
+            SetClearedCasesAndReadFlagsByScenario(main->scenarioIdx);
             if(gMain.unk3D & 8) {
                 gMain.unk3D |= 0x10;
             }

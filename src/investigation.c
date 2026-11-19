@@ -16,6 +16,10 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
+u8 *const gUnknown_08026810[84] = {0}; // ???
+
+u8 *const gUnknown_08026960[14] = {0}; // ???
+
 void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct *) = {
 	InvestigationInit, // RNO1_TANTEI_INIT
 	InvestigationMain, // RNO1_TANTEI_MAIN
@@ -58,7 +62,7 @@ void sub_800BC08(u32 arg0) {
             break;
         case 11:
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags |= 0x80;
             for(i = 0; i < 3; i++) {
                 animation = FindAnimationFromAnimId(0x83+i);
@@ -80,12 +84,12 @@ void sub_800BC08(u32 arg0) {
             }
             // BDA4
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             break;
         case 10:
             sub_800BC08(1);
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
             break;
         case 13:
@@ -105,7 +109,7 @@ void sub_800BC08(u32 arg0) {
                 gMain.blendDeltaY = 0x10;
                 ChangeAnimationActivity(animation, 0);
                 animation->animationInfo.personId = 3;
-                sub_8016FEC(0);
+                ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
                 animation->flags &= ~4;
                 animation->flags &= ~0x04000000;
                 animation->flags &= ~ANIM_BLEND_ACTIVE;
@@ -116,7 +120,7 @@ void sub_800BC08(u32 arg0) {
                 gIORegisters.lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
                 gIORegisters.lcd_bldalpha = BLDALPHA_BLEND(31, 7);
                 gMain.blendDeltaY = 0;
-                animation = sub_8016FB4();
+                animation = FindDahliaShawlAnimation();
                 animation->flags |= 0x80;
                 sub_800BC08(0);
                 *(u16*)REG_ADDR_BLDALPHA = gIORegisters.lcd_bldalpha;
@@ -144,7 +148,7 @@ void sub_800BC08(u32 arg0) {
             sub_800BC08(1);
             // fallthrough
         case 31:
-            animation = sub_8016FB4();
+            animation = FindDahliaShawlAnimation();
             animation->flags &= ~ANIM_BLEND_ACTIVE;
             animation->flags &= ~0x80;
             break;
@@ -451,7 +455,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
     if(gScriptContext.textboxState != 1)
         return;
     if (main->blendCounter == 0xFFFF) {
-        sub_8016FEC(0);
+        ControlDahliaCharacterShawlAnimation(DAHLIA_SHAWL_DESTROY);
     }
     if(main->blendMode)
         return;
@@ -491,7 +495,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
     gInvestigation.personActive = 0;
     SetInactiveActionButtons(&gInvestigation, 0xF);
     gInvestigationRoomSetupFunctions[main->scenarioIdx](main);
-    sub_8017154(3);
+    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
     sub_800BC08(0xA);
     UpdateScrollPromptSprite(main, 0);
     StartHardwareBlend(1, 1, 1, 0x1F);
@@ -681,7 +685,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     }
 }
 
-extern const u8 * gUnknown_08026960[];
+// extern const u8 * gUnknown_08026960[];
 
 void InvestigationMove(struct Main * main, struct InvestigationStruct * investigation) // tantei_move
 {
@@ -1000,7 +1004,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
     }
 }
  
-extern const u8 * gUnknown_08026810[];
+// extern const u8 * gUnknown_08026810[];
 
 void InvestigationTalk(struct Main * main, struct InvestigationStruct * investigation) // tantei_talk
 {
@@ -1652,7 +1656,7 @@ _08010C14:
                 if((gScriptContext.unk1E & 0x100) == 0) {
                     main->process[GAME_PROCESS_VAR1] = 7;
                     main->process[GAME_PROCESS_VAR2] = 0;
-                    sub_8017154(3);
+                    ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
                     break;
                 }
             }
@@ -1756,7 +1760,7 @@ _08010D9C:
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
             gInvestigation.inPsycheLockChallengeFlag &= ~1;
-            sub_8017154(3);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
                 PlayBGM(psycheLockData->bgmToPlayAfterStop);
@@ -1823,7 +1827,7 @@ _08010EAC:
         case 5:
             gMain.hpBarDisplayValue = 1;
             gMain.hpBarValue = 1;
-            sub_8017154(3);
+            ControlDahliaCharacterButterflyAnimation(DAHLIA_BUTTERFLY_UPLOAD_VRAM_CONFIG_03_RESTORE_INVESTIGATION_ELEMENTS);
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
             gInvestigation.inPsycheLockChallengeFlag &= ~1;

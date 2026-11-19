@@ -107,7 +107,7 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 clean-assets:
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' -o -iname '*.epicon' \) -exec rm {} +
 
 clean:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -125,6 +125,10 @@ include graphics.mk
 # dummy rule for now
 %.phscr: ; 
 %.phscr.lz: %.phscr ; $(GBAGFX) $< $@ -search 1
+
+# better extension is left as an exercise for the reader
+%.epicon: %.gbapal %.4bpp ; cat $^ > $@
+%.epicon.lz: %.epicon ; $(GBAGFX) $< $@ -search 8
 
 %.1bpp: %.png  ; $(GBAGFX) $< $@
 %.4bpp: %.png  ; $(GBAGFX) $< $@
